@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "AAAppDelegate.h"
+#import "XAIAppDelegate.h"
 
-@implementation AAAppDelegate
+@implementation XAIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

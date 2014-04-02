@@ -1,5 +1,5 @@
 //
-//  AAAppDelegate.h
+//  ManageVC.h
 //  XAI
 //
 //  Created by touchhy on 14-4-1.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAAppDelegate : UIResponder <UIApplicationDelegate>
+@interface ManageVC : UITableViewController <UITableViewDelegate,UITableViewDataSource>{
 
-@property (strong, nonatomic) UIWindow *window;
+    NSMutableArray*  datas;
+
+}
 
 @end

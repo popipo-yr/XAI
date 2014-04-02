@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAViewController : UIViewController
+@interface XAIViewController : UIViewController
+
+
+
+- (IBAction)loginBtnClick:(id)sender;
 
 @end
