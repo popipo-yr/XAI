@@ -9,19 +9,26 @@
 #include "XAIPacket.h"
 
 
-void packet_to_param_helper(char** to , uint8_t* from ,int size,int* pos){
+
+
+void packet_to_param_helper(char** to , uint8_t* from ,int start,int end){
     
-    *to = malloc(size);
-    strncpy(*to,(const char*)from+(*pos), size);
-    *pos += size;
+    *to = malloc(end - start + 1);
+    strncpy(*to,(const char*)from+start, end - start + 1);
     
 }
 
-void param_to_packet_helper(char* to , const char* from, int size, unsigned int* pos){
+void param_to_packet_helper(char* to , const char* from, int start, int end){
     
-    strcpy(to + *pos , from);
-    *pos += size;
+    if ((strlen(from) + 1) > (end - start + 1)) {
+        
+        printf("XAI_ large STRING");
+        return;
+    }
+    
+    strcpy(to + start , from);
 }
+
 
 _xai_packet*   generateNormalPacket(_xai_packet_param_normal* normal_param){
     
@@ -30,23 +37,26 @@ _xai_packet*   generateNormalPacket(_xai_packet_param_normal* normal_param){
     
     char*  payload  =  malloc(1000);
     memset(payload,0,1000);
-    unsigned int pos = 0;
+    
     if(!payload){
         
         return packet;
     }
     
     //存入固定格式
-    param_to_packet_helper(payload, normal_param->from_guid,_XPPS_N_from_guid,&pos);
-    param_to_packet_helper(payload, normal_param->to_guid,_XPPS_N_to_guid,&pos);
-    param_to_packet_helper(payload, normal_param->flag, _XPPS_N_flag, &pos);
-    param_to_packet_helper(payload, normal_param->msgid, _XPPS_N_mggid, &pos);
-    param_to_packet_helper(payload, normal_param->magic_number, _XPPS_N_magic_number, &pos);
-    param_to_packet_helper(payload, normal_param->length, _XPPS_N_length, &pos);
+    param_to_packet_helper(payload, normal_param->from_guid,_XPP_N_FROM_GUID_START,_XPP_N_FROM_GUID_END);
+    param_to_packet_helper(payload, normal_param->to_guid,_XPP_N_TO_GUID_START,_XPP_N_TO_GUID_END);
+    param_to_packet_helper(payload, normal_param->flag, _XPP_N_FLAG_START, _XPP_N_FROM_GUID_END);
+    param_to_packet_helper(payload, normal_param->msgid, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
+    param_to_packet_helper(payload, normal_param->magic_number, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
+    param_to_packet_helper(payload, normal_param->length, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
+    
+
     
     
     
-    packet->pos = pos;  //固定格式位置
+    packet->pos = _XPPS_N_FIXED_ALL;  //固定格式位置
+    unsigned int pos = _XPPS_N_FIXED_ALL;
     
     packet->pre_load =   malloc(pos);
     memset(packet->pre_load, 0, pos);
@@ -94,12 +104,15 @@ _xai_packet_param_normal*   generateNormalParamFromPacket(const _xai_packet*  pa
 
     _xai_packet_param_normal* aParam = malloc(sizeof(_xai_packet_param_normal));
     
-    int pos = 0;
-    
     //读取固定格式
-    packet_to_param_helper((char**)(&aParam->from_guid), packet->all_load, _XPPS_N_from_guid, &pos);
-    packet_to_param_helper((char**)(&aParam->to_guid), packet->all_load, _XPPS_N_to_guid, &pos);
-    packet_to_param_helper((char**)(&aParam->flag), packet->all_load, _XPPS_N_flag, &pos);
+    packet_to_param_helper((char**)(&aParam->from_guid), packet->all_load, _XPP_N_FROM_GUID_START, _XPP_N_FROM_GUID_END);
+    packet_to_param_helper((char**)(&aParam->to_guid), packet->all_load, _XPP_N_TO_GUID_START, _XPP_N_TO_GUID_END);
+    packet_to_param_helper((char**)(&aParam->flag), packet->all_load, _XPP_N_FLAG_START, _XPP_N_FLAG_END);
+    packet_to_param_helper((char**)(&aParam->msgid), packet->all_load, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
+    packet_to_param_helper((char**)(&aParam->magic_number), packet->all_load, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
+    packet_to_param_helper((char**)(&aParam->length), packet->all_load, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
+    
+
     
     
     return aParam;
