@@ -24,6 +24,7 @@
 		C341A67318EBB2C400034649 /* thread_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66418EBB2C400034649 /* thread_mosq.c */; };
 		C341A67418EBB2C400034649 /* util_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66518EBB2C400034649 /* util_mosq.c */; };
 		C341A67518EBB2C400034649 /* will_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66718EBB2C400034649 /* will_mosq.c */; };
+		C384DA8118EEA417002D9354 /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */; };
 		C387F35218EA757A0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F35418EA757A0069F98B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35318EA757A0069F98B /* CoreGraphics.framework */; };
 		C387F35618EA757A0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
@@ -98,6 +99,8 @@
 		C341A66618EBB2C400034649 /* util_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_mosq.h; sourceTree = "<group>"; };
 		C341A66718EBB2C400034649 /* will_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = will_mosq.c; sourceTree = "<group>"; };
 		C341A66818EBB2C400034649 /* will_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = will_mosq.h; sourceTree = "<group>"; };
+		C384DA7F18EEA417002D9354 /* XAIPacketCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketCtrl.h; sourceTree = "<group>"; };
+		C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketCtrl.c; sourceTree = "<group>"; };
 		C387F34E18EA757A0069F98B /* XAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C387F35118EA757A0069F98B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C387F35318EA757A0069F98B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -414,6 +417,8 @@
 				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
 				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
 				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
+				C384DA7F18EEA417002D9354 /* XAIPacketCtrl.h */,
+				C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */,
 			);
 			path = MQTT;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
+				C384DA8118EEA417002D9354 /* XAIPacketCtrl.c in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,

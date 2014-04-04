@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "XAIPacket.h"
+#import "XAIPacketCtrl.h"
 
 @interface XAITests : XCTestCase
 
@@ -37,6 +38,8 @@
     NSString *msgid = @"5";
     NSString * magic_number = @"8";
     NSString * length  = @"1";
+    
+    
     NSString*  oprId = @"1";
     NSString*   data_count = @"2";
     NSString*   data_len = @"10";

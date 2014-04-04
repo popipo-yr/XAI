@@ -42,20 +42,6 @@ typedef struct _xai_packet_param_normal{
 }_xai_packet_param_normal;  //普通报文参数
     
 
-typedef struct _xai_packet_param_ctrl{
-    
-    
-    _xai_packet_param_normal* normal_param
-    ;const char*  oprId      //2byte
-    ;const char*  data_count //1byte
-    ;const char*  data_len   //2byte
-    ;const char*  data    //.......
-    ;const char*  time //4
-    ;const char*  data_type
-    ;
-    
-}_xai_packet_param_ctrl; //控制报文参数
-
     
 void purgePacket(_xai_packet* packet);  //释放一个报文
 
@@ -65,10 +51,9 @@ void purgePacketParamNormal(_xai_packet_param_normal* normal_param); //释放一
 
     
     
-_xai_packet*   generatePacketCtrl(_xai_packet_param_ctrl* ctrl_param);  //依据参数生成一个控制的报文
-_xai_packet_param_ctrl*   generateParamCtrlFromPacket(const _xai_packet*  packet); //通过报文获控制参数
-void purgePacketParamCtrl(_xai_packet_param_ctrl* ctrl_param); //释放一个控制报文参数
-
+//helper
+void packet_to_param_helper(char** to , uint8_t* from ,int start,int end);
+void param_to_packet_helper(char* to , const char* from, int start, int end);
 
 
 #ifdef __cplusplus
