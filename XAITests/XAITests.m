@@ -37,10 +37,9 @@
     NSString *msgid = @"5";
     NSString * magic_number = @"8";
     NSString * length  = @"1";
-    NSString*  oprId = @"11";
-    NSString*   data_count = @"20";
-    NSString*   data_len = @"100";
-    NSString*  data = @"ABCDEFG";
+    NSString*  oprId = @"1";
+    NSString*   data_count = @"2";
+    NSString*   data_len = @"10";
     
     
     
@@ -61,18 +60,34 @@
 //                                                    );
     
     
-    _xai_packet_param_normal  aP;
-    aP.from_guid = "23456";
-    aP.to_guid = "11111";
+    free(NULL);
     
-    _xai_packet*  cabc =  generateNormalPacket(&aP);
-                                               
-
+    _xai_packet_param_normal  np;
+    np.from_guid = cStr(from_guid);
+    np.to_guid = cStr(to_guid);
+    np.flag  = cStr(flag);
+    np.msgid = cStr(msgid);
+    np.magic_number = cStr(magic_number);
+    np.length  =  cStr(length);
+    np.data = "akfkjalfkjklsjfls";
     
     
+    _xai_packet*  cabc =  generatePacketNormal(&np);
     
-    _xai_packet_param_normal *param =  generateNormalParamFromPacket(cabc);
+    _xai_packet_param_normal *param =  generateParamNormalFromPacket(cabc);
+    
+    
+    _xai_packet_param_ctrl  cp;
+    cp.normal_param = &np;
+    cp.oprId = cStr(oprId);
+    cp.data_count = cStr(data_count);
+    cp.data_len = cStr(data_len);
+    cp.data = "wssssssssssssw";
+    
+    _xai_packet* cpkt = generatePacketCtrl(&cp);
+    _xai_packet_param_ctrl*  cparam = generateParamCtrlFromPacket(cpkt);
    
+    cparam = NULL;
     param = NULL;
     
 //    NSString *CC= [[NSString alloc] initWithCString:(const char*)param->from_guid encoding:NSUTF8StringEncoding];
