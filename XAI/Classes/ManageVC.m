@@ -49,8 +49,39 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.tableView addGestureRecognizer:recognizer];
     
+    
+    
+    
+    
 
 }
+
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    // ADD: get the decode results
+    id<NSFastEnumeration> results =
+    [info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    for(symbol in results)
+        // EXAMPLE: just grab the first barcode
+        break;
+    
+    // EXAMPLE: do something useful with the barcode data
+    //resultText.text = symbol.data;
+    
+    // EXAMPLE: do something useful with the barcode image
+    //resultImage.image =
+    //[info objectForKey: UIImagePickerControllerOriginalImage];
+    
+    // ADD: dismiss the controller (NB dismiss from the *reader*!)
+    //[reader dismissModalViewControllerAnimated: YES];
+    
+    
+    [reader dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 - (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer
@@ -104,6 +135,13 @@
     
     [showViews addSubview:aLabel];
     
+    
+    UIButton*  addBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [addBtn setTitle:@"ADD" forState:UIControlStateNormal];
+    [addBtn setFrame:CGRectMake(280, 25, 20, 20)];
+    [addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [showViews addSubview:addBtn];
+    
     return showViews;
     
     
@@ -113,6 +151,30 @@
     
     return showView;
     
+}
+
+- (void) addBtnClick:(id) sender{
+    
+    
+    //ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    ZBarReaderController *reader = [ZBarReaderController new];
+    
+    reader.readerDelegate = self;
+    //reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+    
+    ZBarImageScanner *scanner = reader.scanner;
+    // TODO: (optional) additional reader configuration here
+    
+    // EXAMPLE: disable rarely used I2/5 to improve performance
+    [scanner setSymbology: ZBAR_I25
+                   config: ZBAR_CFG_ENABLE
+                       to: 0];
+    
+    // present and release the controller
+    
+    [self presentViewController:reader animated:YES completion:Nil];
+
+
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ManageVC : UITableViewController <UITableViewDelegate,UITableViewDataSource>{
+@interface ManageVC : UITableViewController <UITableViewDelegate,UITableViewDataSource,ZBarReaderDelegate>{
 
     NSMutableArray*  datas;
 

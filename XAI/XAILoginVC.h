@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XAIViewController : UIViewController
+@interface XAILoginVC : UIViewController
 
 
+@property  (nonatomic,weak) IBOutlet UITextField* nameLabel;
+@property  (nonatomic,weak) IBOutlet UITextField* passwordLabel;
 
 - (IBAction)loginBtnClick:(id)sender;
+
 
 @end

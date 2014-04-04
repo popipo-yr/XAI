@@ -7,25 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C341A63F18EBB22000034649 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C341A63B18EBB22000034649 /* Main_iPad.storyboard */; };
-		C341A64018EBB22000034649 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C341A63D18EBB22000034649 /* Main_iPhone.storyboard */; };
 		C341A64A18EBB23E00034649 /* DeviceShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64318EBB23E00034649 /* DeviceShowCell.m */; };
 		C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64518EBB23E00034649 /* DeviceShowVC.m */; };
 		C341A64C18EBB23E00034649 /* ManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64718EBB23E00034649 /* ManageCell.m */; };
 		C341A64D18EBB23E00034649 /* ManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64918EBB23E00034649 /* ManageVC.m */; };
+		C341A66918EBB2C400034649 /* logging_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65118EBB2C400034649 /* logging_mosq.c */; };
+		C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65318EBB2C400034649 /* memory_mosq.c */; };
+		C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65518EBB2C400034649 /* messages_mosq.c */; };
+		C341A66C18EBB2C400034649 /* mosquitto.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65718EBB2C400034649 /* mosquitto.c */; };
+		C341A66D18EBB2C400034649 /* net_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65B18EBB2C400034649 /* net_mosq.c */; };
+		C341A66E18EBB2C400034649 /* read_handle.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65D18EBB2C400034649 /* read_handle.c */; };
+		C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65F18EBB2C400034649 /* read_handle_client.c */; };
+		C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66018EBB2C400034649 /* read_handle_shared.c */; };
+		C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66118EBB2C400034649 /* send_client_mosq.c */; };
+		C341A67218EBB2C400034649 /* send_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66218EBB2C400034649 /* send_mosq.c */; };
+		C341A67318EBB2C400034649 /* thread_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66418EBB2C400034649 /* thread_mosq.c */; };
+		C341A67418EBB2C400034649 /* util_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66518EBB2C400034649 /* util_mosq.c */; };
+		C341A67518EBB2C400034649 /* will_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66718EBB2C400034649 /* will_mosq.c */; };
 		C387F35218EA757A0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F35418EA757A0069F98B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35318EA757A0069F98B /* CoreGraphics.framework */; };
 		C387F35618EA757A0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
 		C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C387F35A18EA757A0069F98B /* InfoPlist.strings */; };
 		C387F35E18EA757A0069F98B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F35D18EA757A0069F98B /* main.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F36118EA757A0069F98B /* XAIAppDelegate.m */; };
-		C387F36B18EA757A0069F98B /* XAIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F36A18EA757A0069F98B /* XAIViewController.m */; };
+		C387F36B18EA757A0069F98B /* XAILoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F36A18EA757A0069F98B /* XAILoginVC.m */; };
 		C387F36D18EA757A0069F98B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C387F36C18EA757A0069F98B /* Images.xcassets */; };
 		C387F37418EA757B0069F98B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F37318EA757B0069F98B /* XCTest.framework */; };
 		C387F37518EA757B0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F37618EA757B0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
 		C387F37E18EA757B0069F98B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C387F37C18EA757B0069F98B /* InfoPlist.strings */; };
 		C387F38018EA757B0069F98B /* XAITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F37F18EA757B0069F98B /* XAITests.m */; };
+		C38AC1F218EBC8E3002F20C1 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1EC18EBC8E3002F20C1 /* libzbar.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		C38AC1F318EBC8E3002F20C1 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1EE18EBC8E3002F20C1 /* zbar-back.png */; };
+		C38AC1F418EBC8E3002F20C1 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1EF18EBC8E3002F20C1 /* zbar-help.html */; };
+		C38AC1F518EBC8E3002F20C1 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F018EBC8E3002F20C1 /* zbar-helpicons.png */; };
+		C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */; };
+		C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */; };
+		C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */; };
+		C38AC20518EBF10A002F20C1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */; };
+		C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */; };
+		C38D91D618ECF951006F22D3 /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91D518ECF951006F22D3 /* UserVC.m */; };
+		C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */; };
+		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; };
+		C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E118ED3490006F22D3 /* MosquittoClient.m */; };
+		C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E318ED3490006F22D3 /* MosquittoMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +64,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C341A63C18EBB22000034649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_iPad.storyboard; sourceTree = "<group>"; };
-		C341A63E18EBB22000034649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		C341A64218EBB23E00034649 /* DeviceShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowCell.h; sourceTree = "<group>"; };
 		C341A64318EBB23E00034649 /* DeviceShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowCell.m; sourceTree = "<group>"; };
 		C341A64418EBB23E00034649 /* DeviceShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowVC.h; sourceTree = "<group>"; };
@@ -49,6 +72,32 @@
 		C341A64718EBB23E00034649 /* ManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageCell.m; sourceTree = "<group>"; };
 		C341A64818EBB23E00034649 /* ManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageVC.h; sourceTree = "<group>"; };
 		C341A64918EBB23E00034649 /* ManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageVC.m; sourceTree = "<group>"; };
+		C341A64F18EBB2C400034649 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		C341A65018EBB2C400034649 /* dummypthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dummypthread.h; sourceTree = "<group>"; };
+		C341A65118EBB2C400034649 /* logging_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = logging_mosq.c; sourceTree = "<group>"; };
+		C341A65218EBB2C400034649 /* logging_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logging_mosq.h; sourceTree = "<group>"; };
+		C341A65318EBB2C400034649 /* memory_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory_mosq.c; sourceTree = "<group>"; };
+		C341A65418EBB2C400034649 /* memory_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory_mosq.h; sourceTree = "<group>"; };
+		C341A65518EBB2C400034649 /* messages_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = messages_mosq.c; sourceTree = "<group>"; };
+		C341A65618EBB2C400034649 /* messages_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messages_mosq.h; sourceTree = "<group>"; };
+		C341A65718EBB2C400034649 /* mosquitto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mosquitto.c; sourceTree = "<group>"; };
+		C341A65818EBB2C400034649 /* mosquitto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mosquitto.h; sourceTree = "<group>"; };
+		C341A65918EBB2C400034649 /* mosquitto_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mosquitto_internal.h; sourceTree = "<group>"; };
+		C341A65A18EBB2C400034649 /* mqtt3_protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mqtt3_protocol.h; sourceTree = "<group>"; };
+		C341A65B18EBB2C400034649 /* net_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = net_mosq.c; sourceTree = "<group>"; };
+		C341A65C18EBB2C400034649 /* net_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net_mosq.h; sourceTree = "<group>"; };
+		C341A65D18EBB2C400034649 /* read_handle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = read_handle.c; sourceTree = "<group>"; };
+		C341A65E18EBB2C400034649 /* read_handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = read_handle.h; sourceTree = "<group>"; };
+		C341A65F18EBB2C400034649 /* read_handle_client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = read_handle_client.c; sourceTree = "<group>"; };
+		C341A66018EBB2C400034649 /* read_handle_shared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = read_handle_shared.c; sourceTree = "<group>"; };
+		C341A66118EBB2C400034649 /* send_client_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = send_client_mosq.c; sourceTree = "<group>"; };
+		C341A66218EBB2C400034649 /* send_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = send_mosq.c; sourceTree = "<group>"; };
+		C341A66318EBB2C400034649 /* send_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = send_mosq.h; sourceTree = "<group>"; };
+		C341A66418EBB2C400034649 /* thread_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = thread_mosq.c; sourceTree = "<group>"; };
+		C341A66518EBB2C400034649 /* util_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_mosq.c; sourceTree = "<group>"; };
+		C341A66618EBB2C400034649 /* util_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_mosq.h; sourceTree = "<group>"; };
+		C341A66718EBB2C400034649 /* will_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = will_mosq.c; sourceTree = "<group>"; };
+		C341A66818EBB2C400034649 /* will_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = will_mosq.h; sourceTree = "<group>"; };
 		C387F34E18EA757A0069F98B /* XAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C387F35118EA757A0069F98B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C387F35318EA757A0069F98B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,14 +108,59 @@
 		C387F35F18EA757A0069F98B /* XAI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XAI-Prefix.pch"; sourceTree = "<group>"; };
 		C387F36018EA757A0069F98B /* XAIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIAppDelegate.h; sourceTree = "<group>"; };
 		C387F36118EA757A0069F98B /* XAIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAIAppDelegate.m; sourceTree = "<group>"; };
-		C387F36918EA757A0069F98B /* XAIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIViewController.h; sourceTree = "<group>"; };
-		C387F36A18EA757A0069F98B /* XAIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAIViewController.m; sourceTree = "<group>"; };
+		C387F36918EA757A0069F98B /* XAILoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XAILoginVC.h; path = ../XAILoginVC.h; sourceTree = "<group>"; };
+		C387F36A18EA757A0069F98B /* XAILoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XAILoginVC.m; path = ../XAILoginVC.m; sourceTree = "<group>"; };
 		C387F36C18EA757A0069F98B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C387F37218EA757B0069F98B /* XAITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XAITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C387F37318EA757B0069F98B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C387F37B18EA757B0069F98B /* XAITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XAITests-Info.plist"; sourceTree = "<group>"; };
 		C387F37D18EA757B0069F98B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C387F37F18EA757B0069F98B /* XAITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAITests.m; sourceTree = "<group>"; };
+		C38AC1D818EBC8E3002F20C1 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		C38AC1D918EBC8E3002F20C1 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		C38AC1DA18EBC8E3002F20C1 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		C38AC1DB18EBC8E3002F20C1 /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScanner.h; sourceTree = "<group>"; };
+		C38AC1DC18EBC8E3002F20C1 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		C38AC1DD18EBC8E3002F20C1 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		C38AC1DE18EBC8E3002F20C1 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
+		C38AC1DF18EBC8E3002F20C1 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		C38AC1E018EBC8E3002F20C1 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		C38AC1E118EBC8E3002F20C1 /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
+		C38AC1E218EBC8E3002F20C1 /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
+		C38AC1E318EBC8E3002F20C1 /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
+		C38AC1E418EBC8E3002F20C1 /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
+		C38AC1E518EBC8E3002F20C1 /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
+		C38AC1E618EBC8E3002F20C1 /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
+		C38AC1E718EBC8E3002F20C1 /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
+		C38AC1E818EBC8E3002F20C1 /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
+		C38AC1E918EBC8E3002F20C1 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
+		C38AC1EA18EBC8E3002F20C1 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
+		C38AC1EB18EBC8E3002F20C1 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
+		C38AC1EC18EBC8E3002F20C1 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		C38AC1EE18EBC8E3002F20C1 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
+		C38AC1EF18EBC8E3002F20C1 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
+		C38AC1F018EBC8E3002F20C1 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
+		C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
+		C38AC1F718EBCCB8002F20C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		C38AC1FC18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		C38AC1FE18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceInfo.h; sourceTree = "<group>"; };
+		C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceInfo.m; sourceTree = "<group>"; };
+		C38D91D418ECF951006F22D3 /* UserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVC.h; sourceTree = "<group>"; };
+		C38D91D518ECF951006F22D3 /* UserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserVC.m; sourceTree = "<group>"; };
+		C38D91D818ED19C0006F22D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_iPhone35.storyboard; sourceTree = "<group>"; };
+		C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIMQTTDEF.h; sourceTree = "<group>"; };
+		C38D91DD18ED2F95006F22D3 /* XAIPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacket.h; sourceTree = "<group>"; };
+		C38D91DE18ED2F95006F22D3 /* XAIPacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacket.c; sourceTree = "<group>"; };
+		C38D91E018ED3490006F22D3 /* MosquittoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MosquittoClient.h; sourceTree = "<group>"; };
+		C38D91E118ED3490006F22D3 /* MosquittoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MosquittoClient.m; sourceTree = "<group>"; };
+		C38D91E218ED3490006F22D3 /* MosquittoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MosquittoMessage.h; sourceTree = "<group>"; };
+		C38D91E318ED3490006F22D3 /* MosquittoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MosquittoMessage.m; sourceTree = "<group>"; };
+		C38D91F218ED5BAD006F22D3 /* XAI Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XAI Tests-Info.plist"; sourceTree = "<group>"; };
+		C38D91F418ED5BAD006F22D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C38D91F618ED5BAD006F22D3 /* XAI_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAI_Tests.m; sourceTree = "<group>"; };
+		C38D91F818ED5BAD006F22D3 /* XAI Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XAI Tests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +168,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */,
 				C387F35418EA757A0069F98B /* CoreGraphics.framework in Frameworks */,
 				C387F35618EA757A0069F98B /* UIKit.framework in Frameworks */,
+				C38AC1F218EBC8E3002F20C1 /* libzbar.a in Frameworks */,
 				C387F35218EA757A0069F98B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,8 +192,9 @@
 		C341A63A18EBB22000034649 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C341A63B18EBB22000034649 /* Main_iPad.storyboard */,
-				C341A63D18EBB22000034649 /* Main_iPhone.storyboard */,
+				C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */,
+				C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */,
+				C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */,
 			);
 			name = storyboard;
 			path = Base.lproj;
@@ -106,6 +203,10 @@
 		C341A64118EBB23E00034649 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C38D91DB18ED2C12006F22D3 /* MQTT */,
+				C38AC20118EBE417002F20C1 /* Data */,
+				C387F36918EA757A0069F98B /* XAILoginVC.h */,
+				C387F36A18EA757A0069F98B /* XAILoginVC.m */,
 				C341A64218EBB23E00034649 /* DeviceShowCell.h */,
 				C341A64318EBB23E00034649 /* DeviceShowCell.m */,
 				C341A64418EBB23E00034649 /* DeviceShowVC.h */,
@@ -114,8 +215,43 @@
 				C341A64718EBB23E00034649 /* ManageCell.m */,
 				C341A64818EBB23E00034649 /* ManageVC.h */,
 				C341A64918EBB23E00034649 /* ManageVC.m */,
+				C38D91D418ECF951006F22D3 /* UserVC.h */,
+				C38D91D518ECF951006F22D3 /* UserVC.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		C341A64E18EBB2C400034649 /* libmosquitto */ = {
+			isa = PBXGroup;
+			children = (
+				C341A64F18EBB2C400034649 /* config.h */,
+				C341A65018EBB2C400034649 /* dummypthread.h */,
+				C341A65118EBB2C400034649 /* logging_mosq.c */,
+				C341A65218EBB2C400034649 /* logging_mosq.h */,
+				C341A65318EBB2C400034649 /* memory_mosq.c */,
+				C341A65418EBB2C400034649 /* memory_mosq.h */,
+				C341A65518EBB2C400034649 /* messages_mosq.c */,
+				C341A65618EBB2C400034649 /* messages_mosq.h */,
+				C341A65718EBB2C400034649 /* mosquitto.c */,
+				C341A65818EBB2C400034649 /* mosquitto.h */,
+				C341A65918EBB2C400034649 /* mosquitto_internal.h */,
+				C341A65A18EBB2C400034649 /* mqtt3_protocol.h */,
+				C341A65B18EBB2C400034649 /* net_mosq.c */,
+				C341A65C18EBB2C400034649 /* net_mosq.h */,
+				C341A65D18EBB2C400034649 /* read_handle.c */,
+				C341A65E18EBB2C400034649 /* read_handle.h */,
+				C341A65F18EBB2C400034649 /* read_handle_client.c */,
+				C341A66018EBB2C400034649 /* read_handle_shared.c */,
+				C341A66118EBB2C400034649 /* send_client_mosq.c */,
+				C341A66218EBB2C400034649 /* send_mosq.c */,
+				C341A66318EBB2C400034649 /* send_mosq.h */,
+				C341A66418EBB2C400034649 /* thread_mosq.c */,
+				C341A66518EBB2C400034649 /* util_mosq.c */,
+				C341A66618EBB2C400034649 /* util_mosq.h */,
+				C341A66718EBB2C400034649 /* will_mosq.c */,
+				C341A66818EBB2C400034649 /* will_mosq.h */,
+			);
+			path = libmosquitto;
 			sourceTree = "<group>";
 		};
 		C387F34518EA757A0069F98B = {
@@ -123,6 +259,7 @@
 			children = (
 				C387F35718EA757A0069F98B /* XAI */,
 				C387F37918EA757B0069F98B /* XAITests */,
+				C38D91F018ED5BAD006F22D3 /* XAI Tests */,
 				C387F35018EA757A0069F98B /* Frameworks */,
 				C387F34F18EA757A0069F98B /* Products */,
 			);
@@ -140,6 +277,8 @@
 		C387F35018EA757A0069F98B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */,
+				C38AC1F718EBCCB8002F20C1 /* libz.dylib */,
 				C387F35118EA757A0069F98B /* Foundation.framework */,
 				C387F35318EA757A0069F98B /* CoreGraphics.framework */,
 				C387F35518EA757A0069F98B /* UIKit.framework */,
@@ -152,6 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				C341A64118EBB23E00034649 /* Classes */,
+				C38AC1D418EBC8E3002F20C1 /* ZBarSDK */,
+				C341A64E18EBB2C400034649 /* libmosquitto */,
 				C341A63A18EBB22000034649 /* storyboard */,
 				C387F36C18EA757A0069F98B /* Images.xcassets */,
 				C387F35818EA757A0069F98B /* Supporting Files */,
@@ -164,8 +305,6 @@
 			children = (
 				C387F36018EA757A0069F98B /* XAIAppDelegate.h */,
 				C387F36118EA757A0069F98B /* XAIAppDelegate.m */,
-				C387F36918EA757A0069F98B /* XAIViewController.h */,
-				C387F36A18EA757A0069F98B /* XAIViewController.m */,
 				C387F35918EA757A0069F98B /* XAI-Info.plist */,
 				C387F35A18EA757A0069F98B /* InfoPlist.strings */,
 				C387F35D18EA757A0069F98B /* main.m */,
@@ -188,6 +327,112 @@
 			children = (
 				C387F37B18EA757B0069F98B /* XAITests-Info.plist */,
 				C387F37C18EA757B0069F98B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C38AC1D418EBC8E3002F20C1 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1D518EBC8E3002F20C1 /* Headers */,
+				C38AC1EC18EBC8E3002F20C1 /* libzbar.a */,
+				C38AC1ED18EBC8E3002F20C1 /* Resources */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		C38AC1D518EBC8E3002F20C1 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1D618EBC8E3002F20C1 /* ZBarSDK */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		C38AC1D618EBC8E3002F20C1 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1D718EBC8E3002F20C1 /* zbar */,
+				C38AC1E118EBC8E3002F20C1 /* zbar.h */,
+				C38AC1E218EBC8E3002F20C1 /* ZBarCameraSimulator.h */,
+				C38AC1E318EBC8E3002F20C1 /* ZBarCaptureReader.h */,
+				C38AC1E418EBC8E3002F20C1 /* ZBarHelpController.h */,
+				C38AC1E518EBC8E3002F20C1 /* ZBarImage.h */,
+				C38AC1E618EBC8E3002F20C1 /* ZBarImageScanner.h */,
+				C38AC1E718EBC8E3002F20C1 /* ZBarReaderController.h */,
+				C38AC1E818EBC8E3002F20C1 /* ZBarReaderView.h */,
+				C38AC1E918EBC8E3002F20C1 /* ZBarReaderViewController.h */,
+				C38AC1EA18EBC8E3002F20C1 /* ZBarSDK.h */,
+				C38AC1EB18EBC8E3002F20C1 /* ZBarSymbol.h */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		C38AC1D718EBC8E3002F20C1 /* zbar */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1D818EBC8E3002F20C1 /* Decoder.h */,
+				C38AC1D918EBC8E3002F20C1 /* Exception.h */,
+				C38AC1DA18EBC8E3002F20C1 /* Image.h */,
+				C38AC1DB18EBC8E3002F20C1 /* ImageScanner.h */,
+				C38AC1DC18EBC8E3002F20C1 /* Processor.h */,
+				C38AC1DD18EBC8E3002F20C1 /* Scanner.h */,
+				C38AC1DE18EBC8E3002F20C1 /* Symbol.h */,
+				C38AC1DF18EBC8E3002F20C1 /* Video.h */,
+				C38AC1E018EBC8E3002F20C1 /* Window.h */,
+			);
+			path = zbar;
+			sourceTree = "<group>";
+		};
+		C38AC1ED18EBC8E3002F20C1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC1EE18EBC8E3002F20C1 /* zbar-back.png */,
+				C38AC1EF18EBC8E3002F20C1 /* zbar-help.html */,
+				C38AC1F018EBC8E3002F20C1 /* zbar-helpicons.png */,
+				C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C38AC20118EBE417002F20C1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */,
+				C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C38D91DB18ED2C12006F22D3 /* MQTT */ = {
+			isa = PBXGroup;
+			children = (
+				C38D91E018ED3490006F22D3 /* MosquittoClient.h */,
+				C38D91E118ED3490006F22D3 /* MosquittoClient.m */,
+				C38D91E218ED3490006F22D3 /* MosquittoMessage.h */,
+				C38D91E318ED3490006F22D3 /* MosquittoMessage.m */,
+				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
+				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
+				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
+			);
+			path = MQTT;
+			sourceTree = "<group>";
+		};
+		C38D91F018ED5BAD006F22D3 /* XAI Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C38D91F618ED5BAD006F22D3 /* XAI_Tests.m */,
+				C38D91F118ED5BAD006F22D3 /* Supporting Files */,
+			);
+			path = "XAI Tests";
+			sourceTree = "<group>";
+		};
+		C38D91F118ED5BAD006F22D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C38D91F218ED5BAD006F22D3 /* XAI Tests-Info.plist */,
+				C38D91F318ED5BAD006F22D3 /* InfoPlist.strings */,
+				C38D91F818ED5BAD006F22D3 /* XAI Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -269,10 +514,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C341A63F18EBB22000034649 /* Main_iPad.storyboard in Resources */,
-				C341A64018EBB22000034649 /* Main_iPhone.storyboard in Resources */,
+				C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */,
+				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
+				C38AC20518EBF10A002F20C1 /* Main_iPad.storyboard in Resources */,
 				C387F36D18EA757A0069F98B /* Images.xcassets in Resources */,
 				C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */,
+				C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */,
+				C38AC1F418EBC8E3002F20C1 /* zbar-help.html in Resources */,
+				C38AC1F318EBC8E3002F20C1 /* zbar-back.png in Resources */,
+				C38AC1F518EBC8E3002F20C1 /* zbar-helpicons.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,13 +541,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
 				C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */,
+				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
+				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
+				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
-				C387F36B18EA757A0069F98B /* XAIViewController.m in Sources */,
+				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
+				C38D91D618ECF951006F22D3 /* UserVC.m in Sources */,
+				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
+				C387F36B18EA757A0069F98B /* XAILoginVC.m in Sources */,
 				C341A64C18EBB23E00034649 /* ManageCell.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
+				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
+				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
+				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
+				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
+				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
+				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
+				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
+				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				C341A64D18EBB23E00034649 /* ManageVC.m in Sources */,
+				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
+				C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */,
 				C341A64A18EBB23E00034649 /* DeviceShowCell.m in Sources */,
+				C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,22 +588,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C341A63B18EBB22000034649 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C341A63C18EBB22000034649 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		C341A63D18EBB22000034649 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C341A63E18EBB22000034649 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
 		C387F35A18EA757A0069F98B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -348,6 +600,40 @@
 			isa = PBXVariantGroup;
 			children = (
 				C387F37D18EA757B0069F98B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C38AC1FC18EBDBEE002F20C1 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C38AC1FE18EBDBEE002F20C1 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C38D91D818ED19C0006F22D3 /* Base */,
+			);
+			name = Main_iPhone35.storyboard;
+			sourceTree = "<group>";
+		};
+		C38D91F318ED5BAD006F22D3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C38D91F418ED5BAD006F22D3 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -388,6 +674,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/XAI/libmosquitto",
+					"$(SRCROOT)/XAI/ZBarSDK/Headers",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -422,6 +714,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/XAI/libmosquitto",
+					"$(SRCROOT)/XAI/ZBarSDK/Headers",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -437,6 +735,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XAI/XAI-Prefix.pch";
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/alibaba/Documents/XAI/XAI/ZBarSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -450,6 +752,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XAI/XAI-Prefix.pch";
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/alibaba/Documents/XAI/XAI/ZBarSDK,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
