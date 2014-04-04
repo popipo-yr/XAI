@@ -50,6 +50,8 @@ typedef struct _xai_packet_param_ctrl{
     ;const char*  data_count //1byte
     ;const char*  data_len   //2byte
     ;const char*  data    //.......
+    ;const char*  time //4
+    ;const char*  data_type
     ;
     
 }_xai_packet_param_ctrl; //控制报文参数

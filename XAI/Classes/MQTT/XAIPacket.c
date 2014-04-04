@@ -179,7 +179,9 @@ _xai_packet*   generatePacketCtrl(_xai_packet_param_ctrl* ctrl_param){
     
     //存入固定格式
     param_to_packet_helper(payload, ctrl_param->oprId,_XPP_C_OPRID_START,_XPP_C_OPRID_END);
+    param_to_packet_helper(payload, ctrl_param->time, _XPP_C_TIME_START, _XPP_C_TIME_END);
     param_to_packet_helper(payload, ctrl_param->data_count, _XPP_C_DATA_COUNT_START, _XPP_C_DATA_COUNT_END);
+    param_to_packet_helper(payload, ctrl_param->data_type, _XPP_C_DATA_TYPE_START, _XPP_C_DATA_TYPE_END);
     param_to_packet_helper(payload, ctrl_param->data_len, _XPP_C_DATA_LEN_START, _XPP_C_DATA_LEN_END);
    
     ctrl_packet->pre_load = malloc(_XPPS_C_FIXED_ALL);
@@ -224,6 +226,8 @@ _xai_packet_param_ctrl*   generateParamCtrlFromPacket(const _xai_packet*  packet
     packet_to_param_helper((char**)&ctrl_param->data_len, packet->all_load, _XPP_C_DATA_LEN_START, _XPP_C_DATA_LEN_END);
     
     packet_to_param_helper((char**)&ctrl_param->data, packet->all_load, _XPP_C_DATA_START, _XPP_C_DATA_END);
+    packet_to_param_helper((char**)&ctrl_param->time, packet->all_load, _XPP_C_TIME_START, _XPP_C_TIME_END);
+    packet_to_param_helper((char**)&ctrl_param->data_type, packet->all_load, _XPP_C_DATA_TYPE_START, _XPP_C_DATA_TYPE_END);
     
     
     return ctrl_param;
@@ -237,6 +241,8 @@ void purgePacketParamCtrl(_xai_packet_param_ctrl* ctrl_param){
     free((void*)ctrl_param->data_count);
     free((void*)ctrl_param->data_len);
     free((void*)ctrl_param->data);
+    free((void*)ctrl_param->time);
+    free((void*)ctrl_param->data_type);
     free(ctrl_param);
     
     ctrl_param = NULL;
