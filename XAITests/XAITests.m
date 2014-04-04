@@ -48,44 +48,41 @@
     
     
     
-    _xai_ctrl_packet*  abc =  generateControlPacket( cStr(from_guid)  //12Byte
-                                              ,cStr(to_guid)   //12Byte
-                                              ,cStr(flag)      //1Byte
-                                              ,cStr(msgid)     //2Byte
-                                              ,cStr(magic_number) //2byte
-                                              ,cStr(length)       //2byte
-                                              ,cStr(oprId)      //2byte
-                                              ,cStr(data_count) //1byte
-                                              ,cStr(data_len)   //2byte
-                                              ,cStr(data)    //.......
-                                                    );
+//    _xai_ctrl_packet*  abc =  generateControlPacket( cStr(from_guid)  //12Byte
+//                                              ,cStr(to_guid)   //12Byte
+//                                              ,cStr(flag)      //1Byte
+//                                              ,cStr(msgid)     //2Byte
+//                                              ,cStr(magic_number) //2byte
+//                                              ,cStr(length)       //2byte
+//                                              ,cStr(oprId)      //2byte
+//                                              ,cStr(data_count) //1byte
+//                                              ,cStr(data_len)   //2byte
+//                                              ,cStr(data)    //.......
+//                                                    );
     
     
-    _xai_normal_packet*  cabc =  generateNormalPacket( cStr(from_guid)  //12Byte
-                                                    ,cStr(to_guid)   //12Byte
-                                                    ,cStr(flag)      //1Byte
-                                                    ,cStr(msgid)     //2Byte
-                                                    ,cStr(magic_number) //2byte
-                                                    ,cStr(length)       //2byte
-                                                    ,cStr(data)    //.......
-                                                    );
+    _xai_packet_param_normal  aP;
+    aP.from_guid = "23456";
+    aP.to_guid = "11111";
+    
+    _xai_packet*  cabc =  generateNormalPacket(&aP);
+                                               
 
-	
-	printf("ptr:%s\n", abc->overload);
     
     
-    _xai_normal_packet_param *param = normalPacketToParam(cabc);
+    
+    _xai_packet_param_normal *param =  generateNormalParamFromPacket(cabc);
    
     param = NULL;
     
-    NSString *CC= [[NSString alloc] initWithCString:(const char*)param->from_guid encoding:NSUTF8StringEncoding];
-	
-    CC =  NULL;
-    
-	//char * 转换为 NSString
-	//char encode_buf[1024];
-	NSString *encrypted = [[NSString alloc] initWithCString:(const char*)abc->overload encoding:NSASCIIStringEncoding];
-	NSLog(@"encrypted:%@", encrypted);
+//    NSString *CC= [[NSString alloc] initWithCString:(const char*)param->from_guid encoding:NSUTF8StringEncoding];
+//	
+//    CC =  NULL;
+//    
+//	//char * 转换为 NSString
+//	//char encode_buf[1024];
+//	NSString *encrypted = [[NSString alloc] initWithCString:(const char*)abc->overload encoding:NSASCIIStringEncoding];
+//	NSLog(@"encrypted:%@", encrypted);
     XCTAssertTrue(1 == 1, @"just a test");
     
 }
