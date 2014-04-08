@@ -43,6 +43,9 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
     mosq_msg.payload = [[NSString alloc] initWithBytes:message->payload
                                                  length:message->payloadlen
                                                encoding:NSUTF8StringEncoding];
+    
+    [mosq_msg setPayloadbyte:message->payload withSize:message->payloadlen];
+    
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     
     //[[client delegate] didReceiveMessage:payload topic:topic];
@@ -61,6 +64,12 @@ static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     [[client delegate] didUnsubscribe:message_id];
 }
+
+static void on_log(struct mosquitto *mosq, void *userdata, int level, const char *str){
+    
+    printf("%s\n\n",str);
+}
+
 
 
 // Initialize is called just before the first object is allocated
@@ -89,6 +98,7 @@ static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
         mosquitto_message_callback_set(mosq, on_message);
         mosquitto_subscribe_callback_set(mosq, on_subscribe);
         mosquitto_unsubscribe_callback_set(mosq, on_unsubscribe);
+        mosquitto_log_callback_set(mosq, on_log);
         timer = nil;
     }
     return self;

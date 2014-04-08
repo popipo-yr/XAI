@@ -71,28 +71,7 @@ typedef  enum XAI_DATA_TYPE{
 #define  _XPP_N_DATA_END        _XPP_END_UNKOWN
 
 
-/*----------ctrl----------------*/
 
-#define _XPPS_C_OPRID     1
-#define _XPPS_C_TIME   4
-#define _XPPS_C_DATA_COUNT  1
-#define _XPPS_C_DATA_TYPE  1
-#define _XPPS_C_DATA_LEN    2
-#define _XPPS_C_FIXED_ALL   (_XPPS_N_FIXED_ALL+1+4+1+1+2)
-
-
-#define _XPP_C_OPRID_START  31
-#define _XPP_C_OPRID_END    31
-#define _XPP_C_TIME_START    32
-#define _XPP_C_TIME_END    35
-#define _XPP_C_DATA_COUNT_START   36
-#define _XPP_C_DATA_COUNT_END 36
-#define _XPP_C_DATA_TYPE_START    37
-#define _XPP_C_DATA_TYPE_END    37
-#define _XPP_C_DATA_LEN_START 38
-#define _XPP_C_DATA_LEN_END   39
-#define  _XPP_C_DATA_START      40
-#define  _XPP_C_DATA_END        _XPP_END_UNKOWN
 
 
 #endif

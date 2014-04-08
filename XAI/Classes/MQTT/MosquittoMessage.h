@@ -16,8 +16,9 @@
     unsigned short payloadlen;
     unsigned short qos;
     BOOL retained;
+    
+    void* payloadbyte;
 }
-
 
 @property (readwrite, assign) unsigned short mid;
 @property (readwrite, retain) NSString *topic;
@@ -25,6 +26,11 @@
 @property (readwrite, assign) unsigned short payloadlen;
 @property (readwrite, assign) unsigned short qos;
 @property (readwrite, assign) BOOL retained;
+
+@property (nonatomic,assign) int change;
+
+-(void)  setPayloadbyte:(void*) bytes withSize:(int) size;
+-(void*)  getPayloadbyte;
 
 -(id)init;
 

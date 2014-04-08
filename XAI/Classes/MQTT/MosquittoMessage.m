@@ -20,7 +20,25 @@
     self.payloadlen = 0;
     self.qos = 0;
     self.retained = FALSE;
+    payloadbyte = NULL;
+    
     return self;
+}
+
+- (void)dealloc{
+
+    free(payloadbyte);
+    payloadbyte = NULL;
+}
+
+-(void)  setPayloadbyte:(void*) bytes withSize:(int) size{
+    
+    payloadbyte = malloc(size);
+    memcpy(payloadbyte, bytes, size);
+}
+-(void*)  getPayloadbyte{
+
+    return payloadbyte;
 }
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; };
+		1AF7604F18F2528600520EAD /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7604E18F2528600520EAD /* Light.m */; };
+		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
+		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C341A64A18EBB23E00034649 /* DeviceShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64318EBB23E00034649 /* DeviceShowCell.m */; };
 		C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64518EBB23E00034649 /* DeviceShowVC.m */; };
 		C341A64C18EBB23E00034649 /* ManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C341A64718EBB23E00034649 /* ManageCell.m */; };
@@ -24,7 +28,6 @@
 		C341A67318EBB2C400034649 /* thread_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66418EBB2C400034649 /* thread_mosq.c */; };
 		C341A67418EBB2C400034649 /* util_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66518EBB2C400034649 /* util_mosq.c */; };
 		C341A67518EBB2C400034649 /* will_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66718EBB2C400034649 /* will_mosq.c */; };
-		C384DA8118EEA417002D9354 /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */; };
 		C387F35218EA757A0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F35418EA757A0069F98B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35318EA757A0069F98B /* CoreGraphics.framework */; };
 		C387F35618EA757A0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
@@ -65,6 +68,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketCtrl.c; sourceTree = "<group>"; };
+		1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketCtrl.h; sourceTree = "<group>"; };
+		1AF7604C18F251E300520EAD /* PacketPro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketPro.h; sourceTree = "<group>"; };
+		1AF7604D18F2528600520EAD /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		1AF7604E18F2528600520EAD /* Light.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Light.m; sourceTree = "<group>"; };
+		1AF7605018F257C600520EAD /* MQTTPacketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTPacketManager.h; sourceTree = "<group>"; };
+		1AF7605118F257C600520EAD /* MQTTPacketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTPacketManager.m; sourceTree = "<group>"; };
+		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
+		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C341A64218EBB23E00034649 /* DeviceShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowCell.h; sourceTree = "<group>"; };
 		C341A64318EBB23E00034649 /* DeviceShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowCell.m; sourceTree = "<group>"; };
 		C341A64418EBB23E00034649 /* DeviceShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowVC.h; sourceTree = "<group>"; };
@@ -99,8 +111,6 @@
 		C341A66618EBB2C400034649 /* util_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_mosq.h; sourceTree = "<group>"; };
 		C341A66718EBB2C400034649 /* will_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = will_mosq.c; sourceTree = "<group>"; };
 		C341A66818EBB2C400034649 /* will_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = will_mosq.h; sourceTree = "<group>"; };
-		C384DA7F18EEA417002D9354 /* XAIPacketCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketCtrl.h; sourceTree = "<group>"; };
-		C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketCtrl.c; sourceTree = "<group>"; };
 		C387F34E18EA757A0069F98B /* XAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C387F35118EA757A0069F98B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C387F35318EA757A0069F98B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -192,6 +202,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AF7604B18F2517200520EAD /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				1AF7604C18F251E300520EAD /* PacketPro.h */,
+				1AF7604D18F2528600520EAD /* Light.h */,
+				1AF7604E18F2528600520EAD /* Light.m */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 		C341A63A18EBB22000034649 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +226,7 @@
 		C341A64118EBB23E00034649 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1AF7604B18F2517200520EAD /* Device */,
 				C38D91DB18ED2C12006F22D3 /* MQTT */,
 				C38AC20118EBE417002F20C1 /* Data */,
 				C387F36918EA757A0069F98B /* XAILoginVC.h */,
@@ -417,8 +438,12 @@
 				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
 				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
 				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
-				C384DA7F18EEA417002D9354 /* XAIPacketCtrl.h */,
-				C384DA8018EEA417002D9354 /* XAIPacketCtrl.c */,
+				1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */,
+				1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */,
+				C33E77F618F38DF000808391 /* XAIPacketStatus.h */,
+				C33E77F518F38DF000808391 /* XAIPacketStatus.c */,
+				1AF7605018F257C600520EAD /* MQTTPacketManager.h */,
+				1AF7605118F257C600520EAD /* MQTTPacketManager.m */,
 			);
 			path = MQTT;
 			sourceTree = "<group>";
@@ -547,10 +572,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
+				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
 				C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
+				1AF7604F18F2528600520EAD /* Light.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
 				C38D91D618ECF951006F22D3 /* UserVC.m in Sources */,
@@ -559,11 +586,12 @@
 				C341A64C18EBB23E00034649 /* ManageCell.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
+				1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */,
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
-				C384DA8118EEA417002D9354 /* XAIPacketCtrl.c in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
+				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
@@ -743,7 +771,7 @@
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/alibaba/Documents/XAI/XAI/ZBarSDK,
+					"$(SRCROOT)/XAI/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -760,7 +788,7 @@
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/alibaba/Documents/XAI/XAI/ZBarSDK,
+					"$(SRCROOT)/XAI/ZBarSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
