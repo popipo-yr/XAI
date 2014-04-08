@@ -79,7 +79,7 @@ _xai_packet_param_ctrl*   generateParamCtrlFromPacket(const _xai_packet*  packet
 }
 
 _xai_packet_param_ctrl*   generateParamCtrlFromPacketData(void*  packet_data,int size){
-
+    
     if (size < _XPPS_C_FIXED_ALL) {
         
         printf("XAI -  CTRL PACKET FIXED DATA SIZE ENOUGH");
@@ -120,22 +120,22 @@ _xai_packet_param_ctrl*   generateParamCtrlFromPacketData(void*  packet_data,int
     
     
     return ctrl_param;
-
+    
 }
 
 
 void purgePacketParamCtrl(_xai_packet_param_ctrl* ctrl_param){
     
-    purgePacketParamNormal(ctrl_param->normal_param);
-
     if (NULL != ctrl_param) {
+        
+        purgePacketParamNormal(ctrl_param->normal_param);
         
         free(ctrl_param->data);
         free(ctrl_param);
         
         ctrl_param = NULL;
     }
-
+    
 }
 
 _xai_packet_param_ctrl*    generatePacketParamCtrl(){
