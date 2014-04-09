@@ -17,3 +17,5 @@
 #define strtok_r strtok_s
 #define strerror_r(e, b, l) strerror_s(b, l, e)
 #endif
+
+#define WITH_TLS

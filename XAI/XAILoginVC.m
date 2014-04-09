@@ -116,7 +116,12 @@
 
 - (IBAction)loginBtnClick:(id)sender{
     
- [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:Nil];
+    _login = [[XAILogin alloc] init];
+    [_login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
+
+    
+    
+ //[self performSegueWithIdentifier:@"XAIMainPageSegue" sender:Nil];
     
 
 //[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XAIMainPage"] animated:YES completion:nil];

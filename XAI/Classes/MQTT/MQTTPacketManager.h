@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MosquittoClient.h"
-@protocol MQTTPacketManagerPro <NSObject>
+@protocol MQTTPacketManagerDelegate <NSObject>
+
+@optional
 
 - (void) didPublish: (NSUInteger)messageId;
 - (void) didReceiveMessage: (MosquittoMessage*)mosq_msg;
@@ -20,12 +22,24 @@
 
 @end
 
+
+@protocol MQTTConnectDelegate <NSObject>
+
+@optional
+
+- (void) didConnect:(NSUInteger)code ;
+- (void) didDisconnect;
+@end
+
+
 @interface MQTTPacketManager : NSObject <MosquittoClientDelegate>{
     
     NSMutableDictionary*  _delegates;
     
 }
 
-- (void) addPacketManager: (id<MQTTPacketManagerPro>) aPro  withKey:(NSString*)key;
+@property (nonatomic, weak) id<MQTTConnectDelegate> connectDelegate;
+
+- (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
 @end

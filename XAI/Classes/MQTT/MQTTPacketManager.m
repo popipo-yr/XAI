@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void) addPacketManager: (id<MQTTPacketManagerPro>) aPro withKey:(NSString*)key{
+- (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro withKey:(NSString*)key{
 
 }
 
@@ -30,7 +30,7 @@
 - (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
     
     
-    id<MQTTPacketManagerPro> apro = [_delegates objectForKey:mosq_msg.topic];
+    id<MQTTPacketManagerDelegate> apro = [_delegates objectForKey:mosq_msg.topic];
     if (apro != NULL) {
         
         [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen];
@@ -38,9 +38,11 @@
     
 }
 
-- (void) didConnect:(NSUInteger)code {}
+- (void) didConnect:(NSUInteger)code {
+}
 
-- (void) didDisconnect {}
+- (void) didDisconnect {
+}
 
 
 

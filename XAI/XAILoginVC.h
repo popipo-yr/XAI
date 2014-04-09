@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XAILogin.h"
 
-@interface XAILoginVC : UIViewController
+@interface XAILoginVC : UIViewController{
+
+
+    XAILogin*  _login;
+}
 
 
 @property  (nonatomic,weak) IBOutlet UITextField* nameLabel;

@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PacketPro.h"
-#import "MQTTPacketManager.h"
+#import "MQTT.h"
 
 
 
@@ -21,7 +20,7 @@
 @end
 
 
-@interface Light : NSObject <MQTTPacketManagerPro>
+@interface Light : NSObject <MQTTPacketManagerDelegate>
 
 @property  (weak) id <LightPro> delegate;
 

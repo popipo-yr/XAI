@@ -7,16 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MosquittoClient.h"
-#import "MQTTPacketManager.h"
+#import "MQTT.h"
 
 @interface XAIAppDelegate : UIResponder <UIApplicationDelegate>{
 
-    //MosquittoClient* _mosquittoClient;
+    MosquittoClient* _mosquittoClient;
+    MQTTPacketManager* _mqttPacketManager;
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (readonly) MosquittoClient* mosquittoClient;
-@property (readonly) MQTTPacketManager* mqttPacketManager;
 
 @end

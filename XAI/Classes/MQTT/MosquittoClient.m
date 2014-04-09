@@ -87,9 +87,14 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
     if ((self = [super init])) {
         const char* cstrClientId = [clientId cStringUsingEncoding:NSUTF8StringEncoding];
         [self setHost: nil];
-        [self setPort: 1883];
+        [self setPort: 9001];
         [self setKeepAlive: 60];
         [self setCleanSession: YES]; //NOTE: this isdisable clean to keep the broker remember this client
+        
+        
+        
+        
+
         
         mosq = mosquitto_new(cstrClientId, cleanSession, (__bridge void *)(self));
         mosquitto_connect_callback_set(mosq, on_connect);
@@ -99,6 +104,15 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
         mosquitto_subscribe_callback_set(mosq, on_subscribe);
         mosquitto_unsubscribe_callback_set(mosq, on_unsubscribe);
         mosquitto_log_callback_set(mosq, on_log);
+        
+        NSString *certPath = [[NSBundle mainBundle] pathForResource:@"ca" ofType:@"crt"];  
+        mosquitto_tls_set(mosq,[certPath cStringUsingEncoding:NSUTF8StringEncoding]
+                          ,[[[NSBundle mainBundle] bundlePath] cStringUsingEncoding:NSUTF8StringEncoding]
+                          ,NULL//[certPath cStringUsingEncoding:NSUTF8StringEncoding],
+                          ,NULL//[certPath cStringUsingEncoding:NSUTF8StringEncoding],
+                          ,NULL);
+
+        
         timer = nil;
     }
     return self;
