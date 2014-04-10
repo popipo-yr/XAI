@@ -134,7 +134,7 @@ static int i = 0;
     }else{
     
         APServerNode* node = [[APServerNode alloc] init];
-        [node addUser:@"testname" Password:@"testname"];
+        [node addUser:@"testname" Password:@"password"];
 
     
     }

@@ -351,7 +351,7 @@ _xai_packet* generatePacketCtrlData(_xai_packet_param_ctrl_data* ctrl_param_data
             return NULL;
         }
         
-        _xai_packet*  ctrl_data_packet = generatePacketCtrlDataOne(ctrl_param_data);
+        _xai_packet*  ctrl_data_packet = generatePacketCtrlDataOne(ctrl_data);
         
         memcpy(data_load + dataPos, ctrl_data_packet->all_load, ctrl_data_packet->size);
         
