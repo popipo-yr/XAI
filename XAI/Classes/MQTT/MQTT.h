@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XAIMQTTDEF.h"
+#import "MQTTCover.h"
 #import "MosquittoClient.h"
 #import "MQTTPacketManager.h"
 

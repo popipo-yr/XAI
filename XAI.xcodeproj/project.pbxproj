@@ -15,6 +15,8 @@
 		961F95C318F4E432002D4F74 /* ca.crt in Resources */ = {isa = PBXBuildFile; fileRef = 961F95C218F4E432002D4F74 /* ca.crt */; };
 		961F95C518F4F7D3002D4F74 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C418F4F7D3002D4F74 /* Login.m */; };
 		961F95C818F53629002D4F74 /* APServerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C718F53629002D4F74 /* APServerNode.m */; };
+		961F95CA18F66D98002D4F74 /* APServerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C918F66D98002D4F74 /* APServerTest.m */; };
+		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
@@ -163,6 +165,9 @@
 		961F95C418F4F7D3002D4F74 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		961F95C618F53629002D4F74 /* APServerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APServerNode.h; sourceTree = "<group>"; };
 		961F95C718F53629002D4F74 /* APServerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APServerNode.m; sourceTree = "<group>"; };
+		961F95C918F66D98002D4F74 /* APServerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APServerTest.m; sourceTree = "<group>"; };
+		961F95CB18F688E0002D4F74 /* MQTTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCover.h; sourceTree = "<group>"; };
+		961F95CC18F688E0002D4F74 /* MQTTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTCover.m; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -533,6 +538,7 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				961F95C918F66D98002D4F74 /* APServerTest.m */,
 				961F95C418F4F7D3002D4F74 /* Login.m */,
 				C387F37F18EA757B0069F98B /* XAITests.m */,
 				C387F37A18EA757B0069F98B /* Supporting Files */,
@@ -642,6 +648,8 @@
 				1AF7605118F257C600520EAD /* MQTTPacketManager.m */,
 				C33E77FF18F3B41A00808391 /* MQTT.h */,
 				C33E780018F3B41A00808391 /* MQTT.m */,
+				961F95CB18F688E0002D4F74 /* MQTTCover.h */,
+				961F95CC18F688E0002D4F74 /* MQTTCover.m */,
 			);
 			path = MQTT;
 			sourceTree = "<group>";
@@ -791,6 +799,7 @@
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
 				1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */,
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
+				961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */,
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
@@ -812,6 +821,7 @@
 			files = (
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,
 				961F95C518F4F7D3002D4F74 /* Login.m in Sources */,
+				961F95CA18F66D98002D4F74 /* APServerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

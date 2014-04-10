@@ -7,6 +7,7 @@
 //
 
 #import "XAILoginVC.h"
+#import "APServerNode.h"
 
 @interface XAILoginVC ()
 
@@ -113,11 +114,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+static int i = 0;
 
 - (IBAction)loginBtnClick:(id)sender{
     
-    _login = [[XAILogin alloc] init];
-    [_login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
+    if (i == 0) {
+        
+        i = 5;
+        _login = [[XAILogin alloc] init];
+        [_login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
+    
+    }else if(i == 5) {
+        
+        i = 7;
+        //[[MQTT shareMQTT].client subscribe:@"/0/server/3"];
+        [[MQTT shareMQTT].client subscribe:[MQTTCover serverStatusTopicWithAPNS:1 luid:1 other:1]];
+        [[MQTT shareMQTT].client subscribe:[MQTTCover mobileStatusTopicWithAPNS:1 luid:1 other:1]];
+        
+    }else{
+    
+        APServerNode* node = [[APServerNode alloc] init];
+        [node addUser:@"testname" Password:@"testname"];
+
+    
+    }
+    
 
     
     
