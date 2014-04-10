@@ -25,7 +25,7 @@
     
     
     purgePacket(packet);
-    purgePacketParamCtrl(ctrl_param);
+    purgePacketParamCtrlAndData(ctrl_param);
     
 }
 

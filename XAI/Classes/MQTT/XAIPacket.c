@@ -10,10 +10,23 @@
 
 
 //helper
-void copybyteArray(void* to, const void* from, int toSize,int fromSize){
+void byte_data_copy(void* to, const void* from, int toSize,int fromSize){
 
     int copySize = (toSize >= fromSize ? fromSize : toSize);
     memcpy(to, from, copySize);
+}
+
+void byte_data_set(void** to, const void* from, int size){
+
+    if (*to != NULL) {
+        
+        free(*to);
+    }
+    
+    *to = malloc(size);
+    
+    byte_data_copy(*to, from, size, size);
+
 }
 
 void param_to_packet_helper(void* to , void* from, int start, int end){

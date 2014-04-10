@@ -44,7 +44,6 @@ extern "C" {
     }_xai_packet_param_normal;  //普通报文参数
     
     
-    
     void purgePacket(_xai_packet* packet);  //释放一个报文
     
     _xai_packet*   generatePacketNormal(_xai_packet_param_normal* normal_param);  //依据参数生成一个普通的报文
@@ -60,7 +59,8 @@ extern "C" {
     void packet_to_param_helper(void* to , void* from ,int start,int end);
     
     //helper
-    void copybyteArray(void* to, const void* from, int toSize,int fromSize);
+    void byte_data_copy(void* to, const void* from, int toSize,int fromSize); //不会产生内存分配
+    void byte_data_set(void** to, const void* from, int size); //将产生内存分配
     
     
     

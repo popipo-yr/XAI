@@ -34,27 +34,44 @@
     NSString *from_guid = @"AAAAA";
     NSString *to_guid = @"22222";
     
+    NSString *dataStr = @"csdfsfslkjlllfffff";
+    
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
 
     
-    copybyteArray(param_ctrl->normal_param->from_guid, [from_guid UTF8String],
+    byte_data_copy(param_ctrl->normal_param->from_guid, [from_guid UTF8String],
                   sizeof(param_ctrl->normal_param->from_guid), [from_guid length]);
-    copybyteArray(param_ctrl->normal_param->to_guid, [to_guid UTF8String],
+    byte_data_copy(param_ctrl->normal_param->to_guid, [to_guid UTF8String],
                   sizeof(param_ctrl->normal_param->to_guid), [to_guid length]);
     
     param_ctrl->normal_param->flag  = 0x2;
     param_ctrl->normal_param->msgid = 0x23;
     param_ctrl->normal_param->magic_number = 0x45;
-    param_ctrl->normal_param->length  =  0x20;
-    param_ctrl->normal_param->data = "akfkjalfkjklsjfls";
+    param_ctrl->normal_param->length  =  27;
+    
+    byte_data_set(&param_ctrl->normal_param->data, [@"akfkjalfkjklsjfls" UTF8String], [@"akfkjalfkjklsjfls" length]);
     
     param_ctrl->oprId = 0x11;
     param_ctrl->time = 0x888888;
-    param_ctrl->data = "csfsfsagllllllg";
-    param_ctrl->data_len = 0x20;
     
+    param_ctrl->data_count = 1;
+    
+    _xai_packet_param_ctrl_data* ctrl_data = generatePacketParamCtrlData();
+    
+    ctrl_data->data_len = 20;
+    ctrl_data->data_type = [dataStr length];
+    ctrl_data->data = malloc(ctrl_data->data_len);
+    
+    byte_data_set(&ctrl_data->data, [dataStr UTF8String], [dataStr length]);
+    
+    param_ctrl->data = ctrl_data;
+    
+    //param_ctrl->data = "csfsfsagllllllg";
+    //param_ctrl->data_len = 0x20;
+    
+    //purgePacketParamCtrlData(ctrl_data);
     
     
     _xai_packet*  packet =  generatePacketCtrl(param_ctrl);
@@ -62,16 +79,19 @@
     _xai_packet_param_ctrl  *param =  generateParamCtrlFromPacket(packet);
     
     
-    NSString*  abc = [[NSString alloc] initWithBytes:param->data length:param->data_len encoding:NSUTF8StringEncoding];
-    NSString*  bbc = [[NSString alloc] initWithBytes:param_ctrl->data length:param_ctrl->data_len encoding:NSUTF8StringEncoding];
     
-
+NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param->data->data_len encoding:NSUTF8StringEncoding];
+    NSString*  bbc = [[NSString alloc] initWithBytes:param_ctrl->data->data length:param_ctrl->data->data_len encoding:NSUTF8StringEncoding];
+//    
+//
     XCTAssertTrue([abc isEqualToString:bbc], @"just a test");
     
     
-    purgePacketParamCtrl(param);
+    purgePacketParamCtrlData(ctrl_data);
+    
+    purgePacketParamCtrlAndData(param);
     purgePacket(packet);
-    purgePacketParamCtrl(param_ctrl);
+    purgePacketParamCtrlNoData(param_ctrl);
     
 
 }
@@ -119,8 +139,8 @@
     _xai_packet_param_normal*  np = generatePacketParamNormal();
     NSLog(@"%lu,%lu,%lu",sizeof(np->from_guid),sizeof(bbb),sizeof(ss));
     
-    copybyteArray(np->from_guid, [from_guid UTF8String], sizeof(np->from_guid), [from_guid length]);
-    copybyteArray(np->to_guid, [to_guid UTF8String], sizeof(np->to_guid), [to_guid length]);
+    byte_data_copy(np->from_guid, [from_guid UTF8String], sizeof(np->from_guid), [from_guid length]);
+    byte_data_copy(np->to_guid, [to_guid UTF8String], sizeof(np->to_guid), [to_guid length]);
     
     np->flag  = 0x2;
     np->msgid = 0x23;
