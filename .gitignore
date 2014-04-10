@@ -1,0 +1,8 @@
+
+*.xcsettings
+
+*.xcbkptlist
+
+*.xcscheme
+
+*.plist
