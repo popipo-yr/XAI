@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XAIMQTTDEF.h"
 #import "MosquittoClient.h"
 #import "MQTTPacketManager.h"
 

@@ -120,7 +120,7 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 
 
 - (void) connect {
-    const char *cstrHost = [host cStringUsingEncoding:NSASCIIStringEncoding];
+//    const char *cstrHost = [host cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cstrUsername = NULL, *cstrPassword = NULL;
     
     if (username)
@@ -132,16 +132,41 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
     // FIXME: check for errors
     mosquitto_username_pw_set(mosq, cstrUsername, cstrPassword);
     
-    mosquitto_connect(mosq, cstrHost, port, keepAlive);
+  
+    [NSThread detachNewThreadSelector:@selector(startSynConnect) toTarget:self withObject:nil];
     
-    // Setup timer to handle network events
-    // FIXME: better way to do this - hook into iOS Run Loop select() ?
-    // or run in seperate thread?
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 // 10ms
-                                             target:self
-                                           selector:@selector(loop:)
-                                           userInfo:nil
-                                            repeats:YES];
+}
+
+- (void) startSynConnect{
+
+    const char *cstrHost = [host cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    int rc = mosquitto_connect(mosq, cstrHost, port, keepAlive);
+
+    [self performSelectorOnMainThread:@selector(connectFinish:) withObject:[NSNumber numberWithInt:rc] waitUntilDone:YES];
+     
+
+}
+         
+         
+- (void) connectFinish:(NSNumber*) rc{
+    
+    if ([rc intValue] == MOSQ_ERR_SUCCESS) {
+        
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 // 10ms
+                                                 target:self
+                                               selector:@selector(loop:)
+                                               userInfo:nil
+                                                repeats:YES];
+    }else{
+        
+        
+        [self.delegate didDisconnect];
+        
+    }
+    
+    
 }
 
 - (void) connectToHost: (NSString*)aHost {
@@ -185,6 +210,16 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
     
 }
 
+
+- (void)publish:(void*)payload size:(int)size toTopic:(NSString *)topic withQos:(NSUInteger)qos retain:(BOOL)retain{
+
+    const char* cstrTopic = [topic cStringUsingEncoding:NSUTF8StringEncoding];
+    const uint8_t* cstrPayload = (const uint8_t*)payload;
+    size_t cstrlen = size;
+    mosquitto_publish(mosq, NULL, cstrTopic, cstrlen, cstrPayload, qos, retain);
+
+
+}
 
 
 - (void)subscribe: (NSString *)topic {

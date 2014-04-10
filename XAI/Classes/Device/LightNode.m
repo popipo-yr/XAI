@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "Light.h"
+#import "LightNode.h"
 
 
 

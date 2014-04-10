@@ -20,7 +20,7 @@
 @end
 
 
-@interface Light : NSObject <MQTTPacketManagerDelegate>
+@interface LightNode : NSObject <MQTTPacketManagerDelegate>
 
 @property  (weak) id <LightPro> delegate;
 

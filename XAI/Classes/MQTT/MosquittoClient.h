@@ -57,6 +57,8 @@
 
 - (void)publishString: (NSString *)payload toTopic:(NSString *)topic withQos:(NSUInteger)qos retain:(BOOL)retain;
 
+- (void)publish:(void*)payload size:(int)size toTopic:(NSString *)topic withQos:(NSUInteger)qos retain:(BOOL)retain;
+
 - (void)subscribe: (NSString *)topic;
 - (void)subscribe: (NSString *)topic withQos:(NSUInteger)qos;
 - (void)unsubscribe: (NSString *)topic;

@@ -24,6 +24,9 @@ typedef enum XAI_PKT_TYPE{
     XAI_PKT_FLAG_ACK = 0x80,  //	FLAG最高位为1表示此报文是一个ACK报文
     
 }XAI_PKT_TYPE;
+
+
+typedef  char*  XAITYPELUID;
     
 typedef  enum XAI_DATA_TYPE{
     

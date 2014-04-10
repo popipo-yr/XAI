@@ -23,22 +23,7 @@
 	[mosq setHost: host];
     [mosq setUsername:name];
     [mosq setPassword:password];
-    [mosq setPort:9001];
-    
-//        mosquitto_tls_set(struct mosquitto *mosq, const char *cafile, const char *capath, const char *certfile, const char *keyfile, int (*pw_callback)(char *buf, int size, int rwflag, void *userdata))
-    
-    
-//    SSL_CTX *ctx = NULL;
-//    
-//    const unsigned char *cert_data = NULL;
-//    int cert_len = 0;
-//    
-//    X509 * cert = d2i_X509(NULL, &cert_data, cert_len);
-//    SSL_CTX_use_certificate(ctx, cert);
-    
-    
-    //curl_setopt($ch, CURLOPT_CAINFO, 'E:\path\to\curl-ca-bundle.crt');
-	
+    [mosq setPort:9001];	
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
