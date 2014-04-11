@@ -130,8 +130,8 @@ static int i = 0;
         i = 7;
         //[[MQTT shareMQTT].client subscribe:@"/0/server/3"];
         
-        [[MQTT shareMQTT].client subscribe:@"0x00000001/SERVER/0x0000000000000003/#"];
-        [[MQTT shareMQTT].client subscribe:@"0x00000001/MOBILES/IN"];
+        [[MQTT shareMQTT].client subscribe:@"0x00000001/SERVER/0x0000000000000003/+"];
+        [[MQTT shareMQTT].client subscribe:@"0x00000001/MOBILES/0x0000000000000001/IN"];
         //[[MQTT shareMQTT].client subscribe:[MQTTCover serverStatusTopicWithAPNS:0 luid:1 other:1]];
         //[[MQTT shareMQTT].client subscribe:[MQTTCover mobileStatusTopicWithAPNS:0 luid:1 other:1]];
         

@@ -32,10 +32,12 @@ _xai_packet*   generatePacketCtrl(_xai_packet_param_ctrl* ctrl_param){
     //拷贝 normal 固定格式
     memcpy(payload, nor_packet->pre_load, nor_packet->fix_pos);
     
+    //转为大端模式
+    uint32_t big_time = CFSwapInt32(ctrl_param->time);
     
     //存入固定格式
     param_to_packet_helper(payload, &ctrl_param->oprId,_XPP_C_OPRID_START,_XPP_C_OPRID_END);
-    param_to_packet_helper(payload, &ctrl_param->time, _XPP_C_TIME_START, _XPP_C_TIME_END);
+    param_to_packet_helper(payload, &big_time, _XPP_C_TIME_START, _XPP_C_TIME_END);
     param_to_packet_helper(payload, &ctrl_param->data_count, _XPP_C_DATA_COUNT_START, _XPP_C_DATA_COUNT_END);
     //param_to_packet_helper(payload, &ctrl_param->data_type, _XPP_C_DATA_TYPE_START, _XPP_C_DATA_TYPE_END);
     //param_to_packet_helper(payload, &ctrl_param->data_len, _XPP_C_DATA_LEN_START, _XPP_C_DATA_LEN_END);
@@ -254,6 +256,8 @@ _xai_packet_param_ctrl_data*    generateParamCtrlDataFromPacketDataOne(void*  da
     packet_to_param_helper(&ctrl_param_data->data_type, data, _XPP_CD_TYPE_START, _XPP_CD_TYPE_END);
     packet_to_param_helper(&ctrl_param_data->data_len, data, _XPP_CD_LEN_START, _XPP_CD_LEN_END);
     
+    ctrl_param_data->data_len = CFSwapInt16(ctrl_param_data->data_len);
+    
     if (size < _XPPS_CD_FIXED_ALL + ctrl_param_data->data_len) {
         
         purgePacketParamCtrlData(ctrl_param_data);
@@ -285,10 +289,12 @@ _xai_packet* generatePacketCtrlDataOne(_xai_packet_param_ctrl_data* ctrl_param_d
         return NULL;
     }
     
+    //big
+    uint16_t big_len = CFSwapInt16(ctrl_param_data->data_len);
     
     //存入固定格式
     param_to_packet_helper(payload, &ctrl_param_data->data_type, _XPP_CD_TYPE_START, _XPP_CD_TYPE_END);
-    param_to_packet_helper(payload, &ctrl_param_data->data_len, _XPP_CD_LEN_START, _XPP_CD_LEN_END);
+    param_to_packet_helper(payload, &big_len, _XPP_CD_LEN_START, _XPP_CD_LEN_END);
     
     ctrl_data->pre_load = malloc(_XPPS_CD_FIXED_ALL);
     memcpy(ctrl_data->pre_load, payload, _XPPS_CD_FIXED_ALL);
@@ -418,7 +424,7 @@ void xai_param_ctrl_data_set(_xai_packet_param_ctrl_data* ctrlData ,XAI_DATA_TYP
         return;
     }
     
-    ctrlData->data_len = CFSwapInt16(len);
+    ctrlData->data_len = len;
     ctrlData->data_type = type;
     byte_data_set(&ctrlData->data, data, len);
     
@@ -439,7 +445,7 @@ void xai_param_ctrl_set(_xai_packet_param_ctrl* param_ctrl,XAITYPEAPSN  from_aps
     
     
     param_ctrl->oprId = oprId;
-    param_ctrl->time = CFSwapInt16(time);
+    param_ctrl->time = time;
     
     param_ctrl->data_count = data_count;
     param_ctrl->data = data;
@@ -455,7 +461,7 @@ void xai_param_ctrl_set(_xai_packet_param_ctrl* param_ctrl,XAITYPEAPSN  from_aps
         dataSize += ctrl_data->data_len;
     }
     
-    param_ctrl->normal_param->length =  CFSwapInt16HostToBig(data_count*_XPPS_CD_FIXED_ALL + dataSize);
+    param_ctrl->normal_param->length =  (_XPPS_C_FIXED_ALL - _XPPS_N_FIXED_ALL) + data_count*_XPPS_CD_FIXED_ALL + dataSize;
 
 
 }

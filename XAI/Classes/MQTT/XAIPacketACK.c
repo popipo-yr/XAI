@@ -208,7 +208,7 @@ void xai_param_ack_set(_xai_packet_param_ack* param,XAITYPEAPSN  from_apsn,XAITY
         dataSize += ctrl_data->data_len;
     }
     
-    param->normal_param->length =  CFSwapInt16HostToBig(data_count*_XPPS_CD_FIXED_ALL + dataSize) ;
+    param->normal_param->length =  _XPPS_A_FIXED_ALL - _XPPS_N_FIXED_ALL + data_count*_XPPS_CD_FIXED_ALL + dataSize;
 
 
 }

@@ -43,7 +43,8 @@
                              [password length], (void*)[password UTF8String],NULL);
     
     
-     xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, 0, 0, 0, AddUserID, [[NSDate new] timeIntervalSince1970],
+     xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, XAI_PKT_TYPE_CONTROL, 1, 1, AddUserID,
+                        [[NSDate new] timeIntervalSince1970],
                         2, username_data);
     
     

@@ -10,6 +10,7 @@
 
 @implementation MQTTCover
 
+
 + (NSString*) stringFormat:(NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
 
     //设备表： 0x%08x/NODES/0x%016llx/OUT/DEV

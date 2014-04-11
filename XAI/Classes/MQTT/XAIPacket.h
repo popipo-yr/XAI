@@ -77,6 +77,7 @@ extern "C" {
     //GUID helper
     void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid);
     void purgeGUID(void* guid);
+    void* generateSwapGUID(void* guid);
     size_t lengthOfGUID();
     
 #ifdef __cplusplus

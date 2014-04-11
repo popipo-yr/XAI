@@ -72,15 +72,25 @@ _xai_packet*   generatePacketNormal(_xai_packet_param_normal* normal_param){
         return NULL;
     }
     
+    uint16_t big_msgid = CFSwapInt16(normal_param->msgid);
+    uint16_t big_magic_number = CFSwapInt16(normal_param->magic_number);
+    uint16_t big_length = CFSwapInt16(normal_param->length);
+    
+    void* big_from = generateSwapGUID(normal_param->from_guid);
+    void* big_to  = generateSwapGUID(normal_param->to_guid);
+    
     //存入固定格式
-    param_to_packet_helper(payload, normal_param->from_guid,_XPP_N_FROM_GUID_START,_XPP_N_FROM_GUID_END);
-    param_to_packet_helper(payload, normal_param->to_guid,_XPP_N_TO_GUID_START,_XPP_N_TO_GUID_END);
+    param_to_packet_helper(payload, big_from,_XPP_N_FROM_GUID_START,_XPP_N_FROM_GUID_END);
+    param_to_packet_helper(payload, big_to  ,_XPP_N_TO_GUID_START,_XPP_N_TO_GUID_END);
+    
     param_to_packet_helper(payload, &normal_param->flag, _XPP_N_FLAG_START, _XPP_N_FLAG_END);
-    param_to_packet_helper(payload, &normal_param->msgid, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
-    param_to_packet_helper(payload, &normal_param->magic_number, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
-    param_to_packet_helper(payload, &normal_param->length, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
+    param_to_packet_helper(payload, &big_msgid, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
+    param_to_packet_helper(payload, &big_magic_number, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
+    param_to_packet_helper(payload, &big_length, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
     
 
+    purgeGUID(big_from);
+    purgeGUID(big_to);
     
     
     /*fixed  size  */
@@ -155,6 +165,11 @@ _xai_packet_param_normal*   generateParamNormalFromPacketData(void*  packetData,
     packet_to_param_helper(&aParam->magic_number, packetData, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
     packet_to_param_helper(&aParam->length, packetData, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
     
+    void* lit_from = generateSwapGUID(aParam->from_guid);
+    void* lit_to  = generateSwapGUID(aParam->to_guid);
+    
+    byte_data_copy(aParam->from_guid, lit_from, sizeof(aParam->from_guid), sizeof(aParam->from_guid));
+    byte_data_copy(aParam->to_guid, lit_to, sizeof(aParam->to_guid), sizeof(aParam->to_guid));
     
     aParam->msgid = CFSwapInt32(aParam->msgid);
     aParam->msgid = CFSwapInt16(aParam->magic_number);
@@ -217,8 +232,8 @@ void xai_param_normal_set(_xai_packet_param_normal* normal_param,XAITYPEAPSN  fr
 
     
     
-    void* from_guid = generateGUID(CFSwapInt32(from_apsn), CFSwapInt64(from_luid));
-    void* to_guid = generateGUID(CFSwapInt32(to_apsn) , CFSwapInt64(to_luid));
+    void* from_guid = generateGUID(from_apsn, from_luid);
+    void* to_guid = generateGUID(to_apsn , to_luid);
     
     
     byte_data_copy(normal_param->from_guid, from_guid, sizeof(normal_param->from_guid), lengthOfGUID());
@@ -228,9 +243,9 @@ void xai_param_normal_set(_xai_packet_param_normal* normal_param,XAITYPEAPSN  fr
     purgeGUID(to_guid);
     
     normal_param->flag  = flag;
-    normal_param->msgid = CFSwapInt16(msgid);
-    normal_param->magic_number = CFSwapInt16(magic_number);
-    normal_param->length  =   CFSwapInt16(dataSize);
+    normal_param->msgid = msgid;
+    normal_param->magic_number = magic_number;
+    normal_param->length  =   dataSize;
     
     if (NULL != normal_param->data) {
         
@@ -267,6 +282,33 @@ void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid){
 void purgeGUID(void* guid){
 
     free(guid);
+}
+
+void* generateSwapGUID(void* guid){
+
+    void* newGuid = malloc(12);
+    memset(newGuid, 0, 12);
+    
+    //读取
+    XAITYPEAPSN apsn = 0;
+    XAITYPELUID  luid = 0;
+    
+    memcpy(&apsn, guid, 4);
+    memcpy(&luid, guid+4, 8);
+    
+    //zhuanhuan
+    apsn = CFSwapInt32(apsn);
+    luid = CFSwapInt64(luid);
+    
+    //cunru
+    memcpy(newGuid, &apsn , 4);
+    memcpy(newGuid +4, &luid, 8);
+    
+    return newGuid;
+
+    
+    
+
 }
 
 size_t lengthOfGUID(){
