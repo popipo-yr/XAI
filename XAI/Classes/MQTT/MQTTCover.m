@@ -23,7 +23,9 @@
 
 + (NSString*) devTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
     
-    return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/DEV" APNS:APNS luid:luid];
+    //return [MQTTCover stringFormat:@"0x%@/NODES/0x%@/OUT/DEV" APNS:APNS luid:luid];
+    
+    return [NSString stringWithFormat:@"0x00000000/NODES/0x0000000000000001/OUT/DEV"];
     
     //设备表： 0x%08x/NODES/0x%016llx/OUT/DEV
 
@@ -72,6 +74,7 @@
 + (NSString*) mobileCtrTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
  //0x%08x/MOBILES/0x%016llx/IN
     
+    return [NSString stringWithFormat:@"0x00000000/MOBILES/0x0000000000000001/IN"];
    return [MQTTCover stringFormat:@"0%@/MOBILES/%@/IN" APNS:APNS luid:luid];
 
 }

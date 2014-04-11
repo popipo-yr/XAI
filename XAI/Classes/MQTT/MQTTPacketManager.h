@@ -13,12 +13,11 @@
 @optional
 
 - (void) didPublish: (NSUInteger)messageId;
-- (void) didReceiveMessage: (MosquittoMessage*)mosq_msg;
 - (void) didSubscribe: (NSUInteger)messageId grantedQos:(NSArray*)qos;
 - (void) didUnsubscribe: (NSUInteger)messageId;
 
 - (void) sendPacketIsSuccess:(BOOL) bl;
-- (void) recivePacket:(void*)datas size:(int)size;
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic;
 
 @end
 
@@ -41,5 +40,6 @@
 @property (nonatomic, weak) id<MQTTConnectDelegate> connectDelegate;
 
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
+- (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
 @end

@@ -26,7 +26,8 @@ typedef enum XAI_PKT_TYPE{
 }XAI_PKT_TYPE;
 
 
-typedef  char*  XAITYPELUID;
+typedef  uint64_t  XAITYPELUID;
+typedef  uint32_t  XAITYPEAPSN;
     
 typedef  enum XAI_DATA_TYPE{
     

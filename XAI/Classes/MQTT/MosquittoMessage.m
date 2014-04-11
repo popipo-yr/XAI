@@ -33,8 +33,14 @@
 
 -(void)  setPayloadbyte:(void*) bytes withSize:(int) size{
     
+    if (NULL != payloadbyte) {
+        free(payloadbyte);
+    }
+    
     payloadbyte = malloc(size);
     memcpy(payloadbyte, bytes, size);
+    
+    payloadlen = size;
 }
 -(void*)  getPayloadbyte{
 

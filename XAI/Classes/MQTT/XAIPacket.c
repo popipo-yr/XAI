@@ -155,12 +155,17 @@ _xai_packet_param_normal*   generateParamNormalFromPacketData(void*  packetData,
     packet_to_param_helper(&aParam->magic_number, packetData, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
     packet_to_param_helper(&aParam->length, packetData, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
     
+    
+    aParam->msgid = CFSwapInt32(aParam->msgid);
+    aParam->msgid = CFSwapInt16(aParam->magic_number);
+    aParam->msgid = CFSwapInt16(aParam->length);
+    
     if (size < _XPPS_N_FIXED_ALL + aParam->length) {
         
         purgePacketParamNormal(aParam);
         
         printf("XAI -  NORMAL PACKET UNFIXED DATA SIZE ENOUGH");
-        return NULL;
+        //return NULL;
     }
     
     //unfixed
@@ -199,6 +204,75 @@ _xai_packet_param_normal*    generatePacketParamNormal(){
     
     return param;
 
+}
+
+void xai_param_normal_set(_xai_packet_param_normal* normal_param,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
+                          XAITYPEAPSN to_apsn,XAITYPELUID to_luid,uint8_t flag , uint16_t msgid , uint16_t magic_number
+                          ,void* data ,size_t dataSize){
+
+
+    if (NULL == normal_param) {
+        return;
+    }
+
+    
+    
+    void* from_guid = generateGUID(CFSwapInt32(from_apsn), CFSwapInt64(from_luid));
+    void* to_guid = generateGUID(CFSwapInt32(to_apsn) , CFSwapInt64(to_luid));
+    
+    
+    byte_data_copy(normal_param->from_guid, from_guid, sizeof(normal_param->from_guid), lengthOfGUID());
+    byte_data_copy(normal_param->to_guid, to_guid, sizeof(normal_param->to_guid), lengthOfGUID());
+    
+    purgeGUID(from_guid);
+    purgeGUID(to_guid);
+    
+    normal_param->flag  = flag;
+    normal_param->msgid = CFSwapInt16(msgid);
+    normal_param->magic_number = CFSwapInt16(magic_number);
+    normal_param->length  =   CFSwapInt16(dataSize);
+    
+    if (NULL != normal_param->data) {
+        
+        free(normal_param->data);
+        normal_param->data = NULL;
+    }
+    
+    if (dataSize > 0) {
+        
+        normal_param->data = malloc(dataSize);
+        memset(normal_param->data, 0, dataSize);
+        
+        byte_data_copy(normal_param->data, data, dataSize, dataSize);
+    }
+    
+
+
+}
+
+
+void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid){
+
+    void* guid = malloc(12);
+    memset(guid, 0, 12);
+    
+    memcpy(guid, &apsn , 4);
+    memcpy(guid +4, &luid, 8);
+
+    return guid;
+
+
+}
+
+void purgeGUID(void* guid){
+
+    free(guid);
+}
+
+size_t lengthOfGUID(){
+
+
+    return sizeof(XAITYPEAPSN) + sizeof(XAITYPELUID);
 }
 
 

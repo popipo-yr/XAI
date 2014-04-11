@@ -105,7 +105,12 @@ extern "C" {
     _xai_packet_param_ctrl_data*  getCtrlDataFrom(_xai_packet_param_ctrl* ctrl_param, int index); //通过index获取data
     _xai_packet_param_ctrl_data*  getCtrlData(_xai_packet_param_ctrl_data* ctrl_param_data, int index); //通过index获取data
     
+    void xai_param_ctrl_data_set(_xai_packet_param_ctrl_data* ctrlData ,XAI_DATA_TYPE type , size_t len ,void* data , _xai_packet_param_ctrl_data* next);
     
+    void xai_param_ctrl_set(_xai_packet_param_ctrl* param_ctrl,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
+                            XAITYPEAPSN to_apsn,XAITYPELUID to_luid,
+                            uint8_t flag , uint16_t msgid , uint16_t magic_number ,uint8_t oprId, uint32_t time, uint8_t data_count , _xai_packet_param_ctrl_data* data);
+
     
     
 #ifdef __cplusplus

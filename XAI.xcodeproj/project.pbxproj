@@ -17,6 +17,8 @@
 		961F95C818F53629002D4F74 /* APServerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C718F53629002D4F74 /* APServerNode.m */; };
 		961F95CA18F66D98002D4F74 /* APServerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C918F66D98002D4F74 /* APServerTest.m */; };
 		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
+		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
+		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
@@ -168,6 +170,10 @@
 		961F95C918F66D98002D4F74 /* APServerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APServerTest.m; sourceTree = "<group>"; };
 		961F95CB18F688E0002D4F74 /* MQTTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCover.h; sourceTree = "<group>"; };
 		961F95CC18F688E0002D4F74 /* MQTTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTCover.m; sourceTree = "<group>"; };
+		961F95CE18F780AE002D4F74 /* XAIUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserService.h; sourceTree = "<group>"; };
+		961F95CF18F780AE002D4F74 /* XAIUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserService.m; sourceTree = "<group>"; };
+		961F95D118F79EF5002D4F74 /* XAIPacketACK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketACK.h; sourceTree = "<group>"; };
+		961F95D218F79EF5002D4F74 /* XAIPacketACK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketACK.c; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -312,6 +318,8 @@
 				C33E77FD18F3B28500808391 /* XAILogin.m */,
 				961F95C618F53629002D4F74 /* APServerNode.h */,
 				961F95C718F53629002D4F74 /* APServerNode.m */,
+				961F95CE18F780AE002D4F74 /* XAIUserService.h */,
+				961F95CF18F780AE002D4F74 /* XAIUserService.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -635,6 +643,8 @@
 				C38D91E118ED3490006F22D3 /* MosquittoClient.m */,
 				C38D91E218ED3490006F22D3 /* MosquittoMessage.h */,
 				C38D91E318ED3490006F22D3 /* MosquittoMessage.m */,
+				1AF7605018F257C600520EAD /* MQTTPacketManager.h */,
+				1AF7605118F257C600520EAD /* MQTTPacketManager.m */,
 				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
 				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
 				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
@@ -642,10 +652,10 @@
 				1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */,
 				C33E77F618F38DF000808391 /* XAIPacketStatus.h */,
 				C33E77F518F38DF000808391 /* XAIPacketStatus.c */,
+				961F95D118F79EF5002D4F74 /* XAIPacketACK.h */,
+				961F95D218F79EF5002D4F74 /* XAIPacketACK.c */,
 				C33E77FA18F395F300808391 /* XAIPacketDevTypeInfo.h */,
 				C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */,
-				1AF7605018F257C600520EAD /* MQTTPacketManager.h */,
-				1AF7605118F257C600520EAD /* MQTTPacketManager.m */,
 				C33E77FF18F3B41A00808391 /* MQTT.h */,
 				C33E780018F3B41A00808391 /* MQTT.m */,
 				961F95CB18F688E0002D4F74 /* MQTTCover.h */,
@@ -784,6 +794,7 @@
 				C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
+				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
@@ -811,6 +822,7 @@
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */,
 				C341A64A18EBB23E00034649 /* DeviceShowCell.m in Sources */,
+				961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */,
 				C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

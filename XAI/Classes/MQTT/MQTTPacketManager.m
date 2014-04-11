@@ -22,6 +22,27 @@
 
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro withKey:(NSString*)key{
 
+    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+    
+    if (nil == oldAry) {
+        
+        oldAry = [[NSMutableArray alloc] init];
+    }
+    
+    [oldAry addObject:aPro];
+    
+    [_delegates setObject:oldAry forKey:key];
+}
+
+- (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key{
+
+    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+    
+    if (nil == oldAry) return;
+    
+
+    [oldAry removeObject:aPro];
+
 }
 
 #pragma mark -----------------------
@@ -29,12 +50,22 @@
 
 - (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
     
+    NSMutableArray*  delegeteAry  = [_delegates objectForKey:mosq_msg.topic];
     
-    id<MQTTPacketManagerDelegate> apro = [_delegates objectForKey:mosq_msg.topic];
-    if (apro != NULL) {
+    for (int i = 0; i < [delegeteAry count]; i++) {
         
-        [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen];
+        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
+        if (apro != NULL
+            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            
+            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+        }
+        
+
     }
+    
+    
     
 }
 

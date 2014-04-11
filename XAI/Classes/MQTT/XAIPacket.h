@@ -11,6 +11,13 @@
 #include <stdlib.h>
 #include "XAIMQTTDEF.h"
 
+#include <CoreFoundation/CoreFoundation.h>
+
+
+/* packet 都是大端
+    param  都是小端
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,6 +61,10 @@ extern "C" {
     _xai_packet_param_normal*    generatePacketParamNormal(); //生成一个普通报文参数
     
     
+    void xai_param_normal_set(_xai_packet_param_normal* param_normal,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
+                            XAITYPEAPSN to_apsn,XAITYPELUID to_luid,
+                            uint8_t flag , uint16_t msgid , uint16_t magic_number, void* data ,size_t dataSize);
+    
     //helper
     void param_to_packet_helper(void* to , void* from, int start, int end);
     void packet_to_param_helper(void* to , void* from ,int start,int end);
@@ -63,6 +74,10 @@ extern "C" {
     void byte_data_set(void** to, const void* from, int size); //将产生内存分配
     
     
+    //GUID helper
+    void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid);
+    void purgeGUID(void* guid);
+    size_t lengthOfGUID();
     
 #ifdef __cplusplus
 }

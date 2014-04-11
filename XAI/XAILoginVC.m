@@ -8,6 +8,7 @@
 
 #import "XAILoginVC.h"
 #import "APServerNode.h"
+#import "XAIUserService.h"
 
 @interface XAILoginVC ()
 
@@ -128,14 +129,19 @@ static int i = 0;
         
         i = 7;
         //[[MQTT shareMQTT].client subscribe:@"/0/server/3"];
-        [[MQTT shareMQTT].client subscribe:[MQTTCover serverStatusTopicWithAPNS:1 luid:1 other:1]];
-        [[MQTT shareMQTT].client subscribe:[MQTTCover mobileStatusTopicWithAPNS:1 luid:1 other:1]];
+        
+        [[MQTT shareMQTT].client subscribe:@"0x00000001/SERVER/0x0000000000000003/#"];
+        [[MQTT shareMQTT].client subscribe:@"0x00000001/MOBILES/IN"];
+        //[[MQTT shareMQTT].client subscribe:[MQTTCover serverStatusTopicWithAPNS:0 luid:1 other:1]];
+        //[[MQTT shareMQTT].client subscribe:[MQTTCover mobileStatusTopicWithAPNS:0 luid:1 other:1]];
         
     }else{
     
-        APServerNode* node = [[APServerNode alloc] init];
-        [node addUser:@"testname" Password:@"password"];
+       // APServerNode* node = [[APServerNode alloc] init];
+       // [node addUser:@"testname" Password:@"password"];
 
+        XAIUserService* userService = [[XAIUserService alloc] init];
+        [userService addUser:@"abc" Password:@"bbc"];
     
     }
     

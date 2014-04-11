@@ -13,29 +13,10 @@
 - (void) addUser:(NSString*)username Password:(NSString*)password{
 
 
-    
-    
-    uint32_t from_guid_apsn = 0;
-    uint64_t from_guid_luid = 1;
-    void* from = malloc(12);
-    memset(from, 0, 12);
 
-    memcpy(from, &from_guid_apsn , 4);
-    memcpy(from +4, &from_guid_luid, 8);
     
+
     
-    uint32_t to_guid_apsn = 0;
-    uint64_t to_guid_luid = 1;
-    void* to = malloc(12);
-    memset(to, 0, 12);
-    
-    memcpy(to, &to_guid_apsn , 4);
-    memcpy(to +4, &to_guid_luid, 8);
-    
-    
-    
-//    NSString *from_guid = @"/0/mobile/0";
-//    NSString *to_guid = @"/0/server/3";
     
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
@@ -55,12 +36,17 @@
 
     param_ctrl->data = username_data;
     
+    void* from_guid = generateGUID(0, 1);
+    void* to_guid = generateGUID(0, 1);
     
     
-    byte_data_copy(param_ctrl->normal_param->from_guid, from,
+    byte_data_copy(param_ctrl->normal_param->from_guid, from_guid,
                    sizeof(param_ctrl->normal_param->from_guid), 12);
-    byte_data_copy(param_ctrl->normal_param->to_guid, to,
+    byte_data_copy(param_ctrl->normal_param->to_guid, to_guid,
                    sizeof(param_ctrl->normal_param->to_guid), 12);
+    
+    purgeGUID(from_guid);
+    purgeGUID(to_guid);
     
     param_ctrl->normal_param->flag  = 0;
     param_ctrl->normal_param->msgid = 0;

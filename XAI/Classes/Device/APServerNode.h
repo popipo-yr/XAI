@@ -14,12 +14,12 @@
 
 - (void) addUser:(NSString*)username Password:(NSString*)password;
 
-- (void) delUser:(XAITYPELUID) luid;
-- (void) changeUser:(XAITYPELUID)luid withName:(NSString*)newUsername;
-- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword;
-
-- (void) addDev:(XAITYPELUID)luid  withName:(NSString*)devName;
-- (void) delDev:(XAITYPELUID)luid;
-- (void) changeDev:(XAITYPELUID)luid withName:(NSString*)newName;
+//- (void) delUser:(XAITYPELUID) luid;
+//- (void) changeUser:(XAITYPELUID)luid withName:(NSString*)newUsername;
+//- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword;
+//
+//- (void) addDev:(XAITYPELUID)luid  withName:(NSString*)devName;
+//- (void) delDev:(XAITYPELUID)luid;
+//- (void) changeDev:(XAITYPELUID)luid withName:(NSString*)newName;
 
 @end

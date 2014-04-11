@@ -411,3 +411,52 @@ _xai_packet_param_ctrl_data*  getCtrlData(_xai_packet_param_ctrl_data* ctrl_para
 
 }
 
+void xai_param_ctrl_data_set(_xai_packet_param_ctrl_data* ctrlData ,XAI_DATA_TYPE type , size_t len , void* data,
+                             _xai_packet_param_ctrl_data* next){
+
+    if (NULL ==  ctrlData) {
+        return;
+    }
+    
+    ctrlData->data_len = CFSwapInt16(len);
+    ctrlData->data_type = type;
+    byte_data_set(&ctrlData->data, data, len);
+    
+    ctrlData->next = next;
+    
+}
+
+void xai_param_ctrl_set(_xai_packet_param_ctrl* param_ctrl,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
+                        XAITYPEAPSN to_apsn,XAITYPELUID to_luid,
+                        uint8_t flag , uint16_t msgid , uint16_t magic_number, uint8_t oprId, uint32_t time, uint8_t data_count , _xai_packet_param_ctrl_data* data){
+
+    if (NULL == param_ctrl) {
+        return;
+    }
+    
+    xai_param_normal_set(param_ctrl->normal_param, from_apsn, from_luid, to_apsn, to_luid, flag, msgid, magic_number, NULL, 0);
+    
+    
+    
+    param_ctrl->oprId = oprId;
+    param_ctrl->time = CFSwapInt16(time);
+    
+    param_ctrl->data_count = data_count;
+    param_ctrl->data = data;
+    
+    size_t  dataSize = 0;
+    
+    for (int i = 0; i < data_count; i++) {
+        
+        _xai_packet_param_ctrl_data* ctrl_data = getCtrlData(param_ctrl->data, 0);
+        
+        if (NULL == ctrl_data) return;
+        
+        dataSize += ctrl_data->data_len;
+    }
+    
+    param_ctrl->normal_param->length =  CFSwapInt16HostToBig(data_count*_XPPS_CD_FIXED_ALL + dataSize);
+
+
+}
+
