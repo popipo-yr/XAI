@@ -15,10 +15,10 @@
 
 _xai_packet*   generatePacketDTI(_xai_packet_param_dti* dti_param){
     
-    _xai_packet* nor_packet = generatePacketNormal(dti_param->normal_param);
+    _xai_packet* nor_packet = generatePacketFromParamNormal(dti_param->normal_param);
     
     
-    _xai_packet* dti_packet = malloc(sizeof(_xai_packet));
+    _xai_packet* dti_packet = generatePacket();
     
     
     char*  payload  = malloc(1000);
@@ -72,7 +72,7 @@ _xai_packet_param_dti*   generateParamDTIFromPacketData(void*  packet_data,int s
     _xai_packet_param_dti*  dti_param = generatePacketParamDTI();
     
     purgePacketParamNormal(dti_param->normal_param);
-    dti_param->normal_param = generateParamNormalFromPacketData(packet_data, size);
+    dti_param->normal_param = generateParamNormalFromData(packet_data, size);
     
     if (NULL == dti_param->normal_param) {
         

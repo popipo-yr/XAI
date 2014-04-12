@@ -58,7 +58,7 @@
     
     param_ctrl->data_count = 1;
     
-    _xai_packet_param_ctrl_data* ctrl_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* ctrl_data = generatePacketParamData();
     
     ctrl_data->data_len = 20;
     ctrl_data->data_type = [dataStr length];
@@ -74,7 +74,7 @@
     //purgePacketParamCtrlData(ctrl_data);
     
     
-    _xai_packet*  packet =  generatePacketCtrl(param_ctrl);
+    _xai_packet*  packet =  generatePacketFromParamCtrl(param_ctrl);
     
     _xai_packet_param_ctrl  *param =  generateParamCtrlFromPacket(packet);
     
@@ -87,7 +87,7 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
     XCTAssertTrue([abc isEqualToString:bbc], @"just a test");
     
     
-    purgePacketParamCtrlData(ctrl_data);
+    purgePacketParamData(ctrl_data);
     
     purgePacketParamCtrlAndData(param);
     purgePacket(packet);
@@ -149,7 +149,7 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
     np->data = "akfkjalfkjklsjfls";
     
     
-    _xai_packet*  cabc =  generatePacketNormal(np);
+    _xai_packet*  cabc =  generatePacketFromParamNormal(np);
     
     purgePacketParamNormal(np);
     

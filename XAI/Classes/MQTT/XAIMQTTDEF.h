@@ -45,34 +45,6 @@ typedef  enum XAI_DATA_TYPE{
         
 }XAI_DATA_TYPE;
 
-/*----------------------normal-------------*/
-    
-    //大小
-#define  _XPPS_N_FROM_GUID  12
-#define  _XPPS_N_TO_GUID    12
-#define  _XPPS_N_FLAG    1
-#define  _XPPS_N_MSGID   2
-#define  _XPPS_N_MAGIC_NUMBER  2
-#define  _XPPS_N_LENGTH       2
-#define  _XPPS_N_FIXED_ALL  (12+12+1+2+2+2)
-    
-    //开始与结束位置  0 表示第一位
-#define  _XPP_END_UNKOWN   -1  //表示位置
-
-#define  _XPP_N_FROM_GUID_START  0
-#define  _XPP_N_FROM_GUID_END  11
-#define  _XPP_N_TO_GUID_START   12
-#define  _XPP_N_TO_GUID_END    23
-#define  _XPP_N_FLAG_START    24
-#define  _XPP_N_FLAG_END      24
-#define  _XPP_N_MSGID_START   25
-#define  _XPP_N_MSGID_END   26
-#define  _XPP_N_MAGIC_NUMBER_START  27
-#define  _XPP_N_MAGIC_NUMBER_END  28
-#define  _XPP_N_LENGTH_START        29
-#define  _XPP_N_LENGTH_END        30
-#define  _XPP_N_DATA_START      31
-#define  _XPP_N_DATA_END        _XPP_END_UNKOWN
 
 
 

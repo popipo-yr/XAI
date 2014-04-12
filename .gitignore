@@ -6,3 +6,8 @@
 *.xcscheme
 
 *.plist
+build
+
+*.xccheckout
+
+*.xcuserstate

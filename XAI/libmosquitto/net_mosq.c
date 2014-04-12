@@ -57,10 +57,6 @@
 #include <netinet/in.h>
 #endif
 
-#ifdef WITH_TLS
-#include <openssl/err.h>
-#endif
-
 #ifdef WITH_BROKER
 #  include <mosquitto_broker.h>
 extern uint64_t g_bytes_received;
@@ -78,6 +74,10 @@ extern unsigned long g_pub_msgs_sent;
 #include <mqtt3_protocol.h>
 #include <net_mosq.h>
 #include <util_mosq.h>
+
+#ifdef WITH_TLS
+#include <openssl/err.h>
+#endif
 
 #ifdef WITH_TLS
 static int tls_ex_index_mosq = -1;

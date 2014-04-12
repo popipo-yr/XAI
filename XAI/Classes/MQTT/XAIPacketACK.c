@@ -9,12 +9,12 @@
 #include "XAIPacketACK.h"
 
 
-_xai_packet*   generatePacketACK(_xai_packet_param_ack* param){
+_xai_packet*   generatePacketFromParamACK(_xai_packet_param_ack* param){
     
-    _xai_packet* nor_packet = generatePacketNormal(param->normal_param);
+    _xai_packet* nor_packet = generatePacketFromParamNormal(param->normal_param);
     
     
-    _xai_packet* packet = malloc(sizeof(_xai_packet));
+    _xai_packet* packet = generatePacket();
     
     
     char*  payload  = malloc(1000);
@@ -39,7 +39,7 @@ _xai_packet*   generatePacketACK(_xai_packet_param_ack* param){
     packet->pre_load = malloc(_XPPS_A_FIXED_ALL);
     memcpy(packet->pre_load, payload, _XPPS_A_FIXED_ALL);
     
-    int pos =  _XPPS_C_FIXED_ALL;
+    int pos =  _XPPS_A_FIXED_ALL;
     
     if (NULL != param->data) {
         
@@ -47,7 +47,7 @@ _xai_packet*   generatePacketACK(_xai_packet_param_ack* param){
         memset(packet->data_load, 0, param->normal_param->length);
         
         
-        _xai_packet*  data_packet = generatePacketCtrlData(param->data, param->data_count);
+        _xai_packet*  data_packet = generatePacketFromParamDataList(param->data, param->data_count);
         
         memcpy(packet->data_load, data_packet->all_load, data_packet->size);
         
@@ -80,11 +80,11 @@ _xai_packet*   generatePacketACK(_xai_packet_param_ack* param){
 }
 _xai_packet_param_ack*   generateParamACKFromPacket(const _xai_packet*  packet){
 
-    return generateParamACKFromPacketData(packet->all_load, packet->size);
+    return generateParamACKFromData(packet->all_load, packet->size);
 
     
 }
-_xai_packet_param_ack*   generateParamACKFromPacketData(void*  packet_data,int size){
+_xai_packet_param_ack*   generateParamACKFromData(void*  packet_data,int size){
 
     if (size < _XPPS_A_FIXED_ALL) {
         
@@ -95,7 +95,7 @@ _xai_packet_param_ack*   generateParamACKFromPacketData(void*  packet_data,int s
     _xai_packet_param_ack*  param = generatePacketParamACK();
     
     purgePacketParamNormal(param->normal_param);
-    param->normal_param = generateParamNormalFromPacketData(packet_data, size);
+    param->normal_param = generateParamNormalFromData(packet_data, size);
     
     if (NULL == param->normal_param) {
         
@@ -114,7 +114,7 @@ _xai_packet_param_ack*   generateParamACKFromPacketData(void*  packet_data,int s
     
     int data_size = size - _XPPS_A_FIXED_ALL;
     void*  data = (packet_data + _XPPS_A_FIXED_ALL);
-    _xai_packet_param_ctrl_data* ctrl_data = generateParamCtrlDataFromPacketData(data, data_size,param->data_count);
+    _xai_packet_param_data* ctrl_data = generateParamDataListFromData(data, data_size,param->data_count);
     
     
     param->data = ctrl_data;
@@ -145,7 +145,7 @@ void purgePacketParamACKAndData(_xai_packet_param_ack* param){
         purgePacketParamNormal(param->normal_param);
         
         
-        purgePacketParamCtrlData(param->data);
+        purgePacketParamData(param->data);
         
         free(param);
         
@@ -167,20 +167,20 @@ void purgePacketParamACKNoData(_xai_packet_param_ack* param){
 }
 
 
-_xai_packet_param_ctrl_data*  getACKDataFrom(_xai_packet_param_ack* ctrl_param, int index){
+_xai_packet_param_data*  getParamDataFromParamACK(_xai_packet_param_ack* param, int index){
 
-    if (NULL == ctrl_param) {
+    if (NULL == param) {
         
         return NULL;
     }
     
-    return getCtrlData(ctrl_param->data, index);
-
+    return paramDataAtIndex(param->data, index);
+    
     
 }
 void xai_param_ack_set(_xai_packet_param_ack* param,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
                        XAITYPEAPSN to_apsn,XAITYPELUID to_luid,
-                       uint8_t flag , uint16_t msgid , uint16_t magic_number ,uint8_t scid, uint8_t err_no, uint8_t data_count , _xai_packet_param_ctrl_data* data){
+                       uint8_t flag , uint16_t msgid , uint16_t magic_number ,uint8_t scid, uint8_t err_no, uint8_t data_count , _xai_packet_param_data* data){
 
     
     if (NULL == param) {
@@ -201,7 +201,7 @@ void xai_param_ack_set(_xai_packet_param_ack* param,XAITYPEAPSN  from_apsn,XAITY
     
     for (int i = 0; i < data_count; i++) {
         
-        _xai_packet_param_ctrl_data* ctrl_data = getCtrlData(param->data, 0);
+        _xai_packet_param_data* ctrl_data = paramDataAtIndex(param->data, i);
         
         if (NULL == ctrl_data) return;
         

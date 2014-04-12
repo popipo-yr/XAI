@@ -21,8 +21,8 @@
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
-    _xai_packet_param_ctrl_data* username_data = generatePacketParamCtrlData();
-    _xai_packet_param_ctrl_data* password_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* username_data = generatePacketParamData();
+    _xai_packet_param_data* password_data = generatePacketParamData();
     
     username_data->data_len = [username length];
     username_data->data_type = 13;
@@ -61,7 +61,7 @@
     param_ctrl->data_count = 2;
     
     
-    _xai_packet* packet = generatePacketCtrl(param_ctrl);
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:[MQTTCover devCtrlTopicWithAPNS:1 luid:1]

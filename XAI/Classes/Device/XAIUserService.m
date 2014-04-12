@@ -32,14 +32,14 @@
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
-    _xai_packet_param_ctrl_data* username_data = generatePacketParamCtrlData();
-    _xai_packet_param_ctrl_data* password_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* username_data = generatePacketParamData();
+    _xai_packet_param_data* password_data = generatePacketParamData();
     
     
-     xai_param_ctrl_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
+     xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
                              [username length], (void*)[username UTF8String],password_data);
     
-     xai_param_ctrl_data_set(password_data, XAI_DATA_TYPE_ASCII_TEXT,
+     xai_param_data_set(password_data, XAI_DATA_TYPE_ASCII_TEXT,
                              [password length], (void*)[password UTF8String],NULL);
     
     
@@ -48,7 +48,7 @@
                         2, username_data);
     
     
-     _xai_packet* packet = generatePacketCtrl(param_ctrl);
+     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     NSString* topicStr = @"0x00000001/SERVER/0x0000000000000003/IN";
     
@@ -74,14 +74,14 @@
     
     
     //param
-    _xai_packet_param_ctrl_data* luid_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* luid_data = generatePacketParamData();
     
-    xai_param_ctrl_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &luid,NULL);
+    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &luid,NULL);
     
     xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, 0, 0, 0, DelUser, [[NSDate new] timeIntervalSince1970], 1, luid_data);
     
     
-    _xai_packet* packet = generatePacketCtrl(param_ctrl);
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
@@ -100,14 +100,14 @@
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
-    _xai_packet_param_ctrl_data* luid_data = generatePacketParamCtrlData();
-    _xai_packet_param_ctrl_data* username_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* luid_data = generatePacketParamData();
+    _xai_packet_param_data* username_data = generatePacketParamData();
     
     
-    xai_param_ctrl_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
+    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                             sizeof(XAI_DATA_TYPE_BIN_LUID), &luid, username_data);
     
-    xai_param_ctrl_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
+    xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
                             [newUsername length], (void*)[newUsername UTF8String],NULL);
     
     
@@ -115,7 +115,7 @@
                        2, luid_data);
     
     
-    _xai_packet* packet = generatePacketCtrl(param_ctrl);
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
@@ -133,19 +133,19 @@
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
-    _xai_packet_param_ctrl_data* luid_data = generatePacketParamCtrlData();
-    _xai_packet_param_ctrl_data* oldPassword_data = generatePacketParamCtrlData();
-    _xai_packet_param_ctrl_data* newPassword_data = generatePacketParamCtrlData();
+    _xai_packet_param_data* luid_data = generatePacketParamData();
+    _xai_packet_param_data* oldPassword_data = generatePacketParamData();
+    _xai_packet_param_data* newPassword_data = generatePacketParamData();
     
     
-    xai_param_ctrl_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
+    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                             sizeof(XAI_DATA_TYPE_BIN_LUID), &luid, oldPassword_data);
 
     
-    xai_param_ctrl_data_set(oldPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
+    xai_param_data_set(oldPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
                             [oldPassword length], (void*)[oldPassword UTF8String],newPassword_data);
     
-    xai_param_ctrl_data_set(newPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
+    xai_param_data_set(newPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
                             [newPassword length], (void*)[newPassword UTF8String],NULL);
 
     
@@ -154,7 +154,7 @@
                        2, luid_data);
     
     
-    _xai_packet* packet = generatePacketCtrl(param_ctrl);
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
@@ -172,7 +172,7 @@
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
 
     //test.....
-    _xai_packet_param_ack*  ack = generateParamACKFromPacketData(datas,size);
+    _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
     
     switch (ack->scid) {
         case AddUserID:{

@@ -10,7 +10,7 @@
 #define XAI_XAIPacketDevTypeInfo_h
 
 
-#include "XAIPacket.h"
+#include "XAIPacketNormal.h"
 
 #ifdef __cplusplus
 extern "C" {

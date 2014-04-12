@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; };
+		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; };
 		1AF7604F18F2528600520EAD /* LightNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7604E18F2528600520EAD /* LightNode.m */; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
 		961F93E518F4288F002D4F74 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939818F4288F002D4F74 /* libcrypto.a */; };
@@ -82,6 +83,8 @@
 /* Begin PBXFileReference section */
 		1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketCtrl.c; sourceTree = "<group>"; };
 		1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketCtrl.h; sourceTree = "<group>"; };
+		1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketNormal.c; sourceTree = "<group>"; };
+		1AAE876618F8F71A001B2ECD /* XAIPacketNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIPacketNormal.h; sourceTree = "<group>"; };
 		1AF7604D18F2528600520EAD /* LightNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightNode.h; sourceTree = "<group>"; };
 		1AF7604E18F2528600520EAD /* LightNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightNode.m; sourceTree = "<group>"; };
 		1AF7605018F257C600520EAD /* MQTTPacketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTPacketManager.h; sourceTree = "<group>"; };
@@ -648,12 +651,14 @@
 				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
 				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
 				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
+				1AAE876618F8F71A001B2ECD /* XAIPacketNormal.h */,
+				1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */,
 				1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */,
 				1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */,
-				C33E77F618F38DF000808391 /* XAIPacketStatus.h */,
-				C33E77F518F38DF000808391 /* XAIPacketStatus.c */,
 				961F95D118F79EF5002D4F74 /* XAIPacketACK.h */,
 				961F95D218F79EF5002D4F74 /* XAIPacketACK.c */,
+				C33E77F618F38DF000808391 /* XAIPacketStatus.h */,
+				C33E77F518F38DF000808391 /* XAIPacketStatus.c */,
 				C33E77FA18F395F300808391 /* XAIPacketDevTypeInfo.h */,
 				C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */,
 				C33E77FF18F3B41A00808391 /* MQTT.h */,
@@ -813,6 +818,7 @@
 				961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */,
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
+				1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
@@ -1014,7 +1020,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/XAI/ssl",
 					"$(SRCROOT)/XAI/ZBarSDK",
-					"/Users/office/Desktop/xai-v3/XAI/XAI/ssl",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
@@ -1043,7 +1048,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/XAI/ssl",
 					"$(SRCROOT)/XAI/ZBarSDK",
-					"/Users/office/Desktop/xai-v3/XAI/XAI/ssl",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";

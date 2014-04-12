@@ -8,6 +8,333 @@
 
 #include "XAIPacket.h"
 
+#pragma mark --XAI_PARAM_DATA
+//生成一个数据段
+_xai_packet_param_data*    generatePacketParamData(){
+    
+    _xai_packet_param_data*  param_ctrl_data = malloc(sizeof(_xai_packet_param_data));
+    memset(param_ctrl_data, 0, sizeof(_xai_packet_param_data));
+    
+    
+    param_ctrl_data->data_type = 0;
+    param_ctrl_data->data_len = 0;
+    param_ctrl_data->data = NULL;
+    param_ctrl_data->next = NULL;
+    
+    return param_ctrl_data;
+    
+}
+void purgePacketParamData(_xai_packet_param_data* ctrl_param_data){
+    
+    if (NULL != ctrl_param_data) {
+        
+        purgePacketParamData(ctrl_param_data->next);
+        
+        free(ctrl_param_data->data);
+        free(ctrl_param_data);
+        
+        ctrl_param_data = NULL;
+    }
+    
+}
+_xai_packet_param_data*   generateParamDataListFromData(void*  data,int data_size ,int count){
+    
+    
+    void* cur_data = data;
+    int  cur_data_size = data_size;
+    
+    _xai_packet_param_data* begin_ctrl_data = NULL;
+    _xai_packet_param_data* cur_ctr_data = NULL;
+    
+    for (int i = 0; i < count; i++) {
+        
+        _xai_packet_param_data*  a_data = generateParamDataOneFromData(cur_data, cur_data_size);
+        
+        if (NULL == a_data) {
+            
+            purgePacketParamData(begin_ctrl_data);
+            printf("XAI -  CTRL DATA ERRO");
+            return NULL;
+        }
+        
+        if (i == 0) {
+            begin_ctrl_data = a_data;
+            
+        }else{
+            
+            cur_ctr_data->next = a_data;
+        }
+        
+        cur_data = cur_data + a_data->data_len;
+        cur_data_size = cur_data_size - a_data->data_len;
+        cur_data =  a_data;
+    }
+    
+    
+    return begin_ctrl_data;
+    
+}
+
+_xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
+    
+    if (size < _XPPS_CD_FIXED_ALL) {
+        
+        printf("XAI -  CTRL DATA FIXED DATA SIZE ENOUGH");
+        return NULL;
+    }
+    
+    _xai_packet_param_data*  ctrl_param_data = generatePacketParamData();
+    
+    
+    //fixed
+    packet_to_param_helper(&ctrl_param_data->data_type, data, _XPP_CD_TYPE_START, _XPP_CD_TYPE_END);
+    packet_to_param_helper(&ctrl_param_data->data_len, data, _XPP_CD_LEN_START, _XPP_CD_LEN_END);
+    
+    ctrl_param_data->data_len = CFSwapInt16(ctrl_param_data->data_len);
+    
+    if (size < _XPPS_CD_FIXED_ALL + ctrl_param_data->data_len) {
+        
+        purgePacketParamData(ctrl_param_data);
+        printf("XAI -  CTRL DATA UNFIXED DATA SIZE ENOUGH");
+        return NULL;
+    }
+    
+    //unfixed
+    ctrl_param_data->data = malloc(ctrl_param_data->data_len);
+    memset(ctrl_param_data->data, 0, ctrl_param_data->data_len);
+    packet_to_param_helper(ctrl_param_data->data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
+    
+    
+    return ctrl_param_data;
+}
+
+_xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data){
+    
+    
+    
+    _xai_packet* ctrl_data = generatePacket();
+    
+    
+    char*  payload  = malloc(1000);
+    memset(payload,0,1000);
+    
+    if(!payload){
+        
+        return NULL;
+    }
+    
+    //big
+    uint16_t big_len = CFSwapInt16(ctrl_param_data->data_len);
+    
+    //存入固定格式
+    param_to_packet_helper(payload, &ctrl_param_data->data_type, _XPP_CD_TYPE_START, _XPP_CD_TYPE_END);
+    param_to_packet_helper(payload, &big_len, _XPP_CD_LEN_START, _XPP_CD_LEN_END);
+    
+    ctrl_data->pre_load = malloc(_XPPS_CD_FIXED_ALL);
+    memcpy(ctrl_data->pre_load, payload, _XPPS_CD_FIXED_ALL);
+    
+    int pos =  _XPPS_CD_FIXED_ALL;
+    
+    if (NULL != ctrl_param_data->data) {
+        
+        ctrl_data->data_load = malloc(ctrl_param_data->data_len);
+        memset(ctrl_data->data_load, 0, ctrl_param_data->data_len);
+        memcpy(ctrl_data->data_load, ctrl_param_data->data, ctrl_param_data->data_len);
+        
+        param_to_packet_helper(payload, ctrl_param_data->data, _XPPS_CD_FIXED_ALL
+                               , _XPPS_CD_FIXED_ALL+ctrl_param_data->data_len);
+        
+        memcpy(payload+pos, ctrl_param_data->data, ctrl_param_data->data_len);
+        
+        pos +=  ctrl_param_data->data_len;
+        
+    }else{
+        
+        ctrl_data->data_load = NULL;
+    }
+    
+    
+    
+    ctrl_data->all_load = malloc(pos);
+    memcpy(ctrl_data->all_load, payload, pos);
+    
+    ctrl_data->size = pos;
+    
+    free(payload);
+    
+    
+    return ctrl_data;
+    
+    
+}
+
+
+//数据段转为data
+_xai_packet* generatePacketFromParamDataList(_xai_packet_param_data* ctrl_param_data , int count){
+    
+    _xai_packet*  packet = generatePacket();
+    
+    void* data_load = malloc(1000);
+    memset(data_load, 0, 1000);
+    
+    int  dataPos = 0;
+    
+    for (int i = 0; i < count; i++) {
+        
+        _xai_packet_param_data* ctrl_data = paramDataAtIndex(ctrl_param_data, i);
+        if (NULL ==  ctrl_data) {
+            
+            free(data_load);
+            
+            printf("CTRL  DATA NULL");
+            return NULL;
+        }
+        
+        _xai_packet*  ctrl_data_packet = generatePacketFromeDataOne(ctrl_data);
+        
+        memcpy(data_load + dataPos, ctrl_data_packet->all_load, ctrl_data_packet->size);
+        
+        dataPos += ctrl_data_packet->size;
+        
+        purgePacket(ctrl_data_packet);
+    }
+    
+    
+    packet->all_load = data_load;
+    packet->size = dataPos;
+    
+    return packet;
+    
+}
+
+_xai_packet_param_data*  paramDataAtIndex(_xai_packet_param_data* ctrl_param_data, int index){
+    
+    
+    if ( 0 >index || NULL == ctrl_param_data ) {
+        
+        return NULL;
+    }
+    
+    _xai_packet_param_data* cur_data =  ctrl_param_data;
+    
+    for (int cur = 0; cur < index; cur++) {
+        
+        if (NULL == cur_data->next) {
+            
+            return NULL;
+        }
+        
+        cur_data = cur_data->next;
+        
+    }
+    
+    return cur_data;
+    
+}
+
+void xai_param_data_set(_xai_packet_param_data* ctrlData ,XAI_DATA_TYPE type , size_t len , void* data,
+                        _xai_packet_param_data* next){
+    
+    if (NULL ==  ctrlData) {
+        return;
+    }
+    
+    ctrlData->data_len = len;
+    ctrlData->data_type = type;
+    byte_data_set(&ctrlData->data, data, len);
+    
+    ctrlData->next = next;
+    
+}
+
+#pragma mark --XAI_PACKET
+
+
+_xai_packet* generatePacket(void){
+    
+    _xai_packet* packet = malloc(sizeof(_xai_packet));
+    
+    char*  payload  = malloc(1000);
+    memset(payload,0,1000);
+    
+    packet->pre_load = NULL;
+    packet->all_load = NULL;
+    packet->data_load = NULL;
+    
+    packet->fix_pos = 0;
+    packet->size = 0;
+    
+    return packet;
+}
+
+
+void purgePacket(_xai_packet* packet){
+    
+    free(packet->pre_load);
+    free(packet->data_load);
+    free(packet->all_load);
+    free(packet);
+    packet = NULL;
+    
+}
+
+
+#pragma mark --GUID
+
+void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid){
+    
+    void* guid = malloc(12);
+    memset(guid, 0, 12);
+    
+    memcpy(guid, &apsn , 4);
+    memcpy(guid +4, &luid, 8);
+    
+    return guid;
+    
+    
+}
+
+void purgeGUID(void* guid){
+    
+    free(guid);
+}
+
+void* generateSwapGUID(void* guid){
+    
+    void* newGuid = malloc(12);
+    memset(newGuid, 0, 12);
+    
+    //读取
+    XAITYPEAPSN apsn = 0;
+    XAITYPELUID  luid = 0;
+    
+    memcpy(&apsn, guid, 4);
+    memcpy(&luid, guid+4, 8);
+    
+    //zhuanhuan
+    apsn = CFSwapInt32(apsn);
+    luid = CFSwapInt64(luid);
+    
+    //cunru
+    memcpy(newGuid, &apsn , 4);
+    memcpy(newGuid +4, &luid, 8);
+    
+    return newGuid;
+    
+    
+    
+    
+}
+
+size_t lengthOfGUID(){
+    
+    
+    return sizeof(XAITYPEAPSN) + sizeof(XAITYPELUID);
+}
+
+
+
+#pragma mark --HELPER
 
 //helper
 void byte_data_copy(void* to, const void* from, int toSize,int fromSize){
@@ -45,277 +372,6 @@ void packet_to_param_helper(void* to , void* from ,int start,int end){
     
 }
 
-
-
-
-void purgePacket(_xai_packet* packet){
-    
-    free(packet->pre_load);
-    free(packet->data_load);
-    free(packet->all_load);
-    free(packet);
-    packet = NULL;
-    
-}
-
-
-_xai_packet*   generatePacketNormal(_xai_packet_param_normal* normal_param){
-    
-    _xai_packet*  packet = malloc(sizeof(_xai_packet));
-    
-    
-    uint8_t*  payload  =  malloc(1000);
-    memset(payload,0,1000);
-    
-    if(!payload){
-        
-        return NULL;
-    }
-    
-    uint16_t big_msgid = CFSwapInt16(normal_param->msgid);
-    uint16_t big_magic_number = CFSwapInt16(normal_param->magic_number);
-    uint16_t big_length = CFSwapInt16(normal_param->length);
-    
-    void* big_from = generateSwapGUID(normal_param->from_guid);
-    void* big_to  = generateSwapGUID(normal_param->to_guid);
-    
-    //存入固定格式
-    param_to_packet_helper(payload, big_from,_XPP_N_FROM_GUID_START,_XPP_N_FROM_GUID_END);
-    param_to_packet_helper(payload, big_to  ,_XPP_N_TO_GUID_START,_XPP_N_TO_GUID_END);
-    
-    param_to_packet_helper(payload, &normal_param->flag, _XPP_N_FLAG_START, _XPP_N_FLAG_END);
-    param_to_packet_helper(payload, &big_msgid, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
-    param_to_packet_helper(payload, &big_magic_number, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
-    param_to_packet_helper(payload, &big_length, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
-    
-
-    purgeGUID(big_from);
-    purgeGUID(big_to);
-    
-    
-    /*fixed  size  */
-    packet->fix_pos = _XPPS_N_FIXED_ALL;  //固定格式位置
-    unsigned int pos = _XPPS_N_FIXED_ALL;
-    
-    /*preload --- fixed*/
-    packet->pre_load =   malloc(pos);
-    memset(packet->pre_load, 0, pos);
-    memcpy(packet->pre_load, payload, pos);
-    
-    /*allload*/
-    
-    if (NULL !=  normal_param->data &&  0 != normal_param->length){
-        
-        packet->data_load = malloc(normal_param->length);
-        memset(packet->data_load, 0, normal_param->length);
-        memcpy(packet->data_load, normal_param->data, normal_param->length);
-        
-        param_to_packet_helper(payload, normal_param->data, _XPPS_N_FIXED_ALL, _XPPS_N_FIXED_ALL+normal_param->length);
-        memcpy(payload+pos, normal_param->data, normal_param->length);
-        
-        pos +=  normal_param->length;
-        
-    
-    }else{
-    
-        packet->data_load = NULL;
-    
-    }
-    
-    
-    //复制内存到all
-    packet->all_load = malloc(pos);
-    memset(packet->all_load, 0, pos);
-    memcpy(packet->all_load,payload,pos);
-    
-    packet->size = pos;
-    
-    free(payload);
-    
-    return packet;
-}
-
-
-
-
-_xai_packet_param_normal*   generateParamNormalFromPacket(const _xai_packet*  packet){
-
-    return generateParamNormalFromPacketData(packet->all_load, packet->size);
-
-}
-
-_xai_packet_param_normal*   generateParamNormalFromPacketData(void*  packetData,int size){
-
-    
-    if (size < _XPPS_N_FIXED_ALL) { //长度不够
-        
-        printf("XAI -  NORMAL PACKET FIXED DATA SIZE ENOUGH");
-        return NULL;
-    }
-    
-    
-    _xai_packet_param_normal* aParam = generatePacketParamNormal();
-    
-    
-    //读取固定格式
-    packet_to_param_helper(aParam->from_guid, packetData, _XPP_N_FROM_GUID_START, _XPP_N_FROM_GUID_END);
-    packet_to_param_helper(aParam->to_guid, packetData, _XPP_N_TO_GUID_START, _XPP_N_TO_GUID_END);
-    packet_to_param_helper(&aParam->flag, packetData, _XPP_N_FLAG_START, _XPP_N_FLAG_END);
-    packet_to_param_helper(&aParam->msgid, packetData, _XPP_N_MSGID_START, _XPP_N_MSGID_END);
-    packet_to_param_helper(&aParam->magic_number, packetData, _XPP_N_MAGIC_NUMBER_START, _XPP_N_MAGIC_NUMBER_END);
-    packet_to_param_helper(&aParam->length, packetData, _XPP_N_LENGTH_START, _XPP_N_LENGTH_END);
-    
-    void* lit_from = generateSwapGUID(aParam->from_guid);
-    void* lit_to  = generateSwapGUID(aParam->to_guid);
-    
-    byte_data_copy(aParam->from_guid, lit_from, sizeof(aParam->from_guid), sizeof(aParam->from_guid));
-    byte_data_copy(aParam->to_guid, lit_to, sizeof(aParam->to_guid), sizeof(aParam->to_guid));
-    
-    aParam->msgid = CFSwapInt32(aParam->msgid);
-    aParam->msgid = CFSwapInt16(aParam->magic_number);
-    aParam->msgid = CFSwapInt16(aParam->length);
-    
-    if (size < _XPPS_N_FIXED_ALL + aParam->length) {
-        
-        purgePacketParamNormal(aParam);
-        
-        printf("XAI -  NORMAL PACKET UNFIXED DATA SIZE ENOUGH");
-        //return NULL;
-    }
-    
-    //unfixed
-    aParam->data = malloc(aParam->length);
-    memset(aParam->data, 0, aParam->length);
-    packet_to_param_helper(aParam->data, packetData, _XPP_N_DATA_START, _XPP_N_DATA_START+aParam->length);
-    
-    
-    return aParam;
-
-
-}
-
-void purgePacketParamNormal(_xai_packet_param_normal* normal_param){
-
-    if (NULL != normal_param) {
-        
-        free(normal_param->data);
-        free(normal_param);
-        normal_param = NULL;
-    }
-    
-}
-
-
-_xai_packet_param_normal*    generatePacketParamNormal(){
-
-    _xai_packet_param_normal*  param = malloc(sizeof(_xai_packet_param_normal));
-    memset(param->from_guid, 0, sizeof(param->from_guid));
-    memset(param->to_guid, 0, sizeof(param->to_guid));
-    param->data = NULL;
-    param->flag = 0;
-    param->length = 0;
-    param->msgid = 0;
-    param->magic_number = 0;
-    
-    return param;
-
-}
-
-void xai_param_normal_set(_xai_packet_param_normal* normal_param,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
-                          XAITYPEAPSN to_apsn,XAITYPELUID to_luid,uint8_t flag , uint16_t msgid , uint16_t magic_number
-                          ,void* data ,size_t dataSize){
-
-
-    if (NULL == normal_param) {
-        return;
-    }
-
-    
-    
-    void* from_guid = generateGUID(from_apsn, from_luid);
-    void* to_guid = generateGUID(to_apsn , to_luid);
-    
-    
-    byte_data_copy(normal_param->from_guid, from_guid, sizeof(normal_param->from_guid), lengthOfGUID());
-    byte_data_copy(normal_param->to_guid, to_guid, sizeof(normal_param->to_guid), lengthOfGUID());
-    
-    purgeGUID(from_guid);
-    purgeGUID(to_guid);
-    
-    normal_param->flag  = flag;
-    normal_param->msgid = msgid;
-    normal_param->magic_number = magic_number;
-    normal_param->length  =   dataSize;
-    
-    if (NULL != normal_param->data) {
-        
-        free(normal_param->data);
-        normal_param->data = NULL;
-    }
-    
-    if (dataSize > 0) {
-        
-        normal_param->data = malloc(dataSize);
-        memset(normal_param->data, 0, dataSize);
-        
-        byte_data_copy(normal_param->data, data, dataSize, dataSize);
-    }
-    
-
-
-}
-
-
-void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid){
-
-    void* guid = malloc(12);
-    memset(guid, 0, 12);
-    
-    memcpy(guid, &apsn , 4);
-    memcpy(guid +4, &luid, 8);
-
-    return guid;
-
-
-}
-
-void purgeGUID(void* guid){
-
-    free(guid);
-}
-
-void* generateSwapGUID(void* guid){
-
-    void* newGuid = malloc(12);
-    memset(newGuid, 0, 12);
-    
-    //读取
-    XAITYPEAPSN apsn = 0;
-    XAITYPELUID  luid = 0;
-    
-    memcpy(&apsn, guid, 4);
-    memcpy(&luid, guid+4, 8);
-    
-    //zhuanhuan
-    apsn = CFSwapInt32(apsn);
-    luid = CFSwapInt64(luid);
-    
-    //cunru
-    memcpy(newGuid, &apsn , 4);
-    memcpy(newGuid +4, &luid, 8);
-    
-    return newGuid;
-
-    
-    
-
-}
-
-size_t lengthOfGUID(){
-
-
-    return sizeof(XAITYPEAPSN) + sizeof(XAITYPELUID);
-}
 
 
 
