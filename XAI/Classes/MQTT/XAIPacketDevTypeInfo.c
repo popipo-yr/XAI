@@ -11,9 +11,7 @@
 
 
 
-
-
-_xai_packet*   generatePacketDTI(_xai_packet_param_dti* dti_param){
+_xai_packet*   generatePacketFromParamDTI(_xai_packet_param_dti* dti_param){
     
     _xai_packet* nor_packet = generatePacketFromParamNormal(dti_param->normal_param);
     
@@ -34,14 +32,14 @@ _xai_packet*   generatePacketDTI(_xai_packet_param_dti* dti_param){
     
     
     //存入固定格式
-    param_to_packet_helper(payload, &dti_param->flag,_XPP_D_FLAG_START,_XPP_D_MODEL_END);
-    param_to_packet_helper(payload, dti_param->model, _XPP_D_MODEL_START, _XPP_D_MODEL_END);
-    param_to_packet_helper(payload, dti_param->vender, _XPP_D_VENDOR_START, _XPP_D_VENDOR_END);
+    param_to_packet_helper(payload, &dti_param->flag,_XPP_DTI_FLAG_START,_XPP_DTI_MODEL_END);
+    param_to_packet_helper(payload, dti_param->model, _XPP_DTI_MODEL_START, _XPP_DTI_MODEL_END);
+    param_to_packet_helper(payload, dti_param->vender, _XPP_DTI_VENDOR_START, _XPP_D_VENDOR_END);
     
-    dti_packet->pre_load = malloc(_XPPS_D_FIXED_ALL);
-    memcpy(dti_packet->pre_load, payload, _XPPS_D_FIXED_ALL);
+    dti_packet->pre_load = malloc(_XPPS_DTI_FIXED_ALL);
+    memcpy(dti_packet->pre_load, payload, _XPPS_DTI_FIXED_ALL);
     
-    int pos =  _XPPS_D_FIXED_ALL;
+    int pos =  _XPPS_DTI_FIXED_ALL;
     
     dti_packet->data_load = NULL;
     
@@ -58,12 +56,12 @@ _xai_packet*   generatePacketDTI(_xai_packet_param_dti* dti_param){
 }
 _xai_packet_param_dti*   generateParamDTIFromPacket(const _xai_packet*  packet){
     
-    return generateParamDTIFromPacketData(packet->all_load, packet->size);
+    return generateParamDTIFromData(packet->all_load, packet->size);
 }
 
-_xai_packet_param_dti*   generateParamDTIFromPacketData(void*  packet_data,int size){
+_xai_packet_param_dti*   generateParamDTIFromData(void*  packet_data,int size){
     
-    if (size < _XPPS_D_FIXED_ALL) {
+    if (size < _XPPS_DTI_FIXED_ALL) {
         
         printf("XAI -  DEV TYPE INFO PACKET FIXED DATA SIZE ENOUGH");
         return NULL;
@@ -83,9 +81,9 @@ _xai_packet_param_dti*   generateParamDTIFromPacketData(void*  packet_data,int s
     
     
     //fixed
-    packet_to_param_helper(&dti_param->flag, packet_data, _XPP_D_FLAG_START, _XPP_D_FLAG_END);
-    packet_to_param_helper(dti_param->vender, packet_data, _XPP_D_VENDOR_START, _XPP_D_VENDOR_END);
-    packet_to_param_helper(dti_param->model, packet_data, _XPP_D_MODEL_START, _XPP_D_MODEL_END);
+    packet_to_param_helper(&dti_param->flag, packet_data, _XPP_DTI_FLAG_START, _XPP_DTI_FLAG_END);
+    packet_to_param_helper(dti_param->vender, packet_data, _XPP_DTI_VENDOR_START, _XPP_D_VENDOR_END);
+    packet_to_param_helper(dti_param->model, packet_data, _XPP_DTI_MODEL_START, _XPP_DTI_MODEL_END);
 
     
     
@@ -120,4 +118,27 @@ _xai_packet_param_dti*    generatePacketParamDTI(){
     
     return param_dti;
 }
+
+
+
+void xai_param_dti_set(_xai_packet_param_dti* param,XAITYPEAPSN  from_apsn,XAITYPELUID from_luid,
+                       XAITYPEAPSN to_apsn,XAITYPELUID to_luid,
+                       uint8_t flag, uint16_t msgid , uint16_t magic_number,
+                       void* vender, size_t venderSize, void* model, size_t modelSize){
+    
+    if (NULL == param) {
+        return;
+    }
+    
+    xai_param_normal_set(param->normal_param, from_apsn, from_luid, to_apsn, to_luid, flag, msgid, magic_number, NULL, 0);
+    
+    
+
+    param->normal_param->length =  0;
+    
+    byte_data_copy(param->vender, vender, sizeof(param->vender), venderSize);
+    byte_data_copy(param->model, model, sizeof(param->model), modelSize);
+    
+}
+
 
