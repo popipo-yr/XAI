@@ -278,10 +278,6 @@
 		C38D91E118ED3490006F22D3 /* MosquittoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MosquittoClient.m; sourceTree = "<group>"; };
 		C38D91E218ED3490006F22D3 /* MosquittoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MosquittoMessage.h; sourceTree = "<group>"; };
 		C38D91E318ED3490006F22D3 /* MosquittoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MosquittoMessage.m; sourceTree = "<group>"; };
-		C38D91F218ED5BAD006F22D3 /* XAI Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XAI Tests-Info.plist"; sourceTree = "<group>"; };
-		C38D91F418ED5BAD006F22D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C38D91F618ED5BAD006F22D3 /* XAI_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAI_Tests.m; sourceTree = "<group>"; };
-		C38D91F818ED5BAD006F22D3 /* XAI Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XAI Tests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,7 +487,6 @@
 			children = (
 				C387F35718EA757A0069F98B /* XAI */,
 				C387F37918EA757B0069F98B /* XAITests */,
-				C38D91F018ED5BAD006F22D3 /* XAI Tests */,
 				C387F35018EA757A0069F98B /* Frameworks */,
 				C387F34F18EA757A0069F98B /* Products */,
 			);
@@ -667,25 +662,6 @@
 				961F95CC18F688E0002D4F74 /* MQTTCover.m */,
 			);
 			path = MQTT;
-			sourceTree = "<group>";
-		};
-		C38D91F018ED5BAD006F22D3 /* XAI Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C38D91F618ED5BAD006F22D3 /* XAI_Tests.m */,
-				C38D91F118ED5BAD006F22D3 /* Supporting Files */,
-			);
-			path = "XAI Tests";
-			sourceTree = "<group>";
-		};
-		C38D91F118ED5BAD006F22D3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C38D91F218ED5BAD006F22D3 /* XAI Tests-Info.plist */,
-				C38D91F318ED5BAD006F22D3 /* InfoPlist.strings */,
-				C38D91F818ED5BAD006F22D3 /* XAI Tests-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -894,14 +870,6 @@
 				C38D91D818ED19C0006F22D3 /* Base */,
 			);
 			name = Main_iPhone35.storyboard;
-			sourceTree = "<group>";
-		};
-		C38D91F318ED5BAD006F22D3 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C38D91F418ED5BAD006F22D3 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
