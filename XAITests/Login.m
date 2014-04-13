@@ -33,7 +33,13 @@
     [login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
     
     
-    sleep(1000*1000*600);
+    NSDate *runUntil = [NSDate dateWithTimeIntervalSinceNow: 13.0 ];
+    
+    NSLog(@"about to wait");
+    [[NSRunLoop currentRunLoop] runUntilDate:runUntil];
+    NSLog(@"wait time is over");
+
+    //sleep(1000*1000*600);
     
     //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
