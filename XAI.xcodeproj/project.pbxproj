@@ -20,6 +20,7 @@
 		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
 		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
+		964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964C996A18FBAB53006300F9 /* XAIDeviceService.m */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
@@ -177,6 +178,8 @@
 		961F95CF18F780AE002D4F74 /* XAIUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserService.m; sourceTree = "<group>"; };
 		961F95D118F79EF5002D4F74 /* XAIPacketACK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketACK.h; sourceTree = "<group>"; };
 		961F95D218F79EF5002D4F74 /* XAIPacketACK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketACK.c; sourceTree = "<group>"; };
+		964C996918FBAB53006300F9 /* XAIDeviceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceService.h; sourceTree = "<group>"; };
+		964C996A18FBAB53006300F9 /* XAIDeviceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceService.m; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				961F95C718F53629002D4F74 /* APServerNode.m */,
 				961F95CE18F780AE002D4F74 /* XAIUserService.h */,
 				961F95CF18F780AE002D4F74 /* XAIUserService.m */,
+				964C996918FBAB53006300F9 /* XAIDeviceService.h */,
+				964C996A18FBAB53006300F9 /* XAIDeviceService.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -789,6 +794,7 @@
 				C341A64C18EBB23E00034649 /* ManageCell.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
+				964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */,
 				1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */,
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
 				961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */,

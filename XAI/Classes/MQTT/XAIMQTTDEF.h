@@ -40,7 +40,7 @@ typedef  enum XAI_DATA_TYPE{
     XAI_DATA_TYPE_BIN_DIGITAL_SIGN = 5, //	有符号数字
     XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 0Xd, //	无符号数字
     XAI_DATA_TYPE_BIN_APSN = 7,	//设备编号
-    XAI_DATA_TYPE_BIN_LUID = 8, //	本地唯一编号
+    XAI_DATA_TYPE_BIN_LUID = 15, //	本地唯一编号
         
         
 }XAI_DATA_TYPE;

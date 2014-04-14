@@ -12,11 +12,20 @@
 #import "MosquittoClient.h"
 #import "MQTTPacketManager.h"
 
-@interface MQTT : NSObject
+@interface MQTT : NSObject{
+
+    
+    XAITYPEAPSN _apsn;
+    XAITYPELUID _luid;
+
+}
 
 
 @property (nonatomic, weak) MQTTPacketManager* packetManager;
 @property (nonatomic, weak) MosquittoClient* client;
+
+@property (nonatomic, assign) XAITYPEAPSN apsn;
+@property (nonatomic, assign) XAITYPELUID luid;
 
 
 + (MQTT*) shareMQTT;

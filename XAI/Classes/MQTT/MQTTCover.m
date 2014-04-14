@@ -8,30 +8,75 @@
 
 #import "MQTTCover.h"
 
+#define APNS_STR_TOTAL_LEN  8
+#define LUID_STR_TOTAL_LEN  16
+#define OTHER_STR_TOTAL_LEN  2
+
 @implementation MQTTCover
 
 
 + (NSString*) stringFormat:(NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
 
-    //设备表： 0x%08x/NODES/0x%016llx/OUT/DEV
-    NSString*  APNS_Str = [[NSString alloc] initWithBytes:&APNS length:4 encoding:NSUTF8StringEncoding];
     
-    NSString*  LUID_Str = [[NSString alloc] initWithBytes:&luid length:8 encoding:NSUTF8StringEncoding];
+    NSString* apns_end_str = [NSString stringWithFormat:@"%x",APNS];
+    NSString* luid_end_str = [NSString stringWithFormat:@"%llx",luid];
+    
+     unichar ucdata[16] = {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'};
+    
+    int  apns_start_len =   APNS_STR_TOTAL_LEN - [apns_end_str length];
+    int  luid_start_len =   LUID_STR_TOTAL_LEN - [luid_end_str length];
+    
+    if (apns_end_str < 0 || luid_end_str < 0) {
+        
+        return NULL;
+    }
+    
+    NSString* luid_start_str = [[NSString alloc] initWithCharacters:ucdata length:luid_start_len];
+    
+    
+     NSString* apns_start_str = [[NSString alloc] initWithCharacters:ucdata length:apns_start_len];
+    
+    
+    NSString*  APNS_Str = [[NSString alloc] initWithFormat:@"%@%@",apns_start_str,apns_end_str];
+    
+    NSString*  LUID_Str = [[NSString alloc] initWithFormat:@"%@%@",luid_start_str,luid_end_str];
     
     return [NSString stringWithFormat:format,APNS_Str,LUID_Str];
     
 }
 
-+ (NSString*) devTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
+
++ (NSString*) stringOther:(uint8_t)other{
     
-    //return [MQTTCover stringFormat:@"0x%@/NODES/0x%@/OUT/DEV" APNS:APNS luid:luid];
     
-    return [NSString stringWithFormat:@"0x00000000/NODES/0x0000000000000001/OUT/DEV"];
+    NSString* other_end_str = [[NSString alloc] initWithFormat:@"%x",other];
     
-    //设备表： 0x%08x/NODES/0x%016llx/OUT/DEV
+    
+    unichar ucdata[16] = {'0','0'};
+    
+    int  other_start_len =   OTHER_STR_TOTAL_LEN - [other_end_str length];
+    
+    if (other_start_len < 0) {
+        
+        return NULL;
+        
+    }
+    
+    NSString* other_start_str = [[NSString alloc] initWithCharacters:ucdata length:other_start_len];
+    
+    NSString*  Other_Str = [[NSString alloc] initWithFormat:@"%@%@",other_start_str,other_end_str];
+    
+    return Other_Str;
+    
+}
+
+
++ (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
+    
+    return [MQTTCover stringFormat:@"0x%@/NODES/0x%@/OUT/DEV" APNS:APNS luid:luid];
 
 }
-+ (NSString*) devStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
++ (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
 
     //0x%08x/NODES/0x%016llx/OUT/STATUS/%02d
     
@@ -63,7 +108,7 @@
             ,other_Str];
 
 }
-+ (NSString*) devCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
++ (NSString*) nodeCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
     //0x%08x/NODES/0x%016llx/IN
    return [MQTTCover stringFormat:@"%@/NODES/%@/IN" APNS:APNS luid:luid];
 }

@@ -29,10 +29,12 @@ _xai_packet*   generatePacketFromParamACK(_xai_packet_param_ack* param){
     //拷贝 normal 固定格式
     memcpy(payload, nor_packet->pre_load, nor_packet->fix_pos);
     
+    //BIG
+    uint16_t  big_errno = CFSwapInt16(param->err_no);
     
     //存入固定格式
     param_to_packet_helper(payload, &param->scid,_XPP_A_SCID_START,_XPP_A_SCID_END);
-    param_to_packet_helper(payload, &param->err_no, _XPP_A_ERRNO_START, _XPP_A_ERRNO_END);
+    param_to_packet_helper(payload, &big_errno, _XPP_A_ERRNO_START, _XPP_A_ERRNO_END);
     param_to_packet_helper(payload, &param->data_count, _XPP_A_DATA_COUNT_START, _XPP_A_DATA_COUNT_END);
 
     
@@ -109,6 +111,9 @@ _xai_packet_param_ack*   generateParamACKFromData(void*  packet_data,int size){
     packet_to_param_helper(&param->scid, packet_data, _XPP_A_SCID_START, _XPP_A_SCID_END);
     packet_to_param_helper(&param->err_no, packet_data, _XPP_A_ERRNO_START, _XPP_A_ERRNO_END);
     packet_to_param_helper(&param->data_count, packet_data, _XPP_A_DATA_COUNT_START, _XPP_A_DATA_COUNT_END);
+    
+    //little
+    param->err_no =  CFSwapInt16(param->err_no);
     
     //unfixed
     

@@ -20,6 +20,8 @@
     name = @"admin@0x00000001";
     password = @"admin";
     
+    [_name setString:name];
+    
     
 	[mosq setHost: host];
     [mosq setUsername:name];
@@ -34,9 +36,9 @@
 
 - (void) didConnect:(NSUInteger)code {
 	
-    NSString* topicStr = @"0x00000001/SERVER/0x0000000000000003/OUT/STATUS/0x01";
-    [[MQTT shareMQTT].client subscribe:topicStr];
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    [_userService finderUserLuidHelper:@"admin" apsn:[MQTT shareMQTT].apsn];
+    
 }
 
 - (void) didDisconnect {
@@ -46,63 +48,9 @@
 #pragma mark -------------
 #pragma makr PacketPro
 
-- (XAITYPELUID) finderUserLuidHelper:(NSString*)username paramStatus:(_xai_packet_param_status*) param{
 
-    int realCount = param->data_count / 3;
-    
-    if ((0 != param->data_count % 3) || realCount < 1) {
-        
-        return -1;
-    }
-    
-    for (int i = 0; i < realCount; i++) {
-        
-        BOOL find = FALSE;
-        
-       _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*3 + 3 -1);
-        if ((data->data_type == XAI_DATA_TYPE_ASCII_TEXT) || data->data_len > 0) {
-            
-            NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
-            
-            if ([name isEqualToString:username]) {
-                
-                find = TRUE;
-            }
-        }
-        
-        if (find) {
-            
-            _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
-            if ((data->data_type == XAI_DATA_TYPE_BIN_LUID) || data->data_len > 0) {
-                
-                XAITYPELUID luid;
-                byte_data_copy(&luid, luid_data->data, sizeof(XAITYPELUID), luid_data->data_len);
-                
-                
-                return luid;
-            }
-            
-        }
-    }
-    
-    
-    
-    return -1;
-    
-}
-
-- (void) sendPacketIsSuccess:(BOOL) bl{
-}
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
     
-    if ([topic isEqualToString:@"0x00000001/SERVER/0x0000000000000003/OUT/STATUS/0x01"]) {
-        
-        _xai_packet_param_status*  status = generateParamStatusFromData(datas,size);
-        
-        [self finderUserLuidHelper:@"admin" paramStatus:status];
-       
-        
-    }
     //test.....
     
     
@@ -128,6 +76,38 @@
     
     NSLog(@"anc");
     
+}
+
+#pragma mark -- XAIUserSerciveDelegate
+- (void) findedUser:(BOOL)isFinded Luid:(XAITYPELUID)luid withName:(NSString *)name{
+
+    if ((YES == isFinded) &&  [name isEqualToString:_name]) {
+        
+        [MQTT shareMQTT].luid = luid;
+    }
+    
+
+}
+
+
+- (id) init{
+
+    if (self = [super init]) {
+        
+        _userService = [[XAIUserService alloc] init];
+        _userService.delegate = self;
+        
+        _name = [[NSMutableString alloc] init];
+        
+    }
+    
+    return self;
+}
+
+- (void)dealloc{
+
+    _userService.delegate = NULL;
+
 }
 
 @end

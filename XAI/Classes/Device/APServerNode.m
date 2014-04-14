@@ -64,7 +64,7 @@
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:[MQTTCover devCtrlTopicWithAPNS:1 luid:1]
+                             toTopic:[MQTTCover nodeCtrlTopicWithAPNS:1 luid:1]
                              withQos:0
                               retain:NO];
     

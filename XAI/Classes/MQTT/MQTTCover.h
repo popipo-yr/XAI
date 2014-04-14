@@ -21,13 +21,19 @@
 
 #import <Foundation/Foundation.h>
 
+#define MQTTCover_LUID_Server_03 0x03
+#define MQTTCover_UserTable_Other 0x01
+#define MQTTCover_DevTable_Other  0x02
+
+
 @interface MQTTCover : NSObject
 
-+ (NSString*) devTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
-+ (NSString*) devStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
++ (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
+
++ (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t) luid other:(uint8_t)other;
 + (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
-+ (NSString*) devCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
++ (NSString*) nodeCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) serverCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) mobileCtrTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 

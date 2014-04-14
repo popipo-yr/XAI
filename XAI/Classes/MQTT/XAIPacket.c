@@ -53,7 +53,7 @@ _xai_packet_param_data*   generateParamDataListFromData(void*  data,int data_siz
         if (NULL == a_data) {
             
             purgePacketParamData(begin_ctrl_data);
-            printf("XAI -  CTRL DATA ERRO");
+            printf("XAI -  PARAM DATA ERRO");
             return NULL;
         }
         
@@ -208,16 +208,90 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
     
     if (NULL != ctrl_param_data->data) {
         
+//        ctrl_data->data_load = malloc(ctrl_param_data->data_len);
+//        memset(ctrl_data->data_load, 0, ctrl_param_data->data_len);
+//        memcpy(ctrl_data->data_load, ctrl_param_data->data, ctrl_param_data->data_len);
+//        
+//        param_to_packet_helper(payload, ctrl_param_data->data, _XPPS_CD_FIXED_ALL
+//                               , _XPPS_CD_FIXED_ALL+ctrl_param_data->data_len);
+//        
+//        memcpy(payload+pos, ctrl_param_data->data, ctrl_param_data->data_len);
+//        
+//        pos +=  ctrl_param_data->data_len;
+        
+        
+        /*type  大端 小端转化*/
+        
+        void* in_data =  malloc(ctrl_param_data->data_len);
+        memset(in_data, 0, ctrl_param_data->data_len);
+        memcpy(in_data, ctrl_param_data->data, ctrl_param_data->data_len);
+        
+        
+        int key = ctrl_param_data->data_type;
+        
+        if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type) {
+            
+            if (ctrl_param_data->data_len == 4) {
+                
+                key = XAI_DATA_TYPE_BIN_APSN;
+            }else if(ctrl_param_data->data_len == 8){
+                
+                
+                key = XAI_DATA_TYPE_BIN_LUID;
+            }
+            
+        }
+        
+        
+        switch (key) {
+            case XAI_DATA_TYPE_BIN_APSN:
+            {
+                
+                XAITYPEAPSN apsn = 0;
+                memcpy(&apsn, in_data, sizeof(XAITYPEAPSN));
+                
+                apsn = CFSwapInt32(apsn);
+                
+                memcpy(in_data, &apsn, sizeof(XAITYPEAPSN));
+                
+                
+            }
+                break;
+                
+            case XAI_DATA_TYPE_BIN_LUID:
+            {
+                XAITYPELUID luid = 0;
+                memcpy(&luid, in_data, sizeof(XAITYPELUID));
+                
+                luid = CFSwapInt64(luid);
+                
+                memcpy(in_data, &luid, sizeof(XAITYPELUID));
+                
+            }
+                break;
+                
+            default:{
+                
+                
+                
+            }break;
+        }
+        
+        
+        
         ctrl_data->data_load = malloc(ctrl_param_data->data_len);
         memset(ctrl_data->data_load, 0, ctrl_param_data->data_len);
-        memcpy(ctrl_data->data_load, ctrl_param_data->data, ctrl_param_data->data_len);
+        memcpy(ctrl_data->data_load, in_data, ctrl_param_data->data_len);
         
-        param_to_packet_helper(payload, ctrl_param_data->data, _XPPS_CD_FIXED_ALL
-                               , _XPPS_CD_FIXED_ALL+ctrl_param_data->data_len);
+        //param_to_packet_helper(payload, in_data, 0 , 0 + ctrl_param_data->data_len);
         
-        memcpy(payload+pos, ctrl_param_data->data, ctrl_param_data->data_len);
+        memcpy(payload+pos, in_data, ctrl_param_data->data_len);
         
         pos +=  ctrl_param_data->data_len;
+
+        free(in_data);
+        in_data = NULL;
+
         
     }else{
         
@@ -258,6 +332,7 @@ _xai_packet* generatePacketFromParamDataList(_xai_packet_param_data* ctrl_param_
             free(data_load);
             
             printf("CTRL  DATA NULL");
+            abort();
             return NULL;
         }
         

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
+#import "XAIUserService.h"
 
 @protocol XAILoginDelegate <NSObject>
 
@@ -15,7 +16,15 @@
 
 @end
 
-@interface XAILogin : NSObject <MQTTConnectDelegate,MQTTPacketManagerDelegate>
+@interface XAILogin : NSObject <MQTTConnectDelegate,MQTTPacketManagerDelegate,XAIUserServiceDelegate>{
+
+
+    NSMutableString*  _name;
+    XAIUserService* _userService;
+    
+
+
+}
 
 
 

@@ -20,25 +20,25 @@ extern "C" {
     /*----------ctrl----------------*/
     
 #define _XPPS_A_SCID     1
-#define _XPPS_A_ERRNO   1
+#define _XPPS_A_ERRNO   2
 #define _XPPS_A_DATA_COUNT  1
 #define _XPPS_A_FIXED_ALL   (_XPPS_N_FIXED_ALL+_XPPS_A_SCID+_XPPS_A_ERRNO+_XPPS_A_DATA_COUNT)
     
     
-#define _XPP_A_SCID_START  31
-#define _XPP_A_SCID_END    31
-#define _XPP_A_ERRNO_START    32
-#define _XPP_A_ERRNO_END    32
-#define _XPP_A_DATA_COUNT_START   33
-#define _XPP_A_DATA_COUNT_END 33
-#define _XPP_A_DATA_START      34
+#define _XPP_A_SCID_START  _XPPS_N_FIXED_ALL
+#define _XPP_A_SCID_END    (_XPP_A_SCID_START + 1 -1)
+#define _XPP_A_ERRNO_START    (_XPP_A_SCID_END + 1)
+#define _XPP_A_ERRNO_END    (_XPP_A_ERRNO_START + 2 -1)
+#define _XPP_A_DATA_COUNT_START   (_XPP_A_ERRNO_END + 1)
+#define _XPP_A_DATA_COUNT_END (_XPP_A_DATA_COUNT_START + 1 - 1)
+#define _XPP_A_DATA_START      (_XPP_A_DATA_COUNT_END + 1)
 #define _XPP_A_DATA_END        _XPP_END_UNKOWN
     
     typedef struct _xai_packet_param_ack{
         
         _xai_packet_param_normal* normal_param ; /*packet noraml header*/
         uint8_t  scid ;
-        uint8_t  err_no ;
+        uint16_t  err_no ;
         uint8_t  data_count ;
         _xai_packet_param_data*  data ; /*packet param data list*/
         
