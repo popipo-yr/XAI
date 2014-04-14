@@ -88,7 +88,7 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
         const char* cstrClientId = [clientId cStringUsingEncoding:NSUTF8StringEncoding];
         [self setHost: nil];
         [self setPort: 9001];
-        [self setKeepAlive: 60];
+        [self setKeepAlive: 6000];
         [self setCleanSession: YES]; //NOTE: this isdisable clean to keep the broker remember this client
         
         

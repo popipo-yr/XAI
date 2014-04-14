@@ -70,6 +70,8 @@
 }
 
 - (void) didConnect:(NSUInteger)code {
+    
+    [_connectDelegate didConnect:code];
 }
 
 - (void) didDisconnect {

@@ -38,9 +38,9 @@ _xai_packet*   generatePacketFromParamStatus(_xai_packet_param_status* status_pa
     param_to_packet_helper(payload, &big_time, _XPP_S_TIME_START, _XPP_S_TIME_END);
     param_to_packet_helper(payload, &status_param->data_count, _XPP_S_DATA_COUNT_START, _XPP_S_DATA_COUNT_END);
         
-    param_to_packet_helper(payload, status_param->name, _XPP_S_NAME_START, _XPP_S_NAME_END);
-    param_to_packet_helper(payload, big_trigger_guid, _XPP_S_TRIGGER_GUID_START,
-                           _XPP_S_TRIGGER_GUID_END);
+//    param_to_packet_helper(payload, status_param->name, _XPP_S_NAME_START, _XPP_S_NAME_END);
+//    param_to_packet_helper(payload, big_trigger_guid, _XPP_S_TRIGGER_GUID_START,
+//                           _XPP_S_TRIGGER_GUID_END);
     
     purgeGUID(big_trigger_guid);
     
@@ -116,8 +116,8 @@ _xai_packet_param_status*   generateParamStatusFromData(void*  packet_data,int s
     packet_to_param_helper(&status_param->oprId, packet_data, _XPP_S_OPRID_START, _XPP_S_OPRID_END);
     packet_to_param_helper(&status_param->time, packet_data, _XPP_S_TIME_START, _XPP_S_TIME_END);
     packet_to_param_helper(&status_param->data_count, packet_data, _XPP_S_DATA_COUNT_START, _XPP_S_DATA_COUNT_END);
-    packet_to_param_helper(status_param->name, packet_data, _XPP_S_NAME_START, _XPP_S_NAME_END);
-    param_to_packet_helper(status_param->trigger_guid, packet_data, _XPP_S_TRIGGER_GUID_START, _XPP_S_TRIGGER_GUID_END);
+    //packet_to_param_helper(status_param->name, packet_data, _XPP_S_NAME_START, _XPP_S_NAME_END);
+    //param_to_packet_helper(status_param->trigger_guid, packet_data, _XPP_S_TRIGGER_GUID_START, _XPP_S_TRIGGER_GUID_END);
     
     status_param->time = CFSwapInt32(status_param->time);
     

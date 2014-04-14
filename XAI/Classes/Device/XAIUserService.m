@@ -43,7 +43,7 @@
                              [password length], (void*)[password UTF8String],NULL);
     
     
-     xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, XAI_PKT_TYPE_CONTROL, 1, 1, AddUserID,
+     xai_param_ctrl_set(param_ctrl, 1, 1, 1, 3, XAI_PKT_TYPE_CONTROL, 1, 1, AddUserID,
                         [[NSDate new] timeIntervalSince1970],
                         2, username_data);
     
@@ -111,7 +111,7 @@
                             [newUsername length], (void*)[newUsername UTF8String],NULL);
     
     
-    xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, 0, 0, 0, AddUserID, [[NSDate new] timeIntervalSince1970],
+    xai_param_ctrl_set(param_ctrl, 0, 1, 0, 3, 0, 0, 0, AddUserID, [[NSDate new] timeIntervalSince1970],
                        2, luid_data);
     
     
@@ -167,6 +167,7 @@
 
 
 }
+
 
 
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{

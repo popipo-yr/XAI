@@ -20,31 +20,31 @@ extern "C" {
     /*----------ctrl----------------*/
     
 #define _XPPS_S_OPRID     1
-#define _XPPS_S_NAME   16
+//#define _XPPS_S_NAME   16
 #define _XPPS_S_TRIGGER_GUID  12
 #define _XPPS_S_TIME   4
 #define _XPPS_S_DATA_COUNT  1
-#define _XPPS_S_DATA_TYPE  1
-#define _XPPS_S_DATA_LEN    2
-#define _XPPS_S_FIXED_ALL   (_XPPS_N_FIXED_ALL+_XPPS_S_OPRID+_XPPS_S_NAME+_XPPS_S_TRIGGER_GUID \
-                            +_XPPS_S_TIME+_XPPS_S_DATA_COUNT+_XPPS_S_DATA_TYPE+_XPPS_S_DATA_LEN)
+//#define _XPPS_S_DATA_TYPE  1
+//#define _XPPS_S_DATA_LEN    2
+#define _XPPS_S_FIXED_ALL   (_XPPS_N_FIXED_ALL+_XPPS_S_OPRID + _XPPS_S_TRIGGER_GUID \
+                            +_XPPS_S_TIME+_XPPS_S_DATA_COUNT)
     
     
-#define _XPP_S_OPRID_START  31
-#define _XPP_S_OPRID_END    31
-#define _XPP_S_NAME_START    32
-#define _XPP_S_NAME_END    47
-#define _XPP_S_TRIGGER_GUID_START    48
-#define _XPP_S_TRIGGER_GUID_END    59
-#define _XPP_S_TIME_START    60
-#define _XPP_S_TIME_END    63
-#define _XPP_S_DATA_COUNT_START   64
-#define _XPP_S_DATA_COUNT_END 64
-#define _XPP_S_DATA_TYPE_START    65
-#define _XPP_S_DATA_TYPE_END    65
-#define _XPP_S_DATA_LEN_START 66
-#define _XPP_S_DATA_LEN_END   67
-#define _XPP_S_DATA_START      68
+#define _XPP_S_OPRID_START  (_XPPS_N_FIXED_ALL)
+#define _XPP_S_OPRID_END    (_XPP_S_OPRID_START + 1 -1)
+//#define _XPP_S_NAME_START    32
+//#define _XPP_S_NAME_END    47
+#define _XPP_S_TRIGGER_GUID_START    (_XPP_S_OPRID_END + 1)
+#define _XPP_S_TRIGGER_GUID_END    (_XPP_S_TRIGGER_GUID_START + 12 - 1)
+#define _XPP_S_TIME_START   (_XPP_S_TRIGGER_GUID_END + 1)
+#define _XPP_S_TIME_END     (_XPP_S_TIME_START + 4 -1)
+#define _XPP_S_DATA_COUNT_START   (_XPP_S_TIME_END + 1)
+#define _XPP_S_DATA_COUNT_END  (_XPP_S_DATA_COUNT_START + 1 -1)
+//#define _XPP_S_DATA_TYPE_START    65
+//#define _XPP_S_DATA_TYPE_END    65
+//#define _XPP_S_DATA_LEN_START 66
+//#define _XPP_S_DATA_LEN_END   67
+#define _XPP_S_DATA_START      (_XPP_S_DATA_COUNT_END + 1)
 #define _XPP_S_DATA_END        _XPP_END_UNKOWN
     
     

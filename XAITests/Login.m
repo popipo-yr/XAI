@@ -33,7 +33,7 @@
     [login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
     
     
-    NSDate *runUntil = [NSDate dateWithTimeIntervalSinceNow: 13.0 ];
+    NSDate *runUntil = [NSDate dateWithTimeIntervalSinceNow: 130.0 ];
     
     NSLog(@"about to wait");
     [[NSRunLoop currentRunLoop] runUntilDate:runUntil];

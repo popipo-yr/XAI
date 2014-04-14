@@ -15,7 +15,7 @@
 
 @end
 
-@interface XAILogin : NSObject <MQTTConnectDelegate>
+@interface XAILogin : NSObject <MQTTConnectDelegate,MQTTPacketManagerDelegate>
 
 
 

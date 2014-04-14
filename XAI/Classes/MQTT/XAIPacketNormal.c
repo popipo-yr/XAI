@@ -124,8 +124,8 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
     purgeGUID(lit_to);
     
     aParam->msgid = CFSwapInt32(aParam->msgid);
-    aParam->msgid = CFSwapInt16(aParam->magic_number);
-    aParam->msgid = CFSwapInt16(aParam->length);
+    aParam->magic_number = CFSwapInt16(aParam->magic_number);
+    aParam->length = CFSwapInt16(aParam->length);
     
     if (size < _XPPS_N_FIXED_ALL + aParam->length) {
         
