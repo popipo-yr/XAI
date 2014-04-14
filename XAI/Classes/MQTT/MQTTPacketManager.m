@@ -75,6 +75,8 @@
 }
 
 - (void) didDisconnect {
+    
+    [_connectDelegate didDisconnect];
 }
 
 

@@ -43,6 +43,11 @@
 
 - (void) didDisconnect {
 	
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
+        
+        [_delegate loginFinishWithStatus:false];
+    }
+
 }
 
 #pragma mark -------------
@@ -81,10 +86,19 @@
 #pragma mark -- XAIUserSerciveDelegate
 - (void) findedUser:(BOOL)isFinded Luid:(XAITYPELUID)luid withName:(NSString *)name{
 
+    
+    
     if ((YES == isFinded) &&  [name isEqualToString:_name]) {
         
         [MQTT shareMQTT].luid = luid;
+        
     }
+    
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
+        
+        [_delegate loginFinishWithStatus:isFinded];
+    }
+
     
 
 }
