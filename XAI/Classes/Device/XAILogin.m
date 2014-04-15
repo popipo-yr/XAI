@@ -12,19 +12,22 @@
 
 @implementation XAILogin
 
-- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host{
+#pragma mark Outer methods
+
+- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn{
 
     MosquittoClient*  mosq = [MQTT shareMQTT].client;
 
-    host = @"192.168.1.1";
-    name = @"admin@0x00000001";
-    password = @"admin";
+    //host = @"192.168.1.1";
+    //name = @"admin@0x00000001";
+    //password = @"admin";
     
     [_name setString:name];
     
+    NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@",name,[MQTTCover apsnToString:apsn]];
     
 	[mosq setHost: host];
-    [mosq setUsername:name];
+    [mosq setUsername:nameWithAPSN];
     [mosq setPassword:password];
     [mosq setPort:9001];	
     
@@ -34,10 +37,12 @@
 
 }
 
+#pragma mark -- MQTTConnectDelegate
+
 - (void) didConnect:(NSUInteger)code {
 	
     
-    [_userService finderUserLuidHelper:@"admin" apsn:[MQTT shareMQTT].apsn];
+    [_userService finderUserLuidHelper:_name apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
     
 }
 
@@ -50,47 +55,29 @@
 
 }
 
-#pragma mark -------------
-#pragma makr PacketPro
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
-    
-    //test.....
-    
-    
-//    switch (ack->scid) {
-//        case AddUserID:{
-//            
-//            if (ack->err_no == 0) {
-//                
-//            }else{
-//                
-//                NSLog(@"FAILD ADD USER ");
-//            }
-//            
-//            [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
-//        }
-//            
-//            break;
-//            
-//        default:
-//            break;
-//    }
-    
-    
-    NSLog(@"anc");
-    
-}
 
 #pragma mark -- XAIUserSerciveDelegate
+
 - (void) findedUser:(BOOL)isFinded Luid:(XAITYPELUID)luid withName:(NSString *)name{
 
     
     
     if ((YES == isFinded) &&  [name isEqualToString:_name]) {
         
-        [MQTT shareMQTT].luid = luid;
+        MQTT* curMQTT = [MQTT shareMQTT];
+        
+        curMQTT.luid = luid;
+        
+        // @"0x00000001/SERVER/0x0000000000000003/OUT/+"
+        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                                  luid:MQTTCover_LUID_Server_03]];
+        
+        
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+        
+        //@"0x00000001/MOBILES/0x0000000000000001/IN"
         
     }
     
@@ -99,10 +86,14 @@
         [_delegate loginFinishWithStatus:isFinded];
     }
 
-    
-
 }
 
+- (void) addUser:(BOOL) isSuccess{};
+- (void) delUser:(BOOL) isSuccess{};
+- (void) changeUserName:(BOOL) isSuccess{};
+- (void) changeUserPassword:(BOOL)isSuccess{};
+
+#pragma mark -- Other
 
 - (id) init{
 

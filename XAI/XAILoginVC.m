@@ -126,7 +126,7 @@ static int i = 0;
         
         i = 5;
         _login = [[XAILogin alloc] init];
-        [_login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
+        [_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
     
     }else if(i == 5) {
         
@@ -144,7 +144,7 @@ static int i = 0;
        // [node addUser:@"testname" Password:@"password"];
 
         XAIUserService* userService = [[XAIUserService alloc] init];
-        [userService addUser:@"abc" Password:@"bbc" apsn:0x00000001];
+        [userService addUser:@"abc" Password:@"bbc" apsn:0x00000001 luid:0x3];
     
     }
     

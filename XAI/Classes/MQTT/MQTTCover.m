@@ -15,6 +15,54 @@
 @implementation MQTTCover
 
 
++ (NSString*) apsnToString:(uint32_t)APNS{
+    
+    NSString* apns_end_str = [NSString stringWithFormat:@"%x",APNS];
+    
+    unichar ucdata[16] = {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'};
+    
+    int  apns_start_len =   APNS_STR_TOTAL_LEN - [apns_end_str length];
+   
+    
+    if (apns_end_str < 0 ) {
+        
+        return NULL;
+    }
+    
+    
+    NSString* apns_start_str = [[NSString alloc] initWithCharacters:ucdata length:apns_start_len];
+    
+    
+    NSString*  APNS_Str = [[NSString alloc] initWithFormat:@"0x%@%@",apns_start_str,apns_end_str];
+    
+    
+    return APNS_Str;
+
+}
+
++ (NSString*) luidToString:(uint64_t)luid{
+
+    
+    NSString* luid_end_str = [NSString stringWithFormat:@"%llx",luid];
+    
+    unichar ucdata[16] = {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'};
+    
+       int  luid_start_len =   LUID_STR_TOTAL_LEN - [luid_end_str length];
+    
+    if ( luid_end_str < 0) {
+        
+        return NULL;
+    }
+    
+    NSString* luid_start_str = [[NSString alloc] initWithCharacters:ucdata length:luid_start_len];
+    
+    
+    NSString*  LUID_Str = [[NSString alloc] initWithFormat:@"0x%@%@",luid_start_str,luid_end_str];
+    
+    return LUID_Str;
+
+}
+
 + (NSString*) stringFormat:(NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
 
     
@@ -37,9 +85,9 @@
      NSString* apns_start_str = [[NSString alloc] initWithCharacters:ucdata length:apns_start_len];
     
     
-    NSString*  APNS_Str = [[NSString alloc] initWithFormat:@"%@%@",apns_start_str,apns_end_str];
+    NSString*  APNS_Str = [[NSString alloc] initWithFormat:@"0x%@%@",apns_start_str,apns_end_str];
     
-    NSString*  LUID_Str = [[NSString alloc] initWithFormat:@"%@%@",luid_start_str,luid_end_str];
+    NSString*  LUID_Str = [[NSString alloc] initWithFormat:@"0x%@%@",luid_start_str,luid_end_str];
     
     return [NSString stringWithFormat:format,APNS_Str,LUID_Str];
     
@@ -64,7 +112,7 @@
     
     NSString* other_start_str = [[NSString alloc] initWithCharacters:ucdata length:other_start_len];
     
-    NSString*  Other_Str = [[NSString alloc] initWithFormat:@"%@%@",other_start_str,other_end_str];
+    NSString*  Other_Str = [[NSString alloc] initWithFormat:@"0x%@%@",other_start_str,other_end_str];
     
     return Other_Str;
     
@@ -73,14 +121,14 @@
 
 + (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
     
-    return [MQTTCover stringFormat:@"0x%@/NODES/0x%@/OUT/DEV" APNS:APNS luid:luid];
+    return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/DEV" APNS:APNS luid:luid];
 
 }
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
 
     //0x%08x/NODES/0x%016llx/OUT/STATUS/%02d
     
-    NSString*  other_Str = [[NSString alloc] initWithBytes:&luid length:1 encoding:NSUTF8StringEncoding];
+    NSString*  other_Str = [MQTTCover stringOther:other];
     
     return [NSString stringWithFormat:@"%@/%@"
             ,[MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid]
@@ -88,10 +136,16 @@
     
     
 }
+
++ (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t) luid{
+
+    return [MQTTCover stringFormat:@"%@/SERVER/%@/OUT/+" APNS:APNS luid:luid];
+}
+
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
     //状态表： 0x%08x/SERVER/0x%016llx/OUT/STATUS/%02d
     
-    NSString*  other_Str = [[NSString alloc] initWithBytes:&luid length:1 encoding:NSUTF8StringEncoding];
+    NSString*  other_Str = [MQTTCover stringOther:other];
     
     return [NSString stringWithFormat:@"%@/%@"
             ,[MQTTCover stringFormat:@"%@/SERVER/%@/OUT/STATUS" APNS:APNS luid:luid]
@@ -101,7 +155,7 @@
 
     //0x%08x/MOBILES/0x%016llx/OUT/STATUS/%02d
     
-    NSString*  other_Str = [[NSString alloc] initWithBytes:&luid length:1 encoding:NSUTF8StringEncoding];
+    NSString*  other_Str = [MQTTCover stringOther:other];
     
     return [NSString stringWithFormat:@"%@/%@"
             ,[MQTTCover stringFormat:@"%@/MOBILES/%@/OUT/STATUS" APNS:APNS luid:luid]
@@ -120,8 +174,8 @@
 + (NSString*) mobileCtrTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
  //0x%08x/MOBILES/0x%016llx/IN
     
-    return [NSString stringWithFormat:@"0x00000000/MOBILES/0x0000000000000001/IN"];
-   return [MQTTCover stringFormat:@"0%@/MOBILES/%@/IN" APNS:APNS luid:luid];
+    //return [NSString stringWithFormat:@"0x00000000/MOBILES/0x0000000000000001/IN"];
+   return [MQTTCover stringFormat:@"%@/MOBILES/%@/IN" APNS:APNS luid:luid];
 
 }
 

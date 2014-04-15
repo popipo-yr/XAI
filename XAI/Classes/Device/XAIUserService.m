@@ -28,9 +28,10 @@
 
 
 
-- (void) addUser:(NSString*)username Password:(NSString*)password apsn:(XAITYPEAPSN) apsn{
+- (void) addUser:(NSString*)username Password:(NSString*)password apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
 
     
+    MQTT* cur_MQTT = [MQTT shareMQTT];
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
@@ -48,21 +49,21 @@
                              [password length], (void*)[password UTF8String],NULL);
     
     
-     xai_param_ctrl_set(param_ctrl, 1, 1, 1, 3, XAI_PKT_TYPE_CONTROL, 10, 10, AddUserID,
-                        [[NSDate new] timeIntervalSince1970],
-                        3, apsn_data);
+     xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+                        AddUserID,[[NSDate new] timeIntervalSince1970], 3, apsn_data);
     
     
      _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
-    NSString* topicStr = @"0x00000001/SERVER/0x0000000000000003/IN";
-    NSString* topicStr2 = @"0x00000001/MOBILES/0x0000000000000001/IN";
+    NSString* ctrlTopic =  [MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid];
+    //@"0x00000001/SERVER/0x0000000000000003/IN";
+    //@"0x00000001/MOBILES/0x0000000000000001/IN";
     
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr2];
+    //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:ackTopic];
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:topicStr//[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
+                             toTopic:ctrlTopic
                              withQos:0
                               retain:NO];
     
@@ -75,8 +76,11 @@
 }
 
 
-- (void) delUser:(XAITYPELUID) luid apsn:(XAITYPEAPSN) apsn{
+- (void) delUser:(XAITYPELUID) uluid apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
 
+    
+    MQTT* cur_MQTT = [MQTT shareMQTT];
+    
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
     
@@ -84,17 +88,20 @@
     _xai_packet_param_data* luid_data = generatePacketParamData();
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn_data, luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn, luid_data);
     
-    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &luid,NULL);
+    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &uluid,NULL);
     
-    xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, 0, 0, 0, DelUserID, [[NSDate new] timeIntervalSince1970], 2, apsn_data);
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+                       DelUserID, [[NSDate new] timeIntervalSince1970], 2, apsn_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
+    
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
+                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
                              withQos:0
                               retain:NO];
     
@@ -106,7 +113,11 @@
 }
 
 
-- (void) changeUser:(XAITYPELUID)luid withName:(NSString*)newUsername apsn:(XAITYPEAPSN) apsn{
+- (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername
+               apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
+    
+    MQTT* cur_MQTT = [MQTT shareMQTT];
+
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
@@ -114,25 +125,26 @@
     _xai_packet_param_data* username_data = generatePacketParamData();
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn_data, luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN,
+                       sizeof(XAITYPEAPSN), &apsn, luid_data);
 
-    
-    
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
-                            sizeof(XAI_DATA_TYPE_BIN_LUID), &luid, username_data);
+                            sizeof(XAITYPELUID), &uluid, username_data);
     
     xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
                             [newUsername length], (void*)[newUsername UTF8String],NULL);
     
     
-    xai_param_ctrl_set(param_ctrl, 0, 1, 0, 3, 0, 0, 0, AlterUserNameID, [[NSDate new] timeIntervalSince1970],
-                       3, apsn_data);
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+                       AlterUserNameID, [[NSDate new] timeIntervalSince1970],3, apsn_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
+    
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
+                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
                              withQos:0
                               retain:NO];
     
@@ -142,24 +154,25 @@
 
 
 }
-- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword apsn:(XAITYPEAPSN) apsn{
+- (void) changeUser:(XAITYPELUID)uluid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword
+               apsn:(XAITYPEAPSN) apsn  luid:(XAITYPELUID)luid{
 
+    MQTT* cur_MQTT = [MQTT shareMQTT];
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
+    _xai_packet_param_data* apsn_data = generatePacketParamData();
     _xai_packet_param_data* luid_data = generatePacketParamData();
     _xai_packet_param_data* oldPassword_data = generatePacketParamData();
     _xai_packet_param_data* newPassword_data = generatePacketParamData();
-    _xai_packet_param_data* apsn_data = generatePacketParamData();
+   
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn_data, luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN,
+                       sizeof(XAITYPEAPSN), &apsn, luid_data);
 
-    
-    
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
-                            sizeof(XAI_DATA_TYPE_BIN_LUID), &luid, oldPassword_data);
+                            sizeof(XAITYPELUID), &uluid, oldPassword_data);
 
-    
     xai_param_data_set(oldPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
                             [oldPassword length], (void*)[oldPassword UTF8String],newPassword_data);
     
@@ -168,14 +181,16 @@
 
     
     
-    xai_param_ctrl_set(param_ctrl, 0, 1, 0, 1, 0, 0, 0, AlterUserPWID, [[NSDate new] timeIntervalSince1970],
-                       4, apsn_data);
-    
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, 0x22,
+                       AlterUserPWID, [[NSDate new] timeIntervalSince1970], 4, apsn_data);
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
+    
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
+    
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:1 luid:1]
+                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
                              withQos:0
                               retain:NO];
     
@@ -187,11 +202,13 @@
 }
 
 
-- (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN) apsn{
+- (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
 
     _usernameFind = username;
     
-    NSString* topicStr = @"0x00000001/SERVER/0x0000000000000003/OUT/STATUS/0x01";
+    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:apsn luid:luid other:MQTTCover_UserTable_Other];
+    //@"0x00000001/SERVER/0x0000000000000003/OUT/STATUS/0x01";
+    
     [[MQTT shareMQTT].client subscribe:topicStr];
 
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
@@ -227,7 +244,7 @@
         if (find) {
             
             _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
-            if ((data->data_type == XAI_DATA_TYPE_BIN_LUID) || data->data_len > 0) {
+            if ((luid_data->data_type == XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len > 0) {
                 
                 XAITYPELUID luid;
                 byte_data_copy(&luid, luid_data->data, sizeof(XAITYPELUID), luid_data->data_len);
@@ -253,6 +270,33 @@
     
 }
 
+//- (void) ackVerify:(int) err_no proSelect:(SEL) proSel{
+//
+//    if (err_no == 0) {
+//        
+//        if ((nil != _delegate) && [_delegate respondsToSelector:proSel]) {
+//            
+//            [_delegate performSelector:proSel withObject:[NSNumber numberWithBool:TRUE]];
+//            
+//        }
+//        
+//    }else{
+//        
+//        if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
+//            
+//            [_delegate performSelector:proSel withObject:[NSNumber numberWithBool:FALSE]];
+//        }
+//        
+//        
+//        NSLog(@"FAILD ADD USER - %d", err_no);
+//    }
+//    
+//    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+//    
+//    
+//
+//}
+
 - (void) reciveACKPacket:(void*)datas size:(int)size topic:topic{
 
     _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
@@ -264,18 +308,105 @@
             
             if (ack->err_no == 0) {
                 
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
+                    
+                    [_delegate addUser:YES];
+                }
+                
             }else{
                 
-                NSLog(@"FAILD ADD USER ");
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
+                    
+                    [_delegate addUser:FALSE];
+                }
+
+                
+                NSLog(@"FAILD ADD USER - %d", ack->err_no);
             }
             
-            //[[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
-        }
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
-            break;
             
-        default:
-            break;
+        }break;
+            
+        case DelUserID:{
+        
+            if (ack->err_no == 0) {
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delUser:)]) {
+                    
+                    [_delegate delUser:YES];
+                }
+                
+            }else{
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delUser:)]) {
+                    
+                    [_delegate delUser:FALSE];
+                }
+                
+                
+                NSLog(@"FAILD DEL USER - %d", ack->err_no);
+            }
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+        
+        }break;
+            
+        case AlterUserNameID:{
+            
+            if (ack->err_no == 0) {
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserName:)]) {
+                    
+                    [_delegate changeUserName:YES];
+                }
+                
+            }else{
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserName:)]) {
+                    
+                    [_delegate changeUserName:FALSE];
+                }
+                
+                
+                NSLog(@"FAILD CHANGE_USER_NAME USER - %d", ack->err_no);
+            }
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+        
+        
+        }break;
+            
+        case AlterUserPWID:{
+            
+            
+            if (ack->err_no == 0) {
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserPassword:)]) {
+                    
+                    [_delegate changeUserPassword:YES];
+                }
+                
+            }else{
+                
+                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserPassword:)]) {
+                    
+                    [_delegate changeUserPassword:FALSE];
+                }
+                
+                
+                NSLog(@"FAILD CHANGE_USER_PWD USER - %d", ack->err_no);
+            }
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+        
+        
+        }break;
+            
+            
+            
+        default:break;
     }
 
     purgePacketParamACKAndData(ack);
@@ -294,11 +425,9 @@
             [self finderUserLuidHelper:_usernameFind paramStatus:status];
         
         
-        }
-            break;
+        }break;
             
-        default:
-            break;
+        default:break;
     }
     
     purgePacketParamStatusAndData(status);
@@ -311,7 +440,7 @@
     
 
     switch (param->flag) {
-        case XAI_PKT_FLAG_ACK:{
+        case XAI_PKT_FLAG_ACK_CONTROL:{
             
             [self reciveACKPacket:datas size:size topic:topic];
         }

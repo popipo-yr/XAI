@@ -9,11 +9,42 @@
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
 
+
+@interface  XAIDevice: NSObject
+
+@property (nonatomic, assign) XAITYPELUID luid;
+@property (nonatomic, assign) XAITYPEAPSN apsn;
+@property (nonatomic, strong) NSString* name;
+
+@end
+
+@protocol XAIDeviceServiceDelegate <NSObject>
+
+//- (void) findedDevice:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
+- (void) addDevice:(BOOL) isSuccess;
+- (void) delDevice:(BOOL) isSuccess;
+- (void) changeDeviceName:(BOOL) isSuccess;
+- (void) findedAllDevice:(BOOL) isSuccess datas:(NSArray*) devAry;
+
+@end
+
+
 @interface XAIDeviceService : NSObject <MQTTPacketManagerDelegate>
 
 
-- (void) addDev:(XAITYPELUID)luid  withName:(NSString*)devName;
-- (void) delDev:(XAITYPELUID)luid;
-- (void) changeDev:(XAITYPELUID)luid withName:(NSString*)newName;
+@property id<XAIDeviceServiceDelegate> delegate;
+
+
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName
+           apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+
+- (void) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+
+- (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName
+               apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+
+
+- (void) findAllDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+
 
 @end

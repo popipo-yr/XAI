@@ -7,6 +7,8 @@
 //
 
 #import "MQTTPacketManager.h"
+#import "MQTT.h"
+#import "MQTTCover.h"
 
 @implementation MQTTPacketManager
 
@@ -18,6 +20,22 @@
     }
     
     return self;
+}
+
+- (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro{
+
+    [self addPacketManager:aPro withKey:[MQTTCover mobileCtrTopicWithAPNS:[MQTT shareMQTT].apsn
+                                                                     luid:[MQTT shareMQTT].luid]];
+
+}
+
+- (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro{
+
+    
+    
+    [self removePacketManager:aPro withKey:[MQTTCover mobileCtrTopicWithAPNS:[MQTT shareMQTT].apsn
+                                                                     luid:[MQTT shareMQTT].luid]];
+
 }
 
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro withKey:(NSString*)key{
@@ -33,6 +51,8 @@
     
     [_delegates setObject:oldAry forKey:key];
 }
+
+
 
 - (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key{
 

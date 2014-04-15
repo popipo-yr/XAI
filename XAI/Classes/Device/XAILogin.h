@@ -16,7 +16,7 @@
 
 @end
 
-@interface XAILogin : NSObject <MQTTConnectDelegate,MQTTPacketManagerDelegate,XAIUserServiceDelegate>{
+@interface XAILogin : NSObject <MQTTConnectDelegate,XAIUserServiceDelegate>{
 
 
     NSMutableString*  _name;
@@ -30,6 +30,6 @@
 
 
 
-- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host;
+- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn;
 
 @end

@@ -39,7 +39,10 @@
 
 @property (nonatomic, weak) id<MQTTConnectDelegate> connectDelegate;
 
+- (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
+
+- (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
 @end
