@@ -124,6 +124,10 @@
     return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/DEV" APNS:APNS luid:luid];
 
 }
++ (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
+
+    return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid];
+}
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
 
     //0x%08x/NODES/0x%016llx/OUT/STATUS/%02d
@@ -151,6 +155,14 @@
             ,[MQTTCover stringFormat:@"%@/SERVER/%@/OUT/STATUS" APNS:APNS luid:luid]
             ,other_Str];
 }
+
++ (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid {
+    
+       return [MQTTCover stringFormat:@"%@/MOBILES/%@/OUT/STATUS" APNS:APNS luid:luid];
+    
+}
+
+
 + (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
 
     //0x%08x/MOBILES/0x%016llx/OUT/STATUS/%02d

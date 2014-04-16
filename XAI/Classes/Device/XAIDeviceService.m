@@ -383,6 +383,4 @@
 
 @end
 
-@implementation XAIDevice
 
-@end

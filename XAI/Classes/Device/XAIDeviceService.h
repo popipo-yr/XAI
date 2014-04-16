@@ -8,15 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
+#import "XAIDevice.h"
 
 
-@interface  XAIDevice: NSObject
-
-@property (nonatomic, assign) XAITYPELUID luid;
-@property (nonatomic, assign) XAITYPEAPSN apsn;
-@property (nonatomic, strong) NSString* name;
-
-@end
 
 @protocol XAIDeviceServiceDelegate <NSObject>
 

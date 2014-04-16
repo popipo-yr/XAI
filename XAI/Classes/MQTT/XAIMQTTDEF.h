@@ -9,6 +9,7 @@
 #ifndef XAI_XAIMQTTDEF_h
 #define XAI_XAIMQTTDEF_h
 
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -32,6 +33,13 @@ typedef enum XAI_PKT_TYPE{
 
 typedef  uint64_t  XAITYPELUID;
 typedef  uint32_t  XAITYPEAPSN;
+typedef  uint64_t  XAITYPEUNSIGN;
+typedef  uint8_t   XAITYPEBOOL;
+
+#define XAITYPEBOOL_TRUE 1
+#define XAITYPEBOOL_FALSE 0
+#define XAITYPEBOOL_UNKOWN 2
+
     
 typedef  enum XAI_DATA_TYPE{
     

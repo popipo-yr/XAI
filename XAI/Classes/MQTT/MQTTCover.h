@@ -35,9 +35,11 @@
 
 + (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 
++ (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t) luid;
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t) luid other:(uint8_t)other;
++ (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
 + (NSString*) nodeCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) serverCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;

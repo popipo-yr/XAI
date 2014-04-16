@@ -16,12 +16,14 @@
 		961F93E618F4288F002D4F74 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939918F4288F002D4F74 /* libssl.a */; };
 		961F95C318F4E432002D4F74 /* ca.crt in Resources */ = {isa = PBXBuildFile; fileRef = 961F95C218F4E432002D4F74 /* ca.crt */; };
 		961F95C518F4F7D3002D4F74 /* LoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C418F4F7D3002D4F74 /* LoginTest.m */; };
-		961F95C818F53629002D4F74 /* APServerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C718F53629002D4F74 /* APServerNode.m */; };
 		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
 		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
 		964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964C996A18FBAB53006300F9 /* XAIDeviceService.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
+		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
+		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
+		96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290B18FE55F4008C6B81 /* DeviceTest.m */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
@@ -172,8 +174,6 @@
 		961F95C118F4E12D002D4F74 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		961F95C218F4E432002D4F74 /* ca.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ca.crt; sourceTree = "<group>"; };
 		961F95C418F4F7D3002D4F74 /* LoginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTest.m; sourceTree = "<group>"; };
-		961F95C618F53629002D4F74 /* APServerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APServerNode.h; sourceTree = "<group>"; };
-		961F95C718F53629002D4F74 /* APServerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APServerNode.m; sourceTree = "<group>"; };
 		961F95CB18F688E0002D4F74 /* MQTTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCover.h; sourceTree = "<group>"; };
 		961F95CC18F688E0002D4F74 /* MQTTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTCover.m; sourceTree = "<group>"; };
 		961F95CE18F780AE002D4F74 /* XAIUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserService.h; sourceTree = "<group>"; };
@@ -183,6 +183,11 @@
 		964C996918FBAB53006300F9 /* XAIDeviceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceService.h; sourceTree = "<group>"; };
 		964C996A18FBAB53006300F9 /* XAIDeviceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceService.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
+		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
+		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
+		96D8290818FE4A0C008C6B81 /* XAIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevice.h; sourceTree = "<group>"; };
+		96D8290918FE4A0C008C6B81 /* XAIDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevice.m; sourceTree = "<group>"; };
+		96D8290B18FE55F4008C6B81 /* DeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTest.m; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -321,12 +326,14 @@
 				1AF7604E18F2528600520EAD /* LightNode.m */,
 				C33E77FC18F3B28500808391 /* XAILogin.h */,
 				C33E77FD18F3B28500808391 /* XAILogin.m */,
-				961F95C618F53629002D4F74 /* APServerNode.h */,
-				961F95C718F53629002D4F74 /* APServerNode.m */,
 				961F95CE18F780AE002D4F74 /* XAIUserService.h */,
 				961F95CF18F780AE002D4F74 /* XAIUserService.m */,
 				964C996918FBAB53006300F9 /* XAIDeviceService.h */,
 				964C996A18FBAB53006300F9 /* XAIDeviceService.m */,
+				96D8290518FE4552008C6B81 /* XAIDevSwitch.h */,
+				96D8290618FE4552008C6B81 /* XAIDevSwitch.m */,
+				96D8290818FE4A0C008C6B81 /* XAIDevice.h */,
+				96D8290918FE4A0C008C6B81 /* XAIDevice.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -552,6 +559,7 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				96D8290B18FE55F4008C6B81 /* DeviceTest.m */,
 				96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */,
 				9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */,
 				9614F94218FCEBB400CDF4A1 /* LoginTest.h */,
@@ -779,8 +787,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */,
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
-				961F95C818F53629002D4F74 /* APServerNode.m in Sources */,
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
 				C341A64B18EBB23E00034649 /* DeviceShowVC.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
@@ -804,6 +812,7 @@
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
 				961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */,
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
+				96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
@@ -824,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */,
 				9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */,
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,
 				961F95C518F4F7D3002D4F74 /* LoginTest.m in Sources */,
