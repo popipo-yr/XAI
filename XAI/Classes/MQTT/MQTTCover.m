@@ -124,6 +124,12 @@
     return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/DEV" APNS:APNS luid:luid];
 
 }
+
++ (NSString*) nodeStatusAllTopicWithAPNS:(uint32_t)APNS{
+
+    return [NSString stringWithFormat:@"%@/NODES/+/OUT/STATUS",[MQTTCover apsnToString:APNS]];
+}
+
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
 
     return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid];
@@ -192,6 +198,52 @@
 }
 
 
++ (BOOL) isNodeTopic:(NSString*)topic{
+    
+    NSString* sub =  @"/NODES/";
+    
+    return [sub  isEqualToString:[topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN, [sub length])]];
+
+}
++ (BOOL) isServerTopic:(NSString*)topic{
+    
+    NSString* sub =  @"/SERVER/";
+    
+    return [sub  isEqualToString:[topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN, [sub length])]];
+
+
+}
+
++ (uint32_t) nodeTopicAPSN:(NSString*)topic{
+    
+    uint32_t ret = 0;
+    
+    NSString* sub = [topic substringWithRange:NSMakeRange(2, APNS_STR_TOTAL_LEN)];
+    
+    if (nil != sub){
+        
+        NSScanner* scanner = [NSScanner scannerWithString:sub];
+        [scanner scanHexInt:&ret];
+    }
+    
+    return  ret;
+    
+}
++ (uint64_t) nodeTopicLUID:(NSString *)topic{
+
+    uint64_t ret = 0;
+    
+    NSString* sub = [topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN+7,LUID_STR_TOTAL_LEN)];
+    
+    if (nil != sub){
+        
+        NSScanner* scanner = [NSScanner scannerWithString:sub];
+        [scanner scanHexLongLong:&ret];
+    }
+    
+    return  ret;
+
+}
 
 
 

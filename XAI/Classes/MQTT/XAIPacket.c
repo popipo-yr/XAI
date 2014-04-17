@@ -246,26 +246,32 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
         switch (key) {
             case XAI_DATA_TYPE_BIN_APSN:
             {
-                
-                XAITYPEAPSN apsn = 0;
-                memcpy(&apsn, in_data, sizeof(XAITYPEAPSN));
-                
-                apsn = CFSwapInt32(apsn);
-                
-                memcpy(in_data, &apsn, sizeof(XAITYPEAPSN));
-                
-                
+                if (ctrl_param_data->data_len == 4) {
+                    
+                    XAITYPEAPSN apsn = 0;
+                    memcpy(&apsn, in_data, sizeof(XAITYPEAPSN));
+                    
+                    apsn = CFSwapInt32(apsn);
+                    
+                    memcpy(in_data, &apsn, sizeof(XAITYPEAPSN));
+                    
+                }
             }
                 break;
                 
             case XAI_DATA_TYPE_BIN_LUID:
             {
-                XAITYPELUID luid = 0;
-                memcpy(&luid, in_data, sizeof(XAITYPELUID));
-                
-                luid = CFSwapInt64(luid);
-                
-                memcpy(in_data, &luid, sizeof(XAITYPELUID));
+                if (ctrl_param_data->data_len == 8) {
+                    
+                    XAITYPELUID luid = 0;
+                    memcpy(&luid, in_data, sizeof(XAITYPELUID));
+                    
+                    luid = CFSwapInt64(luid);
+                    
+                    memcpy(in_data, &luid, sizeof(XAITYPELUID));
+                    
+
+                }
                 
             }
                 break;

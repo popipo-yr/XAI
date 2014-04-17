@@ -9,7 +9,7 @@
 #import "XAIDevice.h"
 #import "XAIPacketStatus.h"
 
-#define Key_DeviceStatusID  127
+
 
 @implementation XAIDevice
 
@@ -31,6 +31,13 @@
 
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
     
+    
+    if (![topic isEqualToString:
+          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]]) {
+        
+        return;
+    }
+    
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
     BOOL  isSuccess = false;
@@ -45,7 +52,7 @@
         if ((data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
 
         
-        XAITYPEUNSIGN  devStatus_mem;
+        XAITYPEUNSIGN  devStatus_mem = 0;
         
         byte_data_copy(&devStatus_mem, data->data, sizeof(XAITYPEUNSIGN), data->data_len);
         
@@ -68,8 +75,8 @@
         [_delegate getStatus:devStatus withFinish:isSuccess];
     }
     
-    [[MQTT shareMQTT].packetManager removeObserver:self forKeyPath:
-     [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:0]];
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+     [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     
     purgePacketParamStatusAndData(param);
 }

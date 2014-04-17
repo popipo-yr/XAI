@@ -17,6 +17,7 @@
     if (self = [super init]) {
         
         _delegates = [[NSMutableDictionary alloc] init];
+        _allDelegate = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -65,6 +66,17 @@
 
 }
 
+- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro{
+
+    [_allDelegate addObject:aPro];
+}
+
+
+- (void) removePacketManagerAll:(id<MQTTPacketManagerDelegate>)aPro{
+
+    [_allDelegate removeObject:aPro];
+}
+
 #pragma mark -----------------------
 #pragma mark MosquittoClientDelegate
 
@@ -82,6 +94,19 @@
             [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
         }
         
+
+    }
+    
+    /*通知接受全部的消息*/
+    for (int i = 0; i < [_allDelegate count]; i++) {
+        
+        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
+        if (apro != NULL
+            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            
+            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+        }
 
     }
     

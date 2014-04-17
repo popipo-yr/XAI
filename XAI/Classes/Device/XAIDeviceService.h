@@ -20,10 +20,20 @@
 - (void) changeDeviceName:(BOOL) isSuccess;
 - (void) findedAllDevice:(BOOL) isSuccess datas:(NSArray*) devAry;
 
+- (void) finddedAllOnlineDevices:(NSSet*) luidAry;
+
 @end
 
 
-@interface XAIDeviceService : NSObject <MQTTPacketManagerDelegate>
+@interface XAIDeviceService : NSObject <MQTTPacketManagerDelegate>{
+    
+    NSMutableSet* _allDevices;
+    NSMutableSet* _onlineDevices;
+    NSTimer*  _timer;
+    XAITYPEAPSN  _apsn;
+    BOOL _bFinding;
+
+}
 
 
 @property id<XAIDeviceServiceDelegate> delegate;
@@ -40,5 +50,7 @@
 
 - (void) findAllDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
 
+/*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
+- (void) findAllOnlineDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid useSecond:(int) sec;
 
 @end

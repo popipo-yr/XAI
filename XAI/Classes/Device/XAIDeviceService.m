@@ -146,6 +146,9 @@
 
 }
 
+
+
+/*开启定时*/
 - (void) findAllDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
 
     
@@ -157,13 +160,94 @@
     [[MQTT shareMQTT].client subscribe:topicStr];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    
+   
+}
 
+- (void) stopfindAllOnlineDev{
+    
+    [_timer invalidate];
+    _timer = nil;
+    
+    for (id obj in _allDevices) {
+        
+        if (![obj isKindOfClass:[NSString class]]) continue;
+        
+        XAITYPELUID luid;
+        NSScanner* scanner = [NSScanner scannerWithString:obj];
+        [scanner scanHexLongLong:&luid];
+        
+        NSString* topic = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
+        [[MQTT shareMQTT].client unsubscribe:topic];
+    }
+
+    
+    
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(finddedAllOnlineDevices:)]) {
+        
+        [_delegate finddedAllOnlineDevices:_onlineDevices];
+    }
+    
+    _bFinding = false;
+}
+
+- (void) startFindOnline{
+
+    if (!_bFinding) return;
+    
+    for (id obj in _allDevices) {
+        
+        if (![obj isKindOfClass:[NSString class]]) continue;
+        
+        XAITYPELUID luid;
+        NSScanner* scanner = [NSScanner scannerWithString:obj];
+        [scanner scanHexLongLong:&luid];
+        
+        NSString* topic = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
+        
+        [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
+        [[MQTT shareMQTT].client subscribe:topic];
+    }
+}
+
+- (void) findAllOnlineDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid useSecond:(int) sec{
+
+    if (_bFinding) {
+        
+        return;
+    }
+    
+    [_onlineDevices removeAllObjects];
+    _apsn = apsn;
+    _bFinding = YES;
+    
+    
+    
+    
+    
+//    NSString* topicStr = [MQTTCover nodeStatusAllTopicWithAPNS:apsn];
+//
+//    [[MQTT shareMQTT].packetManager addPacketManagerAll:self];
+//    
+//    [[MQTT shareMQTT].client subscribe:topicStr];
+//    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:sec  // 10ms
+                                             target:self
+                                           selector:@selector(stopfindAllOnlineDev)
+                                           userInfo:nil
+                                            repeats:YES];
+    
+    [self findAllDevWithApsn:apsn luid:luid];
 }
 
 #pragma mark -- Helper
 
 - (int) findAllDevWithParamStatus:(_xai_packet_param_status*) param{
     
+    [_allDevices removeAllObjects];
     
     NSMutableArray* devAry = [[NSMutableArray alloc] init];
     
@@ -220,6 +304,9 @@
             allType = YES;
             
             
+            [_allDevices addObject:[NSString stringWithFormat:@"%llx",luid]];
+            
+            
         } while (0);
         
         if (allType) {
@@ -234,6 +321,12 @@
         [_delegate findedAllDevice:YES datas:devAry];
     }
     
+    
+    if (_bFinding) {/*查找在线的用户*/
+        
+        [self startFindOnline];
+        
+    }
 
     
     return 0;
@@ -335,17 +428,26 @@
     
     _xai_packet_param_status* status = generateParamStatusFromData(datas, size);
     if (status == NULL) return;
+
+    if ([MQTTCover isServerTopic:topic]) {
+        
+        switch (status->oprId) {
+            case DevTableID:
+            {
+                
+                [self findAllDevWithParamStatus:status];
+                
+                
+            }break;
+                
+            default:break;
+        }
     
-    switch (status->oprId) {
-        case DevTableID:
-        {
-            
-            [self findAllDevWithParamStatus:status];
-            
-            
-        }break;
-            
-        default:break;
+    }else if([MQTTCover isNodeTopic:topic]){
+    
+       NSNumber* number = [NSNumber numberWithLongLong:[MQTTCover nodeTopicLUID:topic]];
+        
+        [_onlineDevices addObject:number];
     }
     
     purgePacketParamStatusAndData(status);
@@ -379,6 +481,32 @@
     purgePacketParamNormal(param);
 }
 
+
+- (id) init{
+
+    if (self = [super init]) {
+        
+        _onlineDevices = [[NSMutableSet alloc] init];
+        _allDevices = [[NSMutableSet alloc] init];
+        _bFinding = false;
+        _timer = nil;
+    }
+    
+    return self;
+}
+
+- (void) dealloc{
+    
+    if (_timer != nil) {
+        
+        [_timer invalidate];
+        _timer = nil;
+    }
+    
+    _allDevices = nil;
+    _onlineDevices = nil;
+
+}
 
 
 @end

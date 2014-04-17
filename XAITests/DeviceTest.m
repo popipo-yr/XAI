@@ -28,7 +28,9 @@
     _device.delegate = self;
     
     _device.apsn = 0x1;
-    _device.luid = 0x124b0003d430b6;
+    //_device.luid = 0x124b0003d430b6;
+    _device.luid = 0x00124B000413C8D8;
+    //00-12-4B-00-04-13-C8-D8
     
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -41,16 +43,16 @@
 }
 
 
-static inline void runInMainLoop(void(^block)(BOOL *done)) {
-    __block BOOL done = NO;
-    
-    while (!done) {
-        
-        block(&done);
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
-    }
-}
+//static inline void runInMainLoop(void(^block)(BOOL *done)) {
+//    __block BOOL done = NO;
+//    
+//    while (!done) {
+//        
+//        block(&done);
+//        [[NSRunLoop mainRunLoop] runUntilDate:
+//         [NSDate dateWithTimeIntervalSinceNow:.1]];
+//    }
+//}
 
 - (void)testGetStatus
 {

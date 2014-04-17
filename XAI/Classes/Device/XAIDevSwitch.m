@@ -202,6 +202,16 @@
 
 - (void) reciveStatusPacket:(void*)datas size:(int)size topic:topic{
     
+    [super recivePacket:datas size:size topic:topic];
+    
+    if (![topic isEqualToString:
+          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID]]
+        &&![topic isEqualToString:
+           [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID]]) {
+        
+        return;
+    }
+    
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
     BOOL  isSuccess = false;
@@ -216,7 +226,7 @@
         
         if ((data->data_type != XAI_DATA_TYPE_BIN_BOOL) || data->data_len <= 0)break;
         
-        XAITYPEBOOL isOpen;
+        XAITYPEBOOL isOpen = 0;
         
         byte_data_copy(&isOpen, data->data, sizeof(XAITYPEBOOL), data->data_len);
         
@@ -265,7 +275,7 @@
         default:break;
     }
     
-    [[MQTT shareMQTT].packetManager removeObserver:self forKeyPath:
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
      [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:param->oprId]];
     
     purgePacketParamStatusAndData(param);

@@ -76,16 +76,16 @@ XAITYPELUID  ____luid;
     [super tearDown];
 }
 
-static inline void runInMainLoop(void(^block)(BOOL *done)) {
-    __block BOOL done = NO;
-    
-    while (!done) {
-        
-        block(&done);
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
-    }
-}
+//static inline void runInMainLoop(void(^block)(BOOL *done)) {
+//    __block BOOL done = NO;
+//    
+//    while (!done) {
+//        
+//        block(&done);
+//        [[NSRunLoop mainRunLoop] runUntilDate:
+//         [NSDate dateWithTimeIntervalSinceNow:.1]];
+//    }
+//}
 
 
 
@@ -373,7 +373,7 @@ static inline void runInMainLoop(void(^block)(BOOL *done)) {
         _luiduser = luid;
         ____luid = luid;
         
-        [[NSUserDefaults standardUserDefaults] setInteger:luid forKey:@"LUID"];
+        //[[NSUserDefaults standardUserDefaults] setInteger:luid forKey:@"LUID"];
         
     }else{
         

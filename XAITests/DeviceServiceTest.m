@@ -26,6 +26,8 @@
     
     int _findStatus;
     
+    int _findOnlineStatus;
+    
     NSString* _name4Change;
     
     NSString* _name4Change_end;
@@ -48,7 +50,26 @@
     _name4Change = @"NAME1";
     _name4Change_end = @"NAME2";
     
-    _luidDev = 0x124b0003d430b6 ;
+//    _luidDev = 0x124b0003d430b6 ;
+    
+//    _luidDev = 0x124b000257d985 ;
+//    _luidDev = 0x124b0002d5786f ;
+//    _luidDev = 0x124b0002623bed ;
+//    _luidDev = 0x124b000229251c ;
+//    _luidDev = 0x124b000413c8d8 ;
+    
+    
+//    _luidDev = 0x124b0003d4317c;
+//    _luidDev = 0x124b0003d430b7;
+//    _luidDev = 0x124b0002292580;
+//    _luidDev = 0x124b00023f0c6c;
+    _luidDev = 0x124b000257d991;
+    
+    
+    
+    _name4Change = [NSString stringWithFormat:@"%@,%llX",@"NAME1",_luidDev];
+    _name4Change_end = @"NAME2";
+
     
     
     
@@ -64,16 +85,16 @@
     [super tearDown];
 }
 
-static inline void runInMainLoop(void(^block)(BOOL *done)) {
-    __block BOOL done = NO;
-    
-    while (!done) {
-        
-        block(&done);
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
-    }
-}
+//static inline void runInMainLoop(void(^block)(BOOL *done)) {
+//    __block BOOL done = NO;
+//    
+//    while (!done) {
+//        
+//        block(&done);
+//        [[NSRunLoop mainRunLoop] runUntilDate:
+//         [NSDate dateWithTimeIntervalSinceNow:.1]];
+//    }
+//}
 
 
 
@@ -192,6 +213,40 @@ static inline void runInMainLoop(void(^block)(BOOL *done)) {
 
 }
 
+- (void) testFindAllOnline{
+    
+    [self testLogin];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_devService findAllOnlineDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03 useSecond:10];
+        
+        _findOnlineStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_findOnlineStatus > 0) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_findOnlineStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_findOnlineStatus != Fail, @"Find faild");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
 
 
 
@@ -279,6 +334,14 @@ static inline void runInMainLoop(void(^block)(BOOL *done)) {
         
         _findStatus = Fail;
     }
+
+
+}
+
+- (void) finddedAllOnlineDevices:(NSSet *)luidSet{
+
+
+        _findOnlineStatus = Success;
 
 
 }

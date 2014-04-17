@@ -34,6 +34,7 @@
 @interface MQTTPacketManager : NSObject <MosquittoClientDelegate>{
     
     NSMutableDictionary*  _delegates;
+    NSMutableArray*  _allDelegate;
     
 }
 
@@ -42,7 +43,12 @@
 - (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
+/*接受所有的报文*/
+- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+
 - (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
+
+- (void) removePacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
 
 @end

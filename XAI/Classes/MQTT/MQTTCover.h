@@ -35,6 +35,7 @@
 
 + (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 
++ (NSString*) nodeStatusAllTopicWithAPNS:(uint32_t)APNS;
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other;
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t) luid;
@@ -44,6 +45,14 @@
 + (NSString*) nodeCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) serverCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) mobileCtrTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
+
+
++ (BOOL) isNodeTopic:(NSString*)topic;
++ (BOOL) isServerTopic:(NSString*)topic;
+
+/*topic字符串种获取luid 和 apsn*/
++ (uint32_t) nodeTopicAPSN:(NSString*)topic;
++ (uint64_t) nodeTopicLUID:(NSString*)topic;
 
 
 @end

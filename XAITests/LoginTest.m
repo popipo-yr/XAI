@@ -82,16 +82,9 @@
 //    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 //}
 
-static inline void runInMainLoop(void(^block)(BOOL *done)) {
-    __block BOOL done = NO;
-    
-    while (!done) {
-        
-        block(&done);
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
-    }
-}
+
+
+
 
 
 - (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
 
+#define Key_DeviceStatusID  127
 
 @protocol XAIDeviceStatusDelegate;
 @interface  XAIDevice: NSObject <MQTTPacketManagerDelegate>{

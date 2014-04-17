@@ -17,6 +17,7 @@
 #define Fail   2
 #define start  0
 
+
 @interface LoginTest : XCTestCase <XAILoginDelegate>{
     
     NSConditionLock* _lock;
@@ -32,3 +33,13 @@
 
 @end
 
+static  inline void runInMainLoop(void(^block)(BOOL *done)) {
+    __block BOOL done = NO;
+    
+    while (!done) {
+        
+        block(&done);
+        [[NSRunLoop mainRunLoop] runUntilDate:
+         [NSDate dateWithTimeIntervalSinceNow:.1]];
+    }
+}
