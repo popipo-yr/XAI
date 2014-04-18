@@ -38,6 +38,18 @@
     _devSwitch.swiDelegate = self;
     _devSwitch.apsn = 0x1;
     _devSwitch.luid= 0x124b0003d4317c;
+                     
+    
+    //    _luidDev = 0x124b0003d4317c;
+    //    _luidDev = 0x124b0003d430b7;
+    //    _luidDev = 0x124b0002292580;
+    //    _luidDev = 0x124b00023f0c6c;
+    
+//    0x124b0003d431
+//    0x124b00023f0c
+//    0x124b0003d430
+//    0x124b00022925
+    
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
@@ -221,8 +233,24 @@
     if (_loginStatus == Success) {
         
         
+        [_devSwitch setCircuitTwoStatus:XAIDevCircuitStatusOpen];
         
-        [_devSwitch setCircuitOneStatus:XAIDevCircuitStatusOpen];
+        _setTwo = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_setTwo > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_setTwo != start, @"delegate did not get called");
+        XCTAssertTrue (_setTwo != Success, @"set switch two open status not should success");
+        
+        
+        [_devSwitch setCircuitTwoStatus:XAIDevCircuitStatusClose];
         
         
         _setTwo = start;
@@ -237,25 +265,7 @@
         
         
         XCTAssertTrue (_setTwo != start, @"delegate did not get called");
-        XCTAssertTrue (_setTwo != Fail, @"set switch two open status faild");
-        
-        
-        [_devSwitch setCircuitOneStatus:XAIDevCircuitStatusClose];
-        
-        
-        _setTwo = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_setTwo > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
-        XCTAssertTrue (_setTwo != start, @"delegate did not get called");
-        XCTAssertTrue (_setTwo != Fail, @"set switch two close status faild");
+        XCTAssertTrue (_setTwo != Success, @"set switch two close status not should sucess");
         
         
     }else{

@@ -94,7 +94,7 @@
     
     XAITYPEBOOL typeBool =  [self coverCircuitToPacketBOOL:status];
     
-    xai_param_data_set(param_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAITYPEBOOL)
+    xai_param_data_set(param_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL)
                        , &typeBool, NULL);
     
     xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, 0, 0,

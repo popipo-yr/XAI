@@ -233,7 +233,12 @@
 
     uint64_t ret = 0;
     
-    NSString* sub = [topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN+7,LUID_STR_TOTAL_LEN)];
+    int hexSignLen = [@"0x" length];
+    int otherLen = [@"/NODES/" length];
+    
+    
+    NSString* sub = [topic substringWithRange:NSMakeRange(hexSignLen+APNS_STR_TOTAL_LEN+otherLen+hexSignLen,
+                                                          LUID_STR_TOTAL_LEN)];
     
     if (nil != sub){
         

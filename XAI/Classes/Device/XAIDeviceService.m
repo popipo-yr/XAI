@@ -445,9 +445,9 @@
     
     }else if([MQTTCover isNodeTopic:topic]){
     
-       NSNumber* number = [NSNumber numberWithLongLong:[MQTTCover nodeTopicLUID:topic]];
+        NSString* luidStr = [NSString stringWithFormat:@"%llx",[MQTTCover nodeTopicLUID:topic]];
         
-        [_onlineDevices addObject:number];
+        [_onlineDevices addObject:luidStr];
     }
     
     purgePacketParamStatusAndData(status);
