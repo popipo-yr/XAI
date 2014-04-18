@@ -26,6 +26,7 @@ XAITYPELUID  ____luid;
     int _changePWDStatus;
     
     int _findStatus;
+    int _findAllStatus;
     
     NSString* _name4Change;
     NSString* _pwd4Change;
@@ -55,7 +56,7 @@ XAITYPELUID  ____luid;
     _name4Change_end = @"NAME2";
     
     
-    ____luid = 0x102;
+    ____luid = 0x104;
 //    ____luid = [[NSUserDefaults standardUserDefaults] integerForKey:@"LUID"];
 //    
 //    NSDictionary* _dic;
@@ -121,23 +122,23 @@ XAITYPELUID  ____luid;
     }
     
     
-    [_userService finderUserLuidHelper:_name4Change apsn:[MQTT shareMQTT].apsn luid:
-     MQTTCover_LUID_Server_03];
-    
-    _findStatus = start;
-    
-    
-    runInMainLoop(^(BOOL * done) {
-        
-        if (_findStatus > 0) {
-            
-            *done = YES;
-        }
-    });
-    
-    
-    XCTAssertTrue (_findStatus != start, @"delegate did not get called");
-    XCTAssertTrue (_findStatus != Fail, @"add faild");
+//    [_userService finderUserLuidHelper:_name4Change apsn:[MQTT shareMQTT].apsn luid:
+//     MQTTCover_LUID_Server_03];
+//    
+//    _findStatus = start;
+//    
+//    
+//    runInMainLoop(^(BOOL * done) {
+//        
+//        if (_findStatus > 0) {
+//            
+//            *done = YES;
+//        }
+//    });
+//    
+//    
+//    XCTAssertTrue (_findStatus != start, @"delegate did not get called");
+//    XCTAssertTrue (_findStatus != Fail, @"add faild");
 
     
     
@@ -179,12 +180,43 @@ XAITYPELUID  ____luid;
         XCTFail(@"LOGIN FAILD");
     }
     
+}
+
+
+- (void)testFindALL
+{
     
+    [self testLogin];
     
-    
-    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_userService finderAllUserApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        
+        _findAllStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_findAllStatus > 0) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_findAllStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_findAllStatus != Fail, @"Find faild");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
     
 }
+
 
 
 - (void)testChangePWD
@@ -364,6 +396,24 @@ XAITYPELUID  ____luid;
 
     
 }
+
+- (void)findedAllUser:(BOOL)isFinded users:(NSSet *)name{
+
+    if (isFinded == TRUE) {
+        
+        _findAllStatus = Success;
+        
+        
+        //[[NSUserDefaults standardUserDefaults] setInteger:luid forKey:@"LUID"];
+        
+    }else{
+        
+        _findAllStatus = Fail;
+    }
+
+
+}
+
 - (void) findedUser:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name{
 
     if (isFinded == TRUE) {

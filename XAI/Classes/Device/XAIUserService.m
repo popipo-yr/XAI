@@ -204,13 +204,20 @@
 
 - (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
 
-    _usernameFind = username;
+    _usernameFind = [[NSString alloc] initWithString:username];
+    findingAUser = TRUE;
+    
+    [self finderAllUserApsn:apsn luid:luid];
+
+}
+
+- (void) finderAllUserApsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
+
     
     NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:apsn luid:luid other:MQTTCover_UserTable_Other];
-    //@"0x00000001/SERVER/0x0000000000000003/OUT/STATUS/0x01";
     
     [[MQTT shareMQTT].client subscribe:topicStr];
-
+    
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 
 }
@@ -226,45 +233,77 @@
         return -1;
     }
     
+    NSMutableSet* users = [[NSMutableSet alloc] init];
+    
+    BOOL find = FALSE;
+    
     for (int i = 0; i < realCount; i++) {
         
-        BOOL find = FALSE;
+        BOOL findName = FALSE;
         
         _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*3 + 3 -1);
-        if ((data->data_type == XAI_DATA_TYPE_ASCII_TEXT) || data->data_len > 0) {
+        if ((data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
+        
+        NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
+        
+        if (findingAUser && !find && [name isEqualToString:username]) {
             
-            NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
-            
-            if ([name isEqualToString:username]) {
-                
-                find = TRUE;
-            }
+            findName = TRUE;
         }
         
-        if (find) {
+        
+        
+        
+        _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
+        if ((luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
+        
+        XAITYPELUID luid;
+        byte_data_copy(&luid, luid_data->data, sizeof(XAITYPELUID), luid_data->data_len);
+        
+        if (findingAUser && !find && findName) {
             
-            _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
-            if ((luid_data->data_type == XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len > 0) {
+            if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
                 
-                XAITYPELUID luid;
-                byte_data_copy(&luid, luid_data->data, sizeof(XAITYPELUID), luid_data->data_len);
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
-                    
-                    [_delegate findedUser:YES Luid:luid withName:username];
-                }
-                
-                return luid;
+                [_delegate findedUser:YES Luid:luid withName:username];
             }
             
+            find = YES;
+            findingAUser = FALSE;
         }
-    }
-    
-    
-    if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
         
-        [_delegate findedUser:false Luid:-1 withName:username];
+        
+        _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*3 + 1 -1);
+        if ((apsn_data->data_type != XAI_DATA_TYPE_BIN_APSN) || apsn_data->data_len <= 0) break;
+        
+        XAITYPEAPSN apsn;
+        byte_data_copy(&apsn, apsn_data->data, sizeof(XAITYPEAPSN), apsn_data->data_len);
+        
+        
+        XAIUser* aUser = [[XAIUser alloc] init];
+        aUser.apsn = apsn;
+        aUser.luid = luid;
+        aUser.name = name;
+        
+        
+        [users addObject:aUser];
     }
+    
+    if (findingAUser && !find) {
+        
+        if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
+            
+            [_delegate findedUser:false Luid:-1 withName:username];
+        }
+        
+        findingAUser = FALSE;
+
+    }
+    
+    if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedAllUser:users:)]) {
+        
+        [_delegate findedAllUser:YES users:users];
+    }
+    
     
     return -1;
     

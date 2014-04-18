@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
+#import "XAIUser.h"
 
 @protocol XAIUserServiceDelegate <NSObject>
 
@@ -16,6 +17,9 @@
 - (void) delUser:(BOOL) isSuccess;
 - (void) changeUserName:(BOOL) isSuccess;
 - (void) changeUserPassword:(BOOL)isSuccess;
+
+@optional
+- (void) findedAllUser:(BOOL) isFinded users:(NSSet*) name;
 
 
 
@@ -26,6 +30,7 @@
 {
 
     NSString* _usernameFind;
+    BOOL findingAUser;
 }
 
 @property (nonatomic,weak) id<XAIUserServiceDelegate> delegate;
@@ -43,5 +48,7 @@
 
 
 - (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+
+- (void) finderAllUserApsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid;
 
 @end
