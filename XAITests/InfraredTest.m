@@ -31,6 +31,9 @@
     _din = [[XAIDevInfrared alloc] init];
     _din.delegate = self;
     _din.infDelegate = self;
+    
+    _din.apsn = 0x1;
+    _din.luid = 0x124b0002292580;
     [super setUp];
 
     // Put setup code here. This method is called before the invocation of each test method in the class.

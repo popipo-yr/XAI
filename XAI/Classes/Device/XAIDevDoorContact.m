@@ -116,7 +116,7 @@
             [_dcDelegate doorContactStatusGetSuccess:isSuccess curStatus:curStatus];
         }
         
-        [[MQTT shareMQTT].packetManager removeObserver:self forKeyPath:
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID]];
         
         

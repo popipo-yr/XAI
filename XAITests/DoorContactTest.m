@@ -29,6 +29,13 @@
     _ddc = [[XAIDevDoorContact alloc] init];
     _ddc.delegate = self;
     _ddc.dcDelegate = self;
+    
+    _ddc.apsn = 0x1;
+    _ddc.luid = 0x124b0002292580;
+    //    _luidDev = 0x124b0003d430b7;
+    //    _luidDev = 0x124b0002292580;
+    //    _luidDev = 0x124b00023f0c6c;
+    
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
