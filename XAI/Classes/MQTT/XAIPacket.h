@@ -153,6 +153,14 @@ extern "C" {
     
     
     /**
+     @to-do:   swap a unsigned data
+     @param : to -  swap data's address
+              size - swap data's size
+     @return: void
+     */
+    void SwapBytes(void* to, size_t size);
+    
+    /**
      @to-do:   generate guid from apsn and luid
      @param:   apsn - APSN
      luid - local unique identify

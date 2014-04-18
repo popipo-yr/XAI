@@ -100,15 +100,6 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     }
     
     
-    //        XAI_DATA_TYPE_ASCII_TEXT = 0,//	字符串数据
-    //        XAI_DATA_TYPE_BIN_ANGLE = 1,//	角度数据(0-360)
-    //        XAI_DATA_TYPE_BIN_PERCENT = 2,//	百分比数据(0-100)
-    //        XAI_DATA_TYPE_BIN_DATE = 3,//	时间数据(毫秒从1970.1.1)
-    //        XAI_DATA_TYPE_BIN_BOOL = 4,//	布尔数据
-    //        XAI_DATA_TYPE_BIN_DIGITAL_SIGN = 5, //	有符号数字
-    //        XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 6, //	无符号数字
-    //        XAI_DATA_TYPE_BIN_APSN = 7,	//设备编号
-    //        XAI_DATA_TYPE_BIN_LUID = 8, //	本地唯一编号
     
     /*type  大端 小端转化*/
     
@@ -117,56 +108,14 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     packet_to_param_helper(in_data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
     
     
-    int key = ctrl_param_data->data_type;
     
     if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type) {
         
-        if (ctrl_param_data->data_len == 4) {
-            
-            key = XAI_DATA_TYPE_BIN_APSN;
-        }else if(ctrl_param_data->data_len == 8){
-        
-        
-            key = XAI_DATA_TYPE_BIN_LUID;
-        }
-        
+        SwapBytes(in_data, ctrl_param_data->data_len);
     }
     
     
-    switch (key) {
-        case XAI_DATA_TYPE_BIN_APSN:
-        {
-            
-            XAITYPEAPSN apsn = 0;
-            memcpy(&apsn, in_data, sizeof(XAITYPEAPSN));
-            
-            apsn = CFSwapInt32(apsn);
-            
-            memcpy(in_data, &apsn, sizeof(XAITYPEAPSN));
-            
-        
-        }
-            break;
-            
-        case XAI_DATA_TYPE_BIN_LUID:
-        {
-            XAITYPELUID luid = 0;
-            memcpy(&luid, in_data, sizeof(XAITYPELUID));
-            
-            luid = CFSwapInt64(luid);
-            
-            memcpy(in_data, &luid, sizeof(XAITYPELUID));
-        
-        }
-            break;
-            
-        default:{
-        
-            
-        
-        }break;
-    }
-
+   
     
     //unfixed
     ctrl_param_data->data = malloc(ctrl_param_data->data_len);
@@ -208,17 +157,6 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
     
     if (NULL != ctrl_param_data->data) {
         
-//        ctrl_data->data_load = malloc(ctrl_param_data->data_len);
-//        memset(ctrl_data->data_load, 0, ctrl_param_data->data_len);
-//        memcpy(ctrl_data->data_load, ctrl_param_data->data, ctrl_param_data->data_len);
-//        
-//        param_to_packet_helper(payload, ctrl_param_data->data, _XPPS_CD_FIXED_ALL
-//                               , _XPPS_CD_FIXED_ALL+ctrl_param_data->data_len);
-//        
-//        memcpy(payload+pos, ctrl_param_data->data, ctrl_param_data->data_len);
-//        
-//        pos +=  ctrl_param_data->data_len;
-        
         
         /*type  大端 小端转化*/
         
@@ -227,60 +165,11 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
         memcpy(in_data, ctrl_param_data->data, ctrl_param_data->data_len);
         
         
-        int key = ctrl_param_data->data_type;
-        
         if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type) {
             
-            if (ctrl_param_data->data_len == 4) {
-                
-                key = XAI_DATA_TYPE_BIN_APSN;
-            }else if(ctrl_param_data->data_len == 8){
-                
-                
-                key = XAI_DATA_TYPE_BIN_LUID;
-            }
             
-        }
-        
-        
-        switch (key) {
-            case XAI_DATA_TYPE_BIN_APSN:
-            {
-                if (ctrl_param_data->data_len == 4) {
-                    
-                    XAITYPEAPSN apsn = 0;
-                    memcpy(&apsn, in_data, sizeof(XAITYPEAPSN));
-                    
-                    apsn = CFSwapInt32(apsn);
-                    
-                    memcpy(in_data, &apsn, sizeof(XAITYPEAPSN));
-                    
-                }
-            }
-                break;
-                
-            case XAI_DATA_TYPE_BIN_LUID:
-            {
-                if (ctrl_param_data->data_len == 8) {
-                    
-                    XAITYPELUID luid = 0;
-                    memcpy(&luid, in_data, sizeof(XAITYPELUID));
-                    
-                    luid = CFSwapInt64(luid);
-                    
-                    memcpy(in_data, &luid, sizeof(XAITYPELUID));
-                    
-
-                }
-                
-            }
-                break;
-                
-            default:{
-                
-                
-                
-            }break;
+            SwapBytes(in_data, ctrl_param_data->data_len);
+            
         }
         
         
@@ -430,6 +319,28 @@ void purgePacket(_xai_packet* packet){
     
 }
 
+void SwapBytes(void* to, size_t size){
+
+    if (NULL == to) return;
+    
+    void* temp = malloc(size);
+    memcpy(temp, to, size);
+    
+    
+    for (int i = 0; i < size / 2; i++) {
+        
+        Byte aByte = *((Byte*)(temp + i));
+        *((Byte*)(temp + i)) = *((Byte*)(temp + size - i - 1));
+        *((Byte*)(temp + size - i - 1)) = aByte;
+    }
+    
+    memcpy(to, temp, size);
+    free(temp);
+    temp = NULL;
+    
+    //free(to);
+    //to = temp;
+}
 
 #pragma mark --GUID
 

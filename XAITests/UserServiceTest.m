@@ -49,13 +49,13 @@ XAITYPELUID  ____luid;
     _userService.delegate = self;
     
     
-    _name4Change = @"NAME2";
+    _name4Change = @"NAME22";
     _pwd4Change = @"PWD1";
     _pwd4Change_end = @"PWD2";
     _name4Change_end = @"NAME2";
     
     
-    ____luid = 0x118;
+    ____luid = 0x102;
 //    ____luid = [[NSUserDefaults standardUserDefaults] integerForKey:@"LUID"];
 //    
 //    NSDictionary* _dic;

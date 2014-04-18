@@ -137,7 +137,7 @@
             
             if ((data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
             
-            int power; /*获取的电量为电量百分比乘以十*/
+            int power = 0; /*获取的电量为电量百分比乘以十*/
             
             byte_data_copy(&power, data->data, sizeof(int), data->data_len);
             

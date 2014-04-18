@@ -194,6 +194,35 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
     
 }
 
+- (void) testSwap{
+
+    XAITYPEAPSN apsn = 0x111122;
+    SwapBytes(&apsn, sizeof(XAITYPEAPSN));
+    
+    XAITYPELUID luid = 0x2234242;
+    SwapBytes(&luid, sizeof(XAITYPELUID));
+    
+    uint8_t st[] = {0x22,0x33,0x77,0xff,0xee,0x11,0x32};
+    SwapBytes(st , sizeof(st));
+    
+    NSLog(@"");
+    
+    int power = 0; /*获取的电量为电量百分比乘以十*/
+    
+    Byte s = 0x44;
+    
+    byte_data_copy(&power, &s , sizeof(int), sizeof(Byte));
+    
+    XCTAssertTrue(power == 0x44, @"true");
+    
+    power = 0x45455;
+    
+    byte_data_copy(&s, &power , sizeof(Byte), sizeof(int));
+    
+    XCTAssertTrue(s  == 0x55, @"true");
+
+}
+
 - (void) helper{
 
     MosquittoMessage* aM = [[MosquittoMessage alloc] init];

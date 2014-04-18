@@ -230,19 +230,7 @@
         
         byte_data_copy(&isOpen, data->data, sizeof(XAITYPEBOOL), data->data_len);
         
-        if (isOpen == XAITYPEBOOL_TRUE) {
-            
-            curStatus = XAIDevCircuitStatusOpen;
-            
-        }else if(isOpen == XAITYPEBOOL_FALSE){
-            
-            curStatus = XAIDevCircuitStatusClose;
-            
-        }else{
-            
-            break;
-            
-        }
+        curStatus = [self coverPacketBOOLToCircuit:isOpen];
         
         isSuccess = true;
         
