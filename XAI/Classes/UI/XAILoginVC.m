@@ -23,12 +23,28 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [passwordLabel setText:nil];
+    [passwordLabel setSecureTextEntry:YES];
+    [passwordLabel setPlaceholder:@"密码"];
+    
+    
+    [nameLabel setText:nil];
+    [nameLabel setPlaceholder:@"用户名"];
+    
+    
+    [MQTT shareMQTT].apsn = 0x1;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
@@ -39,17 +55,28 @@
     
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated{
     
-    [passwordLabel setText:nil];
-    [passwordLabel setSecureTextEntry:YES];
-    [passwordLabel setPlaceholder:@"mima"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:Nil];
     
     
-    [nameLabel setText:nil];
-    [nameLabel setPlaceholder:@"your name"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:Nil];
     
     
-    [MQTT shareMQTT].apsn = 0x1;
+    
+    
+    [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+
+
+    [super viewDidDisappear:animated];
 }
 
 
@@ -66,30 +93,16 @@
 }
 
 
+#define  moveLength  90
 
 - (void)keyboardWillShow:(NSNotification *)notif {
     
     CGPoint  oldPoint = self.view.center;
     
-    
-//    if (self.view.hidden == YES) {
-//        return;
-//    }
-    
-//    CGRect rect = [[notif.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-//    CGFloat y = rect.origin.y;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
-//    NSArray *subviews = [self.view subviews];
-//    for (UIView *sub in subviews) {
-//        
-//        CGFloat maxY = CGRectGetMaxY(sub.frame);
-//        if (maxY > y - 2) {
-//            sub.center = CGPointMake(CGRectGetWidth(self.view.frame)/2.0, sub.center.y - maxY + y - 2);
-//        }
-//    }
     
-    self.view.center = CGPointMake(oldPoint.x , oldPoint.y - 120);
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y - moveLength);
     
     [UIView commitAnimations];
 }
@@ -104,7 +117,7 @@
     [UIView setAnimationDuration:0.25];
 
     
-    self.view.center = CGPointMake(oldPoint.x , oldPoint.y + 120);
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y + moveLength);
 
 }
 
@@ -117,36 +130,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-static int i = 0;
 
 - (IBAction)loginBtnClick:(id)sender{
     
-    if (i == 0) {
-        
-        i = 5;
-        _login = [[XAILogin alloc] init];
-        [_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
-    
-    }else if(i == 5) {
-        
-        i = 7;
-        //[[MQTT shareMQTT].client subscribe:@"/0/server/3"];
-        
-        [[MQTT shareMQTT].client subscribe:@"0x00000001/SERVER/0x0000000000000003/OUT/+"];
-        [[MQTT shareMQTT].client subscribe:@"0x00000001/MOBILES/0x0000000000000001/IN"];
-        //[[MQTT shareMQTT].client subscribe:[MQTTCover serverStatusTopicWithAPNS:0 luid:1 other:1]];
-        //[[MQTT shareMQTT].client subscribe:[MQTTCover mobileStatusTopicWithAPNS:0 luid:1 other:1]];
-        
-    }else{
-    
-       // APServerNode* node = [[APServerNode alloc] init];
-       // [node addUser:@"testname" Password:@"password"];
 
-        XAIUserService* userService = [[XAIUserService alloc] init];
-        [userService addUser:@"abc" Password:@"bbc" apsn:0x00000001 luid:0x3];
+    _login = [[XAILogin alloc] init];
+    _login.delegate = self;
     
-    }
-    
+    [_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
+
 
     
     
@@ -154,6 +146,13 @@ static int i = 0;
     
 
 //[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XAIMainPage"] animated:YES completion:nil];
+}
+
+- (void)loginFinishWithStatus:(BOOL)status{
+
+    [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:Nil];
+    _login = Nil;
+    
 }
 
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XAILogin.h"
 
-@interface XAILoginVC : UIViewController{
+@interface XAILoginVC : UIViewController <XAILoginDelegate>{
 
 
     XAILogin*  _login;
