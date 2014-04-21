@@ -45,6 +45,7 @@
     }
     
      //self.tabBarItem.selectedImage = [UIImage imageNamed:name];
+    
 }
 
 - (void)didReceiveMemoryWarning

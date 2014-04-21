@@ -8,8 +8,9 @@
 
 #import "DeviceShowVC.h"
 #import "DeviceShowCell.h"
+#import "XAIObject.h"
 
-#define  constRect  CGRectMake(0, 0, 320, 50)
+#define  constRect  CGRectMake(0, 0, 320, 0)
 
 @interface DeviceShowVC ()
 
@@ -22,8 +23,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        _deviceService = [[XAIDeviceService alloc] init];
+        _deviceService.delegate = self;
+        _activityView = [[UIActivityIndicatorView alloc] init];
     }
     return self;
+}
+
+- (void) dealloc{
+
+    _deviceService.delegate = nil;
+    _deviceService = nil;
+    _activityView = nil;
+
 }
 
 - (void)viewDidLoad
@@ -31,12 +44,31 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [self.navigationController.navigationBar setBarTintColor:
+     [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+    view.backgroundColor=[UIColor whiteColor];
+    [self.navigationController.view  addSubview:view];
+
+    CGRect rx = [ UIScreen mainScreen ].bounds;
     
-    //self.tableView.contentInset = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0);
-    //self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0);
+    _activityView = [[UIActivityIndicatorView alloc] init];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
+    _activityView.hidesWhenStopped = YES;
+    
+    [_activityView startAnimating];
+
+    
+    [_deviceService findAllDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+    
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -161,6 +193,54 @@
     
     return nil;
 }
+
+#pragma mark -- DeviceServiceDelegate
+- (void) findedAllDevice:(BOOL)isSuccess datas:(NSArray *)devAry{
+    
+    
+    NSMutableArray* objects = [[NSMutableArray alloc] init];
+    
+    if (isSuccess == TRUE) {
+        
+        for (int i = 0; i < [devAry count]; i++) {
+            
+            XAIDevice* device = [devAry objectAtIndex:i];
+            
+            if (nil != device && [device isKindOfClass:[XAIDevice class]]) {
+                
+                
+                
+                XAIObject* aObj = [[XAIObject alloc] init]; /*灯，门*/
+                
+                aObj.type = 22; /*?????这里是从device获取,灯，门,还是本地记录,远处获取*/
+                
+                aObj.groupId = 22; /*本地数据判断  guid 与 groupid 的对应表*/
+                aObj.apsn = device.apsn;
+                aObj.luid = device.luid;
+                
+                [objects addObject:aObj];
+             
+                
+            }
+        }
+        
+       
+    }else{
+        
+        NSLog(@"find error");
+    }
+    
+    
+    [_activityView stopAnimating];
+    
+}
+
+- (void) finddedAllOnlineDevices:(NSSet *)luidSet{
+    
+    
+    
+}
+
 
 
 

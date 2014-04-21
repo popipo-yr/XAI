@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MQTT.h"
+#import "XAIObject.h"
+
+#define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? YES : NO)
+
 
 @interface XAIAppDelegate : UIResponder <UIApplicationDelegate>{
 

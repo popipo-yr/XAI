@@ -13,6 +13,8 @@
 
 
     XAILogin*  _login;
+    
+    UIActivityIndicatorView* _activityView;
 }
 
 

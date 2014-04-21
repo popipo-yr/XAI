@@ -133,6 +133,18 @@
 
 - (IBAction)loginBtnClick:(id)sender{
     
+     CGRect rx = [ UIScreen mainScreen ].bounds;
+    
+    _activityView = [[UIActivityIndicatorView alloc] init];
+    
+    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
+    _activityView.hidesWhenStopped = YES;
+    
+    [_activityView startAnimating];
+    
+    [self.view addSubview:_activityView];
 
     _login = [[XAILogin alloc] init];
     _login.delegate = self;
@@ -149,10 +161,13 @@
 }
 
 - (void)loginFinishWithStatus:(BOOL)status{
-
-    [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:Nil];
-    _login = Nil;
     
+
+    [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
+    _login = nil;
+    
+    [_activityView stopAnimating];
+    _activityView = nil;
 }
 
 @end

@@ -19,15 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        // iOS 7
-        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-    } else {
-        // iOS 6
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-    }
+    [XAIObjectGroupManager shareManager];
     
     [self initializeStoryBoardBasedOnScreenSize];
     
@@ -42,6 +35,7 @@
     
     [[MQTT shareMQTT] setClient:_mosquittoClient];
     [[MQTT shareMQTT] setPacketManager:_mqttPacketManager];
+    
     
     
     return YES;
@@ -60,6 +54,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
+    [[XAIObjectGroupManager shareManager] save];
     [_mosquittoClient disconnect];
 }
 
@@ -78,7 +73,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    
+    [[XAIObjectGroupManager shareManager] save];
     [_mosquittoClient disconnect];
 }
 

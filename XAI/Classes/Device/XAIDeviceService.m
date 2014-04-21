@@ -11,6 +11,7 @@
 #import "XAIPacketStatus.h"
 #import "XAIPacketCtrl.h"
 #import "XAIPacketACK.h"
+#import "XAIPacketDevTypeInfo.h"
 
 #define 	AddDevID	5
 #define	DelDevID	6
@@ -178,7 +179,8 @@
         NSScanner* scanner = [NSScanner scannerWithString:obj];
         [scanner scanHexLongLong:&luid];
         
-        NSString* topic = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
+        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:luid];
+        //[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
         
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
         [[MQTT shareMQTT].client unsubscribe:topic];
@@ -206,7 +208,8 @@
         NSScanner* scanner = [NSScanner scannerWithString:obj];
         [scanner scanHexLongLong:&luid];
         
-        NSString* topic = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
+        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:luid];
+        //[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
         
         [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
         [[MQTT shareMQTT].client subscribe:topic];
@@ -322,7 +325,7 @@
     }
     
     
-    if (_bFinding) {/*查找在线的用户*/
+    if (_bFinding) {/*查找在线的设备*/
         
         [self startFindOnline];
         
@@ -453,6 +456,22 @@
     purgePacketParamStatusAndData(status);
 }
 
+- (void) reciveDevPacket:(void*)datas size:(int)size topic:topic{
+    
+    _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
+    
+    
+  if([MQTTCover isNodeTopic:topic]){
+        
+        NSString* luidStr = [NSString stringWithFormat:@"%llx",[MQTTCover nodeTopicLUID:topic]];
+        
+        [_onlineDevices addObject:luidStr];
+    }
+    
+    purgePacketParamDTI(dti);
+}
+
+
 
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
     
@@ -471,6 +490,13 @@
         {
             [self reciveStatusPacket:datas size:size topic:topic];
             
+        }break;
+            
+        case XAI_PKT_TYPE_DEV_INFO_REPLY:
+        {
+            
+            [self reciveDevPacket:datas size:size topic:topic];
+        
         }break;
             
         default:

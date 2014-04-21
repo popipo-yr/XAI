@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XAIDeviceService.h"
 
-@interface DeviceShowVC : UITableViewController <UITableViewDelegate,UITableViewDataSource>
+@interface DeviceShowVC : UITableViewController
+<UITableViewDelegate,UITableViewDataSource,XAIDeviceServiceDelegate>{
+
+    XAIDeviceService* _deviceService;
+    
+    
+    
+    //ui
+    
+    UIActivityIndicatorView* _activityView;
+
+}
 
 
 //@property (retain,atomic) IBOutlet  UITableView* tableView;
