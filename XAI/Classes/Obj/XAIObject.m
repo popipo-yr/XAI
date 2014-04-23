@@ -8,6 +8,34 @@
 
 #import "XAIObject.h"
 
+@implementation XAIObject
+
+- (void) initDev{};
+
++ (NSString*) typeImageName:(XAIObjectType)type{
+    
+   __autoreleasing NSString* imgNameStr = nil;
+    
+    switch (type) {
+        case XAIObjectType_door:{
+        
+            imgNameStr = @"obj_door";
+        }
+            break;
+        case XAIObjectType_light:{
+        
+            imgNameStr = @"obj_light";
+        
+        } break;
+            
+        default:
+            break;
+    }
+    
+    return imgNameStr;
+}
+@end
+
 @implementation XAIObjectGroup
 
 - (id)initWithID:(XAIGOURPID)curId members:(NSArray*)members{
@@ -58,9 +86,7 @@
 
 XAIObjectGroupManager* _staic_XAIObjectGroupManager = Nil;
 
-@implementation XAIObject
 
-@end
 
 @implementation XAIObjectGroupManager
 

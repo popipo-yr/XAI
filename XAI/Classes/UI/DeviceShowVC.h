@@ -14,7 +14,7 @@
 
     XAIDeviceService* _deviceService;
     
-    
+    NSMutableArray*  _deviceDatas; /*XAIObject数组*/
     
     //ui
     

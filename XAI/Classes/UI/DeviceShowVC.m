@@ -9,6 +9,8 @@
 #import "DeviceShowVC.h"
 #import "DeviceShowCell.h"
 #import "XAIObject.h"
+#import "XAILight.h"
+#import "DeviceShowStatusVC.h"
 
 #define  constRect  CGRectMake(0, 0, 320, 0)
 
@@ -18,15 +20,36 @@
 
 @implementation DeviceShowVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id) initWithCoder:(NSCoder *) coder{
+    
+    self = [super initWithCoder:coder];
+
     if (self) {
         // Custom initialization
         
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.delegate = self;
         _activityView = [[UIActivityIndicatorView alloc] init];
+        
+        _deviceDatas = [[NSMutableArray alloc] init];
+        
+        XAILight* obj1 = [[XAILight alloc] init];
+        obj1.apsn = 0x01;
+        obj1.luid = 0x123;
+        obj1.type = XAIObjectType_light;
+        obj1.lastOpr = @"Mr.O open light at 00.0.2";
+        obj1.name = @"客厅大灯";
+        
+        
+        XAILight* obj2 = [[XAILight alloc] init];
+        obj2.apsn = 0x01;
+        obj2.luid = 0x123;
+        obj2.type = XAIObjectType_door;
+        obj2.lastOpr = @"Mr.O close door at 00.0.2";
+        obj2.name = @"主卧门";
+        
+        [_deviceDatas addObject:obj1];
+        [_deviceDatas addObject:obj2];
     }
     return self;
 }
@@ -36,6 +59,8 @@
     _deviceService.delegate = nil;
     _deviceService = nil;
     _activityView = nil;
+    
+    _deviceDatas = nil;
 
 }
 
@@ -44,13 +69,21 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //设置statusbar
     [self.navigationController.navigationBar setBarTintColor:
      [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
 
     UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
     view.backgroundColor=[UIColor whiteColor];
-    [self.navigationController.view  addSubview:view];
+    
+    //[self.navigationController.view  addSubview:view];
+    [self.tabBarController.view addSubview:view];
 
+    
+    // 设置通明
+     [self setExtraCellLineHidden:self.tableView];
+    
+    
     CGRect rx = [ UIScreen mainScreen ].bounds;
     
     _activityView = [[UIActivityIndicatorView alloc] init];
@@ -68,7 +101,13 @@
     
 }
 
-
+- (void)setExtraCellLineHidden: (UITableView *)tableView{
+    
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+    [tableView setTableHeaderView:view];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -124,9 +163,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    
+    if ([_deviceDatas count] > 0) {
+
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }else{
+    
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
 
     
-    return 3;
+    return [_deviceDatas count];
     
 
 }
@@ -144,52 +191,40 @@
                 reuseIdentifier:CellIdentifier];
     }
     
+    XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
     
-    [cell.imageView setBackgroundColor:[UIColor redColor]];
-    [cell.imageView setImage:nil];
-    [cell.nameLable setText:[NSString stringWithFormat:@"名字"]];
-    [cell.contextLable setText:[NSString stringWithFormat:@"最后一次操作纪录"]];
+    if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
+        
+        [cell.imageView setBackgroundColor:[UIColor clearColor]];
+        [cell.imageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
+        [cell.nameLable setText:aObj.name];
+        [cell.contextLable setText:aObj.lastOpr];
+        
+    }
     
-    // Configure the cell...
     return cell;
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CustomCellIdentifier = @"CustomCellIdentifier";
-//    
-//    static BOOL nibsRegistered = NO;
-//    if (!nibsRegistered) {
-//        UINib *nib = [UINib nibWithNibName:@"CustomCell" bundle:nil];
-//        [tableView registerNib:nib forCellReuseIdentifier:CustomCellIdentifier];
-//        nibsRegistered = YES;
-//    }
-//    
-//    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomCellIdentifier];
-//    
-//    
-//    //NSUInteger row = [indexPath row];
-//    //NSDictionary *rowData = [self.dataList objectAtIndex:row];
-//    
-//    //cell.name = [rowData objectForKey:@"name"];
-//    //cell.dec = [rowData objectForKey:@"dec"];
-//    //cell.loc = [rowData objectForKey:@"loc"];
-//    //cell.image = [imageList objectAtIndex:row];
-//    
-//    return cell;
-//}
 
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return 63.0;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+
+    if ([indexPath row] < [_deviceDatas count]) {
+        
+        XAIObject* obj = [_deviceDatas objectAtIndex:[indexPath row]];
+        
+        [self.navigationController pushViewController:
+         [DeviceShowStatusVC statusWithObject:obj storyboard:self.storyboard] animated:YES];
+        
+    }
     
-//    UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
-//    [tableView setTableFooterView:v];
     
     return nil;
 }

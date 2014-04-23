@@ -20,13 +20,27 @@ typedef enum XAIObjectType{
 typedef int  XAIGOURPID;
 
 
-@interface XAIObject : NSObject
+@interface XAIObject : NSObject{
+    
+    NSString* _name;
+    XAIObjectType _type; /*类别,门，窗，灯?*/
+    XAIGOURPID _groupId; /*分组使用*/
+    XAITYPEAPSN _apsn;
+    XAITYPELUID _luid;
+    NSString* _lastOpr; /*最后一次操作*/
+    
+}
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, assign) XAIObjectType type; /*类别,门，窗，灯?*/
 @property (nonatomic, assign) XAIGOURPID groupId; /*分组使用*/
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;
+@property (nonatomic, strong) NSString* lastOpr; /*最后一次操作*/
+
+- (void) initDev; /*初始化设备*/
+
++ (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
 
 @end
 
