@@ -16,6 +16,8 @@
     
     _light.delegate = self;
     
+    [self.navigationItem setTitle:_light.name];
+    
     [self.view addSubview:_activityView];
     [_activityView startAnimating];
     
@@ -34,42 +36,26 @@
     [anInvocation setArgument:&status atIndex:2];
     
     [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
+    
+    
+    XAIObjectOpr* opr1 = [[XAIObjectOpr alloc] init];
+    opr1.opr = @"水水开了灯";
+    opr1.time = @"8:39  03/23";
+    
+    
+    XAIObjectOpr* opr2 = [[XAIObjectOpr alloc] init];
+
+    
+    NSArray* ary = [[NSArray alloc] initWithObjects:opr1,opr2,nil];
+    _oprDatasAry = ary;
+    
+    self.factoryLabel.text = @"成都xxx工厂";
+    self.modelLabel.text = @"JUNENNDENG-8390F";
+    
+    
 }
 
 
-- (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer{
-    
-    CGRect curframe = self.view.frame;
-    
-    self.secondView.frame = CGRectMake(curframe.size.width*0.5f * 1.5
-                                       ,0
-                                       ,self.secondView.frame.size.width
-                                       ,self.secondView.frame.size.height);
-
-    [self.view addSubview:self.secondView];
-    
-    self.secondView.alpha = 0.0f;
-    [UIView beginAnimations:@"fadeIn" context:nil];
-    [UIView setAnimationDuration:0.5f];
-    //[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:NO];
-   
-    //[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-
-    self.secondView.alpha = 1.0f;
-    
-    
-    
-    
-    self.secondView.frame = CGRectMake(curframe.size.width*0.5f
-                                       ,0
-                                       ,self.secondView.frame.size.width
-                                       ,self.secondView.frame.size.height);
-
-    
-    
-    
-    [UIView commitAnimations];
-}
 
 #pragma mark - IBOUT
 

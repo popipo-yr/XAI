@@ -36,6 +36,10 @@
 }
 @end
 
+@implementation XAIObjectOpr
+
+@end
+
 @implementation XAIObjectGroup
 
 - (id)initWithID:(XAIGOURPID)curId members:(NSArray*)members{

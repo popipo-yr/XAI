@@ -45,6 +45,13 @@ typedef int  XAIGOURPID;
 @end
 
 
+@interface XAIObjectOpr : NSObject
+
+@property (nonatomic, strong) NSString* opr;
+@property (nonatomic, strong) NSString* time;
+
+@end
+
 
 #define XAIGOURPID_DEFAULT 0
 

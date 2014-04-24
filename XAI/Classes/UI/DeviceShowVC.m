@@ -94,6 +94,10 @@
     _activityView.hidesWhenStopped = YES;
     
     [_activityView startAnimating];
+    
+    //back
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backItem];
 
     
     [_deviceService findAllDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
@@ -107,6 +111,11 @@
     view.backgroundColor = [UIColor clearColor];
     [tableView setTableFooterView:view];
     [tableView setTableHeaderView:view];
+    
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]){
+        
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
 - (void)didReceiveMemoryWarning
