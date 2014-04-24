@@ -195,8 +195,8 @@
     
     if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
         
-        [cell.imageView setBackgroundColor:[UIColor clearColor]];
-        [cell.imageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
+        [cell.headImageView setBackgroundColor:[UIColor clearColor]];
+        [cell.headImageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
         [cell.nameLable setText:aObj.nickName];
         [cell.contextLable setText:aObj.name];
         
@@ -233,6 +233,8 @@
         
         [self.navigationController  pushViewController:vc animated:YES];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
 }
 

@@ -237,6 +237,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contextLable" destination="Ngv-Wm-RFH" id="VRT-sU-saR"/>
+                                    <outlet property="headImageView" destination="vA9-gV-7D8" id="VcK-Hg-de7"/>
                                     <outlet property="imageView" destination="vA9-gV-7D8" id="pV3-5R-b4a"/>
                                     <outlet property="nameLable" destination="umo-Z6-R4r" id="sgD-rB-9xB"/>
                                 </connections>
@@ -476,6 +477,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contextLable" destination="PmO-lZ-bjQ" id="rAF-bx-gVn"/>
+                                    <outlet property="headImageView" destination="mEK-PS-vtV" id="UvC-26-3lr"/>
                                     <outlet property="imageView" destination="mEK-PS-vtV" id="SID-hN-eWp"/>
                                     <outlet property="nameLable" destination="hH2-ko-4p2" id="AaJ-ep-5fT"/>
                                 </connections>

@@ -10,7 +10,7 @@
 
 @interface ManageCell : UITableViewCell <UIGestureRecognizerDelegate>
 
-@property (nonatomic,strong)  IBOutlet UIImageView*  imageView;
+@property (nonatomic,strong)IBOutlet UIImageView* headImageView;
 @property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
 @property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
 
