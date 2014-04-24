@@ -13,7 +13,7 @@
 #import "XAIObject.h"
 #import "XAIChangeNameVC.h"
 
-@interface ManageVC : XAITableViewController
+@interface XAIDevManageVC : XAITableViewController
 <UITableViewDelegate,UITableViewDataSource,ZBarReaderDelegate,XAIDeviceServiceDelegate>{
 
     XAIDeviceService* _deviceService;

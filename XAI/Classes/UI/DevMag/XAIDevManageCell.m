@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "ManageCell.h"
+#import "XAIDevManageCell.h"
 
-@implementation ManageCell
+@implementation XAIDevManageCell
 
 
 - (void)panAction:(id)sender{

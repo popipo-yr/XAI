@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "DevAddViewController.h"
+#import "XAIDevAddVC.h"
 #import "XAIObject.h"
 
-@interface DevAddViewController ()
+@interface XAIDevAddVC ()
 
 @end
 
-@implementation DevAddViewController
+@implementation XAIDevAddVC
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder{

@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "DeviceShowStatusVC.h"
+#import "XAIDevShowStatusVC.h"
 #import "XAILight.h"
 #import "XAILightStatusVC.h"
 
-@implementation DeviceShowStatusVC
+@implementation XAIDevShowStatusVC
 
-+ (DeviceShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard {
++ (XAIDevShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard {
 
     switch (aObj.type) {
         case XAIObjectType_light:{
@@ -201,10 +201,10 @@
 {
     static NSString *CellIdentifier = @"DeviceShowStatusVCCellID";
     
-    DeviceShowStatusVCCell *cell = [tableView
+    XAIDevShowStatusVCCell *cell = [tableView
                             dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[DeviceShowStatusVCCell alloc]
+        cell = [[XAIDevShowStatusVCCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:CellIdentifier];
     }
@@ -230,6 +230,6 @@
 
 @end
 
-@implementation DeviceShowStatusVCCell
+@implementation XAIDevShowStatusVCCell
 
 @end

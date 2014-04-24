@@ -6,19 +6,19 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "DeviceShowVC.h"
-#import "DeviceShowCell.h"
+#import "XAIDevShowVC.h"
+#import "XAIDevShowCell.h"
 #import "XAIObject.h"
 #import "XAILight.h"
-#import "DeviceShowStatusVC.h"
+#import "XAIDevShowStatusVC.h"
 
 #define  constRect  CGRectMake(0, 0, 320, 0)
 
-@interface DeviceShowVC ()
+@interface XAIDevShowVC ()
 
 @end
 
-@implementation DeviceShowVC
+@implementation XAIDevShowVC
 
 - (id) initWithCoder:(NSCoder *) coder{
     
@@ -160,10 +160,10 @@
 {
     static NSString *CellIdentifier = @"DeviceShowCellIdentifier";
     
-    DeviceShowCell *cell = [tableView
+    XAIDevShowCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[DeviceShowCell alloc]
+        cell = [[XAIDevShowCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:CellIdentifier];
     }
@@ -198,7 +198,7 @@
         XAIObject* obj = [_deviceDatas objectAtIndex:[indexPath row]];
         
         [self.navigationController pushViewController:
-         [DeviceShowStatusVC statusWithObject:obj storyboard:self.storyboard] animated:YES];
+         [XAIDevShowStatusVC statusWithObject:obj storyboard:self.storyboard] animated:YES];
         
     }
     

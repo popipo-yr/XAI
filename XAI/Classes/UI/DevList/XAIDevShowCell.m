@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "DeviceShowCell.h"
+#import "XAIDevShowCell.h"
 
-@implementation DeviceShowCell
+@implementation XAIDevShowCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

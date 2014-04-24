@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "UserVC.h"
+#import "XAISetVC.h"
 
-@interface UserVC ()
+@interface XAISetVC ()
 
 @end
 
-@implementation UserVC
+@implementation XAISetVC
 
 
 - (id) initWithCoder:(NSCoder *) coder{

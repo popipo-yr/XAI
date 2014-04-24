@@ -102,10 +102,10 @@
             </objects>
             <point key="canvasLocation" x="-1119" y="578"/>
         </scene>
-        <!--UserVC - 用户设置-->
+        <!--SetVC - 用户设置-->
         <scene sceneID="YVC-uw-Z6J">
             <objects>
-                <tableViewController id="foG-Bb-d5b" customClass="UserVC" sceneMemberID="viewController">
+                <tableViewController id="foG-Bb-d5b" customClass="XAISetVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eBg-Tx-IJf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,16 +198,16 @@
             </objects>
             <point key="canvasLocation" x="-740" y="-936"/>
         </scene>
-        <!--Device ShowVC - 设备列表-->
+        <!--Dev ShowVC - 设备列表-->
         <scene sceneID="unk-bG-xvQ">
             <objects>
-                <viewController id="TPD-h2-bC8" customClass="DeviceShowVC" sceneMemberID="viewController">
+                <viewController id="TPD-h2-bC8" customClass="XAIDevShowVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="639" verticalCompressionResistancePriority="832" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jfo-DO-e9Y">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DeviceShowCellIdentifier" rowHeight="63" id="DZY-Pk-qSC" customClass="DeviceShowCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DeviceShowCellIdentifier" rowHeight="63" id="DZY-Pk-qSC" customClass="XAIDevShowCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DZY-Pk-qSC" id="p7F-rp-4fa">
@@ -330,7 +330,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <prototypes>
-                                <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="DeviceShowStatusVCCellID" rowHeight="60" id="r55-an-NDm" customClass="DeviceShowStatusVCCell">
+                                <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="DeviceShowStatusVCCellID" rowHeight="60" id="r55-an-NDm" customClass="XAIDevShowStatusVCCell">
                                     <rect key="frame" x="0.0" y="22" width="165" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r55-an-NDm" id="oOj-X9-VCw">
@@ -438,16 +438,16 @@
             </objects>
             <point key="canvasLocation" x="492" y="1466"/>
         </scene>
-        <!--ManageVC - 设备管理-->
+        <!--Dev ManageVC - 设备管理-->
         <scene sceneID="Oeg-SP-TXk">
             <objects>
-                <viewController id="JsJ-oD-swf" customClass="ManageVC" sceneMemberID="viewController">
+                <viewController id="JsJ-oD-swf" customClass="XAIDevManageVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ASn-xP-MjP">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ManageCellIdentifier" rowHeight="63" id="pvi-bg-2S5" customClass="ManageCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ManageCellIdentifier" rowHeight="63" id="pvi-bg-2S5" customClass="XAIDevManageCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pvi-bg-2S5" id="Tc7-Kh-szq">
@@ -547,10 +547,10 @@
             </objects>
             <point key="canvasLocation" x="2420" y="387"/>
         </scene>
-        <!--Dev Add View Controller - 设备添加-->
+        <!--Dev AddVC - 设备添加-->
         <scene sceneID="a7W-oT-U2M">
             <objects>
-                <viewController storyboardIdentifier="DevAddViewControllerID" id="YhE-Ua-zfN" customClass="DevAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DevAddViewControllerID" id="YhE-Ua-zfN" customClass="XAIDevAddVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dtO-eV-NyL"/>
                         <viewControllerLayoutGuide type="bottom" id="BuH-sz-Bqa"/>

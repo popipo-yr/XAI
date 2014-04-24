@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XAIObject.h"
 
-@interface DeviceShowStatusVC : UIViewController <UITableViewDataSource,UITableViewDelegate>{
+@interface XAIDevShowStatusVC : UIViewController <UITableViewDataSource,UITableViewDelegate>{
 
     UIImageView* _statusView;
     UIActivityIndicatorView* _activityView;
@@ -33,12 +33,12 @@
 - (void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer;
 
 
-+ (DeviceShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard ;
++ (XAIDevShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard ;
 
 @end
 
 
-@interface DeviceShowStatusVCCell : UITableViewCell <UIGestureRecognizerDelegate>
+@interface XAIDevShowStatusVCCell : UITableViewCell <UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong)  IBOutlet UILabel*  oprLable;
 @property (nonatomic,strong)  IBOutlet UILabel*  timeLable;

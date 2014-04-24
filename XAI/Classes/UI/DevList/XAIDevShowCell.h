@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeviceShowCell : UITableViewCell
+@interface XAIDevShowCell : UITableViewCell
 
 @property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
 @property (nonatomic,strong)  IBOutlet UILabel*  nameLable;

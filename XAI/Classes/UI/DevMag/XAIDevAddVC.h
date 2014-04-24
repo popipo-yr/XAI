@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XAIDeviceService.h"
 
-@interface DevAddViewController : UIViewController
+@interface XAIDevAddVC : UIViewController
 <UITableViewDataSource,UITableViewDelegate,XAIDeviceServiceDelegate>{
 
     NSString* _luidStr;

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "ManageVC.h"
-#import "ManageCell.h"
+#import "XAIDevManageVC.h"
+#import "XAIDevManageCell.h"
 
-#import "DevAddViewController.h"
+#import "XAIDevAddVC.h"
 #import "XAIChangeNameVC.h"
 
 #import "XAIObject.h"
@@ -17,11 +17,11 @@
 
 #define  constRect  CGRectMake(0, 0, 320, 50)
 
-@interface ManageVC ()
+@interface XAIDevManageVC ()
 
 @end
 
-@implementation ManageVC
+@implementation XAIDevManageVC
 
 - (id) initWithCoder:(NSCoder *) coder{
     
@@ -150,9 +150,9 @@
     
     [reader dismissViewControllerAnimated:YES completion:nil];
     
-    DevAddViewController* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
+    XAIDevAddVC* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
     
-    if (devAddVC != nil && [devAddVC isKindOfClass:[DevAddViewController class]]) {
+    if (devAddVC != nil && [devAddVC isKindOfClass:[XAIDevAddVC class]]) {
         
         devAddVC.luidStr = luidstr;
         [self.navigationController pushViewController:devAddVC animated:YES];
@@ -248,9 +248,9 @@
 {
     static NSString *CellIdentifier = @"ManageCellIdentifier";
     
-    ManageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    XAIDevManageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[ManageCell alloc]
+        cell = [[XAIDevManageCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:CellIdentifier];
     }
@@ -321,7 +321,7 @@
 //        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
 
-        XAIDebug(@"ManageVC",self,@selector(delDevice:),YES,5);
+        XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
         
     }
 }

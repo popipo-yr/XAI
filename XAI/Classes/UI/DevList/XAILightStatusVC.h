@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DeviceShowStatusVC.h"
+#import "XAIDevShowStatusVC.h"
 
 #import "XAILight.h"
 
-@interface XAILightStatusVC : DeviceShowStatusVC <XAILigthtDelegate>{
+@interface XAILightStatusVC : XAIDevShowStatusVC <XAILigthtDelegate>{
 
     XAILight* _light;
 

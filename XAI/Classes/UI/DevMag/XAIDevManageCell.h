@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ManageCell : UITableViewCell <UIGestureRecognizerDelegate>
+@interface XAIDevManageCell : UITableViewCell <UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong)IBOutlet UIImageView* headImageView;
 @property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
