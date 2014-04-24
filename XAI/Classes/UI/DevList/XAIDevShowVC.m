@@ -69,8 +69,20 @@
 	// Do any additional setup after loading the view.
     
     //设置statusbar
-    [self.navigationController.navigationBar setBarTintColor:
-     [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+    if ([self.navigationController respondsToSelector:@selector(setBarTintColor:)]) {
+        
+        
+        [[UINavigationBar appearance] setBarTintColor:
+         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+        
+    }else{
+    
+        [[UINavigationBar appearance] setTintColor:
+         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+    
+    }
+    
+   
 
     UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
     view.backgroundColor=[UIColor whiteColor];

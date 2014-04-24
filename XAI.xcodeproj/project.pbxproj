@@ -1385,7 +1385,7 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 					"$(SRCROOT)/XAI/ssl",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				SDKROOT = iphoneos;
@@ -1428,7 +1428,7 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 					"$(SRCROOT)/XAI/ssl",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1454,7 +1454,7 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 				);
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/XAI/ssl",
@@ -1483,7 +1483,7 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 				);
 				INFOPLIST_FILE = "XAI/XAI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/XAI/ssl",

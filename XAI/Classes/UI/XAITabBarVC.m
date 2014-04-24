@@ -73,8 +73,14 @@
             imageName = [NSString stringWithFormat:@"tab_bar_set_%@.png", selected ? @"sel":@"nor"];
             break;
     }
-    //[musicImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-    return [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-}
+    
+    if ([UIImage respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+       return  [[UIImage imageNamed:imageName]
+                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+
+    return [UIImage imageNamed:imageName];
+  }
 
 @end

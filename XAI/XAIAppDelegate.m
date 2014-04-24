@@ -37,6 +37,11 @@
     [[MQTT shareMQTT] setPacketManager:_mqttPacketManager];
     
     
+    //[[UIApplication  sharedApplication] setStatusBarHidden:false];
+    
+
+    
+    
     
     return YES;
 }

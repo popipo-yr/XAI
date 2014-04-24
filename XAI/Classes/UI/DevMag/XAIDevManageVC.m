@@ -34,7 +34,12 @@
         _deviceService.delegate = self;
         
         
-        UIImage* editNorImg = [[UIImage imageNamed:@"device_edit_nor.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage* editNorImg = [UIImage imageNamed:@"device_edit_nor.png"] ;
+                               
+        if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+            
+            editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
         
         _editItem = [[UIBarButtonItem alloc] initWithImage:editNorImg
                                                      style:UIBarButtonItemStylePlain
@@ -76,8 +81,12 @@
     
     self.tableView.editing = FALSE;
     
-    UIImage* addNorImg = [[UIImage imageNamed:@"device_add_nor.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
+    UIImage* addNorImg = [UIImage imageNamed:@"device_add_nor.png"];
+                          
+    if ([addNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        addNorImg = [addNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
  
     
     
@@ -212,7 +221,13 @@
     
     NSString* imgName = bl ? @"device_edit_sel.png" : @"device_edit_nor.png";
     
-    UIImage* editNorImg = [[UIImage imageNamed:imgName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage* editNorImg = [UIImage imageNamed:imgName];
+    
+    if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+
     
     _editItem.image = editNorImg;
     
