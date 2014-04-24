@@ -35,7 +35,6 @@
 		9631D17019075691007CBC4B /* obj_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16819075691007CBC4B /* obj_light.png */; };
 		9631D17119075691007CBC4B /* obj_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16919075691007CBC4B /* obj_switch.png */; };
 		9631D17219075691007CBC4B /* obj_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16A19075691007CBC4B /* obj_window.png */; };
-		9631D17519075FB4007CBC4B /* DeviceShowStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9631D17419075FB4007CBC4B /* DeviceShowStatusVC.m */; };
 		964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964C996A18FBAB53006300F9 /* XAIDeviceService.m */; };
 		964E6A311904DAD500F1F61C /* nav_bar_44.png in Resources */ = {isa = PBXBuildFile; fileRef = 964E6A2F1904DAD500F1F61C /* nav_bar_44.png */; };
 		964E6A321904DAD500F1F61C /* nav_bar_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 964E6A301904DAD500F1F61C /* nav_bar_64.png */; };
@@ -43,6 +42,14 @@
 		964E6A361904E94100F1F61C /* tab_bar_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 964E6A341904E94100F1F61C /* tab_bar_selected@2x.png */; };
 		964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 964E6A391904F16200F1F61C /* XAIObject.m */; };
 		964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */ = {isa = PBXBuildFile; fileRef = 964E6A3C1904F30B00F1F61C /* XAILight.m */; };
+		967BD77E1908AB08007C3C8C /* DeviceShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD76E1908AB08007C3C8C /* DeviceShowCell.m */; };
+		967BD77F1908AB08007C3C8C /* DeviceShowStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7701908AB08007C3C8C /* DeviceShowStatusVC.m */; };
+		967BD7801908AB08007C3C8C /* DeviceShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7721908AB08007C3C8C /* DeviceShowVC.m */; };
+		967BD7811908AB08007C3C8C /* XAILightStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7741908AB08007C3C8C /* XAILightStatusVC.m */; };
+		967BD7821908AB08007C3C8C /* ManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7771908AB08007C3C8C /* ManageCell.m */; };
+		967BD7831908AB08007C3C8C /* ManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7791908AB08007C3C8C /* ManageVC.m */; };
+		967BD7841908AB08007C3C8C /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD77D1908AB08007C3C8C /* UserVC.m */; };
+		967BD7871908ABCF007C3C8C /* XAITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7861908ABCF007C3C8C /* XAITableViewController.m */; };
 		968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B518FF6B920016DDB7 /* SwitchTest.m */; };
 		968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B818FF73660016DDB7 /* XAIDevDoorContact.m */; };
 		968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120BB18FF91D80016DDB7 /* XAIDevInfrared.m */; };
@@ -55,7 +62,6 @@
 		9683DA6C1900F13500518FEB /* login_btn_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9683DA691900F13500518FEB /* login_btn_normal@2x.png */; };
 		9683DA6D1900F13500518FEB /* login_btn_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9683DA6A1900F13500518FEB /* login_btn_sel@2x.png */; };
 		9683DA701900F5E600518FEB /* XAIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9683DA6F1900F5E600518FEB /* XAIUser.m */; };
-		96BC6775190778B60049B999 /* XAILightStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BC6774190778B60049B999 /* XAILightStatusVC.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -66,11 +72,6 @@
 		96E9D95C1900FD01000BB595 /* qrcode_btn_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9561900FD01000BB595 /* qrcode_btn_nor@2x.png */; };
 		96E9D95D1900FD01000BB595 /* textField_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9571900FD01000BB595 /* textField_bg.png */; };
 		96E9D95E1900FD01000BB595 /* textField_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9581900FD01000BB595 /* textField_bg@2x.png */; };
-		96E9D96C19010561000BB595 /* DeviceShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96119010561000BB595 /* DeviceShowCell.m */; };
-		96E9D96D19010561000BB595 /* DeviceShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96319010561000BB595 /* DeviceShowVC.m */; };
-		96E9D96E19010561000BB595 /* ManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96519010561000BB595 /* ManageCell.m */; };
-		96E9D96F19010561000BB595 /* ManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96719010561000BB595 /* ManageVC.m */; };
-		96E9D97019010561000BB595 /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96919010561000BB595 /* UserVC.m */; };
 		96E9D97119010561000BB595 /* XAILoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D96B19010561000BB595 /* XAILoginVC.m */; };
 		96E9D983190111F7000BB595 /* tab_bar_dev_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D973190111F7000BB595 /* tab_bar_dev_nor.png */; };
 		96E9D984190111F7000BB595 /* tab_bar_dev_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D974190111F7000BB595 /* tab_bar_dev_nor@2x.png */; };
@@ -255,8 +256,6 @@
 		9631D16819075691007CBC4B /* obj_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light.png; sourceTree = "<group>"; };
 		9631D16919075691007CBC4B /* obj_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_switch.png; sourceTree = "<group>"; };
 		9631D16A19075691007CBC4B /* obj_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window.png; sourceTree = "<group>"; };
-		9631D17319075FB4007CBC4B /* DeviceShowStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowStatusVC.h; sourceTree = "<group>"; };
-		9631D17419075FB4007CBC4B /* DeviceShowStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowStatusVC.m; sourceTree = "<group>"; };
 		964C996918FBAB53006300F9 /* XAIDeviceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceService.h; sourceTree = "<group>"; };
 		964C996A18FBAB53006300F9 /* XAIDeviceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceService.m; sourceTree = "<group>"; };
 		964E6A2F1904DAD500F1F61C /* nav_bar_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_44.png; sourceTree = "<group>"; };
@@ -267,6 +266,22 @@
 		964E6A391904F16200F1F61C /* XAIObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObject.m; sourceTree = "<group>"; };
 		964E6A3B1904F30B00F1F61C /* XAILight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight.h; sourceTree = "<group>"; };
 		964E6A3C1904F30B00F1F61C /* XAILight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight.m; sourceTree = "<group>"; };
+		967BD76D1908AB08007C3C8C /* DeviceShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowCell.h; sourceTree = "<group>"; };
+		967BD76E1908AB08007C3C8C /* DeviceShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowCell.m; sourceTree = "<group>"; };
+		967BD76F1908AB08007C3C8C /* DeviceShowStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowStatusVC.h; sourceTree = "<group>"; };
+		967BD7701908AB08007C3C8C /* DeviceShowStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowStatusVC.m; sourceTree = "<group>"; };
+		967BD7711908AB08007C3C8C /* DeviceShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowVC.h; sourceTree = "<group>"; };
+		967BD7721908AB08007C3C8C /* DeviceShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowVC.m; sourceTree = "<group>"; };
+		967BD7731908AB08007C3C8C /* XAILightStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightStatusVC.h; sourceTree = "<group>"; };
+		967BD7741908AB08007C3C8C /* XAILightStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightStatusVC.m; sourceTree = "<group>"; };
+		967BD7761908AB08007C3C8C /* ManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageCell.h; sourceTree = "<group>"; };
+		967BD7771908AB08007C3C8C /* ManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageCell.m; sourceTree = "<group>"; };
+		967BD7781908AB08007C3C8C /* ManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageVC.h; sourceTree = "<group>"; };
+		967BD7791908AB08007C3C8C /* ManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageVC.m; sourceTree = "<group>"; };
+		967BD77C1908AB08007C3C8C /* UserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVC.h; sourceTree = "<group>"; };
+		967BD77D1908AB08007C3C8C /* UserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserVC.m; sourceTree = "<group>"; };
+		967BD7851908ABCF007C3C8C /* XAITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITableViewController.h; sourceTree = "<group>"; };
+		967BD7861908ABCF007C3C8C /* XAITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITableViewController.m; sourceTree = "<group>"; };
 		968120B518FF6B920016DDB7 /* SwitchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchTest.m; sourceTree = "<group>"; };
 		968120B718FF73660016DDB7 /* XAIDevDoorContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevDoorContact.h; sourceTree = "<group>"; };
 		968120B818FF73660016DDB7 /* XAIDevDoorContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevDoorContact.m; sourceTree = "<group>"; };
@@ -282,8 +297,6 @@
 		9683DA6A1900F13500518FEB /* login_btn_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_sel@2x.png"; sourceTree = "<group>"; };
 		9683DA6E1900F5E600518FEB /* XAIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUser.h; sourceTree = "<group>"; };
 		9683DA6F1900F5E600518FEB /* XAIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUser.m; sourceTree = "<group>"; };
-		96BC6773190778B60049B999 /* XAILightStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightStatusVC.h; sourceTree = "<group>"; };
-		96BC6774190778B60049B999 /* XAILightStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightStatusVC.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -296,16 +309,6 @@
 		96E9D9561900FD01000BB595 /* qrcode_btn_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_btn_nor@2x.png"; sourceTree = "<group>"; };
 		96E9D9571900FD01000BB595 /* textField_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textField_bg.png; sourceTree = "<group>"; };
 		96E9D9581900FD01000BB595 /* textField_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textField_bg@2x.png"; sourceTree = "<group>"; };
-		96E9D96019010561000BB595 /* DeviceShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowCell.h; sourceTree = "<group>"; };
-		96E9D96119010561000BB595 /* DeviceShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowCell.m; sourceTree = "<group>"; };
-		96E9D96219010561000BB595 /* DeviceShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceShowVC.h; sourceTree = "<group>"; };
-		96E9D96319010561000BB595 /* DeviceShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceShowVC.m; sourceTree = "<group>"; };
-		96E9D96419010561000BB595 /* ManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageCell.h; sourceTree = "<group>"; };
-		96E9D96519010561000BB595 /* ManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageCell.m; sourceTree = "<group>"; };
-		96E9D96619010561000BB595 /* ManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageVC.h; sourceTree = "<group>"; };
-		96E9D96719010561000BB595 /* ManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageVC.m; sourceTree = "<group>"; };
-		96E9D96819010561000BB595 /* UserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVC.h; sourceTree = "<group>"; };
-		96E9D96919010561000BB595 /* UserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserVC.m; sourceTree = "<group>"; };
 		96E9D96A19010561000BB595 /* XAILoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILoginVC.h; sourceTree = "<group>"; };
 		96E9D96B19010561000BB595 /* XAILoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILoginVC.m; sourceTree = "<group>"; };
 		96E9D973190111F7000BB595 /* tab_bar_dev_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar_dev_nor.png; sourceTree = "<group>"; };
@@ -620,6 +623,48 @@
 			path = Obj;
 			sourceTree = "<group>";
 		};
+		967BD76C1908AB08007C3C8C /* DevList */ = {
+			isa = PBXGroup;
+			children = (
+				967BD76D1908AB08007C3C8C /* DeviceShowCell.h */,
+				967BD76E1908AB08007C3C8C /* DeviceShowCell.m */,
+				967BD76F1908AB08007C3C8C /* DeviceShowStatusVC.h */,
+				967BD7701908AB08007C3C8C /* DeviceShowStatusVC.m */,
+				967BD7711908AB08007C3C8C /* DeviceShowVC.h */,
+				967BD7721908AB08007C3C8C /* DeviceShowVC.m */,
+				967BD7731908AB08007C3C8C /* XAILightStatusVC.h */,
+				967BD7741908AB08007C3C8C /* XAILightStatusVC.m */,
+			);
+			path = DevList;
+			sourceTree = "<group>";
+		};
+		967BD7751908AB08007C3C8C /* DevMag */ = {
+			isa = PBXGroup;
+			children = (
+				967BD7761908AB08007C3C8C /* ManageCell.h */,
+				967BD7771908AB08007C3C8C /* ManageCell.m */,
+				967BD7781908AB08007C3C8C /* ManageVC.h */,
+				967BD7791908AB08007C3C8C /* ManageVC.m */,
+			);
+			path = DevMag;
+			sourceTree = "<group>";
+		};
+		967BD77A1908AB08007C3C8C /* Set */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		967BD77B1908AB08007C3C8C /* UserList */ = {
+			isa = PBXGroup;
+			children = (
+				967BD77C1908AB08007C3C8C /* UserVC.h */,
+				967BD77D1908AB08007C3C8C /* UserVC.m */,
+			);
+			path = UserList;
+			sourceTree = "<group>";
+		};
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,24 +698,16 @@
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				96E9D96019010561000BB595 /* DeviceShowCell.h */,
-				96E9D96119010561000BB595 /* DeviceShowCell.m */,
-				96E9D96219010561000BB595 /* DeviceShowVC.h */,
-				96E9D96319010561000BB595 /* DeviceShowVC.m */,
-				96E9D96419010561000BB595 /* ManageCell.h */,
-				96E9D96519010561000BB595 /* ManageCell.m */,
-				96E9D96619010561000BB595 /* ManageVC.h */,
-				96E9D96719010561000BB595 /* ManageVC.m */,
-				96E9D96819010561000BB595 /* UserVC.h */,
-				96E9D96919010561000BB595 /* UserVC.m */,
+				967BD76C1908AB08007C3C8C /* DevList */,
+				967BD7751908AB08007C3C8C /* DevMag */,
+				967BD77A1908AB08007C3C8C /* Set */,
+				967BD77B1908AB08007C3C8C /* UserList */,
 				96E9D96A19010561000BB595 /* XAILoginVC.h */,
 				96E9D96B19010561000BB595 /* XAILoginVC.m */,
 				96E9D99319011D76000BB595 /* XAITabBarVC.h */,
 				96E9D99419011D76000BB595 /* XAITabBarVC.m */,
-				96BC6773190778B60049B999 /* XAILightStatusVC.h */,
-				96BC6774190778B60049B999 /* XAILightStatusVC.m */,
-				9631D17319075FB4007CBC4B /* DeviceShowStatusVC.h */,
-				9631D17419075FB4007CBC4B /* DeviceShowStatusVC.m */,
+				967BD7851908ABCF007C3C8C /* XAITableViewController.h */,
+				967BD7861908ABCF007C3C8C /* XAITableViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1103,30 +1140,32 @@
 				96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */,
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
-				96E9D96D19010561000BB595 /* DeviceShowVC.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
+				967BD7801908AB08007C3C8C /* DeviceShowVC.m in Sources */,
+				967BD7821908AB08007C3C8C /* ManageCell.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
+				967BD77F1908AB08007C3C8C /* DeviceShowStatusVC.m in Sources */,
 				964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */,
-				96E9D96C19010561000BB595 /* DeviceShowCell.m in Sources */,
-				96E9D96E19010561000BB595 /* ManageCell.m in Sources */,
-				9631D17519075FB4007CBC4B /* DeviceShowStatusVC.m in Sources */,
+				967BD77E1908AB08007C3C8C /* DeviceShowCell.m in Sources */,
 				96E9D97119010561000BB595 /* XAILoginVC.m in Sources */,
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
 				1AF7604F18F2528600520EAD /* LightNode.m in Sources */,
+				967BD7841908AB08007C3C8C /* UserVC.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
-				96E9D97019010561000BB595 /* UserVC.m in Sources */,
 				C33E77FE18F3B28500808391 /* XAILogin.m in Sources */,
 				968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
 				964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */,
+				967BD7811908AB08007C3C8C /* XAILightStatusVC.m in Sources */,
 				1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */,
+				967BD7871908ABCF007C3C8C /* XAITableViewController.m in Sources */,
 				9683DA701900F5E600518FEB /* XAIUser.m in Sources */,
 				C341A66E18EBB2C400034649 /* read_handle.c in Sources */,
 				961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */,
@@ -1142,11 +1181,10 @@
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
-				96BC6775190778B60049B999 /* XAILightStatusVC.m in Sources */,
+				967BD7831908AB08007C3C8C /* ManageVC.m in Sources */,
 				C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */,
 				961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */,
 				C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */,
-				96E9D96F19010561000BB595 /* ManageVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

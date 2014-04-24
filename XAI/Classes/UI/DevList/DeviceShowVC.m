@@ -29,7 +29,6 @@
         
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.delegate = self;
-        _activityView = [[UIActivityIndicatorView alloc] init];
         
         _deviceDatas = [[NSMutableArray alloc] init];
         
@@ -58,7 +57,7 @@
 
     _deviceService.delegate = nil;
     _deviceService = nil;
-    _activityView = nil;
+    //_activityView = nil;
     
     _deviceDatas = nil;
 
@@ -78,22 +77,6 @@
     
     //[self.navigationController.view  addSubview:view];
     [self.tabBarController.view addSubview:view];
-
-    
-    // 设置通明
-     [self setExtraCellLineHidden:self.tableView];
-    
-    
-    CGRect rx = [ UIScreen mainScreen ].bounds;
-    
-    _activityView = [[UIActivityIndicatorView alloc] init];
-    
-    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    _activityView.color = [UIColor redColor];
-    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
-    _activityView.hidesWhenStopped = YES;
-    
-    [_activityView startAnimating];
     
     //back
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -129,17 +112,11 @@
 #pragma mark Table Data Source Methods
 
 
-
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     return constRect.size.height;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//
-//}
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -160,9 +137,7 @@
 
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//
-//}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
@@ -173,14 +148,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
-    if ([_deviceDatas count] > 0) {
-
-        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }else{
-    
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-
+    [self setSeparatorStyle:[_deviceDatas count]];
     
     return [_deviceDatas count];
     

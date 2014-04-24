@@ -37,6 +37,7 @@ typedef int  XAIGOURPID;
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;
 @property (nonatomic, strong) NSString* lastOpr; /*最后一次操作*/
+@property (nonatomic, strong) NSString* nickName; 
 
 - (void) initDev; /*初始化设备*/
 

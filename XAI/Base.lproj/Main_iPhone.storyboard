@@ -437,17 +437,17 @@
             </objects>
             <point key="canvasLocation" x="628" y="754"/>
         </scene>
-        <!--ManageVC - 管理-->
+        <!--ManageVC - 设备管理-->
         <scene sceneID="Oeg-SP-TXk">
             <objects>
                 <viewController id="JsJ-oD-swf" customClass="ManageVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ASn-xP-MjP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ManageCellIdentifier" rowHeight="98" id="pvi-bg-2S5" customClass="ManageCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="98"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pvi-bg-2S5" id="Tc7-Kh-szq">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
@@ -486,7 +486,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="管理" id="0AI-qS-vE2"/>
-                    <navigationItem key="navigationItem" id="f93-7A-w0x"/>
+                    <navigationItem key="navigationItem" title="设备管理" id="f93-7A-w0x"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwV-4B-AHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -497,8 +497,13 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="Myr-f0-uEx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="管理" image="tab_bar_devM_nor.png" id="fEl-hb-9PB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N7d-r8-Z7j">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="N7d-r8-Z7j">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.37254901959999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="JsJ-oD-swf" kind="relationship" relationship="rootViewController" id="z3c-yi-yYK"/>

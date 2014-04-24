@@ -9,6 +9,8 @@
 #import "ManageVC.h"
 #import "ManageCell.h"
 
+#import "XAILight.h"
+
 #define  constRect  CGRectMake(0, 0, 320, 50)
 
 @interface ManageVC ()
@@ -17,28 +19,44 @@
 
 @implementation ManageVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+- (id) initWithCoder:(NSCoder *) coder{
+    
+    self = [super initWithCoder:coder];
+    
     if (self) {
         // Custom initialization
+        
+        _deviceService = [[XAIDeviceService alloc] init];
+        _deviceService.delegate = self;
+
+        
+        _objectAry = [[NSMutableArray alloc] init];
+        
+        XAILight* obj1 = [[XAILight alloc] init];
+        obj1.apsn = 0x01;
+        obj1.luid = 0x123;
+        obj1.type = XAIObjectType_light;
+        obj1.lastOpr = @"Mr.O open light at 00.0.2";
+        obj1.name = @"客厅大灯";
+        
+        
+        XAILight* obj2 = [[XAILight alloc] init];
+        obj2.apsn = 0x01;
+        obj2.luid = 0x123;
+        obj2.type = XAIObjectType_door;
+        obj2.lastOpr = @"Mr.O close door at 00.0.2";
+        obj2.name = @"主卧门";
+        
+        [_objectAry addObject:obj1];
+        [_objectAry addObject:obj2];
     }
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-    datas = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4",nil];
     
     
     self.tableView.editing = FALSE;
@@ -48,8 +66,6 @@
                                                                                      action:@selector(handleSwipeLeft:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.tableView addGestureRecognizer:recognizer];
-    
-    
     
     
     
@@ -115,44 +131,6 @@
 #pragma mark - Table view data source
 
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return  constRect.size.height;
-}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//
-//}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    
-    UIView* showViews = [[UIView alloc] initWithFrame:constRect];
-    UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, 320, 30)];
-    [aLabel setText:[NSString stringWithFormat:@"设备列表"]];
-    [aLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    [showViews addSubview:aLabel];
-    
-    
-    UIButton*  addBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [addBtn setTitle:@"ADD" forState:UIControlStateNormal];
-    [addBtn setFrame:CGRectMake(280, 25, 20, 20)];
-    [addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [showViews addSubview:addBtn];
-    
-    return showViews;
-    
-    
-    UIImageView* showView =  [[UIImageView alloc] initWithFrame:constRect];
-    
-    [showView setBackgroundColor:[UIColor blackColor]];
-    
-    return showView;
-    
-}
-
 - (void) addBtnClick:(id) sender{
     
     
@@ -194,13 +172,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [datas count];
+    [self setSeparatorStyle:[_objectAry count]];
+    return [_objectAry count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ManageCellIdentifier";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     ManageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
@@ -210,10 +188,20 @@
     }
     
     
-    [cell.imageView setBackgroundColor:[UIColor redColor]];
-    [cell.imageView setImage:nil];
-    [cell.nameLable setText:[NSString stringWithFormat:@"名字"]];
-    [cell.contextLable setText:[NSString stringWithFormat:@"所在的组"]];
+    XAIObject* aObj = [_objectAry objectAtIndex:[indexPath row]];
+    
+    if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
+        
+        [cell.imageView setBackgroundColor:[UIColor clearColor]];
+        [cell.imageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
+        [cell.nameLable setText:aObj.nickName];
+        [cell.contextLable setText:aObj.name];
+        
+    }
+
+    
+    
+
 
     //cell.editingAccessoryType = UITableViewCellAccessoryCheckmark;
     
@@ -262,45 +250,6 @@
 
     //显示label
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
