@@ -34,6 +34,16 @@
     
     return imgNameStr;
 }
+
++ (NSArray*)  typeCanUse{
+
+   __autoreleasing NSArray* types = @[[NSNumber numberWithInt:XAIObjectType_door],
+                       [NSNumber numberWithInt:XAIObjectType_light]];
+    
+    return types;
+}
+
+
 @end
 
 @implementation XAIObjectOpr

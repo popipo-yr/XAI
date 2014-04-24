@@ -17,6 +17,8 @@ typedef enum XAIObjectType{
     
 }XAIObjectType;
 
+#define XAIObjectTypeCount 2
+
 typedef int  XAIGOURPID;
 
 
@@ -42,6 +44,7 @@ typedef int  XAIGOURPID;
 - (void) initDev; /*初始化设备*/
 
 + (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
++ (NSArray*)  typeCanUse;
 
 @end
 

@@ -9,6 +9,9 @@
 #import "ManageVC.h"
 #import "ManageCell.h"
 
+#import "DevAddViewController.h"
+#import "XAIChangeNameVC.h"
+
 #import "XAILight.h"
 
 #define  constRect  CGRectMake(0, 0, 320, 50)
@@ -61,14 +64,21 @@
     
     self.tableView.editing = FALSE;
     
+    UIImage* addNorImg = [[UIImage imageNamed:@"device_add_nor.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(handleSwipeLeft:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [self.tableView addGestureRecognizer:recognizer];
+    UIImage* addSelImg = [[UIImage imageNamed:@"device_add_sel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
+    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addNorImg
+                                                  landscapeImagePhone:addSelImg
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(addBtnClick:)];
+    [self.navigationItem setRightBarButtonItem:addItem];
     
+    //back
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backItem];
 
 }
 
@@ -76,13 +86,19 @@
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
+    
+    NSString* luidstr = nil;
+    
     // ADD: get the decode results
     id<NSFastEnumeration> results =
     [info objectForKey: ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
-    for(symbol in results)
+    for(symbol in results){
+    
+       luidstr = symbol.data;
+    
+    }
         // EXAMPLE: just grab the first barcode
-        break;
     
     // EXAMPLE: do something useful with the barcode data
     //resultText.text = symbol.data;
@@ -96,31 +112,18 @@
     
     
     [reader dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-
-- (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer
-{
-    //Get location of the swipe
-    CGPoint location = [gestureRecognizer locationInView:self.tableView];
     
-    //Get the corresponding index path within the table view
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    DevAddViewController* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
     
-    //Check if index path is valid
-    if(indexPath)
-    {
-        //Get the cell out of the table view
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (devAddVC != nil && [devAddVC isKindOfClass:[DevAddViewController class]]) {
         
-        //Update the cell or model
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        devAddVC.luidStr = luidstr;
+        [self.navigationController pushViewController:devAddVC animated:YES];
     }
     
     
-    //[self.tableView removeGestureRecognizer:gestureRecognizer];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -213,43 +216,26 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return 63.0;
 }
 
 
-//设置可删除
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if ([indexPath row] < [_objectAry count]) {
+        
+        
+        XAIObject* aObj = [_objectAry objectAtIndex:[indexPath row]];
+        
+        XAIChangeNameVC* vc = [self.storyboard
+                               instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
+        
+        [self.navigationController  pushViewController:vc animated:YES];
+    }
+    
 }
 
-//更改删除按钮
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return @"删除";
-}
-
-
-//- (void)tableView:(UITableView *)_tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [datas removeObjectAtIndex:indexPath.row];
-//        // Delete the row from the data source.
-//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        
-//    }
-//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//    }
-//}
-
-- (void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    //显示textedit
-}
-- (void)tableView:(UITableView*)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    //显示label
-}
 
 /*
 #pragma mark - Navigation
