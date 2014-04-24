@@ -12,6 +12,7 @@
 #import "DevAddViewController.h"
 #import "XAIChangeNameVC.h"
 
+#import "XAIObject.h"
 #import "XAILight.h"
 
 #define  constRect  CGRectMake(0, 0, 320, 50)
@@ -31,6 +32,14 @@
         
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.delegate = self;
+        
+        
+        UIImage* editNorImg = [[UIImage imageNamed:@"device_edit_nor.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        _editItem = [[UIBarButtonItem alloc] initWithImage:editNorImg
+                                                     style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(editBtnClick:)];
 
         
         _objectAry = [[NSMutableArray alloc] init];
@@ -41,6 +50,7 @@
         obj1.type = XAIObjectType_light;
         obj1.lastOpr = @"Mr.O open light at 00.0.2";
         obj1.name = @"客厅大灯";
+        obj1.nickName = obj1.name;
         
         
         XAILight* obj2 = [[XAILight alloc] init];
@@ -49,9 +59,11 @@
         obj2.type = XAIObjectType_door;
         obj2.lastOpr = @"Mr.O close door at 00.0.2";
         obj2.name = @"主卧门";
+        obj2.nickName = obj2.name;
         
         [_objectAry addObject:obj1];
         [_objectAry addObject:obj2];
+        
     }
     return self;
 }
@@ -66,21 +78,46 @@
     
     UIImage* addNorImg = [[UIImage imageNamed:@"device_add_nor.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UIImage* addSelImg = [[UIImage imageNamed:@"device_add_sel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+ 
     
     
     UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addNorImg
-                                                  landscapeImagePhone:addSelImg
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self
                                                                action:@selector(addBtnClick:)];
-    [self.navigationItem setRightBarButtonItem:addItem];
+
+    
+    [self.navigationItem setRightBarButtonItems:@[addItem,_editItem]];
     
     //back
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backItem];
 
 }
+
+
+- (void) viewWillAppear:(BOOL)animated{
+    
+    
+    _recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                            action:@selector(handleSwipeRight:)];
+    
+    [_recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:_recognizer];
+    
+
+    
+    [super viewWillAppear:animated];
+}
+
+- (void) viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    [self.view removeGestureRecognizer:_recognizer];
+    
+}
+
 
 
 - (void) imagePickerController: (UIImagePickerController*) reader
@@ -131,8 +168,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
+#pragma mark - Event method
 
 - (void) addBtnClick:(id) sender{
     
@@ -154,9 +190,38 @@
     // present and release the controller
     
     [self presentViewController:reader animated:YES completion:Nil];
-
-
+    
+    
 }
+
+- (void) editBtnClick:(id)sender{
+    
+    
+    [self setTableViewEdit:!self.tableView.editing];
+    
+}
+-(void) handleSwipeRight:(id)sender{
+    
+    [self setTableViewEdit:NO];
+    
+}
+
+- (void) setTableViewEdit:(BOOL) bl{
+    
+    self.tableView.editing = bl;
+    
+    NSString* imgName = bl ? @"device_edit_sel.png" : @"device_edit_nor.png";
+    
+    UIImage* editNorImg = [[UIImage imageNamed:imgName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    _editItem.image = editNorImg;
+    
+}
+
+
+#pragma mark - Table view data source
+
+
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -228,14 +293,44 @@
         
         XAIObject* aObj = [_objectAry objectAtIndex:[indexPath row]];
         
-        XAIChangeNameVC* vc = [self.storyboard
+        _vc = [self.storyboard
                                instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
-        [self.navigationController  pushViewController:vc animated:YES];
+        [_vc setOneLabName:@"设备备注" OneTexName:aObj.nickName  TwoLabName:@"新备注名"];
+        [_vc setOKClickTarget:self Selector:@selector(changeDevName:)];
+        [_vc setBarTitle:@"设置备注"];
+        
+        _curOprObj = aObj;
+        
+        [self.navigationController  pushViewController:_vc animated:YES];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        
+        _curDelIndexPath = indexPath;
+        
+//        [_objectAry removeObjectAtIndex:indexPath.row];
+//        // Delete the row from the data source.
+//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+
+        XAIDebug(@"ManageVC",self,@selector(delDevice:),YES,5);
+        
+    }
+}
+
+
+-(NSString *)tableView:(UITableView *)tableView
+titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return @"删除";
 }
 
 
@@ -250,5 +345,47 @@
 }
 
  */
+
+#pragma mark - DeviceService
+
+
+
+- (void) changeDevName:(NSString*)newName{
+
+    [_deviceService changeDev:_curOprObj.luid withName:newName apsn:_curOprObj.apsn luid:_curOprObj.luid];
+
+    [_vc endOkEvent];
+}
+
+- (void) addDevice:(BOOL) isSuccess{
+
+}
+- (void) delDevice:(BOOL) isSuccess{
+    
+    if (isSuccess && nil != _curDelIndexPath) {
+        
+        [_objectAry removeObjectAtIndex:_curDelIndexPath.row];
+        // Delete the row from the data source.
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        
+        _curDelIndexPath = nil;
+    }
+    
+
+
+}
+- (void) changeDeviceName:(BOOL) isSuccess{
+
+}
+- (void) findedAllDevice:(BOOL) isSuccess datas:(NSArray*) devAry{
+
+}
+
+- (void) finddedAllOnlineDevices:(NSSet*) luidAry{
+
+}
+
+
 
 @end

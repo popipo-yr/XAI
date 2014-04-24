@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
 
+#import "XAIDebug.h"
+
 typedef enum XAIObjectType{
     
     XAIObjectType_door = 0,

@@ -31,11 +31,14 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = YES;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"ok" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
+    
+     self.navigationItem.rightBarButtonItem = okItem;
+    
+    self.navigationItem.title = _barItemTitle;
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,14 +78,15 @@
 
     if ([indexPath row] == 0) {
         
-        cell.lable.text = @"用户名";
+        cell.lable.text = _oneLabName;
 
-        [cell setTextFiledWithLable:@"用户名"];
+        [cell setTextFiledWithLable:_oneTexName];
         
     }else if([indexPath row] == 1){
     
-        cell.lable.text = @"新用户名";
+        cell.lable.text = _twoLabName;
         _newNameTextField = cell.textFiled;
+        [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     }
     
@@ -102,5 +106,49 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma  mark - Outer Methods
+
+- (void) setOKClickTarget:(id)target Selector:(SEL)selector{
+
+    _okTarget = target;
+    _okSelector = selector;
+}
+
+- (void) setOneLabName:(NSString*)oneLabName OneTexName:(NSString*)oneTexName
+            TwoLabName:(NSString*)twoLabName{
+
+    _oneLabName = oneLabName;
+    _oneTexName = oneTexName;
+    _twoLabName = twoLabName;
+
+}
+
+- (void) endOkEvent{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) editEnd:(id)sender{
+
+    [_newNameTextField resignFirstResponder];
+}
+
+
+- (void) okClick:(id)sender{
+
+    if (_okTarget != nil && _okSelector != nil
+        && [_okTarget respondsToSelector:_okSelector]) {
+        
+        [_okTarget performSelector:_okSelector withObject:_newNameTextField.text afterDelay:0];
+    }
+    
+
+}
+
+- (void) setBarTitle:(NSString*)title{
+
+    _barItemTitle = title;
+}
 
 @end

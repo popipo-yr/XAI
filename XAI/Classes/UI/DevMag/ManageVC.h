@@ -11,12 +11,23 @@
 #import "XAITableViewController.h"
 #import "XAIDeviceService.h"
 #import "XAIObject.h"
+#import "XAIChangeNameVC.h"
 
 @interface ManageVC : XAITableViewController
 <UITableViewDelegate,UITableViewDataSource,ZBarReaderDelegate,XAIDeviceServiceDelegate>{
 
     XAIDeviceService* _deviceService;
     NSMutableArray*  _objectAry;
+    
+    XAIObject* _curOprObj;
+    
+    XAIChangeNameVC* _vc;
+    
+    UIBarButtonItem* _editItem;
+    
+    UISwipeGestureRecognizer* _recognizer;
+    
+    NSIndexPath* _curDelIndexPath;
 
 }
 
