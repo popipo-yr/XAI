@@ -48,6 +48,8 @@
     
     [_textFiled removeFromSuperview];
     _textFiled = newText;
+    
+    _textFiled.enabled = false;
 }
 
 @end

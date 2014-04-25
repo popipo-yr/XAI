@@ -96,8 +96,7 @@
 
     
     [_deviceService findAllDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
-    
-    
+
 }
 
 - (void)setExtraCellLineHidden: (UITableView *)tableView{

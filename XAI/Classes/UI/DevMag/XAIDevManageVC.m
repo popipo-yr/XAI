@@ -34,19 +34,6 @@
         _deviceService.delegate = self;
         
         
-        UIImage* editNorImg = [UIImage imageNamed:@"device_edit_nor.png"] ;
-                               
-        if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
-            
-            editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        }
-        
-        _editItem = [[UIBarButtonItem alloc] initWithImage:editNorImg
-                                                     style:UIBarButtonItemStylePlain
-                                                    target:self
-                                                    action:@selector(editBtnClick:)];
-
-        
         _objectAry = [[NSMutableArray alloc] init];
         
         XAILight* obj1 = [[XAILight alloc] init];
@@ -78,53 +65,7 @@
 {
     [super viewDidLoad];
     
-    
-    self.tableView.editing = FALSE;
-    
-    UIImage* addNorImg = [UIImage imageNamed:@"device_add_nor.png"];
-                          
-    if ([addNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
-        
-        addNorImg = [addNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }
- 
-    
-    
-    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addNorImg
-                                                                style:UIBarButtonItemStylePlain
-                                                               target:self
-                                                               action:@selector(addBtnClick:)];
 
-    
-    [self.navigationItem setRightBarButtonItems:@[addItem,_editItem]];
-    
-    //back
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    [self.navigationItem setBackBarButtonItem:backItem];
-
-}
-
-
-- (void) viewWillAppear:(BOOL)animated{
-    
-    
-    _recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                            action:@selector(handleSwipeRight:)];
-    
-    [_recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.view addGestureRecognizer:_recognizer];
-    
-
-    
-    [super viewWillAppear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated{
-    
-    [super viewDidDisappear:animated];
-    
-    [self.view removeGestureRecognizer:_recognizer];
-    
 }
 
 
@@ -203,34 +144,10 @@
     
 }
 
-- (void) editBtnClick:(id)sender{
+- (void)delBtnClick:(NSIndexPath*) index{
     
     
-    [self setTableViewEdit:!self.tableView.editing];
-    
-}
--(void) handleSwipeRight:(id)sender{
-    
-    [self setTableViewEdit:NO];
-    
-}
-
-- (void) setTableViewEdit:(BOOL) bl{
-    
-    self.tableView.editing = bl;
-    
-    NSString* imgName = bl ? @"device_edit_sel.png" : @"device_edit_nor.png";
-    
-    UIImage* editNorImg = [UIImage imageNamed:imgName];
-    
-    if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
-        
-        editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }
-
-    
-    _editItem.image = editNorImg;
-    
+    XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
 }
 
 
@@ -324,42 +241,6 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        
-        _curDelIndexPath = indexPath;
-        
-//        [_objectAry removeObjectAtIndex:indexPath.row];
-//        // Delete the row from the data source.
-//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-
-        XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
-        
-    }
-}
-
-
--(NSString *)tableView:(UITableView *)tableView
-titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    return @"删除";
-}
-
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 #pragma mark - DeviceService
 

@@ -8,6 +8,14 @@
 
 #import "XAITableViewController.h"
 
-@interface XAIUserEditVC : XAITableViewController
+#import "XAIUser.h"
+
+@interface XAIUserEditVC : XAITableViewController{
+
+    XAIUser* _userInfo;
+
+}
+
+@property (nonatomic,strong) XAIUser* userInfo;
 
 @end

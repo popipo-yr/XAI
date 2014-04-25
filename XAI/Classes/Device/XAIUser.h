@@ -19,6 +19,7 @@
 @property (nonatomic, assign) XAITYPELUID luid;
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* pawd;
 
 
 @end

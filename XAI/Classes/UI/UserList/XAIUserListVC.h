@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAITableViewController.h"
+#import "XAITableViewWithOprController.h"
 
 #import "XAIUserService.h"
 
-@interface XAIUserListVC : XAITableViewController
+@interface XAIUserListVC : XAITableViewWithOprController
 <UITableViewDataSource,UITabBarDelegate,XAIUserServiceDelegate>{
 
     XAIUserService* _userService;

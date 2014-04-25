@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "XAITableViewController.h"
+#import "XAITableViewWithOprController.h"
 #import "XAIDeviceService.h"
 #import "XAIObject.h"
 #import "XAIChangeNameVC.h"
 
-@interface XAIDevManageVC : XAITableViewController
+@interface XAIDevManageVC : XAITableViewWithOprController
 <UITableViewDelegate,UITableViewDataSource,ZBarReaderDelegate,XAIDeviceServiceDelegate>{
 
     XAIDeviceService* _deviceService;
@@ -23,11 +23,6 @@
     
     XAIChangeNameVC* _vc;
     
-    UIBarButtonItem* _editItem;
-    
-    UISwipeGestureRecognizer* _recognizer;
-    
-    NSIndexPath* _curDelIndexPath;
 
 }
 

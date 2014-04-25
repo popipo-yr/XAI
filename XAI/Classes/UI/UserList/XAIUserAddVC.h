@@ -8,6 +8,17 @@
 
 #import "XAITableViewController.h"
 
-@interface XAIUserAddVC : XAITableViewController
+#import "XAIUserService.h"
+
+@interface XAIUserAddVC : XAITableViewController{
+
+    NSArray* _addUserInfoAry;
+    
+    UITextField* _userNameTF;
+    UITextField* _userPawdTF;
+    UITextField* _userPawdRepTF;
+    
+    XAIUserService* _userService;
+}
 
 @end

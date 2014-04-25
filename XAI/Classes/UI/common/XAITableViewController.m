@@ -51,7 +51,9 @@
     [self setExtraCellLineHidden:self.tableView];
     
 
-    
+    //back
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backItem];
     
 }
 

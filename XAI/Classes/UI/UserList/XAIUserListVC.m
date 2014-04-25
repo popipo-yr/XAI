@@ -8,6 +8,9 @@
 
 #import "XAIUserListVC.h"
 
+#import "XAIUserAddVC.h"
+#import "XAIUserEditVC.h"
+
 @interface XAIUserListVC ()
 
 @end
@@ -23,10 +26,12 @@
         
         XAIUser* user1 = [[XAIUser alloc] init];
         user1.name = @"ADMIN";
+        user1.pawd = @"39487543";
         
         
         XAIUser* user2 = [[XAIUser alloc] init];
         user2.name = @"他大爷";
+        user2.pawd = @"39487543";
         
         _userDatasAry = [[NSMutableArray alloc] initWithObjects:user1,user2,nil];
 
@@ -43,6 +48,10 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,11 +63,28 @@
 
 
 
+#pragma mark - Event
+- (void)addBtnClick:(id)sender{
+
+    XAIUserAddVC* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"XAIUserAddVCID"];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+
+- (void)delBtnClick:(NSIndexPath *)index{
+
+    XAIUser* aUser = [_userDatasAry objectAtIndex:[index row]];
+    
+    
+    [_userService delUser:aUser.luid apsn:aUser.apsn luid:aUser.luid];
+
+}
 
 
 
-
-
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -110,28 +136,27 @@
     return 63.0;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView
-  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
     if ([indexPath row] < [_userDatasAry count]) {
         
         XAIUser* aUser = [_userDatasAry objectAtIndex:[indexPath row]];
         
-//        [self.navigationController pushViewController:
-//         [XAIDevShowStatusVC statusWithObject:obj storyboard:self.storyboard] animated:YES];
+        XAIUserEditVC* editVC = [self.storyboard
+                                 instantiateViewControllerWithIdentifier:@"XAIUserEditVCID"];
+        
+        editVC.userInfo = aUser;
+        
+        [self.navigationController  pushViewController:editVC animated:YES];
+
         
     }
     
-    
-    return nil;
-}
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView  deselectRowAtIndexPath:indexPath animated:false];
 }
-
 
 
 /*
