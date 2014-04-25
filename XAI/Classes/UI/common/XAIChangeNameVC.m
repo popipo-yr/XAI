@@ -34,7 +34,7 @@
     self.clearsSelectionOnViewWillAppear = YES;
     
 
-    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"ok" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
+    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
     
      self.navigationItem.rightBarButtonItem = okItem;
     

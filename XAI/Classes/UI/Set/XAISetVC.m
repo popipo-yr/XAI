@@ -7,6 +7,13 @@
 //
 
 #import "XAISetVC.h"
+#import "XAIChangeCell.h"
+#import "XAIChangeNameVC.h"
+#import "XAIChangePasswordVC.h"
+
+#define _key_name_index 1
+#define _key_pawd_index 2
+#define _key_home_index 0
 
 @interface XAISetVC ()
 
@@ -21,7 +28,11 @@
     
     if (self) {
         
-                _userItems = [[NSArray alloc] initWithObjects:@"名称",@"密码",nil];
+        _userItems = [[NSArray alloc] initWithObjects:@"名称",@"密码",nil];
+        
+        _userInfo = [[XAIUser alloc] init];
+        _userInfo.name = @"小明";
+        _userInfo.pawd = @"98980454";
     }
     
     return self;
@@ -58,6 +69,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) changeUserName:(NSString*)newName{
+    
+    
+}
+
+- (void) changePassword:(NSString*)newPwd{
+    
+    
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -67,86 +89,97 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return [_userItems count];
+    
+    return 3;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"UserCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if (cell) {
-        
-        [cell.textLabel setText:[_userItems objectAtIndex:[indexPath row]]];
+    NSString* cellID = @"XAISetVCCellID";
+    
+    XAIChangeCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (cell == nil || ![cell isKindOfClass:[XAIChangeCell class]]) {
+        cell = [[XAIChangeCell alloc]
+                initWithStyle:UITableViewCellStyleDefault
+                reuseIdentifier:cellID];
     }
     
-    // Configure the cell...
+    
+    
+    if ([indexPath row] == _key_home_index) {
+        
+        cell.lable.text = @"家";
+        
+        [cell setTextFiledWithLable:@"小明爱家"];
+        
+    }else if ([indexPath row] == _key_name_index) {
+        
+        cell.lable.text = @"用户";
+        
+        [cell setTextFiledWithLable:_userInfo.name];
+        
+    }else if([indexPath row] == _key_pawd_index){
+        
+        cell.lable.text = @"密码";
+        
+        [cell setTextFiledWithLable:_userInfo.pawd];
+        [cell.textFiled setSecureTextEntry:YES];
+        
+        
+    }
+    
+    cell.textFiled.enabled = false;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
 
-// Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if ([indexPath row] == _key_home_index) {
+        
+        XAIChangeNameVC* nameVC = [self.storyboard
+                                   instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
+        
+        [nameVC setOneLabName:@"家" OneTexName:_userInfo.name  TwoLabName:@"新名称"];
+        [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
+        [nameVC setBarTitle:@"设置家"];
+        
+        
+        [self.navigationController pushViewController:nameVC animated:YES];
+        
+    }else if ([indexPath row] == _key_name_index) {
+        
+        XAIChangeNameVC* nameVC = [self.storyboard
+                                   instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
+        
+        [nameVC setOneLabName:@"用户名" OneTexName:_userInfo.name  TwoLabName:@"新用户名"];
+        [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
+        [nameVC setBarTitle:@"设置名称"];
+        
+        
+        [self.navigationController pushViewController:nameVC animated:YES];
+        
+    }else if ([indexPath row] == _key_pawd_index){
+        
+        
+        XAIChangePasswordVC* pawVC = [self.storyboard
+                                      instantiateViewControllerWithIdentifier:@"XAIChangePasswordVCID"];
+        
+        [pawVC setOldPwd:_userInfo.pawd];
+        [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
+        [pawVC setBarTitle:@"设置密码"];
+        
+        
+        [self.navigationController pushViewController:pawVC animated:YES];
+    }
     
-//    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"PasswordChangeVC"]
-//                                 animated:NO completion:nil];
     
-    [self.navigationController pushViewController: [self.storyboard instantiateViewControllerWithIdentifier:@"PasswordChangeVC"]  animated:YES];
-
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
 
 @end

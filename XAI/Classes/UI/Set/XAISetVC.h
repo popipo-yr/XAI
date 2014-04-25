@@ -10,12 +10,15 @@
 #import "XAITableViewController.h"
 #import "XAIUserService.h"
 
-@interface XAISetVC : XAITableViewController <UITableViewDataSource,UITableViewDelegate>{
+@interface XAISetVC : XAITableViewController
+<UITableViewDataSource,UITableViewDelegate>{
 
 
     NSArray*  _userItems;
     
     XAIUserService* _userService;
+    
+    XAIUser* _userInfo;
 }
 
 

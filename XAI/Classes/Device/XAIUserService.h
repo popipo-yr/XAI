@@ -12,6 +12,7 @@
 
 @protocol XAIUserServiceDelegate <NSObject>
 
+@optional
 - (void) findedUser:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
 - (void) addUser:(BOOL) isSuccess;
 - (void) delUser:(BOOL) isSuccess;

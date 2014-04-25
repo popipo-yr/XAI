@@ -14,6 +14,7 @@
 
 @protocol XAIDeviceServiceDelegate <NSObject>
 
+@optional
 //- (void) findedDevice:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
 - (void) addDevice:(BOOL) isSuccess;
 - (void) delDevice:(BOOL) isSuccess;

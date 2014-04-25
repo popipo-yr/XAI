@@ -8,7 +8,7 @@
         <!--XAILoginVC-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" userLabel="XAILoginVC" customClass="XAILoginVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAILoginVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" userLabel="XAILoginVC" customClass="XAILoginVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bLL-w0-1TZ"/>
                         <viewControllerLayoutGuide type="bottom" id="WpV-Rt-M78"/>
@@ -106,19 +106,38 @@
         <!--XAISetVC - 用户设置-->
         <scene sceneID="YVC-uw-Z6J">
             <objects>
-                <tableViewController id="foG-Bb-d5b" userLabel="XAISetVC - 用户设置" customClass="XAISetVC" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eBg-Tx-IJf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController storyboardIdentifier="XAISetVCID" id="foG-Bb-d5b" userLabel="XAISetVC - 用户设置" customClass="XAISetVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="eBg-Tx-IJf">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" id="B68-KT-yOE">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="XAISetVCCellID" id="2gD-Jv-TUu" customClass="XAIChangeCell">
+                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B68-KT-yOE" id="aOh-L3-W6l">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2gD-Jv-TUu" id="AIt-bP-nds">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-gI-JM9">
+                                            <rect key="frame" x="111" y="7" width="179" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhM-mI-tza">
+                                            <rect key="frame" x="20" y="11" width="73" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lable" destination="DhM-mI-tza" id="y3m-Y3-obc"/>
+                                    <outlet property="textFiled" destination="fgB-gI-JM9" id="kFa-xN-0g6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -128,39 +147,26 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="用户设置" id="b9G-Bk-S78"/>
                     <connections>
-                        <segue destination="OOd-Q7-85l" kind="push" identifier="UserVCPush" id="8bA-he-Saj"/>
+                        <segue destination="vRk-Hb-KGT" kind="push" identifier="xaisetchangepawdpushid" id="n01-em-JJa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEx-B2-9H5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1320" y="2159"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="M71-qk-yQ1">
-            <objects>
-                <viewController storyboardIdentifier="PasswordChangeVC" id="OOd-Q7-85l" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ky4-Xr-hGj"/>
-                        <viewControllerLayoutGuide type="bottom" id="xhg-mO-cBD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4jA-RA-omh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="XSG-XQ-Zry"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L5c-ed-6ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-648" y="2907"/>
+            <point key="canvasLocation" x="1327" y="2923"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="ayR-nu-Kcq">
             <objects>
                 <navigationController definesPresentationContext="YES" id="tfn-Ze-pDY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="设置" image="tab_bar_set_nor.png" id="TeO-ea-xNt"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rAB-nh-Hcm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rAB-nh-Hcm">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="1" green="0.051221787019999999" blue="0.11104044439999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="foG-Bb-d5b" kind="relationship" relationship="rootViewController" id="7jU-Wf-rTU"/>
@@ -168,7 +174,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRZ-gI-1TX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-480" y="1775"/>
+            <point key="canvasLocation" x="-246" y="2511"/>
         </scene>
         <!--Navigation Controller - 设备-->
         <scene sceneID="SHD-eT-fCJ">
@@ -202,7 +208,7 @@
         <!--XAIDevShowVC - 设备列表-->
         <scene sceneID="unk-bG-xvQ">
             <objects>
-                <viewController id="TPD-h2-bC8" userLabel="XAIDevShowVC - 设备列表" customClass="XAIDevShowVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAIDevShowVCID" id="TPD-h2-bC8" userLabel="XAIDevShowVC - 设备列表" customClass="XAIDevShowVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="639" verticalCompressionResistancePriority="832" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jfo-DO-e9Y">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -251,12 +257,12 @@
                     <tabBarItem key="tabBarItem" title="设备" id="tHS-7I-tJ7"/>
                     <navigationItem key="navigationItem" title="设备列表" id="QJg-jY-IkF"/>
                     <connections>
-                        <segue destination="vuV-w2-93q" kind="push" id="hON-TG-aQy"/>
+                        <segue destination="vuV-w2-93q" kind="push" identifier="xaidevshowpushid" id="hON-TG-aQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKb-is-auv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="-2103"/>
+            <point key="canvasLocation" x="-22" y="-1823"/>
         </scene>
         <!--XAILightStatusVC-->
         <scene sceneID="XUs-4c-B7G">
@@ -378,7 +384,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="111" y="-2672"/>
+            <point key="canvasLocation" x="1327" y="-2296"/>
         </scene>
         <!--XAITabBarVC-->
         <scene sceneID="C86-W6-Tcy">
@@ -400,7 +406,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMK-sk-wJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="424"/>
+            <point key="canvasLocation" x="-246" y="426"/>
         </scene>
         <!--Navigation Controller - 用户-->
         <scene sceneID="hO7-Ld-w0j">
@@ -428,7 +434,7 @@
         <!--XAIUserListVC-->
         <scene sceneID="oWo-G6-uYy">
             <objects>
-                <tableViewController id="d5U-iL-ZM5" userLabel="XAIUserListVC" customClass="XAIUserListVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="XAIUserListVCID" id="d5U-iL-ZM5" userLabel="XAIUserListVC" customClass="XAIUserListVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MPp-nC-ceg">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,8 +479,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="用户列表" id="hvx-9H-IWZ"/>
                     <connections>
-                        <segue destination="r9J-Yd-Yha" kind="push" id="DBY-x2-Jql"/>
-                        <segue destination="GCQ-Za-fFQ" kind="push" id="1fE-mG-Xen"/>
+                        <segue destination="r9J-Yd-Yha" kind="push" identifier="xaiuseraddpushid" id="DBY-x2-Jql"/>
+                        <segue destination="GCQ-Za-fFQ" kind="push" identifier="xaiusereditpushid" id="1fE-mG-Xen"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x3H-zK-R16" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,18 +579,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="用户信息编辑" id="JAH-jM-ojn"/>
                     <connections>
-                        <segue destination="Ujw-Ai-Cdk" kind="push" id="Jh1-J7-H7F"/>
-                        <segue destination="vRk-Hb-KGT" kind="push" id="Hc2-bF-MML"/>
+                        <segue destination="Ujw-Ai-Cdk" kind="push" identifier="xaiusersetnamepushid" id="Jh1-J7-H7F"/>
+                        <segue destination="vRk-Hb-KGT" kind="push" identifier="xaiusersetpawdpushid" id="Hc2-bF-MML"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ka1-PM-bwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2318" y="2047"/>
         </scene>
-        <!--Change PasswordVC - 修改密码-->
+        <!--XAIChangePasswordVC - 修改密码-->
         <scene sceneID="G7z-ZP-V0r">
             <objects>
-                <tableViewController storyboardIdentifier="XAIChangePasswordVCID" id="vRk-Hb-KGT" customClass="XAIChangePasswordVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="XAIChangePasswordVCID" id="vRk-Hb-KGT" userLabel="XAIChangePasswordVC - 修改密码" customClass="XAIChangePasswordVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="6ZU-RB-ztW">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -627,12 +633,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRg-76-lN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3402" y="1672"/>
+            <point key="canvasLocation" x="3698" y="2976"/>
         </scene>
         <!--XAIDevManageVC - 设备管理-->
         <scene sceneID="Oeg-SP-TXk">
             <objects>
-                <viewController id="JsJ-oD-swf" userLabel="XAIDevManageVC - 设备管理" customClass="XAIDevManageVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAIDevManageVCID" id="JsJ-oD-swf" userLabel="XAIDevManageVC - 设备管理" customClass="XAIDevManageVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ASn-xP-MjP">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -681,8 +687,8 @@
                     <tabBarItem key="tabBarItem" title="管理" id="0AI-qS-vE2"/>
                     <navigationItem key="navigationItem" title="设备管理" id="f93-7A-w0x"/>
                     <connections>
-                        <segue destination="YhE-Ua-zfN" kind="push" id="sSF-Kj-kf8"/>
-                        <segue destination="Ujw-Ai-Cdk" kind="push" id="vvL-pu-Vsi"/>
+                        <segue destination="YhE-Ua-zfN" kind="push" identifier="xaidevaddpushid" id="sSF-Kj-kf8"/>
+                        <segue destination="Ujw-Ai-Cdk" kind="push" identifier="xaideveditpushid" id="vvL-pu-Vsi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PwV-4B-AHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -827,6 +833,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="n01-em-JJa"/>
         <segue reference="Jh1-J7-H7F"/>
     </inferredMetricsTieBreakers>
 </document>

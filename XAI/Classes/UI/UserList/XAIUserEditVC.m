@@ -127,7 +127,7 @@
         
         [pawVC setOldPwd:_userInfo.pawd];
         [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
-        [pawVC setBarTitle:@"修改名称"];
+        [pawVC setBarTitle:@"修改密码"];
         
         
         [self.navigationController pushViewController:pawVC animated:YES];
