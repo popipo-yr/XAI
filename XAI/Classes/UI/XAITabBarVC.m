@@ -74,13 +74,14 @@
             break;
     }
     
-    if ([UIImage respondsToSelector:@selector(imageWithRenderingMode:)]) {
+    UIImage* img = [UIImage imageNamed:imageName];
+    
+    if ([img respondsToSelector:@selector(imageWithRenderingMode:)]) {
         
-       return  [[UIImage imageNamed:imageName]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+       return  [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
 
-    return [UIImage imageNamed:imageName];
+    return img;
   }
 
 @end

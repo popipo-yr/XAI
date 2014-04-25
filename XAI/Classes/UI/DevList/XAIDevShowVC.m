@@ -69,7 +69,7 @@
 	// Do any additional setup after loading the view.
     
     //设置statusbar
-    if ([self.navigationController respondsToSelector:@selector(setBarTintColor:)]) {
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
         
         
         [[UINavigationBar appearance] setBarTintColor:

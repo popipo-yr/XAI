@@ -35,6 +35,11 @@
 		9631D17019075691007CBC4B /* obj_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16819075691007CBC4B /* obj_light.png */; };
 		9631D17119075691007CBC4B /* obj_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16919075691007CBC4B /* obj_switch.png */; };
 		9631D17219075691007CBC4B /* obj_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16A19075691007CBC4B /* obj_window.png */; };
+		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
+		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
+		9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */; };
+		9648E6E7190A15FD00D630D8 /* XAIUserEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E6190A15FD00D630D8 /* XAIUserEditVC.m */; };
+		9648E6EA190A1B8300D630D8 /* XAITableViewWithOprViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E9190A1B8300D630D8 /* XAITableViewWithOprViewController.m */; };
 		964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964C996A18FBAB53006300F9 /* XAIDeviceService.m */; };
 		964E6A311904DAD500F1F61C /* nav_bar_44.png in Resources */ = {isa = PBXBuildFile; fileRef = 964E6A2F1904DAD500F1F61C /* nav_bar_44.png */; };
 		964E6A321904DAD500F1F61C /* nav_bar_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 964E6A301904DAD500F1F61C /* nav_bar_64.png */; };
@@ -269,6 +274,14 @@
 		9631D16819075691007CBC4B /* obj_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light.png; sourceTree = "<group>"; };
 		9631D16919075691007CBC4B /* obj_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_switch.png; sourceTree = "<group>"; };
 		9631D16A19075691007CBC4B /* obj_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window.png; sourceTree = "<group>"; };
+		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
+		9648E6DF190A05A900D630D8 /* user_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_head.png; sourceTree = "<group>"; };
+		9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserAddVC.h; sourceTree = "<group>"; };
+		9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserAddVC.m; sourceTree = "<group>"; };
+		9648E6E5190A15FD00D630D8 /* XAIUserEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserEditVC.h; sourceTree = "<group>"; };
+		9648E6E6190A15FD00D630D8 /* XAIUserEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserEditVC.m; sourceTree = "<group>"; };
+		9648E6E8190A1B8300D630D8 /* XAITableViewWithOprViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITableViewWithOprViewController.h; sourceTree = "<group>"; };
+		9648E6E9190A1B8300D630D8 /* XAITableViewWithOprViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITableViewWithOprViewController.m; sourceTree = "<group>"; };
 		964C996918FBAB53006300F9 /* XAIDeviceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceService.h; sourceTree = "<group>"; };
 		964C996A18FBAB53006300F9 /* XAIDeviceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceService.m; sourceTree = "<group>"; };
 		964E6A2F1904DAD500F1F61C /* nav_bar_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_44.png; sourceTree = "<group>"; };
@@ -643,6 +656,23 @@
 			path = 2x;
 			sourceTree = "<group>";
 		};
+		9648E6DC190A05A900D630D8 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				9648E6DD190A05A900D630D8 /* 2x */,
+				9648E6DF190A05A900D630D8 /* user_head.png */,
+			);
+			path = user;
+			sourceTree = "<group>";
+		};
+		9648E6DD190A05A900D630D8 /* 2x */ = {
+			isa = PBXGroup;
+			children = (
+				9648E6DE190A05A900D630D8 /* user_head@2x.png */,
+			);
+			path = 2x;
+			sourceTree = "<group>";
+		};
 		964E6A371904F14800F1F61C /* Obj */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,6 +762,10 @@
 			children = (
 				967BD7AE19090F3A007C3C8C /* XAIUserListVC.h */,
 				967BD7AF19090F3A007C3C8C /* XAIUserListVC.m */,
+				9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */,
+				9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */,
+				9648E6E5190A15FD00D630D8 /* XAIUserEditVC.h */,
+				9648E6E6190A15FD00D630D8 /* XAIUserEditVC.m */,
 			);
 			path = UserList;
 			sourceTree = "<group>";
@@ -739,6 +773,7 @@
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
+				9648E6DC190A05A900D630D8 /* user */,
 				967BD7881908B5CB007C3C8C /* obj-other */,
 				960BDD461907989300787148 /* obj-status */,
 				9631D16119075691007CBC4B /* obj-icon */,
@@ -770,9 +805,9 @@
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				967BD7951908D874007C3C8C /* common */,
 				967BD7AA19090F3A007C3C8C /* Set */,
 				967BD7AD19090F3A007C3C8C /* UserList */,
-				967BD7951908D874007C3C8C /* common */,
 				967BD76C1908AB08007C3C8C /* DevList */,
 				967BD7751908AB08007C3C8C /* DevMag */,
 				96E9D96A19010561000BB595 /* XAILoginVC.h */,
@@ -781,6 +816,8 @@
 				96E9D99419011D76000BB595 /* XAITabBarVC.m */,
 				967BD7851908ABCF007C3C8C /* XAITableViewController.h */,
 				967BD7861908ABCF007C3C8C /* XAITableViewController.m */,
+				9648E6E8190A1B8300D630D8 /* XAITableViewWithOprViewController.h */,
+				9648E6E9190A1B8300D630D8 /* XAITableViewWithOprViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1154,6 +1191,7 @@
 				960BDD531907989300787148 /* obj_light_open@2x.png in Resources */,
 				96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
+				9648E6E1190A05A900D630D8 /* user_head.png in Resources */,
 				9631D17219075691007CBC4B /* obj_window.png in Resources */,
 				C38AC20518EBF10A002F20C1 /* Main_iPad.storyboard in Resources */,
 				960BDD551907989300787148 /* obj_door_open.png in Resources */,
@@ -1167,6 +1205,7 @@
 				96E9D98E190111F7000BB595 /* tab_bar_set_sel@2x.png in Resources */,
 				967BD78F1908B5CB007C3C8C /* device_add_sel@2x.png in Resources */,
 				96E9D985190111F7000BB595 /* tab_bar_dev_sel.png in Resources */,
+				9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */,
 				967BD7A21908F9E1007C3C8C /* device_edit_nor.png in Resources */,
 				964E6A321904DAD500F1F61C /* nav_bar_64.png in Resources */,
 				96E9D984190111F7000BB595 /* tab_bar_dev_nor@2x.png in Resources */,
@@ -1224,6 +1263,7 @@
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
+				9648E6E7190A15FD00D630D8 /* XAIUserEditVC.m in Sources */,
 				967BD7801908AB08007C3C8C /* XAIDevShowVC.m in Sources */,
 				967BD7821908AB08007C3C8C /* XAIDevManageCell.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
@@ -1240,6 +1280,7 @@
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
 				C33E77FE18F3B28500808391 /* XAILogin.m in Sources */,
+				9648E6EA190A1B8300D630D8 /* XAITableViewWithOprViewController.m in Sources */,
 				968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */,
 				967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
@@ -1264,6 +1305,7 @@
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
+				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				967BD7831908AB08007C3C8C /* XAIDevManageVC.m in Sources */,

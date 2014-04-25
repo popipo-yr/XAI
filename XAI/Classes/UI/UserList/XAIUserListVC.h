@@ -8,6 +8,23 @@
 
 #import "XAITableViewController.h"
 
+#import "XAIUserService.h"
+
 @interface XAIUserListVC : XAITableViewController
+<UITableViewDataSource,UITabBarDelegate,XAIUserServiceDelegate>{
+
+    XAIUserService* _userService;
+    
+    NSMutableArray* _userDatasAry;
+}
+
+@end
+
+
+@interface XAIUserListVCCell : UITableViewCell
+
+@property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
+@property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
+@property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
 
 @end
