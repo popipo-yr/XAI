@@ -8,13 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "XAILogin.h"
+#import "XAIUserService.h"
+#import "XAIDeviceService.h"
 
-@interface XAILoginVC : UIViewController <XAILoginDelegate>{
+@interface XAILoginVC : UIViewController
+<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate>{
 
 
     XAILogin*  _login;
     
     UIActivityIndicatorView* _activityView;
+    
+    XAIUserService* _userService;
+    XAIDeviceService* _devService;
+    
+    int _findUser;
+    int _findDev;
 }
 
 

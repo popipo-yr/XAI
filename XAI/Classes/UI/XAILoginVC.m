@@ -9,6 +9,11 @@
 #import "XAILoginVC.h"
 #import "XAIUserService.h"
 
+
+#define findSuccess 1
+#define findFail   2
+#define findStart  0
+
 @interface XAILoginVC ()
 
 @end
@@ -152,22 +157,111 @@
     [_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
-    
-    
- //[self performSegueWithIdentifier:@"XAIMainPageSegue" sender:Nil];
-    
+}
 
-//[self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XAIMainPage"] animated:YES completion:nil];
+#pragma mark - Delegate
+
+- (void) userService:(XAIUserService *)userService findedAllUser:(NSSet *)users status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    
+    _findUser =  isSuccess ? findSuccess : findFail;
+
+    if (isSuccess) {
+        
+        /*存储数据 其他页面使用*/
+        
+    }
+    
+    [self getDateFinsh];
+    
+}
+
+- (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    _findDev =  isSuccess ? findSuccess : findFail;
+    
+    if (isSuccess) {
+        
+        /*存储数据 其他页面使用*/
+        
+    }
+
+    
+        
+    [self getDateFinsh];
+    
 }
 
 - (void)loginFinishWithStatus:(BOOL)status{
     
-
-    [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
-    _login = nil;
+    _findDev = findStart;
+    _findUser = findStart;
     
-    [_activityView stopAnimating];
-    _activityView = nil;
+    /*获取设备列表,和用户列表*/
+    _devService = [[XAIDeviceService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+    _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+    _devService.deviceServiceDelegate = self;
+    _userService.userServiceDelegate = self;
+    
+    
+    
+    [_userService finderAllUser];
+    [_devService findAllOnlineDevWithuseSecond:5];
+
+
+}
+
+
+- (void) getDateFinsh{
+    
+    NSString* errTip = nil;
+    
+    if (_findUser == findStart || _findDev == findStart) return;
+    
+    if (_findDev == findFail && _findUser == findFail) {
+        
+        errTip = @"获取用户列表,设备列表失败";
+        
+    }else if (_findUser == findFail) {
+        
+        errTip = @"获取用户列表失败";
+        
+    }else if (_findDev == findFail) {
+        
+        errTip = @"获取设备列表信息失败";
+    }
+
+    if (errTip != nil) {
+        
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:errTip delegate:nil
+                                              cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        
+        [alert show];
+        
+         [_activityView stopAnimating];
+        
+        
+    }else{
+    
+        [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
+        _login = nil;
+        
+        [_activityView stopAnimating];
+        _activityView = nil;
+        
+        _devService = nil;
+        _userService = nil;
+
+    
+    }
+    
+
+    
+
+
+
+
 }
 
 @end

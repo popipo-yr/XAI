@@ -55,7 +55,7 @@
 - (void) devService:(XAIDeviceService*)devService findedAllDevice:(NSArray*) devAry
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
-- (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) luidAry
+- (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) devs
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
 @end

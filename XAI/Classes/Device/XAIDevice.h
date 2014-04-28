@@ -26,6 +26,8 @@
 
 - (void) getDeviceStatus;
 
+- (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
+
 @end
 
 

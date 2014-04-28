@@ -82,4 +82,16 @@
 }
 
 
+- (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
+    
+    if (self = [super init]) {
+        
+        _apsn = apsn;
+        _luid = luid;
+    }
+    
+    return self;
+    
+}
+
 @end

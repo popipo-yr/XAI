@@ -463,17 +463,36 @@
 }
 
 
+- (void) _init{
+
+    _onlineDevices = [[NSMutableSet alloc] init];
+    _allDevices = [[NSMutableSet alloc] init];
+    _bFinding = false;
+    _timer = nil;
+}
+
+
 - (id) init{
 
     if (self = [super init]) {
         
-        _onlineDevices = [[NSMutableSet alloc] init];
-        _allDevices = [[NSMutableSet alloc] init];
-        _bFinding = false;
-        _timer = nil;
+        [self _init];
+
     }
     
     return self;
+}
+
+
+- (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
+
+    if (self = [super initWithApsn:apsn Luid:luid]) {
+        
+        [self _init];
+    }
+    
+    return self;
+
 }
 
 - (void) dealloc{

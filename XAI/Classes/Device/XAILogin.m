@@ -75,7 +75,7 @@
         
         
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
-
+        
         
     }
     

@@ -38,6 +38,9 @@
 
 - (void) finderAllUser;
 
+
+
+
 @end
 
 #pragma mark ------------------
@@ -55,7 +58,7 @@
 - (void) userService:(XAIUserService*)userService findedUser:(XAITYPELUID)luid
             withName:(NSString*)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
-- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)name
+- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)users
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
 

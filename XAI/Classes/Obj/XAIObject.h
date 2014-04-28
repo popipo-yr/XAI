@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
+#import "XAIData.h"
 
 #import "XAIDebug.h"
 
@@ -32,6 +33,7 @@ typedef int  XAIGOURPID;
     XAITYPEAPSN _apsn;
     XAITYPELUID _luid;
     NSString* _lastOpr; /*最后一次操作*/
+    NSString* nickName; 
     
 }
 

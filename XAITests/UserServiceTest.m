@@ -441,7 +441,7 @@ XAITYPELUID  ____luid;
     
 }
 
-- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)name
+- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)users
               status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
     if (isSuccess == TRUE) {
