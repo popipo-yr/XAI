@@ -10,7 +10,10 @@
 #import "MQTT.h"
 #import "XAIUser.h"
 
-@protocol XAIUserServiceDelegate <NSObject>
+#import "XAIDevice.h"
+
+
+@protocol XAIUserServiceDelegate <XAIDeviceStatusDelegate>
 
 @optional
 - (void) findedUser:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
@@ -27,29 +30,30 @@
 @end
 
 
-@interface XAIUserService : NSObject <MQTTPacketManagerDelegate>
+@interface XAIUserService : XAIDevice <MQTTPacketManagerDelegate>
 {
 
     NSString* _usernameFind;
     BOOL findingAUser;
+    __weak id <XAIUserServiceDelegate> _delegate;
+
 }
 
-@property (nonatomic,weak) id<XAIUserServiceDelegate> delegate;
-
-- (void) addUser:(NSString*)uname Password:(NSString*)password apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
-
-- (void) delUser:(XAITYPELUID) uluid apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid;
-
-- (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername
-               apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid;
-
-- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword
-               apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid;
+@property (nonatomic,weak,setter = setDelegate:) id<XAIUserServiceDelegate> delegate;
 
 
+- (void) addUser:(NSString*)uname Password:(NSString*)password;
 
-- (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (void) delUser:(XAITYPELUID) uluid;
 
-- (void) finderAllUserApsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid;
+- (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername;
+
+- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword;
+
+
+
+- (void) finderUserLuidHelper:(NSString*)username;
+
+- (void) finderAllUser;
 
 @end

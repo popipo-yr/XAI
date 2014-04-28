@@ -28,6 +28,8 @@
         // Custom initialization
         
         _deviceService = [[XAIDeviceService alloc] init];
+        _deviceService.apsn = [MQTT shareMQTT].apsn;
+        _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.delegate = self;
         
         _deviceDatas = [[NSMutableArray alloc] init];
@@ -95,7 +97,7 @@
     [self.navigationItem setBackBarButtonItem:backItem];
 
     
-    [_deviceService findAllDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+    [_deviceService findAllDev];
 
 }
 

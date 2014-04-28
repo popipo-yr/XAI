@@ -166,7 +166,7 @@
     NSString* name =  _nameTextField.text;
    
     
-    [_deviceService addDev:0x1 withName:name apsn:0x1 luid:0x3];
+    [_deviceService addDev:0x1 withName:name];
 }
 
 

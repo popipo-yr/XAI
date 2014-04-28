@@ -44,6 +44,8 @@
 - (void)setUp
 {
     _devService = [[XAIDeviceService alloc] init];
+    _devService.apsn = [MQTT shareMQTT].apsn;
+    _devService.luid = MQTTCover_LUID_Server_03;
     _devService.delegate = self;
     
     
@@ -106,7 +108,7 @@
     if (_loginStatus == Success) {
         
         
-        [_devService addDev:_luidDev  withName:_name4Change apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_devService addDev:_luidDev  withName:_name4Change];
         
         
         _addStatus = 0;
@@ -143,7 +145,7 @@
     if (_loginStatus == Success) {
         
         
-        [_devService changeDev:_luidDev withName:_name4Change_end apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_devService changeDev:_luidDev withName:_name4Change_end];
          
 
         
@@ -188,7 +190,7 @@
         
         
         
-        [_devService findAllDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_devService findAllDev];
         
         _findStatus = start;
         
@@ -221,7 +223,7 @@
         
         
         
-        [_devService findAllOnlineDevWithApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03 useSecond:10];
+        [_devService findAllOnlineDevWithuseSecond:10];
         
         _findOnlineStatus = start;
         
@@ -259,7 +261,7 @@
         
         
         
-        [_devService delDev:_luidDev apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_devService delDev:_luidDev];
         
         
         _delStatus = start;

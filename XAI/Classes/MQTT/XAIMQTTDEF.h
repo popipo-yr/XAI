@@ -60,6 +60,56 @@ typedef  enum XAI_DATA_TYPE{
 }XAI_DATA_TYPE;
 
 
+typedef enum  XAI_ERROR{
+    
+    XAI_ERROR_OK = 0,
+    XAI_ERROR_UNCHANGE = 1,
+    XAI_ERROR_GENERAL = 2,
+    XAI_ERROR_NO_PRIV = 3,  //权限冲突	不是admin或者不是本人
+    XAI_ERROR_NAME_EXISTED = 4, //"1、注册、注销用户时，FromLuid 是不是Admin账户
+    // 2、修改用户名、用户密码时，不是本人"
+    
+    XAI_ERROR_NAME_INVALID = 5, //"1、注册用户的用户名为空
+    //2、注册设备的名字为空
+    //3、修改用户的用户名为空"
+    XAI_ERROR_NAME_NONE_EXISTED = 6, //用户名不存在
+    
+    XAI_ERROR_LUID_EXISTED = 7, //1、添加设备时LUID已经存在
+    XAI_ERROR_LUID_INVALID = 8, //"1、发送给APSERVER模块的TO_LUID不是0x3
+    //2、发送给RB模块的TO_LUID错误
+    //3、注册设备时，LUID 不在范围 0x0000000100000000-0xFFFFFFFFFFFFFFFF"
+    
+    
+    XAI_ERROR_LUID_NONE_EXISTED = 9,//	"1、修改用户密码时，LUID不存在
+    //2、修改用户名字时，LUID不存在
+    //3、删除用户时，LUDI不存在"
+    
+    XAI_ERROR__PWD_INCORRECT = 10,	//1、修改用户密码时，密码为空
+
+    XAI_ERROR___DEVICE_NONE_EXISTED =11,//	"1、删除设备时，LUID不存在
+    XAI_ERROR_DEVICE_OFFLINE = 12	, //设备离线	主要用于桥接模块检测设备是否在线
+    
+    //2、修改设备名字时，LUID不存在"
+    XAI_ERROR_ARG_INCORRECT	 = 13 , //1、ID 和对应的datacount不匹配
+    XAI_ERROR_LOW_POWER = 14, //电量低
+    XAI_ERROR_MALLOC_ERROR	 = 15 ,//"1、APSERVERM模块申请内存失败
+    //2、RB模块申请内存失败
+    //3、Zigbee部分申请内存失败"
+    
+    XAI_ERROR_MSGID_NOT_LAST = 16,	// MSGID不是最新	 Apserver模块和RB模块内部使用
+    XAI_ERROR_MSG_TYPE = 17,	 //消息类型错误 发给RB模块和Apserver模块的消息FLAG错误
+    XAI_ERROR_MODLE_BRIDGE = 18,	//桥接模块内部错误 RB模块内部使用
+    XAI_ERROR_MODLE_APSERVER = 19 ,//	APSERVER模块内部错误 Apserver模块内部使用
+    XAI_ERROR_NULL_POINTER = 20, //空指针错误	Apserver模块和RB模块内部使用
+    XAI_ERROR_APSN = 21,	// APSN错误 发送报文的中的APSN错误
+    XAI_ERROR_ID  = 22,//	控制报文中的ID错误
+    XAI_ERROR_LEN = 23, //	报文长度错误
+    XAI_ERROR_DATA_TYPE = 24 ,//	数据单元中类型错误
+    
+    
+}XAI_ERROR;
+
+
 
 
 

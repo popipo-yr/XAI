@@ -48,7 +48,7 @@
 
 - (void)okBtnClick:(id)sender{
 
-    [_userService addUser:_userNameTF.text Password:_userPawdTF.text apsn:0x1 luid:0x2];
+    [_userService addUser:_userNameTF.text Password:_userPawdTF.text];
 }
 
 - (void)nameFinish:(id)sender{

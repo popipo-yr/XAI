@@ -42,7 +42,7 @@
 - (void) didConnect:(NSUInteger)code {
 	
     
-    [_userService finderUserLuidHelper:_name apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+    [_userService finderUserLuidHelper:_name];
     
 }
 
@@ -93,6 +93,7 @@
 - (void) changeUserName:(BOOL) isSuccess{};
 - (void) changeUserPassword:(BOOL)isSuccess{};
 
+
 #pragma mark -- Other
 
 - (id) init{
@@ -100,6 +101,8 @@
     if (self = [super init]) {
         
         _userService = [[XAIUserService alloc] init];
+        _userService.apsn = 0x01;
+        _userService.luid = MQTTCover_LUID_Server_03;
         _userService.delegate = self;
         
         _name = [[NSMutableString alloc] init];

@@ -248,7 +248,7 @@
 
 - (void) changeDevName:(NSString*)newName{
 
-    [_deviceService changeDev:_curOprObj.luid withName:newName apsn:_curOprObj.apsn luid:_curOprObj.luid];
+    [_deviceService changeDev:_curOprObj.luid withName:newName];
 
     [_vc endOkEvent];
 }

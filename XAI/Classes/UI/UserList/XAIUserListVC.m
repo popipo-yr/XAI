@@ -78,7 +78,7 @@
     XAIUser* aUser = [_userDatasAry objectAtIndex:[index row]];
     
     
-    [_userService delUser:aUser.luid apsn:aUser.apsn luid:aUser.luid];
+    [_userService delUser:aUser.luid];
 
 }
 

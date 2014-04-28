@@ -10,9 +10,11 @@
 #import "MQTT.h"
 #import "XAIDevice.h"
 
+#import "XAIDevice.h"
 
 
-@protocol XAIDeviceServiceDelegate <NSObject>
+
+@protocol XAIDeviceServiceDelegate <XAIDeviceStatusDelegate>
 
 @optional
 //- (void) findedDevice:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
@@ -26,32 +28,29 @@
 @end
 
 
-@interface XAIDeviceService : NSObject <MQTTPacketManagerDelegate>{
+@interface XAIDeviceService : XAIDevice <MQTTPacketManagerDelegate>{
     
     NSMutableSet* _allDevices;
     NSMutableSet* _onlineDevices;
     NSTimer*  _timer;
-    XAITYPEAPSN  _apsn;
     BOOL _bFinding;
 
+    id<XAIDeviceServiceDelegate> _delegate;
 }
 
 
 @property id<XAIDeviceServiceDelegate> delegate;
 
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName
-           apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName;
 
-- (void) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (void) delDev:(XAITYPELUID)dluid ;
 
-- (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName
-               apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName;
 
-
-- (void) findAllDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (void) findAllDev;
 
 /*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
-- (void) findAllOnlineDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid useSecond:(int) sec;
+- (void) findAllOnlineDevWithuseSecond:(int) sec;
 
 @end

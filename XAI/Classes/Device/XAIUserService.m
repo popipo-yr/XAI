@@ -26,8 +26,6 @@
 
 
 
-
-
 - (void) addUser:(NSString*)username Password:(NSString*)password apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
 
     
@@ -56,10 +54,7 @@
      _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     NSString* ctrlTopic =  [MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid];
-    //@"0x00000001/SERVER/0x0000000000000003/IN";
-    //@"0x00000001/MOBILES/0x0000000000000001/IN";
     
-    //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:ackTopic];
     [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
@@ -462,6 +457,7 @@
         case UserTableID:
         {
             [self finderUserLuidHelper:_usernameFind paramStatus:status];
+            
         
         
         }break;
@@ -475,6 +471,8 @@
 
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
 
+    [super recivePacket:datas size:size topic:topic];
+    
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
 
@@ -500,6 +498,45 @@
     purgePacketParamNormal(param);
 }
 
+
+- (void) addUser:(NSString*)uname Password:(NSString*)password{
+
+    [self addUser:uname Password:password apsn:_apsn luid:_luid];
+}
+
+
+- (void) delUser:(XAITYPELUID) uluid{
+
+    [self delUser:uluid apsn:_apsn luid:_luid];
+}
+
+- (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername{
+
+    [self changeUser:uluid withName:newUsername apsn:_apsn luid:_luid];
+}
+
+- (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword{
+
+
+    [self changeUser:luid oldPassword:oldPassword to:newPassword apsn:_apsn luid:_luid];
+}
+
+
+
+- (void) finderUserLuidHelper:(NSString*)username{
+
+    [self finderUserLuidHelper:username apsn:_apsn luid:_luid];
+}
+
+- (void) finderAllUser{
+
+    [self finderAllUserApsn:_apsn luid:_luid];
+}
+
+- (void)setDelegate:(id<XAIUserServiceDelegate>)delegate{
+    
+    _delegate = delegate;
+}
 
 
 @end

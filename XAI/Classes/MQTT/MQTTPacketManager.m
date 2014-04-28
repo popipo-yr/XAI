@@ -41,41 +41,159 @@
 
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro withKey:(NSString*)key{
 
-    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+//    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+//    
+//    if (nil == oldAry) {
+//        
+//        oldAry = [[NSMutableArray alloc] init];
+//    }
+//    
+//    [oldAry addObject:aPro];
+//    
+//    [_delegates setObject:oldAry forKey:key];
     
-    if (nil == oldAry) {
+    /*if refres  count is zero, add it then set the refres to one，
+     if refres count is bigger than zero, plus the refres count*/
+    
+    /*pro info is dictionary not classs ,*/
+    
+    NSMutableArray* proAry = [_delegates objectForKey:key];
+    
+    if (nil == proAry) {
         
-        oldAry = [[NSMutableArray alloc] init];
+        proAry = [[NSMutableArray alloc] init];
+        [_delegates setObject:proAry forKey:key];
     }
     
-    [oldAry addObject:aPro];
+    MQTTPacketManagerDelgInfo* oneProInfo = nil;
+    BOOL bFind = false;
     
-    [_delegates setObject:oldAry forKey:key];
+    for (int i = 0; i < [proAry count]; i++) {
+        
+        oneProInfo = [proAry objectAtIndex:i];
+        
+        if ([oneProInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
+            && oneProInfo.refObj == aPro) {
+            
+            bFind = true;
+            break;
+        }
+    }
+    
+    
+    if (!bFind) {
+        
+        oneProInfo = [[MQTTPacketManagerDelgInfo alloc] init];
+        [proAry addObject:oneProInfo];
+        
+    }
+    
+    
+    if (!bFind) {
+    
+        
+        oneProInfo.refObj = aPro;
+        oneProInfo.refrenceCount = 0;
+        
+    }else{
+    
+        
+        if (oneProInfo.refrenceCount < 0) {/*错误的数据*/
+            
+            oneProInfo.refrenceCount = 0;
+            
+        }
+    }
+    
+    
+    oneProInfo.refrenceCount += 1;
+    
+    
 }
 
 
 
 - (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key{
 
-    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+//    NSMutableArray*  oldAry = [_delegates objectForKey:key];
+//    
+//    if (nil == oldAry) return;
+//    
+//
+//    [oldAry removeObject:aPro];
     
-    if (nil == oldAry) return;
+    /*only  remove reference count,but when it's zero remove obj*/
+    NSMutableArray* proAry = [_delegates objectForKey:key];
+    if (nil == proAry) return;
+    
+    MQTTPacketManagerDelgInfo* oneProInfo = nil;
+    BOOL bFind = false;
+    for (int i = 0; i < [proAry count]; i++) {
+        
+        oneProInfo = [proAry objectAtIndex:i];
+        
+        if ([oneProInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
+            && oneProInfo.refObj == aPro) {
+            
+            bFind = true;
+            break;
+        }
+    }
+    
+    
+    if (!bFind) return;
+    
+    oneProInfo.refrenceCount -= 1;
+    
+    if (oneProInfo.refrenceCount <  1) {
+        
+        [proAry removeObject:oneProInfo];
+        
+    }
+}
+
+/*force remove delegate*/
+- (void) forceRemovePacketManager:(id<MQTTPacketManagerDelegate>)aPro{
+
+    NSArray* allKey =[_delegates allKeys];
+    
+    for (int i = 0;  i < [allKey count]; i++) {
+        
+        NSMutableArray* proAry = [_delegates objectForKey:[allKey objectAtIndex:0]];
+        
+        MQTTPacketManagerDelgInfo* oneProInfo = nil;
+        BOOL bFind = false;
+        for (int i = 0; i < [proAry count]; i++) {
+            
+            oneProInfo = [proAry objectAtIndex:i];
+            
+            if ([oneProInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
+                && oneProInfo.refObj == aPro) {
+                
+                bFind = true;
+                break;
+            }
+        }
+        
+        if (bFind) {
+        
+            [proAry removeObject:oneProInfo];
+        }
+    }
     
 
-    [oldAry removeObject:aPro];
-
 }
 
-- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro{
-
-    [_allDelegate addObject:aPro];
-}
-
-
-- (void) removePacketManagerAll:(id<MQTTPacketManagerDelegate>)aPro{
-
-    [_allDelegate removeObject:aPro];
-}
+//- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro{
+//
+//    [_allDelegate addObject:aPro];
+//}
+//
+//
+//- (void) removePacketManagerAll:(id<MQTTPacketManagerDelegate>)aPro{
+//
+//    [_allDelegate removeObject:aPro];
+//}
 
 #pragma mark -----------------------
 #pragma mark MosquittoClientDelegate
@@ -86,14 +204,22 @@
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         
-        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
-        if (apro != NULL
-            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
-            
-            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
-        }
+//        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
+//        if (apro != NULL
+//            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+//            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+//            
+//            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+//        }
         
+        MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
+        if (delgInfo != NULL
+            && [delgInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
+            && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            
+            [delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+        }
+
 
     }
     
@@ -131,5 +257,9 @@
 - (void) didSubscribe: (NSUInteger)messageId grantedQos:(NSArray*)qos {}
 - (void) didUnsubscribe: (NSUInteger)messageId {}
 
+
+@end
+
+@implementation MQTTPacketManagerDelgInfo
 
 @end

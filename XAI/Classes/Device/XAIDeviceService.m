@@ -224,7 +224,6 @@
     }
     
     [_onlineDevices removeAllObjects];
-    _apsn = apsn;
     _bFinding = YES;
     
     
@@ -475,6 +474,8 @@
 
 - (void) recivePacket:(void*)datas size:(int)size topic:topic{
     
+    [super recivePacket:datas size:size topic:topic];
+    
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
     
@@ -532,6 +533,33 @@
     _allDevices = nil;
     _onlineDevices = nil;
 
+}
+
+
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName{
+
+    [self addDev:dluid withName:devName apsn:_apsn luid:_luid];
+}
+
+- (void) delDev:(XAITYPELUID)dluid{
+
+    [self delDev:dluid apsn:_apsn luid:_luid];
+}
+
+- (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName{
+
+    [self changeDev:dluid withName:newName apsn:_apsn luid:_luid];
+}
+
+- (void) findAllDev{
+
+    [self findAllDevWithApsn:_apsn luid:_luid];
+}
+
+/*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
+- (void) findAllOnlineDevWithuseSecond:(int) sec{
+
+    [self findAllOnlineDevWithApsn:_apsn luid:_luid useSecond:sec];
 }
 
 

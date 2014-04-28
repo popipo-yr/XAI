@@ -43,12 +43,29 @@
 - (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
-/*接受所有的报文*/
-- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+
+
 
 - (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
 - (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
 
-- (void) removePacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+/*force remove delegate*/
+- (void) forceRemovePacketManager:(id<MQTTPacketManagerDelegate>)aPro;
+
+/*接受所有的报文*/
+//- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+//- (void) removePacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+
+@end
+
+
+@interface MQTTPacketManagerDelgInfo : NSObject{
+
+    id <MQTTPacketManagerDelegate>  _refObj;
+    int  _refrenceCount;
+}
+
+@property (nonatomic, strong) id <MQTTPacketManagerDelegate> refObj;
+@property (nonatomic, assign) int refrenceCount;
 
 @end

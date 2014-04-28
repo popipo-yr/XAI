@@ -28,6 +28,8 @@ XAITYPELUID  ____luid;
     int _findStatus;
     int _findAllStatus;
     
+    int _getStatus;
+    
     NSString* _name4Change;
     NSString* _pwd4Change;
     
@@ -47,6 +49,8 @@ XAITYPELUID  ____luid;
 - (void)setUp
 {
     _userService = [[XAIUserService alloc] init];
+    _userService.apsn = [MQTT shareMQTT].apsn;
+    _userService.luid = MQTTCover_LUID_Server_03;
     _userService.delegate = self;
     
     
@@ -88,6 +92,38 @@ XAITYPELUID  ____luid;
 //    }
 //}
 
+- (void)testGetDeviceStatus
+{
+    [self testLogin];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_userService getDeviceStatus];
+        
+        
+        _getStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_getStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_getStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_getStatus != Fail, @"get dev status faild");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
 
 
 - (void)testAdd
@@ -99,7 +135,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService addUser:_name4Change Password:_pwd4Change apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_userService addUser:_name4Change Password:_pwd4Change];
         
         
         _addStatus = 0;
@@ -156,8 +192,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService finderUserLuidHelper:_name4Change apsn:[MQTT shareMQTT].apsn luid:
-         MQTTCover_LUID_Server_03];
+        [_userService finderUserLuidHelper:_name4Change];
         
         _findStatus = start;
         
@@ -192,7 +227,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService finderAllUserApsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_userService finderAllUser];
         
         _findAllStatus = start;
         
@@ -229,7 +264,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService changeUser:_luiduser oldPassword:_pwd4Change to:_pwd4Change_end apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_userService changeUser:_luiduser oldPassword:_pwd4Change to:_pwd4Change_end ];
         
         
         _changePWDStatus = start;
@@ -273,7 +308,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService changeUser:_luiduser withName:_name4Change_end apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_userService changeUser:_luiduser withName:_name4Change_end];
         
         
         _changeNameStatus = start;
@@ -320,7 +355,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService delUser:_luiduser  apsn:[MQTT shareMQTT].apsn luid:MQTTCover_LUID_Server_03];
+        [_userService delUser:_luiduser];
         
         
         _delStatus = start;
@@ -432,5 +467,19 @@ XAITYPELUID  ____luid;
 
 
 }
+
+- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+    
+    if (finish) {
+        
+        _getStatus = Success;
+        
+    }else{
+        
+        _getStatus = Fail;
+        
+    }
+}
+
 
 @end
