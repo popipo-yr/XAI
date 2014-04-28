@@ -44,13 +44,16 @@
 - (void)setUp
 {
     _devService = [[XAIDeviceService alloc] init];
-    _devService.apsn = [MQTT shareMQTT].apsn;
+    
+    [MQTT shareMQTT].apsn = 0x1;
+    
+    _devService.apsn = 0x1;
     _devService.luid = MQTTCover_LUID_Server_03;
-    _devService.delegate = self;
+    _devService.deviceServiceDelegate = self;
     
     
-    _name4Change = @"NAME1";
-    _name4Change_end = @"NAME2";
+    _name4Change = [NSString stringWithFormat:@"NAME1111111"];
+    _name4Change_end = [NSString stringWithFormat:@"NAME112222"];
     
 //    _luidDev = 0x124b0003d430b6 ;
     
@@ -69,7 +72,7 @@
     
     
     
-    _name4Change = [NSString stringWithFormat:@"%@,%llX",@"NAME1",_luidDev];
+    _name4Change = [NSString stringWithFormat:@"%@%llX",@"NAME1",_luidDev];
     _name4Change_end = @"NAME2";
 
     
@@ -290,7 +293,7 @@
 
 
 
-- (void) addDevice:(BOOL)isSuccess{
+- (void) devService:(XAIDeviceService*)devService addDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -301,7 +304,7 @@
     }
     
 }
-- (void) delDevice:(BOOL)isSuccess{
+- (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -313,7 +316,7 @@
     
     
 }
-- (void) changeDeviceName:(BOOL)isSuccess{
+- (void) devService:(XAIDeviceService*)devService changeDevName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -326,7 +329,8 @@
     
 }
 
-- (void) findedAllDevice:(BOOL)isSuccess datas:(NSArray *)devAry{
+- (void) devService:(XAIDeviceService*)devService findedAllDevice:(NSArray*) devAry
+             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
     
     if (isSuccess == TRUE) {
@@ -340,7 +344,8 @@
 
 }
 
-- (void) finddedAllOnlineDevices:(NSSet *)luidSet{
+- (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) luidAry
+             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
 
         _findOnlineStatus = Success;

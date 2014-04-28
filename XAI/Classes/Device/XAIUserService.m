@@ -257,9 +257,10 @@
         
         if (findingAUser && !find && findName) {
             
-            if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
                 
-                [_delegate findedUser:YES Luid:luid withName:username];
+                [_userServiceDelegate userService:self findedUser:luid withName:username  status:YES errcode:XAI_ERROR_OK];
             }
             
             find = YES;
@@ -285,18 +286,20 @@
     
     if (findingAUser && !find) {
         
-        if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedUser:Luid:withName:)]) {
+        if ((nil != _userServiceDelegate) &&
+            [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
             
-            [_delegate findedUser:false Luid:-1 withName:username];
+            [_userServiceDelegate userService:self findedUser:0 withName:nil  status:false  errcode:XAI_ERROR_UNKOWEN];
         }
         
         findingAUser = FALSE;
 
     }
     
-    if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedAllUser:users:)]) {
+    if ((nil != _userServiceDelegate) &&
+        [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
         
-        [_delegate findedAllUser:YES users:users];
+        [_userServiceDelegate userService:self findedAllUser:users status:YES errcode:XAI_ERROR_OK];
     }
     
     
@@ -304,32 +307,6 @@
     
 }
 
-//- (void) ackVerify:(int) err_no proSelect:(SEL) proSel{
-//
-//    if (err_no == 0) {
-//        
-//        if ((nil != _delegate) && [_delegate respondsToSelector:proSel]) {
-//            
-//            [_delegate performSelector:proSel withObject:[NSNumber numberWithBool:TRUE]];
-//            
-//        }
-//        
-//    }else{
-//        
-//        if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
-//            
-//            [_delegate performSelector:proSel withObject:[NSNumber numberWithBool:FALSE]];
-//        }
-//        
-//        
-//        NSLog(@"FAILD ADD USER - %d", err_no);
-//    }
-//    
-//    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-//    
-//    
-//
-//}
 
 - (void) reciveACKPacket:(void*)datas size:(int)size topic:topic{
 
@@ -337,75 +314,44 @@
     
     if (ack == NULL) return;
     
+    BOOL bSuccess = (ack->err_no == XAI_ERROR_OK);
+    
     switch (ack->scid) {
         case AddUserID:{
             
-            if (ack->err_no == 0) {
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:addUser:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
-                    
-                    [_delegate addUser:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addUser:)]) {
-                    
-                    [_delegate addUser:FALSE];
-                }
-
-                
-                NSLog(@"FAILD ADD USER - %d", ack->err_no);
+                [_userServiceDelegate userService:self addUser:bSuccess errcode:ack->err_no];
             }
-            
+
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
             
         }break;
             
         case DelUserID:{
-        
-            if (ack->err_no == 0) {
+            
+            
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delUser:)]) {
-                    
-                    [_delegate delUser:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delUser:)]) {
-                    
-                    [_delegate delUser:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD DEL USER - %d", ack->err_no);
+                [_userServiceDelegate userService:self delUser:bSuccess errcode:ack->err_no];
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+     
         
         }break;
             
         case AlterUserNameID:{
             
-            if (ack->err_no == 0) {
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:changeUserName:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserName:)]) {
-                    
-                    [_delegate changeUserName:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserName:)]) {
-                    
-                    [_delegate changeUserName:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD CHANGE_USER_NAME USER - %d", ack->err_no);
+                [_userServiceDelegate userService:self changeUserName:bSuccess errcode:ack->err_no];
             }
+            
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         
@@ -414,23 +360,10 @@
             
         case AlterUserPWID:{
             
-            
-            if (ack->err_no == 0) {
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:changeUserPassword:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserPassword:)]) {
-                    
-                    [_delegate changeUserPassword:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeUserPassword:)]) {
-                    
-                    [_delegate changeUserPassword:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD CHANGE_USER_PWD USER - %d", ack->err_no);
+                [_userServiceDelegate userService:self changeUserPassword:bSuccess errcode:ack->err_no];
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
@@ -459,6 +392,9 @@
             [self finderUserLuidHelper:_usernameFind paramStatus:status];
             
         
+            NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn luid:_luid other:MQTTCover_UserTable_Other];
+            
+            [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         
         }break;
             
@@ -533,9 +469,9 @@
     [self finderAllUserApsn:_apsn luid:_luid];
 }
 
-- (void)setDelegate:(id<XAIUserServiceDelegate>)delegate{
+- (void)setUserServiceDelegate:(id<XAIUserServiceDelegate>)delegate{
     
-    _delegate = delegate;
+    _userServiceDelegate = delegate;
 }
 
 

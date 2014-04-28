@@ -60,38 +60,31 @@
 
 #pragma mark -- XAIUserSerciveDelegate
 
-- (void) findedUser:(BOOL)isFinded Luid:(XAITYPELUID)luid withName:(NSString *)name{
-
+- (void) userService:(XAIUserService *)userService findedUser:(XAITYPELUID)luid
+            withName:(NSString *)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
     
-    if ((YES == isFinded) &&  [name isEqualToString:_name]) {
+    if ((YES == isSuccess) &&  [name isEqualToString:_name]) {
         
         MQTT* curMQTT = [MQTT shareMQTT];
         
         curMQTT.luid = luid;
         
-        // @"0x00000001/SERVER/0x0000000000000003/OUT/+"
         [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
                                                                   luid:MQTTCover_LUID_Server_03]];
         
         
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
-        
-        //@"0x00000001/MOBILES/0x0000000000000001/IN"
+
         
     }
     
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
         
-        [_delegate loginFinishWithStatus:isFinded];
+        [_delegate loginFinishWithStatus:isSuccess];
     }
 
 }
-
-- (void) addUser:(BOOL) isSuccess{};
-- (void) delUser:(BOOL) isSuccess{};
-- (void) changeUserName:(BOOL) isSuccess{};
-- (void) changeUserPassword:(BOOL)isSuccess{};
 
 
 #pragma mark -- Other
@@ -103,7 +96,7 @@
         _userService = [[XAIUserService alloc] init];
         _userService.apsn = 0x01;
         _userService.luid = MQTTCover_LUID_Server_03;
-        _userService.delegate = self;
+        _userService.userServiceDelegate = self;
         
         _name = [[NSMutableString alloc] init];
         
@@ -114,7 +107,7 @@
 
 - (void)dealloc{
 
-    _userService.delegate = NULL;
+    _userService.userServiceDelegate = NULL;
 
 }
 

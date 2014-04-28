@@ -188,9 +188,10 @@
 
     
     
-    if (_delegate != nil && [_delegate respondsToSelector:@selector(finddedAllOnlineDevices:)]) {
+    if (_deviceServiceDelegate != nil &&
+        [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
         
-        [_delegate finddedAllOnlineDevices:_onlineDevices];
+        [_deviceServiceDelegate  devService:self finddedAllOnlineDevices:_onlineDevices status:YES errcode:XAI_ERROR_OK];
     }
     
     _bFinding = false;
@@ -209,7 +210,6 @@
         [scanner scanHexLongLong:&luid];
         
         NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:luid];
-        //[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
         
         [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
         [[MQTT shareMQTT].client subscribe:topic];
@@ -227,15 +227,6 @@
     _bFinding = YES;
     
     
-    
-    
-    
-//    NSString* topicStr = [MQTTCover nodeStatusAllTopicWithAPNS:apsn];
-//
-//    [[MQTT shareMQTT].packetManager addPacketManagerAll:self];
-//    
-//    [[MQTT shareMQTT].client subscribe:topicStr];
-//    
     _timer = [NSTimer scheduledTimerWithTimeInterval:sec  // 10ms
                                              target:self
                                            selector:@selector(stopfindAllOnlineDev)
@@ -318,9 +309,10 @@
         
     }
     
-    if ((nil != _delegate) && [_delegate respondsToSelector:@selector(findedAllDevice:datas:)]) {
+    if ((nil != _deviceServiceDelegate) &&
+        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
         
-        [_delegate findedAllDevice:YES datas:devAry];
+        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_OK];
     }
     
     
@@ -342,25 +334,16 @@
     
     if (ack == NULL) return;
     
+    
+    BOOL bSuccess = (ack->err_no == XAI_ERROR_OK);
+    
     switch (ack->scid) {
         case AddDevID:{
             
-            if (ack->err_no == 0) {
+            if ((nil != _deviceServiceDelegate) &&
+                [_deviceServiceDelegate respondsToSelector:@selector(devService:addDevice:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addDevice:)]) {
-                    
-                    [_delegate addDevice:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(addDevice:)]) {
-                    
-                    [_delegate addDevice:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD ADD USER - %d", ack->err_no);
+                [_deviceServiceDelegate devService:self addDevice:bSuccess errcode:ack->err_no];
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
@@ -370,22 +353,10 @@
             
         case DelDevID:{
             
-            if (ack->err_no == 0) {
+            if ((nil != _deviceServiceDelegate) &&
+                [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delDevice:)]) {
-                    
-                    [_delegate delDevice:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(delDevice:)]) {
-                    
-                    [_delegate delDevice:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD DEL USER - %d", ack->err_no);
+                [_deviceServiceDelegate devService:self delDevice:bSuccess errcode:ack->err_no];
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
@@ -394,22 +365,10 @@
             
         case AlterDevNameID:{
             
-            if (ack->err_no == 0) {
+            if ((nil != _deviceServiceDelegate) &&
+                [_deviceServiceDelegate respondsToSelector:@selector(devService:changeDevName:errcode:)]) {
                 
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeDeviceName:)]) {
-                    
-                    [_delegate changeDeviceName:YES];
-                }
-                
-            }else{
-                
-                if ((nil != _delegate) && [_delegate respondsToSelector:@selector(changeDeviceName:)]) {
-                    
-                    [_delegate changeDeviceName:FALSE];
-                }
-                
-                
-                NSLog(@"FAILD CHANGE_USER_NAME USER - %d", ack->err_no);
+                [_deviceServiceDelegate devService:self changeDevName:bSuccess errcode:ack->err_no];
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
@@ -445,11 +404,6 @@
             default:break;
         }
     
-    }else if([MQTTCover isNodeTopic:topic]){
-    
-        NSString* luidStr = [NSString stringWithFormat:@"%llx",[MQTTCover nodeTopicLUID:topic]];
-        
-        [_onlineDevices addObject:luidStr];
     }
     
     purgePacketParamStatusAndData(status);

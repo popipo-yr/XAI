@@ -107,6 +107,9 @@ typedef enum  XAI_ERROR{
     XAI_ERROR_DATA_TYPE = 24 ,//	数据单元中类型错误
     
     
+    XAI_ERROR_UNKOWEN = 99,
+    
+    
 }XAI_ERROR;
 
 

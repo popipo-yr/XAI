@@ -12,22 +12,7 @@
 
 #import "XAIDevice.h"
 
-
-@protocol XAIUserServiceDelegate <XAIDeviceStatusDelegate>
-
-@optional
-- (void) findedUser:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
-- (void) addUser:(BOOL) isSuccess;
-- (void) delUser:(BOOL) isSuccess;
-- (void) changeUserName:(BOOL) isSuccess;
-- (void) changeUserPassword:(BOOL)isSuccess;
-
-@optional
-- (void) findedAllUser:(BOOL) isFinded users:(NSSet*) name;
-
-
-
-@end
+@protocol XAIUserServiceDelegate;
 
 
 @interface XAIUserService : XAIDevice <MQTTPacketManagerDelegate>
@@ -35,11 +20,9 @@
 
     NSString* _usernameFind;
     BOOL findingAUser;
-    __weak id <XAIUserServiceDelegate> _delegate;
-
 }
 
-@property (nonatomic,weak,setter = setDelegate:) id<XAIUserServiceDelegate> delegate;
+@property (nonatomic,weak) id<XAIUserServiceDelegate> userServiceDelegate;
 
 
 - (void) addUser:(NSString*)uname Password:(NSString*)password;
@@ -51,9 +34,31 @@
 - (void) changeUser:(XAITYPELUID)luid oldPassword:(NSString*)oldPassword to:(NSString*)newPassword;
 
 
-
 - (void) finderUserLuidHelper:(NSString*)username;
 
 - (void) finderAllUser;
+
+@end
+
+#pragma mark ------------------
+
+
+@protocol XAIUserServiceDelegate <NSObject>
+
+@optional
+
+- (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
+- (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
+- (void) userService:(XAIUserService*)userService changeUserName:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
+- (void) userService:(XAIUserService*)userService changeUserPassword:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
+
+- (void) userService:(XAIUserService*)userService findedUser:(XAITYPELUID)luid
+            withName:(NSString*)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)name
+             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+
+
 
 @end

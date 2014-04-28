@@ -30,7 +30,7 @@
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.apsn = [MQTT shareMQTT].apsn;
         _deviceService.luid = MQTTCover_LUID_Server_03;
-        _deviceService.delegate = self;
+        _deviceService.deviceServiceDelegate = self;
         
         _deviceDatas = [[NSMutableArray alloc] init];
         
@@ -57,7 +57,7 @@
 
 - (void) dealloc{
 
-    _deviceService.delegate = nil;
+    _deviceService.deviceServiceDelegate = nil;
     _deviceService = nil;
     //_activityView = nil;
     

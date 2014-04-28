@@ -14,19 +14,8 @@
 
 
 
-@protocol XAIDeviceServiceDelegate <XAIDeviceStatusDelegate>
 
-@optional
-//- (void) findedDevice:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name;
-- (void) addDevice:(BOOL) isSuccess;
-- (void) delDevice:(BOOL) isSuccess;
-- (void) changeDeviceName:(BOOL) isSuccess;
-- (void) findedAllDevice:(BOOL) isSuccess datas:(NSArray*) devAry;
-
-- (void) finddedAllOnlineDevices:(NSSet*) luidAry;
-
-@end
-
+@protocol XAIDeviceServiceDelegate;
 
 @interface XAIDeviceService : XAIDevice <MQTTPacketManagerDelegate>{
     
@@ -35,11 +24,10 @@
     NSTimer*  _timer;
     BOOL _bFinding;
 
-    id<XAIDeviceServiceDelegate> _delegate;
 }
 
 
-@property id<XAIDeviceServiceDelegate> delegate;
+@property (nonatomic, weak) id<XAIDeviceServiceDelegate> deviceServiceDelegate;
 
 
 - (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName;
@@ -52,5 +40,22 @@
 
 /*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
 - (void) findAllOnlineDevWithuseSecond:(int) sec;
+
+@end
+
+
+@protocol XAIDeviceServiceDelegate <NSObject>
+
+@optional
+
+- (void) devService:(XAIDeviceService*)devService addDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+- (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+- (void) devService:(XAIDeviceService*)devService changeDevName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+- (void) devService:(XAIDeviceService*)devService findedAllDevice:(NSArray*) devAry
+             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+- (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) luidAry
+             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
 @end

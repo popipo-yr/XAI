@@ -22,7 +22,7 @@
         
         _typeStrAry = @[@"门",@"灯"];
         _deviceService = [[XAIDeviceService alloc] init];
-        _deviceService.delegate = self;
+        _deviceService.deviceServiceDelegate = self;
         
     }
     

@@ -49,9 +49,10 @@ XAITYPELUID  ____luid;
 - (void)setUp
 {
     _userService = [[XAIUserService alloc] init];
+    [MQTT shareMQTT].apsn = 1;
     _userService.apsn = [MQTT shareMQTT].apsn;
     _userService.luid = MQTTCover_LUID_Server_03;
-    _userService.delegate = self;
+    _userService.userServiceDelegate = self;
     
     
     _name4Change = @"NAME22";
@@ -60,7 +61,7 @@ XAITYPELUID  ____luid;
     _name4Change_end = @"NAME2";
     
     
-    ____luid = 0x104;
+    ____luid = 258;
 //    ____luid = [[NSUserDefaults standardUserDefaults] integerForKey:@"LUID"];
 //    
 //    NSDictionary* _dic;
@@ -383,8 +384,16 @@ XAITYPELUID  ____luid;
 
 
 
+;
+;
+;
+;
 
-- (void) addUser:(BOOL) isSuccess{
+;
+
+;
+
+- (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
 
     if (isSuccess == TRUE) {
         
@@ -395,7 +404,7 @@ XAITYPELUID  ____luid;
     }
 
 }
-- (void) delUser:(BOOL) isSuccess{
+- (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -407,7 +416,7 @@ XAITYPELUID  ____luid;
 
 
 }
-- (void) changeUserName:(BOOL) isSuccess{
+- (void) userService:(XAIUserService*)userService changeUserName:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -419,7 +428,7 @@ XAITYPELUID  ____luid;
 
 
 }
-- (void) changeUserPassword:(BOOL)isSuccess{
+- (void) userService:(XAIUserService*)userService changeUserPassword:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
     
     if (isSuccess == TRUE) {
         
@@ -432,9 +441,10 @@ XAITYPELUID  ____luid;
     
 }
 
-- (void)findedAllUser:(BOOL)isFinded users:(NSSet *)name{
+- (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)name
+              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
-    if (isFinded == TRUE) {
+    if (isSuccess == TRUE) {
         
         _findAllStatus = Success;
         
@@ -449,9 +459,10 @@ XAITYPELUID  ____luid;
 
 }
 
-- (void) findedUser:(BOOL) isFinded Luid:(XAITYPELUID) luid withName:(NSString*) name{
+- (void) userService:(XAIUserService*)userService findedUser:(XAITYPELUID)luid
+            withName:(NSString*)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
-    if (isFinded == TRUE) {
+    if (isSuccess == TRUE) {
         
         _findStatus = Success;
         

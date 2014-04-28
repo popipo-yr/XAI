@@ -31,7 +31,7 @@
         // Custom initialization
         
         _deviceService = [[XAIDeviceService alloc] init];
-        _deviceService.delegate = self;
+        _deviceService.deviceServiceDelegate = self;
         
         
         _objectAry = [[NSMutableArray alloc] init];
