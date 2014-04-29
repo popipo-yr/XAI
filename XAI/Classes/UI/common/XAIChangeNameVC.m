@@ -107,6 +107,11 @@
 }
 */
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma  mark - Outer Methods
 
 - (void) setOKClickTarget:(id)target Selector:(SEL)selector{
@@ -125,8 +130,21 @@
 }
 
 - (void) endOkEvent{
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改名称成功"
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    [alert show];
+    
+    
+}
 
-    [self.navigationController popViewControllerAnimated:YES];
+- (void) endFailEvent:(NSString*)str{
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:str
+                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (void) editEnd:(id)sender{

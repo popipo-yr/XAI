@@ -38,6 +38,8 @@
     return self;
 }
 
+- (void) startControl{}
+
 - (void) setDevInfo:(XAIDevice*)dev{
 
     _apsn = dev.apsn;

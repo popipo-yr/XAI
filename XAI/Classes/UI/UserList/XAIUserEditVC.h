@@ -9,13 +9,23 @@
 #import "XAITableViewController.h"
 
 #import "XAIUser.h"
+#import "XAIUserService.h"
 
-@interface XAIUserEditVC : XAITableViewController{
+#import "XAIChangeNameVC.h"
+#import "XAIChangePasswordVC.h"
+
+@interface XAIUserEditVC : XAITableViewController
+<XAIUserServiceDelegate>{
 
     XAIUser* _userInfo;
+    XAIUserService* _userService;
+    
+    XAIChangeNameVC* _nameVC;
+    XAIChangePasswordVC* _pawVC;
 
 }
 
 @property (nonatomic,strong) XAIUser* userInfo;
+
 
 @end

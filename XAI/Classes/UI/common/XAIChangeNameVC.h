@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XAIChangeNameVC : UITableViewController <UITableViewDataSource,UITabBarDelegate>{
+@interface XAIChangeNameVC : UITableViewController <UITableViewDataSource,UITabBarDelegate,UIAlertViewDelegate>{
 
     UITextField* _newNameTextField;
     id _okTarget;
@@ -30,6 +30,8 @@
             TwoLabName:(NSString*)twoLabName ;
 
 - (void) endOkEvent;
+
+- (void) endFailEvent:(NSString*)str;
 
 - (void) setBarTitle:(NSString*)title;
 

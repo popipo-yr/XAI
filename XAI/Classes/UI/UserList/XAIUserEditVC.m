@@ -8,8 +8,7 @@
 
 #import "XAIUserEditVC.h"
 #import "XAIChangeCell.h"
-#import "XAIChangeNameVC.h"
-#import "XAIChangePasswordVC.h"
+
 
 @interface XAIUserEditVC ()
 
@@ -26,6 +25,20 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+
+    if (self == [super initWithCoder:aDecoder]) {
+        
+        _userService = [[XAIUserService alloc] init];
+        _userService.apsn = [MQTT shareMQTT].apsn;
+        _userService.luid = MQTTCover_LUID_Server_03;
+        
+        _userService.userServiceDelegate = self;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,16 +51,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:false];
+    
+    [self.navigationController.navigationBar.layer removeAllAnimations];
+}
+
 #pragma mark - Event
 
 - (void) changeUserName:(NSString*)newName{
 
-    
+    [_userService changeUser:_userInfo.luid withName:newName];
 }
 
 - (void) changePassword:(NSString*)newPwd{
     
-    
+    [_userService changeUser:_userInfo.luid oldPassword:_userInfo.pawd to:newPwd];
 }
 
 
@@ -116,6 +136,7 @@
         [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
         [nameVC setBarTitle:@"修改名称"];
         
+        _nameVC = nameVC;
         
         [self.navigationController pushViewController:nameVC animated:YES];
         
@@ -129,11 +150,58 @@
         [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
         [pawVC setBarTitle:@"修改密码"];
         
+        _pawVC = pawVC;
         
         [self.navigationController pushViewController:pawVC animated:YES];
     }
     
 
+}
+
+#pragma mark  delegate
+-(void)userService:(XAIUserService *)userService changeUserName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (isSuccess) {
+        
+        [_nameVC endOkEvent];
+        
+    }else{
+        
+        [_nameVC endFailEvent:@"修改名称失败"];
+    }
+    
+    
+}
+
+-(void)userService:(XAIUserService *)userService changeUserPassword:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (isSuccess) {
+        
+        [_pawVC endOkEvent];
+    }else{
+    
+        [_pawVC endFailEvent:@"修改密码失败"];
+    }
+    
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:nil
+                    completion:nil];
+}
+
+- (IBAction)aboutUnwind:(UIStoryboardSegue *)segue {
+    
+    [UIView transitionWithView:((UIViewController *)segue.sourceViewController).view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:nil
+                    completion:nil];
 }
 
 @end

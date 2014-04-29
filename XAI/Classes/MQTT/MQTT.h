@@ -26,6 +26,7 @@
 
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;
+@property (nonatomic, strong) NSString* curUserName;
 
 
 + (MQTT*) shareMQTT;

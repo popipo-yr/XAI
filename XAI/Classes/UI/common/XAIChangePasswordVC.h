@@ -8,7 +8,7 @@
 
 #import "XAITableViewController.h"
 
-@interface XAIChangePasswordVC : XAITableViewController{
+@interface XAIChangePasswordVC : XAITableViewController<UIAlertViewDelegate>{
 
     UITextField* _newPwdTextField;
     UITextField* _newPwdRepTextField;
@@ -27,6 +27,7 @@
 
 - (void) setOKClickTarget:(id)target Selector:(SEL)selector;
 - (void) endOkEvent;
+- (void) endFailEvent:(NSString*)str;
 - (void) setBarTitle:(NSString*)title;
 
 

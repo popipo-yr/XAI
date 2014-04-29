@@ -26,31 +26,33 @@
     //[self performSelector:@selector(lightCurStatus:)];
     
     
-    NSInvocation *anInvocation = [NSInvocation
-                                  invocationWithMethodSignature:
-                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCurStatus:)]];
+//    NSInvocation *anInvocation = [NSInvocation
+//                                  invocationWithMethodSignature:
+//                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCurStatus:)]];
+//    
+//    [anInvocation setSelector:@selector(lightCurStatus:)];
+//    [anInvocation setTarget:self];
+//    long status = 1;
+//    [anInvocation setArgument:&status atIndex:2];
+//    
+//    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
+//    
+//    
+//    XAIObjectOpr* opr1 = [[XAIObjectOpr alloc] init];
+//    //opr1.opr = @"水水开了灯";
+//    //opr1.time = @"8:39  03/23";
+//    
+//    
+//    XAIObjectOpr* opr2 = [[XAIObjectOpr alloc] init];
+//
+//    
+//    NSArray* ary = [[NSArray alloc] initWithObjects:opr1,opr2,nil];
+    _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
     
-    [anInvocation setSelector:@selector(lightCurStatus:)];
-    [anInvocation setTarget:self];
-    long status = 1;
-    [anInvocation setArgument:&status atIndex:2];
-    
-    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
     
     
-    XAIObjectOpr* opr1 = [[XAIObjectOpr alloc] init];
-    //opr1.opr = @"水水开了灯";
-    //opr1.time = @"8:39  03/23";
-    
-    
-    XAIObjectOpr* opr2 = [[XAIObjectOpr alloc] init];
-
-    
-    NSArray* ary = [[NSArray alloc] initWithObjects:opr1,opr2,nil];
-    _oprDatasAry = ary;
-    
-    self.factoryLabel.text = @"成都xxx工厂";
-    self.modelLabel.text = @"JUNENNDENG-8390F";
+    self.factoryLabel.text = _light.vender;//  @"成都xxx工厂";
+    self.modelLabel.text = _light.model; //@"JUNENNDENG-8390F";
     
     
 }
@@ -74,16 +76,16 @@
     [_activityView startAnimating];
     
     
-    NSInvocation *anInvocation = [NSInvocation
-                                  invocationWithMethodSignature:
-                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
-    
-    [anInvocation setSelector:@selector(lightCloseSuccess:)];
-    [anInvocation setTarget:self];
-    BOOL status = YES;
-    [anInvocation setArgument:&status atIndex:2];
-    
-    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
+//    NSInvocation *anInvocation = [NSInvocation
+//                                  invocationWithMethodSignature:
+//                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
+//    
+//    [anInvocation setSelector:@selector(lightCloseSuccess:)];
+//    [anInvocation setTarget:self];
+//    BOOL status = YES;
+//    [anInvocation setArgument:&status atIndex:2];
+//    
+//    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
 }
 
 #pragma mark -- LightDelegate
@@ -98,6 +100,17 @@
         [_statusView setImage:[UIImage imageNamed:LightOpenImg]];
         
         [_activityView stopAnimating];
+        
+        XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
+        opr.opr = XAILightStatus_Open;
+        opr.time = [NSDate new];
+        opr.name = [MQTT shareMQTT].curUserName;
+        [_light addOpr:opr];
+        
+        /*刷新信息*/
+        _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
+        
+        [self.oprTableView reloadData];
     }
     
 }
@@ -108,12 +121,27 @@
         [_statusView setImage:[UIImage imageNamed:LightCloseImg]];
         
         [_activityView stopAnimating];
+        
+        
+        XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
+        opr.opr = XAILightStatus_Close;
+        opr.time = [NSDate new];
+        opr.name = [MQTT shareMQTT].curUserName;
+        [_light addOpr:opr];
+        
+        /*刷新信息*/
+        _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
+        
+        [self.oprTableView reloadData];
+
     }
 }
 
 - (void) lightCurStatus:(XAILightStatus) status{
     
     NSString* imageName = (status == XAILightStatus_Open) ?LightOpenImg : LightCloseImg;
+    
+    [self.switchUI setOn:status == XAILightStatus_Open];
     
     [_statusView setImage:[UIImage imageNamed:imageName]];
     

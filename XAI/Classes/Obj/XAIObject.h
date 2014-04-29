@@ -58,6 +58,7 @@ typedef enum XAIObjectType{
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/
 
+- (void) startControl;
 - (id) initWithDevice:(XAIDevice*)dev;
 - (void) setDevInfo:(XAIDevice*)dev;
 

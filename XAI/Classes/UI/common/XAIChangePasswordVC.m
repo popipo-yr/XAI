@@ -75,16 +75,21 @@
         
         NSMutableString* dottedPassword = [[NSMutableString alloc] init];
         
-        for (int i = 0; i < [_oldPwd length] -1 ; i++)
-        {
-            [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
+        if (_oldPwd != nil) {
+            
+            for (int i = 0; i < [_oldPwd length] -1 ; i++)
+            {
+                [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
+            }
+            
+            NSRange range;
+            range.length = 1;
+            range.location = [_oldPwd length] - 1;
+            
+            [dottedPassword appendString:[_oldPwd substringWithRange:range]];
         }
         
-        NSRange range;
-        range.length = 1;
-        range.location = [_oldPwd length] - 1;
-        
-        [dottedPassword appendString:[_oldPwd substringWithRange:range]];
+
         
         [cell setTextFiledWithLable:dottedPassword];
         
@@ -117,16 +122,19 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:nil
+                    completion:nil];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma  mark - Outer Methods
 
@@ -145,7 +153,20 @@
 
 - (void) endOkEvent{
     
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改密码成功"
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    [alert show];
+    
+    
+}
+
+- (void) endFailEvent:(NSString*)str{
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:str
+                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (void) editEnd:(id)sender{

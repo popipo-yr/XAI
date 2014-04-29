@@ -36,6 +36,8 @@ typedef  uint32_t  XAITYPEAPSN;
 typedef  uint64_t  XAITYPEUNSIGN;
 typedef  uint8_t   XAITYPEBOOL;
 
+#define XAIUSERADMIN   0x1
+
 #define XAITYPEBOOL_TRUE 1
 #define XAITYPEBOOL_FALSE 0
 #define XAITYPEBOOL_UNKOWN 2

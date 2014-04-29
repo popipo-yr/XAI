@@ -23,6 +23,8 @@
                                              instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
                 lightVC.light = (XAILight*)aObj;
                 
+                [lightVC.light startControl];
+                
                 return lightVC;
                 
             }

@@ -156,7 +156,8 @@
     _login = [[XAILogin alloc] init];
     _login.delegate = self;
     
-    [_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
+    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:@"192.168.1.1" apsn:0x1];
+    //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
 }

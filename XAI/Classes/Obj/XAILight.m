@@ -10,7 +10,7 @@
 
 @implementation XAILight
 
-- (void) initDev{
+- (void) startControl{
 
     _devSwitch = [[XAIDevSwitch alloc] init];
     _devSwitch.swiDelegate = self;

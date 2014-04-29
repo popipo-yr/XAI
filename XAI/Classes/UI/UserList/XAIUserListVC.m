@@ -24,22 +24,24 @@
         
         _userService = [[XAIUserService alloc] init];
         
-        XAIUser* user1 = [[XAIUser alloc] init];
-        user1.name = @"ADMIN";
-        user1.pawd = @"39487543";
+//        XAIUser* user1 = [[XAIUser alloc] init];
+//        user1.name = @"ADMIN";
+//        user1.pawd = @"39487543";
+//        
+//        
+//        XAIUser* user2 = [[XAIUser alloc] init];
+//        user2.name = @"他大爷";
+//        user2.pawd = @"39487543";
         
-        
-        XAIUser* user2 = [[XAIUser alloc] init];
-        user2.name = @"他大爷";
-        user2.pawd = @"39487543";
-        
-        _userDatasAry = [[NSMutableArray alloc] initWithObjects:user1,user2,nil];
+        _userDatasAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getUserList]];
 
     }
     
     return self;
 
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -122,8 +124,14 @@
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
         [cell.headImageView setImage:[UIImage imageNamed:@"user_head.png"]];
         [cell.nameLable setText:aUser.name];
-        [cell.contextLable setText:@"普通成员"];
         
+        if (aUser.luid == XAIUSERADMIN) {
+            
+            [cell.contextLable setText:@"管理员"];
+        }else{
+        
+            [cell.contextLable setText:@"普通成员"];
+        }
     }
     
     return cell;
