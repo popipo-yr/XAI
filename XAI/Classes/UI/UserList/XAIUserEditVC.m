@@ -51,12 +51,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-
-    [super viewWillAppear:false];
-    
-    [self.navigationController.navigationBar.layer removeAllAnimations];
-}
 
 #pragma mark - Event
 
@@ -184,24 +178,6 @@
     }
     
     
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [UIView transitionWithView:self.navigationController.view
-                      duration:0.75
-                       options:UIViewAnimationOptionTransitionFlipFromRight
-                    animations:nil
-                    completion:nil];
-}
-
-- (IBAction)aboutUnwind:(UIStoryboardSegue *)segue {
-    
-    [UIView transitionWithView:((UIViewController *)segue.sourceViewController).view
-                      duration:0.75
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:nil
-                    completion:nil];
 }
 
 @end

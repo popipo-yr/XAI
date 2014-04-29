@@ -122,14 +122,6 @@
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [UIView transitionWithView:self.navigationController.view
-                      duration:0.75
-                       options:UIViewAnimationOptionTransitionFlipFromRight
-                    animations:nil
-                    completion:nil];
-}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 

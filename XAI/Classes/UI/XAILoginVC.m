@@ -7,6 +7,9 @@
 //
 
 #import "XAILoginVC.h"
+
+#import "XAIAppDelegate.h"
+
 #import "XAIUserService.h"
 
 #import "XAIData.h"
@@ -160,6 +163,9 @@
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
+//    _findDev = findSuccess;
+//    _findUser = findSuccess;
+//    [self getDateFinsh];
 }
 
 #pragma mark - Delegate
@@ -251,7 +257,15 @@
         
         [[XAIData shareData] save];
     
-        [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
+        //[self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
+        
+        UIViewController* vc= [self.storyboard
+                               instantiateViewControllerWithIdentifier:@"XAIMainPage"];
+        
+        XAIAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate.window setRootViewController:vc];
+        
+        //XAIAppDelegate* [UIApplication sharedApplication].delegate;
         _login = nil;
         
         [_activityView stopAnimating];

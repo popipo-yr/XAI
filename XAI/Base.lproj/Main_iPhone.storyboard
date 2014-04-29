@@ -389,12 +389,11 @@
         <!--XAITabBarVC-->
         <scene sceneID="C86-W6-Tcy">
             <objects>
-                <tabBarController storyboardIdentifier="XAIMainPage" definesPresentationContext="YES" id="L54-r1-Z8p" userLabel="XAITabBarVC" customClass="XAITabBarVC" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="XAIMainPage" extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" modalTransitionStyle="flipHorizontal" id="L54-r1-Z8p" userLabel="XAITabBarVC" customClass="XAITabBarVC" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="XAI_TAB_BAR" selectionIndicatorImage="tab_bar_selected.png" id="hq2-Yd-Ewy">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <outlet property="xaitabBar" destination="hq2-Yd-Ewy" id="pDL-gn-jjq"/>
@@ -579,7 +578,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="用户信息编辑" id="JAH-jM-ojn"/>
                     <connections>
-                        <segue destination="Ujw-Ai-Cdk" kind="push" identifier="xaiusersetnamepushid" id="Jh1-J7-H7F"/>
+                        <segue destination="Ujw-Ai-Cdk" kind="modal" identifier="xaiusersetnamepushid" modalTransitionStyle="flipHorizontal" id="Jh1-J7-H7F"/>
                         <segue destination="vRk-Hb-KGT" kind="push" identifier="xaiusersetpawdpushid" id="Hc2-bF-MML"/>
                     </connections>
                 </tableViewController>
@@ -700,7 +699,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="XAIChangeNameVCID" id="Ujw-Ai-Cdk" userLabel="XAIChangeNameVC - 设置名称" customClass="XAIChangeNameVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PJG-L6-E4O">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -833,7 +832,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="n01-em-JJa"/>
+        <segue reference="Hc2-bF-MML"/>
         <segue reference="Jh1-J7-H7F"/>
     </inferredMetricsTieBreakers>
 </document>
