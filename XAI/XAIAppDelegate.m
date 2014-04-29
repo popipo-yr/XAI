@@ -37,6 +37,7 @@
     [[MQTT shareMQTT] setPacketManager:_mqttPacketManager];
     
     
+    [XAIData shareData];
     //[[UIApplication  sharedApplication] setStatusBarHidden:false];
     
 
@@ -60,6 +61,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     [[XAIObjectGroupManager shareManager] save];
+    [[XAIData shareData] save];
     [_mosquittoClient disconnect];
 }
 

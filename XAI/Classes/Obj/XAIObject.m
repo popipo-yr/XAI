@@ -45,6 +45,8 @@
     _model = dev.model;
     _vender = dev.vender;
     _type = dev.type;
+    
+    _name = dev.name;
 }
 
 + (NSString*) typeImageName:(XAIObjectType)type{
@@ -133,7 +135,10 @@
 -(NSDictionary *)writeToDIC{
 
     NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:_nickName forKey:_Key_NickName_];
+    if (_nickName != nil) {
+        
+        [dic setObject:_nickName forKey:_Key_NickName_];
+    }
     
     if (_lastOpr.name != nil && _lastOpr.time != nil) {
         

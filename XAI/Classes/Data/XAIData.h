@@ -10,6 +10,24 @@
 
 #import "XAIUser.h"
 
+/*读写协议*/
+@protocol XAIDataInfo_DIC  <NSObject>
+
+- (void) readFromDIC:(NSDictionary*)dic;
+- (NSDictionary*) writeToDIC;
+
+@end
+
+
+@protocol XAIDataInfo_ARY <NSObject>
+
+- (void) readFromARY:(NSArray*)ary;
+- (NSArray*) writeToARY;
+
+@end
+
+
+
 @class XAIObjectList;
 @interface XAIData : NSObject{
 
@@ -27,6 +45,9 @@
 - (NSArray*) getObjList;
 
 
+- (void) save;
+
+
 + (XAIData*) shareData;
 
 + (NSString*) getSavePathFile:(NSString*)fileName;
@@ -37,7 +58,7 @@
 
 @class XAIObject;
 
-@interface XAIObjectList : NSObject{
+@interface XAIObjectList : NSObject <XAIDataInfo_ARY>{
     
     NSMutableArray* _objs;
     
@@ -45,6 +66,9 @@
 
 //- (void) addObject:(XAIObject*)aObj;
 - (BOOL) readObjects;
+- (void) save;
+
+
 - (NSArray*) getObjects;
 - (void) addObject:(XAIObject*)obj;
 
@@ -57,18 +81,3 @@
 
 
 
-/*读写协议*/
-@protocol XAIDataInfo_DIC  <NSObject>
-
-- (void) readFromDIC:(NSDictionary*)dic;
-- (NSDictionary*) writeToDIC;
-
-@end
-
-
-@protocol XAIDataInfo_ARY <NSObject>
-
-- (void) readFromARY:(NSArray*)ary;
-- (NSArray*) writeToARY;
-
-@end

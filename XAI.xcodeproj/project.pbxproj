@@ -1073,8 +1073,8 @@
 			children = (
 				C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */,
 				C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */,
-				96081AAD190E460900E281F9 /* XAIData.h */,
 				96081AAE190E460900E281F9 /* XAIData.m */,
+				96081AAD190E460900E281F9 /* XAIData.h */,
 			);
 			path = Data;
 			sourceTree = "<group>";

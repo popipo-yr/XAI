@@ -60,6 +60,7 @@ static XAIData*  _s_XAIData_ = NULL;
         
         
             aObj.nickName = aObj.name;
+            [_localObjInfo addObject:aObj];
         }
         
 
@@ -74,6 +75,11 @@ static XAIData*  _s_XAIData_ = NULL;
 
 
     return [NSArray arrayWithArray:_objList];
+}
+
+- (void) save{
+
+    [_localObjInfo save];
 }
 
 + (XAIData*) shareData{
@@ -133,14 +139,47 @@ static XAIData*  _s_XAIData_ = NULL;
 
 @implementation XAIObjectList
 
+- (void) readFromARY:(NSArray*)ary{
+    
+     NSMutableArray* objList = [[NSMutableArray alloc] init];
+    
+    for (int i =0; i < [ary count]; i++) {
+        
+        NSDictionary* dic = [ary objectAtIndex:i];
+        
+        /*也可以通过类名获取*/
+        XAIObject* obj = [[XAIObject alloc] init];
+        [obj readFromDIC:dic];
+        
+        [objList addObject:obj];
+    }
+    
+    [_objs setArray:objList];
+
+    
+}
+- (NSArray*) writeToARY{
+    
+  __autoreleasing  NSMutableArray* objList = [[NSMutableArray alloc] init];
+    
+    for (int i =0; i < [_objs count]; i++) {
+        
+        XAIObject* obj = [_objs objectAtIndex:i];
+        
+        NSDictionary* info =  [obj writeToDIC];
+        
+        [objList addObject:info];
+    }
+
+    return objList;
+}
+
 #define _key_file_path @"xai.plist"
 - (BOOL)readObjects{
 
     BOOL isSuccess = false;
     
     do {
-        
-        NSMutableArray* objList = [[NSMutableArray alloc] init];
         
         NSString* localFile = [XAIData getSavePathFile:_key_file_path];
         
@@ -151,25 +190,34 @@ static XAIData*  _s_XAIData_ = NULL;
         if (oprAry == nil || [oprAry count] == 0) break;
         
         
-        for (int i =0; i < [oprAry count]; i++) {
-            
-            NSDictionary* dic = [oprAry objectAtIndex:i];
-            
-            /*也可以通过类名获取*/
-            XAIObject* obj = [[XAIObject alloc] init];
-            [obj readFromDIC:dic];
-            
-            [objList addObject:obj];
-        }
+        [self readFromARY:oprAry];
         
         isSuccess = true;
-        
-        [_objs setArray:objList];
         
     } while (0);
     
     
     return isSuccess;
+
+
+}
+
+- (void) save{
+
+    do {
+        
+        NSString* localFile = [XAIData getSavePathFile:_key_file_path];
+        
+        if (localFile == nil || [localFile isEqualToString:@""]) break;
+        
+        
+        NSArray* infoAry = [self writeToARY];
+        
+        if (infoAry == nil) break;
+        
+        [infoAry writeToFile:localFile atomically:YES];
+        
+    } while (0);
 
 
 }
@@ -206,6 +254,8 @@ static XAIData*  _s_XAIData_ = NULL;
     if (self = [super init]) {
         
         _objs = [[NSMutableArray alloc] init];
+        
+        [self readObjects];
     }
     
     return self;

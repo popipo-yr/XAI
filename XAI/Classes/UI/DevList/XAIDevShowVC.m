@@ -32,28 +32,31 @@
         _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
-        _deviceDatas = [[NSMutableArray alloc] init];
-        
-        XAILight* obj1 = [[XAILight alloc] init];
-        obj1.apsn = 0x01;
-        obj1.luid = 0x123;
-        obj1.type = XAIObjectType_light;
-        obj1.lastOpr = [[XAIObjectOpr alloc] init];
-        obj1.lastOpr.name = @"ABC";
-        
-       // @"Mr.O open light at 00.0.2";
-        obj1.name = @"客厅大灯";
+        _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
         
-        XAILight* obj2 = [[XAILight alloc] init];
-        obj2.apsn = 0x01;
-        obj2.luid = 0x123;
-        obj2.type = XAIObjectType_door;
-        //obj2.lastOpr = @"Mr.O close door at 00.0.2";
-        obj2.name = @"主卧门";
-        
-        [_deviceDatas addObject:obj1];
-        [_deviceDatas addObject:obj2];
+//        [[NSMutableArray alloc] init];
+//        
+//        XAILight* obj1 = [[XAILight alloc] init];
+//        obj1.apsn = 0x01;
+//        obj1.luid = 0x123;
+//        obj1.type = XAIObjectType_light;
+//        obj1.lastOpr = [[XAIObjectOpr alloc] init];
+//        obj1.lastOpr.name = @"ABC";
+//        
+//       // @"Mr.O open light at 00.0.2";
+//        obj1.name = @"客厅大灯";
+//        
+//        
+//        XAILight* obj2 = [[XAILight alloc] init];
+//        obj2.apsn = 0x01;
+//        obj2.luid = 0x123;
+//        obj2.type = XAIObjectType_door;
+//        //obj2.lastOpr = @"Mr.O close door at 00.0.2";
+//        obj2.name = @"主卧门";
+//        
+//        [_deviceDatas addObject:obj1];
+//        [_deviceDatas addObject:obj2];
     }
     return self;
 }

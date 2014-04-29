@@ -247,6 +247,8 @@
         
         
     }else{
+        
+        [[XAIData shareData] save];
     
         [self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
         _login = nil;
