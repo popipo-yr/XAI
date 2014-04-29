@@ -38,7 +38,7 @@ extern "C" {
         _xai_packet_param_normal* normal_param ; /*normal param header*/
         uint8_t  flag ;
         uint8_t  vender[8] ;
-        uint16_t  model[16] ;
+        uint8_t  model[16] ;
         
     }_xai_packet_param_dti; /*dti param struct*/
     

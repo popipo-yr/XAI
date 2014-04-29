@@ -12,6 +12,7 @@
 		1AF7604F18F2528600520EAD /* LightNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7604E18F2528600520EAD /* LightNode.m */; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
+		96081AB2190E4DA700E281F9 /* XAIObjectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AB1190E4DA700E281F9 /* XAIObjectGroup.m */; };
 		960BDD501907989300787148 /* obj_door_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD481907989300787148 /* obj_door_close@2x.png */; };
 		960BDD511907989300787148 /* obj_door_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD491907989300787148 /* obj_door_open@2x.png */; };
 		960BDD521907989300787148 /* obj_light_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD4A1907989300787148 /* obj_light_close@2x.png */; };
@@ -175,6 +176,8 @@
 		1AF7605118F257C600520EAD /* MQTTPacketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTPacketManager.m; sourceTree = "<group>"; };
 		96081AAD190E460900E281F9 /* XAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIData.h; sourceTree = "<group>"; };
 		96081AAE190E460900E281F9 /* XAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIData.m; sourceTree = "<group>"; };
+		96081AB0190E4DA700E281F9 /* XAIObjectGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectGroup.h; sourceTree = "<group>"; };
+		96081AB1190E4DA700E281F9 /* XAIObjectGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectGroup.m; sourceTree = "<group>"; };
 		960BDD481907989300787148 /* obj_door_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door_close@2x.png"; sourceTree = "<group>"; };
 		960BDD491907989300787148 /* obj_door_open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door_open@2x.png"; sourceTree = "<group>"; };
 		960BDD4A1907989300787148 /* obj_light_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_light_close@2x.png"; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				964E6A3C1904F30B00F1F61C /* XAILight.m */,
 				967BD7A4190904FA007C3C8C /* XAIDebug.h */,
 				967BD7A5190904FA007C3C8C /* XAIDebug.m */,
+				96081AB0190E4DA700E281F9 /* XAIObjectGroup.h */,
+				96081AB1190E4DA700E281F9 /* XAIObjectGroup.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1311,6 +1316,7 @@
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
+				96081AB2190E4DA700E281F9 /* XAIObjectGroup.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,

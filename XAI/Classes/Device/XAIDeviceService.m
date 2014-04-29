@@ -173,13 +173,14 @@
     
     for (id obj in _allDevices) {
         
-        if (![obj isKindOfClass:[NSString class]]) continue;
+        if (![obj isKindOfClass:[XAIDevice class]]) continue;
         
-        XAITYPELUID luid;
-        NSScanner* scanner = [NSScanner scannerWithString:obj];
-        [scanner scanHexLongLong:&luid];
+        //        XAITYPELUID luid;
+        //        NSScanner* scanner = [NSScanner scannerWithString:obj];
+        //        [scanner scanHexLongLong:&luid];
+        XAIDevice*  dev = obj;
         
-        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:luid];
+        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
         //[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
         
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
@@ -203,13 +204,14 @@
     
     for (id obj in _allDevices) {
         
-        if (![obj isKindOfClass:[NSString class]]) continue;
+        if (![obj isKindOfClass:[XAIDevice class]]) continue;
         
-        XAITYPELUID luid;
-        NSScanner* scanner = [NSScanner scannerWithString:obj];
-        [scanner scanHexLongLong:&luid];
+//        XAITYPELUID luid;
+//        NSScanner* scanner = [NSScanner scannerWithString:obj];
+//        [scanner scanHexLongLong:&luid];
+        XAIDevice*  dev = obj;
         
-        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:luid];
+        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
         
         [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
         [[MQTT shareMQTT].client subscribe:topic];
@@ -297,7 +299,7 @@
             allType = YES;
             
             
-            [_allDevices addObject:[NSString stringWithFormat:@"%llx",luid]];
+            [_allDevices addObject:aDevice];
             
             
         } while (0);
@@ -414,12 +416,42 @@
     _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
     
     
-  if([MQTTCover isNodeTopic:topic]){
-        
-        NSString* luidStr = [NSString stringWithFormat:@"%llx",[MQTTCover nodeTopicLUID:topic]];
-        
-        [_onlineDevices addObject:luidStr];
-    }
+  if([MQTTCover isNodeTopic:topic] && dti != NULL){
+      
+      XAITYPEAPSN apsn = [MQTTCover nodeTopicAPSN:topic];
+      XAITYPELUID luid = [MQTTCover nodeTopicLUID:topic];
+      
+      XAIDevice*  oneDev = nil;
+      
+      NSEnumerator *enumerator = [_allDevices objectEnumerator];
+      for (XAIDevice *aDev in enumerator) {
+         
+          if (aDev.apsn == apsn && aDev.luid == luid) {
+              
+              oneDev = aDev;
+              break;
+          }
+      }
+      
+      
+      if (nil !=  oneDev) {
+          
+          
+          NSString* model = [[NSString alloc]initWithBytes:dti->model
+                                                    length:sizeof(dti->model) encoding:NSUTF8StringEncoding];
+          NSString* vender = [[NSString alloc] initWithBytes:dti->vender
+                                                      length:sizeof(dti->vender) encoding:NSUTF8StringEncoding];
+          
+          oneDev.model = model;
+          oneDev.vender = vender;
+          
+          oneDev.type = XAIObjectType_light;/*mustchange*/
+          
+          [_onlineDevices addObject:oneDev];
+
+      }
+      
+  }
     
     purgePacketParamDTI(dti);
 }

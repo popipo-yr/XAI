@@ -39,8 +39,8 @@
     
     
     XAIObjectOpr* opr1 = [[XAIObjectOpr alloc] init];
-    opr1.opr = @"水水开了灯";
-    opr1.time = @"8:39  03/23";
+    //opr1.opr = @"水水开了灯";
+    //opr1.time = @"8:39  03/23";
     
     
     XAIObjectOpr* opr2 = [[XAIObjectOpr alloc] init];

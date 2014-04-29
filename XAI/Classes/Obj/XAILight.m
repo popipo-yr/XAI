@@ -108,5 +108,24 @@
     
 }
 
+@end
+
+@implementation XAILightOpr
+
+- (NSString *)oprOnlyStr{
+
+    if (_opr == XAILightStatus_Open) {
+        
+        return @"开了灯";
+        
+    }else if(_opr == XAILightStatus_Close){
+    
+        return @"关了灯";
+    }
+    
+    return nil;
+}
 
 @end
+
+

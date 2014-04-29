@@ -10,16 +10,51 @@
 
 #import "XAIUser.h"
 
+@class XAIObjectList;
 @interface XAIData : NSObject{
 
     NSMutableArray*  _userList; //xaiuser list
-    NSMutableArray*  _devList;  //xaiobject list
+    NSMutableArray*  _objList;  //xaiobject list
+    XAIObjectList*  _localObjInfo;  //本地数据
 
 }
 
+- (void) setUserList:(NSArray*)users;
+- (NSArray*) getUserList;
+
+
+- (void) setObjList:(NSArray*)devs;
+- (NSArray*) getObjList;
+
+
 + (XAIData*) shareData;
 
++ (NSString*) getSavePathFile:(NSString*)fileName;
+
 @end
+
+
+
+@class XAIObject;
+
+@interface XAIObjectList : NSObject{
+    
+    NSMutableArray* _objs;
+    
+}
+
+//- (void) addObject:(XAIObject*)aObj;
+- (BOOL) readObjects;
+- (NSArray*) getObjects;
+- (void) addObject:(XAIObject*)obj;
+
+- (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
+
+@end
+
+
+
+
 
 
 /*读写协议*/

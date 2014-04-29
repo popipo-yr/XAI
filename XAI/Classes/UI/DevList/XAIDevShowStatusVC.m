@@ -214,8 +214,8 @@
     if (aObjOpr != nil && [aObjOpr isKindOfClass:[XAIObjectOpr class]]) {
         
     
-        [cell.timeLable setText:aObjOpr.time];
-        [cell.oprLable setText:aObjOpr.opr];
+        [cell.timeLable setText:[aObjOpr timeStr]];
+        [cell.oprLable setText:[aObjOpr oprWithNameStr]];
         
     }
     

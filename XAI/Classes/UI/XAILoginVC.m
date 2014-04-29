@@ -9,6 +9,8 @@
 #import "XAILoginVC.h"
 #import "XAIUserService.h"
 
+#import "XAIData.h"
+
 
 #define findSuccess 1
 #define findFail   2
@@ -169,6 +171,7 @@
     if (isSuccess) {
         
         /*存储数据 其他页面使用*/
+        [[XAIData shareData] setUserList:[users allObjects]];
         
     }
     
@@ -183,6 +186,7 @@
     if (isSuccess) {
         
         /*存储数据 其他页面使用*/
+        [[XAIData shareData] setObjList:[devs allObjects]];
         
     }
 

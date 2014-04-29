@@ -10,6 +10,8 @@
 #import "MQTT.h"
 #import "XAIData.h"
 
+#import "XAIObjectGroup.h"
+
 #import "XAIDebug.h"
 
 typedef enum XAIObjectType{
@@ -22,18 +24,26 @@ typedef enum XAIObjectType{
 
 #define XAIObjectTypeCount 2
 
-typedef int  XAIGOURPID;
 
+@class XAIObjectOpr;
+@class XAIDevice;
 
-@interface XAIObject : NSObject{
+@interface XAIObject : NSObject<XAIDataInfo_DIC>{
     
     NSString* _name;
     XAIObjectType _type; /*类别,门，窗，灯?*/
     XAIGOURPID _groupId; /*分组使用*/
     XAITYPEAPSN _apsn;
     XAITYPELUID _luid;
-    NSString* _lastOpr; /*最后一次操作*/
-    NSString* nickName; 
+    //NSString* _lastOpr; /*最后一次操作*/
+    NSString* _nickName;
+    
+    XAIObjectOpr* _lastOpr; /*最后一次操作*/
+    
+    NSMutableArray* _objOprList; //操作列表
+    
+    NSString* _model; /*型号*/
+    NSString* _vender; /*生产商*/
     
 }
 
@@ -42,70 +52,50 @@ typedef int  XAIGOURPID;
 @property (nonatomic, assign) XAIGOURPID groupId; /*分组使用*/
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;
-@property (nonatomic, strong) NSString* lastOpr; /*最后一次操作*/
-@property (nonatomic, strong) NSString* nickName; 
+@property (nonatomic, strong) XAIObjectOpr* lastOpr; /*最后一次操作*/
+@property (nonatomic, strong) NSString* nickName;
 
-- (void) initDev; /*初始化设备*/
+@property (nonatomic, strong) NSString* vender; /*生产商*/
+@property (nonatomic, strong) NSString* model; /*型号*/
+
+- (id) initWithDevice:(XAIDevice*)dev;
+- (void) setDevInfo:(XAIDevice*)dev;
+
+- (BOOL) readOprList; /*获取操作记录集,读取本地的信息*/
+- (BOOL) addOpr:(XAIObjectOpr*)aOpr; /*添加一个操作记录 更新最后一次操作和操作列表*/
+- (NSArray*) getOprList;
+
 
 + (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
 + (NSArray*)  typeCanUse;
++ (NSString*) typeOprClassName:(XAIObjectType)type; /*对应操作的类名*/
++ (NSString*) typeClassName:(XAIObjectType)type; /*对应的类名*/
 
 @end
 
 
-@interface XAIObjectOpr : NSObject
+@interface XAIObjectOpr : NSObject <XAIDataInfo_DIC>{
 
-@property (nonatomic, strong) NSString* opr;
-@property (nonatomic, strong) NSString* time;
-
-@end
-
-
-#define XAIGOURPID_DEFAULT 0
-
-@interface XAIObjectGroup  :  NSObject{
-
-    XAIGOURPID _curid;
-    NSMutableArray*  _members;
-    
-}
-
-@property (nonatomic, assign) XAIGOURPID curid;
-@property (nonatomic, strong) NSArray*  members;
-
-- (BOOL) hasMember:(NSString*) aMember;
-- (BOOL) addMember:(NSString*) aMember;
-- (BOOL) delMember:(NSString*) aMember;
-- (int) memberCount;
-
-
-@end
-
-/*分组信息,所有的分组*/
-@interface XAIObjectGroupManager : NSObject{
-
-    /*
-     {
-     1 : [guid,guid...]
-     2 : [guid,guid...]
-     }
-     */
-    
-    NSMutableDictionary* _obj_group_map; /*实物对应分组表,会储存到本地*/
-    NSMutableDictionary* _group_map;  /*分组对应实物表*/
-    
-    XAIGOURPID _lastusedID; /*最后使用的id, 用于生产新的设备分组id,第一次使用将是默认值 */
-
+    int _opr;
+    NSDate* _time;
+    NSString* _name;
 
 }
 
+@property (nonatomic, assign) int opr;
+@property (nonatomic, strong) NSDate* time;
+@property (nonatomic, strong) NSString* name;
 
-+ (XAIObjectGroupManager*) shareManager;
+- (NSString*) oprOnlyStr; /*开了灯  子类必须实现*/
 
-- (void) save; /*保存信息*/
-- (void) getGroupNameWithGroupId:(XAIGOURPID) ID;
-- (XAIGOURPID) generateNewGroup; /*创建一个新的组,返回组的id*/
-- (BOOL) delGroup:(XAIGOURPID) ID; /*删除组，如果组下有数据不能删除*/
-- (XAIGOURPID) getGroupObjectIn:(NSString*)obj_guid;
+- (NSString*) timeStr;   /*8:50  04/12/1*/
+- (NSString*) oprWithNameStr;  /*小明开了灯*/
+
+- (NSString*) allStr;  /*小明在8点50分开了灯*/
 
 @end
+
+
+
+
+

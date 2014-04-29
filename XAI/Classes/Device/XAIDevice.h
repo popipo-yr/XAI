@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
+#import "XAIObject.h"
 
 #define Key_DeviceStatusID  127
 
@@ -17,11 +18,19 @@
     XAITYPELUID _luid;
     XAITYPEAPSN _apsn;
     NSString* _name;
+    NSString* _vender; /*生产商*/
+    NSString* _model; /*型号*/
+    
+    XAIObjectType _type;
+
 }
 
 @property (nonatomic, assign) XAITYPELUID luid;
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, strong) NSString* name;
+@property (nonatomic, strong) NSString* vender; /*生产商*/
+@property (nonatomic, strong) NSString* model; /*型号*/
+@property (nonatomic, assign) XAIObjectType type;
 @property (nonatomic, weak) id <XAIDeviceStatusDelegate> delegate;
 
 - (void) getDeviceStatus;

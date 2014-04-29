@@ -38,7 +38,10 @@
         obj1.apsn = 0x01;
         obj1.luid = 0x123;
         obj1.type = XAIObjectType_light;
-        obj1.lastOpr = @"Mr.O open light at 00.0.2";
+        obj1.lastOpr = [[XAIObjectOpr alloc] init];
+        obj1.lastOpr.name = @"ABC";
+        
+       // @"Mr.O open light at 00.0.2";
         obj1.name = @"客厅大灯";
         
         
@@ -46,7 +49,7 @@
         obj2.apsn = 0x01;
         obj2.luid = 0x123;
         obj2.type = XAIObjectType_door;
-        obj2.lastOpr = @"Mr.O close door at 00.0.2";
+        //obj2.lastOpr = @"Mr.O close door at 00.0.2";
         obj2.name = @"主卧门";
         
         [_deviceDatas addObject:obj1];
@@ -188,7 +191,7 @@
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
         [cell.headImageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
         [cell.nameLable setText:aObj.name];
-        [cell.contextLable setText:aObj.lastOpr];
+        [cell.contextLable setText:[aObj.lastOpr allStr]];
         
     }
     

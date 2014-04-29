@@ -46,3 +46,8 @@ typedef enum XAILightStatus{
 - (void) lightCloseSuccess:(BOOL)isSuccess;
 - (void) lightCurStatus:(XAILightStatus) status;
 @end
+
+
+@interface XAILightOpr : XAIObjectOpr
+
+@end

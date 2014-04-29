@@ -9,7 +9,7 @@
 #import "XAIDevice.h"
 #import "XAIPacketStatus.h"
 
-
+#import "XAIObject.h"
 
 @implementation XAIDevice
 
