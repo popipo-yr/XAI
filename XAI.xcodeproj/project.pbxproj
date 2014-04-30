@@ -382,6 +382,7 @@
 		96E9D982190111F7000BB595 /* tab_bar_user_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bar_user_sel@2x.png"; sourceTree = "<group>"; };
 		96E9D99319011D76000BB595 /* XAITabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITabBarVC.h; sourceTree = "<group>"; };
 		96E9D99419011D76000BB595 /* XAITabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITabBarVC.m; sourceTree = "<group>"; };
+		96F05CB11910C09600F2F128 /* XAIRWProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIRWProtocol.h; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -1075,6 +1076,7 @@
 				C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */,
 				96081AAE190E460900E281F9 /* XAIData.m */,
 				96081AAD190E460900E281F9 /* XAIData.h */,
+				96F05CB11910C09600F2F128 /* XAIRWProtocol.h */,
 			);
 			path = Data;
 			sourceTree = "<group>";

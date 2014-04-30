@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MQTT.h"
+
+#import "XAIMQTTDEF.h"
 
 @interface XAIUser : NSObject{
     

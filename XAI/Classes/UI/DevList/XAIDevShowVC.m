@@ -12,6 +12,8 @@
 #import "XAILight.h"
 #import "XAIDevShowStatusVC.h"
 
+#import "XAIData.h"
+
 #define  constRect  CGRectMake(0, 0, 320, 0)
 
 @interface XAIDevShowVC ()
@@ -34,7 +36,7 @@
         
         _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
-        
+        [[XAIData shareData] addRefreshDelegate:self];
 //        [[NSMutableArray alloc] init];
 //        
 //        XAILight* obj1 = [[XAILight alloc] init];
@@ -63,12 +65,20 @@
 
 - (void) dealloc{
 
+    [[XAIData shareData] removeRefreshDelegate:self];
+    
     _deviceService.deviceServiceDelegate = nil;
     _deviceService = nil;
     //_activityView = nil;
     
     _deviceDatas = nil;
 
+}
+
+-(void)xaiDataRefresh:(XAIData *)data{
+
+    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

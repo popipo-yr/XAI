@@ -9,9 +9,10 @@
 #import "XAITableViewWithOprController.h"
 
 #import "XAIUserService.h"
+#import "XAIData.h"
 
 @interface XAIUserListVC : XAITableViewWithOprController
-<UITableViewDataSource,UITabBarDelegate,XAIUserServiceDelegate>{
+<UITableViewDataSource,UITabBarDelegate,XAIUserServiceDelegate,XAIDataRefreshDelegate>{
 
     XAIUserService* _userService;
     

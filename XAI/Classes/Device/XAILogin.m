@@ -71,6 +71,7 @@
         
         curMQTT.luid = luid;
         
+        /*订阅主题*/
         [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
                                                                   luid:MQTTCover_LUID_Server_03]];
         
@@ -78,6 +79,7 @@
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
         
         
+        /*设置当前用户*/
         XAIUser* user = [[XAIUser alloc] init];
         user.luid = luid;
         user.apsn = curMQTT.apsn;

@@ -11,9 +11,9 @@
 #import "MQTTCover.h"
 #import "MosquittoClient.h"
 #import "MQTTPacketManager.h"
+#import "XAIUser.h"
 
-
-@class XAIUser;
+//@class XAIUser;
 @interface MQTT : NSObject{
 
     

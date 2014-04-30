@@ -9,6 +9,8 @@
 #import "XAIObject.h"
 #import "XAIDevice.h"
 
+#import "XAIData.h"
+
 #define _Key_NickName_ @"NickName"
 #define _Key_OprTime_ @"OprTime"
 #define _Key_OprName_ @"OprName"

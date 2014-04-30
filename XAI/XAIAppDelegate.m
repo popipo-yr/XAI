@@ -8,7 +8,10 @@
 
 #import "XAIAppDelegate.h"
 
+#import "XAIData.h"
+
 #include "mosquitto.h"
+
 
 @implementation XAIAppDelegate
 

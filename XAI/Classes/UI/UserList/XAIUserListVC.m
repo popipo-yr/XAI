@@ -27,16 +27,10 @@
         
         _userService.userServiceDelegate = self; 
         
-//        XAIUser* user1 = [[XAIUser alloc] init];
-//        user1.name = @"ADMIN";
-//        user1.pawd = @"39487543";
-//        
-//        
-//        XAIUser* user2 = [[XAIUser alloc] init];
-//        user2.name = @"他大爷";
-//        user2.pawd = @"39487543";
         
         _userDatasAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getUserList]];
+        
+            [[XAIData shareData] addRefreshDelegate:self];
 
     }
     
@@ -44,6 +38,18 @@
 
 }
 
+
+- (void)dealloc{
+
+    [[XAIData shareData] removeRefreshDelegate:self];
+}
+
+
+-(void)xaiDataRefresh:(XAIData *)data{
+
+     _userDatasAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getUserList]];
+    [self.tableView reloadData];
+}
 
 
 - (void)viewDidLoad

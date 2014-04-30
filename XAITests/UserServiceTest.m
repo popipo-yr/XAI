@@ -55,7 +55,7 @@ XAITYPELUID  ____luid;
     _userService.userServiceDelegate = self;
     
     
-    _name4Change = @"NAME22";
+    _name4Change = @"NAME222";
     _pwd4Change = @"PWD1";
     _pwd4Change_end = @"PWD2";
     _name4Change_end = @"NAME2";

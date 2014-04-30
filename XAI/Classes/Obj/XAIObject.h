@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MQTT.h"
-#import "XAIData.h"
+#import "XAIRWProtocol.h"
 
 #import "XAIObjectGroup.h"
 

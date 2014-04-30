@@ -34,32 +34,24 @@
         _deviceService.deviceServiceDelegate = self;
         
         
-        _objectAry = [[NSMutableArray alloc] init];
+        _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
-        XAILight* obj1 = [[XAILight alloc] init];
-        obj1.apsn = 0x01;
-        obj1.luid = 0x123;
-        obj1.type = XAIObjectType_light;
-        //obj1.lastOpr = @"Mr.O open light at 00.0.2";
-        obj1.name = @"客厅大灯";
-        obj1.nickName = obj1.name;
-        
-        
-        XAILight* obj2 = [[XAILight alloc] init];
-        obj2.apsn = 0x01;
-        obj2.luid = 0x123;
-        obj2.type = XAIObjectType_door;
-        //obj2.lastOpr = @"Mr.O close door at 00.0.2";
-        obj2.name = @"主卧门";
-        obj2.nickName = obj2.name;
-        
-        [_objectAry addObject:obj1];
-        [_objectAry addObject:obj2];
+        [[XAIData shareData] addRefreshDelegate:self];
         
     }
     return self;
 }
 
+- (void)dealloc{
+
+    _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+    [[XAIData shareData] removeRefreshDelegate:self];
+}
+
+-(void)xaiDataRefresh:(XAIData *)data{
+
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad
 {

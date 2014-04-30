@@ -10,8 +10,10 @@
 #import "XAITableViewController.h"
 #import "XAIDeviceService.h"
 
+#import "XAIData.h"
+
 @interface XAIDevShowVC : XAITableViewController
-<UITableViewDelegate,UITableViewDataSource,XAIDeviceServiceDelegate>{
+<UITableViewDelegate,UITableViewDataSource,XAIDeviceServiceDelegate,XAIDataRefreshDelegate>{
 
     XAIDeviceService* _deviceService;
     

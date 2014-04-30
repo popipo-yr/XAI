@@ -9,33 +9,39 @@
 #import <Foundation/Foundation.h>
 
 #import "XAIUser.h"
-
-/*读写协议*/
-@protocol XAIDataInfo_DIC  <NSObject>
-
-- (void) readFromDIC:(NSDictionary*)dic;
-- (NSDictionary*) writeToDIC;
-
-@end
+#import "XAIUserService.h"
+#import "XAIDeviceService.h"
+#import "XAIRWProtocol.h"
 
 
-@protocol XAIDataInfo_ARY <NSObject>
 
-- (void) readFromARY:(NSArray*)ary;
-- (NSArray*) writeToARY;
+
+@class XAIData;
+@protocol XAIDataRefreshDelegate <NSObject>
+
+- (void)xaiDataRefresh:(XAIData*)data;
 
 @end
 
 
 
 @class XAIObjectList;
-@interface XAIData : NSObject{
+@interface XAIData : NSObject
+<MQTTPacketManagerDelegate,XAIUserServiceDelegate,XAIDeviceServiceDelegate>{
 
     NSMutableArray*  _userList; //xaiuser list
     NSMutableArray*  _objList;  //xaiobject list
     XAIObjectList*  _localObjInfo;  //本地数据
 
+    
+    NSMutableArray* _refreshDelegates;
+    XAIUserService* _userService;
+    XAIDeviceService* _devService;
+    
 }
+
+- (void) addRefreshDelegate:(id<XAIDataRefreshDelegate>)delegate;
+- (void) removeRefreshDelegate:(id<XAIDataRefreshDelegate>)delegate;
 
 - (void) setUserList:(NSArray*)users;
 - (NSArray*) getUserList;
@@ -46,6 +52,8 @@
 
 
 - (void) save;
+
+- (void) startRefresh;
 
 
 + (XAIData*) shareData;

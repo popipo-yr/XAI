@@ -11,6 +11,10 @@
 #import "XAIObject.h"
 #import "XAIDevice.h"
 
+#import "XAIPacket.h"
+#import "XAIUserService.h"
+#import "XAIDeviceService.h"
+
 @implementation XAIData
 
 
@@ -128,10 +132,103 @@ static XAIData*  _s_XAIData_ = NULL;
         _userList = [[NSMutableArray alloc] init];
         _objList = [[NSMutableArray alloc] init];
         _localObjInfo = [[XAIObjectList alloc] init];
+        
+        _refreshDelegates = [[NSMutableArray alloc] init];
+        _userService = [[XAIUserService alloc] init];
+        _userService.userServiceDelegate = self;
+        
+        _devService = [[XAIDeviceService alloc] init];
+        _devService.deviceServiceDelegate = self;
     }
     
     return self;
 }
+
+- (void) addRefreshDelegate:(id<XAIDataRefreshDelegate>)delegate{
+
+    [_refreshDelegates addObject:delegate];
+}
+- (void) removeRefreshDelegate:(id<XAIDataRefreshDelegate>)delegate{
+
+    [_refreshDelegates removeObject:delegate];
+}
+
+- (void)callBack{
+
+    for (int i = 0 ; i < [_refreshDelegates count]; i++) {
+    
+        id<XAIDataRefreshDelegate> aDeg = [_refreshDelegates objectAtIndex:i];
+        
+        if ([aDeg conformsToProtocol:@protocol(XAIDataRefreshDelegate)]
+            && [aDeg respondsToSelector:@selector(xaiDataRefresh:)]) {
+            
+            [aDeg xaiDataRefresh:self];
+        }
+        
+    }
+}
+
+- (void) startRefresh{
+    
+    MQTT* curMQTT = [MQTT shareMQTT];
+
+    NSString* uTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_UserTable_Other];
+    
+    NSString* dTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_DevTable_Other];
+    
+    [curMQTT.packetManager addPacketManager:self withKey:uTopic];
+    [curMQTT.packetManager addPacketManager:self withKey:dTopic];
+}
+
+
+-(void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic{
+    
+    MQTT* curMQTT = [MQTT shareMQTT];
+    
+    NSString* uTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_UserTable_Other];
+    
+    NSString* dTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_DevTable_Other];
+    
+    if (topic != nil && [topic isEqualToString:uTopic]) {
+        
+        [_userService recivePacket:datas size:size topic:topic];
+        
+    }else if(topic != nil && [topic isEqualToString:dTopic]){
+    
+        [_devService recivePacket:datas size:size topic:topic];
+    
+    }
+
+    
+}
+
+-(void)userService:(XAIUserService *)userService findedAllUser:(NSSet *)users status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (isSuccess) {
+        
+        [self setUserList:[users allObjects]];
+        [self callBack];
+        
+    }
+
+}
+
+- (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (isSuccess) {
+        
+        [self setObjList:[devs allObjects]];
+    }
+}
+
 
 
 @end

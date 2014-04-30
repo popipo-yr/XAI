@@ -261,6 +261,9 @@
     }else{
         
         [[XAIData shareData] save];
+        
+        /*设置数据更新*/
+        [[XAIData shareData] startRefresh];
     
         //[self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
         
