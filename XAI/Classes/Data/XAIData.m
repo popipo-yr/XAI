@@ -203,6 +203,7 @@ static XAIData*  _s_XAIData_ = NULL;
         
     }else if(topic != nil && [topic isEqualToString:dTopic]){
     
+        [_devService _setFindOnline];
         [_devService recivePacket:datas size:size topic:topic];
     
     }
@@ -226,6 +227,7 @@ static XAIData*  _s_XAIData_ = NULL;
     if (isSuccess) {
         
         [self setObjList:[devs allObjects]];
+        [self callBack];
     }
 }
 

@@ -26,6 +26,9 @@
     
     XAIChangeNameVC* _vc;
     
+    
+    NSString* _newName; //用于修改设备名字
+    
 
 }
 

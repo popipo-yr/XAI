@@ -31,6 +31,8 @@
         // Custom initialization
         
         _deviceService = [[XAIDeviceService alloc] init];
+        _deviceService.apsn = [MQTT shareMQTT].apsn;
+        _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
         
@@ -44,12 +46,13 @@
 
 - (void)dealloc{
 
-    _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+    
     [[XAIData shareData] removeRefreshDelegate:self];
 }
 
 -(void)xaiDataRefresh:(XAIData *)data{
 
+    _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
     [self.tableView reloadData];
 }
 
@@ -91,6 +94,8 @@
     
     
     [reader dismissViewControllerAnimated:YES completion:nil];
+    
+    luidstr = @"0x124b000413c8d8";
     
     XAIDevAddVC* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
     
@@ -138,8 +143,10 @@
 
 - (void)delBtnClick:(NSIndexPath*) index{
     
+    XAIObject*  obj = [_objectAry objectAtIndex:[index row]];
+    [_deviceService delDev:obj.luid];
     
-    XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
+    //XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
 }
 
 
@@ -240,40 +247,58 @@
 
 - (void) changeDevName:(NSString*)newName{
 
-    [_deviceService changeDev:_curOprObj.luid withName:newName];
-
-    [_vc endOkEvent];
-}
-
-- (void) addDevice:(BOOL) isSuccess{
-
-}
-- (void) delDevice:(BOOL) isSuccess{
+    _newName = newName;
     
-    if (isSuccess && nil != _curDelIndexPath) {
+    [_deviceService changeDev:_curOprObj.luid withName:newName];
+}
+
+
+
+
+-(void)devService:(XAIDeviceService *)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (devService != _deviceService) return;
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    if (isSuccess &&  nil != _curDelIndexPath) {
         
-        [_objectAry removeObjectAtIndex:_curDelIndexPath.row];
-        // Delete the row from the data source.
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        alert.message = @"删除成功";
         
+        //不应该时这里删除
+        [_objectAry removeObjectAtIndex:[_curDelIndexPath row]];
+        [self.tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
+                               withRowAnimation:UITableViewRowAnimationAutomatic];
         
         _curDelIndexPath = nil;
+        
+    }else{
+        
+        alert.message = @"删除失败";
     }
     
-
-
-}
-- (void) changeDeviceName:(BOOL) isSuccess{
-
-}
-- (void) findedAllDevice:(BOOL) isSuccess datas:(NSArray*) devAry{
-
+    [alert show];
+    
 }
 
-- (void) finddedAllOnlineDevices:(NSSet*) luidAry{
+-(void)devService:(XAIDeviceService *)devService changeDevName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    
+    if (isSuccess) {
+        
+        [_vc endOkEvent];
+        
+        _curOprObj.name = _newName;
+        
+        [self.tableView reloadData];
+        
+    }else{
+        
+        [_vc endFailEvent:@"修改名称失败"];
+    }
+    
+    
 }
-
-
 
 @end

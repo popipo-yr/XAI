@@ -29,6 +29,7 @@
 
 @property (nonatomic, weak) id<XAIDeviceServiceDelegate> deviceServiceDelegate;
 
+- (void) _setFindOnline;
 
 - (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName;
 

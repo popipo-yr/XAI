@@ -198,10 +198,12 @@
 
 - (void)userService:(XAIUserService *)userService delUser:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    if (userService != _userService) return;
+    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
                                                    delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     
-    if (isSuccess && userService == _userService) {
+    if (isSuccess && nil == _curDelIndexPath) {
         
         alert.message = @"删除成功";
         
@@ -209,6 +211,8 @@
         [_userDatasAry removeObjectAtIndex:[_curDelIndexPath row]];
         [self.tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
                                withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        _curDelIndexPath = nil;
         
     }else{
     

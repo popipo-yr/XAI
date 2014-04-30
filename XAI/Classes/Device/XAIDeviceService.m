@@ -451,6 +451,17 @@
 
       }
       
+      if(_timer != nil){
+          
+          [_timer invalidate];
+          
+      }
+      _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
+                                                target:self
+                                              selector:@selector(stopfindAllOnlineDev)
+                                              userInfo:nil
+                                               repeats:YES];
+      
   }
     
     purgePacketParamDTI(dti);
@@ -565,6 +576,12 @@
 - (void) findAllOnlineDevWithuseSecond:(int) sec{
 
     [self findAllOnlineDevWithApsn:_apsn luid:_luid useSecond:sec];
+}
+
+- (void) _setFindOnline{
+
+    [_onlineDevices removeAllObjects];
+    _bFinding = true;
 }
 
 

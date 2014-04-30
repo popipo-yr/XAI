@@ -142,10 +142,13 @@
 
 - (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
     
+    if (userService != _userService) return;
+    
+    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
                                                    delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
 
-    if (isSuccess && userService == _userService) {
+    if (isSuccess ) {
         
 
         [alert setMessage:@"添加用户成功"];

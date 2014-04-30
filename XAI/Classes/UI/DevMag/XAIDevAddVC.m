@@ -22,6 +22,8 @@
         
         _typeStrAry = @[@"门",@"灯"];
         _deviceService = [[XAIDeviceService alloc] init];
+        _deviceService.apsn = [MQTT shareMQTT].apsn;
+        _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
     }
@@ -125,12 +127,37 @@
 
 #pragma mark -- DeviceServiceDelegate
 
-- (void) addDevice:(BOOL) isSuccess{
 
-    if (isSuccess) {
+- (void) devService:(XAIDeviceService*)devService addDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (devService != _deviceService) return;
+    
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    
+    if (isSuccess ) {
+        
+        
+        [alert setMessage:@"添加设备成功"];
+        alert.delegate = self;
+        
+    }else{
+        
+        [alert setMessage:@"添加设备失败"];
         
     }
+    
+    [alert show];
+
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark --Helper
 
@@ -166,7 +193,13 @@
     NSString* name =  _nameTextField.text;
    
     
-    [_deviceService addDev:0x1 withName:name];
+    XAITYPELUID luid;
+    
+    NSScanner* scanner = [NSScanner scannerWithString:_luidStr];
+    [scanner scanHexLongLong:&luid];
+    
+    
+    [_deviceService addDev:luid withName:name];
 }
 
 
