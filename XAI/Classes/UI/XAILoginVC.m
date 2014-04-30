@@ -128,6 +128,8 @@
 
     
     self.view.center = CGPointMake(oldPoint.x , oldPoint.y + moveLength);
+    
+    [UIView commitAnimations];
 
 }
 
@@ -142,6 +144,9 @@
 
 
 - (IBAction)loginBtnClick:(id)sender{
+    
+    [self.nameLabel resignFirstResponder];
+    [self.passwordLabel resignFirstResponder];
     
      CGRect rx = [ UIScreen mainScreen ].bounds;
     
