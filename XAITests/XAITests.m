@@ -230,6 +230,16 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
 }
 - (void) testARC {
    
+    NSDateFormatter *format =[[NSDateFormatter alloc] init];
+    
+    [format setTimeZone:[NSTimeZone localTimeZone]];
+    
+    [format setDateFormat:@"HH:mm  MM-dd-yyyy"];
+    
+    
+    NSLog(@"%@",[format stringFromDate:[NSDate new]]);
+    
+    
     [self helper];
     
     XCTAssertTrue( 1 == 1);

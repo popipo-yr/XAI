@@ -123,7 +123,7 @@
         return @"关了灯";
     }
     
-    return nil;
+    return @"";
 }
 
 @end

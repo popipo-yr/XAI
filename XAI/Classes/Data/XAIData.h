@@ -50,6 +50,7 @@
 - (void) setObjList:(NSArray*)devs;
 - (NSArray*) getObjList;
 
+- (void) upDataObj:(XAIObject*)obj;
 
 - (void) save;
 
@@ -78,7 +79,7 @@
 
 
 - (NSArray*) getObjects;
-- (void) addObject:(XAIObject*)obj;
+- (void) addObjectInfo:(XAIObject*)obj;
 
 - (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
 

@@ -10,6 +10,8 @@
 
 @implementation XAILightStatusVC
 
+
+
 - (void)viewDidLoad{
 
     [super viewDidLoad];
@@ -47,7 +49,8 @@
 //
 //    
 //    NSArray* ary = [[NSArray alloc] initWithObjects:opr1,opr2,nil];
-    _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
+   
+    
     
     
     
@@ -57,6 +60,14 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    [_light readOprList]; //读取操作表
+     _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
+    
+    
+}
 
 
 #pragma mark - IBOUT
@@ -76,16 +87,16 @@
     [_activityView startAnimating];
     
     
-//    NSInvocation *anInvocation = [NSInvocation
-//                                  invocationWithMethodSignature:
-//                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
-//    
-//    [anInvocation setSelector:@selector(lightCloseSuccess:)];
-//    [anInvocation setTarget:self];
-//    BOOL status = YES;
-//    [anInvocation setArgument:&status atIndex:2];
-//    
-//    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
+    NSInvocation *anInvocation = [NSInvocation
+                                  invocationWithMethodSignature:
+                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
+    
+    [anInvocation setSelector:@selector(lightOpenSuccess:)];
+    [anInvocation setTarget:self];
+    BOOL status = YES;
+    [anInvocation setArgument:&status atIndex:2];
+    
+    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
 }
 
 #pragma mark -- LightDelegate
@@ -101,7 +112,7 @@
         
         [_activityView stopAnimating];
         
-        XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
+        XAILightOpr* opr = [[XAILightOpr alloc] init];
         opr.opr = XAILightStatus_Open;
         opr.time = [NSDate new];
         opr.name = [MQTT shareMQTT].curUser.name;
@@ -123,7 +134,7 @@
         [_activityView stopAnimating];
         
         
-        XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
+        XAILightOpr* opr = [[XAILightOpr alloc] init];
         opr.opr = XAILightStatus_Close;
         opr.time = [NSDate new];
         opr.name = [MQTT shareMQTT].curUser.name;

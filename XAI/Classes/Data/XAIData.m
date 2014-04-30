@@ -64,7 +64,7 @@ static XAIData*  _s_XAIData_ = NULL;
         
         
             aObj.nickName = aObj.name;
-            [_localObjInfo addObject:aObj];
+            [_localObjInfo addObjectInfo:aObj];
         }
         
 
@@ -79,6 +79,12 @@ static XAIData*  _s_XAIData_ = NULL;
 
 
     return [NSArray arrayWithArray:_objList];
+}
+
+- (void) upDataObj:(XAIObject*)obj{
+
+    [_localObjInfo addObjectInfo:obj];
+    [_localObjInfo save];
 }
 
 - (void) save{
@@ -327,9 +333,18 @@ static XAIData*  _s_XAIData_ = NULL;
     return _objs;
 }
 
-- (void) addObject:(XAIObject*)obj{
+- (void) addObjectInfo:(XAIObject*)obj{
+    
+    XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid];
+    
+    if (localobj != nil) {
+        
+        localobj.lastOpr = obj.lastOpr;
+        
+    }else{
 
-    [_objs addObject:obj];
+        [_objs addObject:obj];
+    }
 }
 
 - (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
