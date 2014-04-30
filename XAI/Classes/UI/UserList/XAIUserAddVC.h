@@ -10,7 +10,8 @@
 
 #import "XAIUserService.h"
 
-@interface XAIUserAddVC : XAITableViewController{
+@interface XAIUserAddVC : XAITableViewController
+<UIAlertViewDelegate,XAIUserServiceDelegate>{
 
     NSArray* _addUserInfoAry;
     

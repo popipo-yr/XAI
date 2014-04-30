@@ -23,6 +23,10 @@
         _addUserInfoAry = [[NSArray alloc] initWithObjects:@"用户名"
                            ,@"密码",@"重复密码", nil];
         
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn
+                                                       Luid:MQTTCover_LUID_Server_03];
+        
+        _userService.userServiceDelegate = self;
     }
     
     return self;
@@ -135,5 +139,31 @@
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return 60;
 //}
+
+- (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+
+    if (isSuccess && userService == _userService) {
+        
+
+        [alert setMessage:@"添加用户成功"];
+        alert.delegate = self;
+        
+    }else{
+    
+        [alert setMessage:@"添加用户失败"];
+    
+    }
+    
+    [alert show];
+
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

@@ -22,7 +22,8 @@
     //name = @"admin@0x00000001";
     //password = @"admin";
     
-    [_name setString:name];
+    _name = name;
+    _pawd = password;
     
     NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@",name,[MQTTCover apsnToString:apsn]];
     
@@ -77,6 +78,14 @@
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
         
         
+        XAIUser* user = [[XAIUser alloc] init];
+        user.luid = luid;
+        user.apsn = curMQTT.apsn;
+        user.name = _name;
+        user.pawd = _pawd;
+        
+        curMQTT.curUser = user;
+        
     }
     
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
@@ -98,7 +107,7 @@
         _userService.luid = MQTTCover_LUID_Server_03;
         _userService.userServiceDelegate = self;
         
-        _name = [[NSMutableString alloc] init];
+        //_name = [[NSMutableString alloc] init];
         
     }
     

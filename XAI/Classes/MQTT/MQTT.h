@@ -12,6 +12,8 @@
 #import "MosquittoClient.h"
 #import "MQTTPacketManager.h"
 
+
+@class XAIUser;
 @interface MQTT : NSObject{
 
     
@@ -26,7 +28,8 @@
 
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;
-@property (nonatomic, strong) NSString* curUserName;
+//@property (nonatomic, strong) NSString* curUserName;
+@property (nonatomic, strong) XAIUser* curUser;
 
 
 + (MQTT*) shareMQTT;

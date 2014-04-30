@@ -19,7 +19,8 @@
 @interface XAILogin : NSObject <MQTTConnectDelegate,XAIUserServiceDelegate>{
 
 
-    NSMutableString*  _name;
+    NSString*  _name;
+    NSString*  _pawd;
     XAIUserService* _userService;
     
 

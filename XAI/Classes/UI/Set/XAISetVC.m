@@ -30,9 +30,13 @@
         
         _userItems = [[NSArray alloc] initWithObjects:@"名称",@"密码",nil];
         
-        _userInfo = [[XAIUser alloc] init];
-        _userInfo.name = @"小明";
-        _userInfo.pawd = @"98980454";
+        _userInfo = [MQTT shareMQTT].curUser;
+        
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn
+                                                       Luid:MQTTCover_LUID_Server_03];
+        _userService.userServiceDelegate = self;
+        //_userInfo.name = @"小明";
+        //_userInfo.pawd = @"98980454";
     }
     
     return self;
@@ -53,6 +57,8 @@
 {
     [super viewDidLoad];
     
+    _userInfo = [MQTT shareMQTT].curUser;
+
     
     [self.tableView reloadData];
 
@@ -69,14 +75,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) changeHomeName:(NSString*)newName{
+    
+    _homeName = newName;
+}
+
 - (void) changeUserName:(NSString*)newName{
     
-    
+    _newName = newName;
+    [_userService changeUser:_userInfo.luid withName:newName];
 }
 
 - (void) changePassword:(NSString*)newPwd{
     
-    
+    _newPwd = newPwd;
+    [_userService changeUser:_userInfo.luid oldPassword:_userInfo.pawd to:newPwd];
 }
 
 
@@ -147,9 +160,10 @@
                                    instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
         [nameVC setOneLabName:@"家" OneTexName:_userInfo.name  TwoLabName:@"新名称"];
-        [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
+        [nameVC setOKClickTarget:self Selector:@selector(changeHomeName:)];
         [nameVC setBarTitle:@"设置家"];
         
+        _homeVC = nameVC;
         
         [self.navigationController pushViewController:nameVC animated:YES];
         
@@ -162,6 +176,7 @@
         [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
         [nameVC setBarTitle:@"设置名称"];
         
+        _nameVC = nameVC;
         
         [self.navigationController pushViewController:nameVC animated:YES];
         
@@ -175,11 +190,48 @@
         [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
         [pawVC setBarTitle:@"设置密码"];
         
+        _pawVC = pawVC;
         
         [self.navigationController pushViewController:pawVC animated:YES];
     }
     
     
 }
+
+
+-(void)userService:(XAIUserService *)userService changeUserName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (isSuccess) {
+        
+        [_nameVC endOkEvent];
+        _userInfo.name = _newName;
+        
+        [self.tableView reloadData];
+        
+    }else{
+        
+        [_nameVC endFailEvent:@"修改名称失败"];
+    }
+    
+    
+}
+
+-(void)userService:(XAIUserService *)userService changeUserPassword:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (isSuccess) {
+        
+        [_pawVC endOkEvent];
+        _userInfo.pawd = _newPwd;
+        
+        [self.tableView reloadData];
+        
+    }else{
+        
+        [_pawVC endFailEvent:@"修改密码失败"];
+    }
+    
+    
+}
+
 
 @end

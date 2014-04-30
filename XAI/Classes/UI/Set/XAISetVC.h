@@ -10,8 +10,11 @@
 #import "XAITableViewController.h"
 #import "XAIUserService.h"
 
+#import "XAIChangeNameVC.h"
+#import "XAIChangePasswordVC.h"
+
 @interface XAISetVC : XAITableViewController
-<UITableViewDataSource,UITableViewDelegate>{
+<UITableViewDataSource,UITableViewDelegate,XAIUserServiceDelegate>{
 
 
     NSArray*  _userItems;
@@ -19,6 +22,14 @@
     XAIUserService* _userService;
     
     XAIUser* _userInfo;
+    
+    NSString* _newName;
+    NSString* _newPwd;
+    NSString* _homeName;
+    
+    XAIChangeNameVC* _nameVC;
+    XAIChangeNameVC* _homeVC;
+    XAIChangePasswordVC* _pawVC;
 }
 
 

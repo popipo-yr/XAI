@@ -104,7 +104,7 @@
         XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
         opr.opr = XAILightStatus_Open;
         opr.time = [NSDate new];
-        opr.name = [MQTT shareMQTT].curUserName;
+        opr.name = [MQTT shareMQTT].curUser.name;
         [_light addOpr:opr];
         
         /*刷新信息*/
@@ -126,7 +126,7 @@
         XAIObjectOpr* opr = [[XAIObjectOpr alloc] init];
         opr.opr = XAILightStatus_Close;
         opr.time = [NSDate new];
-        opr.name = [MQTT shareMQTT].curUserName;
+        opr.name = [MQTT shareMQTT].curUser.name;
         [_light addOpr:opr];
         
         /*刷新信息*/

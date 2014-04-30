@@ -22,6 +22,9 @@
     
     XAIChangeNameVC* _nameVC;
     XAIChangePasswordVC* _pawVC;
+    
+    NSString* _newName;
+    NSString* _newPwd;
 
 }
 

@@ -56,11 +56,13 @@
 
 - (void) changeUserName:(NSString*)newName{
 
+    _newName = newName;
     [_userService changeUser:_userInfo.luid withName:newName];
 }
 
 - (void) changePassword:(NSString*)newPwd{
     
+    _newPwd = newPwd;
     [_userService changeUser:_userInfo.luid oldPassword:_userInfo.pawd to:newPwd];
 }
 
@@ -158,6 +160,9 @@
     if (isSuccess) {
         
         [_nameVC endOkEvent];
+        _userInfo.name = _newName;
+        
+        [self.tableView reloadData];
         
     }else{
         
@@ -172,6 +177,10 @@
     if (isSuccess) {
         
         [_pawVC endOkEvent];
+        _userInfo.pawd = _newPwd;
+        
+        [self.tableView reloadData];
+        
     }else{
     
         [_pawVC endFailEvent:@"修改密码失败"];

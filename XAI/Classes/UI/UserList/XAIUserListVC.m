@@ -22,7 +22,10 @@
 
     if (self = [super initWithCoder:aDecoder]) {
         
-        _userService = [[XAIUserService alloc] init];
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn
+                                                       Luid:MQTTCover_LUID_Server_03];
+        
+        _userService.userServiceDelegate = self; 
         
 //        XAIUser* user1 = [[XAIUser alloc] init];
 //        user1.name = @"ADMIN";
@@ -54,6 +57,13 @@
     
 
     
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,6 +158,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    [tableView  deselectRowAtIndexPath:indexPath animated:false];
+    
+    return;
+    
     if ([indexPath row] < [_userDatasAry count]) {
         
         XAIUser* aUser = [_userDatasAry objectAtIndex:[indexPath row]];
@@ -162,8 +176,6 @@
         
     }
     
-
-    [tableView  deselectRowAtIndexPath:indexPath animated:false];
 }
 
 
@@ -177,6 +189,29 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)userService:(XAIUserService *)userService delUser:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
+                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    if (isSuccess && userService == _userService) {
+        
+        alert.message = @"删除成功";
+        
+        //不应该时这里删除
+        [_userDatasAry removeObjectAtIndex:[_curDelIndexPath row]];
+        [self.tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
+                               withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }else{
+    
+        alert.message = @"删除失败";
+    }
+    
+    [alert show];
+
+}
 
 @end
 
