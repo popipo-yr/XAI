@@ -17,12 +17,12 @@
 typedef enum XAIObjectType{
     
     XAIObjectType_door = 0,
-    XAIObjectType_light = 1,
-    
+    XAIObjectType_window = 1,
+    XAIObjectType_light = 2,
     
 }XAIObjectType;
 
-#define XAIObjectTypeCount 2
+#define XAIObjectTypeCount 3
 
 
 @class XAIObjectOpr;
@@ -60,17 +60,12 @@ typedef enum XAIObjectType{
 
 - (void) startControl;
 - (id) initWithDevice:(XAIDevice*)dev;
-- (void) setDevInfo:(XAIDevice*)dev;
+- (void) setInfoFromDevice:(XAIDevice*)dev;
 
 - (BOOL) readOprList; /*获取操作记录集,读取本地的信息*/
 - (BOOL) addOpr:(XAIObjectOpr*)aOpr; /*添加一个操作记录 更新最后一次操作和操作列表*/
 - (NSArray*) getOprList;
 
-
-+ (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
-+ (NSArray*)  typeCanUse;
-+ (NSString*) typeOprClassName:(XAIObjectType)type; /*对应操作的类名*/
-+ (NSString*) typeClassName:(XAIObjectType)type; /*对应的类名*/
 
 @end
 

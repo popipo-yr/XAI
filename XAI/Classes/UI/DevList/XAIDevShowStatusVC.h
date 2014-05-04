@@ -32,9 +32,6 @@
 - (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer;
 - (void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer;
 
-
-+ (XAIDevShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard ;
-
 @end
 
 

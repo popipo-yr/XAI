@@ -32,7 +32,7 @@ typedef enum XAIDevDoorContactStatus{
 
 @protocol XAIDevDoorContactDelegate <NSObject>
 
-- (void) doorContactStatusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status;
-- (void) doorContactPowerGetSuccess:(BOOL)isSuccess curPower:(float)power;
+- (void) doorContact:(XAIDevDoorContact*)dc statusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status;
+- (void) doorContact:(XAIDevDoorContact*)dc powerGetSuccess:(BOOL)isSuccess curPower:(float)power;
 
 @end

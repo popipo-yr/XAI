@@ -25,35 +25,7 @@
     
     [_light getCurStatus];
     
-    //[self performSelector:@selector(lightCurStatus:)];
-    
-    
-//    NSInvocation *anInvocation = [NSInvocation
-//                                  invocationWithMethodSignature:
-//                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCurStatus:)]];
-//    
-//    [anInvocation setSelector:@selector(lightCurStatus:)];
-//    [anInvocation setTarget:self];
-//    long status = 1;
-//    [anInvocation setArgument:&status atIndex:2];
-//    
-//    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
-//    
-//    
-//    XAIObjectOpr* opr1 = [[XAIObjectOpr alloc] init];
-//    //opr1.opr = @"水水开了灯";
-//    //opr1.time = @"8:39  03/23";
-//    
-//    
-//    XAIObjectOpr* opr2 = [[XAIObjectOpr alloc] init];
-//
-//    
-//    NSArray* ary = [[NSArray alloc] initWithObjects:opr1,opr2,nil];
-   
-    
-    
-    
-    
+
     self.factoryLabel.text = _light.vender;//  @"成都xxx工厂";
     self.modelLabel.text = _light.model; //@"JUNENNDENG-8390F";
     
@@ -87,16 +59,16 @@
     [_activityView startAnimating];
     
     
-    NSInvocation *anInvocation = [NSInvocation
-                                  invocationWithMethodSignature:
-                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
-    
-    [anInvocation setSelector:@selector(lightOpenSuccess:)];
-    [anInvocation setTarget:self];
-    BOOL status = YES;
-    [anInvocation setArgument:&status atIndex:2];
-    
-    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
+//    NSInvocation *anInvocation = [NSInvocation
+//                                  invocationWithMethodSignature:
+//                                  [XAILightStatusVC instanceMethodSignatureForSelector:@selector(lightCloseSuccess:)]];
+//    
+//    [anInvocation setSelector:@selector(lightOpenSuccess:)];
+//    [anInvocation setTarget:self];
+//    BOOL status = YES;
+//    [anInvocation setArgument:&status atIndex:2];
+//    
+//    [anInvocation performSelector:@selector(invoke) withObject:nil afterDelay:1];
 }
 
 #pragma mark -- LightDelegate

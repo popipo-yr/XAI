@@ -437,15 +437,34 @@
       if (nil !=  oneDev) {
           
           
-          NSString* model = [[NSString alloc]initWithBytes:dti->model
-                                                    length:sizeof(dti->model) encoding:NSUTF8StringEncoding];
-          NSString* vender = [[NSString alloc] initWithBytes:dti->vender
-                                                      length:sizeof(dti->vender) encoding:NSUTF8StringEncoding];
+          NSString* model = [[NSString alloc] initWithUTF8String:(const char*)dti->model];
+          NSString* vender = [[NSString alloc] initWithUTF8String:(const char*)dti->vender];
           
-          oneDev.model = model;
+//          NSString* model = [[NSString alloc]initWithBytes:dti->model
+//                                                    length:sizeof(dti->model) encoding:NSASCIIStringEncoding];
+//          NSString* vender = [[NSString alloc] initWithBytes:dti->vender
+//                                                      length:sizeof(dti->vender) encoding:NSASCIIStringEncoding];
+          
+          oneDev.model = [[NSString alloc] initWithFormat:@"%@",[model uppercaseString]];
           oneDev.vender = vender;
           
-          oneDev.type = XAIObjectType_light;/*mustchange*/
+          NSLog(@"%@",[oneDev.model uppercaseString]);
+          
+          /*mustchange*/
+          if ([oneDev.model isEqualToString:@"SWITCH-1"]
+              || [oneDev.model isEqualToString:@"SWITCH-2"]) {
+              
+              oneDev.type = XAIObjectType_light;
+              
+          }else if([oneDev.model isEqualToString:@"MAGNET"]){
+          
+              oneDev.type = XAIObjectType_window;
+          
+          }else{
+          
+              oneDev.type = XAIObjectType_light;
+          
+          }
           
           [_onlineDevices addObject:oneDev];
 

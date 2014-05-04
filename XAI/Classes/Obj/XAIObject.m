@@ -8,8 +8,9 @@
 
 #import "XAIObject.h"
 #import "XAIDevice.h"
-
 #import "XAIData.h"
+
+#import "XAIObjectGenerate.h"
 
 #define _Key_NickName_ @"NickName"
 #define _Key_OprTime_ @"OprTime"
@@ -41,7 +42,7 @@
         
         _lastOpr = [[XAIObjectOpr alloc] init];
 
-        [self setDevInfo:dev];
+        [self setInfoFromDevice:dev];
     }
     
     return self;
@@ -49,7 +50,7 @@
 
 - (void) startControl{}
 
-- (void) setDevInfo:(XAIDevice*)dev{
+- (void) setInfoFromDevice:(XAIDevice*)dev{
 
     _apsn = dev.apsn;
     _luid = dev.luid;
@@ -58,91 +59,6 @@
     _type = dev.type;
     
     _name = dev.name;
-
-}
-
-+ (NSString*) typeImageName:(XAIObjectType)type{
-    
-   __autoreleasing NSString* imgNameStr = nil;
-    
-    switch (type) {
-        case XAIObjectType_door:{
-        
-            imgNameStr = @"obj_door";
-        }
-            break;
-        case XAIObjectType_light:{
-        
-            imgNameStr = @"obj_light";
-        
-        } break;
-            
-        default:
-            break;
-    }
-    
-    return imgNameStr;
-}
-
-+ (NSArray*)  typeCanUse{
-
-   __autoreleasing NSArray* types = @[[NSNumber numberWithInt:XAIObjectType_door],
-                       [NSNumber numberWithInt:XAIObjectType_light]];
-    
-    return types;
-}
-
-+ (NSString*) typeOprClassName:(XAIObjectType)type{
-
-    NSString* className = nil;
-    
-    switch (type) {
-        case XAIObjectType_door:{
-            
-           // className = @"XAILightOpr";
-        }
-            break;
-        case XAIObjectType_light:{
-            
-            className = @"XAILightOpr";
-            
-        } break;
-            
-        default:{
-        
-            className = @"XAILightOpr";
-        }
-            break;
-    }
-    
-
-    return className;
-
-}
-
-+ (NSString*) typeClassName:(XAIObjectType)type{
-
-    NSString* className = nil;
-    
-    switch (type) {
-        case XAIObjectType_door:{
-            
-            // className = @"XAILight";
-        }
-            break;
-        case XAIObjectType_light:{
-            
-            className = @"XAILight";
-            
-        } break;
-            
-        default:
-            break;
-    }
-    
-    
-    return className;
-
 
 }
 
@@ -179,7 +95,7 @@
     _type = [[dic objectForKey:_Key_Type_] intValue];
     
     /*必须根据类型创建数据*/
-    _lastOpr = [[NSClassFromString([XAIObject typeOprClassName:_type])  alloc] init];
+    _lastOpr = [[NSClassFromString([XAIObjectGenerate typeOprClassName:_type])  alloc] init];
     
     _lastOpr.opr = [[dic objectForKey:_Key_OprID_] intValue];
     _lastOpr.time = [dic objectForKey:_Key_OprTime_];
@@ -210,7 +126,7 @@
             NSDictionary* dic = [oprAry objectAtIndex:i];
             
             /*也可以通过类名获取*/
-            XAIObjectOpr* aOpr = [[NSClassFromString([XAIObject typeOprClassName:_type]) alloc] init];
+            XAIObjectOpr* aOpr = [[NSClassFromString([XAIObjectGenerate typeOprClassName:_type]) alloc] init];
             [aOpr readFromDIC:dic];
             
             [oprList addObject:aOpr];

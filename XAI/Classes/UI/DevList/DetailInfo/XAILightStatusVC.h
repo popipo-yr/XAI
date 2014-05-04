@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "XAIDevShowStatusVC.h"
 
 #import "XAILight.h"

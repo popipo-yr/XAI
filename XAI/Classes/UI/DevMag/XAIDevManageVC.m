@@ -12,8 +12,9 @@
 #import "XAIDevAddVC.h"
 #import "XAIChangeNameVC.h"
 
-#import "XAIObject.h"
-#import "XAILight.h"
+#import "XAIObjectGenerate.h"
+
+
 
 #define  constRect  CGRectMake(0, 0, 320, 50)
 
@@ -192,7 +193,7 @@
     if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
         
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
-        [cell.headImageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
+        [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
         [cell.nameLable setText:aObj.nickName];
         [cell.contextLable setText:aObj.name];
         

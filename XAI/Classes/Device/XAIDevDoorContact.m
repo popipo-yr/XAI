@@ -111,9 +111,9 @@
         
         
         if (nil != _dcDelegate &&
-            [_dcDelegate respondsToSelector:@selector(doorContactStatusGetSuccess:curStatus:)]) {
+            [_dcDelegate respondsToSelector:@selector(doorContact:statusGetSuccess:curStatus:)]) {
             
-            [_dcDelegate doorContactStatusGetSuccess:isSuccess curStatus:curStatus];
+            [_dcDelegate doorContact:self statusGetSuccess:isSuccess curStatus:curStatus];
         }
         
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
@@ -149,9 +149,9 @@
         
         
         if (nil != _dcDelegate &&
-            [_dcDelegate respondsToSelector:@selector(doorContactPowerGetSuccess:curPower:)]) {
+            [_dcDelegate respondsToSelector:@selector(doorContact:powerGetSuccess:curPower:)]) {
             
-            [_dcDelegate doorContactPowerGetSuccess:isSuccess curPower:curPower];
+            [_dcDelegate doorContact:self powerGetSuccess:isSuccess curPower:curPower];
         }
         
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:

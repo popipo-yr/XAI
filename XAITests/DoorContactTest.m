@@ -158,7 +158,7 @@
 
 }
 
-- (void)doorContactPowerGetSuccess:(BOOL)isSuccess curPower:(float)power{
+- (void)doorContact:(XAIDevDoorContact *)dc statusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status{
 
     if (isSuccess) {
         
@@ -171,7 +171,7 @@
 
 }
 
-- (void)doorContactStatusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status{
+- (void)doorContact:(XAIDevDoorContact *)dc powerGetSuccess:(BOOL)isSuccess curPower:(float)power{
 
     if (isSuccess) {
         

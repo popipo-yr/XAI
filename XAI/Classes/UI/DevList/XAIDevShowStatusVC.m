@@ -7,40 +7,8 @@
 //
 
 #import "XAIDevShowStatusVC.h"
-#import "XAILight.h"
-#import "XAILightStatusVC.h"
 
 @implementation XAIDevShowStatusVC
-
-+ (XAIDevShowStatusVC*) statusWithObject:(XAIObject*) aObj storyboard:(UIStoryboard*)storyboard {
-
-    switch (aObj.type) {
-        case XAIObjectType_light:{
-        
-            if ([aObj isKindOfClass:[XAILight class]]) {
-                
-                XAILightStatusVC* lightVC = [storyboard
-                                             instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
-                lightVC.light = (XAILight*)aObj;
-                
-                [lightVC.light startControl];
-                
-                return lightVC;
-                
-            }
-
-        }
-            
-            break;
-            
-        default:
-            break;
-    }
-    
-    return nil;
-    
-}
-
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
 

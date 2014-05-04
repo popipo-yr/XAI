@@ -8,7 +8,7 @@
 
 #import "XAIData.h"
 
-#import "XAIObject.h"
+#import "XAIObjectGenerate.h"
 #import "XAIDevice.h"
 
 #import "XAIPacket.h"
@@ -45,10 +45,10 @@ static XAIData*  _s_XAIData_ = NULL;
         if (![aDev isKindOfClass:[XAIDevice class]]) continue;
         
         
-        XAIObject*  aObj = [[NSClassFromString([XAIObject typeClassName:aDev.type]) alloc] init];
+        XAIObject*  aObj = [[NSClassFromString([XAIObjectGenerate typeClassName:aDev.type]) alloc] init];
         if (aObj == nil) continue;
         
-        [aObj setDevInfo:aDev];
+        [aObj setInfoFromDevice:aDev];
         
         /*本地数据*/
         

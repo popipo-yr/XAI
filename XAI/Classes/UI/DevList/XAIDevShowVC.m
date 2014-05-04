@@ -7,10 +7,10 @@
 //
 
 #import "XAIDevShowVC.h"
+
 #import "XAIDevShowCell.h"
-#import "XAIObject.h"
-#import "XAILight.h"
-#import "XAIDevShowStatusVC.h"
+#import "XAIObjectGenerate.h"
+#import "XAIDevShowStatusVCGenerate.h"
 
 #import "XAIData.h"
 
@@ -37,28 +37,6 @@
         _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
         [[XAIData shareData] addRefreshDelegate:self];
-//        [[NSMutableArray alloc] init];
-//        
-//        XAILight* obj1 = [[XAILight alloc] init];
-//        obj1.apsn = 0x01;
-//        obj1.luid = 0x123;
-//        obj1.type = XAIObjectType_light;
-//        obj1.lastOpr = [[XAIObjectOpr alloc] init];
-//        obj1.lastOpr.name = @"ABC";
-//        
-//       // @"Mr.O open light at 00.0.2";
-//        obj1.name = @"客厅大灯";
-//        
-//        
-//        XAILight* obj2 = [[XAILight alloc] init];
-//        obj2.apsn = 0x01;
-//        obj2.luid = 0x123;
-//        obj2.type = XAIObjectType_door;
-//        //obj2.lastOpr = @"Mr.O close door at 00.0.2";
-//        obj2.name = @"主卧门";
-//        
-//        [_deviceDatas addObject:obj1];
-//        [_deviceDatas addObject:obj2];
     }
     return self;
 }
@@ -202,7 +180,7 @@
     if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
         
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
-        [cell.headImageView setImage:[UIImage imageNamed:[XAIObject typeImageName:aObj.type]]];
+        [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
         [cell.nameLable setText:aObj.name];
         [cell.contextLable setText:[aObj.lastOpr allStr]];
         
@@ -227,7 +205,7 @@
         XAIObject* obj = [_deviceDatas objectAtIndex:[indexPath row]];
         
         [self.navigationController pushViewController:
-         [XAIDevShowStatusVC statusWithObject:obj storyboard:self.storyboard] animated:YES];
+         [XAIDevShowStatusVCGenerate statusWithObject:obj storyboard:self.storyboard] animated:YES];
         
     }
     

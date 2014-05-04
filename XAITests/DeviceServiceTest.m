@@ -61,14 +61,20 @@
 //    _luidDev = 0x124b0002d5786f ;
 //    _luidDev = 0x124b0002623bed ;
 //    _luidDev = 0x124b000229251c ;
-    _luidDev = 0x124b000413c8d8 ;
+
     
+//    _luidDev = 0x124b000413c8d8 ;
     
 //    _luidDev = 0x124b0003d4317c;
 //    _luidDev = 0x124b0003d430b7;
 //    _luidDev = 0x124b0002292580;
 //    _luidDev = 0x124b00023f0c6c;
 //    _luidDev = 0x124b000257d991;
+    
+    
+    //开关
+//    _luidDev = 0x00124B000413C85C;
+    _luidDev = 0x00124B000413CD9D;
     
     
     

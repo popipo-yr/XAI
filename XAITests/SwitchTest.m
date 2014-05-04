@@ -37,7 +37,7 @@
     _devSwitch.delegate = self;
     _devSwitch.swiDelegate = self;
     _devSwitch.apsn = 0x1;
-    _devSwitch.luid= 0x124b0003d4317c;
+    _devSwitch.luid= 0x00124B000413C85C;
                      
     
     //    _luidDev = 0x124b0003d4317c;

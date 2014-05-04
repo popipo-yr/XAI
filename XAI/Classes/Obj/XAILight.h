@@ -22,7 +22,7 @@
 
 }
 
-@property (nonatomic, assign) id <XAILigthtDelegate> delegate;
+@property (nonatomic, weak) id <XAILigthtDelegate> delegate;
 
 
 - (void) openLight;
