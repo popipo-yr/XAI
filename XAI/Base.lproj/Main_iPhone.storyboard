@@ -258,8 +258,8 @@
                     <navigationItem key="navigationItem" title="设备列表" id="QJg-jY-IkF"/>
                     <connections>
                         <segue destination="vuV-w2-93q" kind="push" identifier="xaidevshowpushid" id="hON-TG-aQy"/>
-                        <segue destination="InB-zr-4fm" kind="push" id="zum-Cn-0Nq"/>
-                        <segue destination="5TM-1k-jGh" kind="push" id="MBc-kP-kJs"/>
+                        <segue destination="InB-zr-4fm" kind="push" identifier="xaidoorpushid" id="zum-Cn-0Nq"/>
+                        <segue destination="5TM-1k-jGh" kind="push" identifier="xaiwindowpushid" id="MBc-kP-kJs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKb-is-auv" userLabel="First Responder" sceneMemberID="firstResponder"/>
