@@ -52,7 +52,7 @@ static XAIData*  _s_XAIData_ = NULL;
         
         /*本地数据*/
         
-        XAIObject* aLocalObj = [_localObjInfo findLocalObjWithApsn:aObj.apsn Luid:aObj.luid];
+        XAIObject* aLocalObj = [_localObjInfo findLocalObjWithApsn:aObj.apsn Luid:aObj.luid type:aObj.type];
         
         if (aLocalObj != nil) {
             
@@ -335,7 +335,7 @@ static XAIData*  _s_XAIData_ = NULL;
 
 - (void) addObjectInfo:(XAIObject*)obj{
     
-    XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid];
+    XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid type:obj.type];
     
     if (localobj != nil) {
         
@@ -347,13 +347,13 @@ static XAIData*  _s_XAIData_ = NULL;
     }
 }
 
-- (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
+- (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid type:(XAIObjectType)type{
 
     for (int i = 0; i < [_objs count]; i++) {
         
         XAIObject* obj = [_objs objectAtIndex:i];
         
-        if (obj.apsn == apsn && obj.luid == luid) {
+        if (obj.apsn == apsn && obj.luid == luid && type == obj.type) {
             
             return obj;
         }

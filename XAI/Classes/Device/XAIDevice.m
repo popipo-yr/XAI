@@ -94,4 +94,23 @@
     
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    XAIDevice* dev = [[XAIDevice allocWithZone:zone]init];
+    dev.apsn = _apsn;
+    dev.luid = _luid;
+    dev.name = _name;
+    dev.vender = _vender; /*生产商*/
+    dev.model = _model; /*型号*/
+    
+    dev.type = _type;
+    
+    return dev;
+
+}
+
+
+- (void) startFocusStatus{}
+- (void) endFocusStatus{}
+
 @end

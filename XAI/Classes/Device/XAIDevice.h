@@ -35,6 +35,10 @@
 
 - (void) getDeviceStatus;
 
+/*状态关心*/
+- (void) startFocusStatus;
+- (void) endFocusStatus;
+
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
 
 @end

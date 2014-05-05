@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* pawd;
 
+- (BOOL) isAdmin;
 
 @end

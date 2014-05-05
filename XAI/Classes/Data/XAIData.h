@@ -81,7 +81,7 @@
 - (NSArray*) getObjects;
 - (void) addObjectInfo:(XAIObject*)obj;
 
-- (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
+- (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid type:(XAIObjectType)type;
 
 @end
 

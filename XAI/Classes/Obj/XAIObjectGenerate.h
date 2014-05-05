@@ -11,6 +11,7 @@
 
 #import "XAIObject.h"
 #import "XAILight.h"
+#import "XAILight2.h"
 #import "XAIDoor.h"
 #import "XAIWindow.h"
 

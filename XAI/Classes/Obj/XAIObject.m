@@ -20,6 +20,8 @@
 #define _Key_LUID_ @"luid"
 #define _Key_Type_ @"type"
 
+//#define _Key_Flag_ @"flag"
+
 @implementation XAIObject
 
 - (id) init{
@@ -29,6 +31,8 @@
         _objOprList = [[NSMutableArray alloc] init];
         
         _lastOpr = [[XAIObjectOpr alloc] init];
+        
+        //_flag = XAIObjectFlagNormal;
     }
     
     return self;
@@ -41,6 +45,8 @@
         _objOprList = [[NSMutableArray alloc] init];
         
         _lastOpr = [[XAIObjectOpr alloc] init];
+        
+        //_flag = XAIObjectFlagNormal;
 
         [self setInfoFromDevice:dev];
     }
@@ -49,6 +55,7 @@
 }
 
 - (void) startControl{}
+- (void) endControl{}
 
 - (void) setInfoFromDevice:(XAIDevice*)dev{
 
@@ -74,6 +81,7 @@
     [dic setObject:[NSNumber numberWithLong:_apsn] forKey:_Key_APSN_];
     [dic setObject:[NSNumber numberWithLongLong:_luid] forKey:_Key_LUID_];
     [dic setObject:[NSNumber numberWithInt:_type] forKey:_Key_Type_];
+    //[dic setObject:[NSNumber numberWithInt:_flag] forKey:_Key_Flag_];
     
     if (_lastOpr.name != nil && _lastOpr.time != nil) {
         
@@ -93,6 +101,7 @@
     _apsn = [[dic objectForKey:_Key_APSN_] longValue];
     _luid = [[dic objectForKey:_Key_LUID_] longLongValue];
     _type = [[dic objectForKey:_Key_Type_] intValue];
+    //_flag = [[dic objectForKey:_Key_Flag_] intValue];
     
     /*必须根据类型创建数据*/
     _lastOpr = [[NSClassFromString([XAIObjectGenerate typeOprClassName:_type])  alloc] init];
@@ -112,7 +121,7 @@
         NSMutableArray* oprList = [[NSMutableArray alloc] init];
         
         NSString* localFile = [XAIData getSavePathFile:
-                               [NSString stringWithFormat:@"%u-%llu.plist",_apsn,_luid]];
+                               [NSString stringWithFormat:@"%u-%llu-%d.plist",_apsn,_luid,_type]];
         
         if (localFile == nil || [localFile isEqualToString:@""]) break;
         
@@ -152,7 +161,7 @@
     do {
         
         NSString* localFile = [XAIData getSavePathFile:
-                               [NSString stringWithFormat:@"%u-%llu.plist",_apsn,_luid]];
+                               [NSString stringWithFormat:@"%u-%llu-%d.plist",_apsn,_luid,_type]];
         
         if (localFile == nil || [localFile isEqualToString:@""]) break;
         

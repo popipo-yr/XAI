@@ -7,7 +7,12 @@
 //
 
 #import "XAIUser.h"
+#import "XAIMQTTDEF.h"
 
 @implementation XAIUser
 
+- (BOOL) isAdmin{
+
+   return  _luid == XAIUSERADMIN;
+}
 @end

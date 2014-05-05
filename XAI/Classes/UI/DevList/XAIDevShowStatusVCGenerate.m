@@ -24,7 +24,20 @@
                                              instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
                 lightVC.light = (XAILight*)aObj;
                 
-                [lightVC.light startControl];
+                
+                return lightVC;
+                
+            }
+            
+        }break;
+        case XAIObjectType_light2:{
+            
+            if ([aObj isKindOfClass:[XAILight2 class]]) {
+                
+                XAILightStatusVC* lightVC = [storyboard
+                                             instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
+                lightVC.light = (XAILight2*)aObj;
+                
                 
                 return lightVC;
                 

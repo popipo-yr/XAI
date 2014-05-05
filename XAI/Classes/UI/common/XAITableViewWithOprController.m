@@ -7,6 +7,7 @@
 //
 
 #import "XAITableViewWithOprController.h"
+#import "MQTT.h"
 
 @interface XAITableViewWithOprController ()
 
@@ -44,6 +45,8 @@
     
     
     self.tableView.editing = FALSE;
+    
+    if (![[MQTT shareMQTT].curUser isAdmin]) return;
     
     UIImage* addNorImg = [UIImage imageNamed:@"device_add_nor.png"];
     

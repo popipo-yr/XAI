@@ -451,8 +451,7 @@
           NSLog(@"%@",[oneDev.model uppercaseString]);
           
           /*mustchange*/
-          if ([oneDev.model isEqualToString:@"SWITCH-1"]
-              || [oneDev.model isEqualToString:@"SWITCH-2"]) {
+          if ([oneDev.model isEqualToString:@"SWITCH-1"]) {//单控灯
               
               oneDev.type = XAIObjectType_light;
               
@@ -464,6 +463,13 @@
           
               oneDev.type = XAIObjectType_light;
           
+          }
+          
+          if ([oneDev.model isEqualToString:@"SWITCH-2"]) {//双控灯
+              
+              XAIDevice* dev2 = [oneDev copy];
+              dev2.type = XAIObjectType_light2;
+              [_onlineDevices addObject:dev2]; //添加2次
           }
           
           [_onlineDevices addObject:oneDev];

@@ -27,6 +27,7 @@
             imgNameStr = @"obj_window";
         }
             break;
+        case XAIObjectType_light2:
         case XAIObjectType_light:{
             
             imgNameStr = @"obj_light";
@@ -64,6 +65,8 @@
             className = @"XAIWindowOpr";
         }
             break;
+        
+        case XAIObjectType_light2:
         case XAIObjectType_light:{
             
             className = @"XAILightOpr";
@@ -97,6 +100,11 @@
         case XAIObjectType_light:{
             
             className = @"XAILight";
+            
+        } break;
+        case XAIObjectType_light2:{
+            
+            className = @"XAILight2";
             
         } break;
             

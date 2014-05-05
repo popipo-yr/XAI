@@ -297,6 +297,34 @@
     purgePacketParamNormal(param);
 }
 
+- (void) startFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    
+    
+    topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+
+}
+- (void) endFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+    
+    topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+}
+
 @end
 
 

@@ -73,8 +73,9 @@
     
     
     //开关
-//    _luidDev = 0x00124B000413C85C;
-    _luidDev = 0x00124B000413CD9D;
+    _luidDev = 0x00124B000413C85C;
+//     _luidDev = 0x00124B000413C931;
+//_luidDev = 0x00124B000413CCC2;
     
     
     

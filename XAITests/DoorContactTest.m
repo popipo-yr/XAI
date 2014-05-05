@@ -32,6 +32,8 @@
     
     _ddc.apsn = 0x1;
     _ddc.luid = 0x124b0002292580;
+   // _ddc.luid = 0x00124B000413CCC2;
+    
     //    _luidDev = 0x124b0003d430b7;
     //    _luidDev = 0x124b0002292580;
     //    _luidDev = 0x124b00023f0c6c;

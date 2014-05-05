@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; };
 		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; };
-		1AF7604F18F2528600520EAD /* LightNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7604E18F2528600520EAD /* LightNode.m */; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
 		960BDD501907989300787148 /* obj_door_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD481907989300787148 /* obj_door_close@2x.png */; };
@@ -81,6 +80,7 @@
 		967BD7A6190904FA007C3C8C /* XAIDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7A5190904FA007C3C8C /* XAIDebug.m */; };
 		967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7AC19090F3A007C3C8C /* XAISetVC.m */; };
 		967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7AF19090F3A007C3C8C /* XAIUserListVC.m */; };
+		968105E71917601A00171BF3 /* XAILight2.m in Sources */ = {isa = PBXBuildFile; fileRef = 968105E61917601A00171BF3 /* XAILight2.m */; };
 		968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B518FF6B920016DDB7 /* SwitchTest.m */; };
 		968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B818FF73660016DDB7 /* XAIDevDoorContact.m */; };
 		968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120BB18FF91D80016DDB7 /* XAIDevInfrared.m */; };
@@ -180,8 +180,6 @@
 		1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketCtrl.h; sourceTree = "<group>"; };
 		1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketNormal.c; sourceTree = "<group>"; };
 		1AAE876618F8F71A001B2ECD /* XAIPacketNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIPacketNormal.h; sourceTree = "<group>"; };
-		1AF7604D18F2528600520EAD /* LightNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightNode.h; sourceTree = "<group>"; };
-		1AF7604E18F2528600520EAD /* LightNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightNode.m; sourceTree = "<group>"; };
 		1AF7605018F257C600520EAD /* MQTTPacketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTPacketManager.h; sourceTree = "<group>"; };
 		1AF7605118F257C600520EAD /* MQTTPacketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTPacketManager.m; sourceTree = "<group>"; };
 		96081AAD190E460900E281F9 /* XAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIData.h; sourceTree = "<group>"; };
@@ -361,6 +359,8 @@
 		967BD7AC19090F3A007C3C8C /* XAISetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAISetVC.m; sourceTree = "<group>"; };
 		967BD7AE19090F3A007C3C8C /* XAIUserListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserListVC.h; sourceTree = "<group>"; };
 		967BD7AF19090F3A007C3C8C /* XAIUserListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserListVC.m; sourceTree = "<group>"; };
+		968105E51917601A00171BF3 /* XAILight2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2.h; sourceTree = "<group>"; };
+		968105E61917601A00171BF3 /* XAILight2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2.m; sourceTree = "<group>"; };
 		968120B518FF6B920016DDB7 /* SwitchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchTest.m; sourceTree = "<group>"; };
 		968120B718FF73660016DDB7 /* XAIDevDoorContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevDoorContact.h; sourceTree = "<group>"; };
 		968120B818FF73660016DDB7 /* XAIDevDoorContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevDoorContact.m; sourceTree = "<group>"; };
@@ -531,8 +531,6 @@
 		1AF7604B18F2517200520EAD /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				1AF7604D18F2528600520EAD /* LightNode.h */,
-				1AF7604E18F2528600520EAD /* LightNode.m */,
 				C33E77FC18F3B28500808391 /* XAILogin.h */,
 				C33E77FD18F3B28500808391 /* XAILogin.m */,
 				9683DA6E1900F5E600518FEB /* XAIUser.h */,
@@ -743,6 +741,8 @@
 				967BD7A5190904FA007C3C8C /* XAIDebug.m */,
 				96619DBD1915DD9D009849B0 /* XAIObjectGenerate.h */,
 				96619DBE1915DD9D009849B0 /* XAIObjectGenerate.m */,
+				968105E51917601A00171BF3 /* XAILight2.h */,
+				968105E61917601A00171BF3 /* XAILight2.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1347,7 +1347,6 @@
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
 				967BD7981908D896007C3C8C /* XAIChangeNameVC.m in Sources */,
-				1AF7604F18F2528600520EAD /* LightNode.m in Sources */,
 				967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
@@ -1381,6 +1380,7 @@
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
+				968105E71917601A00171BF3 /* XAILight2.m in Sources */,
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,

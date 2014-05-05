@@ -21,6 +21,15 @@
     
     _isClosing = false;
     _isOpening = false;
+    
+    [_devSwitch startFocusStatus];
+}
+
+- (void) endControl{
+    
+    [_devSwitch endFocusStatus];
+    _devSwitch = nil;
+    
 }
 
 - (void) openLight{

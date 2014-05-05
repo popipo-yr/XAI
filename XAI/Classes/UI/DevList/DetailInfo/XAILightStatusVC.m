@@ -23,13 +23,16 @@
     [self.view addSubview:_activityView];
     [_activityView startAnimating];
     
-    [_light getCurStatus];
-    
 
     self.factoryLabel.text = _light.vender;//  @"成都xxx工厂";
     self.modelLabel.text = _light.model; //@"JUNENNDENG-8390F";
     
     
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+
+    [_light endControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -38,6 +41,9 @@
     [_light readOprList]; //读取操作表
      _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
     
+    
+    [_light startControl];
+    [_light getCurStatus];
     
 }
 
@@ -94,6 +100,7 @@
         _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
         
         [self.oprTableView reloadData];
+        
     }
     
 }

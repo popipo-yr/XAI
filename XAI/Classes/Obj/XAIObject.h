@@ -19,10 +19,13 @@ typedef enum XAIObjectType{
     XAIObjectType_door = 0,
     XAIObjectType_window = 1,
     XAIObjectType_light = 2,
+    XAIObjectType_light2 = 3,
     
 }XAIObjectType;
 
-#define XAIObjectTypeCount 3
+#define XAIObjectTypeCount 4
+
+#define XAIObjectFlagNormal 0
 
 
 @class XAIObjectOpr;
@@ -45,6 +48,8 @@ typedef enum XAIObjectType{
     NSString* _model; /*型号*/
     NSString* _vender; /*生产商*/
     
+    //int _flag; /*多控*/
+    
 }
 
 @property (nonatomic, strong) NSString* name;
@@ -58,7 +63,10 @@ typedef enum XAIObjectType{
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/
 
+//@property (nonatomic, assign) int flag;
+
 - (void) startControl;
+- (void) endControl;
 - (id) initWithDevice:(XAIDevice*)dev;
 - (void) setInfoFromDevice:(XAIDevice*)dev;
 
