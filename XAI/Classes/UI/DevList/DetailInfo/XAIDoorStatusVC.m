@@ -42,8 +42,15 @@
     [_door readOprList]; //读取操作表
     _oprDatasAry = [[NSArray alloc] initWithArray:[_door getOprList]];
     
-    
+    [_door startControl];
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [_door endControl];
+}
+
+
 
 
 

@@ -42,6 +42,14 @@
     _oprDatasAry = [[NSArray alloc] initWithArray:[_window getOprList]];
     
     
+    [_window startControl];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [_window endControl];
+
 }
 
 

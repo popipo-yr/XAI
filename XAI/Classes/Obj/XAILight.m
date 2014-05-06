@@ -34,14 +34,14 @@
 
 - (void) openLight{
 
-    if (_isClosing || _isOpening) return;
+   // if (_isClosing || _isOpening) return;
     
     _isOpening = YES;
     [_devSwitch  setCircuitOneStatus:XAIDevCircuitStatusOpen];
 }
 - (void) closeLight{
     
-    if (_isOpening || _isClosing) return;
+   // if (_isOpening || _isClosing) return;
     
     _isClosing = YES;
     [_devSwitch setCircuitOneStatus:XAIDevCircuitStatusClose];
@@ -78,16 +78,18 @@
     
     if (_isOpening) {
         
-        
+        _isOpening = false;
         if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightOpenSuccess:)]) {
             
             
             [_delegate lightOpenSuccess:isSuccess];
         }
         
-        _isOpening = false;
+        
         
     }else if (_isClosing) {
+        
+        _isClosing = false;
         
         if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightCloseSuccess:)]) {
             
@@ -95,7 +97,7 @@
             [_delegate lightCloseSuccess:isSuccess];
         }
         
-        _isClosing = false;
+        
 
     }
     

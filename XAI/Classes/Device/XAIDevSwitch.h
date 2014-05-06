@@ -22,7 +22,11 @@ typedef enum XAIDevCircuitStatus{
 
 
 @protocol  XAIDevSwitchDelegate;
-@interface XAIDevSwitch : XAIDevice
+@interface XAIDevSwitch : XAIDevice{
+
+    BOOL _isGetOneStatus;
+    BOOL _isGetTwoStatus;
+}
 
 
 @property (nonatomic,assign) id<XAIDevSwitchDelegate> swiDelegate;

@@ -19,8 +19,18 @@
     
     _doorContact.apsn =  _apsn;
     _doorContact.luid = _luid;
+    
+    [_doorContact startFocusStatus];
 
 }
+
+- (void) endControl{
+    
+    [_doorContact endFocusStatus];
+    _doorContact = nil;
+    
+}
+
 
 
 - (void) getCurStatus{

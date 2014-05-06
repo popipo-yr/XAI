@@ -116,8 +116,8 @@
             [_dcDelegate doorContact:self statusGetSuccess:isSuccess curStatus:curStatus];
         }
         
-        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID]];
+//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+//         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID]];
         
         
         
@@ -164,6 +164,25 @@
     
     
 }
+
+- (void) startFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    
+}
+- (void) endFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+    
+}
+
 
 
 @end

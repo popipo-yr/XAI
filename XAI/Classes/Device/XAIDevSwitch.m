@@ -61,11 +61,13 @@
  */
 - (void) getCircuitOneStatus{
     
+    //_isGetOneStatus = true;
+    
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID];
     
     [[MQTT shareMQTT].client subscribe:topicStr];
     
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 
 }
 
@@ -75,11 +77,13 @@
 - (void) getCircuitTwoStatus{
 
 
+    //_isGetTwoStatus = true;
+    
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
     [[MQTT shareMQTT].client subscribe:topicStr];
     
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 }
 
 
@@ -263,9 +267,6 @@
         default:break;
     }
     
-    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-     [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:param->oprId]];
-    
     purgePacketParamStatusAndData(param);
 }
 
@@ -323,6 +324,18 @@
     topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+}
+
+
+-(id)init{
+
+    if (self = [super init]) {
+        
+        _isGetOneStatus = false;
+        _isGetTwoStatus = false;
+    }
+    
+    return self;
 }
 
 @end

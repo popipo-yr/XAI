@@ -88,8 +88,6 @@
         
         [_statusView setImage:[UIImage imageNamed:LightOpenImg]];
         
-        [_activityView stopAnimating];
-        
         XAILightOpr* opr = [[XAILightOpr alloc] init];
         opr.opr = XAILightStatus_Open;
         opr.time = [NSDate new];
@@ -103,14 +101,14 @@
         
     }
     
+    [_activityView stopAnimating];
+    
 }
 - (void) lightCloseSuccess:(BOOL)isSuccess{
     
     if (isSuccess) {
         
         [_statusView setImage:[UIImage imageNamed:LightCloseImg]];
-        
-        [_activityView stopAnimating];
         
         
         XAILightOpr* opr = [[XAILightOpr alloc] init];
@@ -125,6 +123,8 @@
         [self.oprTableView reloadData];
 
     }
+    
+    [_activityView stopAnimating];
 }
 
 - (void) lightCurStatus:(XAILightStatus) status{
