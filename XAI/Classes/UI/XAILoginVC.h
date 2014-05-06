@@ -10,9 +10,10 @@
 #import "XAILogin.h"
 #import "XAIUserService.h"
 #import "XAIDeviceService.h"
+#import "XAIScanVC.h"
 
 @interface XAILoginVC : UIViewController
-<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate>{
+<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate,XAIScanVCDelegate>{
 
 
     XAILogin*  _login;
@@ -30,7 +31,8 @@
 @property  (nonatomic,weak) IBOutlet UITextField* nameLabel;
 @property  (nonatomic,weak) IBOutlet UITextField* passwordLabel;
 
-- (IBAction)loginBtnClick:(id)sender;
+-(IBAction)loginBtnClick:(id)sender;
+-(IBAction)qrcodeBtnClick:(id)sender;
 
 
 @end

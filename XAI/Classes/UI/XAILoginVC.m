@@ -7,11 +7,8 @@
 //
 
 #import "XAILoginVC.h"
-
 #import "XAIAppDelegate.h"
-
 #import "XAIUserService.h"
-
 #import "XAIData.h"
 
 
@@ -287,12 +284,56 @@
 
     
     }
-    
+
+}
+
+-(IBAction)qrcodeBtnClick:(id)sender{
 
     
+    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:@"XAIScanVCID"];
+    
+    if ([scanvc isKindOfClass:[XAIScanVC class]]) {
+        
+        scanvc.delegate = self;
+        
+        [self presentViewController:scanvc animated:YES completion:nil];
+    }
+
+}
+
+-(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
 
 
-
+    const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
+    NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
+    
+    //判断是否包含 头'http:'
+    NSString *regex = @"http+:[^\\s]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    
+    //判断是否包含 头'ssid:'
+    NSString *ssid = @"ssid+:[^\\s]*";;
+    NSPredicate *ssidPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",ssid];
+    
+    if ([predicate evaluateWithObject:symbolStr]) {
+        
+    }
+    else if([ssidPre evaluateWithObject:symbolStr]){
+        
+        NSArray *arr = [symbolStr componentsSeparatedByString:@";"];
+        
+        NSArray * arrInfoHead = [[arr objectAtIndex:0] componentsSeparatedByString:@":"];
+        
+        NSArray * arrInfoFoot = [[arr objectAtIndex:1] componentsSeparatedByString:@":"];
+        
+        
+        symbolStr = [NSString stringWithFormat:@"ssid: %@ \n password:%@",
+                     [arrInfoHead objectAtIndex:1],[arrInfoFoot objectAtIndex:1]];
+        
+        UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
+        //然后，可以使用如下代码来把一个字符串放置到剪贴板上：
+        pasteboard.string = [arrInfoFoot objectAtIndex:1];
+    }
 
 }
 

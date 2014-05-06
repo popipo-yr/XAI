@@ -5,6 +5,65 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--ScanVC-->
+        <scene sceneID="rAX-b1-z3f">
+            <objects>
+                <viewController storyboardIdentifier="XAIScanVCID" id="hsi-Ff-krP" customClass="XAIScanVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8fS-Z7-QW5"/>
+                        <viewControllerLayoutGuide type="bottom" id="VKm-oG-GjU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lL8-gN-QHX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRL-xD-Sg6">
+                                <rect key="frame" x="0.0" y="79" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZm-fj-05x">
+                                <rect key="frame" x="0.0" y="20" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="扫描" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHk-oS-a5d">
+                                        <rect key="frame" x="0.0" y="20" width="320" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-uy-0kZ">
+                                <rect key="frame" x="104" y="379" width="112" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="取消" backgroundImage="qrcode_scan_cancel.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBtnClick:" destination="hsi-Ff-krP" eventType="touchUpInside" id="822-bG-kZd"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="qrcode_scan_rec.png" translatesAutoresizingMaskIntoConstraints="NO" id="pJQ-Wf-ecZ">
+                                <rect key="frame" x="40" y="132" width="240" height="199"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="scanView" destination="pJQ-Wf-ecZ" id="5xe-Fj-f1I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XLY-lV-8RV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-782" y="-301"/>
+        </scene>
         <!--XAILoginVC-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -52,6 +111,9 @@
                                         <state key="normal" title="Button" image="qrcode_btn_nor.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="qrcodeBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mVw-P3-aMB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -97,6 +159,7 @@
                         <outlet property="nameLabel" destination="hpN-4L-ywU" id="j7M-jB-luF"/>
                         <outlet property="passwordLabel" destination="1HH-oP-bAX" id="xGG-Um-0FA"/>
                         <segue destination="L54-r1-Z8p" kind="modal" identifier="XAIMainPageSegue" id="JAD-yB-UJh"/>
+                        <segue destination="hsi-Ff-krP" kind="modal" id="pW5-b2-wSV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -203,7 +266,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zJ-ra-Xhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-740" y="-936"/>
+            <point key="canvasLocation" x="-300" y="-952"/>
         </scene>
         <!--XAIDevShowVC - 设备列表-->
         <scene sceneID="unk-bG-xvQ">
@@ -264,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MKb-is-auv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-22" y="-1823"/>
+            <point key="canvasLocation" x="206" y="-1803"/>
         </scene>
         <!--XAILightStatusVC-->
         <scene sceneID="XUs-4c-B7G">
@@ -1049,6 +1112,8 @@
         <image name="login_btn_normal.png" width="201" height="39"/>
         <image name="login_btn_sel.png" width="201" height="39"/>
         <image name="qrcode_btn_nor.png" width="25" height="25"/>
+        <image name="qrcode_scan_cancel.png" width="195" height="42"/>
+        <image name="qrcode_scan_rec.png" width="195" height="195"/>
         <image name="tab_bar_devM_nor.png" width="54" height="50"/>
         <image name="tab_bar_dev_nor.png" width="54" height="50"/>
         <image name="tab_bar_selected.png" width="81" height="54"/>
