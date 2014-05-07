@@ -38,6 +38,9 @@
     // Do any additional setup after loading the view.
     
     UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:self action:@selector(okBtnClick:)];
+    
+    [okItem ios6cleanBackgroud];
+    
     [self.navigationItem setRightBarButtonItem:okItem];
     
 }

@@ -23,28 +23,66 @@
     return self;
 }
 
+
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    
 	// Do any additional setup after loading the view.
     
     for(UITabBarItem *tbItem in [_xaitabBar items])
     {
-        if([tbItem respondsToSelector:@selector(setSelectedImage:)]){/*ios7 后使用的方法*/
+        
+        if (isIOS7) {
             
-            [tbItem setSelectedImage:[self imageForTabBarItem:[tbItem tag] selected:YES]];
-            [tbItem setImage:[self imageForTabBarItem:[tbItem tag] selected:NO]];
+            
+            
+            if([tbItem respondsToSelector:@selector(setSelectedImage:)]){/*ios7 后使用的方法*/
+                
+                [tbItem setSelectedImage:[self imageForTabBarItem:[tbItem tag] selected:YES]];
+                [tbItem setImage:[self imageForTabBarItem:[tbItem tag] selected:NO]];
+                
+            }
+            
             
         }else{
         
-            //[tabBarItems addObject:tbItem];
             [tbItem setFinishedSelectedImage:[self imageForTabBarItem:[tbItem tag] selected:YES]
                  withFinishedUnselectedImage:[self imageForTabBarItem:[tbItem tag] selected:NO]];
         }
     }
     
-     //self.tabBarItem.selectedImage = [UIImage imageNamed:name];
+    if (!isIOS7) {
+
+        [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:RGBA(245, 245, 245, 245) size:CGSizeMake(1, 49)]];
+        
+        
+        [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tab_bar_selected.png"]];
+    
+    }
+    
+    
+    if (isIOS7) {
+        
+        [[UINavigationBar appearance] setBarTintColor:
+         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+        view.backgroundColor=[UIColor whiteColor];
+        
+        [self.view addSubview:view];
+        
+    }else{
+        
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:RGBA(255, 91, 0, 255)
+                                                                            size:CGSizeMake(1, 44)]
+                                           forBarMetrics:UIBarMetricsDefault];
+        
+    }
     
 }
 

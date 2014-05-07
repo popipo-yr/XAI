@@ -23,9 +23,26 @@
     return self;
 }
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+
+    if (isIOS7) {
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, -20,320, 20)];
+        view.backgroundColor=[UIColor whiteColor];
+        [self.view addSubview:view];
+    
+        CGPoint  oldCenter =  _backView.center;
+        oldCenter.y += 20;
+
+        [_backView setCenter:oldCenter];
+        
+    }
     
     _readerView = [[ZBarReaderView alloc]init];
     

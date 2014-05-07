@@ -23,6 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    
     [XAIObjectGroupManager shareManager];
     
     [self initializeStoryBoardBasedOnScreenSize];
@@ -43,10 +44,14 @@
     [XAIData shareData];
     //[[UIApplication  sharedApplication] setStatusBarHidden:false];
     
+    if (!isIOS7) {
+    
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
+        self.window.backgroundColor = [UIColor grayColor];
+        
+    }
+    
 
-    
-    
-    
     return YES;
 }
 							

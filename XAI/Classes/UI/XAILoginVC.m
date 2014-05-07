@@ -294,6 +294,9 @@
     
     if ([scanvc isKindOfClass:[XAIScanVC class]]) {
         
+        [self.nameLabel resignFirstResponder];
+        [self.passwordLabel resignFirstResponder];
+        
         scanvc.delegate = self;
         
         [self presentViewController:scanvc animated:YES completion:nil];

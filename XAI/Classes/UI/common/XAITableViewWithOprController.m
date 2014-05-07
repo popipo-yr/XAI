@@ -34,6 +34,8 @@
                                                     target:self
                                                     action:@selector(editBtnClick:)];
         
+        [_editItem ios6cleanBackgroud];
+        
     }
     return self;
 }
@@ -62,6 +64,7 @@
                                                                target:self
                                                                action:@selector(addBtnClick:)];
     
+    [addItem ios6cleanBackgroud];
     
     [self.navigationItem setRightBarButtonItems:@[addItem,_editItem]];
 

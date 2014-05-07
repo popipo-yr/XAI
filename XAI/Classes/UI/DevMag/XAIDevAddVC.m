@@ -46,6 +46,9 @@
     [_nameTextField addTarget:self action:@selector(nameTextReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:self action:@selector(addOneDevice:)];
+    
+    [okItem ios6cleanBackgroud];
+    
     [self.navigationItem setRightBarButtonItem:okItem];
 }
 

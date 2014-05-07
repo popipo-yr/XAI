@@ -109,6 +109,9 @@
 		969D6E8619188422002076A0 /* qrcode_scan_rec.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E8419188422002076A0 /* qrcode_scan_rec.png */; };
 		969D6E891918842B002076A0 /* qrcode_scan_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E871918842B002076A0 /* qrcode_scan_cancel@2x.png */; };
 		969D6E8A1918842B002076A0 /* qrcode_scan_rec@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E881918842B002076A0 /* qrcode_scan_rec@2x.png */; };
+		969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED71919EB5F002076A0 /* nav_back@2x.png */; };
+		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
+		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -162,7 +165,6 @@
 		C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */; };
 		C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */; };
 		C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */; };
-		C38AC20518EBF10A002F20C1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */; };
 		C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */; };
 		C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */; };
 		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; };
@@ -398,6 +400,10 @@
 		969D6E8419188422002076A0 /* qrcode_scan_rec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcode_scan_rec.png; sourceTree = "<group>"; };
 		969D6E871918842B002076A0 /* qrcode_scan_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_cancel@2x.png"; sourceTree = "<group>"; };
 		969D6E881918842B002076A0 /* qrcode_scan_rec@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_rec@2x.png"; sourceTree = "<group>"; };
+		969D6ED71919EB5F002076A0 /* nav_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_back@2x.png"; sourceTree = "<group>"; };
+		969D6ED81919EB5F002076A0 /* nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_back.png; sourceTree = "<group>"; };
+		969D6EDB1919F4A3002076A0 /* UIKitADD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitADD.h; sourceTree = "<group>"; };
+		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -497,7 +503,6 @@
 		C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		C38AC1F718EBCCB8002F20C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
-		C38AC1FC18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		C38AC1FE18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceInfo.h; sourceTree = "<group>"; };
 		C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceInfo.m; sourceTree = "<group>"; };
@@ -825,6 +830,8 @@
 				9648E6F2190A3B8100D630D8 /* XAIChangePasswordVC.m */,
 				969D6E6019187BA8002076A0 /* XAIScanVC.h */,
 				969D6E6119187BA8002076A0 /* XAIScanVC.m */,
+				969D6EDB1919F4A3002076A0 /* UIKitADD.h */,
+				969D6EDC1919F4A3002076A0 /* UIKitADD.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -854,6 +861,7 @@
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
+				969D6ED51919EB5F002076A0 /* other */,
 				9648E6DC190A05A900D630D8 /* user */,
 				967BD7881908B5CB007C3C8C /* obj-other */,
 				960BDD461907989300787148 /* obj-status */,
@@ -911,6 +919,23 @@
 			path = 2x;
 			sourceTree = "<group>";
 		};
+		969D6ED51919EB5F002076A0 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				969D6ED61919EB5F002076A0 /* 2x */,
+				969D6ED81919EB5F002076A0 /* nav_back.png */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
+		969D6ED61919EB5F002076A0 /* 2x */ = {
+			isa = PBXGroup;
+			children = (
+				969D6ED71919EB5F002076A0 /* nav_back@2x.png */,
+			);
+			path = 2x;
+			sourceTree = "<group>";
+		};
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -950,7 +975,6 @@
 			isa = PBXGroup;
 			children = (
 				C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */,
-				C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */,
 				C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */,
 			);
 			name = storyboard;
@@ -1292,16 +1316,17 @@
 				96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
 				9648E6E1190A05A900D630D8 /* user_head.png in Resources */,
+				969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */,
 				9631D17219075691007CBC4B /* obj_window.png in Resources */,
 				969D6E8A1918842B002076A0 /* qrcode_scan_rec@2x.png in Resources */,
 				969D6E8519188422002076A0 /* qrcode_scan_cancel.png in Resources */,
-				C38AC20518EBF10A002F20C1 /* Main_iPad.storyboard in Resources */,
 				969D6E6F191881B7002076A0 /* textField_bg@2x.png in Resources */,
 				969D6E81191882CE002076A0 /* tab_bar_user_nor@2x.png in Resources */,
 				960BDD551907989300787148 /* obj_door_open.png in Resources */,
 				969D6E80191882CE002076A0 /* tab_bar_set_sel@2x.png in Resources */,
 				C387F36D18EA757A0069F98B /* Images.xcassets in Resources */,
 				96E9D989190111F7000BB595 /* tab_bar_devM_sel.png in Resources */,
+				969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */,
 				C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */,
 				960BDD571907989300787148 /* obj_light_open.png in Resources */,
 				969D6E891918842B002076A0 /* qrcode_scan_cancel@2x.png in Resources */,
@@ -1380,6 +1405,7 @@
 				964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */,
 				967BD77E1908AB08007C3C8C /* XAIDevShowCell.m in Sources */,
 				96E9D97119010561000BB595 /* XAILoginVC.m in Sources */,
+				969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */,
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
@@ -1474,15 +1500,6 @@
 				C387F37D18EA757B0069F98B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C38AC1FB18EBDBEE002F20C1 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C38AC1FC18EBDBEE002F20C1 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */ = {

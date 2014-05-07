@@ -52,8 +52,7 @@
     
 
     //back
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    [self.navigationItem setBackBarButtonItem:backItem];
+    [self.navigationItem OnlyBack];
     
 }
 

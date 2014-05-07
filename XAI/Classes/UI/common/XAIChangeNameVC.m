@@ -36,6 +36,8 @@
 
     UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
     
+    [okItem ios6cleanBackgroud];
+    
      self.navigationItem.rightBarButtonItem = okItem;
     
     self.navigationItem.title = _barItemTitle;

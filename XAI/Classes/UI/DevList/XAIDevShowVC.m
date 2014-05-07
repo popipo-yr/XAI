@@ -37,6 +37,7 @@
         _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
         [[XAIData shareData] addRefreshDelegate:self];
+
     }
     return self;
 }
@@ -64,31 +65,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //设置statusbar
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        
-        
-        [[UINavigationBar appearance] setBarTintColor:
-         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
-        
-    }else{
-    
-        [[UINavigationBar appearance] setTintColor:
-         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
-    
-    }
-    
-   
-
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
-    view.backgroundColor=[UIColor whiteColor];
-    
-    //[self.navigationController.view  addSubview:view];
-    [self.tabBarController.view addSubview:view];
-    
     //back
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    [self.navigationItem setBackBarButtonItem:backItem];
+    [self.navigationItem OnlyBack];
 
     
     [_deviceService findAllDev];

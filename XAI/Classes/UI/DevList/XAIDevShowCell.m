@@ -19,6 +19,16 @@
     return self;
 }
 
+
+//- (void)setFrame:(CGRect)frame
+//{
+//    [super setFrame:frame];
+//    
+//    [_headImageView setFrame:CGRectMake(21, 22, 44, 42)];
+//}
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

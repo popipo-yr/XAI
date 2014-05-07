@@ -16,6 +16,7 @@
 
 }
 
+@property (strong, nonatomic) IBOutlet UIView *backView;
 @property (nonatomic,strong) IBOutlet UIImageView* scanView;
 @property (nonatomic,weak)  id<XAIScanVCDelegate> delegate;
 
