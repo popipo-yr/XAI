@@ -14,11 +14,15 @@
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
 {
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
+//    CGRect rect = CGRectMake(0, 0, size.width, size.height-1);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextSetFillColorWithColor(context, [color CGColor]);
     CGContextFillRect(context, rect);
+    
+//    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+//    CGContextFillRect(context, CGRectMake(0, size.height-1, size.width, 1));
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
