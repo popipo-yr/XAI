@@ -103,24 +103,24 @@
 }
 
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    
-    UIView* showViews = [[UIView alloc] initWithFrame:constRect];
-    UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 25, 100, 30)];
-    [aLabel setText:[NSString stringWithFormat:@"分组名称"]];
-    [showViews addSubview:aLabel];
-    
-    return showViews;
-    
-    
-    UIImageView* showView =  [[UIImageView alloc] initWithFrame:constRect];
-    
-    [showView setBackgroundColor:[UIColor blackColor]];
-    
-    return showView;
-
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//    
+//    UIView* showViews = [[UIView alloc] initWithFrame:constRect];
+//    UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 25, 100, 30)];
+//    [aLabel setText:[NSString stringWithFormat:@"分组名称"]];
+//    [showViews addSubview:aLabel];
+//    
+//    return showViews;
+//    
+//    
+//    UIImageView* showView =  [[UIImageView alloc] initWithFrame:constRect];
+//    
+//    [showView setBackgroundColor:[UIColor blackColor]];
+//    
+//    return showView;
+//
+//}
 
 
 

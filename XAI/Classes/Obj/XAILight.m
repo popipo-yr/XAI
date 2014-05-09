@@ -127,11 +127,11 @@
 
     if (_opr == XAILightStatus_Open) {
         
-        return @"开了灯";
+        return NSLocalizedString(@"OpenLight", nil);
         
     }else if(_opr == XAILightStatus_Close){
     
-        return @"关了灯";
+        return NSLocalizedString(@"CloseLight", nil);
     }
     
     return @"";

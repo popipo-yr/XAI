@@ -25,7 +25,11 @@
     self.clearsSelectionOnViewWillAppear = YES;
     
     
-    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
+    UIBarButtonItem* okItem = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"BarItemOK", nil)
+                               style:UIBarButtonItemStyleDone
+                               target:self
+                               action:@selector(okClick:)];
     
     [okItem ios6cleanBackgroud];
     
@@ -71,7 +75,7 @@
     
     if ([indexPath row] == 0) {
         
-        cell.lable.text = @"旧密码";
+        cell.lable.text = NSLocalizedString(@"TipOldPawd", nil);
         
         [cell setTextFiledWithLable:_oldPwd];
         
@@ -98,7 +102,7 @@
         
     }else if([indexPath row] == 1){
         
-        cell.lable.text = @"新密码";
+        cell.lable.text = NSLocalizedString(@"TipNewPawd", nil);
         
         _newPwdTextField = cell.textFiled;
         [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -107,7 +111,7 @@
         
     }else if([indexPath row] == 2){
         
-        cell.lable.text = @"重复密码";
+        cell.lable.text = NSLocalizedString(@"TipRepPawd", nil);
         
         _newPwdRepTextField = cell.textFiled;
         [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -147,8 +151,11 @@
 
 - (void) endOkEvent{
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改密码成功"
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:NSLocalizedString(@"ChangePawdSuc", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     [alert show];
     
@@ -157,8 +164,11 @@
 
 - (void) endFailEvent:(NSString*)str{
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:str
-                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:str
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     [alert show];
 }

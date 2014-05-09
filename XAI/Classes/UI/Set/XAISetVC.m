@@ -28,7 +28,8 @@
     
     if (self) {
         
-        _userItems = [[NSArray alloc] initWithObjects:@"名称",@"密码",nil];
+        _userItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"LabelUserName", nil),
+                      NSLocalizedString(@"LabelPawd", nil),nil];
         
         _userInfo = [MQTT shareMQTT].curUser;
         
@@ -48,7 +49,8 @@
     if (self) {
         // Custom initialization
         
-        _userItems = [[NSArray alloc] initWithObjects:@"名称",@"密码",nil];
+        _userItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"LabelUserName", nil),
+                      NSLocalizedString(@"LabelPawd", nil),nil];
     }
     return self;
 }
@@ -124,19 +126,19 @@
     
     if ([indexPath row] == _key_home_index) {
         
-        cell.lable.text = @"家";
+        cell.lable.text = NSLocalizedString(@"Home", nil);
         
         [cell setTextFiledWithLable:@"小明爱家"];
         
     }else if ([indexPath row] == _key_name_index) {
         
-        cell.lable.text = @"用户";
+        cell.lable.text = NSLocalizedString(@"UserName", nil);
         
         [cell setTextFiledWithLable:_userInfo.name];
         
     }else if([indexPath row] == _key_pawd_index){
         
-        cell.lable.text = @"密码";
+        cell.lable.text = NSLocalizedString(@"UserPawd", nil);
         
         [cell setTextFiledWithLable:_userInfo.pawd];
         [cell.textFiled setSecureTextEntry:YES];
@@ -159,9 +161,11 @@
         XAIChangeNameVC* nameVC = [self.storyboard
                                    instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
-        [nameVC setOneLabName:@"家" OneTexName:_userInfo.name  TwoLabName:@"新名称"];
+        [nameVC setOneLabName:NSLocalizedString(@"Home", nil)
+                   OneTexName:_userInfo.name
+                   TwoLabName:NSLocalizedString(@"HomeNewName", nil)];
         [nameVC setOKClickTarget:self Selector:@selector(changeHomeName:)];
-        [nameVC setBarTitle:@"设置家"];
+        [nameVC setBarTitle:NSLocalizedString(@"HomeNameChange", nil)];
         
         _homeVC = nameVC;
         
@@ -172,9 +176,11 @@
         XAIChangeNameVC* nameVC = [self.storyboard
                                    instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
-        [nameVC setOneLabName:@"用户名" OneTexName:_userInfo.name  TwoLabName:@"新用户名"];
+        [nameVC setOneLabName:NSLocalizedString(@"UserName", nil)
+                   OneTexName:_userInfo.name
+                   TwoLabName:NSLocalizedString(@"UserNewName", nil)];
         [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
-        [nameVC setBarTitle:@"设置名称"];
+        [nameVC setBarTitle:NSLocalizedString(@"UserNameChange", nil)];
         
         _nameVC = nameVC;
         
@@ -188,7 +194,7 @@
         
         [pawVC setOldPwd:_userInfo.pawd];
         [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
-        [pawVC setBarTitle:@"设置密码"];
+        [pawVC setBarTitle:NSLocalizedString(@"UserPawdChange", nil)];
         
         _pawVC = pawVC;
         
@@ -210,7 +216,7 @@
         
     }else{
         
-        [_nameVC endFailEvent:@"修改名称失败"];
+        [_nameVC endFailEvent:NSLocalizedString(@"UserPawdChangeSuc", nil)];
     }
     
     
@@ -227,7 +233,7 @@
         
     }else{
         
-        [_pawVC endFailEvent:@"修改密码失败"];
+        [_pawVC endFailEvent:NSLocalizedString(@"UserPawdChangeFaild", nil)];
     }
     
     

@@ -20,8 +20,9 @@
 
     if (self = [super initWithCoder:aDecoder]) {
         
-        _addUserInfoAry = [[NSArray alloc] initWithObjects:@"用户名"
-                           ,@"密码",@"重复密码", nil];
+        _addUserInfoAry = [[NSArray alloc] initWithObjects:NSLocalizedString(@"UserNameTip", nil)
+                           ,NSLocalizedString(@"UserPawdTip", nil),
+                           NSLocalizedString(@"UserRepPawdTip", nil), nil];
         
         _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn
                                                        Luid:MQTTCover_LUID_Server_03];
@@ -37,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:self action:@selector(okBtnClick:)];
+    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BarItemOK", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(okBtnClick:)];
     
     [okItem ios6cleanBackgroud];
     
@@ -148,18 +149,21 @@
     if (userService != _userService) return;
     
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
 
     if (isSuccess ) {
         
 
-        [alert setMessage:@"添加用户成功"];
+        [alert setMessage:NSLocalizedString(@"AddUserSuc", nil)];
         alert.delegate = self;
         
     }else{
     
-        [alert setMessage:@"添加用户失败"];
+        [alert setMessage:NSLocalizedString(@"AddUserFaild", nil)];
     
     }
     

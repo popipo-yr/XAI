@@ -91,11 +91,11 @@
     
     if (_opr == XAIDoorStatus_Open) {
         
-        return @"开了门";
+        return NSLocalizedString(@"OpenDoor", nil);
         
     }else if(_opr == XAIDoorStatus_Close){
         
-        return @"关了门";
+        return NSLocalizedString(@"CloseDoor", nil);
     }
     
     return @"";

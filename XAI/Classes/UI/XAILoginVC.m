@@ -32,11 +32,11 @@
     
     [passwordLabel setText:nil];
     [passwordLabel setSecureTextEntry:YES];
-    [passwordLabel setPlaceholder:@"密码"];
+    [passwordLabel setPlaceholder:NSLocalizedString(@"TipPawd", nil)];
     
     
     [nameLabel setText:nil];
-    [nameLabel setPlaceholder:@"用户名"];
+    [nameLabel setPlaceholder:NSLocalizedString(@"TipName", nil)];
     
     
     [MQTT shareMQTT].apsn = 0x1;
@@ -233,22 +233,25 @@
     
     if (_findDev == findFail && _findUser == findFail) {
         
-        errTip = @"获取用户列表,设备列表失败";
+        errTip = NSLocalizedString(@"GetUsersAndDevsFaild", nil);
         
     }else if (_findUser == findFail) {
         
-        errTip = @"获取用户列表失败";
+        errTip = NSLocalizedString(@"GetUsersFaild", nil);
         
     }else if (_findDev == findFail) {
         
-        errTip = @"获取设备列表信息失败";
+        errTip = NSLocalizedString(@"GetDevsFaild", nil);
     }
 
     if (errTip != nil) {
         
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:errTip delegate:nil
-                                              cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
         
         [alert show];
         

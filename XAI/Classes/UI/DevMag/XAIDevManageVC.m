@@ -228,9 +228,13 @@
         _vc = [self.storyboard
                                instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
-        [_vc setOneLabName:@"设备备注" OneTexName:aObj.nickName  TwoLabName:@"新备注名"];
+        [_vc setOneLabName:NSLocalizedString(@"DevNick", nil)
+                OneTexName:aObj.nickName
+                TwoLabName:NSLocalizedString(@"DevNewNick", nil)];
+        
         [_vc setOKClickTarget:self Selector:@selector(changeDevName:)];
-        [_vc setBarTitle:@"设置备注"];
+        
+        [_vc setBarTitle:NSLocalizedString(@"DevSetNick", nil)];
         
         _curOprObj = aObj;
         
@@ -260,12 +264,15 @@
 
     if (devService != _deviceService) return;
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     if (isSuccess &&  nil != _curDelIndexPath) {
         
-        alert.message = @"删除成功";
+        alert.message = NSLocalizedString(@"DelDevSuc", nil);
         
         //不应该时这里删除
         [_objectAry removeObjectAtIndex:[_curDelIndexPath row]];
@@ -276,7 +283,7 @@
         
     }else{
         
-        alert.message = @"删除失败";
+        alert.message = NSLocalizedString(@"DelDevFaild", nil);
     }
     
     [alert show];
@@ -296,7 +303,7 @@
         
     }else{
         
-        [_vc endFailEvent:@"修改名称失败"];
+        [_vc endFailEvent:NSLocalizedString(@"DevChangeNameFaild", nil)];
     }
     
     

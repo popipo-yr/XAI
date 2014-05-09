@@ -143,10 +143,10 @@
         
         if (aUser.luid == XAIUSERADMIN) {
             
-            [cell.contextLable setText:@"管理员"];
+            [cell.contextLable setText:NSLocalizedString(@"AdminUser", nil)];
         }else{
         
-            [cell.contextLable setText:@"普通成员"];
+            [cell.contextLable setText:NSLocalizedString(@"NormalUser", nil)];
         }
     }
     
@@ -200,12 +200,15 @@
 
     if (userService != _userService) return;
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     if (isSuccess && nil == _curDelIndexPath) {
         
-        alert.message = @"删除成功";
+        alert.message = NSLocalizedString(@"DelUserSuc", nil);
         
         //不应该时这里删除
         [_userDatasAry removeObjectAtIndex:[_curDelIndexPath row]];
@@ -216,7 +219,7 @@
         
     }else{
     
-        alert.message = @"删除失败";
+        alert.message = NSLocalizedString(@"DelUserFaild", nil);
     }
     
     [alert show];

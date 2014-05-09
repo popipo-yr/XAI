@@ -34,7 +34,10 @@
     self.clearsSelectionOnViewWillAppear = YES;
     
 
-    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(okClick:)];
+    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BarItemOK", nil)
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(okClick:)];
     
     [okItem ios6cleanBackgroud];
     
@@ -133,8 +136,11 @@
 
 - (void) endOkEvent{
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改名称成功"
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:NSLocalizedString(@"ChangeNameSuc", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     [alert show];
     
@@ -143,8 +149,11 @@
 
 - (void) endFailEvent:(NSString*)str{
 
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:str
-                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:str
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     [alert show];
 }

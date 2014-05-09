@@ -116,6 +116,8 @@
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
 		96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290B18FE55F4008C6B81 /* DeviceTest.m */; };
+		96E44802191C6B22008A424B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E44801191C6B22008A424B /* Reachability.m */; };
+		96E4480A191C6E13008A424B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96E4480C191C6E13008A424B /* Localizable.strings */; };
 		96E9D9591900FD01000BB595 /* login_btn_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9531900FD01000BB595 /* login_btn_nor.png */; };
 		96E9D95B1900FD01000BB595 /* qrcode_btn_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9551900FD01000BB595 /* qrcode_btn_nor.png */; };
 		96E9D95D1900FD01000BB595 /* textField_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D9571900FD01000BB595 /* textField_bg.png */; };
@@ -156,7 +158,6 @@
 		C387F37418EA757B0069F98B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F37318EA757B0069F98B /* XCTest.framework */; };
 		C387F37518EA757B0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F37618EA757B0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
-		C387F37E18EA757B0069F98B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C387F37C18EA757B0069F98B /* InfoPlist.strings */; };
 		C387F38018EA757B0069F98B /* XAITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C387F37F18EA757B0069F98B /* XAITests.m */; };
 		C38AC1F218EBC8E3002F20C1 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1EC18EBC8E3002F20C1 /* libzbar.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		C38AC1F318EBC8E3002F20C1 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1EE18EBC8E3002F20C1 /* zbar-back.png */; };
@@ -410,6 +411,10 @@
 		96D8290818FE4A0C008C6B81 /* XAIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevice.h; sourceTree = "<group>"; };
 		96D8290918FE4A0C008C6B81 /* XAIDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevice.m; sourceTree = "<group>"; };
 		96D8290B18FE55F4008C6B81 /* DeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTest.m; sourceTree = "<group>"; };
+		96E44800191C6B22008A424B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		96E44801191C6B22008A424B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		96E44805191C6BA6008A424B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		96E4480B191C6E13008A424B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		96E9D9531900FD01000BB595 /* login_btn_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_btn_nor.png; sourceTree = "<group>"; };
 		96E9D9551900FD01000BB595 /* qrcode_btn_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcode_btn_nor.png; sourceTree = "<group>"; };
 		96E9D9571900FD01000BB595 /* textField_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textField_bg.png; sourceTree = "<group>"; };
@@ -465,7 +470,6 @@
 		C387F35318EA757A0069F98B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C387F35518EA757A0069F98B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C387F35918EA757A0069F98B /* XAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XAI-Info.plist"; sourceTree = "<group>"; };
-		C387F35B18EA757A0069F98B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C387F35D18EA757A0069F98B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C387F35F18EA757A0069F98B /* XAI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XAI-Prefix.pch"; sourceTree = "<group>"; };
 		C387F36018EA757A0069F98B /* XAIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIAppDelegate.h; sourceTree = "<group>"; };
@@ -474,7 +478,6 @@
 		C387F37218EA757B0069F98B /* XAITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XAITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C387F37318EA757B0069F98B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C387F37B18EA757B0069F98B /* XAITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XAITests-Info.plist"; sourceTree = "<group>"; };
-		C387F37D18EA757B0069F98B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C387F37F18EA757B0069F98B /* XAITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XAITests.m; sourceTree = "<group>"; };
 		C38AC1D818EBC8E3002F20C1 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		C38AC1D918EBC8E3002F20C1 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
@@ -1076,12 +1079,15 @@
 		C387F35818EA757A0069F98B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				96E44800191C6B22008A424B /* Reachability.h */,
+				96E44801191C6B22008A424B /* Reachability.m */,
 				C387F36018EA757A0069F98B /* XAIAppDelegate.h */,
 				C387F36118EA757A0069F98B /* XAIAppDelegate.m */,
 				C387F35918EA757A0069F98B /* XAI-Info.plist */,
 				C387F35A18EA757A0069F98B /* InfoPlist.strings */,
 				C387F35D18EA757A0069F98B /* main.m */,
 				C387F35F18EA757A0069F98B /* XAI-Prefix.pch */,
+				96E4480C191C6E13008A424B /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1107,7 +1113,6 @@
 			isa = PBXGroup;
 			children = (
 				C387F37B18EA757B0069F98B /* XAITests-Info.plist */,
-				C387F37C18EA757B0069F98B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1356,6 +1361,7 @@
 				964E6A351904E94100F1F61C /* tab_bar_selected.png in Resources */,
 				969D6E6B191881B7002076A0 /* login_btn_nor@2x.png in Resources */,
 				96E9D9591900FD01000BB595 /* login_btn_nor.png in Resources */,
+				96E4480A191C6E13008A424B /* Localizable.strings in Resources */,
 				960BDD511907989300787148 /* obj_door_open@2x.png in Resources */,
 				969D6E6A191881B7002076A0 /* login_btn_dis@2x.png in Resources */,
 				969D6E6E191881B7002076A0 /* qrcode_btn_nor@2x.png in Resources */,
@@ -1379,7 +1385,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C387F37E18EA757B0069F98B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1440,6 +1445,7 @@
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
+				96E44802191C6B22008A424B /* Reachability.m in Sources */,
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
@@ -1486,18 +1492,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		96E4480C191C6E13008A424B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96E4480B191C6E13008A424B /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		C387F35A18EA757A0069F98B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C387F35B18EA757A0069F98B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C387F37C18EA757B0069F98B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C387F37D18EA757B0069F98B /* en */,
+				96E44805191C6BA6008A424B /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

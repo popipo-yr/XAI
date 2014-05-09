@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MQTT.h"
 #import "XAIObject.h"
+#import "Reachability.h"
 
 #define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? YES : NO)
 
@@ -17,6 +18,7 @@
 
     MosquittoClient* _mosquittoClient;
     MQTTPacketManager* _mqttPacketManager;
+    Reachability* _netReachability;
 }
 
 @property (strong, nonatomic) UIWindow *window;

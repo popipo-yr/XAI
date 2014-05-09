@@ -45,7 +45,10 @@
 
     [_nameTextField addTarget:self action:@selector(nameTextReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
-    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered target:self action:@selector(addOneDevice:)];
+    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BarItemOK", nil)
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self
+                                                              action:@selector(addOneDevice:)];
     
     [okItem ios6cleanBackgroud];
     
@@ -136,19 +139,22 @@
     if (devService != _deviceService) return;
     
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:nil
-                                                   delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                          otherButtonTitles:nil];
     
     
     if (isSuccess ) {
         
         
-        [alert setMessage:@"添加设备成功"];
+        [alert setMessage:NSLocalizedString(@"AddDevSuc", nil)];
         alert.delegate = self;
         
     }else{
         
-        [alert setMessage:@"添加设备失败"];
+        [alert setMessage:NSLocalizedString(@"AddDevFaild", nil)];
         
     }
     

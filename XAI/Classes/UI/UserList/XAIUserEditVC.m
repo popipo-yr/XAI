@@ -99,13 +99,13 @@
     
     if ([indexPath row] == 0) {
         
-        cell.lable.text = @"名称";
+        cell.lable.text = NSLocalizedString(@"UserNameTip", nil);
         
         [cell setTextFiledWithLable:_userInfo.name];
         
     }else if([indexPath row] == 1){
         
-        cell.lable.text = @"密码";
+        cell.lable.text = NSLocalizedString(@"UserPawdTip", nil);
 
         [cell setTextFiledWithLable:_userInfo.pawd];
         [cell.textFiled setSecureTextEntry:YES];
@@ -128,9 +128,11 @@
         XAIChangeNameVC* nameVC = [self.storyboard
                                    instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
-        [nameVC setOneLabName:@"用户名" OneTexName:_userInfo.name  TwoLabName:@"新用户名"];
+        [nameVC setOneLabName:NSLocalizedString(@"UserName", nil)
+                   OneTexName:_userInfo.name
+                   TwoLabName:NSLocalizedString(@"UserNewName", nil)];
         [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
-        [nameVC setBarTitle:@"修改名称"];
+        [nameVC setBarTitle:NSLocalizedString(@"UserNameChange", nil)];
         
         _nameVC = nameVC;
         
@@ -144,7 +146,7 @@
         
         [pawVC setOldPwd:_userInfo.pawd];
         [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
-        [pawVC setBarTitle:@"修改密码"];
+        [pawVC setBarTitle:NSLocalizedString(@"UserPawdChange", nil)];
         
         _pawVC = pawVC;
         
@@ -166,7 +168,8 @@
         
     }else{
         
-        [_nameVC endFailEvent:@"修改名称失败"];
+        [_nameVC endFailEvent:NSLocalizedString(@"UserPawdChangeSuc", nil)];
+
     }
     
     
@@ -183,7 +186,7 @@
         
     }else{
     
-        [_pawVC endFailEvent:@"修改密码失败"];
+        [_pawVC endFailEvent:NSLocalizedString(@"UserPawdChangeFaild", nil)];
     }
     
     

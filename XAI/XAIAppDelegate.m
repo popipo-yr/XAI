@@ -51,6 +51,15 @@
         
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    
+    _netReachability = [Reachability reachabilityForLocalWiFi];
+    
+    [_netReachability startNotifier];
+    
 
     return YES;
 }
@@ -147,6 +156,31 @@
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
         
+    }
+}
+
+
+- (void)reachabilityChanged:(NSNotification *)note {
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    
+    if (status == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"NetNotConnect", nil)
+                              //@"网络不可用"
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    if(status == ReachableViaWiFi)
+    {
+        NSLog(@"WIFI");
+    }
+    if(status == ReachableViaWWAN)
+    {
+        NSLog(@"3G");
     }
 }
 
