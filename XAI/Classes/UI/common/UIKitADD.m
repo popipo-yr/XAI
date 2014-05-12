@@ -70,3 +70,26 @@
 }
 
 @end
+
+
+
+@implementation NSString (ADD)
+
+-(BOOL)onlyHasNumberAndChar{
+
+    NSString *regex = @"[a-z][A-Z][0-9]";
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return  [predicate evaluateWithObject:self] != YES ;
+    
+}
+
+- (BOOL) isNameOrPawdLength{
+
+    return [self length] > 3 && [self length] < 13;
+
+}
+
+
+@end

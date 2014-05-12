@@ -11,6 +11,8 @@
 #import "XAIUserService.h"
 #import "XAIData.h"
 
+#import "Reachability.h"
+
 
 #define findSuccess 1
 #define findFail   2
@@ -141,6 +143,85 @@
 
 
 - (IBAction)loginBtnClick:(id)sender{
+    
+    BOOL hasErr = true;
+    
+    NSString* errTip = nil;
+    
+    do {
+        
+        if (NotReachable == [[Reachability reachabilityForInternetConnection] currentReachabilityStatus]) {
+            
+            errTip = NSLocalizedString(@"NetNotReachable", nil);
+            break;
+        }
+        
+        if (nil == nameLabel.text ||[nameLabel.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserNameNULL", nil);
+            break;
+        }
+        
+        if (nil == passwordLabel.text ||[passwordLabel.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserPawdNULL", nil);
+            break;
+        }
+        
+        
+//        if (nil == _qrcodeLabel.text ||[_qrcodeLabel.text isEqualToString:@""]) {
+//            
+//            errTip = NSLocalizedString(@"QrcodeNULL", nil);
+//            break;
+//        }
+        
+        if (![nameLabel.text onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserNameErr", @"username string is not  require style");
+            break;
+        }
+        
+        if (![nameLabel.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserNameLengthErr", @"username string leangth is not require length");
+            break;
+        }
+        
+        
+        if (![passwordLabel.text onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserPawdErr", @"password string is not  require style");
+            break;
+        }
+        
+        if (![passwordLabel.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserPawdLengthErr", @"password string leangth is not require length");
+            break;
+        }
+        
+        
+        
+        hasErr = false;
+        
+    } while (0);
+    
+    
+    if (hasErr) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        return;
+
+        
+    }
+    
+
     
     [self.nameLabel resignFirstResponder];
     [self.passwordLabel resignFirstResponder];

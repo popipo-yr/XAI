@@ -30,6 +30,7 @@
 
 @property  (nonatomic,weak) IBOutlet UITextField* nameLabel;
 @property  (nonatomic,weak) IBOutlet UITextField* passwordLabel;
+@property  (nonatomic,weak) IBOutlet UITextField* qrcodeLabel;
 
 -(IBAction)loginBtnClick:(id)sender;
 -(IBAction)qrcodeBtnClick:(id)sender;

@@ -159,6 +159,7 @@
                     <connections>
                         <outlet property="nameLabel" destination="hpN-4L-ywU" id="j7M-jB-luF"/>
                         <outlet property="passwordLabel" destination="1HH-oP-bAX" id="xGG-Um-0FA"/>
+                        <outlet property="qrcodeLabel" destination="rzg-GT-8IT" id="ZJb-yi-Nbf"/>
                         <segue destination="L54-r1-Z8p" kind="modal" identifier="XAIMainPageSegue" id="JAD-yB-UJh"/>
                         <segue destination="hsi-Ff-krP" kind="modal" id="pW5-b2-wSV"/>
                     </connections>

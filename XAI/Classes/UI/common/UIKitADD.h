@@ -29,3 +29,12 @@
 - (void) ios6cleanBackgroud;
 
 @end
+
+
+@interface NSString  (ADD)
+
+- (BOOL) onlyHasNumberAndChar;
+
+- (BOOL) isNameOrPawdLength;
+
+@end
