@@ -55,6 +55,87 @@
 #pragma mark - Event
 
 - (void)okBtnClick:(id)sender{
+    
+    BOOL hasErr = true;
+    
+    NSString* errTip = nil;
+    
+    do {
+        
+        
+        if (nil == _userNameTF.text ||[_userNameTF.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserAddNameNULL", nil);
+            break;
+        }
+        
+        if (nil == _userPawdTF.text ||[_userPawdTF.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserAddPawdNULL", nil);
+            break;
+        }
+        
+        if (nil == _userPawdRepTF.text ||[_userPawdRepTF.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserAddPawdRepNULL", nil);
+            break;
+        }
+        
+        
+        if (![_userNameTF.text onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserAddNameErr", @"username string is not  require style");
+            break;
+        }
+        
+        if (![_userNameTF.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserAddNameLengthErr", @"username string leangth is not require length");
+            break;
+        }
+        
+        
+        if (![_userPawdTF.text onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserAddPawdErr", @"password string is not  require style");
+            break;
+        }
+        
+        if (![_userPawdTF.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserAddPawdLengthErr", @"password string leangth is not require length");
+            break;
+        }
+        
+        
+        if (![_userPawdTF.text isEqualToString:_userPawdRepTF.text]) {
+            
+            errTip = NSLocalizedString(@"UserAddPawdNotSame", nil);
+            break;
+        }
+        
+        
+        hasErr = false;
+        
+    } while (0);
+    
+    
+    if (hasErr) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        return;
+        
+        
+    }
+    
+
+    
 
     [_userService addUser:_userNameTF.text Password:_userPawdTF.text];
 }
@@ -162,6 +243,11 @@
         alert.delegate = self;
         
     }else{
+        
+        if (errcode == XAI_ERROR_NAME_EXISTED) {
+            
+            [alert setMessage:NSLocalizedString(@"UserNameExist",nil)];
+        }
     
         [alert setMessage:NSLocalizedString(@"AddUserFaild", nil)];
     

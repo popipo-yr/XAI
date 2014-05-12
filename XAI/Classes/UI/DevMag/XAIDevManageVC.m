@@ -251,6 +251,20 @@
 
 
 - (void) changeDevName:(NSString*)newName{
+    
+    if (newName == nil || [newName isEqualToString:@""]) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"DevNickNameNull", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+
+        [alert show];
+        return;
+        
+    }
 
     _newName = newName;
     

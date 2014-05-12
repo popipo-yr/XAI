@@ -156,6 +156,11 @@
         
         [alert setMessage:NSLocalizedString(@"AddDevFaild", nil)];
         
+        if (errcode == XAI_ERROR_LUID_EXISTED) {
+            
+            [alert setMessage:NSLocalizedString(@"DevWasInNet", nil)];
+        }
+        
     }
     
     [alert show];
@@ -191,6 +196,38 @@
 
 
 - (void)addOneDevice:(id)seder{
+    
+    BOOL hasErr = true;
+    
+    NSString* errTip = nil;
+    
+    do {
+        
+        if ( nil == _nameTextField.text || [_nameTextField.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"DevNameNull", nil);
+            break;
+        }
+        
+        hasErr = false;
+        
+    } while (0);
+    
+    
+    if (hasErr) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        return;
+        
+        
+    }
+
     
     NSString* type = nil;
     
