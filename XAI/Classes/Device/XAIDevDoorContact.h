@@ -29,10 +29,26 @@ typedef enum XAIDevDoorContactStatus{
     
 }XAIDevDoorContactStatus;
 
+typedef enum{
+    
+    XAIDevDCErr_NONE,
+    XAIDevDCErr_TimeOut,
+    XAIDevDCErr_Unknow,
+    
+}XAIDevDCErr;
+
 
 @protocol XAIDevDoorContactDelegate <NSObject>
 
-- (void) doorContact:(XAIDevDoorContact*)dc statusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status;
-- (void) doorContact:(XAIDevDoorContact*)dc powerGetSuccess:(BOOL)isSuccess curPower:(float)power;
+- (void) doorContact:(XAIDevDoorContact*)dc curStatus:(XAIDevDoorContactStatus)status err:(XAIDevDCErr)err;
+- (void) doorContact:(XAIDevDoorContact*)dc curPower:(float)power err:(XAIDevDCErr)err;
 
 @end
+
+
+typedef NS_ENUM(NSUInteger,_XAIDevDCOpr){
+    
+    XAIDevDCOpr_GetCurStatus = __Dev_lastItem,
+    XAIDevDCOpr_GetCurPower,
+    __DevDCOpr_lastItem,
+};

@@ -64,7 +64,7 @@ typedef  enum XAI_DATA_TYPE{
 
 typedef enum  XAI_ERROR{
     
-    XAI_ERROR_OK = 0,
+    XAI_ERROR_NONE = 0,
     XAI_ERROR_UNCHANGE = 1,
     XAI_ERROR_GENERAL = 2,
     XAI_ERROR_NO_PRIV = 3,  //权限冲突	不是admin或者不是本人

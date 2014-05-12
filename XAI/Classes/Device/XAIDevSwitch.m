@@ -67,6 +67,9 @@
     
     [[MQTT shareMQTT].client subscribe:topicStr];
     
+    _devOpr = XAIDevSwitchOpr_GetOneStatus;
+    _DEF_XTO_TIME_Start
+    
     //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 
 }
@@ -82,6 +85,9 @@
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
     [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    _devOpr = XAIDevSwitchOpr_GetTwoStatus;
+    _DEF_XTO_TIME_Start
     
     //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 }
@@ -131,6 +137,9 @@
 - (void) setCircuitOneStatus:(XAIDevCircuitStatus)status{
 
     [self setCircuitStatus:status which:Key_CircuitOneCtrlID];
+    
+    _devOpr = XAIDevSwitchOpr_SetOne;
+    _DEF_XTO_TIME_Start
 
 }
 
@@ -142,6 +151,8 @@
    
     [self setCircuitStatus:status which:Key_CircuitTwoCtrlID];
 
+    _devOpr = XAIDevSwitchOpr_SetTwo;
+    _DEF_XTO_TIME_Start
 }
 
 
@@ -155,42 +166,46 @@
     if (ack == NULL) return;
     
     BOOL isSuccess = false;
+    XAIDevSwitchErr err = XAIDevSwitchErr_Unknow;
+    
+    if (ack->err_no == 0) {
+        
+        isSuccess = true;
+        err = XAIDevSwitchErr_NONE;
+        
+    }
     
     switch (ack->scid) {
+            
         case Key_CircuitOneCtrlID:{
             
             
-            if (ack->err_no == 0) {
+            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitOneSetErr:)]) {
                 
-                isSuccess = true;
-                
-            }
-            
-            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitOneSetSuccess:)]) {
-                
-                [_swiDelegate circuitOneSetSuccess:isSuccess];
+                [_swiDelegate circuitOneSetErr:err];
             }
 
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_SetOne);
             
             
         }break;
             
         case Key_CircuitTwoCtrlID:{
             
-            if (ack->err_no == 0) {
-                
-                isSuccess = true;
-            }
             
-            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitTwoSetSuccess:)]) {
+            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitTwoSetErr:)]) {
                 
-                [_swiDelegate circuitTwoSetSuccess:isSuccess];
+                [_swiDelegate circuitTwoSetErr:err];
             }
             
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_SetTwo);
             
         }break;
             
@@ -219,6 +234,7 @@
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
     BOOL  isSuccess = false;
+    XAIDevSwitchErr err = XAIDevSwitchErr_Unknow;
     
     XAIDevCircuitStatus curStatus = XAIDevCircuitUnkown;
     
@@ -238,6 +254,8 @@
         
         isSuccess = true;
         
+        err = XAIDevSwitchErr_NONE;
+        
         
     } while (0);
     
@@ -247,20 +265,25 @@
         case Key_CircuitOneStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(circuitOneGetSuccess:curStatus:)]) {
+                                        @selector(circuitOneGetCurStatus:err:)]) {
                 
-                [_swiDelegate  circuitOneGetSuccess:isSuccess curStatus:curStatus];
+                [_swiDelegate  circuitOneGetCurStatus:curStatus err:err];
             }
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_GetOneStatus);
             
         }break;
             
         case Key_CircuitTwoStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(circuitTwoGetSuccess:curStatus:)]) {
+                                        @selector(circuitTwoGetCurStatus:err:)]) {
                 
-                [_swiDelegate  circuitTwoGetSuccess:isSuccess curStatus:curStatus];
+                [_swiDelegate  circuitTwoGetCurStatus:curStatus err:err];
             }
+            
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_GetTwoStatus);
             
         }
             
@@ -324,6 +347,39 @@
     topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+}
+
+-(void)timeout{
+
+    [super timeout];
+    
+    if (_devOpr == XAIDevSwitchOpr_GetOneStatus &&
+        (nil != _swiDelegate) &&
+        [_swiDelegate respondsToSelector:@selector(circuitOneGetCurStatus:err:)]) {
+            
+            [_swiDelegate circuitOneGetCurStatus:XAIDevCircuitUnkown err:XAIDevSwitchErr_TimeOut];
+
+        
+    }else if(_devOpr == XAIDevSwitchOpr_GetTwoStatus&&
+             (nil != _swiDelegate) &&
+             [_swiDelegate respondsToSelector:@selector(circuitTwoGetCurStatus:err:)]){
+    
+        [_swiDelegate circuitTwoGetCurStatus:XAIDevCircuitUnkown err:XAIDevSwitchErr_TimeOut];
+    
+    }else if(_devOpr == XAIDevSwitchOpr_SetOne&&
+             (nil != _swiDelegate) &&
+             [_swiDelegate respondsToSelector:@selector(circuitOneSetErr:)]){
+        
+        [_swiDelegate circuitOneSetErr:XAIDevSwitchErr_TimeOut];
+        
+    
+    }else if(_devOpr == XAIDevSwitchOpr_SetTwo&&
+             (nil != _swiDelegate) &&
+             [_swiDelegate respondsToSelector:@selector(circuitTwoSetErr:)]){
+    
+        [_swiDelegate circuitTwoSetErr:XAIDevSwitchErr_TimeOut];
+    
+    }
 }
 
 

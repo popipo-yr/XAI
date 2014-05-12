@@ -31,24 +31,24 @@
     
 }
 
-- (void) circuitOneGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
     
     
     
 }
 
-- (void) circuitOneSetSuccess:(BOOL)isSuccess{
+- (void) circuitOneSetErr:(XAIDevSwitchErr)err{
     
     
     
     
 }
 
-- (void) circuitTwoGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
     
     XAILightStatus curStatus = XAILightStatus_Unkown;
     
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         curStatus = ( status == XAIDevCircuitStatusOpen) ? XAILightStatus_Open : XAILightStatus_Close;
         
@@ -62,7 +62,7 @@
 
     
 }
-- (void) circuitTwoSetSuccess:(BOOL)isSuccess{
+- (void) circuitTwoSetErr:(XAIDevSwitchErr)err{
     
     
     if (_isOpening) {
@@ -71,7 +71,7 @@
         if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(lightOpenSuccess:)]) {
             
             
-            [self.delegate lightOpenSuccess:isSuccess];
+            [self.delegate lightOpenSuccess:err == XAIDevSwitchErr_NONE];
         }
         
         _isOpening = false;
@@ -81,7 +81,7 @@
         if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(lightCloseSuccess:)]) {
             
             
-            [self.delegate lightCloseSuccess:isSuccess];
+            [self.delegate lightCloseSuccess:err == XAIDevSwitchErr_NONE];
         }
         
         _isClosing = false;

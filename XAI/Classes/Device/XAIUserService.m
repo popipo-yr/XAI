@@ -260,7 +260,7 @@
             if ((nil != _userServiceDelegate) &&
                 [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
                 
-                [_userServiceDelegate userService:self findedUser:luid withName:username  status:YES errcode:XAI_ERROR_OK];
+                [_userServiceDelegate userService:self findedUser:luid withName:username  status:YES errcode:XAI_ERROR_NONE];
             }
             
             find = YES;
@@ -299,7 +299,7 @@
     if ((nil != _userServiceDelegate) &&
         [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
         
-        [_userServiceDelegate userService:self findedAllUser:users status:YES errcode:XAI_ERROR_OK];
+        [_userServiceDelegate userService:self findedAllUser:users status:YES errcode:XAI_ERROR_NONE];
     }
     
     
@@ -314,7 +314,7 @@
     
     if (ack == NULL) return;
     
-    BOOL bSuccess = (ack->err_no == XAI_ERROR_OK);
+    BOOL bSuccess = (ack->err_no == XAI_ERROR_NONE);
     
     switch (ack->scid) {
         case AddUserID:{

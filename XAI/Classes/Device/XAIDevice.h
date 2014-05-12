@@ -6,14 +6,16 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XAITimeOut.h"
 #import "MQTT.h"
 #import "XAIObject.h"
 
 #define Key_DeviceStatusID  127
 
+typedef NSUInteger XAIDevOpr;
+
 @protocol XAIDeviceStatusDelegate;
-@interface  XAIDevice: NSObject <MQTTPacketManagerDelegate>{
+@interface  XAIDevice: XAITimeOut <MQTTPacketManagerDelegate>{
 
     XAITYPELUID _luid;
     XAITYPEAPSN _apsn;
@@ -22,6 +24,8 @@
     NSString* _model; /*型号*/
     
     XAIObjectType _type;
+    
+    XAIDevOpr _devOpr;
 
 }
 
@@ -58,6 +62,17 @@ typedef enum XAIDeviceStatus{
 
 @protocol XAIDeviceStatusDelegate <NSObject>
 
-- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish;
+- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut;
 
 @end
+
+typedef NS_ENUM(NSUInteger,_XAIDevOpr){
+
+    XAIDevOpr_GetStatus = 0,
+    __Dev_lastItem,
+};
+
+
+
+
+

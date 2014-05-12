@@ -205,21 +205,50 @@
     
 }
 
-- (void)loginFinishWithStatus:(BOOL)status{
+- (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
     
-    _findDev = findStart;
-    _findUser = findStart;
+    if (status) {
+        
+        
+        
+        _findDev = findStart;
+        _findUser = findStart;
+        
+        /*获取设备列表,和用户列表*/
+        _devService = [[XAIDeviceService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+        _devService.deviceServiceDelegate = self;
+        _userService.userServiceDelegate = self;
+        
+        
+        
+        [_userService finderAllUser];
+        [_devService findAllOnlineDevWithuseSecond:5];
+        
+    }else{
+        
     
-    /*获取设备列表,和用户列表*/
-    _devService = [[XAIDeviceService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
-    _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
-    _devService.deviceServiceDelegate = self;
-    _userService.userServiceDelegate = self;
+        NSString* errstr = NSLocalizedString(@"LoginFailed", nil);
+    
+        if (bTimeOut) {
+            
+            errstr = NSLocalizedString(@"LoginTimeOut", nil);
+        }
+        
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errstr
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        
+        [alert show];
     
     
+        [_activityView stopAnimating];
     
-    [_userService finderAllUser];
-    [_devService findAllOnlineDevWithuseSecond:5];
+    }
 
 
 }

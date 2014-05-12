@@ -6,23 +6,22 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XAITimeOut.h"
 #import "MQTT.h"
 #import "XAIUserService.h"
 
 @protocol XAILoginDelegate <NSObject>
 
-- (void)  loginFinishWithStatus:(BOOL) status;
+- (void)  loginFinishWithStatus:(BOOL) status isTimeOut:(BOOL)bTimeOut;
 
 @end
 
-@interface XAILogin : NSObject <MQTTConnectDelegate,XAIUserServiceDelegate>{
+@interface XAILogin : XAITimeOut <MQTTConnectDelegate,XAIUserServiceDelegate>{
 
 
     NSString*  _name;
     NSString*  _pawd;
     XAIUserService* _userService;
-    
 
 
 }

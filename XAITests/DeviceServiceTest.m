@@ -113,7 +113,7 @@
 
 
 
-- (void)testAdd
+- (void)test1Add
 {
     
     [self testLogin];
@@ -150,7 +150,7 @@
 
 
 
-- (void)testChangeName
+- (void)test2ChangeName
 {
     
     [self testLogin];
@@ -195,7 +195,7 @@
     
 }
 
-- (void) testFindAll{
+- (void) test3FindAll{
 
     [self testLogin];
     
@@ -228,7 +228,7 @@
 
 }
 
-- (void) testFindAllOnline{
+- (void) test4FindAllOnline{
     
     [self testLogin];
     
@@ -265,7 +265,7 @@
 
 
 
-- (void)testDel
+- (void)test5Del
 {
     
     [self testLogin];

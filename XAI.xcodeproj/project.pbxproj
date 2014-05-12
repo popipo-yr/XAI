@@ -20,6 +20,8 @@
 		960BDD561907989300787148 /* obj_light_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD4E1907989300787148 /* obj_light_close.png */; };
 		960BDD571907989300787148 /* obj_light_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD4F1907989300787148 /* obj_light_open.png */; };
 		9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */; };
+		9616802E19206324000682A4 /* DoorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616802D19206324000682A4 /* DoorTest.m */; };
+		9616803119206979000682A4 /* XAITimeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616803019206979000682A4 /* XAITimeOut.m */; };
 		961F93E518F4288F002D4F74 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939818F4288F002D4F74 /* libcrypto.a */; };
 		961F93E618F4288F002D4F74 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939918F4288F002D4F74 /* libssl.a */; };
 		961F95C318F4E432002D4F74 /* ca.crt in Resources */ = {isa = PBXBuildFile; fileRef = 961F95C218F4E432002D4F74 /* ca.crt */; };
@@ -165,7 +167,6 @@
 		C38AC1F518EBC8E3002F20C1 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F018EBC8E3002F20C1 /* zbar-helpicons.png */; };
 		C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */; };
 		C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */; };
-		C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */; };
 		C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */; };
 		C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */; };
 		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; };
@@ -202,6 +203,9 @@
 		960BDD4F1907989300787148 /* obj_light_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light_open.png; sourceTree = "<group>"; };
 		9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
 		9614F94218FCEBB400CDF4A1 /* LoginTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginTest.h; sourceTree = "<group>"; };
+		9616802D19206324000682A4 /* DoorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorTest.m; sourceTree = "<group>"; };
+		9616802F19206979000682A4 /* XAITimeOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITimeOut.h; sourceTree = "<group>"; };
+		9616803019206979000682A4 /* XAITimeOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITimeOut.m; sourceTree = "<group>"; };
 		961F939818F4288F002D4F74 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		961F939918F4288F002D4F74 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		961F957718F4E12D002D4F74 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -507,8 +511,6 @@
 		C38AC1F718EBCCB8002F20C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		C38AC1FE18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDeviceInfo.h; sourceTree = "<group>"; };
-		C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDeviceInfo.m; sourceTree = "<group>"; };
 		C38D91D818ED19C0006F22D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_iPhone35.storyboard; sourceTree = "<group>"; };
 		C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIMQTTDEF.h; sourceTree = "<group>"; };
 		C38D91DD18ED2F95006F22D3 /* XAIPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacket.h; sourceTree = "<group>"; };
@@ -566,6 +568,8 @@
 				968120B818FF73660016DDB7 /* XAIDevDoorContact.m */,
 				968120BA18FF91D80016DDB7 /* XAIDevInfrared.h */,
 				968120BB18FF91D80016DDB7 /* XAIDevInfrared.m */,
+				9616802F19206979000682A4 /* XAITimeOut.h */,
+				9616803019206979000682A4 /* XAITimeOut.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -1105,6 +1109,7 @@
 				961F95C418F4F7D3002D4F74 /* LoginTest.m */,
 				C387F37F18EA757B0069F98B /* XAITests.m */,
 				C387F37A18EA757B0069F98B /* Supporting Files */,
+				9616802D19206324000682A4 /* DoorTest.m */,
 			);
 			path = XAITests;
 			sourceTree = "<group>";
@@ -1184,8 +1189,6 @@
 		C38AC20118EBE417002F20C1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				C38AC20218EBE43A002F20C1 /* XAIDeviceInfo.h */,
-				C38AC20318EBE43A002F20C1 /* XAIDeviceInfo.m */,
 				96081AAD190E460900E281F9 /* XAIData.h */,
 				96081AAE190E460900E281F9 /* XAIData.m */,
 				96F05CB11910C09600F2F128 /* XAIRWProtocol.h */,
@@ -1407,6 +1410,7 @@
 				967BD7821908AB08007C3C8C /* XAIDevManageCell.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
 				967BD77F1908AB08007C3C8C /* XAIDevShowStatusVC.m in Sources */,
+				9616803119206979000682A4 /* XAITimeOut.m in Sources */,
 				964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */,
 				967BD77E1908AB08007C3C8C /* XAIDevShowCell.m in Sources */,
 				96E9D97119010561000BB595 /* XAILoginVC.m in Sources */,
@@ -1458,7 +1462,6 @@
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				967BD7831908AB08007C3C8C /* XAIDevManageVC.m in Sources */,
-				C38AC20418EBE43A002F20C1 /* XAIDeviceInfo.m in Sources */,
 				969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */,
 				961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */,
 				967BD7A6190904FA007C3C8C /* XAIDebug.m in Sources */,
@@ -1471,6 +1474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */,
+				9616802E19206324000682A4 /* DoorTest.m in Sources */,
 				9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */,
 				968120BE18FF98210016DDB7 /* DoorContactTest.m in Sources */,
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,

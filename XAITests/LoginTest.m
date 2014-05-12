@@ -38,7 +38,8 @@
     [super tearDown];
 }
 
-- (void)loginFinishWithStatus:(BOOL)status{
+
+- (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
 
     if (status == TRUE) {
         

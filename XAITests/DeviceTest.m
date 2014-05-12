@@ -87,7 +87,7 @@
 
 }
 
-- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
 
     if (finish) {
         

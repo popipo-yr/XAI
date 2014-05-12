@@ -192,7 +192,7 @@
     if (_deviceServiceDelegate != nil &&
         [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
         
-        [_deviceServiceDelegate  devService:self finddedAllOnlineDevices:_onlineDevices status:YES errcode:XAI_ERROR_OK];
+        [_deviceServiceDelegate  devService:self finddedAllOnlineDevices:_onlineDevices status:YES errcode:XAI_ERROR_NONE];
     }
     
     _bFinding = false;
@@ -314,7 +314,7 @@
     if ((nil != _deviceServiceDelegate) &&
         [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
         
-        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_OK];
+        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_NONE];
     }
     
     
@@ -337,7 +337,7 @@
     if (ack == NULL) return;
     
     
-    BOOL bSuccess = (ack->err_no == XAI_ERROR_OK);
+    BOOL bSuccess = (ack->err_no == XAI_ERROR_NONE);
     
     switch (ack->scid) {
         case AddDevID:{

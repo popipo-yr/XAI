@@ -34,6 +34,8 @@
     
     _din.apsn = 0x1;
     _din.luid = 0x124b0002292580;
+    
+    [_din startFocusStatus];
     [super setUp];
 
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -41,6 +43,7 @@
 
 - (void)tearDown
 {
+    [_din endFocusStatus];
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
@@ -145,7 +148,7 @@
     
 }
 
-- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
     
     if (finish) {
         
@@ -157,9 +160,9 @@
     
 }
 
-- (void)infraredPowerGetSuccess:(BOOL)isSuccess curPower:(float)power{
+- (void)infrared:(XAIDevInfrared *)inf curPower:(float)power err:(XAIDevInfraredErr)err{
     
-    if (isSuccess) {
+    if (err == XAIDevInfraredErr_NONE) {
         
         _getPower = Success;
         
@@ -170,9 +173,9 @@
     
 }
 
-- (void)infraredStatusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevInfraredStatus)status{
+- (void)infrared:(XAIDevInfrared *)inf curStatus:(XAIDevInfraredStatus)status err:(XAIDevInfraredErr)err{
     
-    if (isSuccess) {
+    if (err == XAIDevInfraredErr_NONE) {
         
         _getStatus = Success;
         

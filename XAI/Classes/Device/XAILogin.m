@@ -35,7 +35,9 @@
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
     [mosq connect];
-
+    
+    _DEF_XTO_TIME_Start;
+    
 }
 
 #pragma mark -- MQTTConnectDelegate
@@ -45,15 +47,33 @@
     
     [_userService finderUserLuidHelper:_name];
     
+    _DEF_XTO_TIME_End;
+    
 }
 
 - (void) didDisconnect {
 	
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
-        [_delegate loginFinishWithStatus:false];
+        [_delegate loginFinishWithStatus:false isTimeOut:false];
     }
+    
+    _DEF_XTO_TIME_End;
 
+}
+
+-(void)timeout{
+    
+    [_timeout invalidate];
+    _timeout = nil;
+
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
+        
+        [_delegate loginFinishWithStatus:false isTimeOut:true];
+    }
+    
+    [[MQTT shareMQTT].client disconnect];
+    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
 }
 
 
@@ -90,9 +110,9 @@
         
     }
     
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:)]) {
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
-        [_delegate loginFinishWithStatus:isSuccess];
+        [_delegate loginFinishWithStatus:isSuccess isTimeOut:false];
     }
 
 }

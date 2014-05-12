@@ -24,8 +24,24 @@
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     [[MQTT shareMQTT].client subscribe:topicStr];
     
+
+    _devOpr = XAIDevOpr_GetStatus;
+    _DEF_XTO_TIME_Start
+    
     
 
+}
+
+-(void)timeout{
+    
+    
+    if (_devOpr == XAIDevOpr_GetStatus &&
+        nil != _delegate &&
+        [_delegate respondsToSelector:@selector(getStatus:withFinish:isTimeOut:)]) {
+        
+        [_delegate getStatus:XAIDeviceStatus_UNKOWN withFinish:false isTimeOut:true];
+    }
+    
 }
 
 
@@ -37,6 +53,9 @@
         
         return;
     }
+    
+    
+    _DEF_XTO_TIME_End;
     
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
@@ -70,9 +89,9 @@
     } while (0);
     
     
-    if (nil != _delegate && [_delegate respondsToSelector:@selector(getStatus:withFinish:)]) {
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(getStatus:withFinish:isTimeOut:)]) {
         
-        [_delegate getStatus:devStatus withFinish:isSuccess];
+        [_delegate getStatus:devStatus withFinish:isSuccess isTimeOut:false];
     }
     
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:

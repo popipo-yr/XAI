@@ -27,7 +27,7 @@
 }
 
 - (void) testLogin;
-- (void)loginFinishWithStatus:(BOOL)status;
+//- (void)loginFinishWithStatus:(BOOL)status;
 - (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd;
 
 

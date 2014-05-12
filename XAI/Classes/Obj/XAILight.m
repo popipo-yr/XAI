@@ -55,12 +55,12 @@
 
 #pragma --Delegate
 
-- (void) circuitOneGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
     
     
     XAILightStatus curStatus = XAILightStatus_Unkown;
     
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         curStatus = ( status == XAIDevCircuitStatusOpen) ? XAILightStatus_Open : XAILightStatus_Close;
         
@@ -74,7 +74,7 @@
    
 }
 
-- (void) circuitOneSetSuccess:(BOOL)isSuccess{
+- (void) circuitOneSetErr:(XAIDevSwitchErr)err{
     
     if (_isOpening) {
         
@@ -82,7 +82,7 @@
         if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightOpenSuccess:)]) {
             
             
-            [_delegate lightOpenSuccess:isSuccess];
+            [_delegate lightOpenSuccess:err == XAIDevSwitchErr_NONE];
         }
         
         
@@ -94,7 +94,7 @@
         if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightCloseSuccess:)]) {
             
             
-            [_delegate lightCloseSuccess:isSuccess];
+            [_delegate lightCloseSuccess:err == XAIDevSwitchErr_NONE];
         }
         
         
@@ -105,17 +105,17 @@
     
 }
 
-- (void) circuitTwoGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
     
     
 }
-- (void) circuitTwoSetSuccess:(BOOL)isSuccess{
+- (void) circuitTwoSetErr:(XAIDevSwitchErr)err{
     
     
     
 }
 
-- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
     
 }
 

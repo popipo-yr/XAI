@@ -40,6 +40,7 @@
     _devSwitch.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
                      
     
+    [_devSwitch startFocusStatus];
     //    _luidDev = 0x124b0003d4317c;
     //    _luidDev = 0x124b0003d430b7;
     //    _luidDev = 0x124b0002292580;
@@ -56,6 +57,8 @@
 
 - (void)tearDown
 {
+    
+    [_devSwitch endFocusStatus];
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
@@ -277,9 +280,9 @@
 }
 
 
-- (void) circuitOneGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
 
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         _getOne = Success;
     }else{
@@ -287,9 +290,9 @@
         _getOne = Fail;
     }
 }
-- (void) circuitOneSetSuccess:(BOOL)isSuccess{
+- (void) circuitOneSetErr:(XAIDevSwitchErr)err{
     
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         _setOne = Success;
     }else{
@@ -299,9 +302,9 @@
 
 }
 
-- (void) circuitTwoGetSuccess:(BOOL)isSuccess curStatus:(XAIDevCircuitStatus)status{
+- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
     
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         _getTwo = Success;
     }else{
@@ -310,9 +313,9 @@
     }
 
 }
-- (void) circuitTwoSetSuccess:(BOOL)isSuccess{
+- (void) circuitTwoSetErr:(XAIDevSwitchErr)err{
 
-    if (isSuccess) {
+    if (err == XAIDevSwitchErr_NONE) {
         
         _setTwo = Success;
         
@@ -324,7 +327,7 @@
 
 }
 
-- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
 
     if (finish) {
         

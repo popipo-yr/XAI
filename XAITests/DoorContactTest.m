@@ -32,6 +32,8 @@
     
     _ddc.apsn = 0x1;
     _ddc.luid = 0x124b0002292580;
+    
+    [_ddc startFocusStatus];
    // _ddc.luid = 0x00124B000413CCC2;
     
     //    _luidDev = 0x124b0003d430b7;
@@ -44,6 +46,8 @@
 
 - (void)tearDown
 {
+    
+    [_ddc  endFocusStatus];
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
@@ -148,7 +152,7 @@
     
 }
 
-- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish{
+- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
     
     if (finish) {
         
@@ -160,9 +164,10 @@
 
 }
 
-- (void)doorContact:(XAIDevDoorContact *)dc statusGetSuccess:(BOOL)isSuccess curStatus:(XAIDevDoorContactStatus)status{
 
-    if (isSuccess) {
+- (void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAIDevDCErr)err{
+
+    if (XAIDevDCErr_NONE == err) {
         
         _getPower = Success;
         
@@ -173,9 +178,9 @@
 
 }
 
-- (void)doorContact:(XAIDevDoorContact *)dc powerGetSuccess:(BOOL)isSuccess curPower:(float)power{
+- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAIDevDCErr)err{
 
-    if (isSuccess) {
+    if (XAIDevDCErr_NONE == err) {
         
         _getStatus = Success;
         

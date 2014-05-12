@@ -56,7 +56,10 @@
     
     [[MQTT shareMQTT].client subscribe:topicStr];
     
-    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    _devOpr = XAIDevInfraredOpr_GetCurStatus;
+    _DEF_XTO_TIME_Start;
     
 }
 
@@ -68,6 +71,9 @@
     [[MQTT shareMQTT].client subscribe:topicStr];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    _devOpr = XAIDevInfraredOpr_GetCurPower;
+    _DEF_XTO_TIME_Start;
 }
 
 #pragma mark -- MQTTPacketManagerDelegate
@@ -81,11 +87,13 @@
     
     if (NULL == param) return;
     
+    BOOL  isSuccess = false;
+    XAIDevInfraredErr err = XAIDevInfraredErr_Unknow;
+    
     //查看状态的topic
     if ([topic isEqualToString:
          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID]]) {
         
-        BOOL  isSuccess = false;
         
         XAIDevInfraredStatus curStatus = XAIDevInfraredStatusUnkown;
         
@@ -107,27 +115,27 @@
             if (curStatus == XAIDevInfraredStatusUnkown) break;
             
             isSuccess = true;
-            
+            err = XAIDevInfraredErr_NONE;
             
         } while (0);
         
         
         if (nil != _infDelegate &&
-            [_infDelegate respondsToSelector:@selector(infraredStatusGetSuccess:curStatus:)]) {
+            [_infDelegate respondsToSelector:@selector(infrared:curStatus:err:)]) {
             
-            [_infDelegate infraredStatusGetSuccess:isSuccess curStatus:curStatus];
+            [_infDelegate infrared:self curStatus:curStatus err:err];
         }
         
-        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID]];
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevInfraredOpr_GetCurStatus);
+        
+//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+//         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID]];
         
         
         
     }else if ([topic isEqualToString:
                [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_BatteryPowerId]]){
         
-        
-        BOOL  isSuccess = false;
         
         float curPower = 1;
         
@@ -146,15 +154,18 @@
             curPower = power*1.0 / 10.0;
             
             isSuccess = true;
+            err = XAIDevInfraredErr_NONE;
             
         } while (0);
         
         
         if (nil != _infDelegate &&
-            [_infDelegate respondsToSelector:@selector(infraredPowerGetSuccess:curPower:)]) {
+            [_infDelegate respondsToSelector:@selector(infrared:curPower:err:)]) {
             
-            [_infDelegate infraredPowerGetSuccess:isSuccess curPower:curPower];
+            [_infDelegate infrared:self curPower:curPower err:err];
         }
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevInfraredOpr_GetCurPower);
         
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_BatteryPowerId]];
@@ -162,6 +173,50 @@
     }
     
     purgePacketParamStatusAndData(param);
+    
+}
+
+
+- (void) startFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    
+}
+- (void) endFocusStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+    
+}
+
+
+
+
+-(void)timeout{
+    
+    [super timeout];
+    
+    if (_devOpr == XAIDevInfraredOpr_GetCurStatus &&
+        (nil != _infDelegate) &&
+        [_infDelegate respondsToSelector:@selector(infrared:curStatus:err:)]) {
+        
+        [_infDelegate infrared:self curStatus:XAIDevInfraredStatusUnkown err:XAIDevInfraredErr_TimeOut];
+        
+        
+    }else  if (_devOpr == XAIDevInfraredOpr_GetCurPower &&
+               (nil != _infDelegate) &&
+               [_infDelegate respondsToSelector:@selector(infrared:curPower:err:)]) {
+        
+        [_infDelegate infrared:self curPower:0 err:XAIDevInfraredErr_TimeOut];
+        
+        
+    }
     
 }
 
