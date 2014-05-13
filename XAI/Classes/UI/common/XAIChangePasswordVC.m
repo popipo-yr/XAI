@@ -191,6 +191,66 @@
 
 - (void) okClick:(id)sender{
     
+    
+    BOOL hasErr = true;
+    
+    NSString* errTip = nil;
+    
+    do {
+        
+        if (nil == _newPwdTextField.text ||[_newPwdTextField.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserChangePawdNULL", nil);
+            break;
+        }
+        
+        if (nil == _newPwdRepTextField.text ||[_newPwdRepTextField.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserChangePawdRepNULL", nil);
+            break;
+        }
+        
+        if (![_newPwdTextField.text onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserChangePawdErr", @"password string is not  require style");
+            break;
+        }
+        
+        if (![_newPwdTextField.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserChangePawdLengthErr", @"username string leangth is not require length");
+            break;
+        }
+        
+     
+        if (![_newPwdTextField.text isEqualToString:_newPwdRepTextField.text]) {
+            
+            errTip = NSLocalizedString(@"UserChangePawdNotSame", nil);
+            break;
+        }
+        
+        
+        hasErr = false;
+        
+    } while (0);
+    
+    
+    if (hasErr) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        return;
+        
+        
+    }
+
+    
+    
     if (_okTarget != nil && _okSelector != nil
         && [_okTarget respondsToSelector:_okSelector]) {
         

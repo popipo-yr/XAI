@@ -84,6 +84,50 @@
 
 - (void) changeUserName:(NSString*)newName{
     
+    BOOL hasErr = true;
+    
+    NSString* errTip = nil;
+    
+    do {
+        
+        if (nil == newName ||[newName isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"UserChangeNameNULL", nil);
+            break;
+        }
+        
+        if (![newName onlyHasNumberAndChar]) {
+            
+            errTip = NSLocalizedString(@"UserChangeNameErr", @"username string is not  require style");
+            break;
+        }
+        
+        if (![newName isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"UserChangeNameLengthErr", @"username string leangth is not require length");
+            break;
+        }
+        
+        hasErr = false;
+        
+    } while (0);
+    
+    
+    if (hasErr) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:errTip
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        return;
+        
+        
+    }
+    
+
     _newName = newName;
     [_userService changeUser:_userInfo.luid withName:newName];
 }
@@ -216,7 +260,12 @@
         
     }else{
         
-        [_nameVC endFailEvent:NSLocalizedString(@"UserPawdChangeSuc", nil)];
+        if (errcode == XAI_ERROR_NAME_EXISTED) {
+            
+            [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeExist", nil)];
+        }
+        
+        [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeFaild", nil)];
     }
     
     
