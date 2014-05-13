@@ -16,8 +16,8 @@
 #import "XAIData.h"
 
 @interface XAIDevManageVC : XAITableViewWithOprController
-<UITableViewDelegate,UITableViewDataSource,ZBarReaderDelegate
-,XAIDeviceServiceDelegate,XAIDataRefreshDelegate>{
+<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate
+,ZBarReaderDelegate,XAIDeviceServiceDelegate,XAIDataRefreshDelegate>{
 
     XAIDeviceService* _deviceService;
     NSMutableArray*  _objectAry;

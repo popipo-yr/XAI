@@ -144,10 +144,35 @@
 
 - (void)delBtnClick:(NSIndexPath*) index{
     
-    XAIObject*  obj = [_objectAry objectAtIndex:[index row]];
-    [_deviceService delDev:obj.luid];
     
-    //XAIDebug(@"XAIDevManageVC",self,@selector(delDevice:),YES,5);
+    XAIObject*  obj = [_objectAry objectAtIndex:[index row]];
+    NSString* tip =  [[NSString alloc] initWithFormat:NSLocalizedString(@"DevDelTip", nil),obj.name];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:tip
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertCancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"AlertOK", nil), nil];
+    
+    [alert show];
+    
+}
+
+#pragma mark - UIAlert view delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if ([alertView cancelButtonIndex] != buttonIndex) {
+        
+        XAIObject*  obj = [_objectAry objectAtIndex:[_curDelIndexPath row]];
+        [_deviceService delDev:obj.luid];
+        
+    }else{
+        
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
+                         withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+
 }
 
 
@@ -199,15 +224,6 @@
         
     }
 
-    
-    
-
-
-    //cell.editingAccessoryType = UITableViewCellAccessoryCheckmark;
-    
-    UILabel* cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    cell.editingAccessoryView = cellLabel;
-    // Configure the cell...
     
     return cell;
 }

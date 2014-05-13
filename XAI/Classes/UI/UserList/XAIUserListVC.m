@@ -95,11 +95,34 @@
 
     XAIUser* aUser = [_userDatasAry objectAtIndex:[index row]];
     
+    NSString* tip =  [[NSString alloc] initWithFormat:NSLocalizedString(@"UserDelTip", nil),aUser.name];
     
-    [_userService delUser:aUser.luid];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:tip
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"AlertCancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"AlertOK", nil), nil];
+    
+    [alert show];
 
 }
 
+#pragma mark - UIAlert view delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if ([alertView cancelButtonIndex] != buttonIndex) {
+        
+        XAIUser* aUser = [_userDatasAry objectAtIndex:[_curDelIndexPath row]];
+        [_userService delUser:aUser.luid];
+        
+    }else{
+        
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
+                              withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+    
+}
 
 
 #pragma mark - UITableViewDelegate

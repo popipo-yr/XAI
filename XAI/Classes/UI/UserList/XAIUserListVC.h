@@ -12,7 +12,8 @@
 #import "XAIData.h"
 
 @interface XAIUserListVC : XAITableViewWithOprController
-<UITableViewDataSource,UITabBarDelegate,XAIUserServiceDelegate,XAIDataRefreshDelegate>{
+<UITableViewDataSource,UITabBarDelegate,UIAlertViewDelegate,
+XAIUserServiceDelegate,XAIDataRefreshDelegate>{
 
     XAIUserService* _userService;
     

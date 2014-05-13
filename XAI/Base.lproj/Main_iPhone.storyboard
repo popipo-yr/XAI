@@ -736,7 +736,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contextLable" destination="PmO-lZ-bjQ" id="rAF-bx-gVn"/>
-                                    <outlet property="headImageView" destination="mEK-PS-vtV" id="UvC-26-3lr"/>
+                                    <outlet property="headImageView" destination="mEK-PS-vtV" id="IQ2-DO-vdg"/>
                                     <outlet property="nameLable" destination="hH2-ko-4p2" id="AaJ-ep-5fT"/>
                                 </connections>
                             </tableViewCell>
@@ -762,7 +762,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="XAIChangeNameVCID" id="Ujw-Ai-Cdk" userLabel="XAIChangeNameVC - 设置名称" customClass="XAIChangeNameVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PJG-L6-E4O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -1114,6 +1114,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Hc2-bF-MML"/>
-        <segue reference="Jh1-J7-H7F"/>
+        <segue reference="vvL-pu-Vsi"/>
     </inferredMetricsTieBreakers>
 </document>
