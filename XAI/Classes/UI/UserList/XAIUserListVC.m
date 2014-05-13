@@ -225,11 +225,11 @@
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
                                                     message:nil
-                                                   delegate:self
+                                                   delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
                                           otherButtonTitles:nil];
     
-    if (isSuccess && nil == _curDelIndexPath) {
+    if (isSuccess && nil != _curDelIndexPath) {
         
         alert.message = NSLocalizedString(@"DelUserSuc", nil);
         

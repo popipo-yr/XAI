@@ -10,6 +10,7 @@
 #import "XAIChangeCell.h"
 #import "XAIChangeNameVC.h"
 #import "XAIChangePasswordVC.h"
+#import "XAIAppDelegate.h"
 
 #define _key_name_index 1
 #define _key_pawd_index 2
@@ -63,12 +64,7 @@
 
     
     [self.tableView reloadData];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,6 +132,19 @@
     
     _newPwd = newPwd;
     [_userService changeUser:_userInfo.luid oldPassword:_userInfo.pawd to:newPwd];
+}
+
+
+- (void) userOut{
+    
+    [[MQTT shareMQTT].client disconnect];
+
+    UIViewController* vc= [self.storyboard
+                           instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
+    
+    XAIAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate.window setRootViewController:vc];
+
 }
 
 
