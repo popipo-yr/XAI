@@ -103,6 +103,7 @@
 
 
 #define  moveLength  90
+#define  _35moreLength 80
 
 - (void)keyboardWillShow:(NSNotification *)notif {
     
@@ -111,7 +112,14 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
     
-    self.view.center = CGPointMake(oldPoint.x , oldPoint.y - moveLength);
+    float  addLenght = 0;
+    
+    if ([UIScreen is_35_Size]) {
+        
+        addLenght = _35moreLength;
+    }
+    
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y - (moveLength + addLenght));
     
     [UIView commitAnimations];
 }
@@ -125,8 +133,14 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.25];
 
+    float  addLenght = 0;
+    if ([UIScreen is_35_Size]) {
+        
+        addLenght = _35moreLength;
+    }
+
     
-    self.view.center = CGPointMake(oldPoint.x , oldPoint.y + moveLength);
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y + moveLength + addLenght);
     
     [UIView commitAnimations];
 

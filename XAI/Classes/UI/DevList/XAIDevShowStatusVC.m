@@ -23,12 +23,30 @@
         _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
         _activityView.hidesWhenStopped = YES;
         
+        
+        
+        
 
     }
     
     
     return self;
 
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+
+    
+    Resource35(newString, @"DevInfoView");
+    
+    [[NSBundle mainBundle] loadNibNamed:newString owner:self options:nil];
+    
+    
+    // Do any additional setup after loading the view from its nib.
 }
 
 
@@ -169,15 +187,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"DeviceShowStatusVCCellID";
+    static NSString *CellIdentifier = @"DeviceShowStatusVCCellXIB";
+    
+    if (!_nib) {
+        _nib = [UINib nibWithNibName:@"DevInfoViewCell" bundle:nil];
+        [tableView registerNib:_nib forCellReuseIdentifier:CellIdentifier];
+    }
+    
     
     XAIDevShowStatusVCCell *cell = [tableView
                             dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
+        
         cell = [[XAIDevShowStatusVCCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:CellIdentifier];
+
     }
+    
     
     XAIObjectOpr* aObjOpr = [_oprDatasAry objectAtIndex:[indexPath row]];
     

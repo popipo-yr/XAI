@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XAIObject.h"
 
+
 @interface XAIDevShowStatusVC : UIViewController <UITableViewDataSource,UITableViewDelegate>{
 
     UIImageView* _statusView;
@@ -17,6 +18,8 @@
     UISwipeGestureRecognizer* _recognizerRight;
     
     NSArray* _oprDatasAry;
+    
+    UINib *_nib;
 }
 
 

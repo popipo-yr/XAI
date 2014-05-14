@@ -72,6 +72,17 @@
 @end
 
 
+@implementation UIScreen (Add)
+
++ (BOOL)  is_35_Size{
+
+    CGSize iOSDeviceScreenSize = [[UIScreen mainScreen] bounds].size;
+    return  iOSDeviceScreenSize.height == 480;
+}
+
+@end
+
+
 
 @implementation NSString (ADD)
 

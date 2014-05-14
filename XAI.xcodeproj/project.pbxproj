@@ -39,6 +39,9 @@
 		962DDE0C19161493008F370A /* XAIWindowStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962DDE0919161493008F370A /* XAIWindowStatusVC.m */; };
 		9630469E19230DCE0023653E /* PacketDTITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630469D19230DCE0023653E /* PacketDTITest.m */; };
 		963046A0192345810023653E /* LightTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630469F192345810023653E /* LightTest.m */; };
+		963046A31923544C0023653E /* DevInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963046A11923544C0023653E /* DevInfoView.xib */; };
+		963046A9192356430023653E /* DevInfoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963046A7192356430023653E /* DevInfoViewCell.xib */; };
+		963046AE1923603F0023653E /* DevInfoView35.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963046AA1923603F0023653E /* DevInfoView35.xib */; };
 		9631D16B19075691007CBC4B /* obj_door@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16319075691007CBC4B /* obj_door@2x.png */; };
 		9631D16C19075691007CBC4B /* obj_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16419075691007CBC4B /* obj_light@2x.png */; };
 		9631D16D19075691007CBC4B /* obj_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16519075691007CBC4B /* obj_switch@2x.png */; };
@@ -310,6 +313,9 @@
 		962DDE0919161493008F370A /* XAIWindowStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIWindowStatusVC.m; sourceTree = "<group>"; };
 		9630469D19230DCE0023653E /* PacketDTITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketDTITest.m; sourceTree = "<group>"; };
 		9630469F192345810023653E /* LightTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightTest.m; sourceTree = "<group>"; };
+		963046A21923544C0023653E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = DevInfoView.xib; sourceTree = "<group>"; };
+		963046A8192356430023653E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = DevInfoViewCell.xib; sourceTree = "<group>"; };
+		963046AB1923603F0023653E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = DevInfoView35.xib; sourceTree = "<group>"; };
 		9631D16319075691007CBC4B /* obj_door@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door@2x.png"; sourceTree = "<group>"; };
 		9631D16419075691007CBC4B /* obj_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_light@2x.png"; sourceTree = "<group>"; };
 		9631D16519075691007CBC4B /* obj_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_switch@2x.png"; sourceTree = "<group>"; };
@@ -995,6 +1001,9 @@
 			children = (
 				C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */,
 				C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */,
+				963046A11923544C0023653E /* DevInfoView.xib */,
+				963046AA1923603F0023653E /* DevInfoView35.xib */,
+				963046A7192356430023653E /* DevInfoViewCell.xib */,
 			);
 			name = storyboard;
 			path = Base.lproj;
@@ -1331,6 +1340,7 @@
 				962DDE01191612F1008F370A /* obj_window_close.png in Resources */,
 				96E9D95B1900FD01000BB595 /* qrcode_btn_nor.png in Resources */,
 				969D6E6C191881B7002076A0 /* login_btn_normal@2x.png in Resources */,
+				963046A9192356430023653E /* DevInfoViewCell.xib in Resources */,
 				967BD79F1908F9DA007C3C8C /* device_edit_sel@2x.png in Resources */,
 				9631D16C19075691007CBC4B /* obj_light@2x.png in Resources */,
 				9631D16E19075691007CBC4B /* obj_window@2x.png in Resources */,
@@ -1395,7 +1405,9 @@
 				967BD7911908B5CB007C3C8C /* device_add_sel.png in Resources */,
 				969D6E7C191882CE002076A0 /* tab_bar_devM_nor@2x.png in Resources */,
 				960BDD501907989300787148 /* obj_door_close@2x.png in Resources */,
+				963046A31923544C0023653E /* DevInfoView.xib in Resources */,
 				967BD7901908B5CB007C3C8C /* device_add_nor.png in Resources */,
+				963046AE1923603F0023653E /* DevInfoView35.xib in Resources */,
 				C38AC1F518EBC8E3002F20C1 /* zbar-helpicons.png in Resources */,
 				9631D16D19075691007CBC4B /* obj_switch@2x.png in Resources */,
 				969D6E7E191882CE002076A0 /* tab_bar_selected@2x.png in Resources */,
@@ -1520,6 +1532,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		963046A11923544C0023653E /* DevInfoView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				963046A21923544C0023653E /* Base */,
+			);
+			name = DevInfoView.xib;
+			sourceTree = "<group>";
+		};
+		963046A7192356430023653E /* DevInfoViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				963046A8192356430023653E /* Base */,
+			);
+			name = DevInfoViewCell.xib;
+			sourceTree = "<group>";
+		};
+		963046AA1923603F0023653E /* DevInfoView35.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				963046AB1923603F0023653E /* Base */,
+			);
+			name = DevInfoView35.xib;
+			sourceTree = "<group>";
+		};
 		96E4480C191C6E13008A424B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

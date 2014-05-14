@@ -114,7 +114,7 @@
         {   // iPhone 3GS, 4, and 4S and iPod Touch 3rd and 4th generation: 3.5 inch screen (diagonally measured)
             
             // Instantiate a new storyboard object using the storyboard file named Storyboard_iPhone35
-            UIStoryboard *iPhone35Storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone35" bundle:nil];
+            UIStoryboard *iPhone35Storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
             
             // Instantiate the initial view controller object from the storyboard
             UIViewController *initialViewController = [iPhone35Storyboard instantiateInitialViewController];
