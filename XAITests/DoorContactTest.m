@@ -7,11 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 
 #import "XAIDevDoorContact.h"
 
-@interface DoorContactTest : LoginTest <XAIDevDoorContactDelegate,XAIDeviceStatusDelegate>{
+@interface DoorContactTest : LoginPlugin <XAIDevDoorContactDelegate,XAIDeviceStatusDelegate>{
 
     XAIDevDoorContact* _ddc;
 
@@ -54,7 +54,7 @@
 
 - (void)testGetDeviceStatus
 {
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -89,7 +89,7 @@
 - (void)testGetStatus
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -121,7 +121,7 @@
 
 - (void) testGetPoser{
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

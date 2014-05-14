@@ -11,6 +11,8 @@
 
 _xai_packet*   generatePacketFromParamStatus(_xai_packet_param_status* status_param){
     
+       if (status_param == NULL) return NULL;
+    
     _xai_packet* nor_packet = generatePacketFromParamNormal(status_param->normal_param);
     
     
@@ -58,10 +60,20 @@ _xai_packet*   generatePacketFromParamStatus(_xai_packet_param_status* status_pa
         _xai_packet*  data_packet = generatePacketFromParamDataList(status_param->data,
                                                                     status_param->data_count);
         
+        
+        if (data_packet == NULL) {
+            
+            free(payload);
+            purgePacket(nor_packet);
+            purgePacket(status_packet);
+            
+            return NULL;
+        }
+        
         memcpy(status_packet->data_load, data_packet->all_load, data_packet->size);
         
         
-        param_to_packet_helper(status_packet, data_packet->all_load
+        param_to_packet_helper(payload, data_packet->all_load
                                , _XPPS_S_FIXED_ALL, _XPPS_S_FIXED_ALL+data_packet->size);
         
         pos +=  data_packet->size;
@@ -88,6 +100,7 @@ _xai_packet*   generatePacketFromParamStatus(_xai_packet_param_status* status_pa
 
 _xai_packet_param_status*   generateParamStatusFromPacket(const _xai_packet*  packet){
     
+    if (packet == NULL) return NULL;
     return generateParamStatusFromData(packet->all_load, packet->size);
 }
 

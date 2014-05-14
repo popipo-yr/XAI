@@ -11,6 +11,8 @@
 
 _xai_packet*   generatePacketFromParamACK(_xai_packet_param_ack* param){
     
+     if (param == NULL) return NULL;
+    
     _xai_packet* nor_packet = generatePacketFromParamNormal(param->normal_param);
     
     
@@ -51,6 +53,16 @@ _xai_packet*   generatePacketFromParamACK(_xai_packet_param_ack* param){
         
         _xai_packet*  data_packet = generatePacketFromParamDataList(param->data, param->data_count);
         
+        if (data_packet == NULL) {
+            
+            free(payload);
+            purgePacket(nor_packet);
+            purgePacket(packet);
+            
+            return NULL;
+        }
+
+        
         memcpy(packet->data_load, data_packet->all_load, data_packet->size);
         
         
@@ -82,6 +94,7 @@ _xai_packet*   generatePacketFromParamACK(_xai_packet_param_ack* param){
 }
 _xai_packet_param_ack*   generateParamACKFromPacket(const _xai_packet*  packet){
 
+    if (packet == NULL) return NULL;
     return generateParamACKFromData(packet->all_load, packet->size);
 
     

@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 #import "XAIDevice.h"
 
-@interface DeviceTest : LoginTest <XAIDeviceStatusDelegate>{
+@interface DeviceTest : LoginPlugin <XAIDeviceStatusDelegate>{
 
     int _getStatus;
     XAIDevice* _device;
@@ -56,7 +56,7 @@
 
 - (void)testGetStatus
 {
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

@@ -11,10 +11,10 @@
 #import "XAIDeviceService.h"
 
 
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 
 
-@interface DeviceServiceTest  : LoginTest <XAIDeviceServiceDelegate> {
+@interface DeviceServiceTest  : LoginPlugin <XAIDeviceServiceDelegate> {
     
     
     XAIDeviceService*  _devService;
@@ -113,10 +113,10 @@
 
 
 
-- (void)test1Add
+- (void)test_1_Add
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -150,10 +150,10 @@
 
 
 
-- (void)test2ChangeName
+- (void)test_2_ChangeName
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -195,9 +195,9 @@
     
 }
 
-- (void) test3FindAll{
+- (void) test_3_FindAll{
 
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -228,9 +228,9 @@
 
 }
 
-- (void) test4FindAllOnline{
+- (void) test_4_FindAllOnline{
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -265,10 +265,10 @@
 
 
 
-- (void)test5Del
+- (void)test_5_Del
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

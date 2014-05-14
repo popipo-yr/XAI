@@ -11,6 +11,7 @@
 		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
+		960B30F419230D0600763EFB /* LoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 960B30F319230D0600763EFB /* LoginTest.m */; };
 		960BDD501907989300787148 /* obj_door_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD481907989300787148 /* obj_door_close@2x.png */; };
 		960BDD511907989300787148 /* obj_door_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD491907989300787148 /* obj_door_open@2x.png */; };
 		960BDD521907989300787148 /* obj_light_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD4A1907989300787148 /* obj_light_close@2x.png */; };
@@ -25,7 +26,7 @@
 		961F93E518F4288F002D4F74 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939818F4288F002D4F74 /* libcrypto.a */; };
 		961F93E618F4288F002D4F74 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961F939918F4288F002D4F74 /* libssl.a */; };
 		961F95C318F4E432002D4F74 /* ca.crt in Resources */ = {isa = PBXBuildFile; fileRef = 961F95C218F4E432002D4F74 /* ca.crt */; };
-		961F95C518F4F7D3002D4F74 /* LoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C418F4F7D3002D4F74 /* LoginTest.m */; };
+		961F95C518F4F7D3002D4F74 /* LoginPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C418F4F7D3002D4F74 /* LoginPlugin.m */; };
 		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
 		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
@@ -36,6 +37,8 @@
 		962DDE0A19161493008F370A /* XAIDoorStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962DDE0519161493008F370A /* XAIDoorStatusVC.m */; };
 		962DDE0B19161493008F370A /* XAILightStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962DDE0719161493008F370A /* XAILightStatusVC.m */; };
 		962DDE0C19161493008F370A /* XAIWindowStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962DDE0919161493008F370A /* XAIWindowStatusVC.m */; };
+		9630469E19230DCE0023653E /* PacketDTITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630469D19230DCE0023653E /* PacketDTITest.m */; };
+		963046A0192345810023653E /* LightTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630469F192345810023653E /* LightTest.m */; };
 		9631D16B19075691007CBC4B /* obj_door@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16319075691007CBC4B /* obj_door@2x.png */; };
 		9631D16C19075691007CBC4B /* obj_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16419075691007CBC4B /* obj_light@2x.png */; };
 		9631D16D19075691007CBC4B /* obj_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16519075691007CBC4B /* obj_switch@2x.png */; };
@@ -44,6 +47,8 @@
 		9631D17019075691007CBC4B /* obj_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16819075691007CBC4B /* obj_light.png */; };
 		9631D17119075691007CBC4B /* obj_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16919075691007CBC4B /* obj_switch.png */; };
 		9631D17219075691007CBC4B /* obj_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16A19075691007CBC4B /* obj_window.png */; };
+		96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D99192303B700676F10 /* PacketStatusTest.m */; };
+		96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D9B192308EC00676F10 /* PacketACKTest.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
 		9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */; };
@@ -114,6 +119,7 @@
 		969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED71919EB5F002076A0 /* nav_back@2x.png */; };
 		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
 		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
+		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -193,6 +199,7 @@
 		1AF7605118F257C600520EAD /* MQTTPacketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTPacketManager.m; sourceTree = "<group>"; };
 		96081AAD190E460900E281F9 /* XAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIData.h; sourceTree = "<group>"; };
 		96081AAE190E460900E281F9 /* XAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIData.m; sourceTree = "<group>"; };
+		960B30F319230D0600763EFB /* LoginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTest.m; sourceTree = "<group>"; };
 		960BDD481907989300787148 /* obj_door_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door_close@2x.png"; sourceTree = "<group>"; };
 		960BDD491907989300787148 /* obj_door_open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door_open@2x.png"; sourceTree = "<group>"; };
 		960BDD4A1907989300787148 /* obj_light_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_light_close@2x.png"; sourceTree = "<group>"; };
@@ -202,7 +209,7 @@
 		960BDD4E1907989300787148 /* obj_light_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light_close.png; sourceTree = "<group>"; };
 		960BDD4F1907989300787148 /* obj_light_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light_open.png; sourceTree = "<group>"; };
 		9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
-		9614F94218FCEBB400CDF4A1 /* LoginTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginTest.h; sourceTree = "<group>"; };
+		9614F94218FCEBB400CDF4A1 /* LoginPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPlugin.h; sourceTree = "<group>"; };
 		9616802D19206324000682A4 /* DoorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorTest.m; sourceTree = "<group>"; };
 		9616802F19206979000682A4 /* XAITimeOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITimeOut.h; sourceTree = "<group>"; };
 		9616803019206979000682A4 /* XAITimeOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITimeOut.m; sourceTree = "<group>"; };
@@ -284,7 +291,7 @@
 		961F95C018F4E12D002D4F74 /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		961F95C118F4E12D002D4F74 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		961F95C218F4E432002D4F74 /* ca.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ca.crt; sourceTree = "<group>"; };
-		961F95C418F4F7D3002D4F74 /* LoginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTest.m; sourceTree = "<group>"; };
+		961F95C418F4F7D3002D4F74 /* LoginPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPlugin.m; sourceTree = "<group>"; };
 		961F95CB18F688E0002D4F74 /* MQTTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCover.h; sourceTree = "<group>"; };
 		961F95CC18F688E0002D4F74 /* MQTTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTCover.m; sourceTree = "<group>"; };
 		961F95CE18F780AE002D4F74 /* XAIUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserService.h; sourceTree = "<group>"; };
@@ -301,6 +308,8 @@
 		962DDE0719161493008F370A /* XAILightStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightStatusVC.m; sourceTree = "<group>"; };
 		962DDE0819161493008F370A /* XAIWindowStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIWindowStatusVC.h; sourceTree = "<group>"; };
 		962DDE0919161493008F370A /* XAIWindowStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIWindowStatusVC.m; sourceTree = "<group>"; };
+		9630469D19230DCE0023653E /* PacketDTITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketDTITest.m; sourceTree = "<group>"; };
+		9630469F192345810023653E /* LightTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightTest.m; sourceTree = "<group>"; };
 		9631D16319075691007CBC4B /* obj_door@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_door@2x.png"; sourceTree = "<group>"; };
 		9631D16419075691007CBC4B /* obj_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_light@2x.png"; sourceTree = "<group>"; };
 		9631D16519075691007CBC4B /* obj_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_switch@2x.png"; sourceTree = "<group>"; };
@@ -309,6 +318,8 @@
 		9631D16819075691007CBC4B /* obj_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_light.png; sourceTree = "<group>"; };
 		9631D16919075691007CBC4B /* obj_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_switch.png; sourceTree = "<group>"; };
 		9631D16A19075691007CBC4B /* obj_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window.png; sourceTree = "<group>"; };
+		96334D99192303B700676F10 /* PacketStatusTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketStatusTest.m; sourceTree = "<group>"; };
+		96334D9B192308EC00676F10 /* PacketACKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketACKTest.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
 		9648E6DF190A05A900D630D8 /* user_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_head.png; sourceTree = "<group>"; };
 		9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserAddVC.h; sourceTree = "<group>"; };
@@ -409,6 +420,7 @@
 		969D6ED81919EB5F002076A0 /* nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_back.png; sourceTree = "<group>"; };
 		969D6EDB1919F4A3002076A0 /* UIKitADD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitADD.h; sourceTree = "<group>"; };
 		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
+		96B6D34119220BA000367424 /* PacketCtrlTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketCtrlTest.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -1099,17 +1111,23 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				9630469F192345810023653E /* LightTest.m */,
+				960B30F319230D0600763EFB /* LoginTest.m */,
+				9616802D19206324000682A4 /* DoorTest.m */,
+				96334D9B192308EC00676F10 /* PacketACKTest.m */,
+				96B6D34119220BA000367424 /* PacketCtrlTest.m */,
+				9630469D19230DCE0023653E /* PacketDTITest.m */,
+				96334D99192303B700676F10 /* PacketStatusTest.m */,
 				968120BF18FF98610016DDB7 /* InfraredTest.m */,
 				968120BD18FF98210016DDB7 /* DoorContactTest.m */,
 				968120B518FF6B920016DDB7 /* SwitchTest.m */,
 				96D8290B18FE55F4008C6B81 /* DeviceTest.m */,
 				96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */,
 				9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */,
-				9614F94218FCEBB400CDF4A1 /* LoginTest.h */,
-				961F95C418F4F7D3002D4F74 /* LoginTest.m */,
+				9614F94218FCEBB400CDF4A1 /* LoginPlugin.h */,
+				961F95C418F4F7D3002D4F74 /* LoginPlugin.m */,
 				C387F37F18EA757B0069F98B /* XAITests.m */,
 				C387F37A18EA757B0069F98B /* Supporting Files */,
-				9616802D19206324000682A4 /* DoorTest.m */,
 			);
 			path = XAITests;
 			sourceTree = "<group>";
@@ -1475,11 +1493,17 @@
 			files = (
 				96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */,
 				9616802E19206324000682A4 /* DoorTest.m in Sources */,
+				96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */,
 				9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */,
+				960B30F419230D0600763EFB /* LoginTest.m in Sources */,
+				96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */,
+				963046A0192345810023653E /* LightTest.m in Sources */,
 				968120BE18FF98210016DDB7 /* DoorContactTest.m in Sources */,
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,
 				968120C018FF98610016DDB7 /* InfraredTest.m in Sources */,
-				961F95C518F4F7D3002D4F74 /* LoginTest.m in Sources */,
+				961F95C518F4F7D3002D4F74 /* LoginPlugin.m in Sources */,
+				96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */,
+				9630469E19230DCE0023653E /* PacketDTITest.m in Sources */,
 				96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */,
 				968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */,
 			);

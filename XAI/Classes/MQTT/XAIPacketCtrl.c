@@ -14,6 +14,8 @@
 
 _xai_packet*   generatePacketFromParamCtrl(_xai_packet_param_ctrl* ctrl_param){
     
+    if (ctrl_param == NULL) return NULL;
+    
     _xai_packet* nor_packet = generatePacketFromParamNormal(ctrl_param->normal_param);
     
     
@@ -54,6 +56,15 @@ _xai_packet*   generatePacketFromParamCtrl(_xai_packet_param_ctrl* ctrl_param){
         
         _xai_packet*  data_packet = generatePacketFromParamDataList(ctrl_param->data, ctrl_param->data_count);
         
+        if (data_packet == NULL) {
+            
+            free(payload);
+            purgePacket(nor_packet);
+            purgePacket(ctrl_packet);
+            
+            return NULL;
+        }
+        
         memcpy(ctrl_packet->data_load, data_packet->all_load, data_packet->size);
         
         
@@ -84,6 +95,7 @@ _xai_packet*   generatePacketFromParamCtrl(_xai_packet_param_ctrl* ctrl_param){
 }
 _xai_packet_param_ctrl*   generateParamCtrlFromPacket(const _xai_packet*  packet){
     
+    if (packet == NULL) return NULL;
     return generateParamCtrlFromData(packet->all_load, packet->size);
 }
 

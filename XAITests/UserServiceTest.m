@@ -10,11 +10,11 @@
 #import "XAIUserService.h"
 
 
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 
 XAITYPELUID  ____luid;
 
-@interface UserServiceTest  : LoginTest <XAIUserServiceDelegate> {//XCTestCase <XAIUserServiceDelegate> {
+@interface UserServiceTest  : LoginPlugin <XAIUserServiceDelegate> {//XCTestCase <XAIUserServiceDelegate> {
 
 
     XAIUserService*  _userService;
@@ -95,7 +95,7 @@ XAITYPELUID  ____luid;
 
 - (void)testGetDeviceStatus
 {
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -130,7 +130,7 @@ XAITYPELUID  ____luid;
 - (void)testAdd
 {
 
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -187,7 +187,7 @@ XAITYPELUID  ____luid;
 - (void)testFind
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -222,7 +222,7 @@ XAITYPELUID  ____luid;
 - (void)testFindALL
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -350,7 +350,7 @@ XAITYPELUID  ____luid;
 - (void)testDel
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

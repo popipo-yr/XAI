@@ -225,9 +225,10 @@ _xai_packet* generatePacketFromParamDataList(_xai_packet_param_data* ctrl_param_
         if (NULL ==  ctrl_data) {
             
             free(data_load);
+            purgePacket(packet);
             
             printf("CTRL  DATA NULL");
-            abort();
+            //abort();
             return NULL;
         }
         

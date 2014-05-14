@@ -18,7 +18,7 @@
 #define start  0
 
 
-@interface LoginTest : XCTestCase <XAILoginDelegate>{
+@interface LoginPlugin : XCTestCase <XAILoginDelegate>{
     
     NSConditionLock* _lock;
     int  _loginStatus;
@@ -26,7 +26,7 @@
     
 }
 
-- (void) testLogin;
+- (void) login;
 //- (void)loginFinishWithStatus:(BOOL)status;
 - (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd;
 

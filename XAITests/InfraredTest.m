@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 
 #import "XAIDevInfrared.h"
 
-@interface InfraredTest : LoginTest <XAIDeviceStatusDelegate,XAIDevInfraredDelegate>{
+@interface InfraredTest : LoginPlugin <XAIDeviceStatusDelegate,XAIDevInfraredDelegate>{
 
     XAIDevInfrared * _din;
     
@@ -50,7 +50,7 @@
 
 - (void)testGetDeviceStatus
 {
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -85,7 +85,7 @@
 - (void)testGetStatus
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -117,7 +117,7 @@
 
 - (void) testGetPoser{
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

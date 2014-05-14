@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "LoginTest.h"
+#import "LoginPlugin.h"
 #import "XAIDevSwitch.h"
 
-@interface SwitchTest : LoginTest <XAIDevSwitchDelegate,XAIDeviceStatusDelegate>{
+@interface SwitchTest : LoginPlugin <XAIDevSwitchDelegate,XAIDeviceStatusDelegate>{
 
     
     XAIDevSwitch* _devSwitch;
@@ -77,7 +77,7 @@
 
 - (void)testGetDeviceStatus
 {
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -112,7 +112,7 @@
 - (void)testGetCircuitOneStatus
 {
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -144,7 +144,7 @@
 
 - (void) testGetCircuitTwoStatus{
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -179,7 +179,7 @@
 - (void) testsetCircuitOneStatus{
     
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         
@@ -231,7 +231,7 @@
 
 - (void) testsetCircuitTwoStatus{
     
-    [self testLogin];
+    [self login];
     
     if (_loginStatus == Success) {
         

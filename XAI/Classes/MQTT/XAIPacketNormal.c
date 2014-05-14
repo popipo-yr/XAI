@@ -102,6 +102,11 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
         return NULL;
     }
     
+    if (packetData == NULL) {
+        printf("XAI - Normal packet is null");
+        return NULL;
+    }
+    
     
     _xai_packet_param_normal* aParam = generatePacketParamNormal();
     
@@ -132,7 +137,7 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
         purgePacketParamNormal(aParam);
         
         printf("XAI -  NORMAL PACKET UNFIXED DATA SIZE ENOUGH");
-        //return NULL;
+        return NULL;
     }
     
     //unfixed

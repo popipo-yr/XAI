@@ -13,6 +13,8 @@
 
 _xai_packet*   generatePacketFromParamDTI(_xai_packet_param_dti* dti_param){
     
+      if (dti_param == NULL) return NULL;
+    
     _xai_packet* nor_packet = generatePacketFromParamNormal(dti_param->normal_param);
     
     
@@ -56,6 +58,7 @@ _xai_packet*   generatePacketFromParamDTI(_xai_packet_param_dti* dti_param){
 }
 _xai_packet_param_dti*   generateParamDTIFromPacket(const _xai_packet*  packet){
     
+    if (packet == NULL) return NULL;
     return generateParamDTIFromData(packet->all_load, packet->size);
 }
 
