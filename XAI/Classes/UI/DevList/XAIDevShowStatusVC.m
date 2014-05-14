@@ -52,6 +52,7 @@
 
 - (void) viewWillAppear:(BOOL)animated{
 
+    [super viewWillAppear:animated];
 
     _recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                             action:@selector(handleSwipeLeft:)];
@@ -71,7 +72,10 @@
     
     [self setExtraCellLineHidden:_oprTableView];
     
-    [super viewWillAppear:animated];
+    
+    ViewMoveUpWhenIs35(self.statusView, 50);
+    
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated{

@@ -335,7 +335,7 @@
         <scene sceneID="XUs-4c-B7G">
             <objects>
                 <viewController storyboardIdentifier="XAILightStatusVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vuV-w2-93q" userLabel="XAILightStatusVC" customClass="XAILightStatusVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="V9b-Fy-9Qp">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="V9b-Fy-9Qp">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -790,7 +790,7 @@
         <scene sceneID="lVz-aP-Se5">
             <objects>
                 <viewController storyboardIdentifier="XAIDoorStatusVCID" id="InB-zr-4fm" userLabel="XAIDoorStatusVC" customClass="XAIDoorStatusVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kmn-h8-uBg">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="kmn-h8-uBg">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -814,7 +814,7 @@
         <scene sceneID="xkJ-DG-edZ">
             <objects>
                 <viewController storyboardIdentifier="XAIWindowStatusVCID" id="5TM-1k-jGh" userLabel="XAIWindowStatusVC" customClass="XAIWindowStatusVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Mre-ik-nAj">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="Mre-ik-nAj">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

@@ -17,6 +17,13 @@ if ([UIScreen  is_35_Size]) { \
 name = [NSString stringWithFormat:@"%@35",newString]; \
 }
 
+#define ViewMoveUpWhenIs35(obj,len) \
+if ([UIScreen is_35_Size]) { \
+CGPoint center = obj.center; \
+center.y -= len; \
+[obj setCenter:center]; \
+}
+
 
 @interface UIImage (ADD)
 

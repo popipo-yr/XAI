@@ -45,6 +45,7 @@
     [_light startControl];
     [_light getCurStatus];
     
+    ViewMoveUpWhenIs35(self.switchUI, 70.0f);
 }
 
 
