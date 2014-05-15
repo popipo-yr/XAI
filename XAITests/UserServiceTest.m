@@ -82,17 +82,6 @@ XAITYPELUID  ____luid;
     [super tearDown];
 }
 
-//static inline void runInMainLoop(void(^block)(BOOL *done)) {
-//    __block BOOL done = NO;
-//    
-//    while (!done) {
-//        
-//        block(&done);
-//        [[NSRunLoop mainRunLoop] runUntilDate:
-//         [NSDate dateWithTimeIntervalSinceNow:.1]];
-//    }
-//}
-
 - (void)testGetDeviceStatus
 {
     [self login];

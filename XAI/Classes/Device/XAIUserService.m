@@ -40,11 +40,13 @@
     xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn, username_data);
     
     
+     NSData* data = [username dataUsingEncoding:NSUTF8StringEncoding];
      xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
-                             [username length], (void*)[username UTF8String],password_data);
+                             [data length], (void*)[username UTF8String],password_data);
     
+     NSData* paswddata = [password dataUsingEncoding:NSUTF8StringEncoding];
      xai_param_data_set(password_data, XAI_DATA_TYPE_ASCII_TEXT,
-                             [password length], (void*)[password UTF8String],NULL);
+                             [paswddata length], (void*)[password UTF8String],NULL);
     
     
      xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, XAI_PKT_TYPE_CONTROL, 0, 0,
@@ -126,8 +128,9 @@
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                             sizeof(XAITYPELUID), &uluid, username_data);
     
+     NSData* data = [newUsername dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
-                            [newUsername length], (void*)[newUsername UTF8String],NULL);
+                            [data length], (void*)[newUsername UTF8String],NULL);
     
     
     xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, 0,
@@ -168,11 +171,13 @@
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                             sizeof(XAITYPELUID), &uluid, oldPassword_data);
 
+     NSData* oldpdata = [oldPassword dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(oldPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
-                            [oldPassword length], (void*)[oldPassword UTF8String],newPassword_data);
+                            [oldpdata length], (void*)[oldPassword UTF8String],newPassword_data);
     
+     NSData* newpdata = [newPassword dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(newPassword_data, XAI_DATA_TYPE_ASCII_TEXT,
-                            [newPassword length], (void*)[newPassword UTF8String],NULL);
+                            [newpdata length], (void*)[newPassword UTF8String],NULL);
 
     
     

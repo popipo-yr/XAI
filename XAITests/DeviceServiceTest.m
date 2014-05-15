@@ -7,6 +7,8 @@
 //
 
 
+#import <XCTest/XCTestObserver.h>
+
 #import <XCTest/XCTest.h>
 #import "XAIDeviceService.h"
 
@@ -34,6 +36,11 @@
     
     
     XAITYPELUID  _luidDev;
+    
+    XAITYPELUID _luidNotExist;
+    
+    
+    XAI_ERROR _err;
     
 }
 
@@ -81,6 +88,7 @@
     _luidDev = 0x00124B000413CDCF;  //26
     
     
+    _luidNotExist = 0x89375;
     
     _name4Change = [NSString stringWithFormat:@"%@%llX",@"NAME1",_luidDev];
     _name4Change_end = @"NAME2";
@@ -113,10 +121,12 @@
 
 
 
-- (void)test_1_Add
+- (void)test_1_1_Add_TRUE
 {
     
     [self login];
+    
+    _addStatus = start;
     
     if (_loginStatus == Success) {
         
@@ -128,29 +138,185 @@
         
         runInMainLoop(^(BOOL * done) {
             
-            if (_addStatus > 0) {
+            if (_addStatus > start) {
                 
                 *done = YES;
             }
         });
         
         
-        XCTAssertTrue (_addStatus != 0, @"delegate did not get called");
-        XCTAssertTrue (_addStatus != 2, @"add faild");
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Fail, @"add faild");
+        
+         XCTAssert(_err == XAI_ERROR_NONE, @"yes. it add success");
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
     
+}
+
+
+- (void)test_1_2_Add_LUIDJOINED
+{
     
+    [self login];
+    
+    _addStatus = start;
+    
+    if (_loginStatus == Success) {
+        
+        
+        [_devService addDev:_luidDev  withName:_name4Change];
+        
+        
+        _addStatus = 0;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_addStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Success, @"add faild");
+        
+        XCTAssert(_err == XAI_ERROR_LUID_EXISTED, @"yes. it joned before");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+
+- (void)test_1_3_Add_NameExist
+{
+    
+    [self login];
+    
+    _addStatus = start;
+    
+    XAITYPELUID  new_luidDev = _luidDev + 1;  //26
+    
+    if (_loginStatus == Success) {
+        
+        
+        [_devService addDev:new_luidDev  withName:_name4Change];
+        
+        
+        _addStatus = 0;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_addStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Success, @"add faild");
+        
+        XCTAssert(_err == XAI_ERROR_NAME_EXISTED, @"yes. name is exist");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+- (void)test_1_4_Add_LUIDNotExist
+{
+    
+    [self login];
+    
+    _addStatus = start;
+    //26
+    
+    if (_loginStatus == Success) {
+        
+        
+        [_devService addDev:_luidNotExist  withName:_name4Change];
+        
+        
+        _addStatus = 0;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_addStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Success, @"add faild");
+        XCTAssert(_err == XAI_ERROR_LUID_INVALID, @"yes, it is not invalid dev");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+- (void)test_1_5_Add_NULL_NAME
+{
+    
+    [self login];
+    
+    _addStatus = start;
+    
+    
+    if (_loginStatus == Success) {
+        
+        
+        [_devService addDev:_luidDev  withName:NULL];
+        
+        
+        _addStatus = 0;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_addStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Success, @"add faild");
+        
+        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes, name is null");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
     
 }
 
 
 
 
-- (void)test_2_ChangeName
+
+
+
+- (void)test_2_1_ChangeName_TRUE
 {
     
     [self login];
@@ -177,6 +343,8 @@
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changeNameStatus != Fail, @"change name faild");
         
+        XCTAssert(_err == XAI_ERROR_NONE, @"yes.it be true");
+        
         
         if (_changeNameStatus == Success) {
             
@@ -194,6 +362,82 @@
     
     
 }
+
+
+- (void)test_2_2_ChangeName_LUIDNotExist
+{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        [_devService changeDev:_luidNotExist withName:_name4Change_end];
+        
+        
+        
+        
+        _changeNameStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_changeNameStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_changeNameStatus != Success, @"change name faild");
+        
+        XCTAssert(_err == XAI_ERROR_LUID_INVALID, @"yes.it's not a dev");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+
+- (void)test_2_3_ChangeName_NULL_NAME
+{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        [_devService changeDev:_luidDev withName:nil];
+        
+        _changeNameStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_changeNameStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_changeNameStatus != Success, @"change name faild");
+        
+        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes. this is a null name");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+
 
 - (void) test_3_FindAll{
 
@@ -265,10 +509,13 @@
 
 
 
-- (void)test_5_Del
+- (void)test_5_1_Del_TRUE
 {
     
     [self login];
+    
+    //_luidDev = _luidDev + 1;  //26
+
     
     if (_loginStatus == Success) {
         
@@ -291,6 +538,48 @@
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Fail, @"del user faild");
         
+        XCTAssert(_err == XAI_ERROR_NONE, @"YES . DELETE SUC");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+- (void)test_5_2_Del_LUIDNotJOINED
+{
+    
+    [self login];
+    
+    //_luidDev = _luidDev + 1;  //26
+    
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_devService delDev:_luidDev];
+        
+        
+        _delStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_delStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_delStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_delStatus != Success, @"del user faild");
+        
+        XCTAssert(_err == XAI_ERROR_DEVICE_NONE_EXISTED, @"YES . dev not joind");
+        
     }else{
         
         
@@ -302,8 +591,104 @@
 
 
 
+- (void)test_5_3_Del_LUIDNotExist
+{
+    
+    [self login];
+    
+    //_luidDev = _luidDev + 1;  //26
+    
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_devService delDev:_luidNotExist];
+        
+        
+        _delStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_delStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_delStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_delStatus != Success, @"del user faild");
+        
+        XCTAssert(_err == XAI_ERROR_LUID_INVALID, @"YES . LUID exist");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+
+
+- (void) removeDev:(XAITYPELUID)luid{
+    
+    [self login];
+    
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_devService delDev:luid];
+        
+        
+        _delStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_delStatus > start) {
+                
+                *done = YES;
+            }
+        });
+    }
+
+}
+
+- (void) firstRemove{
+    
+    [self removeDev:_luidDev];
+    [self removeDev:_luidDev+1];
+
+}
+
+-(void)testALL{
+    
+    [self firstRemove];
+
+    [self test_1_1_Add_TRUE];
+    [self test_1_2_Add_LUIDJOINED];
+    [self test_1_3_Add_NameExist];
+    [self test_1_4_Add_LUIDNotExist];
+    [self test_1_5_Add_NULL_NAME];
+    [self test_2_1_ChangeName_TRUE];
+    [self test_2_2_ChangeName_LUIDNotExist];
+    [self test_2_3_ChangeName_NULL_NAME];
+    [self test_3_FindAll];
+    [self test_4_FindAllOnline];
+    [self test_5_1_Del_TRUE];
+    [self test_5_2_Del_LUIDNotJOINED];
+    [self test_5_3_Del_LUIDNotExist];
+    
+}
+
 
 - (void) devService:(XAIDeviceService*)devService addDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (_addStatus != start) return;
     
     if (isSuccess == TRUE) {
         
@@ -313,8 +698,12 @@
         _addStatus = 2;
     }
     
+    _err = errcode;
+    
 }
 - (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (_delStatus != start) return;
     
     if (isSuccess == TRUE) {
         
@@ -325,8 +714,13 @@
     }
     
     
+    _err = errcode;
+    
+    
 }
 - (void) devService:(XAIDeviceService*)devService changeDevName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    if (_changeNameStatus != start) return;
     
     if (isSuccess == TRUE) {
         
@@ -336,12 +730,15 @@
         _changeNameStatus = Fail;
     }
     
+    _err = errcode;
+    
     
 }
 
 - (void) devService:(XAIDeviceService*)devService findedAllDevice:(NSArray*) devAry
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    if (_findStatus != start) return;
     
     if (isSuccess == TRUE) {
         
@@ -351,14 +748,18 @@
         _findStatus = Fail;
     }
 
+    _err = errcode;
 
 }
 
 - (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) luidAry
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    if (_findOnlineStatus != start) return;
 
         _findOnlineStatus = Success;
+    
+    _err = errcode;
 
 
 }

@@ -19,3 +19,7 @@
 #endif
 
 #define WITH_TLS
+
+#ifndef PRINTLOG
+#define PRINTLOG
+#endif

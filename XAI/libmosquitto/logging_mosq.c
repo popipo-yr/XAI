@@ -37,6 +37,9 @@
 
 int _mosquitto_log_printf(struct mosquitto *mosq, int priority, const char *fmt, ...)
 {
+#ifdef PRINTLOG
+    return MOSQ_ERR_SUCCESS;
+#endif
 	va_list va;
 	char *s;
 	int len;

@@ -47,7 +47,9 @@
     if (!isIOS7) {
     
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
-        self.window.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        self.window.backgroundColor = [UIColor colorWithRed:1 green:-1.0 blue:-1.0 alpha:1.0];
+        // self.window.backgroundColor = [UIColor whiteColor];
+        
         
     }
     

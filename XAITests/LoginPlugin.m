@@ -29,6 +29,7 @@
     
     [super setUp];
     [MQTT shareMQTT].apsn = 1;
+    _loginStatus = 0;
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -123,6 +124,11 @@
 
 - (void)login
 {
+    if (_loginStatus != 0) {
+        
+        return;
+    }
+    
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;
     [login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];

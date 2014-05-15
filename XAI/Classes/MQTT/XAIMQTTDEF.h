@@ -86,9 +86,9 @@ typedef enum  XAI_ERROR{
     //2、修改用户名字时，LUID不存在
     //3、删除用户时，LUDI不存在"
     
-    XAI_ERROR__PWD_INCORRECT = 10,	//1、修改用户密码时，密码为空
+    XAI_ERROR_PWD_INCORRECT = 10,	//1、修改用户密码时，密码为空
 
-    XAI_ERROR___DEVICE_NONE_EXISTED =11,//	"1、删除设备时，LUID不存在
+    XAI_ERROR_DEVICE_NONE_EXISTED =11,//	"1、删除设备时，LUID不存在
     XAI_ERROR_DEVICE_OFFLINE = 12	, //设备离线	主要用于桥接模块检测设备是否在线
     
     //2、修改设备名字时，LUID不存在"

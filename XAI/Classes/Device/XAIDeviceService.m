@@ -41,8 +41,9 @@
     
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &dluid,name_data);
     
+    NSData* data = [devName dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       [devName length], (void*)[devName UTF8String],NULL);
+                       [data length], (void*)[devName UTF8String],NULL);
    
     
     
@@ -122,8 +123,9 @@
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                        sizeof(XAITYPELUID), &dluid, name_data);
     
+     NSData* data = [newName dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       [newName length], (void*)[newName UTF8String],NULL);
+                       [data length], (void*)[newName UTF8String],NULL);
     
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
