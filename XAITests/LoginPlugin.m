@@ -8,6 +8,12 @@
 
 #import <XCTest/XCTest.h>
 #import "LoginPlugin.h"
+
+#define _init  (-1)
+#define _start 0
+#define _suc   1
+#define _fail  2
+
 //#import "XAILogin.h"
 //
 //@interface LoginTest : XCTestCase <XAILoginDelegate>{
@@ -29,7 +35,8 @@
     
     [super setUp];
     [MQTT shareMQTT].apsn = 1;
-    _loginStatus = 0;
+    _loginStatus = _init;
+    _loginStatus_normal = _init;
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -42,102 +49,84 @@
 
 - (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
 
-    if (status == TRUE) {
+    if (_loginStatus == _start) {
         
-        _loginStatus = 1;
-    }else{
-    
-        _loginStatus = 2;
+        if (status == TRUE) {
+            
+            _loginStatus = _suc;
+        }else{
+            
+            _loginStatus = _fail;
+        }
     }
+    
+    
+    if (_loginStatus_normal == _start) {
+        
+        if (status == TRUE) {
+            
+            _loginStatus_normal = _suc;
+        }else{
+            
+            _loginStatus_normal = _fail;
+        }
+    }
+    
+
     
     [_lock unlockWithCondition:1];
 }
 
-//- (void)testExample2
-//{
-//    XAILogin*  login = [[XAILogin alloc] init];
-//    login.delegate = self;
-//    
-//    
-//    
-//    // create the semaphore and lock it once before we start
-//    // the async operation
-//    NSConditionLock *tl = [NSConditionLock new];
-//    _lock = tl;
-//    
-//    // start the async operation
-//    _loginStatus = 0;
-//    [login loginWithName:@"admin@00000001" Password:@"admin" Host:@"192.168.1.1"];
-//    
-//    // now lock the semaphore - which will block this thread until
-//    // [self.theLock unlockWithCondition:1] gets invoked
-//    [_lock lockWhenCondition:1];
-//    
-//    // make sure the async callback did in fact happen by
-//    // checking whether it modified a variable
-//    XCTAssertTrue (_loginStatus != 1, @"delegate did not get called");
-//    
-//    // we're done
-//   
-//    _lock = nil;
-//    
-//    //sleep(1000*1000*600);
-//    
-//    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-//}
-
-
-
-
-
 
 - (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd
 {
+    if (_loginStatus_normal == _suc) {
+        
+        return;
+    }
+    
+    _loginStatus = _init;
+    
+    
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;
     [login loginWithName:name Password:pwd Host:@"192.168.1.1" apsn:0x1];
     
-    _loginStatus = 0;
+    _loginStatus_normal = _start;
     
     runInMainLoop(^(BOOL * done) {
         
-        if (_loginStatus > 0) {
+        if (_loginStatus_normal > _start) {
             
             *done = YES;
         }
     });
     
-    
-    // make sure the async callback did in fact happen by
-    // checking whether it modified a variable
-    XCTAssertTrue (_loginStatus != 0, @"delegate did not get called");
-    XCTAssertTrue (_loginStatus != 2, @"login faild");
-    
-    
-    
-    //sleep(1000*1000*600);
-    
-    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+
 }
 
 
 
 - (void)login
 {
-    if (_loginStatus != 0) {
+    if (_loginStatus == _suc) {
         
         return;
     }
+    
+    _loginStatus_normal = _init;
+    
+    //[[MQTT shareMQTT].client disconnect];
     
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;
     [login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
     
-    _loginStatus = 0;
+    _loginStatus = _start;
 
     runInMainLoop(^(BOOL * done) {
         
-            if (_loginStatus > 0) {
+            if (_loginStatus > _start) {
                 
                 *done = YES;
             }

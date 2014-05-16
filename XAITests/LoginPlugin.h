@@ -24,6 +24,8 @@
     int  _loginStatus;
     BOOL _done;
     
+    int  _loginStatus_normal;
+    
 }
 
 - (void) login;
