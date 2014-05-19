@@ -78,7 +78,7 @@
 }
 
 
-- (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd
+- (void)loginWithName:(NSString*)name PWD:(NSString*)pwd
 {
     if (_loginStatus_normal == _suc) {
         

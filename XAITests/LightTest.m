@@ -13,10 +13,12 @@
 
     XAILight*  _light;
     
-    int _status;
+    int _l_status;
     
-    int _open;
-    int _close;
+    int _l_open;
+    int _l_close;
+    
+    XAITYPELUID _err_luid;
 }
 
 @end
@@ -31,6 +33,8 @@
     _light.delegate = self;
     _light.apsn = 0x1;
     _light.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
+    
+    _err_luid = 0x001489848478349d;
     
     
     [_light startControl];
@@ -54,19 +58,19 @@
         [_light getCurStatus];
         
         
-        _status = start;
+        _l_status = start;
         
         runInMainLoop(^(BOOL * done) {
             
-            if (_status > start) {
+            if (_l_status > start) {
                 
                 *done = YES;
             }
         });
         
         
-        XCTAssertTrue(_status != start, @"delegate did not get called");
-        XCTAssertTrue(_status != Fail, @"get switch one status faild");
+        XCTAssertTrue(_l_status != start, @"delegate did not get called");
+        XCTAssertTrue(_l_status != Fail, @"no, Get light status should be suc.");
     }else{
         
         
@@ -82,24 +86,22 @@
     
     if (_loginStatus == Success) {
         
-        
-        
         [_light openLight];
         
         
-        _open = start;
+        _l_open = start;
         
         runInMainLoop(^(BOOL * done) {
             
-            if (_open > start) {
+            if (_l_open > start) {
                 
                 *done = YES;
             }
         });
         
         
-        XCTAssertTrue (_open != start, @"delegate did not get called");
-        XCTAssertTrue (_open != Fail, @"set switch one open status faild");
+        XCTAssertTrue (_l_open != start, @"delegate did not get called");
+        XCTAssertTrue (_l_open != Fail, @"no, open light shoule be suc.");
         
         
     }else{
@@ -118,24 +120,22 @@
     
     if (_loginStatus == Success) {
         
-        
-        
         [_light closeLight];
         
         
-        _close = start;
+        _l_close = start;
         
         runInMainLoop(^(BOOL * done) {
             
-            if (_close > start) {
+            if (_l_close > start) {
                 
                 *done = YES;
             }
         });
         
         
-        XCTAssertTrue (_close != start, @"delegate did not get called");
-        XCTAssertTrue (_close != Fail, @"set switch one open status faild");
+        XCTAssertTrue (_l_close != start, @"delegate did not get called");
+        XCTAssertTrue (_l_close != Fail, @"no, close light shoule be suc");
         
     }else{
         
@@ -146,38 +146,140 @@
 }
 
 
--(void)lightCurStatus:(XAILightStatus)status{
+- (void)testStatus_err
+{
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        _light.luid = _err_luid;
+        [_light getCurStatus];
+        
+        
+        _l_status = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_l_status > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue(_l_status != start, @"delegate did not get called");
+        XCTAssertTrue(_l_status != Success, @"no, Get light status should be fail with err luid");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+- (void) testOpen_err{
+    
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        _light.luid = _err_luid;
+        [_light openLight];
+        
+        
+        _l_open = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_l_open > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_l_open != start, @"delegate did not get called");
+        XCTAssertTrue (_l_open != Success, @"no, open light shoule be fail with err luid.");
+        
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+- (void) testClose_err{
+    
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        _light.luid = _err_luid;
+        [_light closeLight];
+        
+        
+        _l_close = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_l_close > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_l_close != start, @"delegate did not get called");
+        XCTAssertTrue (_l_close != Success, @"no, close light shoule be fail with err luid");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+
+-(void)light:(XAILight *)light curStatus:(XAILightStatus)status{
     
     if (status != XAILightStatus_Unkown) {
         
-        _status = Success;
+        _l_status = Success;
     }else{
         
-        _status = Fail;
+        _l_status = Fail;
     }
 
 }
 
--(void)lightCloseSuccess:(BOOL)isSuccess{
+-(void)light:(XAILight *)light closeSuccess:(BOOL)isSuccess{
     
     if (isSuccess) {
         
-        _close = Success;
+        _l_close = Success;
     }else{
         
-        _close = Fail;
+        _l_close = Fail;
     }
 
 }
 
--(void)lightOpenSuccess:(BOOL)isSuccess{
+-(void)light:(XAILight *)light openSuccess:(BOOL)isSuccess{
 
     if (isSuccess) {
         
-        _open = Success;
+        _l_open = Success;
     }else{
         
-        _open = Fail;
+        _l_open = Fail;
     }
 }
 

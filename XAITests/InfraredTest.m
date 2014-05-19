@@ -160,9 +160,9 @@
     
 }
 
-- (void)infrared:(XAIDevInfrared *)inf curPower:(float)power err:(XAIDevInfraredErr)err{
+- (void)infrared:(XAIDevInfrared *)inf curPower:(float)power err:(XAI_ERROR)err{
     
-    if (err == XAIDevInfraredErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         _getPower = Success;
         
@@ -173,9 +173,9 @@
     
 }
 
-- (void)infrared:(XAIDevInfrared *)inf curStatus:(XAIDevInfraredStatus)status err:(XAIDevInfraredErr)err{
+- (void)infrared:(XAIDevInfrared *)inf curStatus:(XAIDevInfraredStatus)status err:(XAI_ERROR)err{
     
-    if (err == XAIDevInfraredErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         _getStatus = Success;
         

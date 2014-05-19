@@ -28,19 +28,15 @@
     [super tearDown];
 }
 
-- (void)testDatasToParamFail
+- (void)testDatasToParamNULL
 {
-    NSString*  ABC = @"abccccccc";
+
     
-    void* bytes = alloca(1000);
-    
-    [ABC getCharacters:bytes range:NSMakeRange(0, [ABC length])];
-    
-    _xai_packet_param_ack* packer_ack = generateParamACKFromData(bytes, 1000);
+    _xai_packet_param_ack* packer_ack = generateParamACKFromData(NULL, 0);
     
     XCTAssertTrue(packer_ack == NULL, @"false");
     
-    packer_ack = generateParamACKFromData(bytes, 0);
+    packer_ack = generateParamACKFromData(NULL, 0);
     
     XCTAssertTrue(packer_ack == NULL, @"false");
     
@@ -54,7 +50,7 @@
 }
 
 
-- (void)testDatasToParamSuc
+- (void)testDatasToParamFail
 {
     NSString*  ABC = @"abccccccc";
     

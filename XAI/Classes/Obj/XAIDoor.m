@@ -44,13 +44,13 @@
 
 #pragma --Delegate
 
-- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAIDevDCErr)err{
+- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err{
 
     if (dc != _doorContact) return;
     
     XAIDoorStatus  doorStatus = XAIDoorStatus_Unkown;
     
-    if (err == XAIDevDCErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         if (status == XAIDevDoorContactStatusOpen) {
         
@@ -64,17 +64,17 @@
     
     if (_delegate != nil && [_delegate respondsToSelector:@selector(door:curStatus:getIsSuccess:)]) {
 
-        [_delegate  door:self curStatus:doorStatus getIsSuccess:err == XAIDevDCErr_NONE];
+        [_delegate  door:self curStatus:doorStatus getIsSuccess:err == XAI_ERROR_NONE];
     }
 }
 
--(void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAIDevDCErr)err{
+-(void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAI_ERROR)err{
 
     if (dc != _doorContact) return;
     
     if (_delegate != nil && [_delegate respondsToSelector:@selector(door:curPower:getIsSuccess:)]) {
         
-        [_delegate  door:self curPower:power getIsSuccess:err == XAIDevDCErr_NONE];
+        [_delegate  door:self curPower:power getIsSuccess:err == XAI_ERROR_NONE];
     }
 }
 

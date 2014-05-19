@@ -42,9 +42,9 @@ typedef enum XAILightStatus{
 
 @protocol XAILigthtDelegate <NSObject>
 
-- (void) lightOpenSuccess:(BOOL)isSuccess;
-- (void) lightCloseSuccess:(BOOL)isSuccess;
-- (void) lightCurStatus:(XAILightStatus) status;
+- (void) light:(XAILight*)light openSuccess:(BOOL)isSuccess;
+- (void) light:(XAILight*)light closeSuccess:(BOOL)isSuccess;
+- (void) light:(XAILight*)light curStatus:(XAILightStatus) status;
 @end
 
 

@@ -166,12 +166,12 @@
     if (ack == NULL) return;
     
     BOOL isSuccess = false;
-    XAIDevSwitchErr err = XAIDevSwitchErr_Unknow;
+    XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     if (ack->err_no == 0) {
         
         isSuccess = true;
-        err = XAIDevSwitchErr_NONE;
+        err = XAI_ERROR_NONE;
         
     }
     
@@ -180,9 +180,9 @@
         case Key_CircuitOneCtrlID:{
             
             
-            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitOneSetErr:)]) {
+            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(switch_:setCircuitOneErr:)]) {
                 
-                [_swiDelegate circuitOneSetErr:err];
+                [_swiDelegate switch_:self setCircuitOneErr:err];
             }
 
             
@@ -197,9 +197,9 @@
         case Key_CircuitTwoCtrlID:{
             
             
-            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(circuitTwoSetErr:)]) {
+            if ((nil != _swiDelegate) && [_swiDelegate respondsToSelector:@selector(switch_:setCircuitTwoErr:)]) {
                 
-                [_swiDelegate circuitTwoSetErr:err];
+                [_swiDelegate switch_:self setCircuitTwoErr:err];
             }
             
             
@@ -234,7 +234,7 @@
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
     BOOL  isSuccess = false;
-    XAIDevSwitchErr err = XAIDevSwitchErr_Unknow;
+    XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     XAIDevCircuitStatus curStatus = XAIDevCircuitUnkown;
     
@@ -254,7 +254,7 @@
         
         isSuccess = true;
         
-        err = XAIDevSwitchErr_NONE;
+        err = XAI_ERROR_NONE;
         
         
     } while (0);
@@ -265,9 +265,9 @@
         case Key_CircuitOneStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(circuitOneGetCurStatus:err:)]) {
+                                        @selector(switch_:getCircuitOneStatus:err:)]) {
                 
-                [_swiDelegate  circuitOneGetCurStatus:curStatus err:err];
+                [_swiDelegate switch_:self getCircuitOneStatus:curStatus err:err];
             }
             
             _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_GetOneStatus);
@@ -277,9 +277,9 @@
         case Key_CircuitTwoStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(circuitTwoGetCurStatus:err:)]) {
+                                        @selector(switch_:getCircuitTwoStatus:err:)]) {
                 
-                [_swiDelegate  circuitTwoGetCurStatus:curStatus err:err];
+                [_swiDelegate  switch_:self getCircuitTwoStatus:curStatus err:err];
             }
             
             
@@ -355,29 +355,29 @@
     
     if (_devOpr == XAIDevSwitchOpr_GetOneStatus &&
         (nil != _swiDelegate) &&
-        [_swiDelegate respondsToSelector:@selector(circuitOneGetCurStatus:err:)]) {
+        [_swiDelegate respondsToSelector:@selector(switch_:getCircuitOneStatus:err:)]) {
             
-            [_swiDelegate circuitOneGetCurStatus:XAIDevCircuitUnkown err:XAIDevSwitchErr_TimeOut];
+            [_swiDelegate switch_:self getCircuitOneStatus:XAIDevCircuitUnkown err:XAI_ERROR_TIMEOUT];
 
         
     }else if(_devOpr == XAIDevSwitchOpr_GetTwoStatus&&
              (nil != _swiDelegate) &&
-             [_swiDelegate respondsToSelector:@selector(circuitTwoGetCurStatus:err:)]){
+             [_swiDelegate respondsToSelector:@selector(switch_:getCircuitTwoStatus:err:)]){
     
-        [_swiDelegate circuitTwoGetCurStatus:XAIDevCircuitUnkown err:XAIDevSwitchErr_TimeOut];
+        [_swiDelegate switch_:self getCircuitTwoStatus:XAIDevCircuitUnkown err:XAI_ERROR_TIMEOUT];
     
     }else if(_devOpr == XAIDevSwitchOpr_SetOne&&
              (nil != _swiDelegate) &&
-             [_swiDelegate respondsToSelector:@selector(circuitOneSetErr:)]){
+             [_swiDelegate respondsToSelector:@selector(switch_:setCircuitOneErr:)]){
         
-        [_swiDelegate circuitOneSetErr:XAIDevSwitchErr_TimeOut];
+        [_swiDelegate switch_:self setCircuitOneErr:XAI_ERROR_TIMEOUT];
         
     
     }else if(_devOpr == XAIDevSwitchOpr_SetTwo&&
              (nil != _swiDelegate) &&
-             [_swiDelegate respondsToSelector:@selector(circuitTwoSetErr:)]){
+             [_swiDelegate respondsToSelector:@selector(switch_:setCircuitTwoErr:)]){
     
-        [_swiDelegate circuitTwoSetErr:XAIDevSwitchErr_TimeOut];
+        [_swiDelegate switch_:self setCircuitTwoErr:XAI_ERROR_TIMEOUT];
     
     }
 }

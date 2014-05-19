@@ -31,57 +31,57 @@
     
 }
 
-- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi getCircuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{
     
     
     
 }
 
-- (void) circuitOneSetErr:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi setCircuitOneErr:(XAI_ERROR)err{
     
     
     
     
 }
 
-- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi getCircuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{
     
     XAILightStatus curStatus = XAILightStatus_Unkown;
     
-    if (err == XAIDevSwitchErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         curStatus = ( status == XAIDevCircuitStatusOpen) ? XAILightStatus_Open : XAILightStatus_Close;
         
     }
     
     
-    if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(lightCurStatus:)]) {
+    if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(light:curStatus:)]) {
         
-        [self.delegate lightCurStatus:curStatus];
+        [self.delegate light:self curStatus:curStatus];
     }
 
     
 }
-- (void) circuitTwoSetErr:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi setCircuitTwoErr:(XAI_ERROR)err{
     
     
     if (_isOpening) {
         
         
-        if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(lightOpenSuccess:)]) {
+        if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(light:openSuccess:)]) {
             
             
-            [self.delegate lightOpenSuccess:err == XAIDevSwitchErr_NONE];
+            [self.delegate light:self openSuccess:err == XAI_ERROR_NONE];
         }
         
         _isOpening = false;
         
     }else if (_isClosing) {
         
-        if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(lightCloseSuccess:)]) {
+        if (self.delegate != nil && [self.delegate  respondsToSelector:@selector(light:closeSuccess:)]) {
             
             
-            [self.delegate lightCloseSuccess:err == XAIDevSwitchErr_NONE];
+            [self.delegate light:self closeSuccess:err == XAI_ERROR_NONE];
         }
         
         _isClosing = false;

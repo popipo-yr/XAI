@@ -57,10 +57,10 @@ XAITYPELUID  ____luid;
     _userService.userServiceDelegate = self;
     
     
-    _name4Change = @"NAME222";
-    _pwd4Change = @"PWD1";
-    _pwd4Change_end = @"PWD2";
-    _name4Change_end = @"NAME2";
+    _name4Change = @"admin";
+    _pwd4Change = @"admin";
+    _pwd4Change_end = @"adminn";
+    _name4Change_end = @"adminn";
     
     
     ____luid = 258;
@@ -126,7 +126,7 @@ XAITYPELUID  ____luid;
         
         
         
-        [_userService addUser:_name4Change Password:_pwd4Change];
+        [_userService addUser:name Password:pawd];
         
         
         _addStatus = 0;
@@ -142,6 +142,93 @@ XAITYPELUID  ____luid;
 
 }
 
+- (XAITYPELUID)_findLuid:(NSString*)name
+{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        [_userService finderUserLuidHelper:name];
+        
+        _findStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_findStatus > 0) {
+                
+                *done = YES;
+            }
+        });
+        
+    }
+    
+    return _luiduser;
+    
+}
+
+- (void)_change:(XAITYPELUID)luid Name:(NSString*)name pawd:(NSString*)pawd toName:(NSString*)toname{
+    
+    [self loginWithName:name PWD:pawd];
+    
+    if (_loginStatus_normal == Success) {
+    
+        
+        [_userService changeUser:luid withName:toname];
+        
+        
+        _changeNameStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_changeNameStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+    }
+    
+    
+}
+
+
+- (void)_change:(XAITYPELUID)luid Name:(NSString*)name pawd:(NSString*)pawd toPWD:(NSString*)toPwd{
+    
+
+    [self _change:luid Name:name pawd:pawd toPWD:toPwd newPut:pawd];
+}
+
+- (void)_change:(XAITYPELUID)luid Name:(NSString*)name pawd:(NSString*)pawd toPWD:(NSString*)toPwd newPut:(NSString*)newPut{
+    
+    [self loginWithName:name PWD:pawd];
+    //[self testLogin];
+    
+    if (_loginStatus_normal == Success) {
+        
+        
+        
+        [_userService changeUser:luid  oldPassword:newPut to:toPwd];
+        
+        
+        _changePWDStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_changePWDStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+    }
+    
+}
+
+
+
 - (void)_del:(XAITYPELUID)luid
 {
     
@@ -149,7 +236,7 @@ XAITYPELUID  ____luid;
     
     if (_loginStatus == Success) {
         
-        [_userService delUser:_luiduser];
+        [_userService delUser:luid];
         
         
         _delStatus = start;
@@ -174,13 +261,17 @@ XAITYPELUID  ____luid;
     if (_loginStatus == Success) {
         
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_addStatus != Fail, @"add faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"yes. add user suc");
+        XCTAssertTrue (_addStatus != Fail, @"no, add user should be suc");
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
+        
     }else{
     
     
         XCTFail(@"LOGIN FAILD");
     }
+    
+    
+    [self _del:[self _findLuid:_name4Change]];
 
 }
 
@@ -188,36 +279,31 @@ XAITYPELUID  ____luid;
 - (void)test_1_2_Add_NameRep
 {
     
-    [self login];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"Add_NameRep generate data fail");
+        return;
+    }
+    
+    [self _addName:_name4Change pawd:_pwd4Change];
     
     if (_loginStatus == Success) {
         
         
-        
-        [_userService addUser:_name4Change Password:_pwd4Change];
-        
-        
-        _addStatus = 0;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_addStatus > 0) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_addStatus != Success, @"add faild");
-        XCTAssert(_err == XAI_ERROR_MODLE_BRIDGE, @"yes. username is exist");
+        XCTAssertTrue (_addStatus != Success, @"no, add user should be fail , name is rep");
+        XCTAssert(_err == XAI_ERROR_NAME_EXISTED, @"-err : %d",_err);
         
-        //XAI_ERROR_name_exit
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    
+    [self _del:[self _findLuid:_name4Change]];
     
 }
 
@@ -227,66 +313,38 @@ XAITYPELUID  ____luid;
 - (void)test_1_3_Add_NameNull
 {
     
-    [self login];
+    [self _addName:NULL pawd:_pwd4Change];
     
     if (_loginStatus == Success) {
         
-        
-        
-        [_userService addUser:NULL Password:@"NOTUSE"];
-        
-        
-        _addStatus = 0;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_addStatus > 0) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_addStatus != Success, @"add faild");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes , username is NULL");
-    }else{
+        XCTAssertTrue (_addStatus != Success, @"NO, add user should be fail, name is null");
+        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
         
+    }else{
         
         XCTFail(@"LOGIN FAILD");
     }
     
-}
+    
+    [self _del:[self _findLuid:_name4Change]];
+
+    
+ }
 
 
 - (void)test_1_4_Add_PawdNull
 {
     
-    [self login];
+    [self _addName:NULL pawd:_pwd4Change];
     
     if (_loginStatus == Success) {
         
-        
-        
-        [_userService addUser:@"NOTUSE" Password:NULL];
-        
-        
-        _addStatus = 0;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_addStatus > 0) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_addStatus != Success, @"add faild");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes , password is NULL");
-    }else{
+        XCTAssertTrue (_addStatus != Success, @"NO, add user should be fail, pawd is null");
+        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
         
+    }else{
         
         XCTFail(@"LOGIN FAILD");
     }
@@ -297,39 +355,23 @@ XAITYPELUID  ____luid;
 
 - (void)test_2_1_ChangeName_TRUE
 {
+    [self _addName:_name4Change pawd:_pwd4Change];
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"ChangeName_TRUE generate data fail");
+        return;
+    }
+
+    
+    [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toName:_name4Change_end];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:_luiduser withName:_name4Change_end];
-        
-        
-        _changeNameStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changeNameStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changeNameStatus != Fail, @"change name faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"yes . change username suc");
-        
-        
-        if (_changeNameStatus == Success) {
-            
-            NSString* swap = _name4Change;
-            _name4Change = _name4Change_end;
-            _name4Change_end = swap;
-        }
-        
+        XCTAssertTrue (_changeNameStatus != Fail, @"no, change name should be suc");
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
         
     }else{
         
@@ -337,6 +379,7 @@ XAITYPELUID  ____luid;
         XCTFail(@"LOGIN FAILD");
     }
     
+    [self _del:_luiduser];
     
 }
 
@@ -344,84 +387,65 @@ XAITYPELUID  ____luid;
 - (void)test_2_2_ChangeName_NameNull
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"ChangeName_NameNull generate data fail");
+        return;
+    }
+    
+    
+    [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toName:NULL];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:_luiduser withName:NULL];
-        
-        
-        _changeNameStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changeNameStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changeNameStatus != Success, @"change name faild");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes . username for change is null");
-        
-        if (_changeNameStatus == Success) {
-            
-            NSString* swap = _name4Change;
-            _name4Change = _name4Change_end;
-            _name4Change_end = swap;
-        }
+        XCTAssertTrue (_changeNameStatus != Success, @"no, change name should be fail, name is null");
+        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
         
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    [self _del:_luiduser];
+    
 }
 
 
 - (void)test_2_3_ChangeName_LuidOther
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"ChangeName_LuidOther generate data fail");
+        return;
+    }
+    
+    
+    [self _change:0x1 Name:_name4Change pawd:_pwd4Change toName:_name4Change_end];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:0x001 withName:@"ABCCCC"];
-        
-        
-        _changeNameStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changeNameStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changeNameStatus != Success, @"change name faild");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"yes . it cannot change by other");
-        
-        if (_changeNameStatus == Success) {
-            
-            NSString* swap = _name4Change;
-            _name4Change = _name4Change_end;
-            _name4Change_end = swap;
-        }
+        XCTAssertTrue (_changeNameStatus != Success, @"no, change other name should be fail");
+        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
         
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    [self _del:[self _findLuid:_name4Change]];
+    
+    
 }
 
 
@@ -431,43 +455,32 @@ XAITYPELUID  ____luid;
 - (void)test_3_1_ChangePawd_TRUE
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
-    //[self testLogin];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_3_1_ChangePawd_TRUE generate data fail");
+        return;
+    }
+    
+    
+    [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toPWD:_pwd4Change_end];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:_luiduser oldPassword:_pwd4Change to:_pwd4Change_end ];
-        
-        
-        _changePWDStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changePWDStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changePWDStatus != Fail, @"change pwd faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"yes, change pwd true");
-        
-        if (_changePWDStatus == Success) {
-            
-            NSString* swap = _pwd4Change;
-            _pwd4Change = _pwd4Change_end;
-            _pwd4Change_end = swap;
-        }
+        XCTAssertTrue (_changePWDStatus != Fail, @"no, change pwad should be suc");
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
         
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    [self _del:_luiduser];
+
     
     
 }
@@ -476,41 +489,31 @@ XAITYPELUID  ____luid;
 - (void)test_3_2_ChangePawd_Other
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
-    //[self testLogin];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_3_2_ChangePawd_Other generate data fail");
+        return;
+    }
+    
+    
+    [self _change:0x1 Name:_name4Change pawd:_pwd4Change toPWD:_pwd4Change_end];
     
     if (_loginStatus_normal == Success) {
         
-        [_userService changeUser:0x1 oldPassword:_pwd4Change to:_pwd4Change_end ];
-        
-        
-        _changePWDStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changePWDStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changePWDStatus != Success, @"change pwd faild");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"yes, it cannot change by other");
-        
-        if (_changePWDStatus == Success) {
-            
-            NSString* swap = _pwd4Change;
-            _pwd4Change = _pwd4Change_end;
-            _pwd4Change_end = swap;
-        }
+        XCTAssertTrue (_changePWDStatus != Success, @"no, change other pwad should be fail");
+        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
         
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    [self _del:[self _findLuid:_name4Change]];
     
     
 }
@@ -519,38 +522,23 @@ XAITYPELUID  ____luid;
 - (void)test_3_3_ChangePawd_OldNull
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
-    //[self testLogin];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_3_3_ChangePawd_OldNull generate data fail");
+        return;
+    }
+    
+    
+    [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toPWD:_pwd4Change_end newPut:NULL];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:_luiduser oldPassword:NULL to:_pwd4Change_end ];
-        
-        
-        _changePWDStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changePWDStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changePWDStatus != Success, @"change pwd faild");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes, old pwd for change is null");
-        
-        if (_changePWDStatus == Success) {
-            
-            NSString* swap = _pwd4Change;
-            _pwd4Change = _pwd4Change_end;
-            _pwd4Change_end = swap;
-        }
-        
+        XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,old is null");
+        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
         
     }else{
         
@@ -558,51 +546,39 @@ XAITYPELUID  ____luid;
         XCTFail(@"LOGIN FAILD");
     }
     
-    
+    [self _del:_luiduser];
+
+
 }
 
 
 - (void)test_3_4_ChangePawd_NewNull
 {
+    [self _addName:_name4Change pawd:_pwd4Change];
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
-    //[self testLogin];
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_3_4_ChangePawd_NewNull generate data fail");
+        return;
+    }
+    
+    
+    [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toPWD:NULL];
     
     if (_loginStatus_normal == Success) {
         
         
-        
-        [_userService changeUser:_luiduser oldPassword:_pwd4Change to:NULL ];
-        
-        
-        _changePWDStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_changePWDStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changePWDStatus != Success, @"change pwd faild");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"yes, new pwd for change is null");
-        
-        if (_changePWDStatus == Success) {
-            
-            NSString* swap = _pwd4Change;
-            _pwd4Change = _pwd4Change_end;
-            _pwd4Change_end = swap;
-        }
+        XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,NEW is null");
+        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
         
     }else{
         
         
         XCTFail(@"LOGIN FAILD");
     }
-}
+    
+    [self _del:_luiduser];}
 
 
 
@@ -682,29 +658,15 @@ XAITYPELUID  ____luid;
 - (void)test_4_1_Del_NOPriv
 {
     
-    [self testLoginWithName:_name4Change PWD:_pwd4Change];
     
-    if (_loginStatus_normal == Success) {
-        
-        
-        
-        [_userService delUser:0x1];
-        
-        
-        _delStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_delStatus > start) {
-                
-                *done = YES;
-            }
-        });
+    [self _del:0x1];
+    
+    if (_loginStatus == Success) {
         
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_delStatus != Success, @"del user faild");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"yes . normal user do not has privacy");
+        XCTAssertTrue (_delStatus != Success, @"del user should faild,no privacy");
+        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
         
     }else{
         
@@ -721,29 +683,22 @@ XAITYPELUID  ____luid;
 - (void)test_4_2_Del_TRUE
 {
     
-    [self login];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_4_2_Del_TRUE generate data fail");
+        return;
+    }
+    
+    [self _del:[self _findLuid:_name4Change]];
     
     if (_loginStatus == Success) {
         
         
-        
-        [_userService delUser:_luiduser];
-        
-        
-        _delStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_delStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_delStatus != Fail, @"del user faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"oh , del not suc with err %d",_err);
+        XCTAssertTrue (_delStatus != Fail, @"del user should syc");
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err %d",_err);
         
         
     }else{
@@ -758,29 +713,25 @@ XAITYPELUID  ____luid;
 - (void)test_4_2_Del_NotExist
 {
     
-    [self login];
+    [self _addName:_name4Change pawd:_pwd4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"test_4_2_Del_TRUE generate data fail");
+        return;
+    }
+    
+    [self _del:[self _findLuid:_name4Change]];
+    [self _del:[self _findLuid:_name4Change]];
+
     
     if (_loginStatus == Success) {
         
-        
-        
-        [_userService delUser:(_luiduser+10)];
-        
-        
-        _delStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_delStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
+
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_delStatus != Success, @"del user faild");
-        XCTAssert(_err == XAI_ERROR_MODLE_BRIDGE, @"yes . no have the user %d", _err);
+        XCTAssertTrue (_delStatus != Success, @"del user should faild, already be del");
+        XCTAssert(_err == XAI_ERROR_LUID_NONE_EXISTED, @"-err : %d", _err);
         
         //_err == XAI_ERROR_LUID_NONE_EXISTED;
         
@@ -795,7 +746,7 @@ XAITYPELUID  ____luid;
 }
 
 
--(void)testALL{
+-(void)_testALL{
 
     [self test_1_1_Add_TRUE];
     [self test_1_2_Add_NameRep];

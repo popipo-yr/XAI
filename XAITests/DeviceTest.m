@@ -54,7 +54,7 @@
 //    }
 //}
 
-- (void)testGetStatus
+- (void)testGetDevStatus
 {
     [self login];
     
@@ -77,7 +77,7 @@
         
         
         XCTAssertTrue (_getStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_getStatus != Fail, @"get dev status faild");
+        XCTAssertTrue (_getStatus != Fail, @"no, Get dev status should success");
     }else{
         
         
@@ -86,6 +86,42 @@
     
 
 }
+
+
+- (void)testGetDevStatus_err
+{
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        _device.luid = 0x333;
+        [_device getDeviceStatus];
+        
+        
+        _getStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_getStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_getStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_getStatus != Success, @"no, Get dev status should fail");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
 
 - (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
 

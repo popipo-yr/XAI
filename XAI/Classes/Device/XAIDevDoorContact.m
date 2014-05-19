@@ -87,7 +87,7 @@
     if (NULL == param) return;
     
     BOOL  isSuccess = false;
-    XAIDevDCErr err = XAIDevDCErr_Unknow;
+    XAI_ERROR  err = XAI_ERROR_UNKOWEN;
     
     //查看状态的topic
     if ([topic isEqualToString:[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID]]) {
@@ -113,7 +113,7 @@
             if (curStatus == XAIDevDoorContactStatusUnkown) break;
             
             isSuccess = true;
-            err = XAIDevDCErr_NONE;
+            err = XAI_ERROR_NONE;
             
         } while (0);
         
@@ -125,10 +125,6 @@
         }
         
         _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevDCOpr_GetCurStatus);
-        
-//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-//         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID]];
-        
         
         
     }else if ([topic isEqualToString:
@@ -152,7 +148,7 @@
             curPower = power*1.0 / 10.0;
             
             isSuccess = true;
-            err = XAIDevDCErr_NONE;
+            err = XAI_ERROR_UNKOWEN;
             
         } while (0);
         
@@ -203,14 +199,14 @@
         (nil != _dcDelegate) &&
         [_dcDelegate respondsToSelector:@selector(doorContact:curStatus:err:)]) {
         
-        [_dcDelegate doorContact:self curStatus:XAIDevDoorContactStatusUnkown err:XAIDevDCErr_TimeOut];
+        [_dcDelegate doorContact:self curStatus:XAIDevDoorContactStatusUnkown err:XAI_ERROR_TIMEOUT];
         
         
     }else  if (_devOpr == XAIDevDCOpr_GetCurPower &&
                (nil != _dcDelegate) &&
                [_dcDelegate respondsToSelector:@selector(doorContact:curPower:err:)]) {
         
-        [_dcDelegate doorContact:self curPower:0 err:XAIDevDCErr_TimeOut];
+        [_dcDelegate doorContact:self curPower:0 err:XAI_ERROR_TIMEOUT];
 
         
     }

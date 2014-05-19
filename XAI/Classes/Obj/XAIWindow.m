@@ -47,13 +47,13 @@
 
 #pragma --Delegate
 
-- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAIDevDCErr)err{
+- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err{
     
     if (dc != _doorContact) return;
     
     XAIWindowStatus  windowStatus = XAIWindowStatus_Unkown;
     
-    if (err == XAIDevDCErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         if (status == XAIDevDoorContactStatusOpen) {
             
@@ -67,17 +67,17 @@
     
     if (_delegate != nil && [_delegate respondsToSelector:@selector(window:curStatus:getIsSuccess:)]) {
         
-        [_delegate  window:self curStatus:windowStatus getIsSuccess:err == XAIDevDCErr_NONE];
+        [_delegate  window:self curStatus:windowStatus getIsSuccess:err == XAI_ERROR_NONE];
     }
 }
 
--(void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAIDevDCErr)err{
+-(void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAI_ERROR)err{
     
     if (dc != _doorContact) return;
     
     if (_delegate != nil && [_delegate respondsToSelector:@selector(window:curPower:getIsSuccess:)]) {
         
-        [_delegate  window:self curPower:power getIsSuccess:err == XAIDevDCErr_NONE];
+        [_delegate  window:self curPower:power getIsSuccess:err == XAI_ERROR_NONE];
     }
 }
 

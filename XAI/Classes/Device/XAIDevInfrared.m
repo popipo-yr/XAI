@@ -88,7 +88,7 @@
     if (NULL == param) return;
     
     BOOL  isSuccess = false;
-    XAIDevInfraredErr err = XAIDevInfraredErr_Unknow;
+    XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     //查看状态的topic
     if ([topic isEqualToString:
@@ -115,7 +115,7 @@
             if (curStatus == XAIDevInfraredStatusUnkown) break;
             
             isSuccess = true;
-            err = XAIDevInfraredErr_NONE;
+            err = XAI_ERROR_NONE;
             
         } while (0);
         
@@ -154,7 +154,7 @@
             curPower = power*1.0 / 10.0;
             
             isSuccess = true;
-            err = XAIDevInfraredErr_NONE;
+            err = XAI_ERROR_NONE;
             
         } while (0);
         
@@ -206,14 +206,14 @@
         (nil != _infDelegate) &&
         [_infDelegate respondsToSelector:@selector(infrared:curStatus:err:)]) {
         
-        [_infDelegate infrared:self curStatus:XAIDevInfraredStatusUnkown err:XAIDevInfraredErr_TimeOut];
+        [_infDelegate infrared:self curStatus:XAIDevInfraredStatusUnkown err:XAI_ERROR_TIMEOUT];
         
         
     }else  if (_devOpr == XAIDevInfraredOpr_GetCurPower &&
                (nil != _infDelegate) &&
                [_infDelegate respondsToSelector:@selector(infrared:curPower:err:)]) {
         
-        [_infDelegate infrared:self curPower:0 err:XAIDevInfraredErr_TimeOut];
+        [_infDelegate infrared:self curPower:0 err:XAI_ERROR_TIMEOUT];
         
         
     }

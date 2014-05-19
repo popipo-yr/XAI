@@ -11,13 +11,16 @@
 
 #import "XAIDevDoorContact.h"
 
-@interface DoorContactTest : LoginPlugin <XAIDevDoorContactDelegate,XAIDeviceStatusDelegate>{
+@interface DoorContactTest : LoginPlugin <XAIDevDoorContactDelegate>{
 
     XAIDevDoorContact* _ddc;
 
     int _getDevStatus;
     int _getStatus;
     int _getPower;
+    
+    XAITYPELUID _err_luid;
+    XAI_ERROR _err;
 }
 
 @end
@@ -27,13 +30,14 @@
 - (void)setUp
 {
     _ddc = [[XAIDevDoorContact alloc] init];
-    _ddc.delegate = self;
     _ddc.dcDelegate = self;
     
     _ddc.apsn = 0x1;
     _ddc.luid = 0x124b0002292580;
     
     [_ddc startFocusStatus];
+    
+    _err_luid = 0x12989430909437;
    // _ddc.luid = 0x00124B000413CCC2;
     
     //    _luidDev = 0x124b0003d430b7;
@@ -52,38 +56,6 @@
     [super tearDown];
 }
 
-- (void)testGetDeviceStatus
-{
-    [self login];
-    
-    if (_loginStatus == Success) {
-        
-        
-        
-        [_ddc getDeviceStatus];
-        
-        
-        _getDevStatus = start;
-        
-        runInMainLoop(^(BOOL * done) {
-            
-            if (_getDevStatus > start) {
-                
-                *done = YES;
-            }
-        });
-        
-        
-        XCTAssertTrue (_getDevStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_getDevStatus != Fail, @"get dev status faild");
-    }else{
-        
-        
-        XCTFail(@"LOGIN FAILD");
-    }
-    
-    
-}
 
 
 - (void)testGetStatus
@@ -110,7 +82,45 @@
         
         
         XCTAssertTrue (_getStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_getStatus != Fail, @"get ddc one status faild");
+        XCTAssertTrue (_getStatus != Fail, @"no,Get ddc status should be suc.");
+        
+        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+}
+
+
+- (void)testGetStatus_err
+{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        _ddc.luid = _err_luid;
+        [_ddc getDoorContactStatus];
+        
+        
+        _getStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_getStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_getStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_getStatus != Fail, @"no,Get ddc status should be fail with err luid");
+        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
+        
     }else{
         
         
@@ -142,7 +152,8 @@
         
         
         XCTAssertTrue (_getPower != start, @"delegate did not get called");
-        XCTAssertTrue (_getPower != Fail, @"get powder status faild");
+        XCTAssertTrue (_getPower != Fail, @"no, Get power should be suc.");
+        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
     }else{
         
         
@@ -152,35 +163,65 @@
     
 }
 
-- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
-    
-    if (finish) {
-        
-        _getDevStatus = Success;
-    }else{
-    
-        _getDevStatus = Fail;
-    }
 
+- (void) testGetPoser_err{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        _ddc.luid = _err_luid;
+        [_ddc getPower];
+        
+        
+        _getPower = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_getPower > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_getPower != start, @"delegate did not get called");
+        XCTAssertTrue (_getPower != Fail, @"no, Get power should be fail with err luid.");
+        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
 }
 
 
-- (void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAIDevDCErr)err{
 
-    if (XAIDevDCErr_NONE == err) {
+- (void)doorContact:(XAIDevDoorContact *)dc curPower:(float)power err:(XAI_ERROR)err{
+
+    if (_getPower != start) return;
+    
+    if (XAI_ERROR_NONE == err) {
         
         _getPower = Success;
+
         
     }else{
         
         _getPower = Fail;
     }
 
+    _err = err;
 }
 
-- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAIDevDCErr)err{
+- (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err{
 
-    if (XAIDevDCErr_NONE == err) {
+    if (_getStatus != start) return;
+    
+    if (XAI_ERROR_NONE == err) {
         
         _getStatus = Success;
         
@@ -189,6 +230,7 @@
         _getStatus = Fail;
     }
 
+    _err = err;
 
 }
 

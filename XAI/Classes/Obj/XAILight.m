@@ -55,34 +55,34 @@
 
 #pragma --Delegate
 
-- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi getCircuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{
     
     
     XAILightStatus curStatus = XAILightStatus_Unkown;
     
-    if (err == XAIDevSwitchErr_NONE) {
+    if (err == XAI_ERROR_NONE) {
         
         curStatus = ( status == XAIDevCircuitStatusOpen) ? XAILightStatus_Open : XAILightStatus_Close;
         
     }
     
     
-    if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightCurStatus:)]) {
+    if (_delegate != nil && [_delegate  respondsToSelector:@selector(light:curStatus:)]) {
         
-        [_delegate lightCurStatus:curStatus];
+        [_delegate light:self curStatus:curStatus];
     }
    
 }
 
-- (void) circuitOneSetErr:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi setCircuitOneErr:(XAI_ERROR)err{
     
     if (_isOpening) {
         
         _isOpening = false;
-        if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightOpenSuccess:)]) {
+        if (_delegate != nil && [_delegate  respondsToSelector:@selector(light:openSuccess:)]) {
             
             
-            [_delegate lightOpenSuccess:err == XAIDevSwitchErr_NONE];
+            [_delegate light:self openSuccess:err == XAI_ERROR_NONE];
         }
         
         
@@ -91,10 +91,10 @@
         
         _isClosing = false;
         
-        if (_delegate != nil && [_delegate  respondsToSelector:@selector(lightCloseSuccess:)]) {
+        if (_delegate != nil && [_delegate  respondsToSelector:@selector(light:closeSuccess:)]) {
             
             
-            [_delegate lightCloseSuccess:err == XAIDevSwitchErr_NONE];
+            [_delegate light:self closeSuccess:err == XAI_ERROR_NONE];
         }
         
         
@@ -105,11 +105,11 @@
     
 }
 
-- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi getCircuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{
     
     
 }
-- (void) circuitTwoSetErr:(XAIDevSwitchErr)err{
+- (void) switch_:(XAIDevSwitch *)swi setCircuitTwoErr:(XAI_ERROR)err{
     
     
     

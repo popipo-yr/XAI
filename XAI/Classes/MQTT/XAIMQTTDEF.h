@@ -76,6 +76,8 @@ typedef enum  XAI_ERROR{
     //3、修改用户的用户名为空"
     XAI_ERROR_NAME_NONE_EXISTED = 6, //用户名不存在
     
+    ERRNO_PASSWORD_INVALID = 30, //mima bu gunfan
+    
     XAI_ERROR_LUID_EXISTED = 7, //1、添加设备时LUID已经存在
     XAI_ERROR_LUID_INVALID = 8, //"1、发送给APSERVER模块的TO_LUID不是0x3
     //2、发送给RB模块的TO_LUID错误
@@ -110,6 +112,7 @@ typedef enum  XAI_ERROR{
     
     
     XAI_ERROR_UNKOWEN = 99,
+    XAI_ERROR_TIMEOUT = 100,
     
     
 }XAI_ERROR;

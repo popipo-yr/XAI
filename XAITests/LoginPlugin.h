@@ -30,7 +30,7 @@
 
 - (void) login;
 //- (void)loginFinishWithStatus:(BOOL)status;
-- (void)testLoginWithName:(NSString*)name PWD:(NSString*)pwd;
+- (void)loginWithName:(NSString*)name PWD:(NSString*)pwd;
 
 
 @end

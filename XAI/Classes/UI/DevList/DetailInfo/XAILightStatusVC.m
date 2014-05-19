@@ -83,7 +83,7 @@
 #define LightOpenImg  @"obj_light_open.png"
 #define LightCloseImg @"obj_light_close.png"
 
-- (void) lightOpenSuccess:(BOOL)isSuccess{
+- (void) light:(XAILight *)light openSuccess:(BOOL)isSuccess{
     
     if (isSuccess) {
         
@@ -105,7 +105,7 @@
     [_activityView stopAnimating];
     
 }
-- (void) lightCloseSuccess:(BOOL)isSuccess{
+- (void) light:(XAILight *)light closeSuccess:(BOOL)isSuccess{
     
     if (isSuccess) {
         
@@ -128,7 +128,7 @@
     [_activityView stopAnimating];
 }
 
-- (void) lightCurStatus:(XAILightStatus) status{
+- (void) light:(XAILight *)light curStatus:(XAILightStatus)status{
     
     NSString* imageName = (status == XAILightStatus_Open) ?LightOpenImg : LightCloseImg;
     

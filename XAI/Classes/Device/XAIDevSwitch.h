@@ -52,23 +52,16 @@ typedef enum XAIDevCircuitStatus{
 
 @end
 
-//--------------------
-typedef enum{
-    
-    XAIDevSwitchErr_NONE,
-    XAIDevSwitchErr_TimeOut,
-    XAIDevSwitchErr_Unknow,
-    
-}XAIDevSwitchErr;
+
 
 
 @protocol  XAIDevSwitchDelegate <NSObject>
 
-- (void) circuitOneGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err;
-- (void) circuitOneSetErr:(XAIDevSwitchErr)err;
+- (void) switch_:(XAIDevSwitch*)swi getCircuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err;
+- (void) switch_:(XAIDevSwitch*)swi setCircuitOneErr:(XAI_ERROR)err;
 
-- (void) circuitTwoGetCurStatus:(XAIDevCircuitStatus)status err:(XAIDevSwitchErr)err;
-- (void) circuitTwoSetErr:(XAIDevSwitchErr)err;
+- (void) switch_:(XAIDevSwitch*)swi getCircuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err;
+- (void) switch_:(XAIDevSwitch*)swi setCircuitTwoErr:(XAI_ERROR)err;
 
 
 @end

@@ -11,11 +11,14 @@
 #import "XAIDoor.h"
 
 @interface DoorTest : LoginPlugin<XAIDoorDelegate>{
-
+    
     XAIDoor* _door;
     
     int _status;
     int _power;
+    
+    XAITYPELUID _err_luid;
+    
 }
 
 @end
@@ -31,9 +34,11 @@
     _door.apsn = 0x1;
     _door.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
     
+    _err_luid = 0x001384399578dfcd;
+    
     
     [_door startControl];
-
+    
     
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
@@ -53,8 +58,6 @@
     
     if (_loginStatus == Success) {
         
-        
-        
         [_door getCurStatus];
         
         
@@ -70,7 +73,8 @@
         
         
         XCTAssertTrue(_status != start, @"delegate did not get called");
-        XCTAssertTrue(_status != Fail, @"get switch one status faild");
+        XCTAssertTrue(_status != Fail, @"no, Get door status shoule be suc");
+        
     }else{
         
         
@@ -78,6 +82,40 @@
     }
     
 }
+
+
+- (void)testStatus_err;
+{
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        _door.luid = _err_luid;
+        [_door getCurStatus];
+        
+        
+        _status = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_status > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue(_status != start, @"delegate did not get called");
+        XCTAssertTrue(_status != Fail, @"no, Get door status shoule be fail with err luid.");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
 
 - (void) testPower{
     
@@ -103,7 +141,42 @@
         
         
         XCTAssertTrue (_power != start, @"delegate did not get called");
-        XCTAssertTrue (_power != Fail, @"set switch one open status faild");
+        XCTAssertTrue (_power != Fail, @"no, Get door power should be suc.");
+        
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+- (void) testPower_err{
+    
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_door getPower];
+        
+        
+        _power = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_power > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_power != start, @"delegate did not get called");
+        XCTAssertTrue (_power != Success, @"no, Get door power should be fail with err luid");
         
         
     }else{
@@ -128,13 +201,13 @@
 
 
 -(void)door:(XAIDoor *)door curStatus:(XAIDoorStatus)status getIsSuccess:(BOOL)isSuccess{
-
+    
     if (isSuccess) {
         
         _status = Success;
     }else{
-    
-    
+        
+        
         _status = Fail;
     }
     

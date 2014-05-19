@@ -28,19 +28,14 @@
     [super tearDown];
 }
 
-- (void)testDatasToParamFail
+- (void)testDatasToParamNULL
 {
-    NSString*  ABC = @"abccccccc";
     
-    void* bytes = alloca(1000);
-    
-    [ABC getCharacters:bytes range:NSMakeRange(0, [ABC length])];
-    
-    _xai_packet_param_dti* packer_dti = generateParamDTIFromData(bytes, 1000);
+    _xai_packet_param_dti* packer_dti = generateParamDTIFromData(NULL, 1000);
     
     XCTAssertTrue(packer_dti == NULL, @"false");
     
-    packer_dti = generateParamDTIFromData(bytes, 0);
+    packer_dti = generateParamDTIFromData(NULL, 0);
     
     XCTAssertTrue(packer_dti == NULL, @"false");
     
@@ -53,7 +48,7 @@
 }
 
 
-- (void)testDatasToParamSuc
+- (void)testDatasToParamFail
 {
     NSString*  ABC = @"abccccccc";
     
