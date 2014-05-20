@@ -42,6 +42,8 @@
     
     
     [MQTT shareMQTT].apsn = 0x1;
+    
+    _keyboardIsUp = false;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -107,6 +109,10 @@
 
 - (void)keyboardWillShow:(NSNotification *)notif {
     
+    if (_keyboardIsUp == true) return;
+    
+    _keyboardIsUp = true;
+    
     CGPoint  oldPoint = self.view.center;
     
     [UIView beginAnimations:nil context:nil];
@@ -127,6 +133,8 @@
 
 
 - (void)keyboardWillHide:(NSNotification *)notif {
+    
+    _keyboardIsUp = false;
     
     CGPoint  oldPoint = self.view.center;
     

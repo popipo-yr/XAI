@@ -75,6 +75,10 @@
     //扫描区域计算
     _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
     
+    [_readerView.scanner setSymbology: ZBAR_I25
+                               config: ZBAR_CFG_ENABLE
+                                   to: 0];
+    
     [_readerView start];
 
     

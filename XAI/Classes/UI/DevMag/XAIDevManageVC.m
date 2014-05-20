@@ -121,8 +121,8 @@
 - (void) addBtnClick:(id) sender{
     
     
-    //ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    ZBarReaderController *reader = [ZBarReaderController new];
+    ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    //ZBarReaderController *reader = [ZBarReaderController new];
     
     reader.readerDelegate = self;
     //reader.supportedOrientationsMask = ZBarOrientationMaskAll;

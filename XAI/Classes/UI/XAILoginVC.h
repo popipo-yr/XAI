@@ -25,6 +25,8 @@
     
     int _findUser;
     int _findDev;
+    
+    BOOL _keyboardIsUp;
 }
 
 
