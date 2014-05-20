@@ -76,7 +76,7 @@ typedef enum  XAI_ERROR{
     //3、修改用户的用户名为空"
     XAI_ERROR_NAME_NONE_EXISTED = 6, //用户名不存在
     
-    ERRNO_PASSWORD_INVALID = 30, //mima bu gunfan
+     XAI_ERROR_PAWD_INVALID = 30, //mima bu gunfan
     
     XAI_ERROR_LUID_EXISTED = 7, //1、添加设备时LUID已经存在
     XAI_ERROR_LUID_INVALID = 8, //"1、发送给APSERVER模块的TO_LUID不是0x3
@@ -88,7 +88,7 @@ typedef enum  XAI_ERROR{
     //2、修改用户名字时，LUID不存在
     //3、删除用户时，LUDI不存在"
     
-    XAI_ERROR_PWD_INCORRECT = 10,	//1、修改用户密码时，密码为空
+    XAI_ERROR_PAWD_INCORRECT = 10,	//1、修改用户密码时，密码为空
 
     XAI_ERROR_DEVICE_NONE_EXISTED =11,//	"1、删除设备时，LUID不存在
     XAI_ERROR_DEVICE_OFFLINE = 12	, //设备离线	主要用于桥接模块检测设备是否在线
@@ -116,9 +116,6 @@ typedef enum  XAI_ERROR{
     
     
 }XAI_ERROR;
-
-
-
 
 
 

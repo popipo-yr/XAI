@@ -8,6 +8,7 @@
 
 #import "XAIDevAddVC.h"
 #import "XAIObject.h"
+#import "XAIDeviceType.h"
 
 @interface XAIDevAddVC ()
 
@@ -20,7 +21,7 @@
     
     if (self = [super initWithCoder:aDecoder]) {
         
-        _typeStrAry = @[@"门",@"灯"];
+        _typeStrAry = [XAIDeviceTypeUtil typeNameAry];
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.apsn = [MQTT shareMQTT].apsn;
         _deviceService.luid = MQTTCover_LUID_Server_03;
@@ -245,7 +246,7 @@
     [scanner scanHexLongLong:&luid];
     
     
-    [_deviceService addDev:luid withName:name];
+    [_deviceService addDev:luid withName:name type:[XAIDeviceTypeUtil nameToType:[_typeStrAry objectAtIndex:[_curSelIndexPath row]]]];
 }
 
 

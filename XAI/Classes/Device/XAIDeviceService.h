@@ -10,7 +10,6 @@
 #import "MQTT.h"
 #import "XAIDevice.h"
 
-#import "XAIDevice.h"
 
 
 
@@ -31,7 +30,7 @@
 
 - (void) _setFindOnline;
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName;
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type;
 
 - (void) delDev:(XAITYPELUID)dluid ;
 

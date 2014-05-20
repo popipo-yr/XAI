@@ -36,6 +36,7 @@
     
     
     XAITYPELUID  _luidDev;
+    XAIDeviceType _type;
     
     XAITYPELUID _luidNotExist;
     
@@ -58,9 +59,11 @@
     _devService.luid = MQTTCover_LUID_Server_03;
     _devService.deviceServiceDelegate = self;
     
+    _type = XAIDeviceType_light_2;
     
-    _name4Change = [NSString stringWithFormat:@"NAME1111111"];
-    _name4Change_end = [NSString stringWithFormat:@"NAME112222"];
+    
+    _name4Change = [NSString stringWithFormat:@"NAME111"];
+    _name4Change_end = [NSString stringWithFormat:@"NAME112"];
     
 //    _luidDev = 0x124b0003d430b6 ;
     
@@ -90,7 +93,7 @@
     
     _luidNotExist = 0x89375;
     
-    _name4Change = [NSString stringWithFormat:@"%@%llX",@"NAME1",_luidDev];
+   // _name4Change = [NSString stringWithFormat:@"%@%llX",@"NAME1",_luidDev];
     _name4Change_end = @"NAME2";
 
     
@@ -119,7 +122,7 @@
 //    }
 //}
 
-- (void)_addDev:(XAITYPELUID)luid withName:(NSString*)name{
+- (void)_addDev:(XAITYPELUID)luid withName:(NSString*)name type:(XAIDeviceType)type{
 
     [self login];
     
@@ -128,7 +131,7 @@
     if (_loginStatus == Success) {
         
         
-        [_devService addDev:luid  withName:name];
+        [_devService addDev:luid  withName:name type:type];
         
         
         _addStatus = 0;
@@ -199,8 +202,8 @@
 - (void)test_1_1_Add_TRUE
 {
     
-    
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _delDev:_luidDev];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus == Success) {
         
@@ -223,7 +226,7 @@
 - (void)test_1_2_Add_LUIDJOINED
 {
     
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     
     if (_loginStatus != Success && _addStatus != Success) {
@@ -232,7 +235,7 @@
         return;
     }
     
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus == Success) {
         
@@ -255,7 +258,7 @@
 - (void)test_1_3_Add_NameExist
 {
     
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus != Success && _addStatus != Success) {
         
@@ -265,7 +268,7 @@
     
     XAITYPELUID newLuid = _luidDev+10;
     
-    [self _addDev:newLuid withName:_name4Change];
+    [self _addDev:newLuid withName:_name4Change type:_type];
     
     if (_loginStatus == Success) {
         
@@ -288,7 +291,7 @@
 - (void)test_1_4_Add_LUIDNotExist
 {
     
-    [self _addDev:_luidNotExist withName:_name4Change];
+    [self _addDev:_luidNotExist withName:_name4Change type:_type];
     
     if (_loginStatus == Success) {
         
@@ -312,7 +315,7 @@
 {
     
 
-    [self _addDev:_luidDev withName:NULL];
+    [self _addDev:_luidDev withName:NULL type:_type];
     
     
     if (_loginStatus == Success) {
@@ -321,7 +324,7 @@
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
         XCTAssertTrue (_addStatus != Success, @"NO, it should be fail, name is null");
         
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
+        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
     }else{
         
         
@@ -342,7 +345,7 @@
 - (void)test_2_1_ChangeName_TRUE
 {
     
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus != Success && _changeNameStatus != Success) {
         
@@ -395,7 +398,7 @@
 - (void)test_2_3_ChangeName_NULL_NAME
 {
     
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus != Success && _changeNameStatus != Success) {
         
@@ -410,8 +413,8 @@
         
         
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_changeNameStatus != Fail, @"no, change name should be fail, the name is null");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
+        XCTAssertTrue (_changeNameStatus != Success, @"no, change name should be fail, the name is null");
+        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
         
     }else{
         
@@ -496,7 +499,7 @@
 
 - (void)test_5_1_Del_TRUE
 {
-    [self _addDev:_luidDev withName:_name4Change];
+    [self _addDev:_luidDev withName:_name4Change type:_type];
     
     if (_loginStatus != Success && _changeNameStatus != Success) {
         
@@ -538,7 +541,7 @@
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Success, @"no, del dev should be fail, it is not joined");
         
-        XCTAssert(_err == XAI_ERROR_DEVICE_NONE_EXISTED, @"-err : %d",_err);
+        XCTAssert(_err == XAI_ERROR_LUID_NONE_EXISTED, @"-err : %d",_err);
         
     }else{
         

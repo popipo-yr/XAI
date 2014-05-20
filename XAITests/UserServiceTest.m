@@ -57,8 +57,8 @@ XAITYPELUID  ____luid;
     _userService.userServiceDelegate = self;
     
     
-    _name4Change = @"admin";
-    _pwd4Change = @"admin";
+    _name4Change = @"adminxx";
+    _pwd4Change = @"adminxx";
     _pwd4Change_end = @"adminn";
     _name4Change_end = @"adminn";
     
@@ -538,7 +538,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,old is null");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
+        XCTAssert(_err == XAI_ERROR_PAWD_INVALID, @"-err : %d",_err);
         
     }else{
         
@@ -570,7 +570,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,NEW is null");
-        XCTAssert(_err == XAI_ERROR_NULL_POINTER, @"-err : %d",_err);
+        XCTAssert(_err == XAI_ERROR_PAWD_INVALID, @"-err : %d",_err);
         
     }else{
         
@@ -585,6 +585,8 @@ XAITYPELUID  ____luid;
 
 - (void)testFind
 {
+    
+    [self _addName:_name4Change pawd:_pwd4Change];
     
     [self login];
     
@@ -615,6 +617,8 @@ XAITYPELUID  ____luid;
         
         XCTFail(@"LOGIN FAILD");
     }
+    
+    [self _del:_luiduser];
     
 }
 

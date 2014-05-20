@@ -22,7 +22,7 @@
 @implementation XAIDeviceService
 
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type
            apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid
 {
     
@@ -34,21 +34,29 @@
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     _xai_packet_param_data* luid_data = generatePacketParamData();
     _xai_packet_param_data* name_data = generatePacketParamData();
+    _xai_packet_param_data* type_data = generatePacketParamData();
     
     
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn,luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn,luid_data);
     
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &dluid,name_data);
     
     NSData* data = [devName dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
+                       [data length], (void*)[devName UTF8String],type_data);
+    
+//    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
+//                       sizeof(type), &type,NULL);
+    
+    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
                        [data length], (void*)[devName UTF8String],NULL);
+
    
     
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
-                       0, 0, AddDevID,[[NSDate new] timeIntervalSince1970],3, apsn_data);
+                       0, 0, AddDevID,[[NSDate new] timeIntervalSince1970],4, apsn_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
@@ -250,9 +258,10 @@
     
     int realCount = param->data_count / 3;
     
-    if ((0 != param->data_count % 3) || realCount < 1) {
+    if ((0 != param->data_count % 3) || realCount < 0) {
         
-        return -1;
+        realCount = 0;
+        NSLog(@"err...");
     }
     
     for (int i = 0; i < realCount; i++) {
@@ -579,9 +588,9 @@
 }
 
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName{
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type{
 
-    [self addDev:dluid withName:devName apsn:_apsn luid:_luid];
+    [self addDev:dluid withName:devName type:type apsn:_apsn luid:_luid];
 }
 
 - (void) delDev:(XAITYPELUID)dluid{

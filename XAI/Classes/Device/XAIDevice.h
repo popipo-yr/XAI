@@ -8,6 +8,7 @@
 
 #import "XAITimeOut.h"
 #import "MQTT.h"
+#import "XAIDeviceType.h"
 #import "XAIObject.h"
 
 #define Key_DeviceStatusID  127
@@ -71,6 +72,9 @@ typedef NS_ENUM(NSUInteger,_XAIDevOpr){
     XAIDevOpr_GetStatus = 0,
     __Dev_lastItem,
 };
+
+
+
 
 
 
