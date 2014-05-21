@@ -11,7 +11,8 @@
 
 #import "XAIObject.h"
 #import "XAILight.h"
-#import "XAILight2.h"
+#import "XAILight2_CirculeOne.h"
+#import "XAILight2_CirculeTwo.h"
 #import "XAIDoor.h"
 #import "XAIWindow.h"
 
@@ -19,7 +20,6 @@
 
 
 + (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
-+ (NSArray*)  typeCanUse;
 + (NSString*) typeOprClassName:(XAIObjectType)type; /*对应操作的类名*/
 + (NSString*) typeClassName:(XAIObjectType)type; /*对应的类名*/
 

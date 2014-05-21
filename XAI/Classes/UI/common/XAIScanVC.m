@@ -29,20 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 
-    if (isIOS7) {
-        
-        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, -20,320, 20)];
-        view.backgroundColor=[UIColor whiteColor];
-        [self.view addSubview:view];
-    
-        CGPoint  oldCenter =  _backView.center;
-        oldCenter.y += 20;
-
-        [_backView setCenter:oldCenter];
-        
-    }
     
     _readerView = [[ZBarReaderView alloc]init];
     
@@ -62,8 +49,7 @@
     _readerView.torchMode = 0;
     
     
-    //扫描区域
-    CGRect scanMaskRect = frame;
+
     
     //处理模拟器
     if (TARGET_IPHONE_SIMULATOR) {
@@ -71,19 +57,62 @@
         = [[ZBarCameraSimulator alloc]initWithViewController:self];
         cameraSimulator.readerView = _readerView;
     }
-    //[self.view addSubview:_readerView];
+    
+    //扫描区域
+    //CGRect scanMaskRect = frame;
     //扫描区域计算
-    _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
+    // _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
     
     [_readerView.scanner setSymbology: ZBAR_I25
                                config: ZBAR_CFG_ENABLE
                                    to: 0];
     
-    [_readerView start];
+    //[_readerView start];
 
+    //dispatch_async(dispatch_get_main_queue(), ^{[_readerView start];});
+    
+    [_readerView performSelectorInBackground:@selector(start) withObject:nil];
     
     
     [_scanView addSubview:_readerView];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+   // [_readerView start];
+    
+    if (isIOS7) {
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, -20,320, 20)];
+        view.backgroundColor=[UIColor whiteColor];
+        [self.view addSubview:view];
+        
+        CGPoint  oldCenter =  _backView.center;
+        oldCenter.y += 20;
+        
+        [_backView setCenter:oldCenter];
+        
+        _ios7_view = view;
+        
+    }
+
+}
+
+
+- (void) viewWillDisappear:(BOOL)animated{
+    
+    
+    if (isIOS7) {
+        
+        [_ios7_view removeFromSuperview];
+        _ios7_view = nil;
+        
+    }
+    
+
+    [super viewWillDisappear:animated];
+    
 }
 
 - (void)didReceiveMemoryWarning

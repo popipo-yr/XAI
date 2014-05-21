@@ -479,7 +479,7 @@
           if ([oneDev.model isEqualToString:@"SWITCH-2"]) {//双控灯
               
               XAIDevice* dev2 = [oneDev copy];
-              dev2.type = XAIObjectType_light2;
+              dev2.type = XAIObjectType_light2_1;
               [_onlineDevices addObject:dev2]; //添加2次
           }
           

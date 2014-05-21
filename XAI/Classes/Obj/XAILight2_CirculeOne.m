@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILight2.h"
+#import "XAILight2_CirculeOne.h"
 
-@implementation XAILight2
+@implementation XAILight2_CirculeOne
 
 - (void) openLight{
     

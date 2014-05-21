@@ -27,7 +27,7 @@
             imgNameStr = @"obj_window";
         }
             break;
-        case XAIObjectType_light2:
+        case XAIObjectType_light2_1:
         case XAIObjectType_light:{
             
             imgNameStr = @"obj_light";
@@ -41,14 +41,6 @@
     return imgNameStr;
 }
 
-+ (NSArray*)  typeCanUse{
-    
-    __autoreleasing NSArray* types = @[[NSNumber numberWithInt:XAIObjectType_door],
-                                       [NSNumber numberWithInt:XAIObjectType_light],
-                                       [NSNumber numberWithInt:XAIObjectType_window]];
-    
-    return types;
-}
 
 + (NSString*) typeOprClassName:(XAIObjectType)type{
     
@@ -66,7 +58,8 @@
         }
             break;
         
-        case XAIObjectType_light2:
+        case XAIObjectType_light2_1:
+        case XAIObjectType_light2_2:
         case XAIObjectType_light:{
             
             className = @"XAILightOpr";
@@ -102,9 +95,15 @@
             className = @"XAILight";
             
         } break;
-        case XAIObjectType_light2:{
+        case XAIObjectType_light2_1:{
             
-            className = @"XAILight2";
+            className = @"XAILight2_CirculeOne";
+            
+        } break;
+            
+        case XAIObjectType_light2_2:{
+            
+            className = @"XAILight2_CirculeTwo";
             
         } break;
             

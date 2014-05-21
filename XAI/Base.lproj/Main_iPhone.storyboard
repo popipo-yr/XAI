@@ -91,28 +91,33 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="bsM-FV-FV6">
-                                <rect key="frame" x="60" y="205" width="200" height="30"/>
+                                <rect key="frame" x="60" y="210" width="200" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textField_bg.png" id="deV-dM-1Wi">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="5" width="200" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_btn_nor.png" id="rYV-vu-FMO">
+                                        <rect key="frame" x="171" y="6" width="28" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 二维码传" minimumFontSize="17" id="rzg-GT-8IT">
-                                        <rect key="frame" x="3" y="0.0" width="160" height="30"/>
+                                        <rect key="frame" x="3" y="5" width="160" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lJA-Ss-RGZ">
-                                        <rect key="frame" x="175" y="3" width="25" height="25"/>
+                                        <rect key="frame" x="163" y="0.0" width="43" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Button" image="qrcode_btn_nor.png">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="qrcodeBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mVw-P3-aMB"/>
+                                            <action selector="qrcodeBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3GJ-sz-cyQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

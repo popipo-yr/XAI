@@ -71,6 +71,7 @@
 		96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DBE1915DD9D009849B0 /* XAIObjectGenerate.m */; };
 		96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DC11915DE49009849B0 /* XAIObjectGroup.m */; };
 		96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DCA1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m */; };
+		96659E3E192C6B200045E66F /* XAILight2_CirculeTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
 		96729FD7192B1F26002A8C40 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD6192B1F25002A8C40 /* CoreVideo.framework */; };
@@ -94,7 +95,7 @@
 		967BD7A6190904FA007C3C8C /* XAIDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7A5190904FA007C3C8C /* XAIDebug.m */; };
 		967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7AC19090F3A007C3C8C /* XAISetVC.m */; };
 		967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7AF19090F3A007C3C8C /* XAIUserListVC.m */; };
-		968105E71917601A00171BF3 /* XAILight2.m in Sources */ = {isa = PBXBuildFile; fileRef = 968105E61917601A00171BF3 /* XAILight2.m */; };
+		968105E71917601A00171BF3 /* XAILight2_CirculeOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 968105E61917601A00171BF3 /* XAILight2_CirculeOne.m */; };
 		968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B518FF6B920016DDB7 /* SwitchTest.m */; };
 		968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B818FF73660016DDB7 /* XAIDevDoorContact.m */; };
 		968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120BB18FF91D80016DDB7 /* XAIDevInfrared.m */; };
@@ -289,6 +290,8 @@
 		96619DC11915DE49009849B0 /* XAIObjectGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectGroup.m; sourceTree = "<group>"; };
 		96619DC91915E0ED009849B0 /* XAIDevShowStatusVCGenerate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevShowStatusVCGenerate.h; sourceTree = "<group>"; };
 		96619DCA1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevShowStatusVCGenerate.m; sourceTree = "<group>"; };
+		96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2_CirculeTwo.h; sourceTree = "<group>"; };
+		96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2_CirculeTwo.m; sourceTree = "<group>"; };
 		96729FD0192B1E81002A8C40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		96729FD2192B1F00002A8C40 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		96729FD4192B1F0F002A8C40 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -398,8 +401,8 @@
 		967BD7AC19090F3A007C3C8C /* XAISetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAISetVC.m; sourceTree = "<group>"; };
 		967BD7AE19090F3A007C3C8C /* XAIUserListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserListVC.h; sourceTree = "<group>"; };
 		967BD7AF19090F3A007C3C8C /* XAIUserListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserListVC.m; sourceTree = "<group>"; };
-		968105E51917601A00171BF3 /* XAILight2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2.h; sourceTree = "<group>"; };
-		968105E61917601A00171BF3 /* XAILight2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2.m; sourceTree = "<group>"; };
+		968105E51917601A00171BF3 /* XAILight2_CirculeOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2_CirculeOne.h; sourceTree = "<group>"; };
+		968105E61917601A00171BF3 /* XAILight2_CirculeOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2_CirculeOne.m; sourceTree = "<group>"; };
 		968120B518FF6B920016DDB7 /* SwitchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchTest.m; sourceTree = "<group>"; };
 		968120B718FF73660016DDB7 /* XAIDevDoorContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevDoorContact.h; sourceTree = "<group>"; };
 		968120B818FF73660016DDB7 /* XAIDevDoorContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevDoorContact.m; sourceTree = "<group>"; };
@@ -717,8 +720,10 @@
 				967BD7A5190904FA007C3C8C /* XAIDebug.m */,
 				96619DBD1915DD9D009849B0 /* XAIObjectGenerate.h */,
 				96619DBE1915DD9D009849B0 /* XAIObjectGenerate.m */,
-				968105E51917601A00171BF3 /* XAILight2.h */,
-				968105E61917601A00171BF3 /* XAILight2.m */,
+				968105E51917601A00171BF3 /* XAILight2_CirculeOne.h */,
+				968105E61917601A00171BF3 /* XAILight2_CirculeOne.m */,
+				96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */,
+				96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1505,9 +1510,10 @@
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
-				968105E71917601A00171BF3 /* XAILight2.m in Sources */,
+				968105E71917601A00171BF3 /* XAILight2_CirculeOne.m in Sources */,
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
+				96659E3E192C6B200045E66F /* XAILight2_CirculeTwo.m in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
 				9648E6F0190A1FD200D630D8 /* XAITableViewWithOprController.m in Sources */,

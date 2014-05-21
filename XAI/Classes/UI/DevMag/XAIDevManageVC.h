@@ -12,12 +12,13 @@
 #import "XAIDeviceService.h"
 #import "XAIObject.h"
 #import "XAIChangeNameVC.h"
+#import "XAIScanVC.h"
 
 #import "XAIData.h"
 
 @interface XAIDevManageVC : XAITableViewWithOprController
 <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate
-,ZBarReaderDelegate,XAIDeviceServiceDelegate,XAIDataRefreshDelegate>{
+,XAIScanVCDelegate,XAIDeviceServiceDelegate,XAIDataRefreshDelegate>{
 
     XAIDeviceService* _deviceService;
     NSMutableArray*  _objectAry;

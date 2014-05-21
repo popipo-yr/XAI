@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 
 
+#define XAIScanVC_SB_ID @"XAIScanVCID"
+
+
 @protocol XAIScanVCDelegate ;
 @interface XAIScanVC : UIViewController <ZBarReaderViewDelegate>{
 
     ZBarReaderView *_readerView ;
+    
+    UIView* _ios7_view;
 
 }
 

@@ -30,13 +30,13 @@
             }
             
         }break;
-        case XAIObjectType_light2:{
+        case XAIObjectType_light2_1:{
             
-            if ([aObj isKindOfClass:[XAILight2 class]]) {
+            if ([aObj isKindOfClass:[XAILight2_CirculeOne class]]) {
                 
                 XAILightStatusVC* lightVC = [storyboard
                                              instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
-                lightVC.light = (XAILight2*)aObj;
+                lightVC.light = (XAILight2_CirculeOne*)aObj;
                 
                 
                 return lightVC;

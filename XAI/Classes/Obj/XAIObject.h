@@ -19,11 +19,12 @@ typedef enum XAIObjectType{
     XAIObjectType_door = 0,
     XAIObjectType_window = 1,
     XAIObjectType_light = 2,
-    XAIObjectType_light2 = 3,
+    XAIObjectType_light2_1 = 3,
+    XAIObjectType_light2_2 = 4,
     
 }XAIObjectType;
 
-#define XAIObjectTypeCount 4
+#define XAIObjectTypeCount 5
 
 #define XAIObjectFlagNormal 0
 

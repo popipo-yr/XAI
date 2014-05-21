@@ -66,21 +66,13 @@
 
 
 
-- (void) imagePickerController: (UIImagePickerController*) reader
- didFinishPickingMediaWithInfo: (NSDictionary*) info
-{
+-(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
     
-    NSString* luidstr = nil;
     
-    // ADD: get the decode results
-    id<NSFastEnumeration> results =
-    [info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for(symbol in results){
+    const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
+    NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
+    NSString* luidstr = symbolStr;
     
-       luidstr = symbol.data;
-    
-    }
         // EXAMPLE: just grab the first barcode
     
     // EXAMPLE: do something useful with the barcode data
@@ -94,7 +86,7 @@
     //[reader dismissModalViewControllerAnimated: YES];
     
     
-    [reader dismissViewControllerAnimated:YES completion:nil];
+    [scanVC dismissViewControllerAnimated:YES completion:nil];
     
     luidstr = @"0x124b000413c8d8";
     
@@ -121,25 +113,15 @@
 - (void) addBtnClick:(id) sender{
     
     
-    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    //ZBarReaderController *reader = [ZBarReaderController new];
+    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
     
-    reader.readerDelegate = self;
-    //reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-    
-    ZBarImageScanner *scanner = reader.scanner;
-    // TODO: (optional) additional reader configuration here
-    
-    // EXAMPLE: disable rarely used I2/5 to improve performance
-    [scanner setSymbology: ZBAR_I25
-                   config: ZBAR_CFG_ENABLE
-                       to: 0];
-    
-    // present and release the controller
-    
-    [self presentViewController:reader animated:YES completion:Nil];
-    
-    
+    if ([scanvc isKindOfClass:[XAIScanVC class]]) {
+        
+        scanvc.delegate = self;
+        
+        [self presentViewController:scanvc animated:YES completion:nil];
+    }
+
 }
 
 - (void)delBtnClick:(NSIndexPath*) index{

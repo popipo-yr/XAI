@@ -8,6 +8,6 @@
 
 #import "XAILight.h"
 
-@interface XAILight2 : XAILight
+@interface XAILight2_CirculeOne : XAILight
 
 @end

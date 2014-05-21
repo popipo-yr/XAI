@@ -425,7 +425,7 @@
 -(IBAction)qrcodeBtnClick:(id)sender{
 
     
-    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:@"XAIScanVCID"];
+    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
     
     if ([scanvc isKindOfClass:[XAIScanVC class]]) {
         
