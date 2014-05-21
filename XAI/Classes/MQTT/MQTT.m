@@ -20,6 +20,7 @@ static MQTT*  _MQTTSTATIC = NULL;
         _MQTTSTATIC = [[MQTT alloc] init];
         _MQTTSTATIC.client = NULL;
         _MQTTSTATIC.packetManager = NULL;
+        _MQTTSTATIC.isLogin = false;
     }
 
     return _MQTTSTATIC;

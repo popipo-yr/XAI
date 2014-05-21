@@ -19,9 +19,12 @@
     
     XAITYPEAPSN _apsn;
     XAITYPELUID _luid;
+    
+    BOOL _isLogin;
 
 }
 
+@property (nonatomic,assign) BOOL isLogin;
 
 @property (nonatomic, weak) MQTTPacketManager* packetManager;
 @property (nonatomic, weak) MosquittoClient* client;

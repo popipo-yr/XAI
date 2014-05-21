@@ -242,7 +242,21 @@
 
 - (void) didConnect:(NSUInteger)code {
     
+    
+    /*订阅主题*/
+    MQTT* curMQTT = [MQTT shareMQTT];
+    
+    if (curMQTT.isLogin) {
+        
+        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                                  luid:MQTTCover_LUID_Server_03]];
+        
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+    }
+
+    
     [_connectDelegate didConnect:code];
+    
 }
 
 - (void) didDisconnect {

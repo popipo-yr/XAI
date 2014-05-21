@@ -107,6 +107,7 @@
         user.pawd = _pawd;
         
         curMQTT.curUser = user;
+        curMQTT.isLogin = true;
         
     }
     
