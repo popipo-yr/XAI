@@ -468,7 +468,7 @@
         
         
         
-        [_devService findAllOnlineDevWithuseSecond:10];
+        [_devService findAllOnlineDevWithuseSecond:2];
         
         _findOnlineStatus = start;
         

@@ -13,6 +13,7 @@
 @interface DeviceTest : LoginPlugin <XAIDeviceStatusDelegate>{
 
     int _getStatus;
+    int _getInfo;
     XAIDevice* _device;
     
 
@@ -29,7 +30,7 @@
     
     _device.apsn = 0x1;
     //_device.luid = 0x124b0003d430b6;
-    _device.luid = 0x00124B000413C8D8;
+    _device.luid = 0x00124B000413CDCF;
     //00-12-4B-00-04-13-C8-D8
     
     [super setUp];
@@ -123,7 +124,43 @@
 }
 
 
-- (void)getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
+- (void)testGetDevInfo
+{
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_device getDeviceInfo];
+        
+        
+        _getInfo = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_getInfo > start) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_getInfo != start, @"delegate did not get called");
+        XCTAssertTrue (_getInfo != Fail, @"no, Get dev Info should success");
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+
+
+
+- (void)device:(XAIDevice*)device getStatus:(XAIDeviceStatus)status isSuccess:(BOOL)finish isTimeOut:(BOOL)bTimeOut{
 
     if (finish) {
         
@@ -132,6 +169,20 @@
     
         _getStatus = Fail;
     
+    }
+
+}
+
+
+-(void)device:(XAIDevice *)device getInfoIsSuccess:(BOOL)bSuccess isTimeOut:(BOOL)bTimeOut{
+    
+    if (bSuccess) {
+        
+        _getInfo = Success;
+        
+    }else{
+    
+        _getInfo = Fail;
     }
 
 }

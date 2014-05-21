@@ -181,23 +181,16 @@
     [_timer invalidate];
     _timer = nil;
     
-    for (id obj in _allDevices) {
-        
-        if (![obj isKindOfClass:[XAIDevice class]]) continue;
-        
-        //        XAITYPELUID luid;
-        //        NSScanner* scanner = [NSScanner scannerWithString:obj];
-        //        [scanner scanHexLongLong:&luid];
-        XAIDevice*  dev = obj;
-        
-        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
-        //[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:luid other:Key_DeviceStatusID];
-        
-        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
-        [[MQTT shareMQTT].client unsubscribe:topic];
-    }
-
-    
+//    for (id obj in _allDevices) {
+//        
+//        if (![obj isKindOfClass:[XAIDevice class]]) continue;
+//        
+//        XAIDevice*  dev = obj;
+//        
+//        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
+//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
+//        [[MQTT shareMQTT].client unsubscribe:topic];
+//    }
     
     if (_deviceServiceDelegate != nil &&
         [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
@@ -216,15 +209,15 @@
         
         if (![obj isKindOfClass:[XAIDevice class]]) continue;
         
-//        XAITYPELUID luid;
-//        NSScanner* scanner = [NSScanner scannerWithString:obj];
-//        [scanner scanHexLongLong:&luid];
         XAIDevice*  dev = obj;
         
-        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
+        dev.delegate = self;
+        [dev getDeviceInfo];
         
-        [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
-        [[MQTT shareMQTT].client subscribe:topic];
+//        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
+//        
+//        [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
+//        [[MQTT shareMQTT].client subscribe:topic];
     }
 }
 
@@ -340,6 +333,56 @@
 }
 
 
+#pragma mark - Device Delegate
+-(void)device:(XAIDevice *)device getInfoIsSuccess:(BOOL)bSuccess isTimeOut:(BOOL)bTimeOut{
+
+    
+    if (bSuccess) {
+        
+        
+        /*mustchange*/
+        if ([device.model isEqualToString:@"SWITCH-1"]) {//单控灯
+            
+            device.type = XAIObjectType_light;
+            
+        }else if([device.model isEqualToString:@"MAGNET"]){
+            
+            device.type = XAIObjectType_window;
+            
+        }else{
+            
+            device.type = XAIObjectType_light;
+            
+        }
+        
+        if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
+            
+            XAIDevice* dev2 = [device copy];
+            dev2.type = XAIObjectType_light2_1;
+            [_onlineDevices addObject:dev2]; //添加2次
+        }
+        
+        [_onlineDevices addObject:device];
+        
+        
+        
+        if(_timer != nil){
+            
+            [_timer invalidate];
+            
+        }
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
+                                                  target:self
+                                                selector:@selector(stopfindAllOnlineDev)
+                                                userInfo:nil
+                                                 repeats:YES];
+        
+    }
+
+}
+
+
 #pragma mark -- MQTTPacketManagerDelegate
 - (void)reciveACKPacket:(void*)datas size:(int)size topic:topic{
     
@@ -422,86 +465,82 @@
     purgePacketParamStatusAndData(status);
 }
 
-- (void) reciveDevPacket:(void*)datas size:(int)size topic:topic{
-    
-    _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
-    
-    
-  if([MQTTCover isNodeTopic:topic] && dti != NULL){
-      
-      XAITYPEAPSN apsn = [MQTTCover nodeTopicAPSN:topic];
-      XAITYPELUID luid = [MQTTCover nodeTopicLUID:topic];
-      
-      XAIDevice*  oneDev = nil;
-      
-      NSEnumerator *enumerator = [_allDevices objectEnumerator];
-      for (XAIDevice *aDev in enumerator) {
-         
-          if (aDev.apsn == apsn && aDev.luid == luid) {
-              
-              oneDev = aDev;
-              break;
-          }
-      }
-      
-      
-      if (nil !=  oneDev) {
-          
-          
-          NSString* model = [[NSString alloc] initWithUTF8String:(const char*)dti->model];
-          NSString* vender = [[NSString alloc] initWithUTF8String:(const char*)dti->vender];
-          
-//          NSString* model = [[NSString alloc]initWithBytes:dti->model
-//                                                    length:sizeof(dti->model) encoding:NSASCIIStringEncoding];
-//          NSString* vender = [[NSString alloc] initWithBytes:dti->vender
-//                                                      length:sizeof(dti->vender) encoding:NSASCIIStringEncoding];
-          
-          oneDev.model = [[NSString alloc] initWithFormat:@"%@",[model uppercaseString]];
-          oneDev.vender = vender;
-          
-          NSLog(@"%@",[oneDev.model uppercaseString]);
-          
-          /*mustchange*/
-          if ([oneDev.model isEqualToString:@"SWITCH-1"]) {//单控灯
-              
-              oneDev.type = XAIObjectType_light;
-              
-          }else if([oneDev.model isEqualToString:@"MAGNET"]){
-          
-              oneDev.type = XAIObjectType_window;
-          
-          }else{
-          
-              oneDev.type = XAIObjectType_light;
-          
-          }
-          
-          if ([oneDev.model isEqualToString:@"SWITCH-2"]) {//双控灯
-              
-              XAIDevice* dev2 = [oneDev copy];
-              dev2.type = XAIObjectType_light2_1;
-              [_onlineDevices addObject:dev2]; //添加2次
-          }
-          
-          [_onlineDevices addObject:oneDev];
-
-      }
-      
-      if(_timer != nil){
-          
-          [_timer invalidate];
-          
-      }
-      _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
-                                                target:self
-                                              selector:@selector(stopfindAllOnlineDev)
-                                              userInfo:nil
-                                               repeats:YES];
-      
-  }
-    
-    purgePacketParamDTI(dti);
-}
+//- (void) reciveDevPacket:(void*)datas size:(int)size topic:topic{
+//    
+//    _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
+//    
+//    
+//  if([MQTTCover isNodeTopic:topic] && dti != NULL){
+//      
+//      XAITYPEAPSN apsn = [MQTTCover nodeTopicAPSN:topic];
+//      XAITYPELUID luid = [MQTTCover nodeTopicLUID:topic];
+//      
+//      XAIDevice*  oneDev = nil;
+//      
+//      NSEnumerator *enumerator = [_allDevices objectEnumerator];
+//      for (XAIDevice *aDev in enumerator) {
+//         
+//          if (aDev.apsn == apsn && aDev.luid == luid) {
+//              
+//              oneDev = aDev;
+//              break;
+//          }
+//      }
+//      
+//      
+//      if (nil !=  oneDev) {
+//          
+//          
+//          NSString* model = [[NSString alloc] initWithUTF8String:(const char*)dti->model];
+//          NSString* vender = [[NSString alloc] initWithUTF8String:(const char*)dti->vender];
+//          
+//          
+//          oneDev.model = [[NSString alloc] initWithFormat:@"%@",[model uppercaseString]];
+//          oneDev.vender = vender;
+//          
+//          NSLog(@"%@",[oneDev.model uppercaseString]);
+//          
+//          /*mustchange*/
+//          if ([oneDev.model isEqualToString:@"SWITCH-1"]) {//单控灯
+//              
+//              oneDev.type = XAIObjectType_light;
+//              
+//          }else if([oneDev.model isEqualToString:@"MAGNET"]){
+//          
+//              oneDev.type = XAIObjectType_window;
+//          
+//          }else{
+//          
+//              oneDev.type = XAIObjectType_light;
+//          
+//          }
+//          
+//          if ([oneDev.model isEqualToString:@"SWITCH-2"]) {//双控灯
+//              
+//              XAIDevice* dev2 = [oneDev copy];
+//              dev2.type = XAIObjectType_light2_1;
+//              [_onlineDevices addObject:dev2]; //添加2次
+//          }
+//          
+//          [_onlineDevices addObject:oneDev];
+//
+//      }
+//      
+//      if(_timer != nil){
+//          
+//          [_timer invalidate];
+//          
+//      }
+//      _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
+//                                                target:self
+//                                              selector:@selector(stopfindAllOnlineDev)
+//                                              userInfo:nil
+//                                               repeats:YES];
+//      
+//  }
+//    
+//    purgePacketParamDTI(dti);
+//}
 
 
 
@@ -529,7 +568,7 @@
         case XAI_PKT_TYPE_DEV_INFO_REPLY:
         {
             
-            [self reciveDevPacket:datas size:size topic:topic];
+            //[self reciveDevPacket:datas size:size topic:topic];
         
         }break;
             

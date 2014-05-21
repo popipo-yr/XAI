@@ -39,6 +39,8 @@ typedef NSUInteger XAIDevOpr;
 @property (nonatomic, weak) id <XAIDeviceStatusDelegate> delegate;
 
 - (void) getDeviceStatus;
+- (void) getDeviceInfo;
+//- (void) stopGetInfo;
 
 /*状态关心*/
 - (void) startFocusStatus;
@@ -63,13 +65,18 @@ typedef enum XAIDeviceStatus{
 
 @protocol XAIDeviceStatusDelegate <NSObject>
 
-- (void) getStatus:(XAIDeviceStatus)status withFinish:(BOOL)finish isTimeOut:(BOOL)bTimeOut;
+@optional
+
+- (void) device:(XAIDevice*)device getStatus:(XAIDeviceStatus)status isSuccess:(BOOL)finish isTimeOut:(BOOL)bTimeOut;
+
+- (void) device:(XAIDevice*)device getInfoIsSuccess:(BOOL)bSuccess isTimeOut:(BOOL)bTimeOut;
 
 @end
 
 typedef NS_ENUM(NSUInteger,_XAIDevOpr){
 
     XAIDevOpr_GetStatus = 0,
+    XAIDevOpr_GetInfo = 1,
     __Dev_lastItem,
 };
 

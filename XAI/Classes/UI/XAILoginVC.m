@@ -326,7 +326,7 @@
         
         
         [_userService finderAllUser];
-        [_devService findAllOnlineDevWithuseSecond:5];
+        [_devService findAllOnlineDevWithuseSecond:2];
         
     }else{
         

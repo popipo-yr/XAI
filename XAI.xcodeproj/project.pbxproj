@@ -72,6 +72,17 @@
 		96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DC11915DE49009849B0 /* XAIObjectGroup.m */; };
 		96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DCA1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m */; };
 		96659E3E192C6B200045E66F /* XAILight2_CirculeTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */; };
+		96659E41192C813E0045E66F /* MosquittoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E118ED3490006F22D3 /* MosquittoClient.m */; };
+		96659E43192C813E0045E66F /* MosquittoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E318ED3490006F22D3 /* MosquittoMessage.m */; };
+		96659E45192C813E0045E66F /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
+		96659E48192C813E0045E66F /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; };
+		96659E4A192C813E0045E66F /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; };
+		96659E4C192C813E0045E66F /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; };
+		96659E4E192C813E0045E66F /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
+		96659E50192C813E0045E66F /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
+		96659E52192C813E0045E66F /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
+		96659E54192C813E0045E66F /* MQTT.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E780018F3B41A00808391 /* MQTT.m */; };
+		96659E56192C813E0045E66F /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
 		96729FD7192B1F26002A8C40 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD6192B1F25002A8C40 /* CoreVideo.framework */; };
@@ -1531,6 +1542,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96659E41192C813E0045E66F /* MosquittoClient.m in Sources */,
+				96659E43192C813E0045E66F /* MosquittoMessage.m in Sources */,
+				96659E45192C813E0045E66F /* MQTTPacketManager.m in Sources */,
+				96659E48192C813E0045E66F /* XAIPacket.c in Sources */,
+				96659E4A192C813E0045E66F /* XAIPacketNormal.c in Sources */,
+				96659E4C192C813E0045E66F /* XAIPacketCtrl.c in Sources */,
+				96659E4E192C813E0045E66F /* XAIPacketACK.c in Sources */,
+				96659E50192C813E0045E66F /* XAIPacketStatus.c in Sources */,
+				96659E52192C813E0045E66F /* XAIPacketDevTypeInfo.c in Sources */,
+				96659E54192C813E0045E66F /* MQTT.m in Sources */,
+				96659E56192C813E0045E66F /* MQTTCover.m in Sources */,
 				96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */,
 				9616802E19206324000682A4 /* DoorTest.m in Sources */,
 				96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */,
@@ -1792,7 +1814,10 @@
 		C387F38718EA757B0069F98B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XAI.app/XAI";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1807,8 +1832,11 @@
 				);
 				INFOPLIST_FILE = "XAITests/XAITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos7.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1816,7 +1844,10 @@
 		C387F38818EA757B0069F98B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XAI.app/XAI";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1827,8 +1858,11 @@
 				GCC_PREFIX_HEADER = "XAI/XAI-Prefix.pch";
 				INFOPLIST_FILE = "XAITests/XAITests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos7.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

@@ -166,7 +166,7 @@
                         <outlet property="passwordLabel" destination="1HH-oP-bAX" id="xGG-Um-0FA"/>
                         <outlet property="qrcodeLabel" destination="rzg-GT-8IT" id="ZJb-yi-Nbf"/>
                         <segue destination="L54-r1-Z8p" kind="modal" identifier="XAIMainPageSegue" id="JAD-yB-UJh"/>
-                        <segue destination="hsi-Ff-krP" kind="modal" id="pW5-b2-wSV"/>
+                        <segue destination="hsi-Ff-krP" kind="modal" identifier="loginerweimaID" id="pW5-b2-wSV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -860,7 +860,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Hc2-bF-MML"/>
         <segue reference="vvL-pu-Vsi"/>
+        <segue reference="Hc2-bF-MML"/>
     </inferredMetricsTieBreakers>
 </document>

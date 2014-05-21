@@ -8,6 +8,7 @@
 
 #import "XAIDevice.h"
 #import "XAIPacketStatus.h"
+#import "XAIPacketDevTypeInfo.h"
 
 #import "XAIObject.h"
 
@@ -32,21 +33,63 @@
 
 }
 
+- (void) getDeviceInfo{
+    
+    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                         luid:_luid
+                                                        other:MQTTCover_DevTable_Other];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    _devOpr = XAIDevOpr_GetInfo;
+    _DEF_XTO_TIME_Start;
+
+}
+
+//- (void) stopGetInfo{
+//    
+//    _DEF_XTO_TIME_End;
+//    
+//    NSString* _topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:_luid];
+//    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:_topic];
+//    
+//
+//    
+//}
+
 -(void)timeout{
     
     
     if (_devOpr == XAIDevOpr_GetStatus &&
         nil != _delegate &&
-        [_delegate respondsToSelector:@selector(getStatus:withFinish:isTimeOut:)]) {
+        [_delegate respondsToSelector:@selector(device:getStatus:isSuccess:isTimeOut:)]) {
         
-        [_delegate getStatus:XAIDeviceStatus_UNKOWN withFinish:false isTimeOut:true];
+        [_delegate device:self getStatus:XAIDeviceStatus_UNKOWN isSuccess:false isTimeOut:true];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     }
+    
+    
+    if (_devOpr == XAIDevOpr_GetInfo &&
+        nil != _delegate &&
+        [_delegate respondsToSelector:@selector(device:getInfoIsSuccess:isTimeOut:)]) {
+        
+        [_delegate device:self getInfoIsSuccess:false isTimeOut:true];
+        
+        
+        NSString* _topic = [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:_luid];
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:_topic];
+    }
+    
+    _DEF_XTO_TIME_End;
     
 }
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
-    
+- (void) _reciveStatusPacket:(void*)datas size:(int)size topic:topic{
     
     if (![topic isEqualToString:
           [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]]) {
@@ -69,7 +112,7 @@
         _xai_packet_param_data* data = getParamDataFromParamStatus(param, 0);
         
         if ((data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
-
+        
         
         XAITYPEUNSIGN  devStatus_mem = 0;
         
@@ -89,16 +132,102 @@
     } while (0);
     
     
-    if (nil != _delegate && [_delegate respondsToSelector:@selector(getStatus:withFinish:isTimeOut:)]) {
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(device:getStatus:isSuccess:isTimeOut:)]) {
         
-        [_delegate getStatus:devStatus withFinish:isSuccess isTimeOut:false];
+        [_delegate device:self getStatus:devStatus isSuccess:isSuccess isTimeOut:false];
     }
     
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
      [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     
     purgePacketParamStatusAndData(param);
+
 }
+
+- (void) _reciveDevPacket:(void*)datas size:(int)size topic:topic{
+    
+    if (![topic isEqualToString:[MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:_luid]]) {
+        
+        return;
+    }
+
+    
+     _DEF_XTO_TIME_End;
+    
+    _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
+    
+    BOOL isSuc = false;
+    
+    do {
+        
+        if(![MQTTCover isNodeTopic:topic] || dti == NULL) break;
+        
+        XAITYPEAPSN apsn = [MQTTCover nodeTopicAPSN:topic];
+        XAITYPELUID luid = [MQTTCover nodeTopicLUID:topic];
+        
+        if (_apsn != apsn || _luid != luid) break;
+        
+        NSString* model = [[NSString alloc] initWithUTF8String:(const char*)dti->model];
+        NSString* vender = [[NSString alloc] initWithUTF8String:(const char*)dti->vender];
+        
+        
+        
+        _model = [[NSString alloc] initWithFormat:@"%@",[model uppercaseString]];
+        _vender = vender;
+        
+        
+        isSuc = true;
+        
+    } while (0);
+    
+    
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(device:getInfoIsSuccess:isTimeOut:)]) {
+        
+        [_delegate device:self getInfoIsSuccess:isSuc isTimeOut:false];
+    }
+
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+     [MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:_luid]];
+    
+    
+    purgePacketParamDTI(dti);
+}
+
+
+
+
+- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+    
+    
+    _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
+    
+    
+    switch (param->flag) {
+            
+        case XAI_PKT_TYPE_STATUS:
+        {
+            [self _reciveStatusPacket:datas size:size topic:topic];
+            
+        }break;
+            
+        case XAI_PKT_TYPE_DEV_INFO_REPLY:
+        {
+            
+            [self _reciveDevPacket:datas size:size topic:topic];
+            
+        }break;
+            
+        default:
+            break;
+    }
+    
+    
+    purgePacketParamNormal(param);
+
+    
+    
+    
+  }
 
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{

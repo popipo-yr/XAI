@@ -24,7 +24,7 @@
 }
 
 
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,6 +51,7 @@
             
         }else{
         
+            #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
             [tbItem setFinishedSelectedImage:[self imageForTabBarItem:[tbItem tag] selected:YES]
                  withFinishedUnselectedImage:[self imageForTabBarItem:[tbItem tag] selected:NO]];
         }

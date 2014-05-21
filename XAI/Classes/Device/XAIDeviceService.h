@@ -16,7 +16,7 @@
 
 @protocol XAIDeviceServiceDelegate;
 
-@interface XAIDeviceService : XAIDevice <MQTTPacketManagerDelegate>{
+@interface XAIDeviceService : XAIDevice <MQTTPacketManagerDelegate,XAIDeviceStatusDelegate>{
     
     NSMutableSet* _allDevices;
     NSMutableSet* _onlineDevices;
