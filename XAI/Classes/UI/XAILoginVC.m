@@ -40,8 +40,10 @@
     [nameLabel setText:nil];
     [nameLabel setPlaceholder:NSLocalizedString(@"TipName", nil)];
     
+    //TODO: THERE IS
+    _scanApsn = 0x1;
+    _scanIP = @"192.168.0.33";
     
-    [MQTT shareMQTT].apsn = 0x1;
     
     _keyboardIsUp = false;
 }
@@ -264,7 +266,7 @@
     _login = [[XAILogin alloc] init];
     _login.delegate = self;
     
-    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:@"192.168.1.1" apsn:0x1];
+    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_scanIP apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
@@ -441,6 +443,8 @@
 
 -(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
 
+    
+    
 
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
@@ -472,6 +476,9 @@
         //然后，可以使用如下代码来把一个字符串放置到剪贴板上：
         pasteboard.string = [arrInfoFoot objectAtIndex:1];
     }
+    
+    _scanApsn = 0x1;
+    _scanIP = @"192.168.0.33";
 
 }
 

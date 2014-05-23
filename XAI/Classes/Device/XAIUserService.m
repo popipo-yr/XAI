@@ -230,6 +230,24 @@
     
     if ((0 != param->data_count % 3) || realCount < 1) {
         
+        if (findingAUser) {
+            
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
+                
+                [_userServiceDelegate userService:self findedUser:0 withName:nil  status:false  errcode:XAI_ERROR_UNKOWEN];
+            }
+            
+            findingAUser = FALSE;
+            
+        }
+        
+        if ((nil != _userServiceDelegate) &&
+            [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
+            
+            [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_UNKOWEN];
+        }
+
         return -1;
     }
     
@@ -245,6 +263,8 @@
         if ((data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
         
         NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
+        
+        //name = [[NSString alloc] initWithUTF8String:data->data];
         
         if (findingAUser && !find && [name isEqualToString:username]) {
             

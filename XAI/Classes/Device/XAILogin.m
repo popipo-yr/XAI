@@ -15,6 +15,9 @@
 #pragma mark Outer methods
 
 - (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn{
+    
+    _ip = host;
+    _apsn = apsn;
 
     MosquittoClient*  mosq = [MQTT shareMQTT].client;
 
@@ -34,6 +37,8 @@
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
+    //[MQTT shareMQTT].apsn = apsn;
+    
     [mosq connect];
     
     _DEF_XTO_TIME_Start;
@@ -44,7 +49,7 @@
 
 - (void) didConnect:(NSUInteger)code {
 	
-    
+    _userService.apsn = _apsn;
     [_userService finderUserLuidHelper:_name];
     
     _DEF_XTO_TIME_End;
@@ -90,6 +95,7 @@
         MQTT* curMQTT = [MQTT shareMQTT];
         
         curMQTT.luid = luid;
+        curMQTT.apsn = _apsn;
         
         /*订阅主题*/
         [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
@@ -102,7 +108,7 @@
         /*设置当前用户*/
         XAIUser* user = [[XAIUser alloc] init];
         user.luid = luid;
-        user.apsn = curMQTT.apsn;
+        user.apsn = _apsn;
         user.name = _name;
         user.pawd = _pawd;
         
@@ -126,7 +132,6 @@
     if (self = [super init]) {
         
         _userService = [[XAIUserService alloc] init];
-        _userService.apsn = 0x01;
         _userService.luid = MQTTCover_LUID_Server_03;
         _userService.userServiceDelegate = self;
         

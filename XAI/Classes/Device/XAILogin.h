@@ -22,6 +22,9 @@
     NSString*  _name;
     NSString*  _pawd;
     XAIUserService* _userService;
+    
+    NSString* _ip;
+    XAITYPEAPSN _apsn;
 
 
 }

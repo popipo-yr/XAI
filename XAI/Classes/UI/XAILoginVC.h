@@ -27,6 +27,9 @@
     int _findDev;
     
     BOOL _keyboardIsUp;
+    
+    NSString* _scanIP;
+    XAITYPEAPSN _scanApsn;
 }
 
 
