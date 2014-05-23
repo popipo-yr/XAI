@@ -46,14 +46,14 @@
     xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
                        [data length], (void*)[devName UTF8String],type_data);
     
+    
+//    NSString* typestr = @"中文";
+//    NSData* typeData  = [typestr dataUsingEncoding:NSUTF8StringEncoding];
 //    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
-//                       sizeof(type), &type,NULL);
-    
+//                       [typeData length], (void*)[typestr UTF8String],NULL);
     xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       [data length], (void*)[devName UTF8String],NULL);
+                       sizeof(type), &type,NULL);
 
-   
-    
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
                        0, 0, AddDevID,[[NSDate new] timeIntervalSince1970],4, apsn_data);
@@ -249,9 +249,12 @@
     
     NSMutableArray* devAry = [[NSMutableArray alloc] init];
     
-    int realCount = param->data_count / 3;
     
-    if ((0 != param->data_count % 3) || realCount < 0) {
+    int devParamCout = 4; /*每个设备有4个参数*/
+    
+    int realCount = param->data_count / devParamCout;
+    
+    if ((0 != param->data_count % devParamCout) || realCount < 0) {
         
         realCount = 0;
         NSLog(@"err...");
@@ -265,7 +268,17 @@
         
         do {
             
-            _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*3 + 2);
+            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
+            
+            if ((type_data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || type_data->data_len <= 0) break;
+            
+//            NSString* type = [[NSString alloc] initWithBytes:type_data->data length:type_data->data_len encoding:NSUTF8StringEncoding];
+            
+            XAIDeviceType type = *((XAIDeviceType*)type_data->data);
+            aDevice.devType = type;
+            
+            
+            _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
             
             if ((data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
             
@@ -275,7 +288,7 @@
             
             
             
-            _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 1);
+            _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*devParamCout + 1);
             
             if ((luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
             
@@ -287,7 +300,7 @@
             aDevice.luid = luid;
             
             
-            _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*3 + 0);
+            _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*devParamCout + 0);
             
             if ((apsn_data->data_type != XAI_DATA_TYPE_BIN_LUID) || apsn_data->data_len <= 0) break;
             

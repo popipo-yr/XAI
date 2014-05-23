@@ -27,6 +27,7 @@ typedef NSUInteger XAIDevOpr;
     XAIObjectType _type;
     
     XAIDevOpr _devOpr;
+    XAIDeviceType _devType;
 
 }
 
@@ -36,6 +37,7 @@ typedef NSUInteger XAIDevOpr;
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/
 @property (nonatomic, assign) XAIObjectType type;
+@property (nonatomic, assign) XAIDeviceType devType;
 @property (nonatomic, weak) id <XAIDeviceStatusDelegate> delegate;
 
 - (void) getDeviceStatus;
