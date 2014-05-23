@@ -45,7 +45,7 @@ static XAIData*  _s_XAIData_ = NULL;
         if (![aDev isKindOfClass:[XAIDevice class]]) continue;
         
         
-        XAIObject*  aObj = [[NSClassFromString([XAIObjectGenerate typeClassName:aDev.type]) alloc] init];
+        XAIObject*  aObj = [[NSClassFromString([XAIObjectGenerate typeClassName:aDev.corObjType]) alloc] init];
         if (aObj == nil) continue;
         
         [aObj setInfoFromDevice:aDev];

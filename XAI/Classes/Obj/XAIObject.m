@@ -63,7 +63,7 @@
     _luid = dev.luid;
     _model = dev.model;
     _vender = dev.vender;
-    _type = dev.type;
+    _type = dev.corObjType;
     
     _name = dev.name;
 

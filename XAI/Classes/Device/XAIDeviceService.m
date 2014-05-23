@@ -273,9 +273,21 @@
             if ((type_data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || type_data->data_len <= 0) break;
             
 //            NSString* type = [[NSString alloc] initWithBytes:type_data->data length:type_data->data_len encoding:NSUTF8StringEncoding];
+            if (type_data->data_len != sizeof(XAIDeviceType)) {
+                
+                XAIDeviceType type = 0; //必须初始化
+                byte_data_copy(&type, type_data->data, sizeof(XAIDeviceType), type_data->data_len);
+                
+                aDevice.devType = type;
+                
+                
+            }else{
             
-            XAIDeviceType type = *((XAIDeviceType*)type_data->data);
-            aDevice.devType = type;
+                XAIDeviceType type = *((XAIDeviceType*)(type_data->data));
+                aDevice.devType = type;
+            }
+            
+
             
             
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
@@ -353,30 +365,74 @@
     if (bSuccess) {
         
         
+        
+        
+//        /*mustchange*/
+//        if ([device.model isEqualToString:@"SWITCH-1"]) {//单控灯
+//            
+//            device.type = XAIObjectType_light;
+//            
+//        }else if([device.model isEqualToString:@"MAGNET"]){
+//            
+//            device.type = XAIObjectType_window;
+//            
+//        }else{
+//            
+//            device.type = XAIObjectType_light;
+//            
+//        }
+//        
+//        if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
+//            
+//            XAIDevice* dev2 = [device copy];
+//            dev2.type = XAIObjectType_light2_1;
+//            [_onlineDevices addObject:dev2]; //添加2次
+//        }
+        
+        
         /*mustchange*/
-        if ([device.model isEqualToString:@"SWITCH-1"]) {//单控灯
+        
+        BOOL  shouldAdd = true;
+        
+        switch (device.devType) {
+            case XAIDeviceType_light:{
+                
+                device.corObjType = XAIObjectType_light;
             
-            device.type = XAIObjectType_light;
-            
-        }else if([device.model isEqualToString:@"MAGNET"]){
-            
-            device.type = XAIObjectType_window;
-            
-        }else{
-            
-            device.type = XAIObjectType_light;
-            
+            }
+                break;
+            case XAIDeviceType_light_2:{
+                
+                device.corObjType = XAIObjectType_light2_1;
+                
+                XAIDevice* dev2 = [device copy];
+                dev2.corObjType = XAIObjectType_light2_2;
+                [_onlineDevices addObject:dev2]; //添加2次
+                
+            }
+                break;
+            case XAIDeviceType_window:{
+                
+                device.corObjType = XAIObjectType_window;
+                
+            }
+                break;
+            case XAIDeviceType_door:{
+                
+                device.corObjType = XAIObjectType_door;
+            }
+                break;
+                
+            default:
+                
+                shouldAdd = false;
+                break;
         }
         
-        if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
+        if (shouldAdd) {
             
-            XAIDevice* dev2 = [device copy];
-            dev2.type = XAIObjectType_light2_1;
-            [_onlineDevices addObject:dev2]; //添加2次
+            [_onlineDevices addObject:device];
         }
-        
-        [_onlineDevices addObject:device];
-        
         
         
         if(_timer != nil){

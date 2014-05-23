@@ -251,7 +251,7 @@
     dev.vender = _vender; /*生产商*/
     dev.model = _model; /*型号*/
     
-    dev.type = _type;
+    dev.corObjType = _corObjType;
     
     return dev;
 

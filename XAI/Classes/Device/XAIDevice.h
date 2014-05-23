@@ -24,7 +24,7 @@ typedef NSUInteger XAIDevOpr;
     NSString* _vender; /*生产商*/
     NSString* _model; /*型号*/
     
-    XAIObjectType _type;
+    XAIObjectType _corObjType;
     
     XAIDevOpr _devOpr;
     XAIDeviceType _devType;
@@ -36,7 +36,7 @@ typedef NSUInteger XAIDevOpr;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/
-@property (nonatomic, assign) XAIObjectType type;
+@property (nonatomic, assign) XAIObjectType corObjType;  //notgood
 @property (nonatomic, assign) XAIDeviceType devType;
 @property (nonatomic, weak) id <XAIDeviceStatusDelegate> delegate;
 
