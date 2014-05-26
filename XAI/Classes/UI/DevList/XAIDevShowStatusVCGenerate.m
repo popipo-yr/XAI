@@ -45,6 +45,21 @@
             
         }break;
             
+        case XAIObjectType_light2_2:{
+            
+            if ([aObj isKindOfClass:[XAILight2_CirculeTwo class]]) {
+                
+                XAILightStatusVC* lightVC = [storyboard
+                                             instantiateViewControllerWithIdentifier:@"XAILightStatusVCID"];
+                lightVC.light = (XAILight2_CirculeTwo*)aObj;
+                
+                
+                return lightVC;
+                
+            }
+            
+        }break;
+            
         case XAIObjectType_door:{
             
             if ([aObj isKindOfClass:[XAIDoor class]]) {

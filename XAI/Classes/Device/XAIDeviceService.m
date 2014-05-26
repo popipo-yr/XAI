@@ -51,8 +51,8 @@
 //    NSData* typeData  = [typestr dataUsingEncoding:NSUTF8StringEncoding];
 //    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
 //                       [typeData length], (void*)[typestr UTF8String],NULL);
-    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       sizeof(type), &type,NULL);
+    /*一个字节*/
+    xai_param_data_set(type_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(uint8_t), &type,NULL);
 
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
@@ -270,22 +270,29 @@
             
             _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
             
-            if ((type_data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || type_data->data_len <= 0) break;
+            if ((type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
             
-//            NSString* type = [[NSString alloc] initWithBytes:type_data->data length:type_data->data_len encoding:NSUTF8StringEncoding];
-            if (type_data->data_len != sizeof(XAIDeviceType)) {
-                
-                XAIDeviceType type = 0; //必须初始化
-                byte_data_copy(&type, type_data->data, sizeof(XAIDeviceType), type_data->data_len);
-                
-                aDevice.devType = type;
-                
-                
-            }else{
             
-                XAIDeviceType type = *((XAIDeviceType*)(type_data->data));
-                aDevice.devType = type;
-            }
+            uint8_t _type = *((uint8_t*)type_data->data);
+            
+            XAIDeviceType type = _type;
+            aDevice.devType = type;
+            
+            
+
+//            if (type_data->data_len != sizeof(XAIDeviceType)) {
+//                
+//                XAIDeviceType type = 0; //必须初始化
+//                byte_data_copy(&type, type_data->data, sizeof(XAIDeviceType), type_data->data_len);
+//                
+//                aDevice.devType = type;
+//                
+//                
+//            }else{
+//            
+//                XAIDeviceType type = *((XAIDeviceType*)(type_data->data));
+//                aDevice.devType = type;
+//            }
             
 
             

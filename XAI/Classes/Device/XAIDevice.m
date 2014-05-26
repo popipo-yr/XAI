@@ -35,9 +35,8 @@
 
 - (void) getDeviceInfo{
     
-    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
-                                                         luid:_luid
-                                                        other:MQTTCover_DevTable_Other];
+    NSString* topicStr = [MQTTCover  nodeDevTableTopicWithAPNS:_apsn luid:_luid];
+
     
     [[MQTT shareMQTT].client subscribe:topicStr];
     

@@ -28,6 +28,7 @@
         }
             break;
         case XAIObjectType_light2_1:
+        case XAIObjectType_light2_2:
         case XAIObjectType_light:{
             
             imgNameStr = @"obj_light";
