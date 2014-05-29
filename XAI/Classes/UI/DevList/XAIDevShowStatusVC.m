@@ -45,6 +45,8 @@
     
     [[NSBundle mainBundle] loadNibNamed:newString owner:self options:nil];
     
+    ViewMoveUpWhenIs35(self.statusView, 50);
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -73,7 +75,7 @@
     [self setExtraCellLineHidden:_oprTableView];
     
     
-    ViewMoveUpWhenIs35(self.statusView, 50);
+    
     
     
 }

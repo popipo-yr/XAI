@@ -20,6 +20,8 @@
     NSArray* _oprDatasAry;
     
     UINib *_nib;
+    
+    BOOL _is35Up;
 }
 
 

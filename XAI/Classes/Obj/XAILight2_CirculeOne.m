@@ -12,14 +12,14 @@
 
 - (void) openLight{
     
-    if (_isClosing || _isOpening) return;
+    //if (_isClosing || _isOpening) return;
     
     _isOpening = YES;
     [_devSwitch  setCircuitTwoStatus:XAIDevCircuitStatusOpen];
 }
 - (void) closeLight{
     
-    if (_isOpening || _isClosing) return;
+    //if (_isOpening || _isClosing) return;
     
     _isClosing = YES;
     [_devSwitch setCircuitTwoStatus:XAIDevCircuitStatusClose];

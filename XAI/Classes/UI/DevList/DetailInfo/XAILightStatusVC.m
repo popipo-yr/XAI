@@ -27,6 +27,8 @@
     self.factoryLabel.text = _light.vender;//  @"成都xxx工厂";
     self.modelLabel.text = _light.model; //@"JUNENNDENG-8390F";
     
+     ViewMoveUpWhenIs35(self.switchUI, 70.0f);
+    
     
 }
 
@@ -45,7 +47,7 @@
     [_light startControl];
     [_light getCurStatus];
     
-    ViewMoveUpWhenIs35(self.switchUI, 70.0f);
+   
 }
 
 
