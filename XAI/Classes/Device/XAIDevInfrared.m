@@ -103,7 +103,7 @@
             
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, 0);
             
-            if ((data->data_type != XAI_DATA_TYPE_BIN_BOOL) || data->data_len <= 0)break;
+            if (data == NULL || (data->data_type != XAI_DATA_TYPE_BIN_BOOL) || data->data_len <= 0)break;
             
             XAITYPEBOOL bStatus;
             
@@ -145,7 +145,7 @@
             
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, 0);
             
-            if ((data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
+            if (data == NULL || (data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
             
             int power = 0; /*获取的电量为电量百分比乘以十*/
             

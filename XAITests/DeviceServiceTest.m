@@ -91,6 +91,12 @@
     _luidDev = 0x00124B000413CDCF;  //26
     
     
+    //0x69, 0xFE, 0x9A, 0x03, 0x00, 0x4B, 0x12, 0x00  开关
+    _luidDev = 0x00124b00039afe69;
+    //0xD6, 0xFF, 0x9A, 0x03, 0x00, 0x4B, 0x12, 0x00 门磁
+    //luidstr = @"0x124b00039affd6";
+    
+    
     _luidNotExist = 0x89375;
     
    // _name4Change = [NSString stringWithFormat:@"%@%llX",@"NAME1",_luidDev];
@@ -468,7 +474,7 @@
         
         
         
-        [_devService findAllOnlineDevWithuseSecond:2];
+        [_devService findAllOnlineDevWithuseSecond:20];
         
         _findOnlineStatus = start;
         

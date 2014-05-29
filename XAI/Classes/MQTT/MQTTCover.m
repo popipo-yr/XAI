@@ -252,7 +252,31 @@
 
 
 
+/*扫描的字符串转化为APSN*/
++ (BOOL)  qrStr:(NSString*)qrStr ToLuidStr:(NSString**)luidStr{
 
+ 
+    BOOL isSuc = false;
+    
+    do {
+        
+        NSString*  qrRM = [qrStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if ([qrRM length] + 7 != [qrStr length]) break;
+        
+        
+        __autoreleasing NSString*  newQrStr = [[NSString alloc] initWithFormat:@"0x%@",qrRM];
+        if ([newQrStr length] != (LUID_STR_TOTAL_LEN + OTHER_STR_TOTAL_LEN)) break;
+        
+        
+        *luidStr = newQrStr;
+        
+        isSuc = true;
+        
+    } while (0);
+    
+    
+    return isSuc;
+}
 
 
 @end

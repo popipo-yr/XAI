@@ -110,7 +110,7 @@
         
         _xai_packet_param_data* data = getParamDataFromParamStatus(param, 0);
         
-        if ((data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
+        if (data == NULL || (data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || data->data_len <= 0)break;
         
         
         XAITYPEUNSIGN  devStatus_mem = 0;

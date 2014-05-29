@@ -71,7 +71,21 @@
     
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
-    NSString* luidstr = symbolStr;
+    NSString* luidstr = nil;
+    
+    if ([MQTTCover qrStr:symbolStr ToLuidStr:&luidstr]) {
+        
+        [scanVC dismissViewControllerAnimated:YES completion:nil];
+        
+        XAIDevAddVC* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
+        
+        if (devAddVC != nil && [devAddVC isKindOfClass:[XAIDevAddVC class]]) {
+            
+            devAddVC.luidStr = luidstr;
+            [self.navigationController pushViewController:devAddVC animated:YES];
+        }
+
+    }
     
         // EXAMPLE: just grab the first barcode
     
@@ -86,17 +100,6 @@
     //[reader dismissModalViewControllerAnimated: YES];
     
     
-    [scanVC dismissViewControllerAnimated:YES completion:nil];
-    
-    luidstr = @"0x124b000413c8d8";
-    
-    XAIDevAddVC* devAddVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DevAddViewControllerID"];
-    
-    if (devAddVC != nil && [devAddVC isKindOfClass:[XAIDevAddVC class]]) {
-        
-        devAddVC.luidStr = luidstr;
-        [self.navigationController pushViewController:devAddVC animated:YES];
-    }
     
     
 }

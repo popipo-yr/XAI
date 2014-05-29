@@ -270,7 +270,7 @@
             
             _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
             
-            if ((type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
+            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
             
             
             uint8_t _type = *((uint8_t*)type_data->data);
@@ -299,7 +299,7 @@
             
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
             
-            if ((data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
+            if (data == NULL || (data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
             
             NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
             
@@ -309,7 +309,7 @@
             
             _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*devParamCout + 1);
             
-            if ((luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
+            if (luid_data == NULL || (luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
             
             
             XAITYPELUID luid;
@@ -321,7 +321,7 @@
             
             _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*devParamCout + 0);
             
-            if ((apsn_data->data_type != XAI_DATA_TYPE_BIN_LUID) || apsn_data->data_len <= 0) break;
+            if (apsn_data == NULL ||  (apsn_data->data_type != XAI_DATA_TYPE_BIN_LUID) || apsn_data->data_len <= 0) break;
             
             
             XAITYPEAPSN apsn;

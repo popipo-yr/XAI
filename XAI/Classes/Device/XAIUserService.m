@@ -260,7 +260,8 @@
         BOOL findName = FALSE;
         
         _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*3 + 3 -1);
-        if ((data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
+        if (data == NULL || (data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0)
+            break;
         
         NSString* name = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
         
@@ -275,7 +276,7 @@
         
         
         _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
-        if ((luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
+        if (luid_data == NULL || (luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
         
         XAITYPELUID luid;
         byte_data_copy(&luid, luid_data->data, sizeof(XAITYPELUID), luid_data->data_len);
@@ -294,7 +295,7 @@
         
         
         _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*3 + 1 -1);
-        if ((apsn_data->data_type != XAI_DATA_TYPE_BIN_APSN) || apsn_data->data_len <= 0) break;
+        if (apsn_data == NULL || (apsn_data->data_type != XAI_DATA_TYPE_BIN_APSN) || apsn_data->data_len <= 0) break;
         
         XAITYPEAPSN apsn;
         byte_data_copy(&apsn, apsn_data->data, sizeof(XAITYPEAPSN), apsn_data->data_len);

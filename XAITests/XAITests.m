@@ -10,6 +10,7 @@
 #import "XAIPacket.h"
 #import "XAIPacketCtrl.h"
 #import "MosquittoMessage.h"
+#import "MQTTCover.h"
 
 @interface XAITests : XCTestCase
 
@@ -244,6 +245,49 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
     
     XCTAssertTrue( 1 == 1);
     
+}
+
+
+- (void) testUTF8{
+    
+    NSString* luidstr = nil;
+    
+    [MQTTCover qrStr:@"00-12-4b-00-04-13-c8-d8" ToLuidStr:&luidstr];
+    
+    
+    NSString* username = @"admin";
+    
+    Byte data[] = {0x61,0x64,0x6d,0x69,0x6e};
+    Byte data2[] = {0x61,0x64,0x6d,0x69,0x6e,0x00};
+//    void* data   = malloc(5);//｜ 61 64 6D 69 6E   |         5
+//    void* data2  = malloc(6);//｜61 64 6D 69 6E  00 |    6  ( 这个加了结束)
+    
+    
+    
+    
+    NSString* name = [[NSString alloc] initWithBytes:data
+                                              length:5
+                                            encoding:NSUTF8StringEncoding];
+    
+    
+    
+    NSString* name2 = [[NSString alloc] initWithBytes:data2
+                                               length:6
+                                             encoding:NSUTF8StringEncoding];
+    
+    NSString* name3 = [[NSString alloc] initWithUTF8String:(const char*)data];
+    
+    NSString* name4 = [[NSString alloc] initWithUTF8String:(const char*)data2];
+    
+    
+    
+    
+    XCTAssert([name isEqualToString:username]);
+    
+    XCTAssert(![name2 isEqualToString:username]);
+    XCTAssert(![name3 isEqualToString:username]);
+    XCTAssert([name4 isEqualToString:username]);
+
 }
 
 @end

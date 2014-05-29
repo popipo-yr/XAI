@@ -54,6 +54,9 @@
 + (uint32_t) nodeTopicAPSN:(NSString*)topic;
 + (uint64_t) nodeTopicLUID:(NSString*)topic;
 
+/*扫描的字符串转化为APSN*/
++ (BOOL)  qrStr:(NSString*)qrStr ToLuidStr:(NSString**)luidStr;
+
 
 @end
 

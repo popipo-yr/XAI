@@ -244,7 +244,7 @@
         
         _xai_packet_param_data* data = getParamDataFromParamStatus(param, 0);
         
-        if ((data->data_type != XAI_DATA_TYPE_BIN_BOOL) || data->data_len <= 0)break;
+        if (data == NULL || (data->data_type != XAI_DATA_TYPE_BIN_BOOL) || data->data_len <= 0)break;
         
         XAITYPEBOOL isOpen = 0;
         
