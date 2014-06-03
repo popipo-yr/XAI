@@ -33,7 +33,7 @@
     _ddc.dcDelegate = self;
     
     _ddc.apsn = 0x1;
-    _ddc.luid = 0x124b0002292580;
+    _ddc.luid = 0x124b00039affd6;
     
     [_ddc startFocusStatus];
     

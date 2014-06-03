@@ -38,6 +38,20 @@
     return self;
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    XAIObject* obj = [[XAIObject allocWithZone:zone]init];
+    obj.apsn = _apsn;
+    obj.luid = _luid;
+    obj.name = _name;
+    obj.vender = _vender; /*生产商*/
+    obj.model = _model; /*型号*/
+    obj.type = _type;
+    
+    return obj;
+    
+}
+
 - (id) initWithDevice:(XAIDevice*)dev{
 
     if (self = [super init]) {
@@ -202,7 +216,7 @@
     _lastOpr = aOpr;
     
     [_objOprList addObject:aOpr];
-    [[XAIData shareData] upDataObj:self];
+    [[XAIData shareData] upDateObj:self];
     [self writeOprList];
     
     

@@ -204,8 +204,16 @@
         
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
         [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
-        [cell.nameLable setText:aObj.nickName];
-        [cell.contextLable setText:aObj.name];
+        [cell.nameLable setText:aObj.name];
+        
+        if (aObj.nickName != nil && ![aObj.nickName isEqualToString:@""]) {
+            
+            [cell.contextLable setText:aObj.nickName];
+        }else{
+            [cell.contextLable setText:aObj.name];
+        }
+        
+        
         
     }
 
@@ -229,8 +237,16 @@
         _vc = [self.storyboard
                                instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
         
+        NSString* setName = nil;
+        if (aObj.nickName != nil && ![aObj.nickName isEqualToString:@""]) {
+            
+           setName = aObj.nickName;
+        }else{
+            setName = aObj.name;
+        }
+        
         [_vc setOneLabName:NSLocalizedString(@"DevNick", nil)
-                OneTexName:aObj.nickName
+                OneTexName:setName
                 TwoLabName:NSLocalizedString(@"DevNewNick", nil)];
         
         [_vc setOKClickTarget:self Selector:@selector(changeDevName:)];
@@ -269,7 +285,17 @@
 
     _newName = newName;
     
-    [_deviceService changeDev:_curOprObj.luid withName:newName];
+
+    
+    //[_deviceService changeDev:_curOprObj.luid withName:newName];
+    
+    _curOprObj.nickName = newName;
+//    [self.tableView reloadData];
+    
+    [[XAIData shareData] upDateObj:_curOprObj];
+    [[XAIData shareData] notifyChange];
+    
+    [_vc endOkEvent];
 }
 
 
@@ -289,12 +315,31 @@
         
         alert.message = NSLocalizedString(@"DelDevSuc", nil);
         
-        //不应该时这里删除
-        [_objectAry removeObjectAtIndex:[_curDelIndexPath row]];
-        [self.tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
-                               withRowAnimation:UITableViewRowAnimationAutomatic];
+        XAIObject* aObj = [_objectAry objectAtIndex:[_curDelIndexPath row]];
+        
+        //不应该时这里删除  下面会通知刷新 就会删除
+//        [_objectAry removeObjectAtIndex:[_curDelIndexPath row]];
+//        [self.tableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:_curDelIndexPath]
+//                               withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        /*如果是双控 则要一起移除另外一个*/
+        if (aObj.type == XAIObjectType_light2_1 || aObj.type == XAIObjectType_light2_2) {
+            
+            /*删除储存的数据*/
+            XAIObject* another = [aObj copy];
+            another.type = (aObj.type == XAIObjectType_light2_1)
+            ? XAIObjectType_light2_2 : XAIObjectType_light2_1;
+            
+            [[XAIData shareData] removeObj:another];
+            
+        
+        }
+        
+        [[XAIData shareData] removeObj:aObj];
+        [[XAIData shareData] notifyChange];
         
         _curDelIndexPath = nil;
+        
         
     }else{
         

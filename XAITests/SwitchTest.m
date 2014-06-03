@@ -41,7 +41,7 @@
     _devSwitch = [[XAIDevSwitch alloc] init];
     _devSwitch.swiDelegate = self;
     _devSwitch.apsn = 0x1;
-    _devSwitch.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
+    _devSwitch.luid= 0x00124b00039afe69;//0x00124B000413C85C;
     
     _err_luid = 0x0013434335998aad;
                      
@@ -333,7 +333,7 @@
         
         
         XCTAssertTrue (_getTwo != start, @"delegate did not get called");
-        XCTAssertTrue (_getTwo != Fail, @"no, get switch circuit two should be fail with err luid.");
+        XCTAssertTrue (_getTwo != Success, @"no, get switch circuit two should be fail with err luid.");
         XCTAssertTrue(_err != XAI_ERROR_NONE, @"err : %d",_err);
     }else{
         
@@ -369,8 +369,8 @@
         
         
         XCTAssertTrue (_setOne != start, @"delegate did not get called");
-        XCTAssertTrue (_setOne != Fail, @"no, set switch circuit one open should be fail with err luid.");
-        XCTAssertTrue(_err == XAI_ERROR_LUID_NONE_EXISTED, @"err : %d",_err);
+        XCTAssertTrue (_setOne != Success, @"no, set switch circuit one open should be fail with err luid.");
+        XCTAssertTrue(_err != XAI_ERROR_NONE , @"err : %d",_err);
         
     }else{
         
@@ -404,8 +404,8 @@
         
         
         XCTAssertTrue (_setOne != start, @"delegate did not get called");
-        XCTAssertTrue (_setOne != Fail, @"no, set switch circuit one close should be fail with err luid.");
-        XCTAssertTrue(_err == XAI_ERROR_LUID_NONE_EXISTED, @"err : %d",_err);
+        XCTAssertTrue (_setOne != Success, @"no, set switch circuit one close should be fail with err luid.");
+        XCTAssertTrue(_err != XAI_ERROR_NONE, @"err : %d",_err);
         
         
         
@@ -438,8 +438,8 @@
         
         
         XCTAssertTrue (_setTwo != start, @"delegate did not get called");
-        XCTAssertTrue (_setTwo != Fail, @"no, set switch circuit two open should be fail with err luid.");
-        XCTAssertTrue(_err == XAI_ERROR_LUID_NONE_EXISTED, @"err : %d",_err);
+        XCTAssertTrue (_setTwo != Success, @"no, set switch circuit two open should be fail with err luid.");
+        XCTAssertTrue(_err != XAI_ERROR_NONE, @"err : %d",_err);
         
     }else{
         
@@ -472,8 +472,8 @@
         
         
         XCTAssertTrue (_setTwo != start, @"delegate did not get called");
-        XCTAssertTrue (_setTwo != Fail, @"no, set switch circuit two close should be fail with err luid.");
-        XCTAssertTrue(_err == XAI_ERROR_LUID_NONE_EXISTED, @"err : %d",_err);
+        XCTAssertTrue (_setTwo != Success, @"no, set switch circuit two close should be fail with err luid.");
+        XCTAssertTrue(_err != XAI_ERROR_NONE, @"err : %d",_err);
         
         
     }else{
@@ -497,6 +497,8 @@
     
         _getOne = Fail;
     }
+    
+    _err = err;
 }
 - (void) switch_:(XAIDevSwitch *)swi setCircuitOneErr:(XAI_ERROR)err{
     
@@ -507,6 +509,8 @@
         
         _setOne = Fail;
     }
+    
+    _err = err;
 
 }
 
@@ -519,6 +523,8 @@
         
         _getTwo = Fail;
     }
+    
+    _err = err;
 
 }
 - (void) switch_:(XAIDevSwitch *)swi setCircuitTwoErr:(XAI_ERROR)err{
@@ -533,6 +539,7 @@
     }
 
 
+    _err = err;
 }
 
 

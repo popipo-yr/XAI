@@ -159,7 +159,15 @@
         
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
         [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
-        [cell.nameLable setText:aObj.name];
+       
+        if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
+            
+            [cell.nameLable setText:aObj.nickName];
+        }else{
+        
+            [cell.nameLable setText:aObj.name];
+        }
+        
         [cell.contextLable setText:[aObj.lastOpr allStr]];
         
     }

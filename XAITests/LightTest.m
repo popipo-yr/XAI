@@ -32,7 +32,7 @@
     _light = [[XAILight alloc] init];
     _light.delegate = self;
     _light.apsn = 0x1;
-    _light.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
+    _light.luid= 0x00124b00039afe69;//0x00124B000413C85C;
     
     _err_luid = 0x001489848478349d;
     
@@ -154,6 +154,7 @@
         
         
         _light.luid = _err_luid;
+        [_light startControl];
         [_light getCurStatus];
         
         
@@ -186,6 +187,7 @@
     if (_loginStatus == Success) {
         
         _light.luid = _err_luid;
+        [_light startControl];
         [_light openLight];
         
         
@@ -221,6 +223,7 @@
     if (_loginStatus == Success) {
         
         _light.luid = _err_luid;
+        [_light startControl];
         [_light closeLight];
         
         

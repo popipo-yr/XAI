@@ -63,8 +63,8 @@ static XAIData*  _s_XAIData_ = NULL;
         }else{
         
         
-            aObj.nickName = aObj.name;
-            [_localObjInfo addObjectInfo:aObj];
+            //aObj.nickName = aObj.name;
+            [_localObjInfo addOrUpObjectInfo:aObj];
         }
         
 
@@ -77,14 +77,62 @@ static XAIData*  _s_XAIData_ = NULL;
 }
 - (NSArray*) getObjList{
 
+    //return [NSArray arrayWithArray:[_localObjInfo getObjects]];
 
     return [NSArray arrayWithArray:_objList];
 }
 
-- (void) upDataObj:(XAIObject*)obj{
+- (void) upDateObj:(XAIObject*)obj{
+    
+    XAIObject* find_obj = nil;
+    
+    for (int i = 0; i < [_objList count]; i++) {
+        
+        XAIObject* aObj = [_objList objectAtIndex:i];
+        if (aObj.apsn == obj.apsn && obj.luid == aObj.luid && obj.type == aObj.type) {
+            
+            find_obj = aObj;
+            break;
+        }
+    }
+    
+    if (find_obj != nil) {
+        
+        [_objList removeObject:find_obj];
+    }
+    
+    [_objList addObject:obj];
+    
 
-    [_localObjInfo addObjectInfo:obj];
-    [_localObjInfo save];
+    [_localObjInfo addOrUpObjectInfo:obj];
+    [self save];
+}
+
+- (void) removeObj:(XAIObject*)obj{
+
+    [self removeApsnEqual:obj.apsn luid:obj.luid];
+    //[_localObjInfo removeObjectInfo:obj];
+    
+    [self save];
+
+}
+
+
+- (void) removeApsnEqual:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+
+    NSMutableArray* removeAry = [[NSMutableArray alloc] init];
+   
+    for (int i = 0; i < [_objList count]; i++) {
+        
+        XAIObject* aObj = [_objList objectAtIndex:i];
+        if (aObj.apsn == apsn && luid == aObj.luid) {
+            
+            [removeAry addObject:aObj];
+        }
+    }
+    
+    [_objList removeObjectsInArray:removeAry];
+    
 }
 
 - (void) save{
@@ -172,6 +220,11 @@ static XAIData*  _s_XAIData_ = NULL;
         }
         
     }
+}
+
+- (void) notifyChange{
+
+    [self callBack];
 }
 
 - (void) startRefresh{
@@ -333,19 +386,44 @@ static XAIData*  _s_XAIData_ = NULL;
     return _objs;
 }
 
-- (void) addObjectInfo:(XAIObject*)obj{
+- (void) addOrUpObjectInfo:(XAIObject*)obj{
     
     XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid type:obj.type];
     
-    if (localobj != nil) {
+    if (localobj != nil) {//存在只是修改
         
         localobj.lastOpr = obj.lastOpr;
+        localobj.nickName = obj.nickName;
         
     }else{
 
         [_objs addObject:obj];
     }
 }
+- (void) updateObjectInfo:(XAIObject*)obj{
+
+    XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid type:obj.type];
+    
+    if (localobj != nil) {
+        
+        localobj.lastOpr = obj.lastOpr;
+        localobj.nickName = obj.nickName;
+        
+    }
+}
+
+- (void) removeObjectInfo:(XAIObject*)obj{
+    
+    XAIObject* localobj = [self findLocalObjWithApsn:obj.apsn Luid:obj.luid type:obj.type];
+    
+    
+    if (localobj != nil) {
+        
+        [_objs removeObject:localobj];
+    }
+
+}
+
 
 - (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid type:(XAIObjectType)type{
 

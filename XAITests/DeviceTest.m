@@ -30,7 +30,7 @@
     
     _device.apsn = 0x1;
     //_device.luid = 0x124b0003d430b6;
-    _device.luid = 0x00124B000413CDCF;
+    _device.luid = 0x00124b00039afe69;
     //00-12-4B-00-04-13-C8-D8
     
     [super setUp];

@@ -32,7 +32,7 @@
     _door = [[XAIDoor alloc] init];
     _door.delegate = self;
     _door.apsn = 0x1;
-    _door.luid= 0x00124B000413CDCF;//0x00124B000413C85C;
+    _door.luid= 0x124b00039affd6;//0x00124B000413C85C;
     
     _err_luid = 0x001384399578dfcd;
     
@@ -91,6 +91,7 @@
     if (_loginStatus == Success) {
         
         _door.luid = _err_luid;
+        [_door startControl];
         [_door getCurStatus];
         
         
@@ -160,7 +161,8 @@
     if (_loginStatus == Success) {
         
         
-        
+        _door.luid = _err_luid;
+        [_door startControl];
         [_door getPower];
         
         

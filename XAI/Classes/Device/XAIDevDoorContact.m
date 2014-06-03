@@ -148,7 +148,7 @@
             curPower = power*1.0 / 10.0;
             
             isSuccess = true;
-            err = XAI_ERROR_UNKOWEN;
+            err = XAI_ERROR_NONE;
             
         } while (0);
         

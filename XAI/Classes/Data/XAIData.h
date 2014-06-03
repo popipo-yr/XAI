@@ -50,9 +50,12 @@
 - (void) setObjList:(NSArray*)devs;
 - (NSArray*) getObjList;
 
-- (void) upDataObj:(XAIObject*)obj;
+- (void) upDateObj:(XAIObject*)obj;
+- (void) removeObj:(XAIObject*)obj;
 
 - (void) save;
+
+- (void) notifyChange;
 
 - (void) startRefresh;
 
@@ -79,7 +82,9 @@
 
 
 - (NSArray*) getObjects;
-- (void) addObjectInfo:(XAIObject*)obj;
+- (void) addOrUpObjectInfo:(XAIObject*)obj;
+- (void) updateObjectInfo:(XAIObject*)obj;
+- (void) removeObjectInfo:(XAIObject*)obj;
 
 - (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid type:(XAIObjectType)type;
 

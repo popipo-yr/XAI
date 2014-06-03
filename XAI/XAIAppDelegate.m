@@ -31,7 +31,7 @@
     _mqttPacketManager = [[MQTTPacketManager alloc] init];
     
     
-    NSString *clientId = [NSString stringWithFormat:@"XAI_%@", @"abc"];
+    NSString *clientId = [NSString stringWithFormat:@"XAI%@", @""];
     _mosquittoClient = [[MosquittoClient alloc] initWithClientId:clientId];
     
     [_mosquittoClient setDelegate:_mqttPacketManager];
