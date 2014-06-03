@@ -107,7 +107,7 @@
         
         
         XCTAssertTrue(_status != start, @"delegate did not get called");
-        XCTAssertTrue(_status != Fail, @"no, Get door status shoule be fail with err luid.");
+        XCTAssertTrue(_status != Success, @"no, Get door status shoule be fail with err luid.");
         
     }else{
         

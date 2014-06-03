@@ -9,6 +9,9 @@
 #import <XCTest/XCTest.h>
 #import "LoginPlugin.h"
 
+#import "XAIDeviceService.h"
+
+
 #import "XAIDevDoorContact.h"
 
 @interface DoorContactTest : LoginPlugin <XAIDevDoorContactDelegate>{
@@ -66,6 +69,11 @@
     if (_loginStatus == Success) {
         
         
+//        XAIDeviceService*  s = [[XAIDeviceService alloc] init];
+//        s.apsn = 0x01;
+//        s.luid = MQTTCover_LUID_Server_03;
+//        
+//        [s delDev:_ddc.luid];
         
         [_ddc getDoorContactStatus];
         
@@ -100,7 +108,7 @@
     
     if (_loginStatus == Success) {
         
-        
+
         
         _ddc.luid = _err_luid;
         [_ddc getDoorContactStatus];
@@ -118,8 +126,8 @@
         
         
         XCTAssertTrue (_getStatus != start, @"delegate did not get called");
-        XCTAssertTrue (_getStatus != Fail, @"no,Get ddc status should be fail with err luid");
-        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
+        XCTAssertTrue (_getStatus != Success, @"no,Get ddc status should be fail with err luid");
+        XCTAssert(_err != XAI_ERROR_NONE, @"err : %d",_err);
         
     }else{
         
@@ -187,8 +195,8 @@
         
         
         XCTAssertTrue (_getPower != start, @"delegate did not get called");
-        XCTAssertTrue (_getPower != Fail, @"no, Get power should be fail with err luid.");
-        XCTAssert(_err == XAI_ERROR_NONE, @"err : %d",_err);
+        XCTAssertTrue (_getPower != Success, @"no, Get power should be fail with err luid.");
+        XCTAssert(_err != XAI_ERROR_NONE, @"err : %d",_err);
     }else{
         
         
