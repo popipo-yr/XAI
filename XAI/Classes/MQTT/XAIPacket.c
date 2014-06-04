@@ -128,8 +128,24 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     return ctrl_param_data;
 }
 
+
+
+_xai_packet_param_data* generateParamDataCopyOther(_xai_packet_param_data* param_data){
+
+    if (param_data == NULL) return NULL;
+    
+    _xai_packet_param_data* new_param = generatePacketParamData();
+    _xai_packet_param_data* next_param = generateParamDataCopyOther(param_data->next);
+    xai_param_data_set(new_param, param_data->data_type, param_data->data_len, param_data->data, next_param);
+    
+    return new_param;
+}
+
+
 _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data){
     
+    
+    if (ctrl_param_data == NULL) return NULL;
     
     
     _xai_packet* ctrl_data = generatePacket();
@@ -138,10 +154,7 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
     char*  payload  = malloc(1000);
     memset(payload,0,1000);
     
-    if(!payload){
-        
-        return NULL;
-    }
+    if(!payload) return NULL;
     
     //big
     uint16_t big_len = CFSwapInt16(ctrl_param_data->data_len);

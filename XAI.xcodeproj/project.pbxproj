@@ -53,6 +53,8 @@
 		9631D17219075691007CBC4B /* obj_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16A19075691007CBC4B /* obj_window.png */; };
 		96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D99192303B700676F10 /* PacketStatusTest.m */; };
 		96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D9B192308EC00676F10 /* PacketACKTest.m */; };
+		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
+		963D9CBC193DBE01006ACFF2 /* XAILinkageUseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CBB193DBE01006ACFF2 /* XAILinkageUseInfo.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
 		9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */; };
@@ -139,6 +141,7 @@
 		969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED71919EB5F002076A0 /* nav_back@2x.png */; };
 		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
 		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
+		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; };
 		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
@@ -159,6 +162,8 @@
 		96E9D98F190111F7000BB595 /* tab_bar_user_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D97F190111F7000BB595 /* tab_bar_user_nor.png */; };
 		96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D981190111F7000BB595 /* tab_bar_user_sel.png */; };
 		96E9D99519011D76000BB595 /* XAITabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D99419011D76000BB595 /* XAITabBarVC.m */; };
+		96FE3BC9193EF3F6005D0D98 /* PackerLinkageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BC8193EF3F6005D0D98 /* PackerLinkageTest.m */; };
+		96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
@@ -270,6 +275,10 @@
 		9631D16A19075691007CBC4B /* obj_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window.png; sourceTree = "<group>"; };
 		96334D99192303B700676F10 /* PacketStatusTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketStatusTest.m; sourceTree = "<group>"; };
 		96334D9B192308EC00676F10 /* PacketACKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketACKTest.m; sourceTree = "<group>"; };
+		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
+		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
+		963D9CBA193DBE01006ACFF2 /* XAILinkageUseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageUseInfo.h; sourceTree = "<group>"; };
+		963D9CBB193DBE01006ACFF2 /* XAILinkageUseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageUseInfo.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
 		9648E6DF190A05A900D630D8 /* user_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_head.png; sourceTree = "<group>"; };
 		9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserAddVC.h; sourceTree = "<group>"; };
@@ -451,6 +460,8 @@
 		969D6ED81919EB5F002076A0 /* nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_back.png; sourceTree = "<group>"; };
 		969D6EDB1919F4A3002076A0 /* UIKitADD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitADD.h; sourceTree = "<group>"; };
 		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
+		96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketLinkage.h; sourceTree = "<group>"; };
+		96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketLinkage.c; sourceTree = "<group>"; };
 		96B6D34119220BA000367424 /* PacketCtrlTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketCtrlTest.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
@@ -478,6 +489,8 @@
 		96E9D99319011D76000BB595 /* XAITabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAITabBarVC.h; sourceTree = "<group>"; };
 		96E9D99419011D76000BB595 /* XAITabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAITabBarVC.m; sourceTree = "<group>"; };
 		96F05CB11910C09600F2F128 /* XAIRWProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIRWProtocol.h; sourceTree = "<group>"; };
+		96FE3BC8193EF3F6005D0D98 /* PackerLinkageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackerLinkageTest.m; sourceTree = "<group>"; };
+		96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkageServiceTest.m; sourceTree = "<group>"; };
 		C33E77F518F38DF000808391 /* XAIPacketStatus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketStatus.c; sourceTree = "<group>"; };
 		C33E77F618F38DF000808391 /* XAIPacketStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketStatus.h; sourceTree = "<group>"; };
 		C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketDevTypeInfo.c; sourceTree = "<group>"; };
@@ -599,6 +612,8 @@
 		1AF7604B18F2517200520EAD /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */,
+				963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */,
 				C33E77FC18F3B28500808391 /* XAILogin.h */,
 				C33E77FD18F3B28500808391 /* XAILogin.m */,
 				9683DA6E1900F5E600518FEB /* XAIUser.h */,
@@ -735,6 +750,8 @@
 				968105E61917601A00171BF3 /* XAILight2_CirculeOne.m */,
 				96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */,
 				96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */,
+				963D9CBA193DBE01006ACFF2 /* XAILinkageUseInfo.h */,
+				963D9CBB193DBE01006ACFF2 /* XAILinkageUseInfo.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1157,12 +1174,14 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */,
 				9630469F192345810023653E /* LightTest.m */,
 				960B30F319230D0600763EFB /* LoginTest.m */,
 				9616802D19206324000682A4 /* DoorTest.m */,
 				96334D9B192308EC00676F10 /* PacketACKTest.m */,
 				96B6D34119220BA000367424 /* PacketCtrlTest.m */,
 				9630469D19230DCE0023653E /* PacketDTITest.m */,
+				96FE3BC8193EF3F6005D0D98 /* PackerLinkageTest.m */,
 				96334D99192303B700676F10 /* PacketStatusTest.m */,
 				968120BF18FF98610016DDB7 /* InfraredTest.m */,
 				968120BD18FF98210016DDB7 /* DoorContactTest.m */,
@@ -1272,6 +1291,8 @@
 				C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */,
 				C38D91DD18ED2F95006F22D3 /* XAIPacket.h */,
 				C38D91DE18ED2F95006F22D3 /* XAIPacket.c */,
+				96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */,
+				96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */,
 				1AAE876618F8F71A001B2ECD /* XAIPacketNormal.h */,
 				1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */,
 				1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */,
@@ -1469,6 +1490,7 @@
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
 				962DDE0A19161493008F370A /* XAIDoorStatusVC.m in Sources */,
+				963D9CBC193DBE01006ACFF2 /* XAILinkageUseInfo.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961071DE192B3EFA00D5F75A /* XAIDeviceType.m in Sources */,
@@ -1486,6 +1508,7 @@
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
+				96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */,
 				967BD7981908D896007C3C8C /* XAIChangeNameVC.m in Sources */,
 				967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
@@ -1510,6 +1533,7 @@
 				96619DB91915D58F009849B0 /* XAIDoor.m in Sources */,
 				96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */,
 				96081AAF190E460900E281F9 /* XAIData.m in Sources */,
+				963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */,
 				1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */,
 				967BD7941908C5C5007C3C8C /* XAIDevAddVC.m in Sources */,
 				96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */,
@@ -1560,6 +1584,8 @@
 				960B30F419230D0600763EFB /* LoginTest.m in Sources */,
 				96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */,
 				963046A0192345810023653E /* LightTest.m in Sources */,
+				96FE3BC9193EF3F6005D0D98 /* PackerLinkageTest.m in Sources */,
+				96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */,
 				968120BE18FF98210016DDB7 /* DoorContactTest.m in Sources */,
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,
 				968120C018FF98610016DDB7 /* InfraredTest.m in Sources */,

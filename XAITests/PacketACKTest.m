@@ -36,10 +36,11 @@
     
     XCTAssertTrue(packer_ack == NULL, @"false");
     
-    packer_ack = generateParamACKFromData(NULL, 0);
+    packer_ack = generateParamACKFromData(NULL, 300);
     
     XCTAssertTrue(packer_ack == NULL, @"false");
     
+    generatePacketFromeDataOne(NULL);
     generatePacketFromParamACK(NULL);
     generateParamACKFromPacket(NULL);
     generateParamACKFromData(NULL, 100);

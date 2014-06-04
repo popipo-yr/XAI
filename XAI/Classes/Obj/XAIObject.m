@@ -230,6 +230,12 @@
 }
 
 
+- (NSArray*) getLinkageUseInfos{
+
+    return NULL;
+}
+
+
 @end
 
 @implementation XAIObjectOpr

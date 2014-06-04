@@ -10,6 +10,9 @@
 #import "XAIObject.h"
 #import "XAIDevSwitch.h"
 
+#define OpenID  Key_CircuitOneCtrlID
+#define CloseID Key_CircuitTwoCtrlID
+
 @protocol  XAILigthtDelegate;
 @interface XAILight : XAIObject <XAIDevSwitchDelegate,XAIDeviceStatusDelegate>{
 
@@ -19,7 +22,7 @@
     /*状态控制,正在进行开灯关灯的操作,则不能进行其他操作*/
     BOOL _isOpening;
     BOOL _isClosing;
-
+    
 }
 
 @property (nonatomic, weak) id <XAILigthtDelegate> delegate;

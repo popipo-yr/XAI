@@ -57,6 +57,8 @@ typedef  enum XAI_DATA_TYPE{
     
     XAI_DATA_TYPE_BIN_BOOL = 0x0B,//	布尔数据
     XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 0Xd, //	无符号数字
+    
+    XAI_DATA_TYPE_LINKAGE = 0x10, //联动使用的类型
         
         
 }XAI_DATA_TYPE;

@@ -100,6 +100,14 @@ extern "C" {
     
     
     /**
+     @to-do: generate a param data from other if has next same copy
+     @param:    param_data - other
+     @returns: Pointer to a param data struct
+     */
+    _xai_packet_param_data* generateParamDataCopyOther(_xai_packet_param_data* param_data);
+    
+    
+    /**
      @to-do: generate a packet from a param data  list
      @param:    param_data - a param data struct first pointer
      count - count of param data struct
@@ -114,6 +122,7 @@ extern "C" {
      @returns: Pointer to a packet struct
      */
     _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* param_data);
+    
     
     
     /**

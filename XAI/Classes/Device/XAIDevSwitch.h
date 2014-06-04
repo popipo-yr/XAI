@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "XAIDevice.h"
 
+#define Key_CircuitOneCtrlID  1
+#define Key_CircuitTwoCtrlID  2
+
+#define Key_CircuitOneStatusID 1
+#define Key_CircuitTwoStatusID 2
+
 
 typedef enum XAIDevCircuitStatus{
     
@@ -29,7 +35,7 @@ typedef enum XAIDevCircuitStatus{
 }
 
 
-@property (nonatomic,assign) id<XAIDevSwitchDelegate> swiDelegate;
+@property (nonatomic,weak) id<XAIDevSwitchDelegate> swiDelegate;
 /**
  @to-do:   获取线路一的状态
  */
@@ -49,6 +55,9 @@ typedef enum XAIDevCircuitStatus{
  @to-do:   设置线路二的状态
  */
 - (void) setCircuitTwoStatus:(XAIDevCircuitStatus)status;
+
+-(NSArray *)getCirculeOneLinkageUseInfos;
+-(NSArray *)getCirculeTwoLinkageUseInfos;
 
 @end
 

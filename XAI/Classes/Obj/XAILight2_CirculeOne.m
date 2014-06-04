@@ -92,6 +92,9 @@
 }
 
 
+-(NSArray *)getLinkageUseInfos{
 
+    return [_devSwitch getCirculeTwoLinkageUseInfos];
+}
 
 @end
