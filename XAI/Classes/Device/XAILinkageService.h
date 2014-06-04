@@ -7,7 +7,7 @@
 //
 
 #import "XAIDevice.h"
-#import "XAILinkageUseInfo.h"
+#import "XAILinkage.h"
 
 @protocol XAILinkageServiceDelegate;
 @interface XAILinkageService : XAIDevice <MQTTPacketManagerDelegate>{
@@ -22,6 +22,10 @@
 - (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfoCtrl *)ctrlInfo
                     status:(XAILinkageStatus)status name:(NSString*)name;
 
+- (void) delLinkage:(XAILinkageNum)linkNum;
+- (void) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus;
+- (void) findAllLinkages;
+
 @end
 
 
@@ -32,7 +36,7 @@
 
 - (void) linkageService:(XAILinkageService*)service addStatusCode:(XAI_ERROR)errcode;
 - (void) linkageService:(XAILinkageService*)service delStatusCode:(XAI_ERROR)errcode;
-- (void) linkageService:(XAILinkageService*)service changeNameStatusCode:(XAI_ERROR)errcode;
+- (void) linkageService:(XAILinkageService*)service changeStatusStatusCode:(XAI_ERROR)errcode;
 
 - (void) linkageService:(XAILinkageService*)service findedAllLinkage:(NSArray*)linkageAry
                 errcode:(XAI_ERROR)errcode;

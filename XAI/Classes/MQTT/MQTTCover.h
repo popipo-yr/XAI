@@ -25,6 +25,7 @@
 #define MQTTCover_LUID_Server_03 0x03
 #define MQTTCover_UserTable_Other 0x01
 #define MQTTCover_DevTable_Other  0x02
+#define MQTTCover_LinkageTable_Other  0x03
 
 
 @interface MQTTCover : NSObject

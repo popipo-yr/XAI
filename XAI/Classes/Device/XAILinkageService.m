@@ -109,6 +109,56 @@
 
 }
 
+- (void) delLinkage:(XAILinkageNum)linkNum{
+}
+
+- (void) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus{
+    
+    
+    MQTT* cur_MQTT = [MQTT shareMQTT];
+    
+    _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
+    
+    _xai_packet_param_data* number_data = generatePacketParamData();
+    _xai_packet_param_data* status_data = generatePacketParamData();
+
+    
+    xai_param_data_set(number_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageNum), &linkNum, status_data);
+    xai_param_data_set(status_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageStatus), &linkageStatus, NULL);
+    
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+                       Key_LinkageChange,[[NSDate new] timeIntervalSince1970], 2, number_data);
+    
+    
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
+    
+    NSString* ctrlTopic =  [MQTTCover serverCtrlTopicWithAPNS:_apsn luid:_luid];
+    
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
+    
+    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
+                             toTopic:ctrlTopic
+                             withQos:0
+                              retain:NO];
+    
+    
+    purgePacket(packet);
+    purgePacketParamCtrlAndData(param_ctrl);
+
+    
+}
+- (void) findAllLinkages{
+    
+    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                         luid:_luid
+                                                        other:MQTTCover_LinkageTable_Other];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+
+}
+
 
 //- (int) findAllDevWithParamStatus:(_xai_packet_param_status*) param{
 //    
@@ -252,18 +302,18 @@
 //            
 //        }break;
 //            
-//        case AlterDevNameID:{
-//            
-//            if ((nil != _deviceServiceDelegate) &&
-//                [_deviceServiceDelegate respondsToSelector:@selector(devService:changeDevName:errcode:)]) {
-//                
-//                [_deviceServiceDelegate devService:self changeDevName:bSuccess errcode:ack->err_no];
-//            }
-//            
-//            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-//            
-//            
-//        }break;
+        case Key_LinkageChange:{
+            
+            if ((nil != _linkageServiceDelegate) &&
+                [_linkageServiceDelegate respondsToSelector:@selector(linkageService:changeStatusStatusCode:)]) {
+                
+                [_linkageServiceDelegate linkageService:self changeStatusStatusCode:ack->err_no];
+            }
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            
+        }break;
             
             
         default:break;
@@ -279,7 +329,10 @@
     _xai_packet_param_status* status = generateParamStatusFromData(datas, size);
     if (status == NULL) return;
     
-    if ([MQTTCover isServerTopic:topic]) {
+    if ([[MQTTCover serverStatusTopicWithAPNS:_apsn
+                                         luid:_luid
+                                        other:MQTTCover_LinkageTable_Other]
+         isEqualToString:topic]) {
         
         switch (status->oprId) {
             case Key_LinkageTabel:

@@ -11,15 +11,7 @@
 #import "XAIPacket.h"
 
 
-//typedef uint8_t XAILinkageStatus;
 
-typedef enum : uint8_t{
-
-    XAILinkageStatus_DisActive = 1,
-    XAILinkageStatus_Active = 2,
-    XAILinkageStatus_UNKown = 3
-
-}XAILinkageStatus;
 
 
 
