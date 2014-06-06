@@ -12,6 +12,9 @@
 @protocol XAILinkageServiceDelegate;
 @interface XAILinkageService : XAIDevice <MQTTPacketManagerDelegate>{
 
+    
+    NSMutableArray* _allLinkages;
+    XAILinkage*  _getLinkage;
 
 }
 
@@ -25,6 +28,7 @@
 - (void) delLinkage:(XAILinkageNum)linkNum;
 - (void) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus;
 - (void) findAllLinkages;
+- (void) getLinkageDetail:(XAILinkage*)aLinkage;
 
 @end
 
@@ -41,6 +45,14 @@
 - (void) linkageService:(XAILinkageService*)service findedAllLinkage:(NSArray*)linkageAry
                 errcode:(XAI_ERROR)errcode;
 
+- (void) linkageService:(XAILinkageService *)service  getLinkageDetail:(XAILinkage*)linkage
+             statusCode:(XAI_ERROR)errcode;
+
 @end
 
-
+typedef NS_ENUM(NSUInteger,_XAILinkageOpr){
+    
+    XAILinkageOpr_FindAll = __Dev_lastItem,
+    XAILinkageOpr_GetDetail,
+    ___Linkage_lastItem,
+};

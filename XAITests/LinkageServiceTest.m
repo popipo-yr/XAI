@@ -26,6 +26,8 @@
     
     int _findStatus;
     
+    int _getDetail;
+    
     
     NSString* _name4Change;
     
@@ -58,7 +60,7 @@
     
     
     
-    _name4Change = [NSString stringWithFormat:@"NAME1"];
+    _name4Change = [NSString stringWithFormat:@"NAME111"];
     _name4Change_end = [NSString stringWithFormat:@"NAME112"];
     
     //    _luidDev = 0x124b0003d430b6 ;
@@ -154,29 +156,29 @@
 }
 
 
-//- (void)_delDev:(XAITYPELUID)luid{
-//    
-//    
-//    [self login];
-//    
-//    if (_loginStatus == Success) {
-//        
-//        [_devService delDev:luid];
-//        
-//        
-//        _delStatus = start;
-//        
-//        runInMainLoop(^(BOOL * done) {
-//            
-//            if (_delStatus > start) {
-//                
-//                *done = YES;
-//            }
-//        });
-//        
-//    }
-//}
-//
+- (void)_delLinkage:(XAILinkageNum)num{
+    
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        [_service delLinkage:num];
+        
+        
+        _delStatus = start;
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_delStatus > start) {
+                
+                *done = YES;
+            }
+        });
+        
+    }
+}
+
 //
 //- (void)_changeDev:(XAITYPELUID)luid name:(NSString*)name
 //{
@@ -208,8 +210,6 @@
 - (void)test_Add_TRUE
 {
     
-    [_light getLinkageUseInfos];
-    
     [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
                    ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
                      status:XAILinkageStatus_Active
@@ -230,6 +230,113 @@
     
 }
 
+- (void) testFindAll{
+    
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        
+        
+        [_service findAllLinkages];
+        
+        _findStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_findStatus > 0) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_findStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_findStatus != Fail, @"Find faild");
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
+
+
+- (void)testDel_TRUE
+{
+    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
+                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
+                     status:XAILinkageStatus_Active
+                       name:_name4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"Del_TRUE test faild : generate data faild");
+        return;
+    }
+    
+    
+    [self _delLinkage:0x1];
+    
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_delStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_delStatus != Fail, @"no, del dev should be true");
+        
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d", _err);
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+    
+}
+
+- (void)testGetDetail_TRUE
+{
+    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
+                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
+                     status:XAILinkageStatus_Active
+                       name:_name4Change];
+    
+    if (_loginStatus != Success && _addStatus != Success) {
+        
+        XCTFail(@"Del_TRUE test faild : generate data faild");
+        return;
+    }
+    
+    
+    XAILinkage* linkage = [[XAILinkage alloc] init];
+    linkage.num = 0x1;
+    [_service getLinkageDetail:linkage];
+    
+    
+    _getDetail = start;
+    
+    
+    runInMainLoop(^(BOOL * done) {
+        
+        if (_getDetail > 0) {
+            
+            *done = YES;
+        }
+    });
+    
+    
+    XCTAssertTrue (_getDetail != start, @"delegate did not get called");
+    XCTAssertTrue (_getDetail != Fail, @"Find faild");
+    
+    
+}
+
+
+
 
 - (void)linkageService:(XAILinkageService *)service addStatusCode:(XAI_ERROR)errcode{
 
@@ -245,6 +352,56 @@
 
     
     _err = errcode;
+}
+
+- (void)linkageService:(XAILinkageService *)service delStatusCode:(XAI_ERROR)errcode{
+
+    if (_delStatus != start) return;
+    
+    if (errcode == XAI_ERROR_NONE) {
+        
+        _delStatus = Success;
+    }else{
+        
+        _delStatus = Fail;
+    }
+    
+    
+    _err = errcode;
+    
+}
+
+-(void)linkageService:(XAILinkageService *)service findedAllLinkage:(NSArray *)linkageAry errcode:(XAI_ERROR)errcode{
+
+    
+    if (_findStatus != start) return;
+    
+    if (errcode == XAI_ERROR_NONE) {
+        
+        _findStatus = Success;
+    }else{
+        
+        _findStatus = Fail;
+    }
+    
+    _err = errcode;
+}
+
+
+-(void)linkageService:(XAILinkageService *)service getLinkageDetail:(XAILinkage *)linkage statusCode:(XAI_ERROR)errcode{
+
+    if (_getDetail != start) return;
+    
+    if (errcode == XAI_ERROR_NONE) {
+        
+        _getDetail = Success;
+    }else{
+        
+        _getDetail = Fail;
+    }
+    
+    _err = errcode;
+
 }
 
 @end

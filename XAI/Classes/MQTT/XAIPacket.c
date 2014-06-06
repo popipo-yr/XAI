@@ -371,6 +371,18 @@ void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid){
     
 }
 
+bool GUIDToApsnAndLuid(XAITYPEAPSN* apsn,XAITYPELUID* luid,void* guid,size_t size){
+
+    if (size != sizeof(XAITYPEAPSN) + sizeof(XAITYPELUID)) return false;
+    
+    memcpy(apsn, guid, sizeof(XAITYPEAPSN));
+    memcpy(luid, guid + sizeof(XAITYPEAPSN), sizeof(XAITYPELUID));
+    
+    return false;
+    
+    
+}
+
 void purgeGUID(void* guid){
     
     free(guid);

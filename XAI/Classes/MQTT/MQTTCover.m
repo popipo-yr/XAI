@@ -11,6 +11,7 @@
 #define APNS_STR_TOTAL_LEN  8
 #define LUID_STR_TOTAL_LEN  16
 #define OTHER_STR_TOTAL_LEN  2
+#define LinkageNum_STR_TOTAL_LEN  2
 
 @implementation MQTTCover
 
@@ -62,6 +63,32 @@
     return LUID_Str;
 
 }
+
+//+ (NSString*) linkageNumToString:(uint8_t)num{
+//    
+//    NSString* num_end_str = [NSString stringWithFormat:@"%x",num];
+//    
+//    unichar ucdata[16] = {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'};
+//    
+//    int  apns_start_len =   APNS_STR_TOTAL_LEN - [apns_end_str length];
+//    
+//    
+//    if (apns_end_str < 0 ) {
+//        
+//        return NULL;
+//    }
+//    
+//    
+//    NSString* apns_start_str = [[NSString alloc] initWithCharacters:ucdata length:apns_start_len];
+//    
+//    
+//    NSString*  APNS_Str = [[NSString alloc] initWithFormat:@"0x%@%@",apns_start_str,apns_end_str];
+//    
+//    
+//    return APNS_Str;
+//    
+//}
+
 
 + (NSString*) stringFormat:(NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
 
@@ -118,6 +145,30 @@
     
 }
 
++ (NSString*) stringLinkageNum:(uint8_t)num{
+    
+    
+    NSString* num_end_str = [[NSString alloc] initWithFormat:@"%x",num];
+    
+    
+    unichar ucdata[16] = {'0','0'};
+    
+    int  num_start_len =   LinkageNum_STR_TOTAL_LEN - [num_end_str length];
+    
+    if (num_start_len < 0) {
+        
+        return NULL;
+        
+    }
+    
+    NSString* num_start_str = [[NSString alloc] initWithCharacters:ucdata length:num_start_len];
+    
+    NSString*  num_Str = [[NSString alloc] initWithFormat:@"0x%@%@",num_start_str,num_end_str];
+    
+    return num_Str;
+    
+}
+
 
 + (NSString*) nodeDevTableTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
     
@@ -160,6 +211,18 @@
     return [NSString stringWithFormat:@"%@/%@"
             ,[MQTTCover stringFormat:@"%@/SERVER/%@/OUT/STATUS" APNS:APNS luid:luid]
             ,other_Str];
+}
+
++ (NSString*) linkageStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other num:(uint8_t)num{
+    //状态表： 0x%08x/SERVER/0x%016llx/OUT/STATUS/%02d
+    
+    NSString*  other_Str = [MQTTCover stringOther:other];
+    NSString*  num_Str =  [MQTTCover stringLinkageNum:num];
+    
+    return [NSString stringWithFormat:@"%@/%@/%@"
+            ,[MQTTCover stringFormat:@"%@/SERVER/%@/OUT/STATUS" APNS:APNS luid:luid]
+            ,other_Str
+            ,num_Str];
 }
 
 + (NSString*) mobileStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid {
@@ -213,6 +276,7 @@
 
 
 }
+
 
 + (uint32_t) nodeTopicAPSN:(NSString*)topic{
     

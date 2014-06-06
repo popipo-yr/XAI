@@ -113,6 +113,9 @@ typedef enum  XAI_ERROR{
     XAI_ERROR_DATA_TYPE = 24 ,//	数据单元中类型错误
     
     
+    ERRNO_LINK_NOT_EXIST = 30, //联动id不存在
+    
+    
     XAI_ERROR_UNKOWEN = 99,
     XAI_ERROR_TIMEOUT = 100,
     

@@ -177,6 +177,15 @@ extern "C" {
      */
     void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid);
     
+    
+    /**
+     @to-do:
+     @param:   apsn - APSN
+     luid - local unique identify
+     @returns:
+     */
+    bool GUIDToApsnAndLuid(XAITYPEAPSN* apsn,XAITYPELUID* luid,void* guid,size_t size);
+    
     /**
      @to-do:   swap guid bytes－sequence （Little-endian Big-endian）
      @param:   guid -  pointer to guid binary
