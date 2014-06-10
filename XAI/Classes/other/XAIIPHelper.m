@@ -15,37 +15,434 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <pthread.h>
 
+int getdefaultgateway(in_addr_t * addr);
 
+void *_getIp_thread_ever(void *obj);
 void *_getIp_thread_main(void *obj);
+
+pthread_t thread_id;
+
+pthread_t main_thread_id;
+
+
+
+void getApserverIpResult(struct Helper* p_helper, _err rc){
+    
+    p_helper->err = rc;
+    XAIIPHelper* aIPHelper  = (__bridge XAIIPHelper*)p_helper->who;
+    [aIPHelper _res_getApserverIp:p_helper->ip_char err:rc];
+    
+    
+    p_helper->isFinish = true;
+    
+}
+
+void cleanup(void *arg){
+    
+    printf("cleanup: %s\n",(char *)arg);
+}
 
 
 @implementation XAIIPHelper
 
-- (void)getApserverIp:(NSString*)host{
 
+-(id)init{
+
+    if (self = [super init]) {
+        
+        _p_helper = malloc(sizeof(Helper));
+        
+        _p_helper->who = (__bridge void *)(self);
+        _p_helper->host = NULL;
+        _p_helper->ip_char = NULL;
+        _p_helper->getApserverIpResult = getApserverIpResult;
+        
+        
+        _create_p = false;
+    }
+    
+    return self;
+}
+
+- (void) _res_getApserverIp:(const char*)ip err:(_err) rc{
+    
+    if (rc == _err_none) {/*成功返回*/
+    
+//        _ipStr = [NSString stringWithUTF8String:ip];
+//        
+//        if (_delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+//            
+//            [_delegate xaiIPHelper:self getIp:_ipStr errcode:rc];
+//        }
+//        
+//        if (_create_p) {
+//            
+//            pthread_cancel(thread_id);
+//            _create_p = false;
+//        }
+
+        
+    }else{
+        
+        //[self getApserverIpHelper];
+        
+    }
+
+}
+
+
+
+
+- (int) _get_from_route_start{
+    
+    
+    
+    if (_create_p) {
+        
+        //pthread_cancel(thread_id);
+        _create_p = false;
+    }
+    
+    
     /*从路由器获取*/
     in_addr_t gataway;
     int ret = getdefaultgateway(&gataway);
     
-    pthread_t thread_id;
-    pthread_create(&thread_id, NULL, _getIp_thread_main, NULL);
-    
-    
-    
-    
-    [self getApserverIp:NULL host:inet_ntoa(*(struct in_addr *)&gataway)];
-    
-    /*从云服务器获取*/
-    [self getApserverIp:NULL host:[host UTF8String]];
+    /*获取网关成功*/
+    if (ret == 0) {
+        
+        
+        char*  routeip = inet_ntoa(*(struct in_addr *)&gataway);
+        
+        size_t size = strlen(routeip);
+        char*  s = malloc(size);
+        memcpy(s, routeip, size);
+        
+        if (_p_helper->host != NULL) {
+            
+            free(_p_helper->host);
+        }
+        
+        _p_helper->host = s;
+        
+            _p_helper->isFinish = false;
+        
+        
+         _create_p = true;
+        pthread_create(&thread_id, NULL, _getIp_thread_ever, _p_helper);
+        
+        [self performSelector:@selector(timeout) withObject:NULL afterDelay:6.0];
+        
+        //pthread_join(thread_id, NULL);
 
+        
+    
+        
+        return 0;
+        
+    }
+
+    return -1;
+
+}
+- (void) _get_from_route_end{
     
 }
 
-void *_getIp_thread_main(void *obj){
+- (void) _get_from_cloud_start{
+    
+    
+    if (_create_p) {
+        
+        //pthread_cancel(thread_id);
+        _create_p = false;
+    }
+
+    
+    size_t size = [[_host dataUsingEncoding:NSUTF8StringEncoding] length];
+    char*  s = malloc(size);
+    memcpy(s, [_host UTF8String], size);
+    
+    if (_p_helper->host != NULL) {
+        
+        free(_p_helper->host);
+    }
+
+    _p_helper->host = s;
+    _p_helper->isFinish = false;
+
+    
+    _create_p = true;
+    pthread_create(&thread_id, NULL, _getIp_thread_ever, _p_helper);
+    
+    [self performSelector:@selector(timeout) withObject:NULL afterDelay:6.0];
+    
+    //pthread_join(thread_id, NULL);
+    
+    
+
+    
+}
+- (void) _get_from_cloud_end{
     
     
     
+    
+}
+
+
+
+
+
+- (void)getApserverIpHelper{
+    
+    
+//    do {
+//        
+//        [self _get_from_route_start];
+//        
+//        if (NULL != _p_helper->ip_char) break;
+//        
+//        [self _get_from_cloud_start];
+//        
+//        
+//    } while (0);
+//    
+//    
+//    if (_delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+//        
+//        [_delegate xaiIPHelper:self getIp:[NSString stringWithUTF8String:_p_helper->ip_char] errcode:_p_helper->err];
+//    }
+
+    
+    if (_p_helper->ip_char != NULL){
+    
+        printf("%s",_p_helper->ip_char);
+        [_timer invalidate];
+        
+        return;
+    }
+    
+    if (_p_helper->ip_char != NULL &&  _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+        
+        [_delegate xaiIPHelper:self getIp:[NSString stringWithUTF8String:_p_helper->ip_char] errcode:_p_helper->err];
+        
+        [_timer invalidate];
+        
+        return;
+    }
+
+    
+    
+    if (_getStep == _XAIIPHelper_GetStep_Start ) {
+        
+        _getStep = _XAIIPHelper_GetStep_FromRoute;
+        
+        if (0 != [self _get_from_route_start]) {
+            
+            _getStep = _XAIIPHelper_GetStep_FromRoute;
+            [self _get_from_cloud_start];
+        }
+
+        
+    }else if (_getStep == _XAIIPHelper_GetStep_FromRoute){
+        
+        _getStep = _XAIIPHelper_GetStep_FromCloud;
+        [self _get_from_cloud_start];
+    
+        
+    }else{
+        
+        /*所有方式结束,通知*/
+        
+        if (_delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+            
+            [_delegate xaiIPHelper:self getIp:nil errcode:_err_timeout];
+        }
+        
+        if (_create_p) {
+            
+            pthread_cancel(thread_id);
+            _create_p = false;
+        }
+        
+        [_timer invalidate];
+
+    }
+    
+}
+
+
+
+- (void)getApserverIp:(NSString*)host{
+    
+    _host = host;
+    _ipStr = nil;
+    
+    _getStep = _XAIIPHelper_GetStep_Start;
+    
+    _p_helper->isFinish = false;
+    
+    if (_p_helper->ip_char != NULL) {
+        
+        free(_p_helper->ip_char);
+        _p_helper->ip_char = NULL;
+    }
+    
+    
+    [self getApserverIpHelper];
+    
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
+                                              target:self
+                                            selector:@selector(getSteps)
+                                            userInfo:nil
+                                             repeats:YES];
+    
+}
+
+
+- (void) getSteps{
+    
+    if (_p_helper->isFinish) {
+        
+        [self getApserverIpHelper];
+        
+    }
+
+    
+    
+}
+
+
+-(void)timeout{
+
+    pthread_cancel(thread_id);
+    
+    _create_p =false;
+    
+    _p_helper->isFinish = true;
+    
+    //[self getApserverIpHelper];
+    
+}
+
+void *_getIp_thread_ever(void *obj){
+    
+    //pthread_cleanup_push(cleanup, "ruote")
+    
+    Helper* p_helper = (Helper*)obj;
+    
+    int sock;
+    int recbytes;
+    char buffer[1024]={0};
+    uint16_t portnum=9002;
+    
+    struct addrinfo hints;
+	struct addrinfo *ainfo, *rp;
+    
+    
+    memset(&hints, 0, sizeof(struct addrinfo));
+	hints.ai_family = PF_UNSPEC;
+	hints.ai_flags = AI_ADDRCONFIG;
+	hints.ai_socktype = SOCK_STREAM;
+    
+    
+    int s = getaddrinfo(p_helper->host, NULL, &hints, &ainfo);
+    
+    
+    if(s){
+    
+        p_helper->getApserverIpResult(obj,_err_get_route_IP_fail);
+        return obj;
+    }
+    
+    _err res = _err_unkown;
+    
+    do {
+        
+        
+#define INVALID_SOCKET -1
+        
+        BOOL bconnected = false;
+        
+        for(rp = ainfo; rp != NULL; rp = rp->ai_next){
+            sock = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+            if(sock == INVALID_SOCKET) continue;
+            
+            if(rp->ai_family == PF_INET){
+                ((struct sockaddr_in *)rp->ai_addr)->sin_port = htons(portnum);
+            }else if(rp->ai_family == PF_INET6){
+                ((struct sockaddr_in6 *)rp->ai_addr)->sin6_port = htons(portnum);
+            }else{
+                continue;
+            }
+            if(connect(sock, rp->ai_addr, rp->ai_addrlen) != -1){
+                
+                bconnected = true;
+                break;
+            }
+        }
+        
+        if (!bconnected) {
+            
+            res = _err_connect_fail;
+            break;
+        }
+        
+        
+        
+        printf("connect ok !\r\n");
+        
+        
+        char  wBuf[1000] = {0};
+        uint8_t  req = 0x03;
+        XAITYPEAPSN  apsn = 0x01;
+        XAITYPEAPSN napsn = CFSwapInt32(apsn);
+        uint32_t serip = 0x0;
+        
+        memcpy(wBuf, &req, sizeof(uint8_t));
+        memcpy(wBuf+sizeof(uint8_t), &napsn, sizeof(XAITYPEAPSN));
+        memcpy(wBuf+sizeof(uint8_t)+sizeof(XAITYPEAPSN), &serip, sizeof(serip));
+        
+        
+        size_t pack_size = sizeof(uint8_t)+sizeof(XAITYPEAPSN)+sizeof(uint32_t);
+        
+        write(sock, wBuf , pack_size);
+        
+        
+        
+        if(pack_size != (recbytes = read(sock,buffer,1024)))
+        {
+            printf("read data fail !\r\n");
+            close(sock);
+            res = _err_get_data_fail;
+            break;
+        }
+        printf("read ok\r\nREC:\r\n");
+        buffer[recbytes]='\0';
+        printf("%s\r\n",buffer);
+        
+        memcpy(&serip, buffer+sizeof(uint8_t)+sizeof(XAITYPEAPSN), sizeof(uint32_t));
+        
+        char*  ipstr = inet_ntoa(*(struct in_addr *)&serip);
+        
+        printf("ip = %s\n", ipstr);
+        
+        p_helper->ip_char = ipstr;
+        
+        close(sock);
+        
+        res = _err_none;
+        
+    } while (0);
+    
+    
+    freeaddrinfo(ainfo);
+
+    p_helper->getApserverIpResult(p_helper,res);
 
     return obj;
 }
@@ -156,63 +553,6 @@ void *_getIp_thread_main(void *obj){
 @end
 
 
-int down()
-{
-    int sfp,nfp;
-    struct sockaddr_in s_add,c_add;
-    int sin_size;
-    unsigned short portnum=0x8888;
-    printf("Hello,welcome to my server !\r\n");
-    sfp = socket(AF_INET, SOCK_STREAM, 0);
-    if(-1 == sfp)
-    {
-        printf("socket fail ! \r\n");
-        return -1;
-    }
-    printf("socket ok !\r\n");
-    
-    bzero(&s_add,sizeof(struct sockaddr_in));
-    s_add.sin_family=AF_INET;
-    s_add.sin_addr.s_addr=htonl(INADDR_ANY);
-    s_add.sin_port=htons(portnum);
-    
-    if(-1 == bind(sfp,(struct sockaddr *)(&s_add), sizeof(struct sockaddr)))
-    {
-        printf("bind fail !\r\n");
-        return -1;
-    }
-    printf("bind ok !\r\n");
-    
-    if(-1 == listen(sfp,5))
-    {
-        printf("listen fail !\r\n");
-        return -1;
-    }
-    printf("listen ok\r\n");
-    while(1)
-    {
-        sin_size = sizeof(struct sockaddr_in);
-        
-        nfp = accept(sfp, (struct sockaddr *)(&c_add), &sin_size);
-        if(-1 == nfp)
-        {
-            printf("accept fail !\r\n");
-            return -1;
-        }
-        printf("accept ok!\r\nServer start get connect from %#x : %#x\r\n",ntohl(c_add.sin_addr.s_addr),ntohs(c_add.sin_port));
-        
-        if(-1 == write(nfp,"hello,welcome to my server \r\n",32))
-        {
-            printf("write fail!\r\n");
-            return -1;
-        }
-        printf("write ok!\r\n");
-        close(nfp);
-    }
-    close(sfp);
-    return 0;
-}
-
 
 #include <stdio.h>
 #include <netinet/in.h>
@@ -286,198 +626,5 @@ int getdefaultgateway(in_addr_t * addr)
 
 
 
-//#define BUFSIZE 8192
-//
-//
-//struct route_info{
-//    u_int dstAddr;
-//    u_int srcAddr;
-//    u_int gateWay;
-//    char ifName[IF_NAMESIZE];
-//};
-//
-//int readNlSock(int sockFd, char *bufPtr, int seqNum, int pId){
-//    struct nlmsghdr *nlHdr;
-//    int readLen = 0, msgLen = 0;
-//    
-//    do{
-//        /* Recieve response from the kernel */
-//        if((readLen = recv(sockFd, bufPtr, BUFSIZE - msgLen, 0)) < 0){
-//            perror("SOCK READ: ");
-//            return -1;
-//        }
-//        
-//        nlHdr = (struct nlmsghdr *)bufPtr;
-//        
-//        /* Check if the header is valid */
-//        if((NLMSG_OK(nlHdr, readLen) == 0) || (nlHdr->nlmsg_type == NLMSG_ERROR))
-//        {
-//            perror("Error in recieved packet");
-//            return -1;
-//        }
-//        
-//        /* Check if the its the last message */
-//        if(nlHdr->nlmsg_type == NLMSG_DONE) {
-//            break;
-//        }
-//        else{
-//            /* Else move the pointer to buffer appropriately */
-//            bufPtr += readLen;
-//            msgLen += readLen;
-//        }
-//        
-//        /* Check if its a multi part message */
-//        if((nlHdr->nlmsg_flags & NLM_F_MULTI) == 0) {
-//            /* return if its not */
-//            break;
-//        }
-//    } while((nlHdr->nlmsg_seq != seqNum) || (nlHdr->nlmsg_pid != pId));
-//    return msgLen;
-//}
-//
-///* For printing the routes. */
-//void printRoute(struct route_info *rtInfo)
-//{
-//    char tempBuf[512];
-//    
-//    /* Print Destination address */
-//    if(rtInfo->dstAddr != 0)
-//        strcpy(tempBuf, (char *)inet_ntoa(rtInfo->dstAddr));
-//    else
-//        sprintf(tempBuf,"*.*.*.*\t");
-//    fprintf(stdout,"%s\t", tempBuf);
-//    
-//    /* Print Gateway address */
-//    if(rtInfo->gateWay != 0)
-//        strcpy(tempBuf, (char *)inet_ntoa(rtInfo->gateWay));
-//    else
-//        sprintf(tempBuf,"*.*.*.*\t");
-//    fprintf(stdout,"%s\t", tempBuf);
-//    
-//    /* Print Interface Name*/
-//    fprintf(stdout,"%s\t", rtInfo->ifName);
-//    
-//    /* Print Source address */
-//    if(rtInfo->srcAddr != 0)
-//        strcpy(tempBuf, (char *)inet_ntoa(rtInfo->srcAddr));
-//    else
-//        sprintf(tempBuf,"*.*.*.*\t");
-//    fprintf(stdout,"%s\n", tempBuf);
-//}
-//
-///* For parsing the route info returned */
-//void parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo,char *gateway)
-//{
-//    struct rtmsg *rtMsg;
-//    struct rtattr *rtAttr;
-//    int rtLen;
-//    char *tempBuf = NULL;
-//    
-//    tempBuf = (char *)malloc(100);
-//    rtMsg = (struct rtmsg *)NLMSG_DATA(nlHdr);
-//    
-//    /* If the route is not for AF_INET or does not belong to main routing table
-//     then return. */
-//    if((rtMsg->rtm_family != AF_INET) || (rtMsg->rtm_table != RT_TABLE_MAIN))
-//        return;
-//    
-//    /* get the rtattr field */
-//    rtAttr = (struct rtattr *)RTM_RTA(rtMsg);
-//    rtLen = RTM_PAYLOAD(nlHdr);
-//    for(;RTA_OK(rtAttr,rtLen);rtAttr = RTA_NEXT(rtAttr,rtLen)){
-//        switch(rtAttr->rta_type) {
-//            case RTA_OIF:
-//                if_indextoname(*(int *)RTA_DATA(rtAttr), rtInfo->ifName);
-//                break;
-//            case RTA_GATEWAY:
-//                rtInfo->gateWay = *(u_int *)RTA_DATA(rtAttr);
-//                break;
-//            case RTA_PREFSRC:
-//                rtInfo->srcAddr = *(u_int *)RTA_DATA(rtAttr);
-//                break;
-//            case RTA_DST:
-//                rtInfo->dstAddr = *(u_int *)RTA_DATA(rtAttr);
-//                break;
-//        }
-//    }
-//    //printf("%s\n", (char *)inet_ntoa(rtInfo->dstAddr));
-//    
-//    // ADDED BY BOB - ALSO COMMENTED printRoute
-//    
-//    if (strstr((char *)inet_ntoa(rtInfo->dstAddr), "0.0.0.0"))
-//        sprintf(gateway, (char *)inet_ntoa(rtInfo->gateWay));
-//    //printRoute(rtInfo);
-//    
-//    free(tempBuf);
-//    return;
-//}
-//
-//int get_gateway(char *gateway)
-//{
-//    struct nlmsghdr *nlMsg;
-//    struct rtmsg *rtMsg;
-//    struct route_info *rtInfo;
-//    char msgBuf[BUFSIZE];
-//    
-//    int sock, len, msgSeq = 0;
-//    char buff[1024];
-//    
-//    
-//    /* Create Socket */
-//    if((sock = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_ROUTE)) < 0)
-//        perror("Socket Creation: ");
-//    
-//    /* Initialize the buffer */
-//    memset(msgBuf, 0, BUFSIZE);
-//    
-//    /* point the header and the msg structure pointers into the buffer */
-//    nlMsg = (struct nlmsghdr *)msgBuf;
-//    rtMsg = (struct rtmsg *)NLMSG_DATA(nlMsg);
-//    
-//    /* Fill in the nlmsg header*/
-//    nlMsg->nlmsg_len = NLMSG_LENGTH(sizeof(struct rtmsg)); // Length of message.
-//    
-//    nlMsg->nlmsg_type = RTM_GETROUTE; // Get the routes from kernel routing table .
-//    
-//    
-//    nlMsg->nlmsg_flags = NLM_F_DUMP | NLM_F_REQUEST; // The message is a request for dump.
-//    
-//    nlMsg->nlmsg_seq = msgSeq++; // Sequence of the message packet.
-//    
-//    nlMsg->nlmsg_pid = getpid(); // PID of process sending the request.
-//    
-//    
-//    /* Send the request */
-//    if(send(sock, nlMsg, nlMsg->nlmsg_len, 0) < 0){
-//        printf("Write To Socket Failed...\n");
-//        return -1;
-//    }
-//    
-//    /* Read the response */
-//    if((len = readNlSock(sock, msgBuf, msgSeq, getpid())) < 0) {
-//        printf("Read From Socket Failed...\n");
-//        return -1;
-//    }
-//    /* Parse and print the response */
-//    rtInfo = (struct route_info *)malloc(sizeof(struct route_info));
-//    // ADDED BY BOB
-//    
-//    /* THIS IS THE NETTSTAT -RL code I commented out the printing here and in parse routes */
-//    //fprintf(stdout, "Destination\tGateway\tInterface\tSource\n");
-//    
-//    for(;NLMSG_OK(nlMsg,len);nlMsg = NLMSG_NEXT(nlMsg,len)){
-//        memset(rtInfo, 0, sizeof(struct route_info));
-//        parseRoutes(nlMsg, rtInfo,gateway);
-//    }
-//    free(rtInfo);
-//    close(sock);
-//    
-//    return 0;
-//}
-//
-//int route()
-//{
-//    char gateway[255]={0};
-//    get_gateway(gateway);
-//    printf("Gateway:%s\n", gateway);
-//}
+
+

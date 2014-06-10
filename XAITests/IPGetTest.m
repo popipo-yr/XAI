@@ -28,19 +28,36 @@
     [super tearDown];
 }
 
+
+static  inline void runInMainLoop(void(^block)(BOOL *done)) {
+    __block BOOL done = NO;
+    
+    while (!done) {
+        
+        block(&done);
+        [[NSRunLoop mainRunLoop] runUntilDate:
+         [NSDate dateWithTimeIntervalSinceNow:.1]];
+    }
+}
+
 - (void)testExample
 {
     XAIIPHelper* helper =  [[XAIIPHelper alloc] init];
-    char *ip = NULL;
-    [helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
+    //[helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
     
-    NSString* ipStr =[[NSString alloc] initWithUTF8String:ip];
+    [helper getApserverIp:@"www.xai.so"];
     
-    in_addr_t  addr ;
-    getdefaultgateway(&addr);
+    int  _addStatus = 0;
     
-
-    printf("");
+    runInMainLoop(^(BOOL * done) {
+        
+        if (_addStatus > 1) {
+            
+            *done = YES;
+        }
+    });
+    
+    
 }
 
 @end

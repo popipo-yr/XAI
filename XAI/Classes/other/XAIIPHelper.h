@@ -8,12 +8,71 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XAIIPHelper : NSObject
 
+typedef enum _XAIIPHelper_GetStep{
+    
+    _XAIIPHelper_GetStep_Start = 0,
+    _XAIIPHelper_GetStep_FromRoute,
+    _XAIIPHelper_GetStep_FromCloud,
+
+}_XAIIPHelper_GetStep;
+
+
+typedef enum _err{
+    
+    _err_none = 0,
+    _err_unkown,
+    _err_connect_fail,
+    _err_get_data_fail,
+    _err_get_route_IP_fail,
+    _err_timeout,
+    
+    
+}_err;
+
+typedef struct Helper{
+    
+    void*  who;  /*obj  XAIHelper*/
+    
+    char* host;
+    char* ip_char;
+    _err  err;
+    
+    BOOL isFinish;
+    
+    void (*getApserverIpResult)(struct Helper* p_helper, _err rc);
+    
+}Helper;
+
+
+
+@protocol XAIIPHelperDelegate;
+@interface XAIIPHelper : NSObject{
+
+    _XAIIPHelper_GetStep  _getStep;
+    NSString* _host;
+    NSString* _ipStr;
+    
+    Helper* _p_helper;
+    BOOL _create_p;
+    
+    NSTimer* _timer;
+
+}
+
+@property (nonatomic,weak) id <XAIIPHelperDelegate> delegate;
 
 - (void)getApserverIp:(NSString*)host;
 
-//- (int)getApserverIp:(char**)retIp  host:(const char*) host;
+
+- (void) _res_getApserverIp:(const char*)ip err:(_err) rc;
+
+@end
+
+
+@protocol XAIIPHelperDelegate <NSObject>
+
+-(void)xaiIPHelper:(XAIIPHelper*)helper getIp:(NSString*)ip errcode:(_err)rc;
 
 
 @end
