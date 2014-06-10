@@ -17,19 +17,44 @@
 #include <netdb.h>
 
 
-
+void *_getIp_thread_main(void *obj);
 
 
 @implementation XAIIPHelper
 
+- (void)getApserverIp:(NSString*)host{
 
+    /*从路由器获取*/
+    in_addr_t gataway;
+    int ret = getdefaultgateway(&gataway);
+    
+    pthread_t thread_id;
+    pthread_create(&thread_id, NULL, _getIp_thread_main, NULL);
+    
+    
+    
+    
+    [self getApserverIp:NULL host:inet_ntoa(*(struct in_addr *)&gataway)];
+    
+    /*从云服务器获取*/
+    [self getApserverIp:NULL host:[host UTF8String]];
 
-- (int)getApserverIp:(const char*) host{
+    
+}
 
-    int cfd,sock;
+void *_getIp_thread_main(void *obj){
+    
+    
+    
+
+    return obj;
+}
+
+- (int)getApserverIp:(char**)retIp  host:(const char*) host{
+
+    int sock;
     int recbytes;
     char buffer[1024]={0};
-    struct sockaddr_in s_add;
     uint16_t portnum=9002;
     
     struct addrinfo hints;
@@ -50,19 +75,13 @@
     do {
         
         
-        
-  
-        
-        s = getaddrinfo(host, NULL, &hints, &ainfo);
-        if(s) return -1;
-        
         #define INVALID_SOCKET -1
+        
+        BOOL bconnected = false;
         
         for(rp = ainfo; rp != NULL; rp = rp->ai_next){
             sock = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
             if(sock == INVALID_SOCKET) continue;
-            
-            struct sockaddr_in *s  = (struct sockaddr_in *) rp->ai_addr;
             
             if(rp->ai_family == PF_INET){
                 ((struct sockaddr_in *)rp->ai_addr)->sin_port = htons(portnum);
@@ -72,39 +91,15 @@
                 continue;
             }
             if(connect(sock, rp->ai_addr, rp->ai_addrlen) != -1){
-                break;
                 
-                cfd = sock;
+                bconnected = true;
+                break;
             }
-            
-            
-            return -1;
         }
+        
+        if (!bconnected) break;
 
         
-//        cfd = socket(AF_INET, SOCK_STREAM, 0);
-//        if(-1 == cfd)
-//        {
-//            printf("socket fail ! \r\n");
-//            break;
-//        }
-//        printf("socket ok !\r\n");
-//        
-//        bzero(&s_add,sizeof(struct sockaddr_in));
-//        s_add.sin_family=AF_INET;
-//        s_add.sin_addr.s_addr= inet_addr("114.215.178.75");
-//        s_add.sin_port=htons(portnum);
-//        printf("s_addr = %#x ,port : %#x\r\n",s_add.sin_addr.s_addr,s_add.sin_port);
-//
-//        
-//        struct sockaddr * sk = (struct sockaddr *) &s_add;
-//        
-//        if(-1 == connect(cfd,(struct sockaddr *)(&s_add), sizeof(struct sockaddr)))
-//        {
-//            printf("connect fail !\r\n");
-//            break;
-//        }
-
         
         printf("connect ok !\r\n");
         
@@ -129,6 +124,7 @@
         if(pack_size != (recbytes = read(sock,buffer,1024)))
         {
             printf("read data fail !\r\n");
+            close(sock);
             break;
         }
         printf("read ok\r\nREC:\r\n");
@@ -139,18 +135,13 @@
 
         serip = CFSwapInt32(serip);
         
-
+        char*  ipstr = inet_ntoa(*(struct in_addr *)&serip);
         
-        if(-1 == (recbytes = read(cfd,buffer,1024)))
-        {
-            printf("read data fail !\r\n");
-            break;
-        }
-        printf("read ok\r\nREC:\r\n");
-        buffer[recbytes]='\0';
-        printf("%s\r\n",buffer);
-        getchar();
-        close(cfd);
+        printf("ip = %s\n", ipstr);
+
+        *retIp = ipstr;
+
+        close(sock);
 
         res = 0;
         

@@ -11,9 +11,10 @@
 @interface XAIIPHelper : NSObject
 
 
-- (int)getApserverIp:(const char*) host;
+- (void)getApserverIp:(NSString*)host;
+
+//- (int)getApserverIp:(char**)retIp  host:(const char*) host;
 
 
 @end
 
-int getdefaultgateway(in_addr_t * addr);

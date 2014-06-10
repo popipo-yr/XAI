@@ -31,7 +31,10 @@
 - (void)testExample
 {
     XAIIPHelper* helper =  [[XAIIPHelper alloc] init];
-    [helper getApserverIp:[@"192.168.0.33" UTF8String]];
+    char *ip = NULL;
+    [helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
+    
+    NSString* ipStr =[[NSString alloc] initWithUTF8String:ip];
     
     in_addr_t  addr ;
     getdefaultgateway(&addr);
