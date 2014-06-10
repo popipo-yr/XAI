@@ -53,6 +53,8 @@
 		9631D17219075691007CBC4B /* obj_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 9631D16A19075691007CBC4B /* obj_window.png */; };
 		96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D99192303B700676F10 /* PacketStatusTest.m */; };
 		96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D9B192308EC00676F10 /* PacketACKTest.m */; };
+		9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB2619459DBF001E6320 /* XAIIPHelper.m */; };
+		9639FB291945A883001E6320 /* IPGetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB281945A883001E6320 /* IPGetTest.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
@@ -276,6 +278,9 @@
 		9631D16A19075691007CBC4B /* obj_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window.png; sourceTree = "<group>"; };
 		96334D99192303B700676F10 /* PacketStatusTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketStatusTest.m; sourceTree = "<group>"; };
 		96334D9B192308EC00676F10 /* PacketACKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketACKTest.m; sourceTree = "<group>"; };
+		9639FB2519459DBF001E6320 /* XAIIPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIPHelper.h; sourceTree = "<group>"; };
+		9639FB2619459DBF001E6320 /* XAIIPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIPHelper.m; sourceTree = "<group>"; };
+		9639FB281945A883001E6320 /* IPGetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPGetTest.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
@@ -719,6 +724,15 @@
 			path = 2x;
 			sourceTree = "<group>";
 		};
+		9639FB2419459DA2001E6320 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				9639FB2519459DBF001E6320 /* XAIIPHelper.h */,
+				9639FB2619459DBF001E6320 /* XAIIPHelper.m */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
 		9648E6DC190A05A900D630D8 /* user */ = {
 			isa = PBXGroup;
 			children = (
@@ -1067,6 +1081,7 @@
 		C341A64118EBB23E00034649 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9639FB2419459DA2001E6320 /* other */,
 				964E6A371904F14800F1F61C /* Obj */,
 				96E9D95F19010561000BB595 /* UI */,
 				1AF7604B18F2517200520EAD /* Device */,
@@ -1179,6 +1194,7 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				9639FB281945A883001E6320 /* IPGetTest.m */,
 				96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */,
 				9630469F192345810023653E /* LightTest.m */,
 				960B30F319230D0600763EFB /* LoginTest.m */,
@@ -1558,6 +1574,7 @@
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
 				9648E6F0190A1FD200D630D8 /* XAITableViewWithOprController.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
+				9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				967BD7831908AB08007C3C8C /* XAIDevManageVC.m in Sources */,
 				969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */,
@@ -1584,6 +1601,7 @@
 				96659E54192C813E0045E66F /* MQTT.m in Sources */,
 				96659E56192C813E0045E66F /* MQTTCover.m in Sources */,
 				96D8290C18FE55F4008C6B81 /* DeviceTest.m in Sources */,
+				9639FB291945A883001E6320 /* IPGetTest.m in Sources */,
 				9616802E19206324000682A4 /* DoorTest.m in Sources */,
 				96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */,
 				9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */,

@@ -46,6 +46,10 @@
     
     
     _keyboardIsUp = false;
+    
+    [_qrcodeLabel setText:nil];
+    [_qrcodeLabel setEnabled:YES];
+    [_qrcodeLabel setPlaceholder:@"Server-IP"];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -68,6 +72,8 @@
     
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.qrcodeLabel addTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 
@@ -88,6 +94,7 @@
     [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
+    [self.qrcodeLabel removeTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [super viewDidDisappear:animated];
 }
@@ -98,6 +105,16 @@
     [self.passwordLabel becomeFirstResponder];
     
 }
+
+- (void)qrcodeLabelReturn:(id)sender {
+    
+    [self.nameLabel becomeFirstResponder];
+    
+    _scanIP = _qrcodeLabel.text;
+    
+}
+
+
 
 - (void)passwordLabelReturn:(id)sender {
     
