@@ -27,6 +27,7 @@
 @synthesize nameLabel;
 @synthesize passwordLabel;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,15 +42,20 @@
     [nameLabel setPlaceholder:NSLocalizedString(@"TipName", nil)];
     
     //TODO: THERE IS
-    _scanApsn = 0x1;
-    _scanIP = @"192.168.0.33";
-    
+    //_scanApsn = 0x1;
+    //_scanIP = @"192.168.0.33";
+    _hasScan = false;
     
     _keyboardIsUp = false;
     
     [_qrcodeLabel setText:nil];
-    [_qrcodeLabel setEnabled:YES];
+//    [_qrcodeLabel setEnabled:YES];
     [_qrcodeLabel setPlaceholder:@"Server-IP"];
+    
+    
+    _IPHelper = [[XAIIPHelper alloc] init];
+    _IPHelper.delegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -191,11 +197,19 @@
     
     do {
         
+        if (!_hasScan) {
+            
+            errTip = NSLocalizedString(@"PleaseScanQRCode", nil);
+            break;
+            
+        }
+        
         if (NotReachable == [[Reachability reachabilityForInternetConnection] currentReachabilityStatus]) {
             
             errTip = NSLocalizedString(@"NetNotReachable", nil);
             break;
         }
+        
         
         if (nil == nameLabel.text ||[nameLabel.text isEqualToString:@""]) {
             
@@ -206,6 +220,12 @@
         if (nil == passwordLabel.text ||[passwordLabel.text isEqualToString:@""]) {
             
             errTip = NSLocalizedString(@"UserPawdNULL", nil);
+            break;
+        }
+        
+        if (nil == _qrcodeLabel.text ||[_qrcodeLabel.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"ApServerIpNULL", nil);
             break;
         }
         
@@ -495,8 +515,28 @@
     }
     
     _scanApsn = 0x1;
-    _scanIP = @"192.168.0.33";
+    //_scanIP = @"192.168.0.33";
+    _hasScan = true;
+    
+    /*获取ip地址*/
+    [_IPHelper getApserverIp:@"www.xai.so"];
 
+}
+
+
+-(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
+
+    if (rc == _err_none) {
+        
+        _scanIP = ip;
+        [_qrcodeLabel setText:ip];
+        [_qrcodeLabel setEnabled:false];
+        
+    }else{
+    
+        [_qrcodeLabel setText:nil];
+        [_qrcodeLabel setEnabled:true];
+    }
 }
 
 @end

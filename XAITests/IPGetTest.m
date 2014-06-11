@@ -10,7 +10,10 @@
 #import "XAIIPHelper.h"
 
 
-@interface IPGetTest : XCTestCase
+@interface IPGetTest : XCTestCase<XAIIPHelperDelegate>{
+
+    int  _getStatus;
+}
 
 @end
 
@@ -45,19 +48,38 @@ static  inline void runInMainLoop(void(^block)(BOOL *done)) {
     XAIIPHelper* helper =  [[XAIIPHelper alloc] init];
     //[helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
     
+    helper.delegate = self;
     [helper getApserverIp:@"www.xai.so"];
     
-    int  _addStatus = 0;
+    _getStatus = 0;
     
     runInMainLoop(^(BOOL * done) {
         
-        if (_addStatus > 1) {
+        if (_getStatus > 0) {
             
             *done = YES;
         }
     });
     
     
+    
+    XCTAssertTrue (_getStatus != 0, @"delegate did not get called");
+    XCTAssertTrue (_getStatus != 2, @"Find faild");
+    
+}
+
+-(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
+    
+    if (rc == _err_none) {
+        
+        _getStatus = 1;
+        
+        NSLog(@"%@",ip);
+        
+    }else{
+    
+        _getStatus = 2;
+    }
 }
 
 @end

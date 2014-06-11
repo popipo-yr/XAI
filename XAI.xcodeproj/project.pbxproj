@@ -443,6 +443,7 @@
 		9683DA641900F01000518FEB /* login_btn_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_btn_sel.png; sourceTree = "<group>"; };
 		9683DA6E1900F5E600518FEB /* XAIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUser.h; sourceTree = "<group>"; };
 		9683DA6F1900F5E600518FEB /* XAIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUser.m; sourceTree = "<group>"; };
+		968D79AB1947FC4E004A9F20 /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
 		969D6E6019187BA8002076A0 /* XAIScanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIScanVC.h; sourceTree = "<group>"; };
 		969D6E6119187BA8002076A0 /* XAIScanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIScanVC.m; sourceTree = "<group>"; };
 		969D6E64191881B7002076A0 /* login_btn_dis@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_dis@2x.png"; sourceTree = "<group>"; };
@@ -727,6 +728,7 @@
 		9639FB2419459DA2001E6320 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				968D79AB1947FC4E004A9F20 /* route.h */,
 				9639FB2519459DBF001E6320 /* XAIIPHelper.h */,
 				9639FB2619459DBF001E6320 /* XAIIPHelper.m */,
 			);

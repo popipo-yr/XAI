@@ -11,12 +11,15 @@
 #import "XAIUserService.h"
 #import "XAIDeviceService.h"
 #import "XAIScanVC.h"
+#import "XAIIPHelper.h"
 
 @interface XAILoginVC : UIViewController
-<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate,XAIScanVCDelegate>{
+<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate
+,XAIScanVCDelegate,XAIIPHelperDelegate>{
 
 
     XAILogin*  _login;
+    XAIIPHelper* _IPHelper;
     
     UIActivityIndicatorView* _activityView;
     
@@ -27,6 +30,8 @@
     int _findDev;
     
     BOOL _keyboardIsUp;
+    
+    BOOL _hasScan;
     
     NSString* _scanIP;
     XAITYPEAPSN _scanApsn;

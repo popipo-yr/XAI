@@ -24,7 +24,7 @@ typedef enum _err{
     _err_unkown,
     _err_connect_fail,
     _err_get_data_fail,
-    _err_get_route_IP_fail,
+    _err_get_host_ip_fail,
     _err_timeout,
     
     

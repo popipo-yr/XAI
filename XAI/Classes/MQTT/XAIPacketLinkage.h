@@ -9,9 +9,6 @@
 #ifndef XAI_XAIPacketLinkage_h
 #define XAI_XAIPacketLinkage_h
 
-#include "XAIPacket.h"
-
-
 /*
  packet big-endian
  param  little-endian
@@ -20,6 +17,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    
+    #include "XAIPacket.h"
     
     
     /*size*/
