@@ -22,8 +22,11 @@
     Reachability* _netReachability;
     XAIReLogin* _reLogin;
     
-    UIAlertView* _reLoginStartAlert;
+    UIAlertView* _reLoginStartAlert; /*用于重新登录和更新数据,用_isRelogin进行区分*/
     UIAlertView* _reLoginFailAlert;
+    
+    BOOL  _isRelogin;
+
 }
 
 @property (strong, nonatomic) UIWindow *window;

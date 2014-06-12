@@ -26,30 +26,39 @@
     if (self = [super init]) {
         
         _IPHelper = [[XAIIPHelper alloc] init];
-        _IPHelper.delegate = self;
         
         _login = [[XAILogin alloc] init];
-        _login.delegate = self;
     }
     
     return self;
 }
 
 
+-(void)dealloc{
+
+    _IPHelper.delegate = nil;
+    _login.delegate = nil;
+}
+
+
 - (void) relogin{
 
+    _IPHelper.delegate = self;
 
     [_IPHelper getApserverIp:_Macro_Host];
 }
 
 
 -(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
+   
+    _IPHelper.delegate = nil;
     
     if (rc == _err_none) {
         
         
         MQTT* curMQTT =  [MQTT shareMQTT];
         
+        _login.delegate = self;
         [_login loginWithName:curMQTT.curUser.name Password:curMQTT.curUser.pawd Host:ip apsn:curMQTT.apsn];
         
     }else{
@@ -61,6 +70,8 @@
         }
         
     }
+    
+
     
 }
 
@@ -101,6 +112,8 @@
 }
 
 - (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
+  
+    _login.delegate = nil;
     
     if (status) {
         
