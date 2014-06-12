@@ -296,8 +296,8 @@ void cleanup(void *arg){
     
     if (_create_p) {
         
-        pthread_cancel(thread_id);
-        _create_p =false;
+       // pthread_cancel(thread_id);
+       // _create_p =false;
         
     }
     

@@ -441,7 +441,7 @@
         UIViewController* vc= [self.storyboard
                                instantiateViewControllerWithIdentifier:@"XAIMainPage"];
         
-        XAIAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window setRootViewController:vc];
         
         //XAIAppDelegate* [UIApplication sharedApplication].delegate;
@@ -519,7 +519,7 @@
     _hasScan = true;
     
     /*获取ip地址*/
-    [_IPHelper getApserverIp:@"www.xai.so"];
+    [_IPHelper getApserverIp:_Macro_Host];
 
 }
 

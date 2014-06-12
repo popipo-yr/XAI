@@ -142,7 +142,7 @@
     UIViewController* vc= [self.storyboard
                            instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
     
-    XAIAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate.window setRootViewController:vc];
 
 }

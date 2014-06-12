@@ -63,6 +63,9 @@
     
     [_netReachability startNotifier];
     
+    _reLogin = [[XAIReLogin alloc] init];
+    _reLogin.delegate = self;
+    
 
     return YES;
 }
@@ -171,7 +174,6 @@
     if (status == NotReachable) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:NSLocalizedString(@"NetNotConnect", nil)
-                              //@"网络不可用"
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
         [alert show];
@@ -180,10 +182,59 @@
     if(status == ReachableViaWiFi)
     {
         NSLog(@"WIFI");
+        
+        if ([MQTT shareMQTT].isLogin) {
+            
+            _reLoginStartAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:NSLocalizedString(@"ReLoginStart", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil otherButtonTitles:nil];
+            [_reLoginStartAlert show];
+            
+            [_reLogin relogin];
+            
+        }
+
     }
     if(status == ReachableViaWWAN)
     {
         NSLog(@"3G");
+    }
+}
+
+-(void)XAIRelogin:(XAIReLogin *)reLogin loginErrCode:(XAIReLoginErr)err{
+
+    
+    if (err == XAIReLoginErr_NONE) {/*成功,取消提示*/
+        
+        [_reLoginStartAlert removeFromSuperview];
+        _reLoginStartAlert = nil;
+        
+        
+    }else{ /*重新登录错误,提示回到登录界面*/
+        
+        
+        _reLoginFailAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"ReLoginFail", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
+        [_reLoginFailAlert show];
+    
+    
+    }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (_reLoginFailAlert == alertView) {
+        
+        UIViewController* vc= [self.window.rootViewController.storyboard
+                               instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
+        
+        [self.window setRootViewController:vc];
+        
+        _reLoginFailAlert = nil;
     }
 }
 

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
+#define _Macro_Host  @"www.xai.so"
+
 typedef enum _XAIIPHelper_GetStep{
     
     _XAIIPHelper_GetStep_Start = 0,

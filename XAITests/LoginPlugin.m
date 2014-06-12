@@ -120,7 +120,7 @@
     
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;
-    [login loginWithName:@"admin" Password:@"admin" Host:@"192.168.0.33" apsn:0x1];
+    [login loginWithName:@"admin" Password:@"admin" Host:@"114.215.178.75" apsn:0x1];
     
     _loginStatus = _start;
 
