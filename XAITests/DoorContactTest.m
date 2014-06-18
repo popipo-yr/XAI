@@ -32,10 +32,13 @@
 
 - (void)setUp
 {
+    
+    [super setUp];
+    
     _ddc = [[XAIDevDoorContact alloc] init];
     _ddc.dcDelegate = self;
     
-    _ddc.apsn = 0x1;
+    _ddc.apsn = [MQTT shareMQTT].apsn;
     _ddc.luid = 0x124b00039affd6;
     
     [_ddc startFocusStatus];
@@ -46,8 +49,7 @@
     //    _luidDev = 0x124b0003d430b7;
     //    _luidDev = 0x124b0002292580;
     //    _luidDev = 0x124b00023f0c6c;
-    
-    [super setUp];
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 

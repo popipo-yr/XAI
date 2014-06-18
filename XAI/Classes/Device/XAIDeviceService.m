@@ -74,7 +74,8 @@
     purgePacketParamCtrlAndData(param_ctrl);
     
 
-
+    _devOpr = XAIDevServiceOpr_add;
+    _DEF_XTO_TIME_Start
 
 }
 - (void) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
@@ -112,6 +113,8 @@
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
 
+    _devOpr = XAIDevServiceOpr_del;
+    _DEF_XTO_TIME_Start
 
 }
 - (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
@@ -154,6 +157,9 @@
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
 
+    
+    _devOpr = XAIDevServiceOpr_changeName;
+    _DEF_XTO_TIME_Start
 
 }
 
@@ -172,7 +178,12 @@
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     
-    
+    if (!_bFinding) {
+     
+        _devOpr = XAIDevServiceOpr_findAll;
+        _DEF_XTO_TIME_Start
+        
+    }
    
 }
 
@@ -196,6 +207,9 @@
         [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
         
         [_deviceServiceDelegate  devService:self finddedAllOnlineDevices:_onlineDevices status:YES errcode:XAI_ERROR_NONE];
+        
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findOnline);
     }
     
     _bFinding = false;
@@ -239,6 +253,9 @@
                                             repeats:YES];
     
     [self findAllDevWithApsn:apsn luid:luid];
+    
+    _devOpr = XAIDevServiceOpr_findOnline;
+    _DEF_XTO_TIME_Start
 }
 
 #pragma mark -- Helper
@@ -351,6 +368,8 @@
         [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
         
         [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_NONE];
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
     }
     
     
@@ -480,6 +499,7 @@
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_add);
             
         }break;
             
@@ -493,6 +513,8 @@
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_del);
+            
         }break;
             
         case AlterDevNameID:{
@@ -504,6 +526,9 @@
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_changeName);
             
             
         }break;
@@ -735,6 +760,42 @@
     _bFinding = true;
 }
 
+
+-(void)timeout{
+    
+    [super timeout];
+    
+    if (_devOpr == XAIDevServiceOpr_add &&
+        (nil != _deviceServiceDelegate) &&
+        [_deviceServiceDelegate respondsToSelector:@selector(devService:addDevice:errcode:)]) {
+            
+            [_deviceServiceDelegate devService:self addDevice:false errcode:XAI_ERROR_TIMEOUT];
+        
+        }else if(_devOpr == XAIDevServiceOpr_del&&
+             (nil != _deviceServiceDelegate) &&
+             [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
+        
+        [_deviceServiceDelegate devService:self delDevice:false errcode:XAI_ERROR_TIMEOUT];
+            
+    }else if(_devOpr == XAIDevServiceOpr_changeName&&
+             (nil != _deviceServiceDelegate) &&
+             [_deviceServiceDelegate respondsToSelector:@selector(devService:changeDevName:errcode:)]) {
+        
+        [_deviceServiceDelegate devService:self changeDevName:false errcode:XAI_ERROR_TIMEOUT];
+    
+    }else if(_devOpr == XAIDevServiceOpr_findAll&&
+            (nil != _deviceServiceDelegate) &&
+            [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
+        
+        [_deviceServiceDelegate devService:self findedAllDevice:nil status:false errcode: XAI_ERROR_TIMEOUT];
+        
+    }else if (_devOpr == XAIDevServiceOpr_findOnline&&
+              (nil != _deviceServiceDelegate) &&
+              [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
+        
+        [_deviceServiceDelegate devService:self finddedAllOnlineDevices:nil status:false errcode: XAI_ERROR_TIMEOUT];
+    }
+}
 
 @end
 

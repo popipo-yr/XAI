@@ -49,7 +49,7 @@ static  inline void runInMainLoop(void(^block)(BOOL *done)) {
     //[helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
     
     helper.delegate = self;
-    [helper getApserverIpWithApsn:0x1 fromRoute:@"www.xai.so"];
+    [helper getApserverIpWithApsn:0x210e2813 fromRoute:@"www.xai.so"];
     
     _getStatus = 0;
     

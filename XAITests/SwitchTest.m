@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "LoginPlugin.h"
 #import "XAIDevSwitch.h"
+#import "XAIDeviceService.h"
+
 
 @interface SwitchTest : LoginPlugin <XAIDevSwitchDelegate>{
 
@@ -38,9 +40,15 @@
 
 - (void)setUp
 {
+        [super setUp];
+    
+    
+
+    
     _devSwitch = [[XAIDevSwitch alloc] init];
     _devSwitch.swiDelegate = self;
-    _devSwitch.apsn = 0x1;
+    _devSwitch.apsn = [MQTT shareMQTT].apsn;
+    
     _devSwitch.luid= 0x00124b00039afe69;//0x00124B000413C85C;
     
     _err_luid = 0x0013434335998aad;
@@ -57,7 +65,7 @@
 //    0x124b0003d430
 //    0x124b00022925
     
-    [super setUp];
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 

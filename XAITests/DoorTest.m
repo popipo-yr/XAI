@@ -31,7 +31,7 @@
     
     _door = [[XAIDoor alloc] init];
     _door.delegate = self;
-    _door.apsn = 0x1;
+    _door.apsn = [MQTT shareMQTT].apsn;
     _door.luid= 0x124b00039affd6;//0x00124B000413C85C;
     
     _err_luid = 0x001384399578dfcd;

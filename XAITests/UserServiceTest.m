@@ -50,8 +50,9 @@ XAITYPELUID  ____luid;
 
 - (void)setUp
 {
+    [super setUp];
+    
     _userService = [[XAIUserService alloc] init];
-    [MQTT shareMQTT].apsn = 1;
     _userService.apsn = [MQTT shareMQTT].apsn;
     _userService.luid = MQTTCover_LUID_Server_03;
     _userService.userServiceDelegate = self;
@@ -73,7 +74,7 @@ XAITYPELUID  ____luid;
     
     
     
-    [super setUp];
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 

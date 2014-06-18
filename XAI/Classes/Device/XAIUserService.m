@@ -69,6 +69,8 @@
     purgePacketParamCtrlAndData(param_ctrl);
     
     
+    _devOpr = XAIUserServiceOpr_add;
+    _DEF_XTO_TIME_Start
 
 }
 
@@ -107,6 +109,8 @@
     purgePacketParamCtrlAndData(param_ctrl);
     
 
+    _devOpr = XAIUserServiceOpr_del;
+    _DEF_XTO_TIME_Start
 }
 
 
@@ -149,6 +153,9 @@
     
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
+    
+    _devOpr = XAIUserServiceOpr_changeName;
+    _DEF_XTO_TIME_Start
 
 
 }
@@ -197,6 +204,10 @@
     
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
+    
+    
+    _devOpr = XAIUserServiceOpr_changePSWD;
+    _DEF_XTO_TIME_Start
 
 
 }
@@ -208,6 +219,9 @@
     findingAUser = TRUE;
     
     [self finderAllUserApsn:apsn luid:luid];
+    
+    _devOpr = XAIUserServiceOpr_find;
+    _DEF_XTO_TIME_Start
 
 }
 
@@ -219,7 +233,13 @@
     [[MQTT shareMQTT].client subscribe:topicStr];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
-
+    
+    if (!findingAUser) {
+        
+        _devOpr = XAIUserServiceOpr_findAll;
+        _DEF_XTO_TIME_Start
+    }
+    
 }
 
 
@@ -240,12 +260,16 @@
             
             findingAUser = FALSE;
             
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_find);
+            
         }
         
         if ((nil != _userServiceDelegate) &&
             [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
             
             [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_UNKOWEN];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_findAll);
         }
 
         return -1;
@@ -291,6 +315,8 @@
             
             find = YES;
             findingAUser = FALSE;
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_find);
         }
         
         
@@ -320,12 +346,15 @@
         
         findingAUser = FALSE;
 
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_findAll);
     }
     
     if ((nil != _userServiceDelegate) &&
         [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
         
         [_userServiceDelegate userService:self findedAllUser:users status:YES errcode:XAI_ERROR_NONE];
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_find);
     }
     
     
@@ -353,6 +382,7 @@
 
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_add);
             
         }break;
             
@@ -366,6 +396,8 @@
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_del);
      
         
         }break;
@@ -380,6 +412,8 @@
             
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_changeName);
         
         
         }break;
@@ -393,6 +427,8 @@
             }
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_changePSWD);
         
         
         }break;
@@ -488,17 +524,62 @@
 - (void) finderUserLuidHelper:(NSString*)username{
 
     [self finderUserLuidHelper:username apsn:_apsn luid:_luid];
+    
 }
 
 - (void) finderAllUser{
 
     [self finderAllUserApsn:_apsn luid:_luid];
+
 }
 
 - (void)setUserServiceDelegate:(id<XAIUserServiceDelegate>)delegate{
     
     _userServiceDelegate = delegate;
 }
+
+
+-(void)timeout{
+    
+    [super timeout];
+    
+    if (_devOpr == XAIUserServiceOpr_add &&
+        nil != _userServiceDelegate &&
+        [_userServiceDelegate respondsToSelector:@selector(userService:addUser:errcode:)]) {
+        
+        [_userServiceDelegate userService:self addUser:false errcode:XAI_ERROR_TIMEOUT];
+    }else if(_devOpr == XAIUserServiceOpr_del&&
+             (nil != _userServiceDelegate) &&
+             [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:)]) {
+        
+        [_userServiceDelegate userService:self delUser:false errcode:XAI_ERROR_TIMEOUT];
+    }else if(_devOpr == XAIUserServiceOpr_changeName&&
+             (nil != _userServiceDelegate) &&
+             [_userServiceDelegate respondsToSelector:@selector(userService:changeUserName:errcode:)]) {
+        
+        [_userServiceDelegate userService:self changeUserName:false errcode:XAI_ERROR_TIMEOUT];
+    }
+    else if(_devOpr == XAIUserServiceOpr_changePSWD&&
+            (nil != _userServiceDelegate) &&
+            [_userServiceDelegate respondsToSelector:@selector(userService:changeUserPassword:errcode:)]) {
+        
+        [_userServiceDelegate userService:self changeUserPassword:false errcode:XAI_ERROR_TIMEOUT];
+    }else if (_devOpr == XAIUserServiceOpr_find&&
+              (nil != _userServiceDelegate) &&
+              [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
+        
+        [_userServiceDelegate userService:self findedUser:0 withName:nil  status:false  errcode:XAI_ERROR_TIMEOUT];
+    }else if (_devOpr == XAIUserServiceOpr_findAll &&
+              (nil != _userServiceDelegate) &&
+              [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
+        
+        [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_TIMEOUT];
+    }
+
+
+}
+
+
 
 
 @end

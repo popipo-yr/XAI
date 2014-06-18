@@ -59,3 +59,14 @@
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
 @end
+
+
+typedef NS_ENUM(NSUInteger,_XAIDevServiceOpr){
+    
+    XAIDevServiceOpr_add = __Dev_lastItem,
+    XAIDevServiceOpr_del,
+    XAIDevServiceOpr_changeName,
+    XAIDevServiceOpr_findAll,
+    XAIDevServiceOpr_findOnline,
+    __DevService_lastItem,
+};

@@ -50,11 +50,12 @@
 
 - (void)setUp
 {
+        [super setUp];
+    
     _service = [[XAILinkageService alloc] init];
     
-    [MQTT shareMQTT].apsn = 0x1;
     
-    _service.apsn = 0x1;
+    _service.apsn = [MQTT shareMQTT].apsn;
     _service.luid = MQTTCover_LUID_Server_03;
     _service.linkageServiceDelegate = self;
     
@@ -107,7 +108,7 @@
     
     
     
-    [super setUp];
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 

@@ -61,7 +61,15 @@
 - (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)users
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
-
-
-
 @end
+
+typedef NS_ENUM(NSUInteger,_XAIUserServiceOpr){
+    
+    XAIUserServiceOpr_add = __Dev_lastItem,
+    XAIUserServiceOpr_del,
+    XAIUserServiceOpr_changeName,
+    XAIUserServiceOpr_changePSWD,
+    XAIUserServiceOpr_findAll,
+    XAIUserServiceOpr_find,
+    __UserService_lastItem,
+};

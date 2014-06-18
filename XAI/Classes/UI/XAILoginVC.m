@@ -303,7 +303,8 @@
     _login = [[XAILogin alloc] init];
     _login.delegate = self;
     
-    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_scanIP apsn:_scanApsn];
+    
+    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
@@ -515,8 +516,8 @@
     }
     
 
-    
-    _scanApsn = 0x1;
+    symbolStr = @"210e2813";
+    _scanApsn = 0x210e2813;
     //_scanIP = @"192.168.0.33";
     _hasScan = true;
     

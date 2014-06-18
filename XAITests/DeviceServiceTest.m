@@ -51,11 +51,11 @@
 
 - (void)setUp
 {
+    [super setUp];
+    
     _devService = [[XAIDeviceService alloc] init];
     
-    [MQTT shareMQTT].apsn = 0x1;
-    
-    _devService.apsn = 0x1;
+    _devService.apsn = [MQTT shareMQTT].apsn;
     _devService.luid = MQTTCover_LUID_Server_03;
     _devService.deviceServiceDelegate = self;
     
@@ -106,7 +106,7 @@
     
     
     
-    [super setUp];
+    
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
