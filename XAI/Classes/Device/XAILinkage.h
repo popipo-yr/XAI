@@ -1,0 +1,49 @@
+//
+//  XAILinkage.h
+//  XAI
+//
+//  Created by office on 14-6-4.
+//  Copyright (c) 2014年 alibaba. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "XAILinkageUseInfo.h"
+
+typedef uint8_t XAILinkageNum;
+
+typedef enum : uint8_t{
+    
+    XAILinkageStatus_DisActive = 1,
+    XAILinkageStatus_Active = 2,
+    XAILinkageStatus_Del = 3,
+    XAILinkageStatus_UNKown = 9
+    
+}XAILinkageStatus;
+
+
+@interface XAILinkage : NSObject{
+
+    XAILinkageNum _num;
+    XAILinkageStatus _status;
+    NSString* _name;
+    
+    
+    XAILinkageUseInfo* _effeInfo;
+    NSArray*  _condInfos;
+}
+
+
+@property (nonatomic,assign) XAILinkageNum num;
+@property (nonatomic,assign) XAILinkageStatus status;
+@property (nonatomic,strong) NSString* name;
+
+
+@property (nonatomic,strong) XAILinkageUseInfo* effeInfo;
+@property (nonatomic,strong) NSArray* condInfos;
+
+
+//- (void) getDetailInfo;
+
+@end
+
+

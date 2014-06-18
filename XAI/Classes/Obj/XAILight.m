@@ -119,6 +119,12 @@
     
 }
 
+-(NSArray *)getLinkageUseInfos{
+    
+    
+    return [_devSwitch getCirculeOneLinkageUseInfos];
+}
+
 @end
 
 @implementation XAILightOpr

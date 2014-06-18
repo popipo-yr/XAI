@@ -13,11 +13,8 @@
 #import "XAIPacketCtrl.h"
 
 
-#define Key_CircuitOneStatusID 1
-#define Key_CircuitTwoStatusID 2
 
-#define Key_CircuitOneCtrlID  1
-#define Key_CircuitTwoCtrlID  2
+
 
 @implementation XAIDevSwitch
 
@@ -392,6 +389,56 @@
     }
     
     return self;
+}
+
+#pragma mark Linkage
+-(NSArray *)getCirculeOneLinkageUseInfos{
+    
+    
+    XAILinkageUseInfoCtrl* openone = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* true_data = generatePacketParamData();
+    XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
+    
+    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    
+    
+    XAILinkageUseInfoCtrl* closeone = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* false_data = generatePacketParamData();
+    XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
+    xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
+    
+    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    
+    
+    return [NSArray arrayWithObjects:openone, closeone, nil];
+}
+
+-(NSArray *)getCirculeTwoLinkageUseInfos{
+
+
+    XAILinkageUseInfoCtrl* opentwo = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* true_data = generatePacketParamData();
+    XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
+    
+    [opentwo setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    
+    
+    XAILinkageUseInfoCtrl* closetwo = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* false_data = generatePacketParamData();
+    XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
+    xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
+    
+    [closetwo setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    
+    
+    return [NSArray arrayWithObjects:opentwo, closetwo, nil];
+    
 }
 
 @end

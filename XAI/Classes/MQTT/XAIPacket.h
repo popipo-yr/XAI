@@ -100,6 +100,14 @@ extern "C" {
     
     
     /**
+     @to-do: generate a param data from other if has next same copy
+     @param:    param_data - other
+     @returns: Pointer to a param data struct
+     */
+    _xai_packet_param_data* generateParamDataCopyOther(_xai_packet_param_data* param_data);
+    
+    
+    /**
      @to-do: generate a packet from a param data  list
      @param:    param_data - a param data struct first pointer
      count - count of param data struct
@@ -114,6 +122,7 @@ extern "C" {
      @returns: Pointer to a packet struct
      */
     _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* param_data);
+    
     
     
     /**
@@ -167,6 +176,15 @@ extern "C" {
      @returns: a 8 bytes guid
      */
     void* generateGUID(XAITYPEAPSN apsn,XAITYPELUID luid);
+    
+    
+    /**
+     @to-do:
+     @param:   apsn - APSN
+     luid - local unique identify
+     @returns:
+     */
+    bool GUIDToApsnAndLuid(XAITYPEAPSN* apsn,XAITYPELUID* luid,void* guid,size_t size);
     
     /**
      @to-do:   swap guid bytes－sequence （Little-endian Big-endian）

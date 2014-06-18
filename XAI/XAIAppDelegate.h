@@ -10,15 +10,23 @@
 #import "MQTT.h"
 #import "XAIObject.h"
 #import "Reachability.h"
+#import "XAIReLogin.h"
 
 #define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? YES : NO)
 
 
-@interface XAIAppDelegate : UIResponder <UIApplicationDelegate>{
+@interface XAIAppDelegate : UIResponder <UIApplicationDelegate,XAIReLoginDelegate,UIAlertViewDelegate>{
 
     MosquittoClient* _mosquittoClient;
     MQTTPacketManager* _mqttPacketManager;
     Reachability* _netReachability;
+    XAIReLogin* _reLogin;
+    
+    UIAlertView* _reLoginStartAlert; /*用于重新登录和更新数据,用_isRelogin进行区分*/
+    UIAlertView* _reLoginFailAlert;
+    
+    BOOL  _isRelogin;
+
 }
 
 @property (strong, nonatomic) UIWindow *window;

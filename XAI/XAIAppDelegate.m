@@ -63,6 +63,9 @@
     
     [_netReachability startNotifier];
     
+    _reLogin = [[XAIReLogin alloc] init];
+    _reLogin.delegate = self;
+    
 
     return YES;
 }
@@ -89,6 +92,7 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
+    [self reloginIsLogin:false];
     [_mosquittoClient reconnect];
 }
 
@@ -164,6 +168,9 @@
 
 
 - (void)reachabilityChanged:(NSNotification *)note {
+
+    
+    
     Reachability* curReach = [note object];
     NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     NetworkStatus status = [curReach currentReachabilityStatus];
@@ -171,19 +178,123 @@
     if (status == NotReachable) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:NSLocalizedString(@"NetNotConnect", nil)
-                              //@"网络不可用"
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
         [alert show];
     }
     
-    if(status == ReachableViaWiFi)
+    if(status == ReachableViaWiFi || status == ReachableViaWWAN)
     {
         NSLog(@"WIFI");
+    
+        [self reloginIsLogin:true];
+       
     }
     if(status == ReachableViaWWAN)
     {
         NSLog(@"3G");
+    }
+}
+
+
+- (void)reloginIsLogin:(BOOL)islogin{
+    
+    
+    if ([MQTT shareMQTT].isLogin &&
+        nil == _reLoginStartAlert &&
+        NotReachable != [[Reachability reachabilityForInternetConnection] currentReachabilityStatus]) {
+        /*重新获取数据,数据可能更新*/
+        
+        _isRelogin = islogin;
+        
+        NSString* msg = NSLocalizedString(@"ReLoginStartUpdate", nil);
+        
+        if (islogin) {
+            
+            msg= NSLocalizedString(@"ReLoginStart", nil);
+            
+        }
+        
+        _reLoginStartAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:msg
+                                                       delegate:nil
+                                              cancelButtonTitle:nil otherButtonTitles:nil];
+        
+        UIActivityIndicatorView *activeView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        
+        activeView.color = [UIColor redColor];
+        [activeView startAnimating];
+        
+        if (isIOS7) {
+            
+            
+            activeView.frame= CGRectMake(50, 10, 37, 37);
+            
+            activeView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+            
+            
+            //the magic line below,
+            //we associate the activity indicator to the alert view: (addSubview is not used)
+            [_reLoginStartAlert setValue:activeView forKey:@"accessoryView"];
+            
+        }else{
+            
+            
+            activeView.center = CGPointMake(_reLoginStartAlert.bounds.size.width/2.0f,
+                                            _reLoginStartAlert.bounds.size.height-40.0f);
+            
+            [_reLoginStartAlert addSubview:activeView];
+        }
+        
+        
+        [_reLoginStartAlert show];
+        
+        [_reLogin relogin];
+        
+    }
+    
+}
+
+-(void)XAIRelogin:(XAIReLogin *)reLogin loginErrCode:(XAIReLoginErr)err{
+
+    
+    /*成功,取消提示*/
+    [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
+    _reLoginStartAlert = nil;
+    
+    
+    if (err != XAIReLoginErr_NONE) {
+    /*重新登录错误,提示回到登录界面*/
+        
+        NSString* msg = NSLocalizedString(@"ReLoginUpdateFail", nil);
+        
+        if (_isRelogin) {
+            
+            msg = NSLocalizedString(@"ReLoginFail", nil);
+        }
+        
+        _reLoginFailAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:msg
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
+        [_reLoginFailAlert show];
+    
+    
+        [MQTT shareMQTT].isLogin = false;
+    }
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (_reLoginFailAlert == alertView) {
+        
+        UIViewController* vc= [self.window.rootViewController.storyboard
+                               instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
+        
+        [self.window setRootViewController:vc];
+        
+        _reLoginFailAlert = nil;
     }
 }
 

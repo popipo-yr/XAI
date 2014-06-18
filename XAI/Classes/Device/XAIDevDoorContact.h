@@ -17,6 +17,8 @@
 - (void) getDoorContactStatus;
 - (void) getPower; //BatteryPower
 
+-(NSArray *)getLinkageUseInfos;
+
 @end
 
 

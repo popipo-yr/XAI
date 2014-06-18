@@ -83,6 +83,13 @@
     
 }
 
+-(NSArray *)getLinkageUseInfos{
+    
+    
+    return [_doorContact getLinkageUseInfos];
+}
+
+
 @end
 
 @implementation XAIDoorOpr

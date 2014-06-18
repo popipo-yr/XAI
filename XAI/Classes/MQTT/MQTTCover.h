@@ -25,6 +25,8 @@
 #define MQTTCover_LUID_Server_03 0x03
 #define MQTTCover_UserTable_Other 0x01
 #define MQTTCover_DevTable_Other  0x02
+#define MQTTCover_LinkageTable_Other  0x04
+#define MQTTCover_LinkageTableDetail_Other  0x03
 
 
 @interface MQTTCover : NSObject
@@ -45,6 +47,7 @@
 + (NSString*) nodeCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) serverCtrlTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
 + (NSString*) mobileCtrTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid;
++ (NSString*) linkageStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other num:(uint8_t)num;
 
 
 + (BOOL) isNodeTopic:(NSString*)topic;

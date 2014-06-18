@@ -27,6 +27,7 @@
 @synthesize nameLabel;
 @synthesize passwordLabel;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,11 +42,20 @@
     [nameLabel setPlaceholder:NSLocalizedString(@"TipName", nil)];
     
     //TODO: THERE IS
-    _scanApsn = 0x1;
-    _scanIP = @"192.168.0.33";
-    
+    //_scanApsn = 0x1;
+    //_scanIP = @"192.168.0.33";
+    _hasScan = false;
     
     _keyboardIsUp = false;
+    
+    [_qrcodeLabel setText:nil];
+//    [_qrcodeLabel setEnabled:YES];
+    [_qrcodeLabel setPlaceholder:@"Server-IP"];
+    
+    
+    _IPHelper = [[XAIIPHelper alloc] init];
+    _IPHelper.delegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -68,6 +78,8 @@
     
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.qrcodeLabel addTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 
@@ -88,6 +100,7 @@
     [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
+    [self.qrcodeLabel removeTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [super viewDidDisappear:animated];
 }
@@ -98,6 +111,16 @@
     [self.passwordLabel becomeFirstResponder];
     
 }
+
+- (void)qrcodeLabelReturn:(id)sender {
+    
+    [self.nameLabel becomeFirstResponder];
+    
+    _scanIP = _qrcodeLabel.text;
+    
+}
+
+
 
 - (void)passwordLabelReturn:(id)sender {
     
@@ -174,11 +197,19 @@
     
     do {
         
+        if (!_hasScan) {
+            
+            errTip = NSLocalizedString(@"PleaseScanQRCode", nil);
+            break;
+            
+        }
+        
         if (NotReachable == [[Reachability reachabilityForInternetConnection] currentReachabilityStatus]) {
             
             errTip = NSLocalizedString(@"NetNotReachable", nil);
             break;
         }
+        
         
         if (nil == nameLabel.text ||[nameLabel.text isEqualToString:@""]) {
             
@@ -189,6 +220,12 @@
         if (nil == passwordLabel.text ||[passwordLabel.text isEqualToString:@""]) {
             
             errTip = NSLocalizedString(@"UserPawdNULL", nil);
+            break;
+        }
+        
+        if (nil == _qrcodeLabel.text ||[_qrcodeLabel.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"ApServerIpNULL", nil);
             break;
         }
         
@@ -404,7 +441,7 @@
         UIViewController* vc= [self.storyboard
                                instantiateViewControllerWithIdentifier:@"XAIMainPage"];
         
-        XAIAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window setRootViewController:vc];
         
         //XAIAppDelegate* [UIApplication sharedApplication].delegate;
@@ -477,9 +514,34 @@
         pasteboard.string = [arrInfoFoot objectAtIndex:1];
     }
     
-    _scanApsn = 0x1;
-    _scanIP = @"192.168.0.33";
 
+    
+    _scanApsn = 0x1;
+    //_scanIP = @"192.168.0.33";
+    _hasScan = true;
+    
+    NSScanner* scanner = [NSScanner scannerWithString:symbolStr];
+    [scanner scanHexInt:&_scanApsn];
+    
+    /*获取ip地址*/
+    [_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];
+
+}
+
+
+-(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
+
+    if (rc == _err_none) {
+        
+        _scanIP = ip;
+        [_qrcodeLabel setText:ip];
+        [_qrcodeLabel setEnabled:false];
+        
+    }else{
+    
+        [_qrcodeLabel setText:nil];
+        [_qrcodeLabel setEnabled:true];
+    }
 }
 
 @end
