@@ -133,6 +133,7 @@ void cleanup(void *arg){
             free(_p_helper->host);
         }
         
+        _p_helper->apsn = _apsn;
         _p_helper->host = s;
         
         _p_helper->isFinish = false;
@@ -173,6 +174,7 @@ void cleanup(void *arg){
         free(_p_helper->host);
     }
     
+    _p_helper->apsn = _apsn;
     _p_helper->host = s;
     _p_helper->isFinish = false;
     
@@ -251,10 +253,11 @@ void cleanup(void *arg){
 
 
 
-- (void)getApserverIp:(NSString*)host{
+- (void)getApserverIpWithApsn:(XAITYPEAPSN)apsn fromRoute:(NSString*)host{
     
     _host = host;
     _ipStr = nil;
+    _apsn = apsn;
     
     _getStep = _XAIIPHelper_GetStep_Start;
     
@@ -377,7 +380,7 @@ void *_getIp_thread_ever(void *obj){
         
         char  wBuf[1000] = {0};
         uint8_t  req = 0x03;
-        XAITYPEAPSN  apsn = 0x01;
+        XAITYPEAPSN  apsn = p_helper->apsn;
         XAITYPEAPSN napsn = CFSwapInt32(apsn);
         uint32_t serip = 0x0;
         

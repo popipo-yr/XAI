@@ -43,13 +43,13 @@ static  inline void runInMainLoop(void(^block)(BOOL *done)) {
     }
 }
 
-- (void)testExample
+- (void)testGetIp
 {
     XAIIPHelper* helper =  [[XAIIPHelper alloc] init];
     //[helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
     
     helper.delegate = self;
-    [helper getApserverIp:@"www.xai.so"];
+    [helper getApserverIpWithApsn:0x1 fromRoute:@"www.xai.so"];
     
     _getStatus = 0;
     

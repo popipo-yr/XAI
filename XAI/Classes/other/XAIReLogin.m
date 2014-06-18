@@ -45,7 +45,7 @@
 
     _IPHelper.delegate = self;
 
-    [_IPHelper getApserverIp:_Macro_Host];
+    [_IPHelper getApserverIpWithApsn:[MQTT shareMQTT].apsn fromRoute:_Macro_Host];
 }
 
 

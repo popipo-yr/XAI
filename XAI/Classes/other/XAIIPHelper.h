@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XAIMQTTDEF.h"
+
 
 
 #define _Macro_Host  @"www.xai.so"
@@ -42,6 +44,8 @@ typedef struct Helper{
     
     BOOL isFinish;
     
+    XAITYPEAPSN  apsn;
+    
     void (*getApserverIpResult)(struct Helper* p_helper, _err rc);
     
 }Helper;
@@ -59,12 +63,14 @@ typedef struct Helper{
     BOOL _create_p;
     
     NSTimer* _timer;
+    
+    XAITYPEAPSN  _apsn;
 
 }
 
 @property (nonatomic,weak) id <XAIIPHelperDelegate> delegate;
 
-- (void)getApserverIp:(NSString*)host;
+- (void)getApserverIpWithApsn:(XAITYPEAPSN)apsn fromRoute:(NSString*)host;
 
 
 - (void) _res_getApserverIp:(const char*)ip err:(_err) rc;

@@ -514,12 +514,17 @@
         pasteboard.string = [arrInfoFoot objectAtIndex:1];
     }
     
+
+    
     _scanApsn = 0x1;
     //_scanIP = @"192.168.0.33";
     _hasScan = true;
     
+    NSScanner* scanner = [NSScanner scannerWithString:symbolStr];
+    [scanner scanHexInt:&_scanApsn];
+    
     /*获取ip地址*/
-    [_IPHelper getApserverIp:_Macro_Host];
+    [_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];
 
 }
 
