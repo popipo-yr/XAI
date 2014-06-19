@@ -768,31 +768,45 @@
     if (_devOpr == XAIDevServiceOpr_add &&
         (nil != _deviceServiceDelegate) &&
         [_deviceServiceDelegate respondsToSelector:@selector(devService:addDevice:errcode:)]) {
-            
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             [_deviceServiceDelegate devService:self addDevice:false errcode:XAI_ERROR_TIMEOUT];
         
         }else if(_devOpr == XAIDevServiceOpr_del&&
              (nil != _deviceServiceDelegate) &&
              [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
         
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_deviceServiceDelegate devService:self delDevice:false errcode:XAI_ERROR_TIMEOUT];
             
     }else if(_devOpr == XAIDevServiceOpr_changeName&&
              (nil != _deviceServiceDelegate) &&
              [_deviceServiceDelegate respondsToSelector:@selector(devService:changeDevName:errcode:)]) {
         
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_deviceServiceDelegate devService:self changeDevName:false errcode:XAI_ERROR_TIMEOUT];
     
     }else if(_devOpr == XAIDevServiceOpr_findAll&&
             (nil != _deviceServiceDelegate) &&
             [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
         
+        
+        NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                             luid:_luid
+                                                            other:MQTTCover_DevTable_Other];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         [_deviceServiceDelegate devService:self findedAllDevice:nil status:false errcode: XAI_ERROR_TIMEOUT];
         
     }else if (_devOpr == XAIDevServiceOpr_findOnline&&
               (nil != _deviceServiceDelegate) &&
               [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
         
+        NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                             luid:_luid
+                                                            other:MQTTCover_DevTable_Other];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         [_deviceServiceDelegate devService:self finddedAllOnlineDevices:nil status:false errcode: XAI_ERROR_TIMEOUT];
     }
 }

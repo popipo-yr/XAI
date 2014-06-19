@@ -346,7 +346,7 @@
         
         findingAUser = FALSE;
 
-        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_findAll);
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_find);
     }
     
     if ((nil != _userServiceDelegate) &&
@@ -354,7 +354,7 @@
         
         [_userServiceDelegate userService:self findedAllUser:users status:YES errcode:XAI_ERROR_NONE];
         
-        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_find);
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_findAll);
     }
     
     
@@ -546,33 +546,41 @@
     if (_devOpr == XAIUserServiceOpr_add &&
         nil != _userServiceDelegate &&
         [_userServiceDelegate respondsToSelector:@selector(userService:addUser:errcode:)]) {
-        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_userServiceDelegate userService:self addUser:false errcode:XAI_ERROR_TIMEOUT];
     }else if(_devOpr == XAIUserServiceOpr_del&&
              (nil != _userServiceDelegate) &&
              [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:)]) {
-        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_userServiceDelegate userService:self delUser:false errcode:XAI_ERROR_TIMEOUT];
     }else if(_devOpr == XAIUserServiceOpr_changeName&&
              (nil != _userServiceDelegate) &&
              [_userServiceDelegate respondsToSelector:@selector(userService:changeUserName:errcode:)]) {
-        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_userServiceDelegate userService:self changeUserName:false errcode:XAI_ERROR_TIMEOUT];
     }
     else if(_devOpr == XAIUserServiceOpr_changePSWD&&
             (nil != _userServiceDelegate) &&
             [_userServiceDelegate respondsToSelector:@selector(userService:changeUserPassword:errcode:)]) {
-        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_userServiceDelegate userService:self changeUserPassword:false errcode:XAI_ERROR_TIMEOUT];
     }else if (_devOpr == XAIUserServiceOpr_find&&
               (nil != _userServiceDelegate) &&
               [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {
         
+        NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn luid:_luid other:MQTTCover_UserTable_Other];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+
         [_userServiceDelegate userService:self findedUser:0 withName:nil  status:false  errcode:XAI_ERROR_TIMEOUT];
     }else if (_devOpr == XAIUserServiceOpr_findAll &&
               (nil != _userServiceDelegate) &&
               [_userServiceDelegate respondsToSelector:@selector(userService:findedAllUser:status:errcode:)]) {
         
+        NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn luid:_luid other:MQTTCover_UserTable_Other];
+        
+        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+
         [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_TIMEOUT];
     }
 

@@ -353,7 +353,7 @@
     if (_devOpr == XAIDevSwitchOpr_GetOneStatus &&
         (nil != _swiDelegate) &&
         [_swiDelegate respondsToSelector:@selector(switch_:getCircuitOneStatus:err:)]) {
-            
+        
             [_swiDelegate switch_:self getCircuitOneStatus:XAIDevCircuitUnkown err:XAI_ERROR_TIMEOUT];
 
         
@@ -367,6 +367,7 @@
              (nil != _swiDelegate) &&
              [_swiDelegate respondsToSelector:@selector(switch_:setCircuitOneErr:)]){
         
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_swiDelegate switch_:self setCircuitOneErr:XAI_ERROR_TIMEOUT];
         
     
@@ -374,6 +375,7 @@
              (nil != _swiDelegate) &&
              [_swiDelegate respondsToSelector:@selector(switch_:setCircuitTwoErr:)]){
     
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_swiDelegate switch_:self setCircuitTwoErr:XAI_ERROR_TIMEOUT];
     
     }

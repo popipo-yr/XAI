@@ -83,16 +83,16 @@
     
     
     //开关
-//    _luidDev = 0x00124B000413C85C;  //21
+    _luidDev = 0x00124B000413C85C;  //21
 //     _luidDev = 0x00124B000413C931;
 //_luidDev = 0x00124B000413CCC2;
     
     
-    _luidDev = 0x00124B000413CDCF;  //26
+//    _luidDev = 0x00124B000413CDCF;  //26
     
     
     //0x69, 0xFE, 0x9A, 0x03, 0x00, 0x4B, 0x12, 0x00  开关
-    _luidDev = 0x00124b00039afe69;
+//    _luidDev = 0x00124b00039afe69;
     //0xD6, 0xFF, 0x9A, 0x03, 0x00, 0x4B, 0x12, 0x00 门磁
    // luidstr = 0x124b00039affd6;
     
@@ -202,6 +202,46 @@
     }
 }
 
+
+
+- (void)test_Add
+{
+    
+    _luidDev = 0x124b0003d43034;  //26
+    
+    [self _addDev:_luidDev withName:@"门窗.." type:_type];
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+//        XCTAssertTrue (_addStatus != Fail, @"no, add dev should be suc");
+//        XCTAssert(_err == XAI_ERROR_NONE, @"-err:%d",_err);
+        
+    }else{
+        
+        
+        XCTFail(@"login faild");
+    }
+    
+     _luidDev = 0x00124b00039afe69;
+    [self _addDev:_luidDev withName:@"开关" type:_type];
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+//        XCTAssertTrue (_addStatus != Fail, @"no, add dev should be suc");
+//        XCTAssert(_err == XAI_ERROR_NONE, @"-err:%d",_err);
+        
+    }else{
+        
+        
+        XCTFail(@"login faild");
+    }
+    
+    
+}
 
 
 
