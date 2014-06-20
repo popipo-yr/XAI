@@ -290,11 +290,20 @@
             
             if (![tabBarVC isKindOfClass:[UITabBarController class]]) break;
             
-            UIViewController* curVC = ((UITabBarController*)tabBarVC).selectedViewController;
+           
+             NSArray* curVCS = ((UITabBarController*)tabBarVC).viewControllers;
             
-            if (![curVC isKindOfClass:[UINavigationController class]]) break;
+            for (int i = 0; i < [curVCS count]; i++) {
                 
-            [(UINavigationController*)curVC popToRootViewControllerAnimated:YES]; //回到起始位置
+                UIViewController* curVC = [curVCS  objectAtIndex:i];
+                
+                if (![curVC isKindOfClass:[UINavigationController class]]) continue;
+                
+                [(UINavigationController*)curVC popToRootViewControllerAnimated:YES]; //回到起始位置
+                
+            }
+            
+
             
         } while (0);
         
