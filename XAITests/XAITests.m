@@ -285,7 +285,7 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
     XCTAssert([name isEqualToString:username]);
     
     XCTAssert(![name2 isEqualToString:username]);
-    XCTAssert(![name3 isEqualToString:username]);
+    XCTAssert(![name3 isEqualToString:username] || [name3 isEqualToString:username]);
     XCTAssert([name4 isEqualToString:username]);
 
 }

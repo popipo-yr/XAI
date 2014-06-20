@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "XAIPacketLinkage.h"
+#include "XAIPacketLinkage.h"
 
 @interface PackerLinkageTest : XCTestCase
 

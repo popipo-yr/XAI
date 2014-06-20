@@ -281,6 +281,25 @@
     
     
         [MQTT shareMQTT].isLogin = false;
+        
+    }else{
+        
+        do {
+            
+            UIViewController*  tabBarVC = self.window.rootViewController;
+            
+            if (![tabBarVC isKindOfClass:[UITabBarController class]]) break;
+            
+            UIViewController* curVC = ((UITabBarController*)tabBarVC).selectedViewController;
+            
+            if (![curVC isKindOfClass:[UINavigationController class]]) break;
+                
+            [(UINavigationController*)curVC popToRootViewControllerAnimated:YES]; //回到起始位置
+            
+        } while (0);
+        
+
+        
     }
 }
 
