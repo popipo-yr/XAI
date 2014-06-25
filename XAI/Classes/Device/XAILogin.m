@@ -7,6 +7,7 @@
 //
 
 #import "XAILogin.h"
+#import "XAIToken.h"
 #import "XAIPacketStatus.h"
 //#include "openssl/ssl.h"
 
@@ -89,20 +90,17 @@
 - (void) userService:(XAIUserService *)userService findedUser:(XAITYPELUID)luid
             withName:(NSString *)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
+    void* token = malloc(TokenSize);
+    memset(token, 0, TokenSize);
+
+    BOOL bl = [XAIToken getToken:&token size:NULL];
     
-    if ((YES == isSuccess) &&  [name isEqualToString:_name]) {
+    if (bl && (YES == isSuccess) &&  [name isEqualToString:_name]) {
         
         MQTT* curMQTT = [MQTT shareMQTT];
         
         curMQTT.luid = luid;
         curMQTT.apsn = _apsn;
-        
-        /*订阅主题*/
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
-        
-        
-        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
         
         
         /*设置当前用户*/
@@ -115,12 +113,41 @@
         curMQTT.curUser = user;
         curMQTT.isLogin = true;
         
+        /*订阅主题*/
+        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                                  luid:MQTTCover_LUID_Server_03]];
+        
+        
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+        
+        
+        [_userService pushToken:token size:TokenSize user:luid];
+        
+    }else{
+        
+        if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
+            
+            [_delegate loginFinishWithStatus:false isTimeOut:false];
+        }
     }
+    
+    free(token);
+
+}
+
+-(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+//    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
+//        
+//        MQTT* curMQTT = [MQTT shareMQTT];
+//        
+//    }
     
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
         [_delegate loginFinishWithStatus:isSuccess isTimeOut:false];
     }
+
 
 }
 

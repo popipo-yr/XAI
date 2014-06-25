@@ -52,8 +52,8 @@ typedef  enum XAI_DATA_TYPE{
     XAI_DATA_TYPE_BIN_DATE = 3,//	时间数据(毫秒从1970.1.1)
     XAI_DATA_TYPE_BIN_DIGITAL_SIGN = 5, //	有符号数字
     
-    XAI_DATA_TYPE_BIN_APSN = 0xd,	//设备编号  使用无符号表示
-    XAI_DATA_TYPE_BIN_LUID = 0xd, //	本地唯一编号  使用无符号表示
+    XAI_DATA_TYPE_BIN_APSN = 0xe,	//设备编号  使用无符号表示
+    XAI_DATA_TYPE_BIN_LUID = 0xf, //	本地唯一编号  使用无符号表示
     
     XAI_DATA_TYPE_BIN_BOOL = 0x0B,//	布尔数据
     XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 0Xd, //	无符号数字

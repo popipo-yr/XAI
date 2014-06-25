@@ -114,6 +114,16 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
         SwapBytes(in_data, ctrl_param_data->data_len);
     }
     
+    if (XAI_DATA_TYPE_BIN_APSN == ctrl_param_data->data_type) {
+        
+        SwapBytes(in_data, ctrl_param_data->data_len);
+    }
+    
+    if (XAI_DATA_TYPE_BIN_LUID == ctrl_param_data->data_type) {
+        
+        SwapBytes(in_data, ctrl_param_data->data_len);
+    }
+    
     
    
     
@@ -179,6 +189,18 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
         
         
         if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type) {
+            
+            
+            SwapBytes(in_data, ctrl_param_data->data_len);
+            
+        }
+        if (XAI_DATA_TYPE_BIN_APSN == ctrl_param_data->data_type) {
+            
+            
+            SwapBytes(in_data, ctrl_param_data->data_len);
+            
+        }
+        if (XAI_DATA_TYPE_BIN_LUID == ctrl_param_data->data_type) {
             
             
             SwapBytes(in_data, ctrl_param_data->data_len);

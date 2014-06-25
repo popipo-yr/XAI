@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "XAIUserService.h"
 
+#import "XAIToken.h"
 
 #import "LoginPlugin.h"
 
@@ -29,6 +30,8 @@ XAITYPELUID  ____luid;
     int _findAllStatus;
     
     int _getStatus;
+    
+    int _pushStatus;
     
     NSString* _name4Change;
     NSString* _pwd4Change;
@@ -579,7 +582,46 @@ XAITYPELUID  ____luid;
         XCTFail(@"LOGIN FAILD");
     }
     
-    [self _del:_luiduser];}
+    [self _del:_luiduser];
+}
+
+
+- (void) testPushToken{
+    
+    uint8_t token[32] = {0xff};
+    NSData* data = [[NSData alloc] initWithBytes:token length:TokenSize];
+    [XAIToken saveToken:data];
+
+    [self login];
+    
+    if (_loginStatus == Success) {
+        
+        uint8_t token2[32] = {0xee};
+        [_userService pushToken:token2 size:32 user:0x1];
+        
+        _pushStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_pushStatus > 0) {
+                
+                *done = YES;
+            }
+        });
+        
+        
+        XCTAssertTrue (_pushStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_pushStatus != Fail, @"push faild");
+        XCTAssert(_err == XAI_ERROR_NONE, @"oh , push has err : %d", _err);
+        
+    }else{
+        
+        
+        XCTFail(@"LOGIN FAILD");
+    }
+    
+}
 
 
 
@@ -842,6 +884,22 @@ XAITYPELUID  ____luid;
 
       _err = errcode;
     
+}
+
+-(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (_pushStatus != start) return;
+    
+    if (isSuccess == TRUE) {
+        
+        _pushStatus = Success;
+    }else{
+        
+        _pushStatus = Fail;
+    }
+    
+    _err = errcode;
+
 }
 
 - (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)users

@@ -17,6 +17,8 @@
 #define	AlterUserNameID  3
 #define	AlterUserPWID  4
 
+#define PushTokenID 8
+
 
 #define UserTableID 0x1
 
@@ -210,6 +212,46 @@
     _DEF_XTO_TIME_Start
 
 
+}
+
+
+- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+    
+    MQTT* cur_MQTT = [MQTT shareMQTT];
+    
+    _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
+    
+    _xai_packet_param_data* luid_data = generatePacketParamData();
+    _xai_packet_param_data* token_data = generatePacketParamData();
+    
+    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID , sizeof(XAITYPELUID), &uluid, token_data);
+    xai_param_data_set(token_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, size, token, NULL);
+    
+    
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+                       PushTokenID,[[NSDate new] timeIntervalSince1970], 2, luid_data);
+    
+    
+    _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
+    
+    NSString* ctrlTopic =  [MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid];
+    
+    [[MQTT shareMQTT].packetManager addPacketManagerACK:self];
+    
+    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
+                             toTopic:ctrlTopic
+                             withQos:0
+                              retain:NO];
+    
+    
+    purgePacket(packet);
+    purgePacketParamCtrlAndData(param_ctrl);
+    
+    
+    _devOpr = XAIUserServiceOpr_push;
+    _DEF_XTO_TIME_Start
+    
+    
 }
 
 
@@ -433,7 +475,21 @@
         
         }break;
             
+        
+        case PushTokenID:{
             
+            if ((nil != _userServiceDelegate) &&
+                [_userServiceDelegate respondsToSelector:@selector(userService:pushToken:errcode:)]) {
+                
+                [_userServiceDelegate userService:self pushToken:bSuccess errcode:ack->err_no];
+            }
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            
+            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_push);
+            
+            
+        }break;
             
         default:break;
     }
@@ -519,7 +575,10 @@
     [self changeUser:luid oldPassword:oldPassword to:newPassword apsn:_apsn luid:_luid];
 }
 
-
+- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid{
+    
+    [self pushToken:token  size:size user:uluid apsn:_apsn luid:_luid];
+}
 
 - (void) finderUserLuidHelper:(NSString*)username{
 
@@ -564,6 +623,13 @@
             [_userServiceDelegate respondsToSelector:@selector(userService:changeUserPassword:errcode:)]) {
         [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         [_userServiceDelegate userService:self changeUserPassword:false errcode:XAI_ERROR_TIMEOUT];
+        
+    }else if(_devOpr == XAIUserServiceOpr_push&&
+             (nil != _userServiceDelegate) &&
+             [_userServiceDelegate respondsToSelector:@selector(userService:pushToken:errcode:)]) {
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+        [_userServiceDelegate userService:self pushToken:false errcode:XAI_ERROR_TIMEOUT];
+        
     }else if (_devOpr == XAIUserServiceOpr_find&&
               (nil != _userServiceDelegate) &&
               [_userServiceDelegate respondsToSelector:@selector(userService:findedUser:withName:status:errcode:)]) {

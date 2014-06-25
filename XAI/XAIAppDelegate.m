@@ -10,9 +10,11 @@
 
 #import "XAIData.h"
 
+#include "XAIToken.h"
+
 #include "mosquitto.h"
 
-#define _K_Register @"_K_Register"
+
 
 
 @implementation XAIAppDelegate
@@ -68,7 +70,7 @@
     _reLogin = [[XAIReLogin alloc] init];
     _reLogin.delegate = self;
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:_K_Register] == false) {
+    if (false == [XAIToken hasToken]) {
         
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
@@ -107,6 +109,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -124,15 +127,10 @@
 
 // Delegation methods
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-    const void *devTokenBytes = [devToken bytes];
-    
-    printf("%s",devTokenBytes);
+
     NSLog(@"devToken=%@",devToken);
     
-    [[NSUserDefaults standardUserDefaults] setBool:true forKey:_K_Register];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    //self.registered = YES;
-    //[self sendProviderDeviceToken:devTokenBytes]; // custom method
+    [XAIToken saveToken:devToken];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {

@@ -39,6 +39,7 @@
 - (void) finderAllUser;
 
 
+- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid;
 
 
 @end
@@ -53,7 +54,8 @@
 - (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
 - (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
 - (void) userService:(XAIUserService*)userService changeUserName:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
-- (void) userService:(XAIUserService*)userService changeUserPassword:(BOOL) isSuccess errcode:(XAI_ERROR)errcode;
+- (void) userService:(XAIUserService*)userService changeUserPassword:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+- (void) userService:(XAIUserService*)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
 - (void) userService:(XAIUserService*)userService findedUser:(XAITYPELUID)luid
             withName:(NSString*)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
@@ -71,5 +73,6 @@ typedef NS_ENUM(NSUInteger,_XAIUserServiceOpr){
     XAIUserServiceOpr_changePSWD,
     XAIUserServiceOpr_findAll,
     XAIUserServiceOpr_find,
+    XAIUserServiceOpr_push,
     __UserService_lastItem,
 };
