@@ -1387,6 +1387,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = alibaba;
 				TargetAttributes = {
+					C387F34D18EA757A0069F98B = {
+						DevelopmentTeam = 4KSVTJUMRP;
+					};
 					C387F37118EA757B0069F98B = {
 						TestTargetID = C387F34D18EA757A0069F98B;
 					};

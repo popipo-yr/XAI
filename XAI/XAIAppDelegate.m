@@ -12,6 +12,8 @@
 
 #include "mosquitto.h"
 
+#define _K_Register @"_K_Register"
+
 
 @implementation XAIAppDelegate
 
@@ -66,6 +68,13 @@
     _reLogin = [[XAIReLogin alloc] init];
     _reLogin.delegate = self;
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:_K_Register] == false) {
+        
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    }
+    
+   
 
     return YES;
 }
@@ -106,6 +115,33 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[XAIObjectGroupManager shareManager] save];
     [_mosquittoClient disconnect];
+}
+
+- (void)applicationDidFinishLaunching:(UIApplication *)app {
+    // other setup tasks here....
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+}
+
+// Delegation methods
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    const void *devTokenBytes = [devToken bytes];
+    
+    printf("%s",devTokenBytes);
+    NSLog(@"devToken=%@",devToken);
+    
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:_K_Register];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //self.registered = YES;
+    //[self sendProviderDeviceToken:devTokenBytes]; // custom method
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSLog(@"Error in registration. Error: %@", err);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+
+    NSLog(@"%@",userInfo);
 }
 
 
