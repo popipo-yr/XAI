@@ -493,8 +493,6 @@
             
         default:break;
     }
-    
-    printf("%p",datas);
 
     purgePacketParamACKAndData(ack);
 

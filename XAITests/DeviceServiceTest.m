@@ -207,9 +207,9 @@
 - (void)test_Add
 {
     
-    _luidDev = 0x124b0003d43034;  //26
+    _luidDev = 0x124b000413c931;  //26
     
-    [self _addDev:_luidDev withName:@"门窗.." type:_type];
+    [self _addDev:_luidDev withName:@"门窗..." type:_type];
     
     if (_loginStatus == Success) {
         

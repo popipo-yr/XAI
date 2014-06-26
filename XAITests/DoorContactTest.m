@@ -39,7 +39,7 @@
     _ddc.dcDelegate = self;
     
     _ddc.apsn = [MQTT shareMQTT].apsn;
-    _ddc.luid = 0x124b0003d43034;
+    _ddc.luid = 0x124b000413c931;
     
     [_ddc startFocusStatus];
     
