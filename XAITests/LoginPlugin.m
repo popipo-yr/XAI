@@ -85,6 +85,10 @@
 
 - (void)loginWithName:(NSString*)name PWD:(NSString*)pwd
 {
+    uint8_t token[32] = {0xff};
+    NSData* data = [[NSData alloc] initWithBytes:token length:TokenSize];
+    [XAIToken saveToken:data];
+    
     if (_loginStatus_normal == _suc) {
         
         return;
@@ -116,8 +120,12 @@
 
 
 
-- (void)login
-{
+- (void)login{
+    
+    uint8_t token[32] = {0xff};
+    NSData* data = [[NSData alloc] initWithBytes:token length:TokenSize];
+    [XAIToken saveToken:data];
+    
     if (_loginStatus == _suc) {
         
         return;

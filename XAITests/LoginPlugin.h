@@ -13,6 +13,9 @@
 
 #import "XAILogin.h"
 
+#import "XAIToken.h"
+
+
 #define Success 1
 #define Fail   2
 #define start  0

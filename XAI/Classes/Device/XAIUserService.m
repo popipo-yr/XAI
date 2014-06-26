@@ -39,7 +39,7 @@
     _xai_packet_param_data* username_data = generatePacketParamData();
     _xai_packet_param_data* password_data = generatePacketParamData();
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn, username_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn, username_data);
     
     
      NSData* data = [username dataUsingEncoding:NSUTF8StringEncoding];
@@ -89,7 +89,7 @@
     _xai_packet_param_data* luid_data = generatePacketParamData();
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn, luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn, luid_data);
     
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &uluid,NULL);
     
@@ -128,7 +128,7 @@
     _xai_packet_param_data* username_data = generatePacketParamData();
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN,
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN,
                        sizeof(XAITYPEAPSN), &apsn, luid_data);
 
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
@@ -174,7 +174,7 @@
     _xai_packet_param_data* newPassword_data = generatePacketParamData();
    
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN,
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN,
                        sizeof(XAITYPEAPSN), &apsn, luid_data);
 
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
@@ -493,6 +493,8 @@
             
         default:break;
     }
+    
+    printf("%p",datas);
 
     purgePacketParamACKAndData(ack);
 

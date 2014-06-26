@@ -92,7 +92,7 @@
     _xai_packet_param_data* luid_data = generatePacketParamData();
     
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn,luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn,luid_data);
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &dluid,NULL);
     
     
@@ -129,7 +129,7 @@
     _xai_packet_param_data* name_data = generatePacketParamData();
    
     
-    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN , sizeof(XAITYPEAPSN), &apsn,luid_data);
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn,luid_data);
     
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID,
                        sizeof(XAITYPELUID), &dluid, name_data);
