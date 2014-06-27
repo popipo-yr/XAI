@@ -111,7 +111,7 @@
         user.pawd = _pawd;
         
         curMQTT.curUser = user;
-        curMQTT.isLogin = true;
+
         
         /*订阅主题*/
         [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
@@ -137,11 +137,12 @@
 
 -(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
-//    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
-//        
-//        MQTT* curMQTT = [MQTT shareMQTT];
-//        
-//    }
+    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
+        
+        MQTT* curMQTT = [MQTT shareMQTT];
+        curMQTT.isLogin = true;
+        
+    }
     
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
