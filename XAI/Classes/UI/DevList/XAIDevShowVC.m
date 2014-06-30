@@ -34,7 +34,7 @@
         _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
-        _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+        _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
         
         [[XAIData shareData] addRefreshDelegate:self];
 
@@ -56,7 +56,7 @@
 
 -(void)xaiDataRefresh:(XAIData *)data{
 
-    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
     [self.tableView reloadData];
 }
 

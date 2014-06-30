@@ -267,7 +267,7 @@
     NSMutableArray* devAry = [[NSMutableArray alloc] init];
     
     
-    int devParamCout = 4; /*每个设备有4个参数*/
+    int devParamCout = 5; /*每个设备有5个参数*/
     
     int realCount = param->data_count / devParamCout;
     
@@ -284,6 +284,24 @@
         BOOL  allType = false;
         
         do {
+            
+            _xai_packet_param_data* status_data = getParamDataFromParamStatus(param, i*devParamCout + 4);
+            
+            if (status_data == NULL || (status_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || status_data->data_len <= 0) break;
+            
+            
+            XAITYPEUNSIGN  devStatus_mem = 0;
+            
+            byte_data_copy(&devStatus_mem, status_data->data, sizeof(XAITYPEUNSIGN), status_data->data_len);
+            
+            
+            //if (devStatus_mem > 2) break; //devStatus_mem >= 0  unsigned number always true
+                
+            aDevice.devStatus = (XAIDeviceStatus)devStatus_mem;
+        
+
+
+            
             
             _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
             
@@ -565,83 +583,6 @@
     
     purgePacketParamStatusAndData(status);
 }
-
-//- (void) reciveDevPacket:(void*)datas size:(int)size topic:topic{
-//    
-//    _xai_packet_param_dti* dti = generateParamDTIFromData(datas, size);
-//    
-//    
-//  if([MQTTCover isNodeTopic:topic] && dti != NULL){
-//      
-//      XAITYPEAPSN apsn = [MQTTCover nodeTopicAPSN:topic];
-//      XAITYPELUID luid = [MQTTCover nodeTopicLUID:topic];
-//      
-//      XAIDevice*  oneDev = nil;
-//      
-//      NSEnumerator *enumerator = [_allDevices objectEnumerator];
-//      for (XAIDevice *aDev in enumerator) {
-//         
-//          if (aDev.apsn == apsn && aDev.luid == luid) {
-//              
-//              oneDev = aDev;
-//              break;
-//          }
-//      }
-//      
-//      
-//      if (nil !=  oneDev) {
-//          
-//          
-//          NSString* model = [[NSString alloc] initWithUTF8String:(const char*)dti->model];
-//          NSString* vender = [[NSString alloc] initWithUTF8String:(const char*)dti->vender];
-//          
-//          
-//          oneDev.model = [[NSString alloc] initWithFormat:@"%@",[model uppercaseString]];
-//          oneDev.vender = vender;
-//          
-//          NSLog(@"%@",[oneDev.model uppercaseString]);
-//          
-//          /*mustchange*/
-//          if ([oneDev.model isEqualToString:@"SWITCH-1"]) {//单控灯
-//              
-//              oneDev.type = XAIObjectType_light;
-//              
-//          }else if([oneDev.model isEqualToString:@"MAGNET"]){
-//          
-//              oneDev.type = XAIObjectType_window;
-//          
-//          }else{
-//          
-//              oneDev.type = XAIObjectType_light;
-//          
-//          }
-//          
-//          if ([oneDev.model isEqualToString:@"SWITCH-2"]) {//双控灯
-//              
-//              XAIDevice* dev2 = [oneDev copy];
-//              dev2.type = XAIObjectType_light2_1;
-//              [_onlineDevices addObject:dev2]; //添加2次
-//          }
-//          
-//          [_onlineDevices addObject:oneDev];
-//
-//      }
-//      
-//      if(_timer != nil){
-//          
-//          [_timer invalidate];
-//          
-//      }
-//      _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
-//                                                target:self
-//                                              selector:@selector(stopfindAllOnlineDev)
-//                                              userInfo:nil
-//                                               repeats:YES];
-//      
-//  }
-//    
-//    purgePacketParamDTI(dti);
-//}
 
 
 

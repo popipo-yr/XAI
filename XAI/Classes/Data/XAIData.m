@@ -59,6 +59,7 @@ static XAIData*  _s_XAIData_ = NULL;
             
             aObj.nickName = aLocalObj.nickName;
             aObj.lastOpr = aLocalObj.lastOpr;
+        
             
         }else{
         
@@ -80,6 +81,24 @@ static XAIData*  _s_XAIData_ = NULL;
     //return [NSArray arrayWithArray:[_localObjInfo getObjects]];
 
     return [NSArray arrayWithArray:_objList];
+}
+
+- (NSArray*) getNormalObjList{
+
+    __autoreleasing NSMutableArray* normalObjs = [[NSMutableArray alloc] init];
+    
+    for (int i= 0; i < [_objList count]; i++) {
+        
+        XAIObject* obj = [_objList objectAtIndex:i];
+        
+        if (obj.isOnline == false) continue;
+        
+        [normalObjs addObject:obj];
+        
+    }
+    
+    return normalObjs;
+
 }
 
 - (void) upDateObj:(XAIObject*)obj{
@@ -285,9 +304,20 @@ static XAIData*  _s_XAIData_ = NULL;
     
     if (isSuccess) {
         
-        [self setObjList:[devs allObjects]];
+        //[self setObjList:[devs allObjects]];
+        //[self callBack];
+    }
+}
+
+
+- (void)devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
+    if (isSuccess) {
+        
+        [self setObjList:devAry];
         [self callBack];
     }
+
 }
 
 

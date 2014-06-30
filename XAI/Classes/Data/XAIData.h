@@ -49,6 +49,7 @@
 
 - (void) setObjList:(NSArray*)devs;
 - (NSArray*) getObjList;
+- (NSArray*) getNormalObjList;
 
 - (void) upDateObj:(XAIObject*)obj;
 - (void) removeObj:(XAIObject*)obj;

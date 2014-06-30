@@ -50,6 +50,8 @@ typedef enum XAIObjectType{
     NSString* _model; /*型号*/
     NSString* _vender; /*生产商*/
     
+    BOOL _isOnline;
+    
     //int _flag; /*多控*/
     
 }
@@ -61,6 +63,7 @@ typedef enum XAIObjectType{
 @property (nonatomic, assign) XAITYPELUID luid;
 @property (nonatomic, strong) XAIObjectOpr* lastOpr; /*最后一次操作*/
 @property (nonatomic, strong) NSString* nickName;
+@property (nonatomic, assign) BOOL isOnline ;
 
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/

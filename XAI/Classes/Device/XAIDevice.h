@@ -15,6 +15,15 @@
 
 typedef NSUInteger XAIDevOpr;
 
+typedef enum XAIDeviceStatus{
+    
+    XAIDeviceStatus_OFFLINE   = 0,
+    XAIDeviceStatus_ONLINE    = 1,
+    XAIDeviceStatus_SleepIng  = 2,
+    XAIDeviceStatus_UNKOWN    = 0x99
+    
+}XAIDeviceStatus;
+
 @protocol XAIDeviceStatusDelegate;
 @interface  XAIDevice: XAITimeOut <MQTTPacketManagerDelegate>{
 
@@ -28,6 +37,7 @@ typedef NSUInteger XAIDevOpr;
     
     XAIDevOpr _devOpr;
     XAIDeviceType _devType;
+    XAIDeviceStatus _devStatus;
 
 }
 
@@ -38,6 +48,7 @@ typedef NSUInteger XAIDevOpr;
 @property (nonatomic, strong) NSString* model; /*型号*/
 @property (nonatomic, assign) XAIObjectType corObjType;  //notgood
 @property (nonatomic, assign) XAIDeviceType devType;
+@property (nonatomic, assign)  XAIDeviceStatus devStatus;
 @property (nonatomic, weak) id <XAIDeviceStatusDelegate> delegate;
 
 - (void) getDeviceStatus;
@@ -54,14 +65,7 @@ typedef NSUInteger XAIDevOpr;
 
 
 
-typedef enum XAIDeviceStatus{
-    
-    XAIDeviceStatus_OFFLINE   = 0,
-    XAIDeviceStatus_ONLINE    = 1,
-    XAIDeviceStatus_SleepIng  = 2,
-    XAIDeviceStatus_UNKOWN    = 0x99
-    
-}XAIDeviceStatus;
+
 
 
 

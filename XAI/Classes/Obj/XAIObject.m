@@ -80,6 +80,14 @@
     _type = dev.corObjType;
     
     _name = dev.name;
+    
+    if (dev.devStatus == XAIDeviceStatus_UNKOWN || dev.devStatus == XAIDeviceStatus_OFFLINE) {
+        _isOnline = false;
+    }else{
+        _isOnline = true;
+    }
+    
+
 
 }
 

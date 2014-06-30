@@ -288,9 +288,11 @@
 
 - (XAITYPELUID) finderUserLuidHelper:(NSString*)username paramStatus:(_xai_packet_param_status*) param{
     
-    int realCount = param->data_count / 3;
+    int usrParamCout = 4; /*每个有4个参数*/
     
-    if ((0 != param->data_count % 3) || realCount < 1) {
+    int realCount = param->data_count / usrParamCout;
+    
+    if ((0 != param->data_count % usrParamCout) || realCount < 1) {
         
         if (findingAUser) {
             
@@ -325,7 +327,7 @@
         
         BOOL findName = FALSE;
         
-        _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*3 + 3 -1);
+        _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*usrParamCout + 2);
         if (data == NULL || (data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0)
             break;
         
@@ -341,7 +343,7 @@
         
         
         
-        _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*3 + 2 -1);
+        _xai_packet_param_data* luid_data = getParamDataFromParamStatus(param, i*usrParamCout + 1);
         if (luid_data == NULL || (luid_data->data_type != XAI_DATA_TYPE_BIN_LUID) || luid_data->data_len <= 0) break;
         
         XAITYPELUID luid;
@@ -362,7 +364,7 @@
         }
         
         
-        _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*3 + 1 -1);
+        _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*usrParamCout + 0);
         if (apsn_data == NULL || (apsn_data->data_type != XAI_DATA_TYPE_BIN_APSN) || apsn_data->data_len <= 0) break;
         
         XAITYPEAPSN apsn;

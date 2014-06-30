@@ -97,18 +97,30 @@
 
 - (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
+//    _findDev =  isSuccess ? findSuccess : findFail;
+//    
+//    if (isSuccess) {
+//        
+//        /*存储数据 其他页面使用*/
+//        [[XAIData shareData] setObjList:[devs allObjects]];
+//        
+//    }
+//    
+//    
+//    [self getDateFinsh];
+    
+}
+
+- (void)devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+
     _findDev =  isSuccess ? findSuccess : findFail;
     
     if (isSuccess) {
-        
         /*存储数据 其他页面使用*/
-        [[XAIData shareData] setObjList:[devs allObjects]];
-        
+        [[XAIData shareData] setObjList:devAry];
     }
     
-    
     [self getDateFinsh];
-    
 }
 
 - (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
