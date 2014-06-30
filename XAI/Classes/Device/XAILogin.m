@@ -19,6 +19,7 @@
     
     _ip = host;
     _apsn = apsn;
+    _isLogin = true;
 
     MosquittoClient*  mosq = [MQTT shareMQTT].client;
 
@@ -50,6 +51,8 @@
 
 - (void) didConnect:(NSUInteger)code {
 	
+    if (!_isLogin) return;
+    
     _userService.apsn = _apsn;
     [_userService finderUserLuidHelper:_name];
     
@@ -58,6 +61,8 @@
 }
 
 - (void) didDisconnect {
+    
+     if (!_isLogin) return;
 	
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
@@ -125,6 +130,7 @@
         
     }else{
         
+        _isLogin = false;
         if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
             
             [_delegate loginFinishWithStatus:false isTimeOut:false];
@@ -149,7 +155,7 @@
         [_delegate loginFinishWithStatus:isSuccess isTimeOut:false];
     }
 
-
+    _isLogin = false;
 }
 
 
@@ -164,6 +170,7 @@
         _userService.userServiceDelegate = self;
         
         //_name = [[NSMutableString alloc] init];
+        _isLogin =false;
         
     }
     

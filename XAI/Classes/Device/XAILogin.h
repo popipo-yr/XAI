@@ -25,6 +25,8 @@
     
     NSString* _ip;
     XAITYPEAPSN _apsn;
+    
+    BOOL _isLogin ;
 
 
 }

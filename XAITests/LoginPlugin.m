@@ -30,8 +30,8 @@
 
 @implementation LoginPlugin
 
-#define _K_APSN  0x2923aeea  //0x210e2813  0x210e2813  0x2923aeea
-#define _K_HOST @"192.168.0.33" // @"192.168.1.1"  @"114.215.178.75" @"192.168.0.33"
+#define _K_APSN  0x210e2813  //0x210e2813  0x210e2813  0x2923aeea
+#define _K_HOST @"114.215.178.75" // @"192.168.1.1"  @"114.215.178.75" @"192.168.0.33"
 
 
 - (void)setUp

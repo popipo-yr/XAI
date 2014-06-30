@@ -338,7 +338,7 @@
             
             _xai_packet_param_data* apsn_data = getParamDataFromParamStatus(param, i*devParamCout + 0);
             
-            if (apsn_data == NULL ||  (apsn_data->data_type != XAI_DATA_TYPE_BIN_LUID) || apsn_data->data_len <= 0) break;
+            if (apsn_data == NULL ||  (apsn_data->data_type != XAI_DATA_TYPE_BIN_APSN) || apsn_data->data_len <= 0) break;
             
             
             XAITYPEAPSN apsn;

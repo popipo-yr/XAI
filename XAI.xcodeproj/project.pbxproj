@@ -146,7 +146,6 @@
 		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
 		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
 		96AF0A82195A695C00AF3C88 /* XAIToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AF0A81195A695C00AF3C88 /* XAIToken.m */; };
-		96AF0A85195C024100AF3C88 /* XCTest+GCovFlush.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AF0A84195C024100AF3C88 /* XCTest+GCovFlush.m */; };
 		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; };
 		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
@@ -476,9 +475,6 @@
 		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
 		96AF0A80195A695C00AF3C88 /* XAIToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIToken.h; sourceTree = "<group>"; };
 		96AF0A81195A695C00AF3C88 /* XAIToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIToken.m; sourceTree = "<group>"; };
-		96AF0A83195C024100AF3C88 /* XCTest+GCovFlush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+GCovFlush.h"; sourceTree = "<group>"; };
-		96AF0A84195C024100AF3C88 /* XCTest+GCovFlush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+GCovFlush.m"; sourceTree = "<group>"; };
-		96AF0A8C195C078E00AF3C88 /* GcovExtern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GcovExtern.h; sourceTree = "<group>"; };
 		96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketLinkage.h; sourceTree = "<group>"; };
 		96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketLinkage.c; sourceTree = "<group>"; };
 		96B6D34119220BA000367424 /* PacketCtrlTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketCtrlTest.m; sourceTree = "<group>"; };
@@ -1237,9 +1233,6 @@
 		C387F37A18EA757B0069F98B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				96AF0A8C195C078E00AF3C88 /* GcovExtern.h */,
-				96AF0A83195C024100AF3C88 /* XCTest+GCovFlush.h */,
-				96AF0A84195C024100AF3C88 /* XCTest+GCovFlush.m */,
 				C387F37B18EA757B0069F98B /* XAITests-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -1658,7 +1651,6 @@
 				96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */,
 				9630469E19230DCE0023653E /* PacketDTITest.m in Sources */,
 				96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */,
-				96AF0A85195C024100AF3C88 /* XCTest+GCovFlush.m in Sources */,
 				968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
