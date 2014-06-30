@@ -202,14 +202,51 @@
     }
 }
 
+- (void)test_ADD{
 
+    _luidDev = 0x124b000413c931;  //26
+    
+    [self _addDev:_luidDev withName:@"门窗..." type:_type];
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        //        XCTAssertTrue (_addStatus != Fail, @"no, add dev should be suc");
+        //        XCTAssert(_err == XAI_ERROR_NONE, @"-err:%d",_err);
+        
+    }else{
+        
+        
+        XCTFail(@"login faild");
+    }
+    
+    _luidDev = 0x00124b00039afe69;
+    [self _addDev:_luidDev withName:@"开关" type:_type];
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        //        XCTAssertTrue (_addStatus != Fail, @"no, add dev should be suc");
+        //        XCTAssert(_err == XAI_ERROR_NONE, @"-err:%d",_err);
+        
+    }else{
+        
+        
+        XCTFail(@"login faild");
+    }
+    
+    
 
-- (void)test_Add
+}
+
+- (void)test_del
 {
     
     _luidDev = 0x124b000413c931;  //26
     
-    [self _addDev:_luidDev withName:@"门窗..." type:_type];
+    [self _delDev:_luidDev];
     
     if (_loginStatus == Success) {
         
@@ -225,7 +262,7 @@
     }
     
      _luidDev = 0x00124b00039afe69;
-    [self _addDev:_luidDev withName:@"开关" type:_type];
+    [self _delDev:_luidDev];
     
     if (_loginStatus == Success) {
         

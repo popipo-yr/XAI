@@ -487,42 +487,18 @@
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     
-    //判断是否包含 头'http:'
-    NSString *regex = @"http+:[^\\s]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    
-    //判断是否包含 头'ssid:'
-    NSString *ssid = @"ssid+:[^\\s]*";;
-    NSPredicate *ssidPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",ssid];
-    
-    if ([predicate evaluateWithObject:symbolStr]) {
-        
-    }
-    else if([ssidPre evaluateWithObject:symbolStr]){
-        
-        NSArray *arr = [symbolStr componentsSeparatedByString:@";"];
-        
-        NSArray * arrInfoHead = [[arr objectAtIndex:0] componentsSeparatedByString:@":"];
-        
-        NSArray * arrInfoFoot = [[arr objectAtIndex:1] componentsSeparatedByString:@":"];
-        
-        
-        symbolStr = [NSString stringWithFormat:@"ssid: %@ \n password:%@",
-                     [arrInfoHead objectAtIndex:1],[arrInfoFoot objectAtIndex:1]];
-        
-        UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
-        //然后，可以使用如下代码来把一个字符串放置到剪贴板上：
-        pasteboard.string = [arrInfoFoot objectAtIndex:1];
-    }
-    
-
-    symbolStr = @"210e2813";
-    _scanApsn = 0x210e2813;
+   
+    //symbolStr = @"210e2813";
+    //_scanApsn = 0x210e2813;
     //_scanIP = @"192.168.0.33";
-    _hasScan = true;
+    
     
     NSScanner* scanner = [NSScanner scannerWithString:symbolStr];
-    [scanner scanHexInt:&_scanApsn];
+    
+    if ([scanner scanHexInt:&_scanApsn]) {
+        _hasScan = true;
+    }
+    
     
     /*获取ip地址*/
     [_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];

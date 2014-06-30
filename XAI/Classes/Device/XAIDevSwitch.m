@@ -216,7 +216,7 @@
 }
 
 
-- (void) reciveStatusPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     [super recivePacket:datas size:size topic:topic];
     
