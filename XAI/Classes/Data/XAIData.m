@@ -101,6 +101,23 @@ static XAIData*  _s_XAIData_ = NULL;
 
 }
 
+- (XAIObject*) findObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+
+    
+    for (int i = 0; i < [_objList count]; i++) {
+        
+        XAIObject* obj = [_objList objectAtIndex:i];
+        
+        if (obj.apsn == apsn && obj.luid == luid) {
+            
+            return obj;
+        }
+    }
+    
+    return nil;
+
+}
+
 - (void) upDateObj:(XAIObject*)obj{
     
     XAIObject* find_obj = nil;
@@ -281,7 +298,7 @@ static XAIData*  _s_XAIData_ = NULL;
         
     }else if(topic != nil && [topic isEqualToString:dTopic]){
     
-        [_devService _setFindOnline];
+        //[_devService _setFindOnline];
         [_devService recivePacket:datas size:size topic:topic];
     
     }

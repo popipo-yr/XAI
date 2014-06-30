@@ -26,7 +26,7 @@
 }
 
 
-@property (nonatomic, weak) id<XAIDeviceServiceDelegate> deviceServiceDelegate;
+@property (nonatomic, assign) id<XAIDeviceServiceDelegate> deviceServiceDelegate;
 
 - (void) _setFindOnline;
 

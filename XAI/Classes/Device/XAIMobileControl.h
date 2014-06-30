@@ -8,10 +8,13 @@
 
 #import "MQTTPacketManager.h"
 
+@protocol XAIMobileControlDelegate;
 @interface XAIMobileControl : NSObject <MQTTPacketManagerDelegate>
 
 - (void) startListene;
 - (void) stopListene;
+
+@property(nonatomic,assign) id<XAIMobileControlDelegate> delegate;
 
 @end
 

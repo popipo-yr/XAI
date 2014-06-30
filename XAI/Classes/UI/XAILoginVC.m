@@ -303,7 +303,9 @@
     _login = [[XAILogin alloc] init];
     _login.delegate = self;
     
-    
+    //_scanApsn = 0x2923aeea;
+    //_qrcodeLabel.text = @"192.168.1.236";
+
     [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
@@ -317,7 +319,7 @@
 
 - (void) userService:(XAIUserService *)userService findedAllUser:(NSSet *)users status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
-    
+    _userService.delegate = nil;
     _findUser =  isSuccess ? findSuccess : findFail;
 
     if (isSuccess) {
@@ -350,6 +352,7 @@
 
 - (void) devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    _devService.deviceServiceDelegate = nil;
     _findDev =  isSuccess ? findSuccess : findFail;
     
     if (isSuccess) {
@@ -379,7 +382,8 @@
         
         
         [_userService finderAllUser];
-        [_devService findAllOnlineDevWithuseSecond:2];
+        //[_devService findAllOnlineDevWithuseSecond:2];
+        [_devService findAllDev];
         
     }else{
         

@@ -81,6 +81,7 @@
 
 - (void) userService:(XAIUserService *)userService findedAllUser:(NSSet *)users status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
+    _userService.delegate = nil;
     
     _findUser =  isSuccess ? findSuccess : findFail;
     
@@ -113,6 +114,7 @@
 
 - (void)devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
 
+    _devService.delegate = nil;
     _findDev =  isSuccess ? findSuccess : findFail;
     
     if (isSuccess) {
@@ -143,7 +145,8 @@
         
         
         [_userService finderAllUser];
-        [_devService findAllOnlineDevWithuseSecond:2];
+        //[_devService findAllOnlineDevWithuseSecond:2];
+        [_devService findAllDev];
         
     }else{
         

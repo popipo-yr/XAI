@@ -594,10 +594,6 @@
 
 }
 
-- (void)setUserServiceDelegate:(id<XAIUserServiceDelegate>)delegate{
-    
-    _userServiceDelegate = delegate;
-}
 
 
 -(void)timeout{

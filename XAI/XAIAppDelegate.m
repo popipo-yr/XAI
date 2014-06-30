@@ -68,7 +68,6 @@
     [_netReachability startNotifier];
     
     _reLogin = [[XAIReLogin alloc] init];
-    _reLogin.delegate = self;
     
     if (false == [XAIToken hasToken]) {
         
@@ -76,7 +75,7 @@
          (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     }
     
-   
+    [XAIAlert shareAlert];
 
     return YES;
 }
@@ -96,6 +95,7 @@
     
     [[XAIObjectGroupManager shareManager] save];
     [[XAIData shareData] save];
+    [[XAIAlert shareAlert] stop];
     [_mosquittoClient disconnect];
 }
 
@@ -283,6 +283,7 @@
         
         [_reLoginStartAlert show];
         
+        _reLogin.delegate = self;
         [_reLogin relogin];
         
     }
@@ -291,6 +292,7 @@
 
 -(void)XAIRelogin:(XAIReLogin *)reLogin loginErrCode:(XAIReLoginErr)err{
 
+    //_reLogin.delegate = nil;
     
     /*成功,取消提示*/
     [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
@@ -341,7 +343,7 @@
             
         } while (0);
         
-
+        [[XAIAlert shareAlert] start];
         
     }
 }

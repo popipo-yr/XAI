@@ -22,7 +22,7 @@
     BOOL findingAUser;
 }
 
-@property (nonatomic,weak) id<XAIUserServiceDelegate> userServiceDelegate;
+@property (nonatomic,assign) id<XAIUserServiceDelegate> userServiceDelegate;
 
 
 - (void) addUser:(NSString*)uname Password:(NSString*)password;

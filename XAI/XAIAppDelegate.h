@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MQTT.h"
+#import "XAIAlert.h"
 #import "XAIObject.h"
 #import "Reachability.h"
 #import "XAIReLogin.h"

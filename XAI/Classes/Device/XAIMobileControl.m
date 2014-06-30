@@ -40,6 +40,12 @@
     if (ctrl == NULL) return;
     
     
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(mobileControl:getCmd:)]) {
+        
+        [_delegate mobileControl:self getCmd:nil];
+    }
+    
+    
     
     purgePacketParamCtrlAndData(ctrl);
     

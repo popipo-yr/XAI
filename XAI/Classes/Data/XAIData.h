@@ -51,6 +51,7 @@
 - (NSArray*) getObjList;
 - (NSArray*) getNormalObjList;
 
+- (XAIObject*) findObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
 - (void) upDateObj:(XAIObject*)obj;
 - (void) removeObj:(XAIObject*)obj;
 

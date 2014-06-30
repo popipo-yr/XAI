@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XAIMobileControl.h"
 
-@interface XAIAlert : NSObject
+@interface XAIAlert : NSObject<XAIMobileControlDelegate,UIAlertViewDelegate>{
+
+    XAIMobileControl* _mc;
+    UIAlertView*  _alertView;
+}
+
+- (void) start;
+- (void) stop;
++ (XAIAlert*) shareAlert;
+
 
 @end

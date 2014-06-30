@@ -13,6 +13,7 @@
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
 		9608ADDF1960FB5C00E1CE75 /* XAIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608ADDE1960FB5C00E1CE75 /* XAIAlert.m */; };
 		9608ADE21960FBFE00E1CE75 /* XAIMobileControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608ADE11960FBFE00E1CE75 /* XAIMobileControl.m */; };
+		9608ADE31961409800E1CE75 /* PackerLinkageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BC8193EF3F6005D0D98 /* PackerLinkageTest.m */; };
 		960B30F419230D0600763EFB /* LoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 960B30F319230D0600763EFB /* LoginTest.m */; };
 		960BDD501907989300787148 /* obj_door_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD481907989300787148 /* obj_door_close@2x.png */; };
 		960BDD511907989300787148 /* obj_door_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960BDD491907989300787148 /* obj_door_open@2x.png */; };
@@ -169,7 +170,6 @@
 		96E9D98F190111F7000BB595 /* tab_bar_user_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D97F190111F7000BB595 /* tab_bar_user_nor.png */; };
 		96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D981190111F7000BB595 /* tab_bar_user_sel.png */; };
 		96E9D99519011D76000BB595 /* XAITabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D99419011D76000BB595 /* XAITabBarVC.m */; };
-		96FE3BC9193EF3F6005D0D98 /* PackerLinkageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BC8193EF3F6005D0D98 /* PackerLinkageTest.m */; };
 		96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */; };
 		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
 		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
@@ -1635,6 +1635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9608ADE31961409800E1CE75 /* PackerLinkageTest.m in Sources */,
 				96659E41192C813E0045E66F /* MosquittoClient.m in Sources */,
 				96659E43192C813E0045E66F /* MosquittoMessage.m in Sources */,
 				96659E45192C813E0045E66F /* MQTTPacketManager.m in Sources */,
@@ -1654,7 +1655,6 @@
 				960B30F419230D0600763EFB /* LoginTest.m in Sources */,
 				96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */,
 				963046A0192345810023653E /* LightTest.m in Sources */,
-				96FE3BC9193EF3F6005D0D98 /* PackerLinkageTest.m in Sources */,
 				96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */,
 				968120BE18FF98210016DDB7 /* DoorContactTest.m in Sources */,
 				C387F38018EA757B0069F98B /* XAITests.m in Sources */,

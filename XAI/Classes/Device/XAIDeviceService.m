@@ -570,6 +570,11 @@
         switch (status->oprId) {
             case DevTableID:
             {
+                NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                                     luid:_luid
+                                                                    other:MQTTCover_DevTable_Other];
+                
+                [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
                 
                 [self findAllDevWithParamStatus:status];
                 
