@@ -18,6 +18,9 @@
 #define findFail   2
 #define findStart  0
 
+#define _K_APSN @"APSN"
+#define _K_Username @"username"
+
 @interface XAILoginVC ()
 
 @end
@@ -55,6 +58,16 @@
     
     _IPHelper = [[XAIIPHelper alloc] init];
     _IPHelper.delegate = self;
+    
+    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
+    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
+        [self hasGetApsn:apsnstr];
+    }
+    
+    NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:_K_Username];
+    if (username != nil && [username isKindOfClass:[NSString class]] && ![username isEqualToString:@""]) {
+        [nameLabel setText:username];
+    }
 
 }
 
@@ -305,6 +318,8 @@
     
     //_scanApsn = 0x2923aeea;
     //_qrcodeLabel.text = @"192.168.1.236";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
 
     [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
@@ -504,13 +519,21 @@
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     
+    [self hasGetApsn:symbolStr];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:symbolStr forKey:_K_APSN];
    
+   
+}
+
+- (void) hasGetApsn:(NSString*)apsn{
+
     //symbolStr = @"210e2813";
     //_scanApsn = 0x210e2813;
     //_scanIP = @"192.168.0.33";
     
     
-    NSScanner* scanner = [NSScanner scannerWithString:symbolStr];
+    NSScanner* scanner = [NSScanner scannerWithString:apsn];
     
     if ([scanner scanHexInt:&_scanApsn]) {
         _hasScan = true;

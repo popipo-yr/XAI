@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "XAIIPHelper.h"
+#import "LoginPlugin.h"
 
 
 @interface IPGetTest : XCTestCase<XAIIPHelperDelegate>{
@@ -32,16 +33,16 @@
 }
 
 
-static  inline void runInMainLoop(void(^block)(BOOL *done)) {
-    __block BOOL done = NO;
-    
-    while (!done) {
-        
-        block(&done);
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
-    }
-}
+//static  inline void runInMainLoop(void(^block)(BOOL *done)) {
+//    __block BOOL done = NO;
+//    
+//    while (!done) {
+//        
+//        block(&done);
+//        [[NSRunLoop mainRunLoop] runUntilDate:
+//         [NSDate dateWithTimeIntervalSinceNow:.1]];
+//    }
+//}
 
 - (void)testGetIp
 {
@@ -49,7 +50,7 @@ static  inline void runInMainLoop(void(^block)(BOOL *done)) {
     //[helper getApserverIp:&ip host:[@"192.168.0.33" UTF8String]];
     
     helper.delegate = self;
-    [helper getApserverIpWithApsn:0x210e2813 fromRoute:@"www.xai.so"];
+    [helper getApserverIpWithApsn:_K_APSN fromRoute:@"www.xai.so"];
     
     _getStatus = 0;
     
