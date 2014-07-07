@@ -28,6 +28,7 @@
         _IPHelper = [[XAIIPHelper alloc] init];
         
         _login = [[XAILogin alloc] init];
+        _bRetry = false;
     }
     
     return self;
@@ -40,6 +41,24 @@
     _login.delegate = nil;
 }
 
+- (void) stop{
+    
+    _IPHelper.delegate = nil;
+    _IPHelper = nil;
+    _login.delegate = nil;
+    _login = nil;
+    
+    
+    [self start];
+}
+- (void) start{
+    
+    _IPHelper = [[XAIIPHelper alloc] init];
+    
+    _login = [[XAILogin alloc] init];
+    
+    _bRetry = false;
+}
 
 - (void) relogin{
 
@@ -59,20 +78,15 @@
         MQTT* curMQTT =  [MQTT shareMQTT];
         
         _login.delegate = self;
+        NSLog(@"name =%@ , pwd = %@",curMQTT.curUser.name , curMQTT.curUser.pawd);
         [_login loginWithName:curMQTT.curUser.name Password:curMQTT.curUser.pawd Host:ip apsn:curMQTT.apsn];
         
     }else{
         /*提示获取失败 返回登录页面*/
         
-        if (_delegate != nil && [_delegate respondsToSelector:@selector(XAIRelogin:loginErrCode:)]) {
-            
-            [_delegate XAIRelogin:self loginErrCode:XAIReLoginErr_GetRouteIP_Fail];
-        }
+        [self overWithCide:XAIReLoginErr_GetRouteIP_Fail];
         
     }
-    
-
-    
 }
 
 
@@ -150,11 +164,7 @@
         
     }else{
         
-        
-        if (_delegate != nil && [_delegate respondsToSelector:@selector(XAIRelogin:loginErrCode:)]) {
-            
-            [_delegate XAIRelogin:self loginErrCode:XAIReLoginErr_LoginFail];
-        }
+        [self overWithCide:XAIReLoginErr_LoginFail];
     }
     
     
@@ -175,12 +185,25 @@
         
     }
     
+    [self overWithCide:err];
+    
+}
+
+- (void)overWithCide:(XAIReLoginErr)err{
+    
+    if (_bRetry == false && err != XAIReLoginErr_NONE) {  /*再进行一次*/
+        
+        [self relogin];
+        _bRetry = true;
+        return;
+    }
+
     if (_delegate != nil && [_delegate respondsToSelector:@selector(XAIRelogin:loginErrCode:)]) {
         
         [_delegate XAIRelogin:self loginErrCode:err];
     }
-
     
+    _bRetry = false;
 }
 
 @end

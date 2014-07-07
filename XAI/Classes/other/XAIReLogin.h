@@ -35,6 +35,8 @@ typedef enum XAIReLoginErr{
     XAIUserService* _userService;
     XAIDeviceService* _devService;
     
+    BOOL _bRetry;
+    
     int _findUser;
     int _findDev;
 }
@@ -42,6 +44,8 @@ typedef enum XAIReLoginErr{
 @property (nonatomic,weak) id<XAIReLoginDelegate> delegate;
 
 - (void) relogin;
+- (void) stop;
+- (void) start;
 
 
 @end
