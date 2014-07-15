@@ -38,11 +38,11 @@
     
     if (typeBool == XAITYPEBOOL_TRUE) {
         
-        retStatus = XAIDevInfraredStatusDetectorNothing;
+        retStatus = XAIDevInfraredStatusDetectorThing;
         
     }else if(typeBool == XAITYPEBOOL_FALSE){
         
-        retStatus = XAIDevInfraredStatusDetectorThing;
+        retStatus = XAIDevInfraredStatusDetectorNothing;
         
     }
     

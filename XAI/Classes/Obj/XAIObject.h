@@ -22,10 +22,12 @@ typedef enum XAIObjectType{
     XAIObjectType_light = 2,
     XAIObjectType_light2_1 = 3,
     XAIObjectType_light2_2 = 4,
+    XAIObjectType_IR = 5,
+    XAIObjectType_UnKown = -1,
     
 }XAIObjectType;
 
-#define XAIObjectTypeCount 5
+#define XAIObjectTypeCount 6
 
 #define XAIObjectFlagNormal 0
 

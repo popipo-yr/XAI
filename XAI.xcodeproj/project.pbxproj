@@ -152,6 +152,14 @@
 		96AF0A82195A695C00AF3C88 /* XAIToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AF0A81195A695C00AF3C88 /* XAIToken.m */; };
 		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; };
 		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
+		96B75AC01974F74A00253906 /* obj_IR.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75ABF1974F74A00253906 /* obj_IR.png */; };
+		96B75AC21974F75A00253906 /* obj_IR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC11974F75A00253906 /* obj_IR@2x.png */; };
+		96B75AC51974F76400253906 /* obj_IR_warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC31974F76400253906 /* obj_IR_warning.png */; };
+		96B75AC61974F76400253906 /* obj_IR_working.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC41974F76400253906 /* obj_IR_working.png */; };
+		96B75AC91974F77300253906 /* obj_IR_warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC71974F77300253906 /* obj_IR_warning@2x.png */; };
+		96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC81974F77300253906 /* obj_IR_working@2x.png */; };
+		96B75ACD1974F7D500253906 /* XAIIR.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACC1974F7D500253906 /* XAIIR.m */; };
+		96B75AD0197500A000253906 /* XAIIRStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACF197500A000253906 /* XAIIRStatusVC.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -485,6 +493,16 @@
 		96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketLinkage.h; sourceTree = "<group>"; };
 		96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketLinkage.c; sourceTree = "<group>"; };
 		96B6D34119220BA000367424 /* PacketCtrlTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketCtrlTest.m; sourceTree = "<group>"; };
+		96B75ABF1974F74A00253906 /* obj_IR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_IR.png; sourceTree = "<group>"; };
+		96B75AC11974F75A00253906 /* obj_IR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_IR@2x.png"; sourceTree = "<group>"; };
+		96B75AC31974F76400253906 /* obj_IR_warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_IR_warning.png; sourceTree = "<group>"; };
+		96B75AC41974F76400253906 /* obj_IR_working.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_IR_working.png; sourceTree = "<group>"; };
+		96B75AC71974F77300253906 /* obj_IR_warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_IR_warning@2x.png"; sourceTree = "<group>"; };
+		96B75AC81974F77300253906 /* obj_IR_working@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_IR_working@2x.png"; sourceTree = "<group>"; };
+		96B75ACB1974F7D500253906 /* XAIIR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIR.h; sourceTree = "<group>"; };
+		96B75ACC1974F7D500253906 /* XAIIR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIR.m; sourceTree = "<group>"; };
+		96B75ACE197500A000253906 /* XAIIRStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIRStatusVC.h; sourceTree = "<group>"; };
+		96B75ACF197500A000253906 /* XAIIRStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIRStatusVC.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -678,6 +696,8 @@
 				960BDD4F1907989300787148 /* obj_light_open.png */,
 				962DDDFF191612F1008F370A /* obj_window_close.png */,
 				962DDE00191612F1008F370A /* obj_window_open.png */,
+				96B75AC31974F76400253906 /* obj_IR_warning.png */,
+				96B75AC41974F76400253906 /* obj_IR_working.png */,
 			);
 			path = "obj-status";
 			sourceTree = "<group>";
@@ -691,6 +711,8 @@
 				960BDD491907989300787148 /* obj_door_open@2x.png */,
 				960BDD4A1907989300787148 /* obj_light_close@2x.png */,
 				960BDD4B1907989300787148 /* obj_light_open@2x.png */,
+				96B75AC71974F77300253906 /* obj_IR_warning@2x.png */,
+				96B75AC81974F77300253906 /* obj_IR_working@2x.png */,
 			);
 			path = 2x;
 			sourceTree = "<group>";
@@ -715,6 +737,8 @@
 				962DDE0719161493008F370A /* XAILightStatusVC.m */,
 				962DDE0819161493008F370A /* XAIWindowStatusVC.h */,
 				962DDE0919161493008F370A /* XAIWindowStatusVC.m */,
+				96B75ACE197500A000253906 /* XAIIRStatusVC.h */,
+				96B75ACF197500A000253906 /* XAIIRStatusVC.m */,
 			);
 			path = DetailInfo;
 			sourceTree = "<group>";
@@ -727,6 +751,7 @@
 				9631D16819075691007CBC4B /* obj_light.png */,
 				9631D16919075691007CBC4B /* obj_switch.png */,
 				9631D16A19075691007CBC4B /* obj_window.png */,
+				96B75ABF1974F74A00253906 /* obj_IR.png */,
 			);
 			path = "obj-icon";
 			sourceTree = "<group>";
@@ -738,6 +763,7 @@
 				9631D16419075691007CBC4B /* obj_light@2x.png */,
 				9631D16519075691007CBC4B /* obj_switch@2x.png */,
 				9631D16619075691007CBC4B /* obj_window@2x.png */,
+				96B75AC11974F75A00253906 /* obj_IR@2x.png */,
 			);
 			path = 2x;
 			sourceTree = "<group>";
@@ -794,6 +820,8 @@
 				968105E61917601A00171BF3 /* XAILight2_CirculeOne.m */,
 				96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */,
 				96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */,
+				96B75ACB1974F7D500253906 /* XAIIR.h */,
+				96B75ACC1974F7D500253906 /* XAIIR.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1440,13 +1468,16 @@
 				9631D17019075691007CBC4B /* obj_light.png in Resources */,
 				969D6E6D191881B7002076A0 /* login_btn_sel@2x.png in Resources */,
 				960BDD541907989300787148 /* obj_door_close.png in Resources */,
+				96B75AC91974F77300253906 /* obj_IR_warning@2x.png in Resources */,
 				9631D17119075691007CBC4B /* obj_switch.png in Resources */,
 				96E9D98B190111F7000BB595 /* tab_bar_set_nor.png in Resources */,
+				96B75AC61974F76400253906 /* obj_IR_working.png in Resources */,
 				962DDDFE191612E7008F370A /* obj_window_open@2x.png in Resources */,
 				962DDE01191612F1008F370A /* obj_window_close.png in Resources */,
 				96E9D95B1900FD01000BB595 /* qrcode_btn_nor.png in Resources */,
 				969D6E6C191881B7002076A0 /* login_btn_normal@2x.png in Resources */,
 				963046A9192356430023653E /* DevInfoViewCell.xib in Resources */,
+				96B75AC21974F75A00253906 /* obj_IR@2x.png in Resources */,
 				967BD79F1908F9DA007C3C8C /* device_edit_sel@2x.png in Resources */,
 				9631D16C19075691007CBC4B /* obj_light@2x.png in Resources */,
 				9631D16E19075691007CBC4B /* obj_window@2x.png in Resources */,
@@ -1466,10 +1497,12 @@
 				969D6E81191882CE002076A0 /* tab_bar_user_nor@2x.png in Resources */,
 				960BDD551907989300787148 /* obj_door_open.png in Resources */,
 				969D6E80191882CE002076A0 /* tab_bar_set_sel@2x.png in Resources */,
+				96B75AC51974F76400253906 /* obj_IR_warning.png in Resources */,
 				C387F36D18EA757A0069F98B /* Images.xcassets in Resources */,
 				96E9D989190111F7000BB595 /* tab_bar_devM_sel.png in Resources */,
 				969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */,
 				C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */,
+				96B75AC01974F74A00253906 /* obj_IR.png in Resources */,
 				960BDD571907989300787148 /* obj_light_open.png in Resources */,
 				969D6E891918842B002076A0 /* qrcode_scan_cancel@2x.png in Resources */,
 				96E9D98F190111F7000BB595 /* tab_bar_user_nor.png in Resources */,
@@ -1506,6 +1539,7 @@
 				9683DA651900F01000518FEB /* login_btn_dis.png in Resources */,
 				967BD7A31908F9E1007C3C8C /* device_edit_sel.png in Resources */,
 				969D6E82191882CE002076A0 /* tab_bar_user_sel@2x.png in Resources */,
+				96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */,
 				96E9D95D1900FD01000BB595 /* textField_bg.png in Resources */,
 				96E9D987190111F7000BB595 /* tab_bar_devM_nor.png in Resources */,
 				967BD7911908B5CB007C3C8C /* device_add_sel.png in Resources */,
@@ -1597,6 +1631,7 @@
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				96619DB91915D58F009849B0 /* XAIDoor.m in Sources */,
 				96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */,
+				96B75ACD1974F7D500253906 /* XAIIR.m in Sources */,
 				9621FF4F19494A4F004356B1 /* XAIReLogin.m in Sources */,
 				96081AAF190E460900E281F9 /* XAIData.m in Sources */,
 				963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */,
@@ -1611,6 +1646,7 @@
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
 				96E44802191C6B22008A424B /* Reachability.m in Sources */,
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
+				96B75AD0197500A000253906 /* XAIIRStatusVC.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
 				968105E71917601A00171BF3 /* XAILight2_CirculeOne.m in Sources */,

@@ -14,6 +14,8 @@ typedef enum XAIDeviceType{
     XAIDeviceType_window = 1,
     XAIDeviceType_light = 2,
     XAIDeviceType_light_2 = 3,
+    XAIDeviceType_Inf = 4,
+    XAIDeviceType_UnKown = -1,
     
 }XAIDeviceType;
 

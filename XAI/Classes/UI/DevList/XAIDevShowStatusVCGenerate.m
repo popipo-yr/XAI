@@ -69,7 +69,7 @@
 
                 doorVC.door = (XAIDoor*)aObj;
                 
-                [doorVC.door startControl];
+                //[doorVC.door startControl];
                 
                 return doorVC;
                 
@@ -86,9 +86,25 @@
                 
                 windowVC.window = (XAIWindow*)aObj;
                 
-                [windowVC.window startControl];
+                //[windowVC.window startControl];
                 
                 return windowVC;
+                
+            }
+            
+        }break;
+            
+        case XAIObjectType_IR:{
+            
+            if ([aObj isKindOfClass:[XAIIR class]]) {
+                
+                XAIIRStatusVC*  IRVC = [storyboard instantiateViewControllerWithIdentifier:@"XAIIRStatusVCID"];
+                
+                IRVC.IR = (XAIIR*)aObj;
+                
+                //[IRVC.IR startControl];
+                
+                return IRVC;
                 
             }
             

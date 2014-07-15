@@ -228,6 +228,21 @@
     
   }
 
+- (void)realInit{
+    
+    _devType = XAIDeviceType_UnKown;
+    _corObjType = XAIObjectType_UnKown;
+}
+
+- (id)init{
+
+    if (self = [super init]) {
+        
+        [self realInit];
+    }
+    
+    return self;
+}
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
     
@@ -235,6 +250,8 @@
         
         _apsn = apsn;
         _luid = luid;
+        [self realInit];
+
     }
     
     return self;

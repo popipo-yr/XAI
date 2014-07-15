@@ -15,6 +15,7 @@
 #import "XAILight2_CirculeTwo.h"
 #import "XAIDoor.h"
 #import "XAIWindow.h"
+#import "XAIIR.h"
 
 @interface XAIObjectGenerate : NSObject
 

@@ -12,6 +12,7 @@
 #import "XAILightStatusVC.h"
 #import "XAIDoorStatusVC.h"
 #import "XAIWindowStatusVC.h"
+#import "XAIIRStatusVC.h"
 
 @interface XAIDevShowStatusVCGenerate : NSObject
 

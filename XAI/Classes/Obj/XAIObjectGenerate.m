@@ -35,6 +35,10 @@
             
         } break;
             
+        case XAIObjectType_IR:{
+            imgNameStr = @"obj_IR";
+        }
+            
         default:
             break;
     }
@@ -65,7 +69,13 @@
             
             className = @"XAILightOpr";
             
-        } break;
+        }
+            break;
+        
+        case XAIObjectType_IR:{
+        
+            className = @"XAIIROpr";
+        }
             
             
         default:break;
@@ -107,6 +117,11 @@
             className = @"XAILight2_CirculeTwo";
             
         } break;
+            
+        case XAIObjectType_IR:{
+            
+            className = @"XAIIR";
+        }
             
         default:
             break;

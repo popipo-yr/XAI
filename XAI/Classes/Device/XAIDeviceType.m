@@ -14,14 +14,15 @@
 #define __window @"窗"
 #define __switch @"开关"
 #define __switch2 @"双控开关"
+#define __inf   @"红外"
 
 + (NSArray*) typeAry{
 
-    return @[@(XAIDeviceType_door),@(XAIDeviceType_window),@(XAIDeviceType_light),@(XAIDeviceType_light_2)];
+    return @[@(XAIDeviceType_door),@(XAIDeviceType_window),@(XAIDeviceType_light),@(XAIDeviceType_light_2),@(XAIDeviceType_Inf)];
 }
 + (NSArray*) typeNameAry{
     
-    return @[__door,__window,__switch,__switch2];
+    return @[__door,__window,__switch,__switch2,__inf];
 }
 + (NSString*) typeToName:(XAIDeviceType)type{
     
@@ -44,6 +45,11 @@
         case XAIDeviceType_light_2:
         {
             return __switch2;
+        }
+            break;
+        case XAIDeviceType_Inf:
+        {
+            return __inf;
         }
             break;
             
@@ -71,6 +77,9 @@
     
         return XAIDeviceType_light_2;
     
+    }else if([name isEqual:__inf]){
+        
+        return XAIDeviceType_Inf;
     }
 
     return -1;

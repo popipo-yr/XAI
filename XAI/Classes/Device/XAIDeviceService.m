@@ -366,6 +366,7 @@
             aDevice.apsn = apsn;
             
             
+            if ([self converToObjType:aDevice] == false) break;
             
             allType = YES;
             
@@ -402,6 +403,51 @@
 }
 
 
+- (BOOL) converToObjType:(XAIDevice*)device{
+    
+    BOOL isSuc = true;
+
+    switch (device.devType) {
+        case XAIDeviceType_light:{
+            
+            device.corObjType = XAIObjectType_light;
+            
+        }
+            break;
+        case XAIDeviceType_light_2:{
+            
+            device.corObjType = XAIObjectType_light2_1;
+            
+        }
+            break;
+        case XAIDeviceType_window:{
+            
+            device.corObjType = XAIObjectType_window;
+            
+        }
+            break;
+        case XAIDeviceType_door:{
+            
+            device.corObjType = XAIObjectType_door;
+        }
+            break;
+            
+        case XAIDeviceType_Inf:{
+            device.corObjType = XAIObjectType_IR;
+        }
+            break;
+            
+        default:{
+            
+            isSuc = false;
+        }
+        break;
+    }
+    
+    return isSuc;
+
+}
+
 #pragma mark - Device Delegate
 -(void)device:(XAIDevice *)device getInfoIsSuccess:(BOOL)bSuccess isTimeOut:(BOOL)bTimeOut{
 
@@ -436,47 +482,20 @@
         
         /*mustchange*/
         
-        BOOL  shouldAdd = true;
-        
-        switch (device.devType) {
-            case XAIDeviceType_light:{
-                
-                device.corObjType = XAIObjectType_light;
+        if ([self converToObjType:device]) {
             
-            }
-                break;
-            case XAIDeviceType_light_2:{
-                
-                device.corObjType = XAIObjectType_light2_1;
+            if (device.devType == XAIDeviceType_light_2) {
                 
                 XAIDevice* dev2 = [device copy];
                 dev2.corObjType = XAIObjectType_light2_2;
                 [_onlineDevices addObject:dev2]; //添加2次
-                
+            
             }
-                break;
-            case XAIDeviceType_window:{
-                
-                device.corObjType = XAIObjectType_window;
-                
-            }
-                break;
-            case XAIDeviceType_door:{
-                
-                device.corObjType = XAIObjectType_door;
-            }
-                break;
-                
-            default:
-                
-                shouldAdd = false;
-                break;
-        }
-        
-        if (shouldAdd) {
             
             [_onlineDevices addObject:device];
+            
         }
+        
         
         
         if(_timer != nil){
