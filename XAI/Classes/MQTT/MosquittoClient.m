@@ -89,7 +89,7 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
         [self setHost: nil];
         [self setPort: 9001];
         [self setKeepAlive: 60];
-        [self setCleanSession: YES]; //NOTE: this isdisable clean to keep the broker remember this client
+        [self setCleanSession: FALSE]; //NOTE: this isdisable clean to keep the broker remember this client
         
         
         

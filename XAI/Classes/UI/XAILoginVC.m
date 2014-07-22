@@ -319,6 +319,12 @@
     //_scanApsn = 0x2923aeea;
     //_qrcodeLabel.text = @"192.168.1.236";
     
+    NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
+                              ,self.nameLabel.text,[MQTTCover apsnToString:_scanApsn]];
+    
+    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate changeMQTTClinetID:nameWithAPSN];
+    
     [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
 
     [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
