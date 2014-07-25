@@ -22,7 +22,7 @@
 
 
 #define _K_APSN  0x210e2b26  //0x210e2b26  0x210e2813  0x2923aeea
-#define _K_HOST @"114.215.178.75" // @"192.168.1.1"  @"114.215.178.75" @"192.168.0.33"   0x210e2757
+#define _K_HOST @"192.168.1.1" // @"192.168.1.1"  @"114.215.178.75" @"192.168.0.33"   0x210e2757
 
 @interface LoginPlugin : XCTestCase <XAILoginDelegate>{
     

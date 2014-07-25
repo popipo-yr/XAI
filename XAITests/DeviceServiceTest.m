@@ -204,7 +204,7 @@
 
 - (void)test_ADD{
 
-    _luidDev = 0x124b000413c931;  //26
+    _luidDev = 0x00124b0004e8369b;  //26
     
     [self _addDev:_luidDev withName:@"门窗..." type:_type];
     

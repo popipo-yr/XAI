@@ -223,7 +223,7 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 
 
 - (void)subscribe: (NSString *)topic {
-    [self subscribe:topic withQos:0];
+    [self subscribe:topic withQos:2];
 }
 
 - (void)subscribe: (NSString *)topic withQos:(NSUInteger)qos {

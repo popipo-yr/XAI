@@ -32,7 +32,7 @@
     _door = [[XAIDoor alloc] init];
     _door.delegate = self;
     _door.apsn = [MQTT shareMQTT].apsn;
-    _door.luid= 0x124b000413c931;//0x00124B000413C85C;
+    _door.luid= 0x00124b0004e8369b;//0x00124B000413C85C;
     
     _err_luid = 0x001384399578dfcd;
     
@@ -67,7 +67,7 @@
             
             if (_status > start) {
                 
-                *done = YES;
+                //*done = YES;
             }
         });
         
