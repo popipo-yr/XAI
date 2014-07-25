@@ -44,7 +44,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
 }
 
 
-- (void) start{
+- (void) startFocus{
 
     _mc.delegate = self;
     [_mc startListene];

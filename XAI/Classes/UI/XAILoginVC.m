@@ -11,6 +11,9 @@
 #import "XAIUserService.h"
 #import "XAIData.h"
 
+#import "XAIToken.h"
+#import "XAIAlert.h"
+
 #import "Reachability.h"
 
 
@@ -243,12 +246,6 @@
         }
         
         
-//        if (nil == _qrcodeLabel.text ||[_qrcodeLabel.text isEqualToString:@""]) {
-//            
-//            errTip = NSLocalizedString(@"QrcodeNULL", nil);
-//            break;
-//        }
-        
         if (![nameLabel.text onlyHasNumberAndChar]) {
             
             errTip = NSLocalizedString(@"UserNameErr", @"username string is not  require style");
@@ -333,14 +330,14 @@
 
 //    _findDev = findSuccess;
 //    _findUser = findSuccess;
-//    [self getDateFinsh];
+//    [self getDataFinsh];
 }
 
 #pragma mark - Delegate
 
 - (void) userService:(XAIUserService *)userService findedAllUser:(NSSet *)users status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
-    _userService.delegate = nil;
+    _userService.userServiceDelegate = nil;
     _findUser =  isSuccess ? findSuccess : findFail;
 
     if (isSuccess) {
@@ -350,8 +347,40 @@
         
     }
     
-    [self getDateFinsh];
+    [self getDataFinsh];
     
+}
+
+-(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    _userService.userServiceDelegate = nil;
+    _userService = nil;
+    
+    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
+        
+        
+        [self getData];
+        
+    }else{
+        
+        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
+        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
+        
+        if (errTip != nil) {
+            
+            
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:errTip
+                                                           delegate:nil
+                                                  cancelButtonTitle:cancelStr
+                                                  otherButtonTitles:nil];
+            
+            [alert show];
+            
+            [_activityView stopAnimating];
+            
+        }
+    }
 }
 
 - (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -367,7 +396,7 @@
 //
 //    
 //        
-//    [self getDateFinsh];
+//    [self getDataFinsh];
     
 }
 
@@ -381,7 +410,7 @@
         [[XAIData shareData] setObjList:devAry];
     }
     
-    [self getDateFinsh];
+    [self getDataFinsh];
     
 }
 
@@ -390,21 +419,7 @@
     if (status) {
         
         
-        
-        _findDev = findStart;
-        _findUser = findStart;
-        
-        /*获取设备列表,和用户列表*/
-        _devService = [[XAIDeviceService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
-        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
-        _devService.deviceServiceDelegate = self;
-        _userService.userServiceDelegate = self;
-        
-        
-        
-        [_userService finderAllUser];
-        //[_devService findAllOnlineDevWithuseSecond:2];
-        [_devService findAllDev];
+        [self pushToken];
         
     }else{
         
@@ -434,8 +449,49 @@
 
 }
 
+- (void) pushToken{
 
-- (void) getDateFinsh{
+    void* token = malloc(TokenSize);
+    memset(token, 0, TokenSize);
+    
+    BOOL bl = [XAIToken getToken:&token size:NULL];
+    
+    if (bl) {
+        
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+        _userService.userServiceDelegate = self;
+        [_userService pushToken:token size:TokenSize user:[MQTT shareMQTT].curUser.luid];
+    }else{
+    
+        [self getData];
+    }
+    
+    free(token);
+
+
+}
+
+- (void) getData{
+
+    _findDev = findStart;
+    _findUser = findStart;
+    
+    /*获取设备列表,和用户列表*/
+    _devService = [[XAIDeviceService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+    _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+    _devService.deviceServiceDelegate = self;
+    _userService.userServiceDelegate = self;
+    
+    
+    
+    [_userService finderAllUser];
+    //[_devService findAllOnlineDevWithuseSecond:2];
+    [_devService findAllDev];
+
+}
+
+
+- (void) getDataFinsh{
     
     NSString* errTip = nil;
     
@@ -492,8 +548,15 @@
         _devService = nil;
         _userService = nil;
         
+        [[XAIAlert shareAlert] startFocus];
+        MQTT* curMQTT = [MQTT shareMQTT];
+        /*订阅主题*/
+        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                                  luid:MQTTCover_LUID_Server_03]];
         
         
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+
 
     
     }

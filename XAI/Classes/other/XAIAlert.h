@@ -15,7 +15,7 @@
     UIAlertView*  _alertView;
 }
 
-- (void) start;
+- (void) startFocus;
 - (void) stop;
 + (XAIAlert*) shareAlert;
 

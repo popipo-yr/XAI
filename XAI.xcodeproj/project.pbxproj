@@ -160,6 +160,7 @@
 		96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC81974F77300253906 /* obj_IR_working@2x.png */; };
 		96B75ACD1974F7D500253906 /* XAIIR.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACC1974F7D500253906 /* XAIIR.m */; };
 		96B75AD0197500A000253906 /* XAIIRStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACF197500A000253906 /* XAIIRStatusVC.m */; };
+		96C8822119823BBE00571F21 /* XAIAlertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C8822019823BBE00571F21 /* XAIAlertTest.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -503,6 +504,7 @@
 		96B75ACC1974F7D500253906 /* XAIIR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIR.m; sourceTree = "<group>"; };
 		96B75ACE197500A000253906 /* XAIIRStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIRStatusVC.h; sourceTree = "<group>"; };
 		96B75ACF197500A000253906 /* XAIIRStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIRStatusVC.m; sourceTree = "<group>"; };
+		96C8822019823BBE00571F21 /* XAIAlertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIAlertTest.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -1245,6 +1247,7 @@
 		C387F37918EA757B0069F98B /* XAITests */ = {
 			isa = PBXGroup;
 			children = (
+				96C8822019823BBE00571F21 /* XAIAlertTest.m */,
 				9639FB281945A883001E6320 /* IPGetTest.m */,
 				96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */,
 				9630469F192345810023653E /* LightTest.m */,
@@ -1692,6 +1695,7 @@
 				9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */,
 				960B30F419230D0600763EFB /* LoginTest.m in Sources */,
 				96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */,
+				96C8822119823BBE00571F21 /* XAIAlertTest.m in Sources */,
 				963046A0192345810023653E /* LightTest.m in Sources */,
 				96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */,
 				968120BE18FF98210016DDB7 /* DoorContactTest.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "XAIAppDelegate.h"
 #import "LoginPlugin.h"
 
 #define _init  (-1)
@@ -100,7 +101,11 @@
     login.delegate = self;
     //114.215.178.75
     
+    NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
+                              ,name,[MQTTCover apsnToString:_K_APSN]];
     
+    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate changeMQTTClinetID:nameWithAPSN];
     
     [login loginWithName:name Password:pwd Host:_K_HOST apsn:_K_APSN];
     
@@ -133,6 +138,12 @@
     _loginStatus_normal = _init;
     
     //[[MQTT shareMQTT].client disconnect];
+    
+    NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
+                              ,@"admin",[MQTTCover apsnToString:_K_APSN]];
+    
+    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate changeMQTTClinetID:nameWithAPSN];
     
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;

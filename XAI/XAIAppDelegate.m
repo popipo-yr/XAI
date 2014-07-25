@@ -374,7 +374,15 @@
             
         } while (0);
         
-        [[XAIAlert shareAlert] start];
+        [[XAIAlert shareAlert] startFocus];
+        
+        
+        MQTT* curMQTT = [MQTT shareMQTT];
+        /*订阅主题*/
+        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                                  luid:MQTTCover_LUID_Server_03]];
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn
+                                                               luid:curMQTT.luid]];
         
     }
 }

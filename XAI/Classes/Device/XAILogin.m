@@ -19,16 +19,13 @@
     
     _ip = host;
     _apsn = apsn;
+    _name = name;
+    _pawd = password;
+    
     _isLogin = true;
 
     MosquittoClient*  mosq = [MQTT shareMQTT].client;
 
-    //host = @"192.168.1.1";
-    //name = @"admin@0x00000001";
-    //password = @"admin";
-    
-    _name = name;
-    _pawd = password;
     
     NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@",name,[MQTTCover apsnToString:apsn]];
     
@@ -38,8 +35,6 @@
     [mosq setPort:9001];	
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
-    
-    //[MQTT shareMQTT].apsn = apsn;
     
     [mosq connect];
     
@@ -85,6 +80,7 @@
     
     [[MQTT shareMQTT].client disconnect];
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
+
 }
 
 
@@ -95,12 +91,7 @@
 - (void) userService:(XAIUserService *)userService findedUser:(XAITYPELUID)luid
             withName:(NSString *)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
-    void* token = malloc(TokenSize);
-    memset(token, 0, TokenSize);
-
-    BOOL bl = [XAIToken getToken:&token size:NULL];
-    
-    if (bl && (YES == isSuccess) &&  [name isEqualToString:_name]) {
+    if ( (YES == isSuccess) &&  [name isEqualToString:_name]) {
         
         MQTT* curMQTT = [MQTT shareMQTT];
         
@@ -116,46 +107,21 @@
         user.pawd = _pawd;
         
         curMQTT.curUser = user;
-
         
-        /*订阅主题*/
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
-        
-        
-        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
-        
-        
-        [_userService pushToken:token size:TokenSize user:luid];
-        
-    }else{
-        
-        _isLogin = false;
-        if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
-            
-            [_delegate loginFinishWithStatus:false isTimeOut:false];
-        }
-    }
-    
-    free(token);
-
-}
-
--(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
-
-    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
-        
-        MQTT* curMQTT = [MQTT shareMQTT];
         curMQTT.isLogin = true;
         
     }
+    
     
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
         [_delegate loginFinishWithStatus:isSuccess isTimeOut:false];
     }
-
+    
     _isLogin = false;
+    
+    
+
 }
 
 
