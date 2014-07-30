@@ -28,6 +28,12 @@ static void on_disconnect(struct mosquitto *mosq, void *obj, int rc)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     [[client delegate] didDisconnect];
+    
+    
+    if (client.keepAliveDelegate != nil && [client.keepAliveDelegate respondsToSelector:@selector(didDisconnect)]) {
+        [client.keepAliveDelegate didDisconnect];
+    }
+    
 }
 
 static void on_publish(struct mosquitto *mosq, void *obj, int message_id)

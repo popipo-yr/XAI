@@ -278,3 +278,8 @@
 - (void) endFocusStatus{}
 
 @end
+
+
+@implementation XAIOtherInfo
+@end
+

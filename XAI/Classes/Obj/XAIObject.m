@@ -13,9 +13,6 @@
 #import "XAIObjectGenerate.h"
 
 #define _Key_NickName_ @"NickName"
-#define _Key_OprTime_ @"OprTime"
-#define _Key_OprName_ @"OprName"
-#define _Key_OprID_ @"OprOrder"
 #define _Key_APSN_ @"apsn"
 #define _Key_LUID_ @"luid"
 #define _Key_Type_ @"type"
@@ -31,6 +28,8 @@
         _objOprList = [[NSMutableArray alloc] init];
         
         _lastOpr = [[XAIObjectOpr alloc] init];
+        
+        _tmpOprs = [[NSMutableArray alloc] init];
         
         //_flag = XAIObjectFlagNormal;
     }
@@ -110,6 +109,7 @@
         [dic setObject:[NSNumber numberWithInt:_lastOpr.opr] forKey:_Key_OprID_];
         [dic setObject:_lastOpr.time forKey:_Key_OprTime_];
         [dic setObject:_lastOpr.name forKey:_Key_OprName_];
+        [dic setObject:[NSNumber numberWithInteger:_lastOpr.otherID] forKey:_Key_OprOtherID_];
     }
     
     return dic;
@@ -131,6 +131,7 @@
     _lastOpr.opr = [[dic objectForKey:_Key_OprID_] intValue];
     _lastOpr.time = [dic objectForKey:_Key_OprTime_];
     _lastOpr.name = [dic objectForKey:_Key_OprName_];
+    _lastOpr.otherID = [[dic objectForKey:_Key_OprOtherID_] intValue];
 }
 
 /*获取操作记录集,读取本地的信息*/
@@ -221,6 +222,12 @@
         return false;
     }
     
+    /*与最后一次记录一样,不储存*/
+    XAIObjectOpr* saveLast = [_objOprList lastObject];
+    if (saveLast != nil && saveLast.otherID == aOpr.otherID && saveLast.opr == aOpr.opr) {
+        return false;
+    }
+    
     _lastOpr = aOpr;
     
     [_objOprList addObject:aOpr];
@@ -244,83 +251,29 @@
 }
 
 
-@end
+- (void) updateFinish:(XAIObjectOpr*)opr{}
 
-@implementation XAIObjectOpr
-
-- (id)init{
-
-    if (self = [super init]) {
-        
-        _name = @"";
+- (void) timeout{
+    
+    NSArray* newAry = [XAIObjectOpr sort:_tmpOprs];
+    [_tmpOprs removeAllObjects];
+    
+    XAIObjectOpr* last = [newAry lastObject];
+    
+    //写入状态
+    for (XAIObjectOpr* opr in newAry) {
+        [self addOpr:opr];
     }
     
-    return self;
-}
-
-
--(NSDictionary *)writeToDIC{
     
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[NSNumber numberWithInt:_opr] forKey:_Key_OprID_];
-    [dic setObject:_time forKey:_Key_OprTime_];
-    [dic setObject:_name forKey:_Key_OprName_];
-    
-    return dic;
-    
-}
-
-- (void)readFromDIC:(NSDictionary *)dic{
-    
-    _opr = [[dic objectForKey:_Key_OprID_] intValue];
-    _time = [dic objectForKey:_Key_OprTime_];
-    _name = [dic objectForKey:_Key_OprName_];
-    
-}
-
-- (NSString*) timeStr{
-    
-    if (_time == nil) {
-    
-        return @"";
+    //如果需要通知结果
+    if (last != nil) {
+        [self updateFinish:last];
     }
     
-    NSDateFormatter *format =[[NSDateFormatter alloc] init];
-    
-    [format setTimeZone:[NSTimeZone localTimeZone]];
-    
-    [format setDateFormat:@"HH:mm  MM-dd-yyyy"];
-    
-    
-    return [format stringFromDate:_time];
-
 }
 
-- (NSString*) oprWithNameStr{
 
-    return [NSString stringWithFormat:@"%@%@",_name,[self oprOnlyStr]];
 
-}
-
-- (NSString*) allStr{
-    
-    if (_time == nil) {
-        
-        return @"";
-    }
-
-    NSDateFormatter *format =[[NSDateFormatter alloc] init];
-    
-    [format setTimeZone:[NSTimeZone localTimeZone]];
-    
-    [format setDateFormat:@"HH:mm"];
-
-    return [NSString stringWithFormat:@"%@%@ %@",_name,[self oprOnlyStr],[format stringFromDate:_time]];
-}
-
-- (NSString*) oprOnlyStr{
-
-    return @"";
-}
 @end
 

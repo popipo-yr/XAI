@@ -12,8 +12,10 @@
 #import "XAILinkageUseInfo.h"
 
 #import "XAIObjectGroup.h"
+#import "XAIObjectOpr.h"
 
 #import "XAIDebug.h"
+#import "XAITimeOut.h"
 
 typedef enum XAIObjectType{
     
@@ -35,7 +37,7 @@ typedef enum XAIObjectType{
 @class XAIObjectOpr;
 @class XAIDevice;
 
-@interface XAIObject : NSObject<XAIDataInfo_DIC>{
+@interface XAIObject : XAITimeOut<XAIDataInfo_DIC>{
     
     NSString* _name;
     XAIObjectType _type; /*类别,门，窗，灯?*/
@@ -56,6 +58,7 @@ typedef enum XAIObjectType{
     
     //int _flag; /*多控*/
     
+    NSMutableArray* _tmpOprs;
 }
 
 @property (nonatomic, strong) NSString* name;
@@ -83,29 +86,13 @@ typedef enum XAIObjectType{
 - (NSArray*) getLinkageUseInfos; /*获取联动使用信息*/
 
 
+- (void) timeout;
+- (void) updateFinish:(XAIObjectOpr*)opr;
+
+
 @end
 
 
-@interface XAIObjectOpr : NSObject <XAIDataInfo_DIC>{
-
-    int _opr;
-    NSDate* _time;
-    NSString* _name;
-
-}
-
-@property (nonatomic, assign) int opr;
-@property (nonatomic, strong) NSDate* time;
-@property (nonatomic, strong) NSString* name;
-
-- (NSString*) oprOnlyStr; /*开了灯  子类必须实现*/
-
-- (NSString*) timeStr;   /*8:50  04/12/1*/
-- (NSString*) oprWithNameStr;  /*小明开了灯*/
-
-- (NSString*) allStr;  /*小明在8点50分开了灯*/
-
-@end
 
 
 

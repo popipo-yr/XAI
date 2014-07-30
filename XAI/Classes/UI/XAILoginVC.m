@@ -359,7 +359,7 @@
     if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
         
         
-        [self getData];
+        //[self getData];
         
     }else{
         
@@ -381,6 +381,8 @@
             
         }
     }
+    
+    [self getData];
 }
 
 - (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -584,7 +586,8 @@
 
     
     
-
+    [scanVC dismissViewControllerAnimated:YES completion:nil];
+    
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     

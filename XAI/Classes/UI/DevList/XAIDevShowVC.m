@@ -73,6 +73,13 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 - (void)setExtraCellLineHidden: (UITableView *)tableView{
     
     UIView *view =[ [UIView alloc]init];

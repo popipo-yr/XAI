@@ -88,7 +88,13 @@ typedef NS_ENUM(NSUInteger,_XAIDevOpr){
 
 
 
+@interface XAIOtherInfo : NSObject
 
+@property (nonatomic,assign) uint32_t time;
+@property (nonatomic,assign) uint16_t msgid;
+@property (nonatomic,assign) XAI_ERROR error;
+
+@end
 
 
 

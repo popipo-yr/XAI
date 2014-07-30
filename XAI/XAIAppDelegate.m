@@ -34,6 +34,7 @@
     _mosquittoClient = [[MosquittoClient alloc] initWithClientId:clientID];
     
     [_mosquittoClient setDelegate:_mqttPacketManager];
+    [_mosquittoClient setKeepAliveDelegate:self];
     [[MQTT shareMQTT] setClient:_mosquittoClient];
     
 }
@@ -118,6 +119,7 @@
     [[XAIData shareData] save];
     [[XAIAlert shareAlert] stop];
     [self stopRelogin];
+    _isBackgroud = true;
     [_mosquittoClient disconnect];
 }
 
@@ -133,6 +135,7 @@
 {
     //[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    _isBackgroud = false;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -390,7 +393,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
-    if (_reLoginFailAlert == alertView) {
+    if (_reLoginFailAlert == alertView ||
+        (_otherLoginTipAlert == alertView && buttonIndex == [alertView cancelButtonIndex])) {
         
         UIViewController* vc= [self.window.rootViewController.storyboard
                                instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
@@ -399,6 +403,27 @@
         
         _reLoginFailAlert = nil;
     }
+}
+
+#pragma mark -- KeepAlive
+-(void)didDisconnect{
+
+    if ([MQTT shareMQTT].isLogin == true && _isBackgroud == false) {
+        
+        [MQTT shareMQTT].isLogin = false;
+        
+        
+        NSString* msg = NSLocalizedString(@"other space login", nil);
+        
+        _otherLoginTipAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                       message:msg
+                                                      delegate:self
+                                             cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
+        [_otherLoginTipAlert show];
+
+    }
+
+    
 }
 
 

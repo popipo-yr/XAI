@@ -126,6 +126,11 @@
     NSMutableArray* proAry = [_delegates objectForKey:key];
     if (nil == proAry) return;
     
+    BOOL isLast =  false;
+    if ([proAry count] == 1) {
+        isLast = true;
+    }
+    
     MQTTPacketManagerDelgInfo* oneProInfo = nil;
     BOOL bFind = false;
     for (int i = 0; i < [proAry count]; i++) {
@@ -148,6 +153,10 @@
     if (oneProInfo.refrenceCount <  1) {
         
         [proAry removeObject:oneProInfo];
+        
+        if (isLast) { //no focus  remove topic
+            //[[MQTT shareMQTT].client unsubscribe:key];
+        }
         
     }
 }
@@ -204,14 +213,6 @@
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         
-//        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
-//        if (apro != NULL
-//            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-//            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
-//            
-//            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
-//        }
-        
         MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
         if (delgInfo != NULL
             && [delgInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
@@ -219,8 +220,6 @@
             
             [delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
         }
-
-
     }
     
     /*通知接受全部的消息*/
@@ -234,6 +233,11 @@
             [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
         }
 
+    }
+    
+    /*没有人接受*/
+    if ([delegeteAry count] == 0) {
+        
     }
     
     

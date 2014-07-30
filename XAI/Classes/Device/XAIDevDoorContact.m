@@ -119,9 +119,14 @@
         
         
         if (nil != _dcDelegate &&
-            [_dcDelegate respondsToSelector:@selector(doorContact:curStatus:err:)]) {
+            [_dcDelegate respondsToSelector:@selector(doorContact:status:err:otherInfo:)]) {
             
-            [_dcDelegate doorContact:self curStatus:curStatus err:err];
+            XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
+            otherInfo.time = param->time;
+            otherInfo.msgid = param->normal_param->magic_number;
+            otherInfo.error = err;
+            
+            [_dcDelegate doorContact:self status:curStatus err:err otherInfo:otherInfo];
         }
         
         _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevDCOpr_GetCurStatus);

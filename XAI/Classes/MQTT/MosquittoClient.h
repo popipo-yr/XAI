@@ -19,6 +19,13 @@
 
 @end
 
+@protocol MQTTKeepAliveDelegate <NSObject>
+
+@optional
+- (void) didDisconnect;
+
+@end
+
 
 @interface MosquittoClient : NSObject {
     struct mosquitto *mosq;
@@ -40,6 +47,7 @@
 @property (readwrite,assign) unsigned short keepAlive;
 @property (readwrite,assign) BOOL cleanSession;
 @property (readwrite,assign) id<MosquittoClientDelegate> delegate;
+@property (nonatomic, weak)  id<MQTTKeepAliveDelegate> keepAliveDelegate;
 
 + (void) initialize;
 + (NSString*) version;

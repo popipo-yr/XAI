@@ -130,7 +130,7 @@
         [_delegate scanVC:self didReadSymbols:symbols];
     }
     
-    [self cancelBtnClick:nil];
+    //[self cancelBtnClick:nil];
     
 }
 
