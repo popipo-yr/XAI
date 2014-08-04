@@ -10,15 +10,23 @@
 
 @implementation XAIIR
 
-
-- (void) startControl{
-    
+-(void)step{
     _infrared = [[XAIDevInfrared alloc] init];
     _infrared.infDelegate = self;
     _infrared.delegate = self;
     
     _infrared.apsn =  _apsn;
     _infrared.luid = _luid;
+}
+
+-(XAIDevice *)curDevice{
+
+    return _infrared;
+}
+
+- (void) startControl{
+    
+    [self step];
     
     [_infrared startFocusStatus];
     

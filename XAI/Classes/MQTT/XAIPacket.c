@@ -330,9 +330,10 @@ void xai_param_data_set(_xai_packet_param_data* ctrlData ,XAI_DATA_TYPE type , s
 _xai_packet* generatePacket(void){
     
     _xai_packet* packet = malloc(sizeof(_xai_packet));
+    memset(packet,0,sizeof(_xai_packet));
     
-    char*  payload  = malloc(1000);
-    memset(payload,0,1000);
+//    char*  payload  = malloc(1000);
+//    memset(payload,0,1000);
     
     packet->pre_load = NULL;
     packet->all_load = NULL;
@@ -350,6 +351,10 @@ void purgePacket(_xai_packet* packet){
     free(packet->pre_load);
     free(packet->data_load);
     free(packet->all_load);
+    packet->pre_load = NULL;
+    packet->all_load = NULL;
+    packet->data_load = NULL;
+    
     free(packet);
     packet = NULL;
     

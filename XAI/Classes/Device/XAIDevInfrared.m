@@ -54,7 +54,7 @@
     
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DetectorStatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     //[[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     
@@ -87,7 +87,6 @@
     
     if (NULL == param) return;
     
-    BOOL  isSuccess = false;
     XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     //查看状态的topic
@@ -114,7 +113,6 @@
             
             if (curStatus == XAIDevInfraredStatusUnkown) break;
             
-            isSuccess = true;
             err = XAI_ERROR_NONE;
             
         } while (0);
@@ -153,7 +151,6 @@
             
             curPower = power*1.0 / 10.0;
             
-            isSuccess = true;
             err = XAI_ERROR_NONE;
             
         } while (0);

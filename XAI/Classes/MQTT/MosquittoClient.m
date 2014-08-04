@@ -44,6 +44,8 @@ static void on_publish(struct mosquitto *mosq, void *obj, int message_id)
 
 static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
 {
+    @autoreleasepool {
+    NSLog(@"MQTT-MSG-IN");
     MosquittoMessage *mosq_msg = [[MosquittoMessage alloc] init];
     mosq_msg.topic = [NSString stringWithUTF8String: message->topic];
     mosq_msg.payload = [[NSString alloc] initWithBytes:message->payload
@@ -56,6 +58,9 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
     
     //[[client delegate] didReceiveMessage:payload topic:topic];
     [[client delegate] didReceiveMessage:mosq_msg];
+    
+    NSLog(@"MQTT-MSG-OUT");
+    }
 }
 
 static void on_subscribe(struct mosquitto *mosq, void *obj, int message_id, int qos_count, const int *granted_qos)
@@ -73,7 +78,7 @@ static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
 
 static void on_log(struct mosquitto *mosq, void *userdata, int level, const char *str){
     
-    printf("%s\n\n",str);
+    printf("mqtt-log:%s\n\n",str);
 }
 
 
@@ -159,6 +164,11 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
     
     if ([rc intValue] == MOSQ_ERR_SUCCESS) {
         
+        if (timer != nil && [timer isValid]) {
+            
+            [timer invalidate];
+            NSLog(@"cao");
+        }
         
         timer = [NSTimer scheduledTimerWithTimeInterval:0.01 // 10ms
                                                  target:self
@@ -185,6 +195,10 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 }
 
 - (void) disconnect {
+//    if (timer != nil) {
+//        [timer invalidate];
+//        timer = nil;
+//    }
     mosquitto_disconnect(mosq);
 }
 
@@ -229,7 +243,7 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 
 
 - (void)subscribe: (NSString *)topic {
-    [self subscribe:topic withQos:2];
+    [self subscribe:topic withQos:0];
 }
 
 - (void)subscribe: (NSString *)topic withQos:(NSUInteger)qos {

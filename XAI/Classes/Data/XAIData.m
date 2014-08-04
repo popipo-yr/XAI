@@ -279,8 +279,25 @@ static XAIData*  _s_XAIData_ = NULL;
     [curMQTT.packetManager addPacketManager:self withKey:dTopic];
 }
 
+- (void) stopRefresh{
+    
+    MQTT* curMQTT = [MQTT shareMQTT];
+    
+    NSString* uTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_UserTable_Other];
+    
+    NSString* dTopic =[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+                                                      luid:MQTTCover_LUID_Server_03
+                                                     other:MQTTCover_DevTable_Other];
+    
+    [curMQTT.packetManager removePacketManager:self withKey:uTopic];
+    [curMQTT.packetManager removePacketManager:self withKey:dTopic];
+}
+
 
 -(void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic{
+    
     
     MQTT* curMQTT = [MQTT shareMQTT];
     

@@ -62,7 +62,7 @@
     
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     _devOpr = XAIDevSwitchOpr_GetOneStatus;
     _DEF_XTO_TIME_Start
@@ -81,7 +81,7 @@
     
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     _devOpr = XAIDevSwitchOpr_GetTwoStatus;
     _DEF_XTO_TIME_Start
@@ -156,18 +156,16 @@
 #pragma mark - MQTTPacketManagerDelegate
 
 
-- (void) reciveACKPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveACKPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
     
     if (ack == NULL) return;
     
-    BOOL isSuccess = false;
     XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     if (ack->err_no == 0) {
         
-        isSuccess = true;
         err = XAI_ERROR_NONE;
         
     }
@@ -230,7 +228,11 @@
     
     _xai_packet_param_status* param = generateParamStatusFromData(datas, size);
     
-    BOOL  isSuccess = false;
+    if (param == NULL) {
+        return;
+    }
+    
+
     XAI_ERROR err = XAI_ERROR_UNKOWEN;
     
     XAIDevCircuitStatus curStatus = XAIDevCircuitUnkown;
@@ -249,14 +251,11 @@
         
         curStatus = [self coverPacketBOOLToCircuit:isOpen];
         
-        isSuccess = true;
-        
         err = XAI_ERROR_NONE;
         
         
     } while (0);
-    
-    
+
     switch (param->oprId) {
             
         case Key_CircuitOneStatusID:{
@@ -291,7 +290,7 @@
 }
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     

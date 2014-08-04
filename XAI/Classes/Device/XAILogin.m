@@ -42,12 +42,32 @@
     
 }
 
+- (void) relogin{
+
+    _isLogin = true;
+
+    MosquittoClient*  mosq = [MQTT shareMQTT].client;
+    
+    _name = [MQTT shareMQTT].curUser.name;
+    _apsn = [MQTT shareMQTT].apsn;
+    _pawd = [MQTT shareMQTT].curUser.pawd;
+
+    
+    
+    [[MQTT shareMQTT].packetManager setConnectDelegate:self];
+    
+    [mosq reconnect];
+    _DEF_XTO_TIME_Start;
+
+}
+
 #pragma mark -- MQTTConnectDelegate
 
 - (void) didConnect:(NSUInteger)code {
 	
     if (!_isLogin) return;
     
+    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
     _userService.apsn = _apsn;
     [_userService finderUserLuidHelper:_name];
     
@@ -58,11 +78,15 @@
 - (void) didDisconnect {
     
      if (!_isLogin) return;
+    
+    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
 	
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
         
         [_delegate loginFinishWithStatus:false isTimeOut:false];
     }
+    
+    _isLogin = false;
     
     _DEF_XTO_TIME_End;
 
@@ -78,8 +102,10 @@
         [_delegate loginFinishWithStatus:false isTimeOut:true];
     }
     
-    [[MQTT shareMQTT].client disconnect];
+    //[[MQTT shareMQTT].client disconnect];
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
+    
+    _isLogin = false;
 
 }
 
@@ -145,7 +171,7 @@
 
 - (void)dealloc{
 
-    _userService.userServiceDelegate = NULL;
+    _userService.userServiceDelegate = nil;
 
 }
 

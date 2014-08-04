@@ -10,15 +10,24 @@
 
 @implementation XAIDoor
 
+- (void)step{
 
-- (void) startControl{
-    
     _doorContact = [[XAIDevDoorContact alloc] init];
     _doorContact.dcDelegate = self;
     _doorContact.delegate = self;
     
     _doorContact.apsn =  _apsn;
     _doorContact.luid = _luid;
+}
+
+-(XAIDevice *)curDevice{
+
+    return _doorContact;
+}
+
+- (void) startControl{
+    
+    [self step];
     
     [_doorContact startFocusStatus];
     
@@ -79,7 +88,7 @@
         
         XAIDoorOpr* opr = [[XAIDoorOpr alloc] init];
         opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
-        opr.opr = status;
+        opr.opr = doorStatus;
         opr.otherID = otherInfo.msgid;
         
         [_tmpOprs addObject:opr];

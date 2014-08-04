@@ -60,7 +60,7 @@
 - (void) notifyChange;
 
 - (void) startRefresh;
-
+- (void) stopRefresh;
 
 + (XAIData*) shareData;
 

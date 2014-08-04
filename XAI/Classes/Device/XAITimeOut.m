@@ -20,6 +20,15 @@
     return self;
 }
 
+
+-(void)dealloc{
+    
+    if (_timeout != nil) {
+        [_timeout invalidate];
+        _timeout = nil;
+    }
+}
+
 - (void) timeout{};
 
 @end

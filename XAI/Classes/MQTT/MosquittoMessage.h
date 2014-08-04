@@ -21,8 +21,8 @@
 }
 
 @property (readwrite, assign) unsigned short mid;
-@property (readwrite, retain) NSString *topic;
-@property (readwrite, retain) NSString *payload;
+@property (readwrite, strong) NSString *topic;
+@property (readwrite, strong) NSString *payload;
 @property (readwrite, assign) unsigned short payloadlen;
 @property (readwrite, assign) unsigned short qos;
 @property (readwrite, assign) BOOL retained;

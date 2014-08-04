@@ -12,6 +12,7 @@
 #import "XAIObject.h"
 #import "Reachability.h"
 #import "XAIReLogin.h"
+#import "XAINoAcceptPacketHandle.h"
 
 #define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? YES : NO)
 
@@ -21,6 +22,7 @@
 
     MosquittoClient* _mosquittoClient;
     MQTTPacketManager* _mqttPacketManager;
+    XAINoAcceptPacketHandle* _noAcceptHandle;
     Reachability* _netReachability;
     XAIReLogin* _reLogin;
     
@@ -29,7 +31,8 @@
     UIAlertView* _otherLoginTipAlert;
     
     BOOL  _isRelogin;
-    BOOL  _isBackgroud;
+    BOOL  _isReConnect;
+    BOOL  _needKeepTip;
 
 }
 

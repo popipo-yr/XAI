@@ -10,18 +10,26 @@
 
 @implementation XAILight
 
-- (void) startControl{
-
+- (void) step{
     _devSwitch = [[XAIDevSwitch alloc] init];
     _devSwitch.swiDelegate = self;
     _devSwitch.delegate = self;
-
+    
     _devSwitch.apsn =  _apsn;
     _devSwitch.luid = _luid;
     
     _isClosing = false;
     _isOpening = false;
+}
+
+- (XAIDevice*) curDevice{
+
+    return _devSwitch;
+}
+
+- (void) startControl{
     
+    [self step];
     [_devSwitch startFocusStatus];
 }
 

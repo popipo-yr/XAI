@@ -88,11 +88,15 @@
 }
 
 
-- (void) _reciveStatusPacket:(void*)datas size:(int)size topic:topic{
+- (void) _reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
-    if (![topic isEqualToString:
-          [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]]) {
+    return;
+    
+    //NSString* c = [[NSString alloc] initWithString:[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
+    
+    if (![topic isEqualToString:[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]]) {
         
+        //NSLog(@"out-------");
         return;
     }
     
@@ -143,7 +147,7 @@
 
 }
 
-- (void) _reciveDevPacket:(void*)datas size:(int)size topic:topic{
+- (void) _reciveDevPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     if (![topic isEqualToString:[MQTTCover nodeDevTableTopicWithAPNS:_apsn luid:_luid]]) {
         
@@ -195,8 +199,9 @@
 
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
+    return;
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
@@ -242,6 +247,11 @@
     }
     
     return self;
+}
+
+-(void)dealloc{
+
+    [[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
 }
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{

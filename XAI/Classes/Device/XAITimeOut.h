@@ -27,6 +27,7 @@
 #define _DEF_XTO_TIME_End \
 if (_timeout != nil) { \
 [_timeout invalidate]; \
+_timeout = nil; \
 }
 
 

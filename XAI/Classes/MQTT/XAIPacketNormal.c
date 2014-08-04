@@ -166,8 +166,9 @@ void purgePacketParamNormal(_xai_packet_param_normal* normal_param){
 _xai_packet_param_normal*    generatePacketParamNormal(){
     
     _xai_packet_param_normal*  param = malloc(sizeof(_xai_packet_param_normal));
-    memset(param->from_guid, 0, sizeof(param->from_guid));
-    memset(param->to_guid, 0, sizeof(param->to_guid));
+    memset(param, 0, sizeof(_xai_packet_param_normal));
+    //memset(param->from_guid, 0, sizeof(param->from_guid));
+    //memset(param->to_guid, 0, sizeof(param->to_guid));
     param->data = NULL;
     param->flag = 0;
     param->length = 0;

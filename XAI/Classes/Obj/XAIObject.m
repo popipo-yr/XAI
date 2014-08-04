@@ -67,6 +67,8 @@
     return self;
 }
 
+- (void) step{}
+- (XAIDevice*) curDevice{return  nil;}
 - (void) startControl{}
 - (void) endControl{}
 
@@ -204,7 +206,7 @@
         }
         
         
-        [oprAry writeToFile:localFile atomically:YES];
+       // [oprAry writeToFile:localFile atomically:YES];
         
     } while (0);
     

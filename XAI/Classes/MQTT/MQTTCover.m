@@ -27,7 +27,7 @@
     
     if (apns_end_str < 0 ) {
         
-        return NULL;
+        return @"";
     }
     
     
@@ -52,7 +52,7 @@
     
     if ( luid_end_str < 0) {
         
-        return NULL;
+        return @"";
     }
     
     NSString* luid_start_str = [[NSString alloc] initWithCharacters:ucdata length:luid_start_len];
@@ -90,7 +90,7 @@
 //}
 
 
-+ (NSString*) stringFormat:(NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
++ (NSString*) stringFormat:( NSString*)format APNS:(uint32_t)APNS luid:(uint64_t)luid{
 
     
     NSString* apns_end_str = [NSString stringWithFormat:@"%x",APNS];
@@ -103,7 +103,7 @@
     
     if (apns_end_str < 0 || luid_end_str < 0) {
         
-        return NULL;
+        return @"";
     }
     
     NSString* luid_start_str = [[NSString alloc] initWithCharacters:ucdata length:luid_start_len];
@@ -116,7 +116,10 @@
     
     NSString*  LUID_Str = [[NSString alloc] initWithFormat:@"0x%@%@",luid_start_str,luid_end_str];
     
-    return [NSString stringWithFormat:format,APNS_Str,LUID_Str];
+    //return  [NSString  stringWithFormat:format,APNS_Str,LUID_Str];
+    __autoreleasing NSString* ret = [[NSString  alloc] initWithFormat:format,APNS_Str,LUID_Str];
+
+    return  ret;
     
 }
 
@@ -127,19 +130,19 @@
     NSString* other_end_str = [[NSString alloc] initWithFormat:@"%x",other];
     
     
-    unichar ucdata[16] = {'0','0'};
+    unichar ucdata[16] = {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'};
     
     int  other_start_len =   OTHER_STR_TOTAL_LEN - [other_end_str length];
     
     if (other_start_len < 0) {
         
-        return NULL;
+        return @"";
         
     }
     
     NSString* other_start_str = [[NSString alloc] initWithCharacters:ucdata length:other_start_len];
     
-    NSString*  Other_Str = [[NSString alloc] initWithFormat:@"0x%@%@",other_start_str,other_end_str];
+   __autoreleasing NSString*  Other_Str = [[NSString alloc] initWithFormat:@"0x%@%@",other_start_str,other_end_str];
     
     return Other_Str;
     
@@ -157,7 +160,7 @@
     
     if (num_start_len < 0) {
         
-        return NULL;
+        return @"";
         
     }
     
@@ -182,18 +185,26 @@
 }
 
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid{
-
-    return [MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid];
+    
+    NSString* format = @"%@/NODES/%@/OUT/STATUS";
+    NSString* str = [[NSString alloc] initWithString:[MQTTCover stringFormat:format APNS:APNS luid:luid]];
+    return  str;//[MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid];
 }
 + (NSString*) nodeStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
 
     //0x%08x/NODES/0x%016llx/OUT/STATUS/%02d
     
-    NSString*  other_Str = [MQTTCover stringOther:other];
+    NSString*  other_Str = [[NSString alloc] initWithString:[MQTTCover stringOther:other]];
+    NSString*  part_str = [[NSString alloc] initWithString:[MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid]];
+    NSString*  formart = @"%@/%@";
+    __autoreleasing NSString* ret = [[NSString alloc] initWithFormat:formart,part_str ,other_Str];
+
     
-    return [NSString stringWithFormat:@"%@/%@"
-            ,[MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid]
-            ,other_Str];
+    return ret;
+    
+//    return [NSString stringWithFormat:@"%@/%@"
+//            ,[MQTTCover stringFormat:@"%@/NODES/%@/OUT/STATUS" APNS:APNS luid:luid]
+//            ,other_Str];
     
     
 }
@@ -206,7 +217,7 @@
 + (NSString*) serverStatusTopicWithAPNS:(uint32_t)APNS luid:(uint64_t)luid other:(uint8_t)other{
     //状态表： 0x%08x/SERVER/0x%016llx/OUT/STATUS/%02d
     
-    NSString*  other_Str = [MQTTCover stringOther:other];
+    NSString*  other_Str = [[NSString alloc] initWithString:[MQTTCover stringOther:other]];
     
     return [NSString stringWithFormat:@"%@/%@"
             ,[MQTTCover stringFormat:@"%@/SERVER/%@/OUT/STATUS" APNS:APNS luid:luid]
@@ -267,6 +278,16 @@
     
     return [sub  isEqualToString:[topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN, [sub length])]];
 
+}
++ (BOOL) isNodeStatusTopic:(NSString *)topic{
+
+    if ([MQTTCover isNodeTopic:topic] == false) {
+     
+        return false;
+    }
+    
+    NSString* status = @"/OUT/STATUS/";
+    return [topic rangeOfString:status].location != NSNotFound;
 }
 + (BOOL) isServerTopic:(NSString*)topic{
     

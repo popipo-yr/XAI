@@ -11,8 +11,11 @@
  没有接受的报文全部放到这里取处理,主要处理设备的状态
  */
 
-#import <Foundation/Foundation.h>
+#import "MQTTPacketManager.h"
 
-@interface XAINoAcceptPacketHandle : NSObject
+
+@interface XAINoAcceptPacketHandle : NSObject <MQTTPacketManagerDelegate>
+
+
 
 @end

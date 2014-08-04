@@ -52,9 +52,9 @@
 /*force remove delegate*/
 - (void) forceRemovePacketManager:(id<MQTTPacketManagerDelegate>)aPro;
 
-/*接受所有的报文*/
-//- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
-//- (void) removePacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro;
+/*接受未被其他接受的报文*/
+- (void) addPacketManagerNoAccept: (id<MQTTPacketManagerDelegate>) aPro;
+- (void) removePacketManagerNoAccept: (id<MQTTPacketManagerDelegate>) aPro;
 
 @end
 

@@ -18,6 +18,7 @@
         
         _delegates = [[NSMutableDictionary alloc] init];
         _allDelegate = [[NSMutableArray alloc] init];
+        self.connectDelegate = NULL;
     }
     
     return self;
@@ -193,21 +194,20 @@
 
 }
 
-//- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro{
-//
-//    [_allDelegate addObject:aPro];
-//}
-//
-//
-//- (void) removePacketManagerAll:(id<MQTTPacketManagerDelegate>)aPro{
-//
-//    [_allDelegate removeObject:aPro];
-//}
+- (void) addPacketManagerNoAccept:(id<MQTTPacketManagerDelegate>)aPro{
+
+    [_allDelegate addObject:aPro];
+}
+
+
+- (void) removePacketManagerNoAccept:(id<MQTTPacketManagerDelegate>)aPro{
+
+    [_allDelegate removeObject:aPro];
+}
 
 #pragma mark -----------------------
 #pragma mark MosquittoClientDelegate
-
-- (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
+- (void) didReceiveMessageMainT:(MosquittoMessage*) mosq_msg {
     
     NSMutableArray*  delegeteAry  = [_delegates objectForKey:mosq_msg.topic];
     
@@ -219,29 +219,79 @@
             && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:)]) {
             
             [delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            
+            //[delgInfo.refObj recivePacket:datas size:size topic:topic];
         }
     }
     
-    /*通知接受全部的消息*/
-    for (int i = 0; i < [_allDelegate count]; i++) {
-        
-        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
-        if (apro != NULL
-            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
-            
-            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
-        }
-
-    }
+    //    free(datas);
+    
     
     /*没有人接受*/
     if ([delegeteAry count] == 0) {
         
+        /*通知接受全部的消息*/
+        for (int i = 0; i < [_allDelegate count]; i++) {
+            
+            id<MQTTPacketManagerDelegate> apro = [_allDelegate objectAtIndex:i];
+            if (apro != NULL
+                && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+                && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+                
+                [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            }
+            
+        }
+        
+    }
+
+}
+
+- (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
+    
+//    size_t size = mosq_msg.payloadlen;
+//    void* datas = malloc(sizeof(size));
+//    memcpy(datas,[mosq_msg getPayloadbyte] , size);
+//    NSString* topic = [[NSString alloc] initWithString:mosq_msg.topic];
+    
+//    [self performSelectorOnMainThread:@selector(didReceiveMessageMainT:) withObject:mosq_msg waitUntilDone:YES];
+
+    
+    NSMutableArray*  delegeteAry  = [_delegates objectForKey:mosq_msg.topic];
+    
+    for (int i = 0; i < [delegeteAry count]; i++) {
+        
+        MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
+        if (delgInfo != NULL
+            && [delgInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
+            && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            
+            [delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            
+            //[delgInfo.refObj recivePacket:datas size:size topic:topic];
+        }
     }
     
+//    free(datas);
     
     
+    /*没有人接受*/
+    if ([delegeteAry count] == 0) {
+        
+        /*通知接受全部的消息*/
+        for (int i = 0; i < [_allDelegate count]; i++) {
+            
+            id<MQTTPacketManagerDelegate> apro = [_allDelegate objectAtIndex:i];
+            if (apro != NULL
+                && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+                && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+                
+                [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            }
+            
+        }
+
+    }
 }
 
 - (void) didConnect:(NSUInteger)code {
@@ -252,20 +302,25 @@
     
     if (curMQTT.isLogin) {
         
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
-        
-        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+//        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+//                                                                  luid:MQTTCover_LUID_Server_03]];
+//        
+//        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
     }
 
+    if (_connectDelegate != nil && [_connectDelegate respondsToSelector:@selector(didConnect:)]) {
+         [_connectDelegate didConnect:code];
+    }
     
-    [_connectDelegate didConnect:code];
+   
     
 }
 
 - (void) didDisconnect {
     
-    [_connectDelegate didDisconnect];
+    if (_connectDelegate != nil && [_connectDelegate respondsToSelector:@selector(didDisconnect)]) {
+        [_connectDelegate didDisconnect];
+    }
 }
 
 

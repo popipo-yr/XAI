@@ -11,7 +11,7 @@
 @implementation XAIWindow
 
 
-- (void) startControl{
+- (void)step{
     
     _doorContact = [[XAIDevDoorContact alloc] init];
     _doorContact.dcDelegate = self;
@@ -19,6 +19,16 @@
     
     _doorContact.apsn =  _apsn;
     _doorContact.luid = _luid;
+}
+
+-(XAIDevice *)curDevice{
+    
+    return _doorContact;
+}
+
+- (void) startControl{
+    
+    [self step];
     
     [_doorContact startFocusStatus];
 

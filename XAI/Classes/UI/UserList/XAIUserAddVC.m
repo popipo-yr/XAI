@@ -52,6 +52,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc{
+
+}
+
 #pragma mark - Event
 
 - (void)okBtnClick:(id)sender{

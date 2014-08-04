@@ -39,16 +39,25 @@
         
         _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
         
-        [[XAIData shareData] addRefreshDelegate:self];
-        
     }
     return self;
 }
 
-- (void)dealloc{
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [[XAIData shareData] addRefreshDelegate:self];
+}
 
+-(void)viewDidDisappear:(BOOL)animated{
     
     [[XAIData shareData] removeRefreshDelegate:self];
+    [super viewDidDisappear:animated];
+}
+
+- (void)dealloc{
+
 }
 
 -(void)xaiDataRefresh:(XAIData *)data{

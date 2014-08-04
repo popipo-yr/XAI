@@ -35,16 +35,25 @@
         _deviceService.deviceServiceDelegate = self;
         
         _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
-        
-        [[XAIData shareData] addRefreshDelegate:self];
 
     }
     return self;
 }
 
-- (void) dealloc{
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+    [[XAIData shareData] addRefreshDelegate:self];
+}
 
+-(void)viewDidDisappear:(BOOL)animated{
+    
     [[XAIData shareData] removeRefreshDelegate:self];
+    [super viewDidDisappear:animated];
+}
+
+- (void) dealloc{
     
     _deviceService.deviceServiceDelegate = nil;
     _deviceService = nil;
@@ -73,12 +82,6 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-
-    [super viewWillAppear:animated];
-    
-    [self.tableView reloadData];
-}
 
 - (void)setExtraCellLineHidden: (UITableView *)tableView{
     

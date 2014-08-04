@@ -33,6 +33,28 @@
 @synthesize nameLabel;
 @synthesize passwordLabel;
 
+-(id)initWithCoder:(NSCoder *)aDecoder{
+
+    if (self = [super initWithCoder:aDecoder]) {
+        
+        _IPHelper = [[XAIIPHelper alloc] init];
+        _IPHelper.delegate = self;
+    }
+    
+    return self;
+}
+
+-(void)dealloc{
+    
+    _userService.userServiceDelegate = nil;
+    _devService.deviceServiceDelegate = nil;
+    
+    _userService = nil;
+    _devService = nil;
+
+    _IPHelper.delegate = nil;
+    _IPHelper = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -59,10 +81,10 @@
     [_qrcodeLabel setPlaceholder:@"Server-IP"];
     
     
-    _IPHelper = [[XAIIPHelper alloc] init];
-    _IPHelper.delegate = self;
+
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
+    apsnstr = @"210e2b26";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }
@@ -206,6 +228,10 @@
 
 
 - (IBAction)loginBtnClick:(id)sender{
+    
+    //[_activityView startAnimating];
+    
+    //return;
     
     BOOL hasErr = true;
     
@@ -553,8 +579,8 @@
         [[XAIAlert shareAlert] startFocus];
         MQTT* curMQTT = [MQTT shareMQTT];
         /*订阅主题*/
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
+//        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+//                                                                  luid:MQTTCover_LUID_Server_03]];
         
         
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
@@ -631,6 +657,9 @@
         [_qrcodeLabel setText:nil];
         [_qrcodeLabel setEnabled:true];
     }
+    
+    //_scanIP = @"192.168.0.33";
+    //[_qrcodeLabel setText:_scanIP];
 }
 
 @end

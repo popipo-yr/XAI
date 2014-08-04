@@ -74,6 +74,10 @@ typedef enum XAIObjectType{
 @property (nonatomic, strong) NSString* model; /*型号*/
 
 //@property (nonatomic, assign) int flag;
+/*初始化*/
+- (void) step;
+/*获取内部设备*/
+- (XAIDevice*) curDevice;
 
 - (void) startControl;
 - (void) endControl;

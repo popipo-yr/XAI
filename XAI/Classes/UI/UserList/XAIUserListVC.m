@@ -30,7 +30,7 @@
         
         _userDatasAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getUserList]];
         
-            [[XAIData shareData] addRefreshDelegate:self];
+        
 
     }
     
@@ -38,10 +38,25 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+    
+    [[XAIData shareData] addRefreshDelegate:self];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [[XAIData shareData] removeRefreshDelegate:self];
+    [super viewDidDisappear:animated];
+}
+
 
 - (void)dealloc{
 
-    [[XAIData shareData] removeRefreshDelegate:self];
+    
 }
 
 
@@ -65,12 +80,6 @@
     
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-
-}
 
 - (void)didReceiveMemoryWarning
 {
