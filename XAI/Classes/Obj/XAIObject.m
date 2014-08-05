@@ -95,7 +95,7 @@
 
 -(NSDictionary *)writeToDIC{
 
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+    __autoreleasing NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     if (_nickName != nil) {
         
         [dic setObject:_nickName forKey:_Key_NickName_];

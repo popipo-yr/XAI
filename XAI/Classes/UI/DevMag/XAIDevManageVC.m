@@ -57,7 +57,8 @@
 }
 
 - (void)dealloc{
-
+    [_deviceService willRemove];
+    _deviceService = nil;
 }
 
 -(void)xaiDataRefresh:(XAIData *)data{

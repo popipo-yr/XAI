@@ -56,6 +56,7 @@
 - (void) dealloc{
     
     _deviceService.deviceServiceDelegate = nil;
+    [_deviceService willRemove];
     _deviceService = nil;
     //_activityView = nil;
     
@@ -78,7 +79,7 @@
     [self.navigationItem OnlyBack];
 
     
-    [_deviceService findAllDev];
+    //[_deviceService findAllDev];
 
 }
 

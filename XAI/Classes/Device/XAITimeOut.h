@@ -16,6 +16,7 @@
     NSTimer* _timeout;
 }
 
+- (void) willRemove;
 - (void) timeout;
 
 @end

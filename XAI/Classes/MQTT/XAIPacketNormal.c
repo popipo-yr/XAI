@@ -154,8 +154,10 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
 void purgePacketParamNormal(_xai_packet_param_normal* normal_param){
     
     if (NULL != normal_param) {
-        
-        free(normal_param->data);
+        if (normal_param->data != NULL) {
+            free(normal_param->data);
+            normal_param->data = NULL;
+        }
         free(normal_param);
         normal_param = NULL;
     }

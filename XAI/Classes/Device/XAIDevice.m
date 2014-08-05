@@ -249,9 +249,16 @@
     return self;
 }
 
+
+- (void) willRemove{
+
+    [super willRemove];
+    //[[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
+    
+}
 -(void)dealloc{
 
-    [[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
+    
 }
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{

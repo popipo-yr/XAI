@@ -33,10 +33,12 @@
 
 - (void) changeMQTTClinetID:(NSString*)clientID{
     
+    
     _mosquittoClient = [[MosquittoClient alloc] initWithClientId:clientID];
     
     [_mosquittoClient setDelegate:_mqttPacketManager];
     [_mosquittoClient setKeepAliveDelegate:self];
+    [[MQTT shareMQTT].client willRemove];
     [[MQTT shareMQTT] setClient:_mosquittoClient];
     
 }
@@ -63,12 +65,14 @@
     //uidStr = [self getMacAddress];
     
     //NSString *clientId = [NSString stringWithFormat:@"ios%@", uidStr];
-    _mosquittoClient = [[MosquittoClient alloc] initWithClientId:@"ios"];
-    
-    [_mosquittoClient setDelegate:_mqttPacketManager];
     
     
-    [[MQTT shareMQTT] setClient:_mosquittoClient];
+    //_mosquittoClient = [[MosquittoClient alloc] initWithClientId:@"ios"];
+    
+    //[_mosquittoClient setDelegate:_mqttPacketManager];
+    
+    
+    //[[MQTT shareMQTT] setClient:_mosquittoClient];
     [[MQTT shareMQTT] setPacketManager:_mqttPacketManager];
     
     
@@ -114,6 +118,7 @@
     [self stopRelogin];
     [[XAIData shareData] stopRefresh];
     [_mosquittoClient disconnect];
+    [_mosquittoClient endwork];
 
 }
 
@@ -143,6 +148,7 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"xxxxxxxxxxxxxxxxxxxx");
     if ([MQTT shareMQTT].isLogin) {
+        [_mosquittoClient startwork];
         [self performSelector:@selector(reloginWhenGoIn) withObject:nil afterDelay:0.5f];
     }
     
@@ -276,9 +282,13 @@
 
     [_reLogin stop];
     if (_isReConnect ==  true) {
-        [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
         _isReConnect = false;
     }
+    
+    if (_reLoginStartAlert != nil && [_reLoginStartAlert isVisible]) {
+        [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
+    }
+    
 }
 - (void)reloginWhenGoIn{
     [self reloginIsLogin:false];
@@ -301,11 +311,11 @@
         _isRelogin = islogin;
         _isReConnect = true;
         
-        NSString* msg = NSLocalizedString(@"ReLoginStartUpdate", nil);
+        NSString* msg =[NSString stringWithString:NSLocalizedString(@"ReLoginStartUpdate", nil)];
         
         if (islogin) {
             
-            msg= NSLocalizedString(@"ReLoginStart", nil);
+            msg= [NSString stringWithString:NSLocalizedString(@"ReLoginStart", nil)];
             
         }
         
@@ -362,7 +372,9 @@
     }
     
     /*成功,取消提示*/
-    [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
+    if (_reLoginStartAlert != nil && [_reLoginStartAlert isVisible]) {
+        [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
+    }
     _isReConnect = false;
     
     NSLog(@"END .............");
@@ -405,7 +417,7 @@
                 
                 if (![curVC isKindOfClass:[UINavigationController class]]) continue;
                 
-                [(UINavigationController*)curVC popToRootViewControllerAnimated:YES]; //回到起始位置
+                [(UINavigationController*)curVC popToRootViewControllerAnimated:false]; //回到起始位置
                 
             }
             
@@ -424,6 +436,9 @@
                                                                luid:curMQTT.luid]];
         [[XAIData shareData] startRefresh];
     }
+    
+    [_reLogin stop];
+    _reLogin.delegate = nil;
 }
 
 

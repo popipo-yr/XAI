@@ -15,36 +15,56 @@
 @synthesize password;
 @synthesize keepAlive;
 @synthesize cleanSession;
-@synthesize delegate;
+//@synthesize delegate;
 
+static bool __ISING = false;
 
 static void on_connect(struct mosquitto *mosq, void *obj, int rc)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
-    [[client delegate] didConnect:(NSUInteger)rc];
+    
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didConnect:)]) {
+        [[client delegate] didConnect:(NSUInteger)rc];
+    }
+    
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(change)]) {
+        [[client delegate] change];
+    }
 }
 
 static void on_disconnect(struct mosquitto *mosq, void *obj, int rc)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
-    [[client delegate] didDisconnect];
+    
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didDisconnect)]) {
+        [[client delegate] didDisconnect];
+    }
     
     
-    if (client.keepAliveDelegate != nil && [client.keepAliveDelegate respondsToSelector:@selector(didDisconnect)]) {
+    if (client != nil && client.keepAliveDelegate != nil && [client.keepAliveDelegate respondsToSelector:@selector(didDisconnect)]) {
         [client.keepAliveDelegate didDisconnect];
     }
     
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(change)]) {
+        [[client delegate] change];
+    }
 }
 
 static void on_publish(struct mosquitto *mosq, void *obj, int message_id)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
-    [[client delegate] didPublish:(NSUInteger)message_id];
+    
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didPublish:)]) {
+        [[client delegate] didPublish:(NSUInteger)message_id];
+    }
+
+    
 }
 
 static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
 {
-    @autoreleasepool {
+    __ISING = true;
+    //@autoreleasepool {
     NSLog(@"MQTT-MSG-IN");
     MosquittoMessage *mosq_msg = [[MosquittoMessage alloc] init];
     mosq_msg.topic = [NSString stringWithUTF8String: message->topic];
@@ -57,31 +77,59 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     
     //[[client delegate] didReceiveMessage:payload topic:topic];
-    [[client delegate] didReceiveMessage:mosq_msg];
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didReceiveMessage:)]) {
+        [[client delegate] didReceiveMessage:mosq_msg];
+    }
+    
+//        MosquittoMessage *mosq_msg = [[MosquittoMessage alloc] init];
+//        mosq_msg.topic = [NSString stringWithUTF8String: message->topic];
+//        mosq_msg.payload = [[NSString alloc] initWithBytes:message->payload
+//                                                    length:message->payloadlen
+//                                                  encoding:NSUTF8StringEncoding];
+//        
+//        [mosq_msg setPayloadbyte:message->payload withSize:message->payloadlen];
+//        
+//        MosquittoClient* client = (__bridge MosquittoClient*)obj;
+//        
+//        [client performSelectorOnMainThread:@selector(hasmessage:) withObject:mosq_msg waitUntilDone:true];
     
     NSLog(@"MQTT-MSG-OUT");
+    
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(change)]) {
+        [[client delegate] change];
     }
+
+    //}
+    __ISING = false;
 }
 
 static void on_subscribe(struct mosquitto *mosq, void *obj, int message_id, int qos_count, const int *granted_qos)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     // FIXME: implement this
-    [[client delegate] didSubscribe:message_id grantedQos:nil];
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didSubscribe:grantedQos:)]) {
+        [[client delegate] didSubscribe:message_id grantedQos:nil];
+    }
 }
 
 static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
 {
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
-    [[client delegate] didUnsubscribe:message_id];
+     if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didUnsubscribe:)]) {
+         [[client delegate] didUnsubscribe:message_id];
+     }
 }
 
 static void on_log(struct mosquitto *mosq, void *userdata, int level, const char *str){
     
-    printf("mqtt-log:%s\n\n",str);
+   // printf("mqtt-log:%s\n\n",str);
 }
 
 
+- (void) hasmessage:(MosquittoMessage*) mosq_msg{
+
+    [[self delegate] didReceiveMessage:mosq_msg];
+}
 
 // Initialize is called just before the first object is allocated
 + (void)initialize {
@@ -203,6 +251,9 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 }
 
 - (void) loop: (NSTimer *)timer {
+    if (__ISING) {
+        return;
+    }
     mosquitto_loop(mosq, 1, 1);
 }
 
@@ -260,6 +311,37 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 - (void) setMessageRetry: (NSUInteger)seconds
 {
     mosquitto_message_retry_set(mosq, (unsigned int)seconds);
+}
+
+
+- (void) startwork{
+    __ISING = false;
+    
+    if (timer == nil) {
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 // 10ms
+                                                 target:self
+                                               selector:@selector(loop:)
+                                               userInfo:nil
+                                                repeats:YES];
+
+    }
+}
+
+- (void) endwork{
+    __ISING = true;
+    
+    if (timer != nil) {
+        [timer invalidate];
+        timer = nil;
+    }
+}
+
+- (void) willRemove{
+    [self disconnect];
+    if (timer) {
+        [timer invalidate];
+        timer = nil;
+    }
 }
 
 - (void) dealloc {

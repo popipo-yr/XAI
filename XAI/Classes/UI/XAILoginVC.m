@@ -479,7 +479,7 @@
 
 - (void) pushToken{
 
-    void* token = malloc(TokenSize);
+    void* token = malloc(TokenSize+20);
     memset(token, 0, TokenSize);
     
     BOOL bl = [XAIToken getToken:&token size:NULL];

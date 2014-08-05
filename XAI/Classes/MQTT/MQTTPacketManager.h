@@ -36,21 +36,24 @@
     NSMutableDictionary*  _delegates;
     NSMutableArray*  _allDelegate;
     
+    NSMutableArray* _forceRemove;
+    NSMutableArray* _normalRemove;
+    NSMutableArray* _normalAdd;
 }
 
 @property (nonatomic, weak) id<MQTTConnectDelegate> connectDelegate;
 
-- (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
-- (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
+- (void) addPacketManagerACK: (NSObject*) aPro;
+- (void) addPacketManager: (NSObject*) aPro  withKey:(NSString*)key;
 
 
 
 
-- (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro;
-- (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key;
+- (void) removePacketManagerACK: (NSObject*) aPro;
+- (void) removePacketManager: (NSObject*) aPro  withKey:(NSString*)key;
 
 /*force remove delegate*/
-- (void) forceRemovePacketManager:(id<MQTTPacketManagerDelegate>)aPro;
+- (void) forceRemovePacketManager:(NSObject*)aPro;
 
 /*接受未被其他接受的报文*/
 - (void) addPacketManagerNoAccept: (id<MQTTPacketManagerDelegate>) aPro;
@@ -61,11 +64,11 @@
 
 @interface MQTTPacketManagerDelgInfo : NSObject{
 
-    id <MQTTPacketManagerDelegate>  _refObj;
+    NSObject*  _refObj;
     int  _refrenceCount;
 }
 
-@property (nonatomic, strong) id <MQTTPacketManagerDelegate> refObj;
+@property (nonatomic, strong) NSObject* refObj;
 @property (nonatomic, assign) int refrenceCount;
 
 @end

@@ -56,6 +56,8 @@
 
 - (void)dealloc{
 
+    [_userService willRemove];
+    _userService = nil;
     
 }
 

@@ -23,7 +23,7 @@
 
 -(NSDictionary *)writeToDIC{
     
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+    __autoreleasing NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[NSNumber numberWithInt:_opr] forKey:_Key_OprID_];
     [dic setObject:_time forKey:_Key_OprTime_];
     [dic setObject:_name forKey:_Key_OprName_];

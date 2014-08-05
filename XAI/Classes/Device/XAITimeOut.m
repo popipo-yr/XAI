@@ -29,6 +29,16 @@
     }
 }
 
+- (void) willRemove{
+
+    if (_timeout != nil) {
+        [self timeout];
+        [_timeout invalidate];
+        _timeout = nil;
+    }
+
+}
+
 - (void) timeout{};
 
 @end

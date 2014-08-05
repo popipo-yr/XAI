@@ -43,6 +43,10 @@
 
 - (void) stop{
     
+    _userService.userServiceDelegate = nil;
+    _userService = nil;
+    _devService.deviceServiceDelegate = nil;
+    _devService = nil;
     _IPHelper.delegate = nil;
     _login.delegate = nil;
     
@@ -135,6 +139,8 @@
 
 - (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
     
+    _login.delegate = nil;
+    
     if (status) {
         
         
@@ -159,7 +165,7 @@
         [self overWithCide:XAIReLoginErr_LoginFail];
     }
     
-    _login.delegate = nil;
+    
     
 }
 
