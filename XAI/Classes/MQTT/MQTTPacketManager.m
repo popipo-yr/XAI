@@ -25,6 +25,8 @@
         _normalRemove = [[NSMutableArray alloc] init];
         _normalAdd = [[NSMutableArray alloc] init];
         
+        _isPostMsg = false;
+        
         self.connectDelegate = NULL;
     }
     
@@ -67,13 +69,13 @@
 
 - (void) normalAddHelper{
     
-    NSArray* add = [NSArray arrayWithArray:_normalAdd];
-    [_normalAdd removeAllObjects];
     
-    for (NSDictionary* aDic in add) {
+    for (NSDictionary* aDic in _normalAdd) {
         
         [self normalAddOne:[aDic objectForKey:_K_Normal_Obj] key:[aDic objectForKey:_K_Normal_Key]];
     }
+    
+    [_normalAdd removeAllObjects];
 }
 
 - (void) normalAddOne:(NSObject*)aPro key:(NSString*)key{
@@ -280,6 +282,13 @@
 }
 
 - (void) change{
+    
+    if (_isPostMsg) {
+        NSLog(@"fuccccccc");
+        return;
+    }
+    
+    NSLog(@"change ....");
 
     [self normalRemoveHelper];
     [self forceRemoveHelper];
@@ -297,6 +306,7 @@
     
 //    [self performSelectorOnMainThread:@selector(didReceiveMessageMainT:) withObject:mosq_msg waitUntilDone:YES];
 
+    _isPostMsg = true;
     
     NSArray*  delegeteAry  = [[NSArray alloc] initWithArray:[_delegates objectForKey:mosq_msg.topic]];
     
@@ -337,6 +347,7 @@
 
     }
     
+    _isPostMsg = false;
     
     //[self change];
 }

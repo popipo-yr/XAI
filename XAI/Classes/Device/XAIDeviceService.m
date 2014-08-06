@@ -662,7 +662,7 @@ static int __k = 0;
     if (self = [super initWithApsn:apsn Luid:luid]) {
         [self _init];
         __k += 1;
-        NSLog(@"++++++++++:%d",__k);
+        //NSLog(@"++++++++++:%d",__k);
     }
     return self;
 }
@@ -671,7 +671,7 @@ static int __k = 0;
     if (self = [super init]) {
         [self _init];
         __k += 1;
-        NSLog(@"++++++++++:%d",__k);
+        //NSLog(@"++++++++++:%d",__k);
     }
     
     return self;
@@ -688,7 +688,7 @@ static int __k = 0;
     _onlineDevices = nil;
     
     __k -= 1;
-    NSLog(@"-----------:%d",__k);
+    //NSLog(@"-----------:%d",__k);
     
 }
 
@@ -728,7 +728,6 @@ static int __k = 0;
 
 -(void)timeout{
     
-    [super timeout];
     
     if (_devOpr == XAIDevServiceOpr_add &&
         (nil != _deviceServiceDelegate) &&
@@ -774,6 +773,8 @@ static int __k = 0;
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         [_deviceServiceDelegate devService:self finddedAllOnlineDevices:nil status:false errcode: XAI_ERROR_TIMEOUT];
     }
+    
+    [super timeout];
 }
 
 @end

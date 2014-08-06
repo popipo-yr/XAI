@@ -85,6 +85,8 @@
     
     _DEF_XTO_TIME_End;
     
+    [[MQTT shareMQTT].packetManager change];
+    
 }
 
 
@@ -254,11 +256,13 @@
 
     [super willRemove];
     //[[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
-    
 }
--(void)dealloc{
 
+
+-(void)dealloc{
     
+    //
+    NSLog(@"%s,%@,%p", __PRETTY_FUNCTION__,[[self class] description] ,self);
 }
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{

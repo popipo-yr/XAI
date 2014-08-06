@@ -39,6 +39,7 @@
         
         _IPHelper = [[XAIIPHelper alloc] init];
         _IPHelper.delegate = self;
+        _isLoging = false;
     }
     
     return self;
@@ -84,7 +85,7 @@
 
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    apsnstr = @"210e2b26";
+     apsnstr = @"210e2b26";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }
@@ -121,7 +122,7 @@
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
@@ -140,7 +141,11 @@
 
     [self.qrcodeLabel removeTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
-    [super viewDidDisappear:animated];
+    [self.passwordLabel resignFirstResponder];
+    [self.passwordLabel resignFirstResponder];
+    [self.qrcodeLabel resignFirstResponder];
+    
+    [super viewWillDisappear:animated];
 }
 
 
@@ -312,6 +317,8 @@
                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
                                               otherButtonTitles:nil];
         
+
+    
         [alert show];
         return;
 
@@ -350,6 +357,11 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
 
+    if (_isLoging) {
+        return;
+    }
+    _isLoging = true;
+    
     [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
@@ -389,26 +401,31 @@
         
     }else{
         
-        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
-        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
+//        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
+//        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
+//        
+//        if (errTip != nil) {
+//            
+//            
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                            message:errTip
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:cancelStr
+//                                                  otherButtonTitles:nil];
+//            
+//            [alert show];
+//            
+//            [_activityView stopAnimating];
+//            
+//        }
         
-        if (errTip != nil) {
-            
-            
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:errTip
-                                                           delegate:nil
-                                                  cancelButtonTitle:cancelStr
-                                                  otherButtonTitles:nil];
-            
-            [alert show];
-            
-            [_activityView stopAnimating];
-            
-        }
+        
     }
     
     [self getData];
+    
+    //获取失败也要进行,失败不会更新代理,手动更新
+    [[MQTT shareMQTT].packetManager change];
 }
 
 - (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -471,6 +488,8 @@
     
     
         [_activityView stopAnimating];
+        
+        _isLoging = false;
     
     }
 
@@ -589,6 +608,7 @@
     
     }
 
+    _isLoging =false;
 }
 
 -(IBAction)qrcodeBtnClick:(id)sender{

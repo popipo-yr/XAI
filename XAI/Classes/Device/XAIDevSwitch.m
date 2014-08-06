@@ -347,7 +347,7 @@
 
 -(void)timeout{
 
-    [super timeout];
+    
     
     if (_devOpr == XAIDevSwitchOpr_GetOneStatus &&
         (nil != _swiDelegate) &&
@@ -378,6 +378,8 @@
         [_swiDelegate switch_:self setCircuitTwoErr:XAI_ERROR_TIMEOUT];
     
     }
+    
+    [super timeout];
 }
 
 

@@ -92,6 +92,9 @@ void cleanup(void *arg){
     }
     
     free(_p_helper->ip_char);
+    
+    _p_helper->getApserverIpResult = nil;
+    
     free(_p_helper);
     _p_helper = nil;
 

@@ -15,6 +15,7 @@
     XAITYPELUID _luid;
     XAITYPEAPSN _apsn;
     NSString* _name;
+    NSString* _pawd;
 }
 
 @property (nonatomic, assign) XAITYPELUID luid;

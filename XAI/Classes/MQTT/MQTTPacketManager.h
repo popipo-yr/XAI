@@ -39,6 +39,8 @@
     NSMutableArray* _forceRemove;
     NSMutableArray* _normalRemove;
     NSMutableArray* _normalAdd;
+    
+    BOOL _isPostMsg;
 }
 
 @property (nonatomic, weak) id<MQTTConnectDelegate> connectDelegate;

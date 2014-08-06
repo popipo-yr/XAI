@@ -18,6 +18,7 @@
     #import "ZBarSDK.h"
     #import "UIKitADD.h"
 
+
 #define  isIOS7  ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
 
 #endif

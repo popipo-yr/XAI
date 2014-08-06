@@ -599,7 +599,6 @@
 
 -(void)timeout{
     
-    [super timeout];
     
     if (_devOpr == XAIUserServiceOpr_add &&
         nil != _userServiceDelegate &&
@@ -649,7 +648,7 @@
         [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_TIMEOUT];
     }
 
-
+    [super timeout];
 }
 
 static int __s = 0;

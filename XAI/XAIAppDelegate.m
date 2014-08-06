@@ -322,7 +322,7 @@
         _reLoginStartAlert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:msg
                                                        delegate:nil
-                                              cancelButtonTitle:nil otherButtonTitles:nil];
+                                              cancelButtonTitle:nil otherButtonTitles:nil,nil];
         
         UIActivityIndicatorView *activeView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         

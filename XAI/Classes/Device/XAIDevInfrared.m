@@ -197,7 +197,7 @@
 
 -(void)timeout{
     
-    [super timeout];
+    
     
     if (_devOpr == XAIDevInfraredOpr_GetCurStatus &&
         (nil != _infDelegate) &&
@@ -215,6 +215,7 @@
         
     }
     
+    [super timeout];
 }
 
 @end

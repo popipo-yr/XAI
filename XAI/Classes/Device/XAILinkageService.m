@@ -516,8 +516,6 @@
 
 -(void)timeout{
     
-    [super timeout];
-    
     if(_devOpr == XAILinkageOpr_FindAll &&
        (nil != _linkageServiceDelegate) &&
        [_linkageServiceDelegate respondsToSelector:@selector(linkageService:findedAllLinkage:errcode:)]){
@@ -535,6 +533,8 @@
     }
     
     _getLinkage = nil;
+    
+    [super timeout];
 
 }
 

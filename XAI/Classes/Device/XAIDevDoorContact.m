@@ -195,8 +195,6 @@
 
 -(void)timeout{
     
-    [super timeout];
-    
     if (_devOpr == XAIDevDCOpr_GetCurStatus &&
         (nil != _dcDelegate) &&
         [_dcDelegate respondsToSelector:@selector(doorContact:curStatus:err:)]) {
@@ -213,6 +211,7 @@
         
     }
 
+    [super timeout];
 }
 
 #pragma mark Linkage
