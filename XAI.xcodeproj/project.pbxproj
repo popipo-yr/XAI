@@ -153,6 +153,8 @@
 		969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED71919EB5F002076A0 /* nav_back@2x.png */; };
 		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
 		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
+		96AE040819931296001F2A5C /* time_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = 96AE040419931296001F2A5C /* time_mosq.c */; };
+		96AE040A19931C64001F2A5C /* tls_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = 96AE040619931296001F2A5C /* tls_mosq.c */; };
 		96AF0A82195A695C00AF3C88 /* XAIToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AF0A81195A695C00AF3C88 /* XAIToken.m */; };
 		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
@@ -499,6 +501,10 @@
 		969D6ED81919EB5F002076A0 /* nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_back.png; sourceTree = "<group>"; };
 		969D6EDB1919F4A3002076A0 /* UIKitADD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitADD.h; sourceTree = "<group>"; };
 		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
+		96AE040419931296001F2A5C /* time_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time_mosq.c; sourceTree = "<group>"; };
+		96AE040519931296001F2A5C /* time_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time_mosq.h; sourceTree = "<group>"; };
+		96AE040619931296001F2A5C /* tls_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tls_mosq.c; sourceTree = "<group>"; };
+		96AE040719931296001F2A5C /* tls_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tls_mosq.h; sourceTree = "<group>"; };
 		96AF0A80195A695C00AF3C88 /* XAIToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIToken.h; sourceTree = "<group>"; };
 		96AF0A81195A695C00AF3C88 /* XAIToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIToken.m; sourceTree = "<group>"; };
 		96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketLinkage.h; sourceTree = "<group>"; };
@@ -1174,6 +1180,10 @@
 		C341A64E18EBB2C400034649 /* libmosquitto */ = {
 			isa = PBXGroup;
 			children = (
+				96AE040419931296001F2A5C /* time_mosq.c */,
+				96AE040519931296001F2A5C /* time_mosq.h */,
+				96AE040619931296001F2A5C /* tls_mosq.c */,
+				96AE040719931296001F2A5C /* tls_mosq.h */,
 				C341A64F18EBB2C400034649 /* config.h */,
 				C341A65018EBB2C400034649 /* dummypthread.h */,
 				C341A65118EBB2C400034649 /* logging_mosq.c */,
@@ -1617,6 +1627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96AE040A19931C64001F2A5C /* tls_mosq.c in Sources */,
 				96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */,
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
@@ -1675,6 +1686,7 @@
 				96569B4719403FD600A96F45 /* XAILinkage.m in Sources */,
 				96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */,
 				962DDE0B19161493008F370A /* XAILightStatusVC.m in Sources */,
+				96AE040819931296001F2A5C /* time_mosq.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,

@@ -37,6 +37,7 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
+@property (assign, nonatomic)  BOOL  needKeepTip;
 
 - (void) changeMQTTClinetID:(NSString*)clientID;
 

@@ -359,6 +359,10 @@
         [_reLogin relogin];
         
         
+    }else{
+    
+        _isReConnect = true;
+        [self XAIRelogin:nil loginErrCode:XAIReLoginErr_LoginFail];
     }
     
 }

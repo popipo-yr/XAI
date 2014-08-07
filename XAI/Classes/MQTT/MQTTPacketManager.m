@@ -299,6 +299,8 @@
 #pragma mark MosquittoClientDelegate
 - (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
     
+    [self change];
+    
 //    size_t size = mosq_msg.payloadlen;
 //    void* datas = malloc(sizeof(size));
 //    memcpy(datas,[mosq_msg getPayloadbyte] , size);
