@@ -85,7 +85,8 @@
 
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-     apsnstr = @"210e2b26";
+    //apsnstr = @"210e2b26";
+    //apsnstr = @"210e9b6e";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }
@@ -586,6 +587,7 @@
         XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window setRootViewController:vc];
         
+        appDelegate.needKeepTip = true;
         //XAIAppDelegate* [UIApplication sharedApplication].delegate;
         _login = nil;
         
