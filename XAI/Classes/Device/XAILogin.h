@@ -34,7 +34,7 @@
 @property (nonatomic,weak) id <XAILoginDelegate> delegate;
 
 
-
+- (void) relogin;
 - (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn;
 
 @end

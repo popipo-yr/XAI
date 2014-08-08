@@ -30,8 +30,8 @@
     int _findDev;
     
     BOOL _keyboardIsUp;
-    
     BOOL _hasScan;
+    BOOL _isLoging;
     
     NSString* _scanIP;
     XAITYPEAPSN _scanApsn;

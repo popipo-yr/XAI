@@ -26,8 +26,8 @@
 
 @property (nonatomic,assign) BOOL isLogin;
 
-@property (nonatomic, weak) MQTTPacketManager* packetManager;
-@property (nonatomic, weak) MosquittoClient* client;
+@property (nonatomic, strong) MQTTPacketManager* packetManager;
+@property (nonatomic, strong) MosquittoClient* client;
 
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, assign) XAITYPELUID luid;

@@ -11,7 +11,7 @@
 @implementation XAIWindow
 
 
-- (void) startControl{
+- (void)step{
     
     _doorContact = [[XAIDevDoorContact alloc] init];
     _doorContact.dcDelegate = self;
@@ -19,6 +19,16 @@
     
     _doorContact.apsn =  _apsn;
     _doorContact.luid = _luid;
+}
+
+-(XAIDevice *)curDevice{
+    
+    return _doorContact;
+}
+
+- (void) startControl{
+    
+    [self step];
     
     [_doorContact startFocusStatus];
 
@@ -44,8 +54,60 @@
     [_doorContact getPower];
 }
 
+#pragma --Helper
+- (void)updateFinish:(XAIObjectOpr *)oprInfo{
+    
+    //如果需要通知结果
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(window:curStatus:getIsSuccess:)]) {
+        
+        [_delegate window:self curStatus:oprInfo.opr getIsSuccess:true];
+    }
+}
+
 
 #pragma --Delegate
+
+-(void)doorContact:(XAIDevDoorContact *)dc status:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    if (dc != _doorContact) return;
+    
+    
+    //添加otherInfo
+    XAIWindowStatus  winStatus = XAIWindowStatus_Unkown;
+    
+    if (err == XAI_ERROR_NONE) {
+        
+        _DEF_XTO_TIME_End
+        
+        if (status == XAIDevDoorContactStatusOpen) {
+            
+            winStatus = XAIWindowStatus_Open;
+            
+        }else if(status == XAIDevDoorContactStatusClose){
+            
+            winStatus = XAIWindowStatus_Close;
+        }
+        
+        XAIWindowOpr* opr = [[XAIWindowOpr alloc] init];
+        opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
+        opr.opr = winStatus;
+        opr.otherID = otherInfo.msgid;
+        
+        [_tmpOprs addObject:opr];
+        
+        _DEF_XTO_TIME_Wait
+        
+    }else{
+        
+        if (_delegate != nil && [_delegate respondsToSelector:@selector(window:curStatus:getIsSuccess:)]) {
+            
+            [_delegate window:self curStatus:winStatus getIsSuccess:err == XAI_ERROR_NONE];
+        }
+        
+        _DEF_XTO_TIME_End
+    }
+    
+}
 
 - (void)doorContact:(XAIDevDoorContact *)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err{
     

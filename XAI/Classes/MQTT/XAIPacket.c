@@ -105,7 +105,8 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     
     void* in_data =  malloc(ctrl_param_data->data_len);
     memset(in_data, 0, ctrl_param_data->data_len);
-    packet_to_param_helper(in_data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
+    memcpy(in_data, data+_XPP_CD_DATA_START, ctrl_param_data->data_len);
+    //packet_to_param_helper(in_data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
     
     
     
@@ -330,9 +331,10 @@ void xai_param_data_set(_xai_packet_param_data* ctrlData ,XAI_DATA_TYPE type , s
 _xai_packet* generatePacket(void){
     
     _xai_packet* packet = malloc(sizeof(_xai_packet));
+    memset(packet,0,sizeof(_xai_packet));
     
-    char*  payload  = malloc(1000);
-    memset(payload,0,1000);
+//    char*  payload  = malloc(1000);
+//    memset(payload,0,1000);
     
     packet->pre_load = NULL;
     packet->all_load = NULL;
@@ -350,6 +352,10 @@ void purgePacket(_xai_packet* packet){
     free(packet->pre_load);
     free(packet->data_load);
     free(packet->all_load);
+    packet->pre_load = NULL;
+    packet->all_load = NULL;
+    packet->data_load = NULL;
+    
     free(packet);
     packet = NULL;
     

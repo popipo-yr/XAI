@@ -27,7 +27,6 @@
         _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn
                                                        Luid:MQTTCover_LUID_Server_03];
         
-        _userService.userServiceDelegate = self;
     }
     
     return self;
@@ -50,6 +49,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    _userService.userServiceDelegate = nil;
 }
 
 #pragma mark - Event
@@ -136,7 +139,7 @@
     
 
     
-
+    _userService.userServiceDelegate = self;
     [_userService addUser:_userNameTF.text Password:_userPawdTF.text];
 }
 
@@ -226,13 +229,13 @@
 //}
 
 - (void) userService:(XAIUserService*)userService addUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
-    
     if (userService != _userService) return;
     
+    _userService.userServiceDelegate = nil;
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
                                                     message:nil
-                                                   delegate:self
+                                                   delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
                                           otherButtonTitles:nil];
 

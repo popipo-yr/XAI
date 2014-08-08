@@ -33,7 +33,7 @@
 #pragma mark - delegate
 
 
-- (void) reciveCtrlPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveCtrlPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_ctrl*  ctrl = generateParamCtrlFromData(datas, size);
     
@@ -54,7 +54,7 @@
 
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     MQTT* curMQTT = [MQTT shareMQTT];
     

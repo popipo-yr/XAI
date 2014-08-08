@@ -33,6 +33,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
     if (self = [super init]) {
         
         _mc = [[XAIMobileControl alloc] init];
+        _mc.delegate = self;
     }
     
     return self;
@@ -41,23 +42,22 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
 -(void)dealloc{
 
     [self stop];
+    _mc.delegate = nil;
+    _mc = nil;
 }
 
 
 - (void) startFocus{
 
-    _mc.delegate = self;
     [_mc startListene];
 }
 - (void) stop{
     
-    if (_alertView != nil) {
+    if (_alertView != nil && [_alertView isVisible]) {
         [_alertView dismissWithClickedButtonIndex:0 animated:false];
     }
 
     [_mc stopListene];
-    _mc.delegate = nil;
-    _mc = nil;
 }
 
 -(void)mobileControl:(XAIMobileControl *)mc getCmd:(XAIMCCMD *)cmd{

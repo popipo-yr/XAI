@@ -41,6 +41,7 @@ typedef struct Helper{
     char* host;
     char* ip_char;
     _err  err;
+    BOOL isGetSuc;
     
     BOOL isFinish;
     

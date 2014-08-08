@@ -75,10 +75,14 @@
         case XAIObjectType_IR:{
         
             className = @"XAIIROpr";
-        }
+        }break;
             
             
-        default:break;
+        default:{
+        
+            NSLog(@"=====================");
+            NSLog(@"typeClassName-err....");
+        }break;
     }
     
     
@@ -121,9 +125,13 @@
         case XAIObjectType_IR:{
             
             className = @"XAIIR";
-        }
+        } break;
             
         default:
+        {
+            NSLog(@"=====================");
+            NSLog(@"typeClassName-err....");
+        }
             break;
     }
     

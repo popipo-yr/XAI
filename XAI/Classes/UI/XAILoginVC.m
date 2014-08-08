@@ -33,6 +33,29 @@
 @synthesize nameLabel;
 @synthesize passwordLabel;
 
+-(id)initWithCoder:(NSCoder *)aDecoder{
+
+    if (self = [super initWithCoder:aDecoder]) {
+        
+        _IPHelper = [[XAIIPHelper alloc] init];
+        _IPHelper.delegate = self;
+        _isLoging = false;
+    }
+    
+    return self;
+}
+
+-(void)dealloc{
+    
+    _userService.userServiceDelegate = nil;
+    _devService.deviceServiceDelegate = nil;
+    
+    _userService = nil;
+    _devService = nil;
+
+    _IPHelper.delegate = nil;
+    _IPHelper = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -59,10 +82,12 @@
     [_qrcodeLabel setPlaceholder:@"Server-IP"];
     
     
-    _IPHelper = [[XAIIPHelper alloc] init];
-    _IPHelper.delegate = self;
+
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
+    //apsnstr = @"210e2b26";
+    //apsnstr = @"210e9b6e";
+    //apsnstr = @"210e2757";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }
@@ -99,7 +124,7 @@
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
@@ -118,7 +143,11 @@
 
     [self.qrcodeLabel removeTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
-    [super viewDidDisappear:animated];
+    [self.passwordLabel resignFirstResponder];
+    [self.passwordLabel resignFirstResponder];
+    [self.qrcodeLabel resignFirstResponder];
+    
+    [super viewWillDisappear:animated];
 }
 
 
@@ -207,6 +236,10 @@
 
 - (IBAction)loginBtnClick:(id)sender{
     
+    //[_activityView startAnimating];
+    
+    //return;
+    
     BOOL hasErr = true;
     
     NSString* errTip = nil;
@@ -286,6 +319,8 @@
                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
                                               otherButtonTitles:nil];
         
+
+    
         [alert show];
         return;
 
@@ -324,6 +359,11 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
 
+    if (_isLoging) {
+        return;
+    }
+    _isLoging = true;
+    
     [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
@@ -359,28 +399,35 @@
     if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
         
         
-        [self getData];
+        //[self getData];
         
     }else{
         
-        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
-        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
+//        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
+//        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
+//        
+//        if (errTip != nil) {
+//            
+//            
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                            message:errTip
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:cancelStr
+//                                                  otherButtonTitles:nil];
+//            
+//            [alert show];
+//            
+//            [_activityView stopAnimating];
+//            
+//        }
         
-        if (errTip != nil) {
-            
-            
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:errTip
-                                                           delegate:nil
-                                                  cancelButtonTitle:cancelStr
-                                                  otherButtonTitles:nil];
-            
-            [alert show];
-            
-            [_activityView stopAnimating];
-            
-        }
+        
     }
+    
+    [self getData];
+    
+    //获取失败也要进行,失败不会更新代理,手动更新
+    [[MQTT shareMQTT].packetManager change];
 }
 
 - (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -443,6 +490,8 @@
     
     
         [_activityView stopAnimating];
+        
+        _isLoging = false;
     
     }
 
@@ -451,7 +500,7 @@
 
 - (void) pushToken{
 
-    void* token = malloc(TokenSize);
+    void* token = malloc(TokenSize+20);
     memset(token, 0, TokenSize);
     
     BOOL bl = [XAIToken getToken:&token size:NULL];
@@ -539,6 +588,7 @@
         XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window setRootViewController:vc];
         
+        appDelegate.needKeepTip = true;
         //XAIAppDelegate* [UIApplication sharedApplication].delegate;
         _login = nil;
         
@@ -551,8 +601,8 @@
         [[XAIAlert shareAlert] startFocus];
         MQTT* curMQTT = [MQTT shareMQTT];
         /*订阅主题*/
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
+//        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+//                                                                  luid:MQTTCover_LUID_Server_03]];
         
         
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
@@ -561,6 +611,7 @@
     
     }
 
+    _isLoging =false;
 }
 
 -(IBAction)qrcodeBtnClick:(id)sender{
@@ -584,7 +635,8 @@
 
     
     
-
+    [scanVC dismissViewControllerAnimated:YES completion:nil];
+    
     const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
     NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
     
@@ -628,6 +680,9 @@
         [_qrcodeLabel setText:nil];
         [_qrcodeLabel setEnabled:true];
     }
+    
+    //_scanIP = @"192.168.0.33";
+    //[_qrcodeLabel setText:_scanIP];
 }
 
 @end

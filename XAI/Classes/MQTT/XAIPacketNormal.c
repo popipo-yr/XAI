@@ -143,7 +143,8 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
     //unfixed
     aParam->data = malloc(aParam->length);
     memset(aParam->data, 0, aParam->length);
-    packet_to_param_helper(aParam->data, packetData, _XPP_N_DATA_START, _XPP_N_DATA_START+aParam->length);
+    //packet_to_param_helper(aParam->data, packetData, _XPP_N_DATA_START, _XPP_N_DATA_START+aParam->length);
+    memcpy(aParam->data, packetData+_XPP_N_DATA_START, aParam->length);
     
     
     return aParam;
@@ -154,8 +155,10 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
 void purgePacketParamNormal(_xai_packet_param_normal* normal_param){
     
     if (NULL != normal_param) {
-        
-        free(normal_param->data);
+        if (normal_param->data != NULL) {
+            free(normal_param->data);
+            normal_param->data = NULL;
+        }
         free(normal_param);
         normal_param = NULL;
     }
@@ -166,8 +169,9 @@ void purgePacketParamNormal(_xai_packet_param_normal* normal_param){
 _xai_packet_param_normal*    generatePacketParamNormal(){
     
     _xai_packet_param_normal*  param = malloc(sizeof(_xai_packet_param_normal));
-    memset(param->from_guid, 0, sizeof(param->from_guid));
-    memset(param->to_guid, 0, sizeof(param->to_guid));
+    memset(param, 0, sizeof(_xai_packet_param_normal));
+    //memset(param->from_guid, 0, sizeof(param->from_guid));
+    //memset(param->to_guid, 0, sizeof(param->to_guid));
     param->data = NULL;
     param->flag = 0;
     param->length = 0;

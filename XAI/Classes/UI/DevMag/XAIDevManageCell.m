@@ -63,24 +63,24 @@
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
         
-        NSLog(@"swipe down");
+        XSLog(@"swipe down");
         //执行程序
     }
     if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
         
-        NSLog(@"swipe up");
+        XSLog(@"swipe up");
         //执行程序
     }
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
         
-        NSLog(@"swipe left");
+        XSLog(@"swipe left");
         //执行程序
     }
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
         
-        NSLog(@"swipe right");
+        XSLog(@"swipe right");
         //执行程序
     }
     

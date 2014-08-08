@@ -246,7 +246,7 @@
     [scanner scanHexLongLong:&luid];
     
     
-    [_deviceService addDev:luid withName:name type:[XAIDeviceTypeUtil nameToType:[_typeStrAry objectAtIndex:[_curSelIndexPath row]]]];
+    [_deviceService addDev:luid withName:name type:[XAIDeviceTypeUtil nameToType:type]];
 }
 
 

@@ -217,8 +217,6 @@
         
         XAILinkage* aLinkage = [[XAILinkage alloc] init];
         
-        BOOL  allType = false;
-        
         do {
             
             
@@ -254,10 +252,6 @@
             
             
             aLinkage.num = num;
-            
-            
-            
-            allType = YES;
             
             
             [_allLinkages addObject:aLinkage];
@@ -382,7 +376,7 @@
 
 
 #pragma mark -- MQTTPacketManagerDelegate
-- (void)reciveACKPacket:(void*)datas size:(int)size topic:topic{
+- (void)reciveACKPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
     
@@ -440,7 +434,7 @@
 }
 
 
-- (void) reciveStatusPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_status* status = generateParamStatusFromData(datas, size);
     if (status == NULL) return;
@@ -490,7 +484,7 @@
     purgePacketParamStatusAndData(status);
 }
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     [super recivePacket:datas size:size topic:topic];
     
@@ -522,8 +516,6 @@
 
 -(void)timeout{
     
-    [super timeout];
-    
     if(_devOpr == XAILinkageOpr_FindAll &&
        (nil != _linkageServiceDelegate) &&
        [_linkageServiceDelegate respondsToSelector:@selector(linkageService:findedAllLinkage:errcode:)]){
@@ -541,6 +533,8 @@
     }
     
     _getLinkage = nil;
+    
+    [super timeout];
 
 }
 

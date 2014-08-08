@@ -407,7 +407,7 @@
 }
 
 
-- (void) reciveACKPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveACKPacket:(void*)datas size:(int)size topic:(NSString*)topic{
 
     _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
     
@@ -501,7 +501,7 @@
 }
 
 
-- (void) reciveStatusPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_status* status = generateParamStatusFromData(datas, size);
     if (status == NULL) return;
@@ -525,8 +525,8 @@
 }
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
-
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
+    
     [super recivePacket:datas size:size topic:topic];
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
@@ -598,7 +598,6 @@
 
 -(void)timeout{
     
-    [super timeout];
     
     if (_devOpr == XAIUserServiceOpr_add &&
         nil != _userServiceDelegate &&
@@ -648,9 +647,33 @@
         [_userServiceDelegate userService:self findedAllUser:nil status:false errcode:XAI_ERROR_TIMEOUT];
     }
 
-
+    [super timeout];
 }
 
+static int __s = 0;
+- (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
+
+    if (self = [super initWithApsn:apsn Luid:luid]) {
+        __s += 1;
+        //XSLog(@"++++++++++:%d",__s);
+    }
+    return self;
+}
+-(id)init{
+
+    if (self = [super init]) {
+        __s += 1;
+        //XSLog(@"++++++++++:%d",__s);
+    }
+    
+    return self;
+}
+
+-(void)dealloc{
+    __s -= 1;
+    //XSLog(@"-----------:%d",__s);
+    
+}
 
 
 

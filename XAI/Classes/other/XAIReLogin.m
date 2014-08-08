@@ -43,19 +43,15 @@
 
 - (void) stop{
     
+    _userService.userServiceDelegate = nil;
+    _userService = nil;
+    _devService.deviceServiceDelegate = nil;
+    _devService = nil;
     _IPHelper.delegate = nil;
-    _IPHelper = nil;
     _login.delegate = nil;
-    _login = nil;
     
-    
-    [self start];
 }
 - (void) start{
-    
-    _IPHelper = [[XAIIPHelper alloc] init];
-    
-    _login = [[XAILogin alloc] init];
     
     _bRetry = false;
 }
@@ -74,12 +70,9 @@
     
     if (rc == _err_none) {
         
-        
-        MQTT* curMQTT =  [MQTT shareMQTT];
-        
+        XSLog(@"name =%@ , pwd = %@",[MQTT shareMQTT].curUser.name , [MQTT shareMQTT].curUser.pawd);
         _login.delegate = self;
-        NSLog(@"name =%@ , pwd = %@",curMQTT.curUser.name , curMQTT.curUser.pawd);
-        [_login loginWithName:curMQTT.curUser.name Password:curMQTT.curUser.pawd Host:ip apsn:curMQTT.apsn];
+        [_login relogin];
         
     }else{
         /*提示获取失败 返回登录页面*/
@@ -102,7 +95,8 @@
     if (isSuccess) {
         
         /*存储数据 其他页面使用*/
-        [[XAIData shareData] setUserList:[users allObjects]];
+        NSArray* userAry = [users allObjects];
+        [[XAIData shareData] setUserList:userAry];
         
     }
     
@@ -140,7 +134,7 @@
 }
 
 - (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
-  
+    
     _login.delegate = nil;
     
     if (status) {
@@ -166,6 +160,7 @@
         
         [self overWithCide:XAIReLoginErr_LoginFail];
     }
+    
     
     
 }

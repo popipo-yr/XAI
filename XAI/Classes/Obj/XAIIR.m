@@ -10,15 +10,23 @@
 
 @implementation XAIIR
 
-
-- (void) startControl{
-    
+-(void)step{
     _infrared = [[XAIDevInfrared alloc] init];
     _infrared.infDelegate = self;
     _infrared.delegate = self;
     
     _infrared.apsn =  _apsn;
     _infrared.luid = _luid;
+}
+
+-(XAIDevice *)curDevice{
+
+    return _infrared;
+}
+
+- (void) startControl{
+    
+    [self step];
     
     [_infrared startFocusStatus];
     
@@ -44,9 +52,59 @@
     [_infrared getPower];
 }
 
+- (void)updateFinish:(XAIObjectOpr *)oprInfo{
+    
+    //如果需要通知结果
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(ir:curStatus:getIsSuccess:)]) {
+        
+        [_delegate ir:self curStatus:oprInfo.opr getIsSuccess:true];
+    }
+}
+
 
 #pragma --Delegate
 
+-(void)infrared:(XAIDevInfrared *)inf status:(XAIDevInfraredStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    if (inf != _infrared) return;
+    
+    
+    //添加otherInfo
+    XAIIRStatus  iRStatus = XAIIRStatus_Unkown;
+    
+    if (err == XAI_ERROR_NONE) {
+        
+        _DEF_XTO_TIME_End
+        
+        if (status == XAIDevInfraredStatusDetectorNothing) {
+            
+            iRStatus = XAIIRStatus_working;
+            
+        }else if(status == XAIDevInfraredStatusDetectorThing){
+            
+            iRStatus = XAIIRStatus_warning;
+        }
+        
+        XAIIROpr* opr = [[XAIIROpr alloc] init];
+        opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
+        opr.opr = iRStatus;
+        opr.otherID = otherInfo.msgid;
+        
+        [_tmpOprs addObject:opr];
+        
+        _DEF_XTO_TIME_Wait
+        
+    }else{
+        
+        if (_delegate != nil && [_delegate respondsToSelector:@selector(ir:curStatus:getIsSuccess:)]) {
+            
+            [_delegate ir:self curStatus:iRStatus getIsSuccess:err == XAI_ERROR_NONE];
+        }
+        
+        _DEF_XTO_TIME_End
+    }
+
+}
 
 -(void)infrared:(XAIDevInfrared *)inf curStatus:(XAIDevInfraredStatus)status err:(XAI_ERROR)err{
     

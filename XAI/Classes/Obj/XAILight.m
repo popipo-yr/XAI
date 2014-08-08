@@ -10,18 +10,26 @@
 
 @implementation XAILight
 
-- (void) startControl{
-
+- (void) step{
     _devSwitch = [[XAIDevSwitch alloc] init];
     _devSwitch.swiDelegate = self;
     _devSwitch.delegate = self;
-
+    
     _devSwitch.apsn =  _apsn;
     _devSwitch.luid = _luid;
     
     _isClosing = false;
     _isOpening = false;
+}
+
+- (XAIDevice*) curDevice{
+
+    return _devSwitch;
+}
+
+- (void) startControl{
     
+    [self step];
     [_devSwitch startFocusStatus];
 }
 
@@ -53,7 +61,60 @@
 
 }
 
+#pragma --Helper
+- (void)updateFinish:(XAIObjectOpr *)oprInfo{
+    
+    //如果需要通知结果
+    if (_delegate != nil && [_delegate respondsToSelector:@selector(light:curStatus:)]) {
+        
+        [_delegate  light:self curStatus:oprInfo.opr];
+    }
+}
+
 #pragma --Delegate
+
+-(void)switch_:(XAIDevSwitch *)swi circuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    if (_devSwitch != swi) return;
+    
+    
+    //添加otherInfo
+    XAILightStatus lightStatus = XAILightStatus_Unkown;
+    
+    if (err == XAI_ERROR_NONE) {
+        
+        _DEF_XTO_TIME_End
+        
+        if (status == XAIDevCircuitStatusOpen) {
+            
+            lightStatus = XAILightStatus_Open;
+            
+        }else if(status == XAIDevCircuitStatusClose){
+            
+            lightStatus = XAILightStatus_Close;
+        }
+        
+        XAILightOpr* opr = [[XAILightOpr alloc] init];
+        opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
+        opr.opr = lightStatus;
+        opr.otherID = otherInfo.msgid;
+        
+        [_tmpOprs addObject:opr];
+        
+        _DEF_XTO_TIME_Wait
+        
+    }else{
+        
+        if (_delegate != nil && [_delegate respondsToSelector:@selector(light:curStatus:)]) {
+            
+            [_delegate light:self curStatus:lightStatus];
+        }
+        
+        _DEF_XTO_TIME_End
+    }
+}
+
+
 
 - (void) switch_:(XAIDevSwitch *)swi getCircuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{
     
@@ -103,6 +164,10 @@
     
    
     
+}
+
+-(void)switch_:(XAIDevSwitch *)swi circuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err therInfo:(XAIOtherInfo *)otherInfo{
+
 }
 
 - (void) switch_:(XAIDevSwitch *)swi getCircuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err{

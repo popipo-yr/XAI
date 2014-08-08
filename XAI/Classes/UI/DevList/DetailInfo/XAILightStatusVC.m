@@ -139,6 +139,10 @@
     [_statusView setImage:[UIImage imageNamed:imageName]];
     
     [_activityView stopAnimating];
+    
+    /*刷新信息*/
+    _oprDatasAry = [[NSArray alloc] initWithArray:[_light getOprList]];
+
 }
 
 @end

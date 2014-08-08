@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; };
-		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; };
+		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
 		9608ADDF1960FB5C00E1CE75 /* XAIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608ADDE1960FB5C00E1CE75 /* XAIAlert.m */; };
@@ -34,8 +34,11 @@
 		961F95C518F4F7D3002D4F74 /* LoginPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95C418F4F7D3002D4F74 /* LoginPlugin.m */; };
 		961F95CD18F688E0002D4F74 /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
 		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
-		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; };
+		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9621FF4F19494A4F004356B1 /* XAIReLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9621FF4E19494A4F004356B1 /* XAIReLogin.m */; };
+		962DDB5D1990DBFD009EB456 /* icon120*120.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5A1990DBFD009EB456 /* icon120*120.png */; };
+		962DDB5E1990DBFD009EB456 /* icon58*58.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5B1990DBFD009EB456 /* icon58*58.png */; };
+		962DDB5F1990DBFD009EB456 /* icon80*80.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5C1990DBFD009EB456 /* icon80*80.png */; };
 		962DDDFD191612E7008F370A /* obj_window_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDDFB191612E7008F370A /* obj_window_close@2x.png */; };
 		962DDDFE191612E7008F370A /* obj_window_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDDFC191612E7008F370A /* obj_window_open@2x.png */; };
 		962DDE01191612F1008F370A /* obj_window_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDDFF191612F1008F370A /* obj_window_close.png */; };
@@ -93,6 +96,7 @@
 		96659E52192C813E0045E66F /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		96659E54192C813E0045E66F /* MQTT.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E780018F3B41A00808391 /* MQTT.m */; };
 		96659E56192C813E0045E66F /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
+		9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
 		96729FD7192B1F26002A8C40 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD6192B1F25002A8C40 /* CoreVideo.framework */; };
@@ -149,8 +153,10 @@
 		969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED71919EB5F002076A0 /* nav_back@2x.png */; };
 		969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6ED81919EB5F002076A0 /* nav_back.png */; };
 		969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6EDC1919F4A3002076A0 /* UIKitADD.m */; };
+		96AE040819931296001F2A5C /* time_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = 96AE040419931296001F2A5C /* time_mosq.c */; };
+		96AE040A19931C64001F2A5C /* tls_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = 96AE040619931296001F2A5C /* tls_mosq.c */; };
 		96AF0A82195A695C00AF3C88 /* XAIToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 96AF0A81195A695C00AF3C88 /* XAIToken.m */; };
-		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; };
+		96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B53144193EBC9000E5D0C9 /* XAIPacketLinkage.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96B6D34219220BA000367424 /* PacketCtrlTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B6D34119220BA000367424 /* PacketCtrlTest.m */; };
 		96B75AC01974F74A00253906 /* obj_IR.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75ABF1974F74A00253906 /* obj_IR.png */; };
 		96B75AC21974F75A00253906 /* obj_IR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC11974F75A00253906 /* obj_IR@2x.png */; };
@@ -161,6 +167,7 @@
 		96B75ACD1974F7D500253906 /* XAIIR.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACC1974F7D500253906 /* XAIIR.m */; };
 		96B75AD0197500A000253906 /* XAIIRStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACF197500A000253906 /* XAIIRStatusVC.m */; };
 		96C8822119823BBE00571F21 /* XAIAlertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C8822019823BBE00571F21 /* XAIAlertTest.m */; };
+		96C882241985F60A00571F21 /* XAIObjectOpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C882231985F60A00571F21 /* XAIObjectOpr.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
 		96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290618FE4552008C6B81 /* XAIDevSwitch.m */; };
 		96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8290918FE4A0C008C6B81 /* XAIDevice.m */; };
@@ -181,23 +188,23 @@
 		96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 96E9D981190111F7000BB595 /* tab_bar_user_sel.png */; };
 		96E9D99519011D76000BB595 /* XAITabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E9D99419011D76000BB595 /* XAITabBarVC.m */; };
 		96FE3BCB193EFCF5005D0D98 /* LinkageServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE3BCA193EFCF5005D0D98 /* LinkageServiceTest.m */; };
-		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; };
-		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
+		C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F518F38DF000808391 /* XAIPacketStatus.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C33E77FE18F3B28500808391 /* XAILogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E77FD18F3B28500808391 /* XAILogin.m */; };
 		C33E780118F3B41A00808391 /* MQTT.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E780018F3B41A00808391 /* MQTT.m */; };
-		C341A66918EBB2C400034649 /* logging_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65118EBB2C400034649 /* logging_mosq.c */; };
-		C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65318EBB2C400034649 /* memory_mosq.c */; };
-		C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65518EBB2C400034649 /* messages_mosq.c */; };
-		C341A66C18EBB2C400034649 /* mosquitto.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65718EBB2C400034649 /* mosquitto.c */; };
-		C341A66D18EBB2C400034649 /* net_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65B18EBB2C400034649 /* net_mosq.c */; };
-		C341A66E18EBB2C400034649 /* read_handle.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65D18EBB2C400034649 /* read_handle.c */; };
-		C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65F18EBB2C400034649 /* read_handle_client.c */; };
-		C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66018EBB2C400034649 /* read_handle_shared.c */; };
-		C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66118EBB2C400034649 /* send_client_mosq.c */; };
-		C341A67218EBB2C400034649 /* send_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66218EBB2C400034649 /* send_mosq.c */; };
-		C341A67318EBB2C400034649 /* thread_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66418EBB2C400034649 /* thread_mosq.c */; };
-		C341A67418EBB2C400034649 /* util_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66518EBB2C400034649 /* util_mosq.c */; };
-		C341A67518EBB2C400034649 /* will_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66718EBB2C400034649 /* will_mosq.c */; };
+		C341A66918EBB2C400034649 /* logging_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65118EBB2C400034649 /* logging_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65318EBB2C400034649 /* memory_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65518EBB2C400034649 /* messages_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66C18EBB2C400034649 /* mosquitto.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65718EBB2C400034649 /* mosquitto.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66D18EBB2C400034649 /* net_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65B18EBB2C400034649 /* net_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66E18EBB2C400034649 /* read_handle.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65D18EBB2C400034649 /* read_handle.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A65F18EBB2C400034649 /* read_handle_client.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67018EBB2C400034649 /* read_handle_shared.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66018EBB2C400034649 /* read_handle_shared.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66118EBB2C400034649 /* send_client_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67218EBB2C400034649 /* send_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66218EBB2C400034649 /* send_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67318EBB2C400034649 /* thread_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66418EBB2C400034649 /* thread_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67418EBB2C400034649 /* util_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66518EBB2C400034649 /* util_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C341A67518EBB2C400034649 /* will_mosq.c in Sources */ = {isa = PBXBuildFile; fileRef = C341A66718EBB2C400034649 /* will_mosq.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C387F35218EA757A0069F98B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35118EA757A0069F98B /* Foundation.framework */; };
 		C387F35418EA757A0069F98B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35318EA757A0069F98B /* CoreGraphics.framework */; };
 		C387F35618EA757A0069F98B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C387F35518EA757A0069F98B /* UIKit.framework */; };
@@ -217,7 +224,7 @@
 		C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */; };
 		C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */; };
 		C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */; };
-		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; };
+		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E118ED3490006F22D3 /* MosquittoClient.m */; };
 		C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E318ED3490006F22D3 /* MosquittoMessage.m */; };
 /* End PBXBuildFile section */
@@ -273,6 +280,9 @@
 		961F95D218F79EF5002D4F74 /* XAIPacketACK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketACK.c; sourceTree = "<group>"; };
 		9621FF4D19494A4F004356B1 /* XAIReLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIReLogin.h; sourceTree = "<group>"; };
 		9621FF4E19494A4F004356B1 /* XAIReLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIReLogin.m; sourceTree = "<group>"; };
+		962DDB5A1990DBFD009EB456 /* icon120*120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon120*120.png"; sourceTree = "<group>"; };
+		962DDB5B1990DBFD009EB456 /* icon58*58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon58*58.png"; sourceTree = "<group>"; };
+		962DDB5C1990DBFD009EB456 /* icon80*80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon80*80.png"; sourceTree = "<group>"; };
 		962DDDFB191612E7008F370A /* obj_window_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_window_close@2x.png"; sourceTree = "<group>"; };
 		962DDDFC191612E7008F370A /* obj_window_open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_window_open@2x.png"; sourceTree = "<group>"; };
 		962DDDFF191612F1008F370A /* obj_window_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_window_close.png; sourceTree = "<group>"; };
@@ -340,6 +350,8 @@
 		96619DCA1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevShowStatusVCGenerate.m; sourceTree = "<group>"; };
 		96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2_CirculeTwo.h; sourceTree = "<group>"; };
 		96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2_CirculeTwo.m; sourceTree = "<group>"; };
+		967101891988979B0037C21E /* XAINoAcceptPacketHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINoAcceptPacketHandle.h; sourceTree = "<group>"; };
+		9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINoAcceptPacketHandle.m; sourceTree = "<group>"; };
 		96729FD0192B1E81002A8C40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		96729FD2192B1F00002A8C40 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		96729FD4192B1F0F002A8C40 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -489,6 +501,10 @@
 		969D6ED81919EB5F002076A0 /* nav_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_back.png; sourceTree = "<group>"; };
 		969D6EDB1919F4A3002076A0 /* UIKitADD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitADD.h; sourceTree = "<group>"; };
 		969D6EDC1919F4A3002076A0 /* UIKitADD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitADD.m; sourceTree = "<group>"; };
+		96AE040419931296001F2A5C /* time_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time_mosq.c; sourceTree = "<group>"; };
+		96AE040519931296001F2A5C /* time_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time_mosq.h; sourceTree = "<group>"; };
+		96AE040619931296001F2A5C /* tls_mosq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tls_mosq.c; sourceTree = "<group>"; };
+		96AE040719931296001F2A5C /* tls_mosq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tls_mosq.h; sourceTree = "<group>"; };
 		96AF0A80195A695C00AF3C88 /* XAIToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIToken.h; sourceTree = "<group>"; };
 		96AF0A81195A695C00AF3C88 /* XAIToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIToken.m; sourceTree = "<group>"; };
 		96B53143193EBC9000E5D0C9 /* XAIPacketLinkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketLinkage.h; sourceTree = "<group>"; };
@@ -505,6 +521,8 @@
 		96B75ACE197500A000253906 /* XAIIRStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIRStatusVC.h; sourceTree = "<group>"; };
 		96B75ACF197500A000253906 /* XAIIRStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIRStatusVC.m; sourceTree = "<group>"; };
 		96C8822019823BBE00571F21 /* XAIAlertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIAlertTest.m; sourceTree = "<group>"; };
+		96C882221985F60A00571F21 /* XAIObjectOpr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectOpr.h; sourceTree = "<group>"; };
+		96C882231985F60A00571F21 /* XAIObjectOpr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectOpr.m; sourceTree = "<group>"; };
 		96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceServiceTest.m; sourceTree = "<group>"; };
 		96D8290518FE4552008C6B81 /* XAIDevSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDevSwitch.h; sourceTree = "<group>"; };
 		96D8290618FE4552008C6B81 /* XAIDevSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevSwitch.m; sourceTree = "<group>"; };
@@ -730,6 +748,16 @@
 			path = ssl;
 			sourceTree = "<group>";
 		};
+		962DDB591990DBFD009EB456 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				962DDB5A1990DBFD009EB456 /* icon120*120.png */,
+				962DDB5B1990DBFD009EB456 /* icon58*58.png */,
+				962DDB5C1990DBFD009EB456 /* icon80*80.png */,
+			);
+			path = icon;
+			sourceTree = "<group>";
+		};
 		962DDE0319161493008F370A /* DetailInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +808,8 @@
 				9621FF4E19494A4F004356B1 /* XAIReLogin.m */,
 				9608ADDD1960FB5C00E1CE75 /* XAIAlert.h */,
 				9608ADDE1960FB5C00E1CE75 /* XAIAlert.m */,
+				967101891988979B0037C21E /* XAINoAcceptPacketHandle.h */,
+				9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -824,6 +854,8 @@
 				96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */,
 				96B75ACB1974F7D500253906 /* XAIIR.h */,
 				96B75ACC1974F7D500253906 /* XAIIR.m */,
+				96C882221985F60A00571F21 /* XAIObjectOpr.h */,
+				96C882231985F60A00571F21 /* XAIObjectOpr.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1008,6 +1040,7 @@
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
+				962DDB591990DBFD009EB456 /* icon */,
 				969D6ED51919EB5F002076A0 /* other */,
 				9648E6DC190A05A900D630D8 /* user */,
 				967BD7881908B5CB007C3C8C /* obj-other */,
@@ -1147,6 +1180,10 @@
 		C341A64E18EBB2C400034649 /* libmosquitto */ = {
 			isa = PBXGroup;
 			children = (
+				96AE040419931296001F2A5C /* time_mosq.c */,
+				96AE040519931296001F2A5C /* time_mosq.h */,
+				96AE040619931296001F2A5C /* tls_mosq.c */,
+				96AE040719931296001F2A5C /* tls_mosq.h */,
 				C341A64F18EBB2C400034649 /* config.h */,
 				C341A65018EBB2C400034649 /* dummypthread.h */,
 				C341A65118EBB2C400034649 /* logging_mosq.c */,
@@ -1491,6 +1528,7 @@
 				960BDD531907989300787148 /* obj_light_open@2x.png in Resources */,
 				96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
+				962DDB5E1990DBFD009EB456 /* icon58*58.png in Resources */,
 				9648E6E1190A05A900D630D8 /* user_head.png in Resources */,
 				969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */,
 				9631D17219075691007CBC4B /* obj_window.png in Resources */,
@@ -1518,6 +1556,7 @@
 				967BD7A21908F9E1007C3C8C /* device_edit_nor.png in Resources */,
 				964E6A321904DAD500F1F61C /* nav_bar_64.png in Resources */,
 				969D6E8619188422002076A0 /* qrcode_scan_rec.png in Resources */,
+				962DDB5D1990DBFD009EB456 /* icon120*120.png in Resources */,
 				962DDDFD191612E7008F370A /* obj_window_close@2x.png in Resources */,
 				962DDE02191612F1008F370A /* obj_window_open.png in Resources */,
 				969D6E7A191882CE002076A0 /* tab_bar_dev_nor@2x.png in Resources */,
@@ -1542,6 +1581,7 @@
 				9683DA651900F01000518FEB /* login_btn_dis.png in Resources */,
 				967BD7A31908F9E1007C3C8C /* device_edit_sel.png in Resources */,
 				969D6E82191882CE002076A0 /* tab_bar_user_sel@2x.png in Resources */,
+				962DDB5F1990DBFD009EB456 /* icon80*80.png in Resources */,
 				96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */,
 				96E9D95D1900FD01000BB595 /* textField_bg.png in Resources */,
 				96E9D987190111F7000BB595 /* tab_bar_devM_nor.png in Resources */,
@@ -1578,7 +1618,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = XcodeCoverage/exportenv.sh;
+			shellScript = "#XcodeCoverage/exportenv.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1587,6 +1627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96AE040A19931C64001F2A5C /* tls_mosq.c in Sources */,
 				96D8290718FE4552008C6B81 /* XAIDevSwitch.m in Sources */,
 				C341A67218EBB2C400034649 /* send_mosq.c in Sources */,
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
@@ -1619,6 +1660,7 @@
 				962DDE0C19161493008F370A /* XAIWindowStatusVC.m in Sources */,
 				967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
+				9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
 				C341A67418EBB2C400034649 /* util_mosq.c in Sources */,
 				964C996B18FBAB53006300F9 /* XAIDeviceService.m in Sources */,
@@ -1644,6 +1686,7 @@
 				96569B4719403FD600A96F45 /* XAILinkage.m in Sources */,
 				96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */,
 				962DDE0B19161493008F370A /* XAILightStatusVC.m in Sources */,
+				96AE040819931296001F2A5C /* time_mosq.c in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
@@ -1655,6 +1698,7 @@
 				968105E71917601A00171BF3 /* XAILight2_CirculeOne.m in Sources */,
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,
 				C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */,
+				96C882241985F60A00571F21 /* XAIObjectOpr.m in Sources */,
 				96659E3E192C6B200045E66F /* XAILight2_CirculeTwo.m in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
@@ -1821,9 +1865,10 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 					"$(SRCROOT)/XAI/ssl",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1847,8 +1892,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1865,9 +1910,10 @@
 					"$(SRCROOT)/XAI/ZBarSDK/Headers",
 					"$(SRCROOT)/XAI/ssl",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1883,10 +1929,10 @@
 					armv7,
 					armv6,
 				);
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1911,6 +1957,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos7.1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
 				VALID_ARCHS = "armv7 armv6";
@@ -1926,10 +1973,10 @@
 					armv7,
 					armv6,
 				);
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1953,6 +2000,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos7.1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
 				VALID_ARCHS = "armv7 armv6";
@@ -1989,6 +2037,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos7.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALID_ARCHS = "armv7 armv7s";
@@ -2019,6 +2068,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0C35558F-6297-43A9-9F8E-35FDFCA2E7AE";
 				SDKROOT = iphoneos7.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALID_ARCHS = "armv7 armv7s";

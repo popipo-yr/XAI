@@ -17,6 +17,8 @@
 #include <netdb.h>
 #include <pthread.h>
 
+#define _IP_SIZE_MAX  30
+
 int getdefaultgateway(in_addr_t * addr);
 
 void *_getIp_thread_ever(void *obj);
@@ -56,7 +58,8 @@ void cleanup(void *arg){
         
         _p_helper->who = (__bridge void *)(self);
         _p_helper->host = NULL;
-        _p_helper->ip_char = NULL;
+        _p_helper->ip_char = malloc(_IP_SIZE_MAX);
+        _p_helper->isGetSuc = false;
         _p_helper->getApserverIpResult = getApserverIpResult;
         
         
@@ -66,16 +69,49 @@ void cleanup(void *arg){
     return self;
 }
 
+-(void)dealloc{
+    
+    _p_helper->who = nil;
+    
+    if (_create_p) {
+        
+        pthread_cancel(thread_id);
+        _create_p = false;
+    }
+    
+    if (_timer != nil) {
+        
+        [_timer invalidate];
+        _timer = nil;
+
+    }
+    
+    if (_p_helper->host != NULL) {
+        free(_p_helper->host);
+        _p_helper->host = NULL;
+    }
+    
+    free(_p_helper->ip_char);
+    
+    _p_helper->getApserverIpResult = nil;
+    
+    free(_p_helper);
+    _p_helper = nil;
+
+    
+    XSLog(@"dealloc");
+}
+
 -(void)cancelTimeout
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //[[self class] cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void) _res_getApserverIp:(const char*)ip err:(_err) rc{
     
     _create_p = false;
     
-    [self performSelectorOnMainThread:@selector(cancelTimeout) withObject:nil waitUntilDone:NO];
+    //[self performSelectorOnMainThread:@selector(cancelTimeout) withObject:nil waitUntilDone:NO];
     
     
     if (rc == _err_none) {/*成功返回*/
@@ -121,6 +157,10 @@ void cleanup(void *arg){
     /*获取网关成功*/
     if (ret == 0) {
         
+        if (_p_helper->host != NULL) {
+            free(_p_helper->host);
+            _p_helper->host = NULL;
+        }
         
         char*  routeip = inet_ntoa(*(struct in_addr *)&gataway);
         
@@ -128,10 +168,6 @@ void cleanup(void *arg){
         char*  s = malloc(size);
         memcpy(s, routeip, size);
         
-        if (_p_helper->host != NULL) {
-            
-            free(_p_helper->host);
-        }
         
         _p_helper->apsn = _apsn;
         _p_helper->host = s;
@@ -142,6 +178,7 @@ void cleanup(void *arg){
         _create_p = true;
         pthread_create(&thread_id, NULL, _getIp_thread_ever, _p_helper);
         
+        [[self class] cancelPreviousPerformRequestsWithTarget:self];
         [self performSelector:@selector(timeout) withObject:NULL afterDelay:1.0f];
         
         return 0;
@@ -162,6 +199,10 @@ void cleanup(void *arg){
         _create_p = false;
     }
     
+    if (_p_helper->host != NULL) {
+        free(_p_helper->host);
+        _p_helper->host = NULL;
+    }
     
     size_t size = [[_host dataUsingEncoding:NSUTF8StringEncoding] length]+1;
     char*  s = malloc(size);
@@ -169,10 +210,6 @@ void cleanup(void *arg){
     memcpy(s, [_host UTF8String], size);
     
     
-    if (_p_helper->host != NULL) {
-        
-        free(_p_helper->host);
-    }
     
     _p_helper->apsn = _apsn;
     _p_helper->host = s;
@@ -182,6 +219,7 @@ void cleanup(void *arg){
     _create_p = true;
     pthread_create(&thread_id, NULL, _getIp_thread_ever, _p_helper);
     
+    [[self class] cancelPreviousPerformRequestsWithTarget:self];
     [self performSelector:@selector(timeout) withObject:NULL afterDelay:6.0f];
     
     
@@ -193,9 +231,9 @@ void cleanup(void *arg){
 - (void)getApserverIpHelper{
     
     
-    if (_p_helper->ip_char != NULL){
+    if (_p_helper->isGetSuc){
         
-        printf("%s",_p_helper->ip_char);
+        printf("IPS = %s",_p_helper->ip_char);
         
         if ( _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
             
@@ -204,6 +242,7 @@ void cleanup(void *arg){
         
         
         [_timer invalidate];
+        _timer = nil;
         
         return;
     }
@@ -255,6 +294,14 @@ void cleanup(void *arg){
 
 - (void)getApserverIpWithApsn:(XAITYPEAPSN)apsn fromRoute:(NSString*)host{
     
+//            if ( _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+//    
+//                [_delegate xaiIPHelper:self getIp:@"114.215.178.75" errcode:0];
+//            }
+//    
+//    
+//        return;
+    
     _host = host;
     _ipStr = nil;
     _apsn = apsn;
@@ -263,14 +310,13 @@ void cleanup(void *arg){
     
     _p_helper->isFinish = false;
     
-    if (_p_helper->ip_char != NULL) {
-        
-        free(_p_helper->ip_char);
-        _p_helper->ip_char = NULL;
-    }
-    
     
     [self getApserverIpHelper];
+    
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
     
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5  // 10ms
@@ -299,8 +345,8 @@ void cleanup(void *arg){
     
     if (_create_p) {
         
-       // pthread_cancel(thread_id);
-       // _create_p =false;
+        pthread_cancel(thread_id);
+        _create_p =false;
         
     }
     
@@ -328,22 +374,19 @@ void *_getIp_thread_ever(void *obj){
 	hints.ai_flags = AI_ADDRCONFIG;
 	hints.ai_socktype = SOCK_STREAM;
     
-    
-    int s = getaddrinfo(p_helper->host, NULL, &hints, &ainfo);
-    
-    
-    
-    if(s){
-        
-        printf("getaddr %s  : %s\n", p_helper->host, gai_strerror(s));
-        p_helper->getApserverIpResult(obj,_err_get_host_ip_fail);
-        return obj;
-    }
-    
     _err res = _err_unkown;
     
     do {
         
+        int s = getaddrinfo(p_helper->host, NULL, &hints, &ainfo);
+        
+        if(s){
+            
+            printf("getaddr %s  : %s\n", p_helper->host, gai_strerror(s));
+            res = _err_get_host_ip_fail;
+            break;
+        }
+
         
         #define INVALID_SOCKET -1
         
@@ -360,12 +403,15 @@ void *_getIp_thread_ever(void *obj){
             }else{
                 continue;
             }
+            
+            //ioctlsocket();
             if(connect(sock, rp->ai_addr, rp->ai_addrlen) != -1){
                 
                 bconnected = true;
                 break;
             }
         }
+        
         
         if (!bconnected) {
             
@@ -378,7 +424,7 @@ void *_getIp_thread_ever(void *obj){
         printf("connect ok !\r\n");
         
         
-        char  wBuf[1000] = {0};
+        char  wBuf[100] = {0};
         uint8_t  req = 0x03;
         XAITYPEAPSN  apsn = p_helper->apsn;
         XAITYPEAPSN napsn = CFSwapInt32(apsn);
@@ -412,11 +458,16 @@ void *_getIp_thread_ever(void *obj){
         
         printf("ip = %s\n", ipstr);
         
-        p_helper->ip_char = malloc(strlen(ipstr)+1);
-        memcpy(p_helper->ip_char, ipstr, strlen(ipstr)+1);
+        size_t copysize = strlen(ipstr) + 1;
+        if (strlen(ipstr) + 1 > _IP_SIZE_MAX) {
+            copysize = _IP_SIZE_MAX;
+        }
+        memset(p_helper->ip_char, 0, _IP_SIZE_MAX);
+        memcpy(p_helper->ip_char, ipstr, copysize);
         
         close(sock);
         
+        p_helper->isGetSuc = true;
         res = _err_none;
         
     } while (0);
@@ -473,6 +524,7 @@ int getdefaultgateway(in_addr_t * addr)
     if(l>0) {
         buf = malloc(l);
         if(sysctl(mib, sizeof(mib)/sizeof(int), buf, &l, 0, 0) < 0) {
+            free(buf);
             return -1;
         }
         for(p=buf; p<buf+l; p+=rt->rtm_msglen) {

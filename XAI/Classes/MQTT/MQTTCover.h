@@ -51,6 +51,7 @@
 
 
 + (BOOL) isNodeTopic:(NSString*)topic;
++ (BOOL) isNodeStatusTopic:(NSString *)topic;
 + (BOOL) isServerTopic:(NSString*)topic;
 
 /*topic字符串种获取luid 和 apsn*/

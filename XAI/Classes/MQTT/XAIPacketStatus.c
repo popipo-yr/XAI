@@ -180,7 +180,7 @@ void purgePacketParamStatusAndData(_xai_packet_param_status* param){
     if (NULL != param) {
         
         purgePacketParamNormal(param->normal_param);
-        
+        param->normal_param = NULL;
         purgePacketParamData(param->data);
         
         free(param);

@@ -7,8 +7,9 @@
 #import <Foundation/Foundation.h>
 #import "MosquittoMessage.h"
 
-@protocol MosquittoClientDelegate
+@protocol MosquittoClientDelegate <NSObject>
 
+@optional
 - (void) didConnect: (NSUInteger)code;
 - (void) didDisconnect;
 - (void) didPublish: (NSUInteger)messageId;
@@ -16,6 +17,14 @@
 - (void) didReceiveMessage: (MosquittoMessage*)mosq_msg;
 - (void) didSubscribe: (NSUInteger)messageId grantedQos:(NSArray*)qos;
 - (void) didUnsubscribe: (NSUInteger)messageId;
+- (void) change;
+
+@end
+
+@protocol MQTTKeepAliveDelegate <NSObject>
+
+@optional
+- (void) didDisconnect;
 
 @end
 
@@ -29,7 +38,7 @@
     unsigned short keepAlive;
     BOOL cleanSession;
     
-    __unsafe_unretained id<MosquittoClientDelegate> delegate;
+    //__unsafe_unretained id<MosquittoClientDelegate> delegate;
     NSTimer *timer;
 }
 
@@ -39,7 +48,8 @@
 @property (readwrite,retain) NSString *password;
 @property (readwrite,assign) unsigned short keepAlive;
 @property (readwrite,assign) BOOL cleanSession;
-@property (readwrite,assign) id<MosquittoClientDelegate> delegate;
+@property (nonatomic, weak)  id<MosquittoClientDelegate> delegate;
+@property (nonatomic, weak)  id<MQTTKeepAliveDelegate> keepAliveDelegate;
 
 + (void) initialize;
 + (NSString*) version;
@@ -63,7 +73,9 @@
 - (void)subscribe: (NSString *)topic withQos:(NSUInteger)qos;
 - (void)unsubscribe: (NSString *)topic;
 
-
+- (void) willRemove;
+- (void) startwork;
+- (void) endwork;
 // This is called automatically when connected
 - (void) loop: (NSTimer *)timer;
 

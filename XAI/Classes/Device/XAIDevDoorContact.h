@@ -37,6 +37,8 @@ typedef enum XAIDevDoorContactStatus{
 
 - (void) doorContact:(XAIDevDoorContact*)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err;
 - (void) doorContact:(XAIDevDoorContact*)dc curPower:(float)power err:(XAI_ERROR)err;
+- (void) doorContact:(XAIDevDoorContact*)dc status:(XAIDevDoorContactStatus)status
+                 err:(XAI_ERROR)err otherInfo:(XAIOtherInfo*)otherInfo;
 
 @end
 

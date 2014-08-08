@@ -44,6 +44,12 @@
     return self;
 }
 
+-(void)dealloc{
+
+    [_userService willRemove];
+    _userService = nil;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

@@ -516,7 +516,7 @@
 
 
 #pragma mark -- MQTTPacketManagerDelegate
-- (void)reciveACKPacket:(void*)datas size:(int)size topic:topic{
+- (void)reciveACKPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_ack*  ack = generateParamACKFromData(datas,size);
     
@@ -579,7 +579,7 @@
 }
 
 
-- (void) reciveStatusPacket:(void*)datas size:(int)size topic:topic{
+- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     _xai_packet_param_status* status = generateParamStatusFromData(datas, size);
     if (status == NULL) return;
@@ -610,7 +610,7 @@
 
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
     [super recivePacket:datas size:size topic:topic];
     
@@ -656,31 +656,28 @@
 }
 
 
-- (id) init{
-
-    if (self = [super init]) {
-        
-        [self _init];
-
-    }
-    
-    return self;
-}
-
-
+static int __k = 0;
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
-
+    
     if (self = [super initWithApsn:apsn Luid:luid]) {
-        
         [self _init];
+        __k += 1;
+        //XSLog(@"++++++++++:%d",__k);
+    }
+    return self;
+}
+-(id)init{
+    
+    if (self = [super init]) {
+        [self _init];
+        __k += 1;
+        //XSLog(@"++++++++++:%d",__k);
     }
     
     return self;
-
 }
 
-- (void) dealloc{
-    
+-(void)dealloc{
     if (_timer != nil) {
         
         [_timer invalidate];
@@ -689,7 +686,10 @@
     
     _allDevices = nil;
     _onlineDevices = nil;
-
+    
+    __k -= 1;
+    //XSLog(@"-----------:%d",__k);
+    
 }
 
 
@@ -728,7 +728,6 @@
 
 -(void)timeout{
     
-    [super timeout];
     
     if (_devOpr == XAIDevServiceOpr_add &&
         (nil != _deviceServiceDelegate) &&
@@ -774,6 +773,8 @@
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         [_deviceServiceDelegate devService:self finddedAllOnlineDevices:nil status:false errcode: XAI_ERROR_TIMEOUT];
     }
+    
+    [super timeout];
 }
 
 @end

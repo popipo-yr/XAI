@@ -211,8 +211,8 @@
 
     }
     
-    
-    XAIObjectOpr* aObjOpr = [_oprDatasAry objectAtIndex:[indexPath row]];
+    //最后的最先显示
+    XAIObjectOpr* aObjOpr = [_oprDatasAry objectAtIndex:([_oprDatasAry count] - [indexPath row] - 1)];
     
     if (aObjOpr != nil && [aObjOpr isKindOfClass:[XAIObjectOpr class]]) {
         

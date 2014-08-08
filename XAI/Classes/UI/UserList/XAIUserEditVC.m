@@ -27,7 +27,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
 
-    if (self == [super initWithCoder:aDecoder]) {
+    if (self = [super initWithCoder:aDecoder]) {
         
         _userService = [[XAIUserService alloc] init];
         _userService.apsn = [MQTT shareMQTT].apsn;

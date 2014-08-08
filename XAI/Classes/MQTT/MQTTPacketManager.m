@@ -10,6 +10,9 @@
 #import "MQTT.h"
 #import "MQTTCover.h"
 
+#define _K_Normal_Obj @"obj"
+#define _K_Normal_Key @"key"
+
 @implementation MQTTPacketManager
 
 - (id) init{
@@ -18,19 +21,26 @@
         
         _delegates = [[NSMutableDictionary alloc] init];
         _allDelegate = [[NSMutableArray alloc] init];
+        _forceRemove = [[NSMutableArray alloc] init];
+        _normalRemove = [[NSMutableArray alloc] init];
+        _normalAdd = [[NSMutableArray alloc] init];
+        
+        _isPostMsg = false;
+        
+        self.connectDelegate = NULL;
     }
     
     return self;
 }
 
-- (void) addPacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro{
+- (void) addPacketManagerACK: (NSObject*) aPro{
 
     [self addPacketManager:aPro withKey:[MQTTCover mobileCtrTopicWithAPNS:[MQTT shareMQTT].apsn
                                                                      luid:[MQTT shareMQTT].luid]];
 
 }
 
-- (void) removePacketManagerACK: (id<MQTTPacketManagerDelegate>) aPro{
+- (void) removePacketManagerACK: (NSObject*) aPro{
 
     
     
@@ -39,23 +49,41 @@
 
 }
 
-- (void) addPacketManager: (id<MQTTPacketManagerDelegate>) aPro withKey:(NSString*)key{
-
-//    NSMutableArray*  oldAry = [_delegates objectForKey:key];
-//    
-//    if (nil == oldAry) {
-//        
-//        oldAry = [[NSMutableArray alloc] init];
-//    }
-//    
-//    [oldAry addObject:aPro];
-//    
-//    [_delegates setObject:oldAry forKey:key];
+- (void) addPacketManager: (NSObject*) aPro withKey:(NSString*)key{
     
+    if (![aPro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]) {
+        return;
+    }
     /*if refres  count is zero, add it then set the refres to one，
      if refres count is bigger than zero, plus the refres count*/
     
     /*pro info is dictionary not classs ,*/
+    
+    NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:aPro,_K_Normal_Obj
+                         ,key,_K_Normal_Key,nil];
+    
+    [_normalAdd addObject:dic];
+
+}
+
+
+- (void) normalAddHelper{
+    
+    
+    for (NSDictionary* aDic in _normalAdd) {
+        
+        [self normalAddOne:[aDic objectForKey:_K_Normal_Obj] key:[aDic objectForKey:_K_Normal_Key]];
+    }
+    
+    [_normalAdd removeAllObjects];
+}
+
+- (void) normalAddOne:(NSObject*)aPro key:(NSString*)key{
+    
+    if (aPro == nil || key == nil) {
+        return;
+    }
+    
     
     NSMutableArray* proAry = [_delegates objectForKey:key];
     
@@ -64,6 +92,7 @@
         proAry = [[NSMutableArray alloc] init];
         [_delegates setObject:proAry forKey:key];
     }
+    
     
     MQTTPacketManagerDelgInfo* oneProInfo = nil;
     BOOL bFind = false;
@@ -90,13 +119,13 @@
     
     
     if (!bFind) {
-    
+        
         
         oneProInfo.refObj = aPro;
         oneProInfo.refrenceCount = 0;
         
     }else{
-    
+        
         
         if (oneProInfo.refrenceCount < 0) {/*错误的数据*/
             
@@ -107,24 +136,54 @@
     
     
     oneProInfo.refrenceCount += 1;
-    
+
     
 }
 
 
 
-- (void) removePacketManager: (id<MQTTPacketManagerDelegate>) aPro  withKey:(NSString*)key{
-
-//    NSMutableArray*  oldAry = [_delegates objectForKey:key];
-//    
-//    if (nil == oldAry) return;
-//    
-//
-//    [oldAry removeObject:aPro];
+- (void) removePacketManager: (NSObject*) aPro  withKey:(NSString*)key{
+    
+    XSLog(@"rmoveeeeeeeeeee");
+    if (![aPro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]) {
+        return;
+    }
+    
+    NSDictionary* dic = [[NSDictionary alloc] initWithObjectsAndKeys:aPro,_K_Normal_Obj
+                         ,key,_K_Normal_Key,nil];
+    
+    [_normalRemove addObject:dic];
     
     /*only  remove reference count,but when it's zero remove obj*/
+}
+
+
+
+- (void) normalRemoveHelper{
+    
+    NSArray* remove = [NSArray arrayWithArray:_normalRemove];
+    [_normalRemove removeAllObjects];
+    
+    for (NSDictionary* aDic in remove) {
+        
+        [self normalRemoveOne:[aDic objectForKey:_K_Normal_Obj] key:[aDic objectForKey:_K_Normal_Key]];
+    }
+    
+}
+
+- (void) normalRemoveOne:(NSObject*)aPro key:(NSString*)key{
+    
+    if (aPro == nil || key == nil) {
+        return;
+    }
+    
     NSMutableArray* proAry = [_delegates objectForKey:key];
     if (nil == proAry) return;
+    
+    BOOL isLast =  false;
+    if ([proAry count] == 1) {
+        isLast = true;
+    }
     
     MQTTPacketManagerDelgInfo* oneProInfo = nil;
     BOOL bFind = false;
@@ -147,14 +206,40 @@
     
     if (oneProInfo.refrenceCount <  1) {
         
+        oneProInfo.refObj = nil;
         [proAry removeObject:oneProInfo];
+        
+        if (isLast) { //no focus  remove topic
+            //[[MQTT shareMQTT].client unsubscribe:key];
+        }
         
     }
 }
 
 /*force remove delegate*/
-- (void) forceRemovePacketManager:(id<MQTTPacketManagerDelegate>)aPro{
+- (void) forceRemovePacketManager:(NSObject*)aPro{
+    
+    if ([aPro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]) {
+        [_forceRemove addObject:aPro];
+    }
+    
+}
 
+
+- (void) forceRemoveHelper{
+
+    for (NSObject* aPro in _forceRemove) {
+        
+        [self forceRemoveOne:aPro];
+    }
+    
+    [_forceRemove removeAllObjects];
+}
+
+- (void) forceRemoveOne:(NSObject*)aPro{
+    
+    XSLog(@"focue-remove");
+    
     NSArray* allKey =[_delegates allKeys];
     
     for (int i = 0;  i < [allKey count]; i++) {
@@ -176,68 +261,97 @@
         }
         
         if (bFind) {
-        
+            
             [proAry removeObject:oneProInfo];
         }
     }
     
-
+    
 }
 
-//- (void) addPacketManagerAll: (id<MQTTPacketManagerDelegate>) aPro{
-//
-//    [_allDelegate addObject:aPro];
-//}
-//
-//
-//- (void) removePacketManagerAll:(id<MQTTPacketManagerDelegate>)aPro{
-//
-//    [_allDelegate removeObject:aPro];
-//}
+
+- (void) addPacketManagerNoAccept:(id<MQTTPacketManagerDelegate>)aPro{
+
+    [_allDelegate addObject:aPro];
+}
+
+
+- (void) removePacketManagerNoAccept:(id<MQTTPacketManagerDelegate>)aPro{
+
+    [_allDelegate removeObject:aPro];
+}
+
+- (void) change{
+    
+    if (_isPostMsg) {
+        XSLog(@"fuccccccc");
+        return;
+    }
+    
+    XSLog(@"change ....");
+
+    [self normalRemoveHelper];
+    [self forceRemoveHelper];
+    [self normalAddHelper];
+}
 
 #pragma mark -----------------------
 #pragma mark MosquittoClientDelegate
-
 - (void) didReceiveMessage:(MosquittoMessage*) mosq_msg {
     
-    NSMutableArray*  delegeteAry  = [_delegates objectForKey:mosq_msg.topic];
+    [self change];
+    
+//    size_t size = mosq_msg.payloadlen;
+//    void* datas = malloc(sizeof(size));
+//    memcpy(datas,[mosq_msg getPayloadbyte] , size);
+//    NSString* topic = [[NSString alloc] initWithString:mosq_msg.topic];
+    
+//    [self performSelectorOnMainThread:@selector(didReceiveMessageMainT:) withObject:mosq_msg waitUntilDone:YES];
+
+    _isPostMsg = true;
+    
+    NSArray*  delegeteAry  = [[NSArray alloc] initWithArray:[_delegates objectForKey:mosq_msg.topic]];
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         
-//        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
-//        if (apro != NULL
-//            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-//            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
-//            
-//            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
-//        }
+        XSLog(@"innnnnnnnnnn");
         
         MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
         if (delgInfo != NULL
+            && delgInfo.refObj != NULL
             && [delgInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
             && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:)]) {
             
-            [delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
-        }
-
-
-    }
-    
-    /*通知接受全部的消息*/
-    for (int i = 0; i < [_allDelegate count]; i++) {
-        
-        id<MQTTPacketManagerDelegate> apro = [delegeteAry objectAtIndex:i];
-        if (apro != NULL
-            && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-            && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            [(id <MQTTPacketManagerDelegate>)delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
             
-            [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            //[delgInfo.refObj recivePacket:datas size:size topic:topic];
+        }
+    }
+    
+//    free(datas);
+    
+    
+    /*没有人接受*/
+    if ([delegeteAry count] == 0) {
+        
+        /*通知接受全部的消息*/
+        for (int i = 0; i < [_allDelegate count]; i++) {
+            
+            id<MQTTPacketManagerDelegate> apro = [_allDelegate objectAtIndex:i];
+            if (apro != NULL
+                && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
+                && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+                
+                [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            }
+            
         }
 
     }
     
+    _isPostMsg = false;
     
-    
+    //[self change];
 }
 
 - (void) didConnect:(NSUInteger)code {
@@ -248,20 +362,25 @@
     
     if (curMQTT.isLogin) {
         
-        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-                                                                  luid:MQTTCover_LUID_Server_03]];
-        
-        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+//        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
+//                                                                  luid:MQTTCover_LUID_Server_03]];
+//        
+//        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
     }
 
+    if (_connectDelegate != nil && [_connectDelegate respondsToSelector:@selector(didConnect:)]) {
+         [_connectDelegate didConnect:code];
+    }
     
-    [_connectDelegate didConnect:code];
+   
     
 }
 
 - (void) didDisconnect {
     
-    [_connectDelegate didDisconnect];
+    if (_connectDelegate != nil && [_connectDelegate respondsToSelector:@selector(didDisconnect)]) {
+        [_connectDelegate didDisconnect];
+    }
 }
 
 
