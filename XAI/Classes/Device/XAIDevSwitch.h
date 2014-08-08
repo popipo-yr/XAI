@@ -73,6 +73,14 @@ typedef enum XAIDevCircuitStatus{
 - (void) switch_:(XAIDevSwitch*)swi setCircuitTwoErr:(XAI_ERROR)err;
 
 
+- (void) switch_:(XAIDevSwitch*)swi circuitOneStatus:(XAIDevCircuitStatus)status
+             err:(XAI_ERROR)err otherInfo:(XAIOtherInfo*)otherInfo;
+
+- (void) switch_:(XAIDevSwitch*)swi circuitTwoStatus:(XAIDevCircuitStatus)status
+             err:(XAI_ERROR)err therInfo:(XAIOtherInfo*)otherInfo;
+
+
+
 @end
 
 typedef NS_ENUM(NSUInteger,_XAIDevSWitchOpr){

@@ -31,6 +31,8 @@ typedef enum XAIDevInfraredStatus{
 
 @protocol XAIDevInfraredDelegate <NSObject>
 
+- (void) infrared:(XAIDevInfrared*)inf status:(XAIDevInfraredStatus)status
+              err:(XAI_ERROR)err otherInfo:(XAIOtherInfo*)otherInfo;
 - (void) infrared:(XAIDevInfrared*)inf curStatus:(XAIDevInfraredStatus)status err:(XAI_ERROR)err;
 - (void) infrared:(XAIDevInfrared*)inf curPower:(float)power err:(XAI_ERROR)err;
 

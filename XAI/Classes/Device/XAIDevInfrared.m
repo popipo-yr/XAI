@@ -119,9 +119,14 @@
         
         
         if (nil != _infDelegate &&
-            [_infDelegate respondsToSelector:@selector(infrared:curStatus:err:)]) {
+            [_infDelegate respondsToSelector:@selector(infrared:status:err:otherInfo:)]) {
             
-            [_infDelegate infrared:self curStatus:curStatus err:err];
+            XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
+            otherInfo.time = param->time;
+            otherInfo.msgid = param->normal_param->magic_number;
+            otherInfo.error = err;
+            
+            [_infDelegate infrared:self status:curStatus err:err otherInfo:otherInfo];
         }
         
         _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevInfraredOpr_GetCurStatus);

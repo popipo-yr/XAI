@@ -20,7 +20,7 @@
     NSDate* _time;
     NSString* _name;
     
-    uint16_t _otherID;
+    uint16_t _otherID; /*比较使用,报文的msgid*/
     
 }
 

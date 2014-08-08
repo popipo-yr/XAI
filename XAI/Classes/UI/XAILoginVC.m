@@ -87,6 +87,7 @@
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
     //apsnstr = @"210e2b26";
     //apsnstr = @"210e9b6e";
+    //apsnstr = @"210e2757";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }

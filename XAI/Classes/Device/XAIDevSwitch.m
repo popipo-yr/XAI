@@ -261,9 +261,15 @@
         case Key_CircuitOneStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(switch_:getCircuitOneStatus:err:)]) {
+                                        @selector(switch_:circuitOneStatus:err:otherInfo:)]) {
                 
-                [_swiDelegate switch_:self getCircuitOneStatus:curStatus err:err];
+                XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
+                otherInfo.time = param->time;
+                otherInfo.msgid = param->normal_param->magic_number;
+                otherInfo.error = err;
+
+                
+                [_swiDelegate switch_:self circuitOneStatus:curStatus err:err otherInfo:otherInfo];
             }
             
             _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevSwitchOpr_GetOneStatus);
@@ -273,9 +279,14 @@
         case Key_CircuitTwoStatusID:{
             
             if (nil != _swiDelegate && [_swiDelegate respondsToSelector:
-                                        @selector(switch_:getCircuitTwoStatus:err:)]) {
+                                        @selector(switch_:circuitTwoStatus:err:therInfo:)]) {
                 
-                [_swiDelegate  switch_:self getCircuitTwoStatus:curStatus err:err];
+                XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
+                otherInfo.time = param->time;
+                otherInfo.msgid = param->normal_param->magic_number;
+                otherInfo.error = err;
+                
+                [_swiDelegate switch_:self circuitTwoStatus:curStatus err:err therInfo:otherInfo];
             }
             
             
