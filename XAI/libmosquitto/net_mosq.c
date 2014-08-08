@@ -63,8 +63,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <netinet/in.h>
 #endif
 
-#ifdef WITH_TLS
 #include <openssl/err.h>
+#ifdef WITH_TLS
 #include <tls_mosq.h>
 #endif
 

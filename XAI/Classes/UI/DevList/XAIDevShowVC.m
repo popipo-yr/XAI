@@ -43,6 +43,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
 }

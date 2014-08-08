@@ -143,7 +143,8 @@ _xai_packet_param_normal*   generateParamNormalFromData(void*  packetData,int si
     //unfixed
     aParam->data = malloc(aParam->length);
     memset(aParam->data, 0, aParam->length);
-    packet_to_param_helper(aParam->data, packetData, _XPP_N_DATA_START, _XPP_N_DATA_START+aParam->length);
+    //packet_to_param_helper(aParam->data, packetData, _XPP_N_DATA_START, _XPP_N_DATA_START+aParam->length);
+    memcpy(aParam->data, packetData+_XPP_N_DATA_START, aParam->length);
     
     
     return aParam;

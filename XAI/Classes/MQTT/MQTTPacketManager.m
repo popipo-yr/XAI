@@ -144,7 +144,7 @@
 
 - (void) removePacketManager: (NSObject*) aPro  withKey:(NSString*)key{
     
-    NSLog(@"rmoveeeeeeeeeee");
+    XSLog(@"rmoveeeeeeeeeee");
     if (![aPro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]) {
         return;
     }
@@ -238,7 +238,7 @@
 
 - (void) forceRemoveOne:(NSObject*)aPro{
     
-    NSLog(@"focue-remove");
+    XSLog(@"focue-remove");
     
     NSArray* allKey =[_delegates allKeys];
     
@@ -284,11 +284,11 @@
 - (void) change{
     
     if (_isPostMsg) {
-        NSLog(@"fuccccccc");
+        XSLog(@"fuccccccc");
         return;
     }
     
-    NSLog(@"change ....");
+    XSLog(@"change ....");
 
     [self normalRemoveHelper];
     [self forceRemoveHelper];
@@ -314,7 +314,7 @@
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         
-        NSLog(@"innnnnnnnnnn");
+        XSLog(@"innnnnnnnnnn");
         
         MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
         if (delgInfo != NULL

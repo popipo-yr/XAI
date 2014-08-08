@@ -146,7 +146,7 @@
 {
     //[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSLog(@"xxxxxxxxxxxxxxxxxxxx");
+    XSLog(@"xxxxxxxxxxxxxxxxxxxx");
     if ([MQTT shareMQTT].isLogin) {
         [_mosquittoClient startwork];
         [self performSelector:@selector(reloginWhenGoIn) withObject:nil afterDelay:0.5f];
@@ -172,18 +172,18 @@
 // Delegation methods
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
 
-    NSLog(@"devToken=%@",devToken);
+    XSLog(@"devToken=%@",devToken);
     
     [XAIToken saveToken:devToken];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    NSLog(@"Error in registration. Error: %@", err);
+    XSLog(@"Error in registration. Error: %@", err);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
 
-    NSLog(@"%@",userInfo);
+    XSLog(@"%@",userInfo);
 }
 
 
@@ -266,7 +266,7 @@
     
     if(status == ReachableViaWiFi || status == ReachableViaWWAN)
     {
-        NSLog(@"WIFI");
+        XSLog(@"WIFI");
         
         [[XAIData shareData] stopRefresh];
         [self reloginIsLogin:true];
@@ -274,7 +274,7 @@
     }
     if(status == ReachableViaWWAN)
     {
-        NSLog(@"3G");
+        XSLog(@"3G");
     }
 }
 
@@ -297,8 +297,8 @@
 
 - (void)reloginIsLogin:(BOOL)islogin{
     
-    NSLog(@"-------------");
-    NSLog(@"islong = %@, hasalert = %@, is noreachable= %@",
+    XSLog(@"-------------");
+    XSLog(@"islong = %@, hasalert = %@, is noreachable= %@",
           [MQTT shareMQTT].isLogin ? @"true" : @"false",
           false != _isReConnect ? @"true" : @"false",
           NotReachable != [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] ? @"true" : @"false");
@@ -381,7 +381,7 @@
     }
     _isReConnect = false;
     
-    NSLog(@"END .............");
+    XSLog(@"END .............");
     
     if (err != XAIReLoginErr_NONE) {
     /*重新登录错误,提示回到登录界面*/

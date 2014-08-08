@@ -41,9 +41,8 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-    
+    _userDatasAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getUserList]];
     [self.tableView reloadData];
-    
     [[XAIData shareData] addRefreshDelegate:self];
 }
 
@@ -52,6 +51,7 @@
     [[XAIData shareData] removeRefreshDelegate:self];
     [super viewDidDisappear:animated];
 }
+
 
 
 - (void)dealloc{
@@ -69,18 +69,6 @@
 }
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
-    
-
-    
-}
 
 
 - (void)didReceiveMemoryWarning
@@ -157,6 +145,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XSLog(@"celllllllllllll-%d",[indexPath row]);
     static NSString *CellIdentifier = @"XAIUserListVCCellID";
     
     XAIUserListVCCell *cell = [tableView
@@ -183,7 +172,7 @@
             [cell.contextLable setText:NSLocalizedString(@"NormalUser", nil)];
         }
     }
-    
+    XSLog(@"cellllllllllllle-%d",[indexPath row]);
     return cell;
 }
 

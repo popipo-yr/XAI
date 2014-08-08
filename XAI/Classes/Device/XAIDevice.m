@@ -262,7 +262,7 @@
 -(void)dealloc{
     
     //
-    NSLog(@"%s,%@,%p", __PRETTY_FUNCTION__,[[self class] description] ,self);
+    XSLog(@"%s,%@,%p", __PRETTY_FUNCTION__,[[self class] description] ,self);
 }
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{

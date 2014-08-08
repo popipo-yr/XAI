@@ -552,7 +552,6 @@
     
 
     purgePacketParamNormal(param);
-    NSLog(@"out");
 }
 
 
@@ -656,7 +655,7 @@ static int __s = 0;
 
     if (self = [super initWithApsn:apsn Luid:luid]) {
         __s += 1;
-        //NSLog(@"++++++++++:%d",__s);
+        //XSLog(@"++++++++++:%d",__s);
     }
     return self;
 }
@@ -664,7 +663,7 @@ static int __s = 0;
 
     if (self = [super init]) {
         __s += 1;
-        //NSLog(@"++++++++++:%d",__s);
+        //XSLog(@"++++++++++:%d",__s);
     }
     
     return self;
@@ -672,7 +671,7 @@ static int __s = 0;
 
 -(void)dealloc{
     __s -= 1;
-    //NSLog(@"-----------:%d",__s);
+    //XSLog(@"-----------:%d",__s);
     
 }
 

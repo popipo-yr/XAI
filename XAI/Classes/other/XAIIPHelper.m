@@ -99,7 +99,7 @@ void cleanup(void *arg){
     _p_helper = nil;
 
     
-    NSLog(@"dealloc");
+    XSLog(@"dealloc");
 }
 
 -(void)cancelTimeout

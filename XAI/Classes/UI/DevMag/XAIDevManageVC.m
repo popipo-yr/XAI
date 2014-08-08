@@ -47,6 +47,9 @@
     
     [super viewWillAppear:animated];
     
+    _objectAry = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getObjList]];
+    [self.tableView reloadData];
+    
     [[XAIData shareData] addRefreshDelegate:self];
 }
 

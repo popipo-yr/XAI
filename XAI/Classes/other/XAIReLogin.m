@@ -70,12 +70,8 @@
     
     if (rc == _err_none) {
         
-        
-        MQTT* curMQTT =  [MQTT shareMQTT];
-        
+        XSLog(@"name =%@ , pwd = %@",[MQTT shareMQTT].curUser.name , [MQTT shareMQTT].curUser.pawd);
         _login.delegate = self;
-        
-        NSLog(@"name =%@ , pwd = %@",curMQTT.curUser.name , curMQTT.curUser.pawd);
         [_login relogin];
         
     }else{

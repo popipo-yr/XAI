@@ -208,6 +208,67 @@
 
 
 
+- (void)test_Add_TRUE_D_U
+{
+    XAITYPEAPSN apsn = [MQTT shareMQTT].apsn;
+    
+    XAITYPELUID  doorLuid = 0x00124b0004e8369b;
+    int doorstatus = 1;
+    XAITYPELUID  usLuid = 0x3;
+    int usAdd = 1;
+    
+    
+    XAILinkageUseInfoCtrl* open = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* open_data = generatePacketParamData();
+    XAITYPEBOOL typeopen =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(open_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typeopen, NULL);
+    
+    [open setApsn:apsn Luid:doorLuid ID:doorstatus Datas:open_data];
+    
+    
+    XAILinkageUseInfoStatus* us_add = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* apsn_data = generatePacketParamData();
+    _xai_packet_param_data* username_data = generatePacketParamData();
+    _xai_packet_param_data* password_data = generatePacketParamData();
+    
+    xai_param_data_set(apsn_data, XAI_DATA_TYPE_BIN_APSN , sizeof(XAITYPEAPSN), &apsn, username_data);
+    
+    
+    NSData* data = [@"联动" dataUsingEncoding:NSUTF8StringEncoding];
+    xai_param_data_set(username_data, XAI_DATA_TYPE_ASCII_TEXT,
+                       [data length], (void*)[@"联动" UTF8String],password_data);
+    
+    NSData* paswddata = [@"PAWD" dataUsingEncoding:NSUTF8StringEncoding];
+    xai_param_data_set(password_data, XAI_DATA_TYPE_ASCII_TEXT,
+                       [paswddata length], (void*)[@"PAWD" UTF8String],NULL);
+    
+    
+    [us_add setApsn:[MQTT shareMQTT].apsn Luid:usLuid ID:usAdd Datas:apsn_data];
+    
+    
+    [self _addLinkageParams:[NSArray arrayWithObjects:us_add, nil]
+                   ctrlInfo:open
+                     status:XAILinkageStatus_Active
+                       name:@"ls_test2"];
+    
+    if (_loginStatus == Success) {
+        
+        
+        XCTAssertTrue (_addStatus != start, @"delegate did not get called");
+        XCTAssertTrue (_addStatus != Fail, @"no, add dev should be suc");
+        XCTAssert(_err == XAI_ERROR_NONE, @"-err:%d",_err);
+        
+    }else{
+        
+        
+        XCTFail(@"login faild");
+    }
+    
+}
+
+
 - (void)test_Add_TRUE
 {
     
@@ -267,17 +328,18 @@
 
 - (void)testDel_TRUE
 {
-    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
-                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
-                     status:XAILinkageStatus_Active
-                       name:_name4Change];
-    
-    if (_loginStatus != Success && _addStatus != Success) {
-        
-        XCTFail(@"Del_TRUE test faild : generate data faild");
-        return;
-    }
-    
+//    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
+//                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
+//                     status:XAILinkageStatus_Active
+//                       name:_name4Change];
+//    
+//    if (_loginStatus != Success && _addStatus != Success) {
+//        
+//        XCTFail(@"Del_TRUE test faild : generate data faild");
+//        return;
+//    }
+//    
+    [self login];
     
     [self _delLinkage:0x1];
     

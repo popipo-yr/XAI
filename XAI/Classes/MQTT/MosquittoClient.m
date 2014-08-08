@@ -34,6 +34,7 @@ static void on_connect(struct mosquitto *mosq, void *obj, int rc)
 
 static void on_disconnect(struct mosquitto *mosq, void *obj, int rc)
 {
+    XSLog_(@"disconnect call back");
     MosquittoClient* client = (__bridge MosquittoClient*)obj;
     
     if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didDisconnect)]) {
@@ -65,7 +66,7 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
 {
     __ISING = true;
     //@autoreleasepool {
-    NSLog(@"MQTT-MSG-IN");
+    XSLog(@"MQTT-MSG-IN");
     MosquittoMessage *mosq_msg = [[MosquittoMessage alloc] init];
     mosq_msg.topic = [NSString stringWithUTF8String: message->topic];
     mosq_msg.payload = [[NSString alloc] initWithBytes:message->payload
@@ -93,7 +94,7 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
 //        
 //        [client performSelectorOnMainThread:@selector(hasmessage:) withObject:mosq_msg waitUntilDone:true];
     
-    NSLog(@"MQTT-MSG-OUT");
+    XSLog(@"MQTT-MSG-OUT");
     
     if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(change)]) {
         [[client delegate] change];
@@ -122,7 +123,7 @@ static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
 
 static void on_log(struct mosquitto *mosq, void *userdata, int level, const char *str){
     
-   // printf("mqtt-log:%s\n\n",str);
+    printf("mqtt-log:%s\n\n",str);
 }
 
 
@@ -215,7 +216,6 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
         if (timer != nil && [timer isValid]) {
             
             [timer invalidate];
-            NSLog(@"cao");
         }
         
         timer = [NSTimer scheduledTimerWithTimeInterval:0.01 // 10ms

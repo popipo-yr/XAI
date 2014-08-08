@@ -662,7 +662,7 @@ static int __k = 0;
     if (self = [super initWithApsn:apsn Luid:luid]) {
         [self _init];
         __k += 1;
-        //NSLog(@"++++++++++:%d",__k);
+        //XSLog(@"++++++++++:%d",__k);
     }
     return self;
 }
@@ -671,7 +671,7 @@ static int __k = 0;
     if (self = [super init]) {
         [self _init];
         __k += 1;
-        //NSLog(@"++++++++++:%d",__k);
+        //XSLog(@"++++++++++:%d",__k);
     }
     
     return self;
@@ -688,7 +688,7 @@ static int __k = 0;
     _onlineDevices = nil;
     
     __k -= 1;
-    //NSLog(@"-----------:%d",__k);
+    //XSLog(@"-----------:%d",__k);
     
 }
 
