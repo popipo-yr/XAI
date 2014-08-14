@@ -35,6 +35,15 @@ static XAIData*  _s_XAIData_ = NULL;
 
 - (void) setObjList:(NSArray*)devs{
     
+    //------------del
+    for (XAIObject* obj in _objListenList) {
+        [obj endControl];
+        [obj willRemove];
+    }
+    
+    [_objListenList removeAllObjects];
+    //---------------
+    
     NSMutableArray* objs = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < [devs count]; i++) {
@@ -71,9 +80,20 @@ static XAIData*  _s_XAIData_ = NULL;
 
         
         [objs addObject:aObj];
+        
+        
+        //-------------
+        [_objListenList addObject:aObj];
+        //--------------
     }
     
     [_objList  setArray:objs];
+    
+    
+    for (XAIObject* obj in _objListenList) {
+        [obj startControl];
+    }
+
     
 }
 - (NSArray*) getObjList{
@@ -229,6 +249,8 @@ static XAIData*  _s_XAIData_ = NULL;
         
         _devService = [[XAIDeviceService alloc] init];
         _devService.deviceServiceDelegate = self;
+        
+        _objListenList = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -354,6 +376,23 @@ static XAIData*  _s_XAIData_ = NULL;
 
 }
 
+- (NSArray*) listenObjsWithType:(NSArray*)types{
+    
+    NSMutableArray* retObjs = [[NSMutableArray alloc] init];
+    
+    for (NSNumber* aType in types) {
+        if (![aType isKindOfClass:[NSNumber class]]) continue;
+        
+        for (XAIObject* obj in  _objListenList) {
+            
+            if (obj.type == [aType intValue]) {
+                [retObjs addObject:obj];
+            }
+        }
+    }
+
+    return retObjs;
+}
 
 
 @end
@@ -368,7 +407,7 @@ static XAIData*  _s_XAIData_ = NULL;
     for (int i =0; i < [ary count]; i++) {
         
         NSDictionary* dic = [ary objectAtIndex:i];
-        
+
         /*也可以通过类名获取*/
         XAIObject* obj = [[XAIObject alloc] init];
         [obj readFromDIC:dic];

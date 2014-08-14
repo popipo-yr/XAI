@@ -27,7 +27,7 @@ typedef enum XAIIRStatus{
     
     XAIIRStatus_working = 1,
     XAIIRStatus_warning = 0,
-    XAIIRStatus_Unkown = 9
+    XAIIRStatus_Unkown = XAIObjStatusUnkown
     
 }XAIIRStatus;
 

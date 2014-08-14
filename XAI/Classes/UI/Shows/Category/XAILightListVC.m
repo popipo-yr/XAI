@@ -38,7 +38,8 @@
         _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
-        _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
+        _types = @[@(XAIObjectType_light),@(XAIObjectType_light2_1),@(XAIObjectType_light2_2)];
+        _deviceDatas = [[NSMutableArray alloc] init];
         
     }
     return self;
@@ -60,7 +61,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
+    [self updateShowDatas];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
 }
@@ -84,11 +85,88 @@
 
 -(void)xaiDataRefresh:(XAIData *)data{
     
-    _deviceDatas = [[NSMutableArray alloc] initWithArray:[[XAIData shareData] getNormalObjList]];
+    [self updateShowDatas];
     [self.tableView reloadData];
 }
 
 
+
+- (void) updateShowDatas{
+    
+    _curInputCell = nil;
+    
+    NSMutableArray* newDatas = [[NSMutableArray alloc] init];
+    
+    NSMutableArray* circleOnes = [[NSMutableArray alloc] init];
+    NSMutableArray* circleTwos = [[NSMutableArray alloc] init];
+    
+    
+    NSArray* allLights =  [[NSArray alloc] initWithArray:
+                           [[XAIData shareData] listenObjsWithType:_types]];
+    
+    //分类并添加单控开关
+    for (XAIObject* obj in allLights) {
+
+        if (![obj isKindOfClass:[XAILight class]]) continue;
+        
+        if ([obj isKindOfClass:[XAILight2_CirculeOne class]]) {
+            
+            [circleOnes addObject:obj];
+            
+            
+        }else if ([obj isKindOfClass:[XAILight2_CirculeTwo class]]){
+        
+            [circleTwos addObject:obj];
+        
+        }else{
+        
+            [newDatas addObject:obj];
+        }
+    }
+    
+    //找到配皮的双控加入,并加入未匹配的单控一
+    for (XAILight2_CirculeOne* aOne in circleOnes) {
+        
+        BOOL hasTogether = false;
+        
+        for (XAILight2_CirculeTwo* aTwo in circleTwos) {
+            if (aOne.luid == aTwo.luid) {
+                
+                NSArray* together = [[NSArray alloc] initWithObjects:aOne,aTwo,nil];
+                [newDatas addObject:together];
+                
+                [circleTwos removeObject:aTwo];
+                hasTogether = true;
+                break;
+            }
+        }
+        
+        if (hasTogether == false) {
+            [newDatas addObject:aOne];
+        }
+    }
+    
+    //加入未匹配的单控二
+    [newDatas addObjectsFromArray:circleTwos];
+
+
+    [newDatas removeAllObjects];
+    [newDatas addObject:[[XAILight alloc] init]];
+    
+    NSArray* ary = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
+                    [[XAILight2_CirculeTwo alloc] init],nil];
+    [newDatas addObject:ary];
+
+    [newDatas addObject:[[XAILight alloc] init]];
+    
+    
+    NSArray* ary2 = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
+                    [[XAILight2_CirculeTwo alloc] init],nil];
+    [newDatas addObject:ary2];
+    
+    _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
+
+}
 
 
 #pragma mark Table Data Source Methods
@@ -117,12 +195,47 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    static NSString *CellIdentifier1 = @"XAILightListCell2ID";
+    static NSString *CellIdentifier2 = @"XAILightListCellID";
+    
+    NSArray* objs = [_deviceDatas objectAtIndex:[indexPath row]];
+    
+    if ([objs isKindOfClass:[NSArray class]]) {
+        
+        XAILightListVCCell2 *cell = [tableView
+                                    dequeueReusableCellWithIdentifier:CellIdentifier1];
+        if (cell == nil) {
+            cell = [[XAILightListVCCell2 alloc]
+                    initWithStyle:UITableViewCellStyleDefault
+                    reuseIdentifier:CellIdentifier1];
+        }
+        
+        
+        [cell setDatas:objs];
+        
+      
+        NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+        
+        
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
+         [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                    title:@"删除"];
+        
+        cell.rightUtilityButtons = rightUtilityButtons;
+        cell.delegate = self;
+        
+        cell.topVC = self;
+        
+        return cell;
+        
+    }
+    
     XAILightListVCCell *cell = [tableView
-                            dequeueReusableCellWithIdentifier:XAILightListCellID];
+                                dequeueReusableCellWithIdentifier:CellIdentifier2];
     if (cell == nil) {
         cell = [[XAILightListVCCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:XAILightListCellID];
+                reuseIdentifier:CellIdentifier2];
     }
     
     XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
@@ -142,6 +255,7 @@
         
         [cell.contextLable setText:[aObj.lastOpr allStr]];
         
+        
     }
     
     
@@ -149,22 +263,11 @@
     NSMutableArray *leftUtilityButtons = [NSMutableArray new];
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
     
-//    [leftUtilityButtons sw_addUtilityButtonWithColor:
-//     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-//                                                icon:[UIImage imageNamed:@"like.png"]];
+    
     [leftUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                                title:@"修改备注"];
-//    [leftUtilityButtons sw_addUtilityButtonWithColor:
-//     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-//                                                icon:[UIImage imageNamed:@"facebook.png"]];
-//    [leftUtilityButtons sw_addUtilityButtonWithColor:
-//     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-//                                                icon:[UIImage imageNamed:@"twitter.png"]];
-//    
-//    [rightUtilityButtons sw_addUtilityButtonWithColor:
-//     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-//                                                title:@"More"];
+                                               title:@"修改备注"];
+    
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
                                                 title:@"删除"];
@@ -174,7 +277,9 @@
     cell.delegate = self;
     
     return cell;
-}
+
+    
+  }
 
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
@@ -189,8 +294,32 @@
     switch (index) {
         case 0:
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Bookmark" message:@"Save to favorites successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
+            XAILightListVCCell* listCell = (XAILightListVCCell*)cell;
+            if ([listCell isKindOfClass:[XAILightListVCCell class]]) {
+                
+                
+                [self changeInputCell:listCell input:listCell.input];
+                
+                listCell.input.enabled = true;
+                listCell.input.hidden = false;
+                [listCell.input becomeFirstResponder];
+                
+                // Add utility buttons
+                NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+                
+                
+                [leftUtilityButtons sw_addUtilityButtonWithColor:
+                 [UIColor colorWithRed:1.0f green:1.0f blue:0.75f alpha:0.7]
+                                                           title:@"保存保存"];
+
+                
+                listCell.leftUtilityButtons = leftUtilityButtons;
+                
+                _curInputCell = listCell;
+                _curInputTF = listCell.input;
+            }
+            
+            
             break;
         }
         default:
@@ -203,20 +332,12 @@
     switch (index) {
         case 0:
         {
-            // More button is pressed
-            UIActionSheet *shareActionSheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share on Facebook", @"Share on Twitter", nil];
-            [shareActionSheet showInView:self.view];
-            
-            [cell hideUtilityButtonsAnimated:YES];
+
             break;
         }
         case 1:
         {
-            // Delete button is pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            //[patterns removeObjectAtIndex:cellIndexPath.row];
-            //[patternImages removeObjectAtIndex:cellIndexPath.row];
-            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
             break;
         }
         default:
@@ -225,8 +346,87 @@
 }
 
 
+static bool delShow = false;
+static bool changeShow = false;
+static SWTableViewCell* curSWCell;
+-(void)swipeableTableViewCellDidEndScrolling:(SWTableViewCell *)cell{
+    
+    curSWCell = cell;
+    if ( cell.cellState == kCellStateLeft) {
+        delShow = false;
+        changeShow = true;
+        
+    }else if( cell.cellState == kCellStateRight){
+        
+        delShow = true;
+        changeShow = false;
+        
+    }else{
+        
+        delShow = false;
+        changeShow = false;
+    }
+    
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    if ([self hasInput] == true) {
+        return false;
+    }
+    
+    if ([cell isKindOfClass:[XAILightListVCCell2 class]]) {
+        
+        if ([((XAILightListVCCell2*)cell) isallInCenter] == false) {
+            return false;
+        }
+    }
+    
+    if (cell != curSWCell) {
+        return true;
+    }
+    switch (state) {
+        case kCellStateLeft:
+            // set to NO to disable all left utility buttons appearing
+            return delShow == false ? true : false;
+            break;
+        case kCellStateRight:
+            // set to NO to disable all right utility buttons appearing
+            return changeShow == false ? true : false;
+            break;
+        default:
+            break;
+    }
+    
+    return YES;
+}
+
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+    [self hiddenOldInput];
+    
+    NSArray* cells = [self.tableView visibleCells];
+    for (XAILightListVCCell2* aCell in cells) {
+        if (![aCell isKindOfClass:[XAILightListVCCell2 class]]) continue;
+        if (aCell == cell) continue;
+        
+        [aCell hidenAll];
+        
+    }
+
+    return YES;
+}
+
+
+
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([[_deviceDatas objectAtIndex:[indexPath row]] isKindOfClass:[NSArray class]]) {
+        return  63.0*2;
+    };
+
     return 63.0;
 }
 
@@ -253,10 +453,77 @@
 }
 
 
+- (void) willShowLeft:(UITableViewCell*)cell{
+    
+    [self hiddenOldInput];
+    
+    NSArray* cells = [self.tableView visibleCells];
+    for (SWTableViewCell* aCell in cells) {
+        if (![aCell isKindOfClass:[SWTableViewCell class]]) continue;
+        if (aCell == cell) continue;
+        
+        if ([aCell isUtilityButtonsHidden] == false) {
+            
+            [aCell hideUtilityButtonsAnimated:YES];
+
+        }
+        
+        if ([aCell isKindOfClass:[XAILightListVCCell2 class]]) {
+            [((XAILightListVCCell2*)aCell) hidenAll];
+        }
+        
+        
+    }
+
+
+}
+
+
+- (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input{
+
+    [self hiddenOldInput];
+    _curInputCell = cell;
+    _curInputTF = input;
+    
+    [self.tableView setScrollEnabled:false];
+    //[cell setEnable:false];
+}
+
+
+- (void) hiddenOldInput{
+
+    if (_curInputCell != nil) {
+        
+        
+        [_curInputCell hideUtilityButtonsAnimated:true];
+        
+        // Add utility buttons
+        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+        
+        
+        [leftUtilityButtons sw_addUtilityButtonWithColor:
+         [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
+                                                   title:@"修改备注"];
+        
+        _curInputCell.leftUtilityButtons = leftUtilityButtons;
+    }
+    
+    if (_curInputTF != nil) {
+        
+        _curInputTF.enabled = false;
+        _curInputTF.hidden = true;
+        [_curInputTF resignFirstResponder];
+    }
+
+    _curInputCell = nil;
+    _curInputTF = nil;
+}
+
+- (BOOL) hasInput{
+
+    return _curInputCell != nil;
+}
 
 @end
 
 
-@implementation XAILightListVCCell
-
-@end

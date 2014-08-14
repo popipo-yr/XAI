@@ -21,7 +21,7 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 
 @property (nonatomic, strong) UIPanGestureRecognizer *tableViewPanGestureRecognizer;
 
-@property (nonatomic, assign) SWCellState cellState; // The state of the cell within the scroll view, can be left, right or middle
+//@property (nonatomic, assign) SWCellState cellState; // The state of the cell within the scroll view, can be left, right or middle
 @property (nonatomic, assign) CGFloat additionalRightPadding;
 
 @property (nonatomic, strong) UIScrollView *cellScrollView;
@@ -45,6 +45,15 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 
 @implementation SWTableViewCell {
     UIView *_contentCellView;
+}
+
+- (void)setEnable:(BOOL)enable{
+
+    self.tableViewPanGestureRecognizer.enabled = enable;
+    self.tableViewPanGestureRecognizer.enabled = enable;
+    self.longPressGestureRecognizer.enabled = enable;
+    self.cellScrollView.scrollEnabled = enable;
+    self.containingTableView.scrollEnabled = enable;
 }
 
 #pragma mark Initializers
@@ -677,7 +686,18 @@ static NSString * const kTableViewPanState = @"state";
                 BOOL shouldScroll = [self.delegate swipeableTableViewCell:self canSwipeToState:kCellStateRight];
                 if (!shouldScroll)
                 {
-                    scrollView.contentOffset = CGPointMake([self leftUtilityButtonsWidth], 0);
+                    //scrollView.contentOffset = CGPointMake([self leftUtilityButtonsWidth], 0);
+                    [scrollView setContentOffset:CGPointMake([self leftUtilityButtonsWidth], 0)
+                                        animated:NO];
+                    
+                    scrollView.scrollEnabled = NO;
+                    scrollView.scrollEnabled = YES;
+                    
+                    
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeableTableViewCellDidEndScrolling:)]) {
+                        [self.delegate swipeableTableViewCellDidEndScrolling:self];
+                    }
+
                 }
             }
         }
@@ -697,7 +717,17 @@ static NSString * const kTableViewPanState = @"state";
                 BOOL shouldScroll = [self.delegate swipeableTableViewCell:self canSwipeToState:kCellStateLeft];
                 if (!shouldScroll)
                 {
-                    scrollView.contentOffset = CGPointMake([self leftUtilityButtonsWidth], 0);
+                    //scrollView.contentOffset = CGPointMake([self leftUtilityButtonsWidth], 0);
+                    [scrollView setContentOffset:CGPointMake([self leftUtilityButtonsWidth], 0)
+                                        animated:NO];
+                    
+                    scrollView.scrollEnabled = NO;
+                    scrollView.scrollEnabled = YES;
+
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeableTableViewCellDidEndScrolling:)]) {
+                        [self.delegate swipeableTableViewCellDidEndScrolling:self];
+                    }
+
                 }
             }
         }

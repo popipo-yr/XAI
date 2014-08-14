@@ -27,7 +27,7 @@ typedef enum XAIDoorStatus{
     
     XAIDoorStatus_Open = 1,
     XAIDoorStatus_Close = 0,
-    XAIDoorStatus_Unkown = 9
+    XAIDoorStatus_Unkown = XAIObjStatusUnkown
     
 }XAIDoorStatus;
 

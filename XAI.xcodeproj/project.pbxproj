@@ -73,6 +73,7 @@
 		963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA6199B426B0025B304 /* SWTableViewCell.m */; };
 		963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */; };
+		963BDBB3199C663E0025B304 /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBB2199C663E0025B304 /* XAILightListCell.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
@@ -358,6 +359,8 @@
 		963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		963BDBA9199B426B0025B304 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		963BDBB1199C663E0025B304 /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
+		963BDBB2199C663E0025B304 /* XAILightListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightListCell.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
@@ -887,6 +890,8 @@
 			children = (
 				963BDB9B199B31910025B304 /* XAILightListVC.h */,
 				963BDB9C199B31910025B304 /* XAILightListVC.m */,
+				963BDBB1199C663E0025B304 /* XAILightListCell.h */,
+				963BDBB2199C663E0025B304 /* XAILightListCell.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1848,6 +1853,7 @@
 				96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */,
 				963BDB96199B0CE40025B304 /* XAICategoryTool.m in Sources */,
 				963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */,
+				963BDBB3199C663E0025B304 /* XAILightListCell.m in Sources */,
 				963BDBAB199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				96619DB91915D58F009849B0 /* XAIDoor.m in Sources */,

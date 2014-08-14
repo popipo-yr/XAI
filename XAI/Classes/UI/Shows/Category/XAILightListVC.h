@@ -11,6 +11,8 @@
 #import "XAIData.h"
 #import "XAIDeviceService.h"
 
+#import "XAILightListCell.h"
+
 #define _ST_LightListVCID @"XAILightListVCID"
 
 @interface XAILightListVC : XAIHasTableViewVC
@@ -18,21 +20,26 @@
 
     XAIDeviceService* _deviceService;
     
+    NSArray* _types;
+    
     NSMutableArray*  _deviceDatas; /*XAIObject数组*/
-
+    
+    
+//    XAILightListVCCell* _curInputCell;
+    
+    SWTableViewCell* _curInputCell;
+    UITextField*  _curInputTF;
 }
+
 
 
 +(UIViewController*)create;
 
-@end
 
-
-#define  XAILightListCellID @"XAILightListCellID"
-@interface XAILightListVCCell : SWTableViewCell
-
-@property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
-@property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
-@property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
+- (void) willShowLeft:(UITableViewCell*)cell;
+- (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input;
+- (BOOL) hasInput;
 
 @end
+
+

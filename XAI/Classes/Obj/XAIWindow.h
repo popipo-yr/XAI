@@ -27,7 +27,7 @@ typedef enum XAIWindowStatus{
     
     XAIWindowStatus_Open = 1,
     XAIWindowStatus_Close = 0,
-    XAIWindowStatus_Unkown = 9
+    XAIWindowStatus_Unkown = XAIObjStatusUnkown
     
 }XAIWindowStatus;
 

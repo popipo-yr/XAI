@@ -32,6 +32,8 @@
     NSMutableArray*  _userList; //xaiuser list
     NSMutableArray*  _objList;  //xaiobject list
     XAIObjectList*  _localObjInfo;  //本地数据
+    
+    NSMutableArray* _objListenList;
 
     
     NSMutableArray* _refreshDelegates;
@@ -65,6 +67,8 @@
 + (XAIData*) shareData;
 
 + (NSString*) getSavePathFile:(NSString*)fileName;
+
+- (NSArray*) listenObjsWithType:(NSArray*)types;
 
 @end
 

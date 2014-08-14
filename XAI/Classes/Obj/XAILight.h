@@ -25,6 +25,8 @@
     
 }
 
+@property (nonatomic, assign) int  curStatus;
+
 @property (nonatomic, weak) id <XAILigthtDelegate> delegate;
 
 
@@ -39,7 +41,7 @@ typedef enum XAILightStatus{
 
     XAILightStatus_Open = 1,
     XAILightStatus_Close = 0,
-    XAILightStatus_Unkown = 9
+    XAILightStatus_Unkown = XAIObjStatusUnkown
     
 }XAILightStatus;
 

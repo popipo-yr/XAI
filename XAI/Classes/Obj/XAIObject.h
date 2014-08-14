@@ -34,6 +34,9 @@ typedef enum XAIObjectType{
 #define XAIObjectFlagNormal 0
 
 
+#define XAIObjStatusUnkown 9
+
+
 @class XAIObjectOpr;
 @class XAIDevice;
 
@@ -69,6 +72,8 @@ typedef enum XAIObjectType{
 @property (nonatomic, strong) XAIObjectOpr* lastOpr; /*最后一次操作*/
 @property (nonatomic, strong) NSString* nickName;
 @property (nonatomic, assign) BOOL isOnline ;
+
+@property (nonatomic, assign) int  curStatus;
 
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/

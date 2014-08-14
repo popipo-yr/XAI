@@ -377,6 +377,20 @@
         } while (0);
         
         if (allType) {
+            //TODO:must del start
+            
+            if ([self converToObjType:aDevice]) {
+                
+                if (aDevice.devType == XAIDeviceType_light_2) {
+                    
+                    XAIDevice* dev2 = [aDevice copy];
+                    dev2.corObjType = XAIObjectType_light2_2;
+                    [devAry addObject:dev2]; //添加2次
+                    
+                }
+                
+            }
+            //TODO:must del end
             
             [devAry addObject:aDevice];
         }

@@ -31,6 +31,8 @@
         
         _tmpOprs = [[NSMutableArray alloc] init];
         
+        _curStatus = XAIObjStatusUnkown;
+        
         //_flag = XAIObjectFlagNormal;
     }
     
@@ -270,6 +272,7 @@
     
     //如果需要通知结果
     if (last != nil) {
+        self.curStatus = last.opr;
         [self updateFinish:last];
     }
     
