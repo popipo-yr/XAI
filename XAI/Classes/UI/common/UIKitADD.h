@@ -58,3 +58,24 @@ center.y -= len; \
 - (BOOL) isNameOrPawdLength;
 
 @end
+
+
+@interface UIViewController (ADD)
+
+- (NSArray*) openSwipe;
+- (void) stopSwipte:(NSArray*) swipes;
+
+- (void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer;
+- (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer;
+
+/*R2L 显示 从右边出现*/
+- (void) animalVC_R2L:(UIViewController*)vc;
+- (void) animalView_R2L:(UIView*)view;
+- (void) animalView_L2R:(UIView*)view;
+
+- (void) finish_R2L;
+- (void) finish_L2R;
+
+- (void) changeIphoneStatus;
+
+@end

@@ -63,6 +63,16 @@
 		96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D9B192308EC00676F10 /* PacketACKTest.m */; };
 		9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB2619459DBF001E6320 /* XAIIPHelper.m */; };
 		9639FB291945A883001E6320 /* IPGetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB281945A883001E6320 /* IPGetTest.m */; };
+		963BDB93199B05D80025B304 /* XAICategoryBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB92199B05D80025B304 /* XAICategoryBtn.m */; };
+		963BDB96199B0CE40025B304 /* XAICategoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB95199B0CE40025B304 /* XAICategoryTool.m */; };
+		963BDB99199B17550025B304 /* XAIHasTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB98199B17550025B304 /* XAIHasTableViewVC.m */; };
+		963BDB9D199B31910025B304 /* XAILightListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB9C199B31910025B304 /* XAILightListVC.m */; };
+		963BDBAB199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA0199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m */; };
+		963BDBAC199B426B0025B304 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA2199B426B0025B304 /* SWCellScrollView.m */; };
+		963BDBAD199B426B0025B304 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA4199B426B0025B304 /* SWLongPressGestureRecognizer.m */; };
+		963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA6199B426B0025B304 /* SWTableViewCell.m */; };
+		963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
@@ -96,6 +106,21 @@
 		96659E52192C813E0045E66F /* XAIPacketDevTypeInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = C33E77F818F395DF00808391 /* XAIPacketDevTypeInfo.c */; };
 		96659E54192C813E0045E66F /* MQTT.m in Sources */ = {isa = PBXBuildFile; fileRef = C33E780018F3B41A00808391 /* MQTT.m */; };
 		96659E56192C813E0045E66F /* MQTTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CC18F688E0002D4F74 /* MQTTCover.m */; };
+		966828331998A72200F25AB9 /* Set_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 966828301998A72200F25AB9 /* Set_iPhone.storyboard */; };
+		966828381998C27300F25AB9 /* XAIChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 966828351998C27300F25AB9 /* XAIChatCell.m */; };
+		966828391998C27300F25AB9 /* XAIChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 966828371998C27300F25AB9 /* XAIChatVC.m */; };
+		966828491998C2C600F25AB9 /* ReceiverTextNodeBkg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9668283C1998C2C600F25AB9 /* ReceiverTextNodeBkg.png */; };
+		9668284A1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9668283D1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png */; };
+		9668284B1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 9668283E1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading.png */; };
+		9668284C1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9668283F1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png */; };
+		9668284D1998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828401998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png */; };
+		9668284E1998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828411998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png */; };
+		9668284F1998C2C600F25AB9 /* SenderAppNodeBkg_HL.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828431998C2C600F25AB9 /* SenderAppNodeBkg_HL.png */; };
+		966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */; };
+		966828511998C2C600F25AB9 /* SenderVoiceNodeDownloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */; };
+		966828521998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */; };
+		966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */; };
+		966828541998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */; };
 		9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
@@ -166,6 +191,9 @@
 		96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B75AC81974F77300253906 /* obj_IR_working@2x.png */; };
 		96B75ACD1974F7D500253906 /* XAIIR.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACC1974F7D500253906 /* XAIIR.m */; };
 		96B75AD0197500A000253906 /* XAIIRStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B75ACF197500A000253906 /* XAIIRStatusVC.m */; };
+		96C6BD5C19986E4E00D61111 /* Main_iPhone副本.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C6BD5A19986E4E00D61111 /* Main_iPhone副本.storyboard */; };
+		96C6BD621998730800D61111 /* Show_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C6BD601998730800D61111 /* Show_iPhone.storyboard */; };
+		96C6BD661998789E00D61111 /* XAIShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C6BD651998789E00D61111 /* XAIShowVC.m */; };
 		96C8822119823BBE00571F21 /* XAIAlertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C8822019823BBE00571F21 /* XAIAlertTest.m */; };
 		96C882241985F60A00571F21 /* XAIObjectOpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C882231985F60A00571F21 /* XAIObjectOpr.m */; };
 		96D0FED718FD168A0017ADD8 /* DeviceServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FED618FD168A0017ADD8 /* DeviceServiceTest.m */; };
@@ -223,7 +251,6 @@
 		C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1F118EBC8E3002F20C1 /* zbar-samples.png */; };
 		C38AC1FA18EBCD4E002F20C1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */; };
 		C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */; };
-		C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */; };
 		C38D91DF18ED2F95006F22D3 /* XAIPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = C38D91DE18ED2F95006F22D3 /* XAIPacket.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E118ED3490006F22D3 /* MosquittoClient.m */; };
 		C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D91E318ED3490006F22D3 /* MosquittoMessage.m */; };
@@ -311,6 +338,26 @@
 		9639FB2519459DBF001E6320 /* XAIIPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIPHelper.h; sourceTree = "<group>"; };
 		9639FB2619459DBF001E6320 /* XAIIPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIPHelper.m; sourceTree = "<group>"; };
 		9639FB281945A883001E6320 /* IPGetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPGetTest.m; sourceTree = "<group>"; };
+		963BDB91199B05D70025B304 /* XAICategoryBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICategoryBtn.h; sourceTree = "<group>"; };
+		963BDB92199B05D80025B304 /* XAICategoryBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICategoryBtn.m; sourceTree = "<group>"; };
+		963BDB94199B0CE40025B304 /* XAICategoryTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICategoryTool.h; sourceTree = "<group>"; };
+		963BDB95199B0CE40025B304 /* XAICategoryTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICategoryTool.m; sourceTree = "<group>"; };
+		963BDB97199B17550025B304 /* XAIHasTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIHasTableViewVC.h; sourceTree = "<group>"; };
+		963BDB98199B17550025B304 /* XAIHasTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIHasTableViewVC.m; sourceTree = "<group>"; };
+		963BDB9B199B31910025B304 /* XAILightListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListVC.h; sourceTree = "<group>"; };
+		963BDB9C199B31910025B304 /* XAILightListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightListVC.m; sourceTree = "<group>"; };
+		963BDB9F199B426B0025B304 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		963BDBA0199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		963BDBA1199B426B0025B304 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		963BDBA2199B426B0025B304 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		963BDBA3199B426B0025B304 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		963BDBA4199B426B0025B304 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		963BDBA5199B426B0025B304 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		963BDBA6199B426B0025B304 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		963BDBA7199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		963BDBA9199B426B0025B304 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
@@ -350,6 +397,23 @@
 		96619DCA1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevShowStatusVCGenerate.m; sourceTree = "<group>"; };
 		96659E3C192C6B200045E66F /* XAILight2_CirculeTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2_CirculeTwo.h; sourceTree = "<group>"; };
 		96659E3D192C6B200045E66F /* XAILight2_CirculeTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2_CirculeTwo.m; sourceTree = "<group>"; };
+		966828311998A72200F25AB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Set_iPhone.storyboard; sourceTree = "<group>"; };
+		966828341998C27300F25AB9 /* XAIChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIChatCell.h; sourceTree = "<group>"; };
+		966828351998C27300F25AB9 /* XAIChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIChatCell.m; sourceTree = "<group>"; };
+		966828361998C27300F25AB9 /* XAIChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIChatVC.h; sourceTree = "<group>"; };
+		966828371998C27300F25AB9 /* XAIChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIChatVC.m; sourceTree = "<group>"; };
+		9668283C1998C2C600F25AB9 /* ReceiverTextNodeBkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceiverTextNodeBkg.png; sourceTree = "<group>"; };
+		9668283D1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@2x.png"; sourceTree = "<group>"; };
+		9668283E1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceiverVoiceNodeDownloading.png; sourceTree = "<group>"; };
+		9668283F1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
+		966828401998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceiverVoiceNodePlaying.png; sourceTree = "<group>"; };
+		966828411998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverVoiceNodePlaying@2x.png"; sourceTree = "<group>"; };
+		966828431998C2C600F25AB9 /* SenderAppNodeBkg_HL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderAppNodeBkg_HL.png; sourceTree = "<group>"; };
+		966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderAppNodeBkg_HL@2x.png"; sourceTree = "<group>"; };
+		966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodeDownloading.png; sourceTree = "<group>"; };
+		966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
+		966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying.png; sourceTree = "<group>"; };
+		966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying@2x.png"; sourceTree = "<group>"; };
 		967101891988979B0037C21E /* XAINoAcceptPacketHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINoAcceptPacketHandle.h; sourceTree = "<group>"; };
 		9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINoAcceptPacketHandle.m; sourceTree = "<group>"; };
 		96729FD0192B1E81002A8C40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -520,6 +584,10 @@
 		96B75ACC1974F7D500253906 /* XAIIR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIR.m; sourceTree = "<group>"; };
 		96B75ACE197500A000253906 /* XAIIRStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIRStatusVC.h; sourceTree = "<group>"; };
 		96B75ACF197500A000253906 /* XAIIRStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIRStatusVC.m; sourceTree = "<group>"; };
+		96C6BD5B19986E4E00D61111 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Main_iPhone副本.storyboard"; sourceTree = "<group>"; };
+		96C6BD611998730800D61111 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Show_iPhone.storyboard; sourceTree = "<group>"; };
+		96C6BD641998789E00D61111 /* XAIShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIShowVC.h; sourceTree = "<group>"; };
+		96C6BD651998789E00D61111 /* XAIShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIShowVC.m; sourceTree = "<group>"; };
 		96C8822019823BBE00571F21 /* XAIAlertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIAlertTest.m; sourceTree = "<group>"; };
 		96C882221985F60A00571F21 /* XAIObjectOpr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectOpr.h; sourceTree = "<group>"; };
 		96C882231985F60A00571F21 /* XAIObjectOpr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectOpr.m; sourceTree = "<group>"; };
@@ -627,7 +695,6 @@
 		C38AC1F718EBCCB8002F20C1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C38AC1F918EBCD4E002F20C1 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		C38AC1FE18EBDBEE002F20C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		C38D91D818ED19C0006F22D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main_iPhone35.storyboard; sourceTree = "<group>"; };
 		C38D91DC18ED2C73006F22D3 /* XAIMQTTDEF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIMQTTDEF.h; sourceTree = "<group>"; };
 		C38D91DD18ED2F95006F22D3 /* XAIPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacket.h; sourceTree = "<group>"; };
 		C38D91DE18ED2F95006F22D3 /* XAIPacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacket.c; sourceTree = "<group>"; };
@@ -801,6 +868,7 @@
 		9639FB2419459DA2001E6320 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				963BDB9E199B426B0025B304 /* SWCell */,
 				968D79AB1947FC4E004A9F20 /* route.h */,
 				9639FB2519459DBF001E6320 /* XAIIPHelper.h */,
 				9639FB2619459DBF001E6320 /* XAIIPHelper.m */,
@@ -812,6 +880,34 @@
 				9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */,
 			);
 			path = other;
+			sourceTree = "<group>";
+		};
+		963BDB9A199B316A0025B304 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				963BDB9B199B31910025B304 /* XAILightListVC.h */,
+				963BDB9C199B31910025B304 /* XAILightListVC.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		963BDB9E199B426B0025B304 /* SWCell */ = {
+			isa = PBXGroup;
+			children = (
+				963BDB9F199B426B0025B304 /* NSMutableArray+SWUtilityButtons.h */,
+				963BDBA0199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m */,
+				963BDBA1199B426B0025B304 /* SWCellScrollView.h */,
+				963BDBA2199B426B0025B304 /* SWCellScrollView.m */,
+				963BDBA3199B426B0025B304 /* SWLongPressGestureRecognizer.h */,
+				963BDBA4199B426B0025B304 /* SWLongPressGestureRecognizer.m */,
+				963BDBA5199B426B0025B304 /* SWTableViewCell.h */,
+				963BDBA6199B426B0025B304 /* SWTableViewCell.m */,
+				963BDBA7199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.h */,
+				963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */,
+				963BDBA9199B426B0025B304 /* SWUtilityButtonView.h */,
+				963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */,
+			);
+			path = SWCell;
 			sourceTree = "<group>";
 		};
 		9648E6DC190A05A900D630D8 /* user */ = {
@@ -858,6 +954,41 @@
 				96C882231985F60A00571F21 /* XAIObjectOpr.m */,
 			);
 			path = Obj;
+			sourceTree = "<group>";
+		};
+		9668283A1998C2C600F25AB9 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				9668283B1998C2C600F25AB9 /* receiver */,
+				966828421998C2C600F25AB9 /* sender */,
+			);
+			path = chat;
+			sourceTree = "<group>";
+		};
+		9668283B1998C2C600F25AB9 /* receiver */ = {
+			isa = PBXGroup;
+			children = (
+				9668283C1998C2C600F25AB9 /* ReceiverTextNodeBkg.png */,
+				9668283D1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png */,
+				9668283E1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading.png */,
+				9668283F1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png */,
+				966828401998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png */,
+				966828411998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png */,
+			);
+			path = receiver;
+			sourceTree = "<group>";
+		};
+		966828421998C2C600F25AB9 /* sender */ = {
+			isa = PBXGroup;
+			children = (
+				966828431998C2C600F25AB9 /* SenderAppNodeBkg_HL.png */,
+				966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */,
+				966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */,
+				966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */,
+				966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */,
+				966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */,
+			);
+			path = sender;
 			sourceTree = "<group>";
 		};
 		96729FD9192B2576002A8C40 /* openssl */ = {
@@ -1011,6 +1142,8 @@
 				969D6E6119187BA8002076A0 /* XAIScanVC.m */,
 				969D6EDB1919F4A3002076A0 /* UIKitADD.h */,
 				969D6EDC1919F4A3002076A0 /* UIKitADD.m */,
+				963BDB97199B17550025B304 /* XAIHasTableViewVC.h */,
+				963BDB98199B17550025B304 /* XAIHasTableViewVC.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1040,6 +1173,7 @@
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
+				9668283A1998C2C600F25AB9 /* chat */,
 				962DDB591990DBFD009EB456 /* icon */,
 				969D6ED51919EB5F002076A0 /* other */,
 				9648E6DC190A05A900D630D8 /* user */,
@@ -1116,9 +1250,28 @@
 			path = 2x;
 			sourceTree = "<group>";
 		};
+		96C6BD631998788000D61111 /* Shows */ = {
+			isa = PBXGroup;
+			children = (
+				963BDB9A199B316A0025B304 /* Category */,
+				966828341998C27300F25AB9 /* XAIChatCell.h */,
+				966828351998C27300F25AB9 /* XAIChatCell.m */,
+				966828361998C27300F25AB9 /* XAIChatVC.h */,
+				966828371998C27300F25AB9 /* XAIChatVC.m */,
+				96C6BD641998789E00D61111 /* XAIShowVC.h */,
+				96C6BD651998789E00D61111 /* XAIShowVC.m */,
+				963BDB91199B05D70025B304 /* XAICategoryBtn.h */,
+				963BDB92199B05D80025B304 /* XAICategoryBtn.m */,
+				963BDB94199B0CE40025B304 /* XAICategoryTool.h */,
+				963BDB95199B0CE40025B304 /* XAICategoryTool.m */,
+			);
+			path = Shows;
+			sourceTree = "<group>";
+		};
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				96C6BD631998788000D61111 /* Shows */,
 				967BD7951908D874007C3C8C /* common */,
 				967BD7AA19090F3A007C3C8C /* Set */,
 				967BD7AD19090F3A007C3C8C /* UserList */,
@@ -1154,7 +1307,9 @@
 		C341A63A18EBB22000034649 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */,
+				966828301998A72200F25AB9 /* Set_iPhone.storyboard */,
+				96C6BD601998730800D61111 /* Show_iPhone.storyboard */,
+				96C6BD5A19986E4E00D61111 /* Main_iPhone副本.storyboard */,
 				C38AC1FD18EBDBEE002F20C1 /* Main_iPhone.storyboard */,
 				963046A11923544C0023653E /* DevInfoView.xib */,
 				963046AA1923603F0023653E /* DevInfoView35.xib */,
@@ -1506,31 +1661,37 @@
 			files = (
 				967BD78E1908B5CB007C3C8C /* device_add_nor@2x.png in Resources */,
 				9631D17019075691007CBC4B /* obj_light.png in Resources */,
+				9668284B1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading.png in Resources */,
 				969D6E6D191881B7002076A0 /* login_btn_sel@2x.png in Resources */,
 				960BDD541907989300787148 /* obj_door_close.png in Resources */,
 				96B75AC91974F77300253906 /* obj_IR_warning@2x.png in Resources */,
 				9631D17119075691007CBC4B /* obj_switch.png in Resources */,
 				96E9D98B190111F7000BB595 /* tab_bar_set_nor.png in Resources */,
+				966828491998C2C600F25AB9 /* ReceiverTextNodeBkg.png in Resources */,
 				96B75AC61974F76400253906 /* obj_IR_working.png in Resources */,
 				962DDDFE191612E7008F370A /* obj_window_open@2x.png in Resources */,
 				962DDE01191612F1008F370A /* obj_window_close.png in Resources */,
 				96E9D95B1900FD01000BB595 /* qrcode_btn_nor.png in Resources */,
+				966828521998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png in Resources */,
 				969D6E6C191881B7002076A0 /* login_btn_normal@2x.png in Resources */,
+				966828331998A72200F25AB9 /* Set_iPhone.storyboard in Resources */,
 				963046A9192356430023653E /* DevInfoViewCell.xib in Resources */,
 				96B75AC21974F75A00253906 /* obj_IR@2x.png in Resources */,
 				967BD79F1908F9DA007C3C8C /* device_edit_sel@2x.png in Resources */,
 				9631D16C19075691007CBC4B /* obj_light@2x.png in Resources */,
 				9631D16E19075691007CBC4B /* obj_window@2x.png in Resources */,
 				9683DA671900F01000518FEB /* login_btn_sel.png in Resources */,
-				C38D91DA18ED1A2F006F22D3 /* Main_iPhone35.storyboard in Resources */,
 				960BDD561907989300787148 /* obj_light_close.png in Resources */,
+				9668284A1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png in Resources */,
 				969D6E7F191882CE002076A0 /* tab_bar_set_nor@2x.png in Resources */,
 				960BDD531907989300787148 /* obj_light_open@2x.png in Resources */,
+				966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */,
 				96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
 				962DDB5E1990DBFD009EB456 /* icon58*58.png in Resources */,
 				9648E6E1190A05A900D630D8 /* user_head.png in Resources */,
 				969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */,
+				966828511998C2C600F25AB9 /* SenderVoiceNodeDownloading.png in Resources */,
 				9631D17219075691007CBC4B /* obj_window.png in Resources */,
 				969D6E8A1918842B002076A0 /* qrcode_scan_rec@2x.png in Resources */,
 				969D6E8519188422002076A0 /* qrcode_scan_cancel.png in Resources */,
@@ -1551,6 +1712,7 @@
 				967BD78F1908B5CB007C3C8C /* device_add_sel@2x.png in Resources */,
 				96E9D985190111F7000BB595 /* tab_bar_dev_sel.png in Resources */,
 				9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */,
+				966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */,
 				969D6E7D191882CE002076A0 /* tab_bar_devM_sel@2x.png in Resources */,
 				969D6E7B191882CE002076A0 /* tab_bar_dev_sel@2x.png in Resources */,
 				967BD7A21908F9E1007C3C8C /* device_edit_nor.png in Resources */,
@@ -1560,17 +1722,24 @@
 				962DDDFD191612E7008F370A /* obj_window_close@2x.png in Resources */,
 				962DDE02191612F1008F370A /* obj_window_open.png in Resources */,
 				969D6E7A191882CE002076A0 /* tab_bar_dev_nor@2x.png in Resources */,
+				96C6BD621998730800D61111 /* Show_iPhone.storyboard in Resources */,
+				9668284F1998C2C600F25AB9 /* SenderAppNodeBkg_HL.png in Resources */,
+				96C6BD5C19986E4E00D61111 /* Main_iPhone副本.storyboard in Resources */,
 				9631D16B19075691007CBC4B /* obj_door@2x.png in Resources */,
 				9631D16F19075691007CBC4B /* obj_door.png in Resources */,
+				9668284C1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png in Resources */,
 				96E9D983190111F7000BB595 /* tab_bar_dev_nor.png in Resources */,
 				961F95C318F4E432002D4F74 /* ca.crt in Resources */,
 				C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */,
+				9668284E1998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png in Resources */,
 				964E6A311904DAD500F1F61C /* nav_bar_44.png in Resources */,
 				9683DA661900F01000518FEB /* login_btn_normal.png in Resources */,
+				966828541998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png in Resources */,
 				960BDD521907989300787148 /* obj_light_close@2x.png in Resources */,
 				C38AC1F418EBC8E3002F20C1 /* zbar-help.html in Resources */,
 				96E9D98D190111F7000BB595 /* tab_bar_set_sel.png in Resources */,
 				964E6A351904E94100F1F61C /* tab_bar_selected.png in Resources */,
+				9668284D1998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png in Resources */,
 				969D6E6B191881B7002076A0 /* login_btn_nor@2x.png in Resources */,
 				96E9D9591900FD01000BB595 /* login_btn_nor.png in Resources */,
 				96E4480A191C6E13008A424B /* Localizable.strings in Resources */,
@@ -1633,6 +1802,8 @@
 				1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */,
 				962DDE0A19161493008F370A /* XAIDoorStatusVC.m in Sources */,
 				C341A66D18EBB2C400034649 /* net_mosq.c in Sources */,
+				963BDB9D199B31910025B304 /* XAILightListVC.m in Sources */,
+				96C6BD661998789E00D61111 /* XAIShowVC.m in Sources */,
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961071DE192B3EFA00D5F75A /* XAIDeviceType.m in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
@@ -1643,6 +1814,7 @@
 				967BD77F1908AB08007C3C8C /* XAIDevShowStatusVC.m in Sources */,
 				9616803119206979000682A4 /* XAITimeOut.m in Sources */,
 				964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */,
+				963BDB99199B17550025B304 /* XAIHasTableViewVC.m in Sources */,
 				967BD77E1908AB08007C3C8C /* XAIDevShowCell.m in Sources */,
 				96E9D97119010561000BB595 /* XAILoginVC.m in Sources */,
 				969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */,
@@ -1651,6 +1823,7 @@
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
 				96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */,
+				963BDBAC199B426B0025B304 /* SWCellScrollView.m in Sources */,
 				967BD7981908D896007C3C8C /* XAIChangeNameVC.m in Sources */,
 				967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
@@ -1673,6 +1846,9 @@
 				C341A67118EBB2C400034649 /* send_client_mosq.c in Sources */,
 				96D8290A18FE4A0C008C6B81 /* XAIDevice.m in Sources */,
 				96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */,
+				963BDB96199B0CE40025B304 /* XAICategoryTool.m in Sources */,
+				963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */,
+				963BDBAB199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				96619DB91915D58F009849B0 /* XAIDoor.m in Sources */,
 				96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */,
@@ -1683,10 +1859,13 @@
 				9608ADDF1960FB5C00E1CE75 /* XAIAlert.m in Sources */,
 				1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */,
 				967BD7941908C5C5007C3C8C /* XAIDevAddVC.m in Sources */,
+				966828391998C27300F25AB9 /* XAIChatVC.m in Sources */,
+				966828381998C27300F25AB9 /* XAIChatCell.m in Sources */,
 				96569B4719403FD600A96F45 /* XAILinkage.m in Sources */,
 				96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */,
 				962DDE0B19161493008F370A /* XAILightStatusVC.m in Sources */,
 				96AE040819931296001F2A5C /* time_mosq.c in Sources */,
+				963BDBAD199B426B0025B304 /* SWLongPressGestureRecognizer.m in Sources */,
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
@@ -1703,11 +1882,14 @@
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
 				9648E6F0190A1FD200D630D8 /* XAITableViewWithOprController.m in Sources */,
+				963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				967BD7831908AB08007C3C8C /* XAIDevManageVC.m in Sources */,
+				963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */,
 				969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */,
+				963BDB93199B05D80025B304 /* XAICategoryBtn.m in Sources */,
 				961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */,
 				967BD7A6190904FA007C3C8C /* XAIDebug.m in Sources */,
 				96569B4819403FD600A96F45 /* XAILinkageUseInfo.m in Sources */,
@@ -1788,6 +1970,30 @@
 			name = DevInfoView35.xib;
 			sourceTree = "<group>";
 		};
+		966828301998A72200F25AB9 /* Set_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				966828311998A72200F25AB9 /* Base */,
+			);
+			name = Set_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		96C6BD5A19986E4E00D61111 /* Main_iPhone副本.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96C6BD5B19986E4E00D61111 /* Base */,
+			);
+			name = "Main_iPhone副本.storyboard";
+			sourceTree = "<group>";
+		};
+		96C6BD601998730800D61111 /* Show_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96C6BD611998730800D61111 /* Base */,
+			);
+			name = Show_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
 		96E4480C191C6E13008A424B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1811,14 +2017,6 @@
 			);
 			name = Main_iPhone.storyboard;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		C38D91D718ED19C0006F22D3 /* Main_iPhone35.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C38D91D818ED19C0006F22D3 /* Base */,
-			);
-			name = Main_iPhone35.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

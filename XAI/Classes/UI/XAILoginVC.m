@@ -14,6 +14,9 @@
 #import "XAIToken.h"
 #import "XAIAlert.h"
 
+#import "XAIShowVC.h"
+
+
 #import "Reachability.h"
 
 
@@ -85,7 +88,7 @@
 
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    //apsnstr = @"210e2b26";
+    apsnstr = @"210e2b26";
     //apsnstr = @"210e9b6e";
     //apsnstr = @"210e2757";
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
@@ -403,48 +406,13 @@
         
     }else{
         
-//        NSString* errTip = NSLocalizedString(@"PushTokenFaild", nil);
-//        NSString* cancelStr = NSLocalizedString(@"AlertOK", nil);
-//        
-//        if (errTip != nil) {
-//            
-//            
-//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                            message:errTip
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:cancelStr
-//                                                  otherButtonTitles:nil];
-//            
-//            [alert show];
-//            
-//            [_activityView stopAnimating];
-//            
-//        }
-        
-        
+    
     }
     
     [self getData];
     
     //获取失败也要进行,失败不会更新代理,手动更新
     [[MQTT shareMQTT].packetManager change];
-}
-
-- (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
-
-//    _findDev =  isSuccess ? findSuccess : findFail;
-//    
-//    if (isSuccess) {
-//        
-//        /*存储数据 其他页面使用*/
-//        [[XAIData shareData] setObjList:[devs allObjects]];
-//        
-//    }
-//
-//    
-//        
-//    [self getDataFinsh];
-    
 }
 
 - (void) devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -580,13 +548,12 @@
         /*设置数据更新*/
         [[XAIData shareData] startRefresh];
     
-        //[self performSegueWithIdentifier:@"XAIMainPageSegue" sender:nil];
         
-        UIViewController* vc= [self.storyboard
-                               instantiateViewControllerWithIdentifier:@"XAIMainPage"];
+        UIViewController* vc= [XAIShowVC create];
         
         XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.window setRootViewController:vc];
+        
         
         appDelegate.needKeepTip = true;
         //XAIAppDelegate* [UIApplication sharedApplication].delegate;

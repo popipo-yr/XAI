@@ -22,6 +22,15 @@
 
 @implementation XAISetVC
 
++ (UIViewController*) create{
+
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Set_iPhone" bundle:nil];
+    UIViewController* vc = [storyboard instantiateViewControllerWithIdentifier:_SI_SetVC];
+    [vc changeIphoneStatus];
+    
+    return vc;
+}
+
 
 - (id) initWithCoder:(NSCoder *) coder{
 

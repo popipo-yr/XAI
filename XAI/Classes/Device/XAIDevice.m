@@ -289,6 +289,7 @@
     dev.model = _model; /*型号*/
     
     dev.corObjType = _corObjType;
+    dev.devStatus = _devStatus;
     
     return dev;
 

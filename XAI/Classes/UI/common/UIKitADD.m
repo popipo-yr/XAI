@@ -101,6 +101,180 @@
     return [self length] > 3 && [self length] < 13;
 
 }
+@end
 
+@implementation UIViewController (ADD)
+
+- (NSArray*) openSwipe{
+    
+    UISwipeGestureRecognizer* _recognizer;
+    UISwipeGestureRecognizer* _recognizerRight;
+
+    
+    _recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                            action:@selector(handleSwipeLeft:)];
+    
+    [_recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:_recognizer];
+    
+    
+    _recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                 action:@selector(handleSwipeRight:)];
+    
+    [_recognizerRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:_recognizerRight];
+    
+    return [NSArray arrayWithObjects:_recognizer,_recognizerRight,nil];
+
+}
+- (void) stopSwipte:(NSArray*) swipes{
+    for ( UISwipeGestureRecognizer* recognizer in swipes) {
+        if ([recognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
+            [self.view removeGestureRecognizer:recognizer];
+        }
+    }
+}
+- (void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer{
+}
+- (void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer{
+}
+
+- (void) animalVC_R2L:(UIViewController*)vc{
+    // Get the views.
+    UIView * fromView = self.view;
+    if (self.parentViewController != nil && [self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        fromView = self.parentViewController.view;
+    }
+    
+    UIView * toView = vc.view;
+    
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    
+    // Add the toView to the fromView
+    [fromView.superview addSubview:toView];
+    
+    // Position it off screen.
+    toView.frame = CGRectMake( 320 , viewSize.origin.y, 320, viewSize.size.height);
+    
+    [UIView animateWithDuration:0.4 animations:
+     ^{
+         // Animate the views on and off the screen. This will appear to slide.
+         fromView.frame =CGRectMake( -320 , viewSize.origin.y, 320, viewSize.size.height);
+         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+     }
+                     completion:^(BOOL finished)
+     {
+         if (finished)
+         {
+             // Remove the old view from its parent.
+             [fromView removeFromSuperview];
+             [[UIApplication sharedApplication].delegate.window setRootViewController:vc];
+
+         }
+     }];
+    
+
+}
+
+- (void) animalView_R2L:(UIView*)view{
+    
+    // Get the views.
+    UIView * fromView = self.view;
+    UIView * toView = view;
+    
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    
+    // Add the toView to the fromView
+    [fromView.superview addSubview:toView];
+    
+    // Position it off screen.
+    toView.frame = CGRectMake( 320 , viewSize.origin.y, 320, viewSize.size.height);
+    
+    [UIView animateWithDuration:0.4 animations:
+     ^{
+         // Animate the views on and off the screen. This will appear to slide.
+         fromView.frame =CGRectMake( -320 , viewSize.origin.y, 320, viewSize.size.height);
+         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+     }
+                     completion:^(BOOL finished)
+     {
+         if (finished)
+         {
+             // Remove the old view from its parent.
+             [fromView removeFromSuperview];
+             //[[UIApplication sharedApplication].delegate.window setRootViewController:vc];
+            
+             [self finish_R2L];
+         }
+     }];
+ 
+}
+
+- (void) finish_R2L{
+
+}
+
+- (void) animalView_L2R:(UIView *)view{
+
+    
+    // Get the views.
+    UIView * fromView = self.view;
+    UIView * toView = view;
+    
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    
+    // Position it off screen.
+    toView.frame = CGRectMake( -320 , viewSize.origin.y, 320, viewSize.size.height);
+    
+    [UIView animateWithDuration:0.4 animations:
+     ^{
+         // Animate the views on and off the screen. This will appear to slide.
+         fromView.frame =CGRectMake( 320 , viewSize.origin.y, 320, viewSize.size.height);
+         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+     }
+                     completion:^(BOOL finished)
+     {
+         if (finished)
+         {
+             // Remove the old view from the tabbar view.
+             [fromView removeFromSuperview];
+             [self finish_L2R];
+         }
+     }];
+
+}
+
+-(void)finish_L2R{
+}
+
+- (void) changeIphoneStatus{
+
+    if (isIOS7) {
+        
+        [[UINavigationBar appearance] setBarTintColor:
+         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+        view.backgroundColor=[UIColor whiteColor];
+        
+        [self.view addSubview:view];
+        
+    }else{
+        
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:RGBA(255, 91, 0, 255)
+                                                                            size:CGSizeMake(1, 44)]
+                                           forBarMetrics:UIBarMetricsDefault];
+        
+    }
+    
+
+
+}
 
 @end

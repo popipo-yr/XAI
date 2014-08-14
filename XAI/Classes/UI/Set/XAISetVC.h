@@ -13,6 +13,8 @@
 #import "XAIChangeNameVC.h"
 #import "XAIChangePasswordVC.h"
 
+#define _SI_SetVC @"show_set"
+
 @interface XAISetVC : XAITableViewController
 <UITableViewDataSource,UITableViewDelegate,XAIUserServiceDelegate>{
 
@@ -32,6 +34,6 @@
     XAIChangePasswordVC* _pawVC;
 }
 
-
++ (UIViewController*) create;
 
 @end
