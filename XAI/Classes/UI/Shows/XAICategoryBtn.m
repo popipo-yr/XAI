@@ -15,7 +15,7 @@
     if (self = [super init]) {
         
         _showBtn = [[UIButton alloc] initWithFrame:frame];
-        [_showBtn setBackgroundColor:[UIColor greenColor]];
+        [_showBtn setBackgroundColor:[UIColor clearColor]];
     }
     
     return self;
@@ -59,5 +59,16 @@
     }
 }
 
+
+-(void)setType:(XAICategoryType)type{
+
+    [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool norImgStrForType:type]]
+              forState:UIControlStateNormal];
+    [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool selImgStrForType:type]]
+              forState:UIControlStateSelected];
+
+    
+    _type = type;
+}
 
 @end

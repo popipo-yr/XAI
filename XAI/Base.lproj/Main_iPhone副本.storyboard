@@ -866,9 +866,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="login_btn_dis.png" width="201" height="39"/>
-        <image name="login_btn_normal.png" width="201" height="39"/>
-        <image name="login_btn_sel.png" width="201" height="39"/>
+        <image name="login_btn_dis.png" width="285" height="42"/>
+        <image name="login_btn_normal.png" width="285" height="42"/>
+        <image name="login_btn_sel.png" width="285" height="42"/>
         <image name="qrcode_btn_nor.png" width="25" height="25"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>

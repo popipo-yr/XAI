@@ -20,7 +20,7 @@
 
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
     UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_ShowVCID];
-    [vc changeIphoneStatus];
+    //[vc changeIphoneStatus];
     return vc;
 
 }
@@ -66,7 +66,7 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -143,9 +143,9 @@
     float sideSpaceUD = 8.0f;
     float udSpace = 15.0f;
     float midSpace =  15.0f;
-    float buttonHeight = 140.0f;
+    float buttonHeight = 142.0f;
     float buttonWidth = (scViewSize.width - 2*sideSpaceLR - (rowButtons - 1)*midSpace) / rowButtons;
-    
+    buttonWidth =  142.f;
     
     float height = rows*buttonHeight + (rows - 1)*udSpace + 2*sideSpaceUD;
     
@@ -175,7 +175,7 @@
     
     
     if (self.scrollView.contentSize.height > scViewSize.height) {
-        self.scrollView.scrollEnabled = true;
+        self.scrollView.scrollEnabled = false;
     }else{
         self.scrollView.scrollEnabled = false;
     }
