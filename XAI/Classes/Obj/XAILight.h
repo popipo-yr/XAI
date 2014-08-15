@@ -13,6 +13,8 @@
 #define OpenID  Key_CircuitOneCtrlID
 #define CloseID Key_CircuitTwoCtrlID
 
+
+
 @protocol  XAILigthtDelegate;
 @interface XAILight : XAIObject <XAIDevSwitchDelegate,XAIDeviceStatusDelegate>{
 
@@ -41,6 +43,8 @@ typedef enum XAILightStatus{
 
     XAILightStatus_Open = 1,
     XAILightStatus_Close = 0,
+    XAILightStatus_Start = XAIObjStatusOperStart,
+    XAILightStatus_err = XAIObjStatusErr,
     XAILightStatus_Unkown = XAIObjStatusUnkown
     
 }XAILightStatus;

@@ -262,15 +262,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="XAILightListCellID" rowHeight="63" id="eIP-uI-Ru3" userLabel="light Cell" customClass="XAILightListVCCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILightListCellID" rowHeight="63" id="eIP-uI-Ru3" userLabel="light Cell" customClass="XAILightListVCCell">
                                         <rect key="frame" x="0.0" y="22" width="297" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eIP-uI-Ru3" id="A3k-D4-A8f">
-                                            <rect key="frame" x="0.0" y="0.0" width="264" height="62"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="297" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1gt-pp-cIb">
-                                                    <rect key="frame" x="21" y="11" width="44" height="41"/>
+                                                    <rect key="frame" x="21" y="11" width="52" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 </imageView>
@@ -305,23 +305,23 @@
                                             <outlet property="nameLable" destination="Z5F-9Q-zTk" id="siT-15-ckv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="XAILightListCell2ID" rowHeight="126" id="svr-kV-TiQ" userLabel="light2 Cell" customClass="XAILightListVCCell2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILightListCell2ID" rowHeight="126" id="svr-kV-TiQ" userLabel="light2 Cell" customClass="XAILightListVCCell2">
                                         <rect key="frame" x="0.0" y="85" width="297" height="126"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="svr-kV-TiQ" id="gBr-Wv-6My">
-                                            <rect key="frame" x="0.0" y="0.0" width="264" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="297" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rjE-tA-gdY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="264" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="297" height="125"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <prototypes>
                                                         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILightListCellChildID" rowHeight="63" id="MvO-Ak-cbk" userLabel="light childCell" customClass="XAILightListVCChildCell">
-                                                            <rect key="frame" x="0.0" y="22" width="264" height="63"/>
+                                                            <rect key="frame" x="0.0" y="22" width="297" height="63"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MvO-Ak-cbk" id="GAk-eG-UAd">
-                                                                <rect key="frame" x="0.0" y="0.0" width="264" height="62"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="297" height="62"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="P5n-jf-Atk">
@@ -384,6 +384,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZb-x2-dmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2993" y="-2119"/>
+        </scene>
+        <!--door window List-->
+        <scene sceneID="6gS-bu-EfF">
+            <objects>
+                <viewController storyboardIdentifier="XAIDoorWinListVCID" id="VLG-ZO-7am" userLabel="door window List" customClass="XAIDoorWinListVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jh7-1Y-Lwr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LCj-Lb-Sp6">
+                                <rect key="frame" x="12" y="80" width="297" height="324"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIDoorWinCellID" rowHeight="63" id="tOw-Yd-7uO" userLabel="light Cell" customClass="XAIDoorWinCell">
+                                        <rect key="frame" x="0.0" y="22" width="297" height="63"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tOw-Yd-7uO" id="7he-sX-Ilz">
+                                            <rect key="frame" x="0.0" y="0.0" width="297" height="62"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cQv-qw-zKp">
+                                                    <rect key="frame" x="21" y="11" width="52" height="41"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vqf-DW-Lx0">
+                                                    <rect key="frame" x="81" y="11" width="191" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last operation time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uYt-1y-iSX">
+                                                    <rect key="frame" x="81" y="30" width="191" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abccccc" minimumFontSize="17" id="9ZO-jK-bU5" userLabel="input">
+                                                    <rect key="frame" x="81" y="2" width="97" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" label=""/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contextLable" destination="uYt-1y-iSX" id="XjL-eQ-SnT"/>
+                                            <outlet property="headImageView" destination="cQv-qw-zKp" id="bef-DH-Cqu"/>
+                                            <outlet property="input" destination="9ZO-jK-bU5" id="NJP-0e-zNw"/>
+                                            <outlet property="nameLable" destination="vqf-DW-Lx0" id="T9k-iD-Aku"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="LCj-Lb-Sp6" id="rEO-X4-eeh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MrX-A7-IiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3396" y="-1989"/>
         </scene>
         <!--XAIShowVC - 显示列表-->
         <scene sceneID="j3Z-rp-W1q">

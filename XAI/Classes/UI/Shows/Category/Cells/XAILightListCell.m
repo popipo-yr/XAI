@@ -10,6 +10,67 @@
 #import "XAIObjectGenerate.h"
 #import "XAILightListVC.h"
 
+@implementation _XAILightListVCCell
+
+- (void) setStatus:(XAILightStatus)status{
+
+    if(status == XAILightStatus_Open){
+        [self showOpen];
+    }else if(status == XAILightStatus_Close){
+        [self showClose];
+    }else if(status == XAILightStatus_Start){
+        [self showStart];
+    }else{
+        [self showError];
+    }
+    
+}
+
+#pragma mark -- LightDelegate
+
+#define LightOpenImg  @"obj_light_open.png"
+#define LightCloseImg @"obj_light_close.png"
+
+- (void) light:(XAILight *)light openSuccess:(BOOL)isSuccess{
+    
+    if (isSuccess) {
+        
+        
+        [self showOpen];
+        
+    }else{
+    
+        [self showError];
+    }
+    
+    
+}
+- (void) light:(XAILight *)light closeSuccess:(BOOL)isSuccess{
+    
+    if (isSuccess) {
+        
+        
+        [self showClose];
+        
+    }else{
+        
+        [self showError];
+    }
+}
+
+- (void) light:(XAILight *)light curStatus:(XAILightStatus)status{
+    
+    if (status == XAILightStatus_Open) {
+        [self showOpen];
+    }else{
+    
+        [self showClose];
+    }
+}
+
+
+@end
+
 @implementation XAILightListVCCell
 
 @end
@@ -39,7 +100,13 @@
     [self.cTableView reloadData];
 }
 
+-(void)dealloc{
 
+    for (XAILight* light in _datas) {
+        if (![light isKindOfClass:[XAILight class]]) continue;
+        light.delegate = nil;
+    }
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -71,9 +138,9 @@
                 reuseIdentifier:CellIdentifier2];
     }
     
-    XAIObject* aObj = [_datas objectAtIndex:[indexPath row]];
+    XAILight* aObj = [_datas objectAtIndex:[indexPath row]];
     
-    if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
+    if (aObj != nil && [aObj isKindOfClass:[XAILight class]]) {
         
         [cell.headImageView setBackgroundColor:[UIColor clearColor]];
         [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
@@ -89,6 +156,14 @@
         [cell.contextLable setText:[aObj.lastOpr allStr]];
         
         
+        [cell setStatus:aObj.curStatus];
+        
+        if (cell.weakLight != nil) {
+            cell.weakLight.delegate = nil;
+        }
+        cell.weakLight = aObj;
+        cell.weakLight.delegate = cell;
+        //aObj.delegate = cell;
     }
     
     
@@ -124,8 +199,44 @@
     switch (index) {
         case 0:
         {
+            
+            
             XAILightListVCChildCell* listCell = (XAILightListVCChildCell*)cell;
             if ([listCell isKindOfClass:[XAILightListVCChildCell class]]) {
+                
+                
+                if ([self.topVC isSame:listCell]) {
+                    if (listCell.input.text == nil || [listCell.input.text isEqualToString:@""]) {
+                        
+                        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:NSLocalizedString(@"DevNickNameNull", nil)
+                                                                       delegate:self
+                                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
+                                                              otherButtonTitles:nil];
+                        
+                        
+                        [alert show];
+                        return;
+                        
+                    }
+                    
+                    int index = [[self.cTableView indexPathForCell:cell] row];
+                    if (index >= [_datas  count]) {
+                        return;
+                    }
+                    XAIObject* obj = [_datas objectAtIndex:index];
+                    
+                    obj.nickName = listCell.input.text;
+                    
+                    [[XAIData shareData] upDateObj:obj];
+                    
+                    listCell.nameLable.text = listCell.input.text;
+                    
+                    
+                    [self.topVC hiddenOldInput];
+                    return;
+                }
+
                 
                 [self.topVC changeInputCell:listCell input:listCell.input];
 //                if (_curInputCell != nil) {
@@ -272,6 +383,43 @@ static SWTableViewCell* _curSWCell;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 63.0;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView
+  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    do {
+        
+        if ([indexPath row] >= [_datas count]) break;
+        
+        XAILight* aLight = [_datas objectAtIndex:[indexPath row]];
+        if (![aLight isKindOfClass:[XAILight class]]) break;
+        
+        XAILightListVCChildCell* cell = (XAILightListVCChildCell*)[tableView
+                                                                   cellForRowAtIndexPath:indexPath];
+        if (![cell isKindOfClass:[XAILightListVCChildCell class]]) break;
+        
+        
+        if(aLight.curStatus == XAILightStatus_Open){
+            
+            [aLight closeLight];
+            
+            
+        }else if(aLight.curStatus == XAILightStatus_Close){
+            
+            [aLight openLight];
+            
+        }
+        
+        [cell setStatus:aLight.curStatus];
+        
+        
+    } while (0);
+    
+    
+    
+    return nil;
 }
 
 

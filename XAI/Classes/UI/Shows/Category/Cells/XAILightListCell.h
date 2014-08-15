@@ -6,28 +6,39 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "SWTableViewCell.h"
+#import "XAIObjectCell.h"
+#import "XAILight.h"
+
+typedef enum {
+    
+    XAILightListVCCellStatus_open = 1,
+    XAILightListVCCellStatus_close = 2,
+    XAILightListVCCellStatus_start = 3,
+    XAILightListVCCellStatus_err = 4,
+
+}XAILightListVCCellStatus;
 
 @class XAILightListVC;
 
-#define  XAILightListCellID @"XAILightListCellID"
-@interface XAILightListVCCell : SWTableViewCell
+@interface _XAILightListVCCell : XAIObjectCell <XAILigthtDelegate>
 
-@property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
-@property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
-@property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
-@property (nonatomic,strong)  IBOutlet UITextField* input;
+@property (nonatomic,weak) XAILight* weakLight;
+
+- (void) setStatus:(XAILightStatus)status;
+@end
+
+
+
+#define  XAILightListCellID @"XAILightListCellID"
+@interface XAILightListVCCell : _XAILightListVCCell
+
 
 @end
 
 
 #define  XAILightListCellChildID @"XAILightListCellChildID"
-@interface XAILightListVCChildCell : SWTableViewCell
+@interface XAILightListVCChildCell : _XAILightListVCCell
 
-@property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
-@property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
-@property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
-@property (nonatomic,strong)  IBOutlet UITextField* input;
 
 @end
 
@@ -37,9 +48,11 @@
 <UITableViewDataSource,UITableViewDelegate,SWTableViewCellDelegate>{
 
     NSArray* _datas;
+    NSMutableArray* _cells;
+    
     XAILightListVCChildCell* _curInputCell;
     
-    NSMutableArray* _cells;
+
 
 }
 

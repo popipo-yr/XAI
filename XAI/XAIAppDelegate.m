@@ -87,6 +87,9 @@
         // self.window.backgroundColor = [UIColor whiteColor];
         
         
+    }else{
+    
+        //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self

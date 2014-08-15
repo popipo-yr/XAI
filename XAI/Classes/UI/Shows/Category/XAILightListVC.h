@@ -39,6 +39,8 @@
 - (void) willShowLeft:(UITableViewCell*)cell;
 - (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input;
 - (BOOL) hasInput;
+- (BOOL) isSame:(SWTableViewCell*)cell;
+- (void) hiddenOldInput;
 
 @end
 

@@ -10,6 +10,8 @@
 
 #import "XAIChatVC.h"
 #import "XAILightListVC.h"
+#import "XAIDoorWinListVC.h"
+
 
 
 @implementation XAICategoryTool
@@ -67,6 +69,7 @@
     switch (type) {
         case XAICategoryType_doorwin:{
         
+            nextVC = [XAIDoorWinListVC create];
             break;
         }
         case XAICategoryType_light:{

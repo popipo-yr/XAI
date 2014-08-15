@@ -36,6 +36,10 @@
 		961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 961F95CF18F780AE002D4F74 /* XAIUserService.m */; };
 		961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */ = {isa = PBXBuildFile; fileRef = 961F95D218F79EF5002D4F74 /* XAIPacketACK.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9621FF4F19494A4F004356B1 /* XAIReLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9621FF4E19494A4F004356B1 /* XAIReLogin.m */; };
+		962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */; };
+		962A0070199DA7950039E4EE /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006D199DA7950039E4EE /* XAILightListCell.m */; };
+		962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006F199DA7950039E4EE /* XAIObjectCell.m */; };
+		962A0074199DA7DC0039E4EE /* XAIDoorWinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A0073199DA7DC0039E4EE /* XAIDoorWinCell.m */; };
 		962DDB5D1990DBFD009EB456 /* icon120*120.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5A1990DBFD009EB456 /* icon120*120.png */; };
 		962DDB5E1990DBFD009EB456 /* icon58*58.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5B1990DBFD009EB456 /* icon58*58.png */; };
 		962DDB5F1990DBFD009EB456 /* icon80*80.png in Resources */ = {isa = PBXBuildFile; fileRef = 962DDB5C1990DBFD009EB456 /* icon80*80.png */; };
@@ -73,7 +77,6 @@
 		963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA6199B426B0025B304 /* SWTableViewCell.m */; };
 		963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */; };
-		963BDBB3199C663E0025B304 /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBB2199C663E0025B304 /* XAILightListCell.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
@@ -156,6 +159,18 @@
 		9683DA661900F01000518FEB /* login_btn_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9683DA631900F01000518FEB /* login_btn_normal.png */; };
 		9683DA671900F01000518FEB /* login_btn_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9683DA641900F01000518FEB /* login_btn_sel.png */; };
 		9683DA701900F5E600518FEB /* XAIUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9683DA6F1900F5E600518FEB /* XAIUser.m */; };
+		968A9B3E199DF8CF00D357BC /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B3C199DF8CF00D357BC /* bg@2x.png */; };
+		968A9B3F199DF8CF00D357BC /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B3D199DF8CF00D357BC /* bg.png */; };
+		968A9B44199E05BD00D357BC /* login_other_spe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B40199E05BD00D357BC /* login_other_spe@2x.png */; };
+		968A9B45199E05BD00D357BC /* login_tip_mima@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B41199E05BD00D357BC /* login_tip_mima@2x.png */; };
+		968A9B46199E05BD00D357BC /* login_tip_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B42199E05BD00D357BC /* login_tip_name@2x.png */; };
+		968A9B47199E05BD00D357BC /* xai_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B43199E05BD00D357BC /* xai_icon@2x.png */; };
+		968A9B4C199E05C600D357BC /* login_other_spe.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B48199E05C600D357BC /* login_other_spe.png */; };
+		968A9B4D199E05C600D357BC /* login_tip_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B49199E05C600D357BC /* login_tip_mima.png */; };
+		968A9B4E199E05C600D357BC /* login_tip_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B4A199E05C600D357BC /* login_tip_name.png */; };
+		968A9B4F199E05C600D357BC /* xai_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B4B199E05C600D357BC /* xai_icon.png */; };
+		968A9B51199E08E400D357BC /* login_ip.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B50199E08E400D357BC /* login_ip.png */; };
+		968A9B53199E08E900D357BC /* login_ip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968A9B52199E08E900D357BC /* login_ip@2x.png */; };
 		969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6E6119187BA8002076A0 /* XAIScanVC.m */; };
 		969D6E6A191881B7002076A0 /* login_btn_dis@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E64191881B7002076A0 /* login_btn_dis@2x.png */; };
 		969D6E6B191881B7002076A0 /* login_btn_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E65191881B7002076A0 /* login_btn_nor@2x.png */; };
@@ -308,6 +323,14 @@
 		961F95D218F79EF5002D4F74 /* XAIPacketACK.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketACK.c; sourceTree = "<group>"; };
 		9621FF4D19494A4F004356B1 /* XAIReLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIReLogin.h; sourceTree = "<group>"; };
 		9621FF4E19494A4F004356B1 /* XAIReLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIReLogin.m; sourceTree = "<group>"; };
+		962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoorWinListVC.h; sourceTree = "<group>"; };
+		962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoorWinListVC.m; sourceTree = "<group>"; };
+		962A006C199DA7950039E4EE /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
+		962A006D199DA7950039E4EE /* XAILightListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightListCell.m; sourceTree = "<group>"; };
+		962A006E199DA7950039E4EE /* XAIObjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectCell.h; sourceTree = "<group>"; };
+		962A006F199DA7950039E4EE /* XAIObjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectCell.m; sourceTree = "<group>"; };
+		962A0072199DA7DC0039E4EE /* XAIDoorWinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoorWinCell.h; sourceTree = "<group>"; };
+		962A0073199DA7DC0039E4EE /* XAIDoorWinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoorWinCell.m; sourceTree = "<group>"; };
 		962DDB5A1990DBFD009EB456 /* icon120*120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon120*120.png"; sourceTree = "<group>"; };
 		962DDB5B1990DBFD009EB456 /* icon58*58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon58*58.png"; sourceTree = "<group>"; };
 		962DDB5C1990DBFD009EB456 /* icon80*80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon80*80.png"; sourceTree = "<group>"; };
@@ -359,8 +382,6 @@
 		963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		963BDBA9199B426B0025B304 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
-		963BDBB1199C663E0025B304 /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
-		963BDBB2199C663E0025B304 /* XAILightListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILightListCell.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
@@ -542,6 +563,18 @@
 		9683DA641900F01000518FEB /* login_btn_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_btn_sel.png; sourceTree = "<group>"; };
 		9683DA6E1900F5E600518FEB /* XAIUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUser.h; sourceTree = "<group>"; };
 		9683DA6F1900F5E600518FEB /* XAIUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUser.m; sourceTree = "<group>"; };
+		968A9B3C199DF8CF00D357BC /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
+		968A9B3D199DF8CF00D357BC /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		968A9B40199E05BD00D357BC /* login_other_spe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_other_spe@2x.png"; sourceTree = "<group>"; };
+		968A9B41199E05BD00D357BC /* login_tip_mima@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_tip_mima@2x.png"; sourceTree = "<group>"; };
+		968A9B42199E05BD00D357BC /* login_tip_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_tip_name@2x.png"; sourceTree = "<group>"; };
+		968A9B43199E05BD00D357BC /* xai_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xai_icon@2x.png"; sourceTree = "<group>"; };
+		968A9B48199E05C600D357BC /* login_other_spe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_other_spe.png; sourceTree = "<group>"; };
+		968A9B49199E05C600D357BC /* login_tip_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_tip_mima.png; sourceTree = "<group>"; };
+		968A9B4A199E05C600D357BC /* login_tip_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_tip_name.png; sourceTree = "<group>"; };
+		968A9B4B199E05C600D357BC /* xai_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xai_icon.png; sourceTree = "<group>"; };
+		968A9B50199E08E400D357BC /* login_ip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_ip.png; sourceTree = "<group>"; };
+		968A9B52199E08E900D357BC /* login_ip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_ip@2x.png"; sourceTree = "<group>"; };
 		968D79AB1947FC4E004A9F20 /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
 		969D6E6019187BA8002076A0 /* XAIScanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIScanVC.h; sourceTree = "<group>"; };
 		969D6E6119187BA8002076A0 /* XAIScanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIScanVC.m; sourceTree = "<group>"; };
@@ -818,6 +851,19 @@
 			path = ssl;
 			sourceTree = "<group>";
 		};
+		962A006B199DA7950039E4EE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				962A006C199DA7950039E4EE /* XAILightListCell.h */,
+				962A006D199DA7950039E4EE /* XAILightListCell.m */,
+				962A006E199DA7950039E4EE /* XAIObjectCell.h */,
+				962A006F199DA7950039E4EE /* XAIObjectCell.m */,
+				962A0072199DA7DC0039E4EE /* XAIDoorWinCell.h */,
+				962A0073199DA7DC0039E4EE /* XAIDoorWinCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		962DDB591990DBFD009EB456 /* icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,10 +934,11 @@
 		963BDB9A199B316A0025B304 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				962A006B199DA7950039E4EE /* Cells */,
 				963BDB9B199B31910025B304 /* XAILightListVC.h */,
 				963BDB9C199B31910025B304 /* XAILightListVC.m */,
-				963BDBB1199C663E0025B304 /* XAILightListCell.h */,
-				963BDBB2199C663E0025B304 /* XAILightListCell.m */,
+				962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */,
+				962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1178,6 +1225,7 @@
 		9683DA601900F01000518FEB /* res */ = {
 			isa = PBXGroup;
 			children = (
+				968A9B39199DF8CF00D357BC /* reource */,
 				9668283A1998C2C600F25AB9 /* chat */,
 				962DDB591990DBFD009EB456 /* icon */,
 				969D6ED51919EB5F002076A0 /* other */,
@@ -1194,6 +1242,11 @@
 		9683DA611900F01000518FEB /* login */ = {
 			isa = PBXGroup;
 			children = (
+				968A9B50199E08E400D357BC /* login_ip.png */,
+				968A9B48199E05C600D357BC /* login_other_spe.png */,
+				968A9B49199E05C600D357BC /* login_tip_mima.png */,
+				968A9B4A199E05C600D357BC /* login_tip_name.png */,
+				968A9B4B199E05C600D357BC /* xai_icon.png */,
 				969D6E63191881B7002076A0 /* 2x */,
 				969D6E8319188422002076A0 /* qrcode_scan_cancel.png */,
 				969D6E8419188422002076A0 /* qrcode_scan_rec.png */,
@@ -1207,9 +1260,40 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		968A9B39199DF8CF00D357BC /* reource */ = {
+			isa = PBXGroup;
+			children = (
+				968A9B3A199DF8CF00D357BC /* common */,
+			);
+			name = reource;
+			path = XAI/reource;
+			sourceTree = SOURCE_ROOT;
+		};
+		968A9B3A199DF8CF00D357BC /* common */ = {
+			isa = PBXGroup;
+			children = (
+				968A9B3B199DF8CF00D357BC /* 2x */,
+				968A9B3D199DF8CF00D357BC /* bg.png */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		968A9B3B199DF8CF00D357BC /* 2x */ = {
+			isa = PBXGroup;
+			children = (
+				968A9B3C199DF8CF00D357BC /* bg@2x.png */,
+			);
+			path = 2x;
+			sourceTree = "<group>";
+		};
 		969D6E63191881B7002076A0 /* 2x */ = {
 			isa = PBXGroup;
 			children = (
+				968A9B52199E08E900D357BC /* login_ip@2x.png */,
+				968A9B40199E05BD00D357BC /* login_other_spe@2x.png */,
+				968A9B41199E05BD00D357BC /* login_tip_mima@2x.png */,
+				968A9B42199E05BD00D357BC /* login_tip_name@2x.png */,
+				968A9B43199E05BD00D357BC /* xai_icon@2x.png */,
 				969D6E871918842B002076A0 /* qrcode_scan_cancel@2x.png */,
 				969D6E881918842B002076A0 /* qrcode_scan_rec@2x.png */,
 				969D6E64191881B7002076A0 /* login_btn_dis@2x.png */,
@@ -1673,7 +1757,9 @@
 				9631D17119075691007CBC4B /* obj_switch.png in Resources */,
 				96E9D98B190111F7000BB595 /* tab_bar_set_nor.png in Resources */,
 				966828491998C2C600F25AB9 /* ReceiverTextNodeBkg.png in Resources */,
+				968A9B4E199E05C600D357BC /* login_tip_name.png in Resources */,
 				96B75AC61974F76400253906 /* obj_IR_working.png in Resources */,
+				968A9B3F199DF8CF00D357BC /* bg.png in Resources */,
 				962DDDFE191612E7008F370A /* obj_window_open@2x.png in Resources */,
 				962DDE01191612F1008F370A /* obj_window_close.png in Resources */,
 				96E9D95B1900FD01000BB595 /* qrcode_btn_nor.png in Resources */,
@@ -1688,12 +1774,14 @@
 				9683DA671900F01000518FEB /* login_btn_sel.png in Resources */,
 				960BDD561907989300787148 /* obj_light_close.png in Resources */,
 				9668284A1998C2C600F25AB9 /* ReceiverTextNodeBkg@2x.png in Resources */,
+				968A9B3E199DF8CF00D357BC /* bg@2x.png in Resources */,
 				969D6E7F191882CE002076A0 /* tab_bar_set_nor@2x.png in Resources */,
 				960BDD531907989300787148 /* obj_light_open@2x.png in Resources */,
 				966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */,
 				96E9D991190111F7000BB595 /* tab_bar_user_sel.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
 				962DDB5E1990DBFD009EB456 /* icon58*58.png in Resources */,
+				968A9B46199E05BD00D357BC /* login_tip_name@2x.png in Resources */,
 				9648E6E1190A05A900D630D8 /* user_head.png in Resources */,
 				969D6ED91919EB5F002076A0 /* nav_back@2x.png in Resources */,
 				966828511998C2C600F25AB9 /* SenderVoiceNodeDownloading.png in Resources */,
@@ -1706,15 +1794,20 @@
 				969D6E80191882CE002076A0 /* tab_bar_set_sel@2x.png in Resources */,
 				96B75AC51974F76400253906 /* obj_IR_warning.png in Resources */,
 				C387F36D18EA757A0069F98B /* Images.xcassets in Resources */,
+				968A9B4D199E05C600D357BC /* login_tip_mima.png in Resources */,
 				96E9D989190111F7000BB595 /* tab_bar_devM_sel.png in Resources */,
+				968A9B47199E05BD00D357BC /* xai_icon@2x.png in Resources */,
 				969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */,
 				C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */,
 				96B75AC01974F74A00253906 /* obj_IR.png in Resources */,
 				960BDD571907989300787148 /* obj_light_open.png in Resources */,
 				969D6E891918842B002076A0 /* qrcode_scan_cancel@2x.png in Resources */,
 				96E9D98F190111F7000BB595 /* tab_bar_user_nor.png in Resources */,
+				968A9B4F199E05C600D357BC /* xai_icon.png in Resources */,
 				967BD79E1908F9DA007C3C8C /* device_edit_nor@2x.png in Resources */,
+				968A9B53199E08E900D357BC /* login_ip@2x.png in Resources */,
 				967BD78F1908B5CB007C3C8C /* device_add_sel@2x.png in Resources */,
+				968A9B4C199E05C600D357BC /* login_other_spe.png in Resources */,
 				96E9D985190111F7000BB595 /* tab_bar_dev_sel.png in Resources */,
 				9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */,
 				966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */,
@@ -1752,6 +1845,7 @@
 				969D6E6A191881B7002076A0 /* login_btn_dis@2x.png in Resources */,
 				969D6E6E191881B7002076A0 /* qrcode_btn_nor@2x.png in Resources */,
 				C38AC1F318EBC8E3002F20C1 /* zbar-back.png in Resources */,
+				968A9B51199E08E400D357BC /* login_ip.png in Resources */,
 				9683DA651900F01000518FEB /* login_btn_dis.png in Resources */,
 				967BD7A31908F9E1007C3C8C /* device_edit_sel.png in Resources */,
 				969D6E82191882CE002076A0 /* tab_bar_user_sel@2x.png in Resources */,
@@ -1760,12 +1854,14 @@
 				96E9D95D1900FD01000BB595 /* textField_bg.png in Resources */,
 				96E9D987190111F7000BB595 /* tab_bar_devM_nor.png in Resources */,
 				967BD7911908B5CB007C3C8C /* device_add_sel.png in Resources */,
+				968A9B45199E05BD00D357BC /* login_tip_mima@2x.png in Resources */,
 				969D6E7C191882CE002076A0 /* tab_bar_devM_nor@2x.png in Resources */,
 				960BDD501907989300787148 /* obj_door_close@2x.png in Resources */,
 				963046A31923544C0023653E /* DevInfoView.xib in Resources */,
 				967BD7901908B5CB007C3C8C /* device_add_nor.png in Resources */,
 				963046AE1923603F0023653E /* DevInfoView35.xib in Resources */,
 				C38AC1F518EBC8E3002F20C1 /* zbar-helpicons.png in Resources */,
+				968A9B44199E05BD00D357BC /* login_other_spe@2x.png in Resources */,
 				9631D16D19075691007CBC4B /* obj_switch@2x.png in Resources */,
 				969D6E7E191882CE002076A0 /* tab_bar_selected@2x.png in Resources */,
 			);
@@ -1817,11 +1913,14 @@
 				967BD7821908AB08007C3C8C /* XAIDevManageCell.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
 				967BD77F1908AB08007C3C8C /* XAIDevShowStatusVC.m in Sources */,
+				962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */,
+				962A0074199DA7DC0039E4EE /* XAIDoorWinCell.m in Sources */,
 				9616803119206979000682A4 /* XAITimeOut.m in Sources */,
 				964E6A3A1904F16200F1F61C /* XAIObject.m in Sources */,
 				963BDB99199B17550025B304 /* XAIHasTableViewVC.m in Sources */,
 				967BD77E1908AB08007C3C8C /* XAIDevShowCell.m in Sources */,
 				96E9D97119010561000BB595 /* XAILoginVC.m in Sources */,
+				962A0070199DA7950039E4EE /* XAILightListCell.m in Sources */,
 				969D6EDD1919F4A3002076A0 /* UIKitADD.m in Sources */,
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				9608ADE21960FBFE00E1CE75 /* XAIMobileControl.m in Sources */,
@@ -1853,7 +1952,6 @@
 				96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */,
 				963BDB96199B0CE40025B304 /* XAICategoryTool.m in Sources */,
 				963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */,
-				963BDBB3199C663E0025B304 /* XAILightListCell.m in Sources */,
 				963BDBAB199B426B0025B304 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				C341A66F18EBB2C400034649 /* read_handle_client.c in Sources */,
 				96619DB91915D58F009849B0 /* XAIDoor.m in Sources */,
@@ -1887,6 +1985,7 @@
 				96659E3E192C6B200045E66F /* XAILight2_CirculeTwo.m in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
+				962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */,
 				9648E6F0190A1FD200D630D8 /* XAITableViewWithOprController.m in Sources */,
 				963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,

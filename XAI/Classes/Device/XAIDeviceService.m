@@ -78,8 +78,9 @@
     _DEF_XTO_TIME_Start
 
 }
-- (void) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+- (int) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
     
+    curDelIDs += 1;
     
     MQTT* curMQTT = [MQTT shareMQTT];
 
@@ -97,26 +98,60 @@
     
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
-                       0, 0, DelDevID, [[NSDate new] timeIntervalSince1970], 2, apsn_data);
+                       0, curDelIDs, DelDevID, [[NSDate new] timeIntervalSince1970], 2, apsn_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
     
     [curMQTT.packetManager addPacketManagerACK:self];
     
-    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
-                             withQos:0
-                              retain:NO];
+//    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
+//                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
+//                             withQos:0
+//                              retain:NO];
     
     
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
 
-    _devOpr = XAIDevServiceOpr_del;
-    _DEF_XTO_TIME_Start
+    //_devOpr = XAIDevServiceOpr_del;
+    //_DEF_XTO_TIME_Start
+    NSNumber* delIDNum = [NSNumber numberWithInt:curDelIDs];
+    [_delIDs addObject:delIDNum];
+    [self performSelector:@selector(delTimeOut:) withObject:delIDNum afterDelay:5.0];
+    
+    return curDelIDs;
 
 }
+
+-(void) delTimeOut:(NSNumber*)obj{
+
+    int otherID = -1;
+    if ([obj isKindOfClass:[NSNumber class]]){
+        otherID = [obj intValue];
+    }
+    
+    
+    NSNumber* curID = [NSNumber numberWithInt:otherID];
+    
+    if (NSNotFound != [_delIDs indexOfObject:curID]) {
+        
+        [_delIDs removeObject:curID];
+        
+        if((nil != _deviceServiceDelegate) &&
+           [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:otherID:)]) {
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            [_deviceServiceDelegate devService:self
+                                     delDevice:false
+                                       errcode:XAI_ERROR_TIMEOUT
+                                       otherID:otherID];
+            
+        }
+    }
+    
+}
+
 - (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
 
     MQTT* curMQTT = [MQTT shareMQTT];
@@ -556,15 +591,36 @@
             
         case DelDevID:{
             
-            if ((nil != _deviceServiceDelegate) &&
-                [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
+//            if ((nil != _deviceServiceDelegate) &&
+//                [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
+//                
+//                [_deviceServiceDelegate devService:self delDevice:bSuccess errcode:ack->err_no];
+//            }
+            
+//            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+//            
+//            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_del);
+            
+            NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->magic_number];
+            
+            if (NSNotFound != [_delIDs indexOfObject:curID]) {
                 
-                [_deviceServiceDelegate devService:self delDevice:bSuccess errcode:ack->err_no];
+                [_delIDs removeObject:curID];
+                
+                if((nil != _deviceServiceDelegate) &&
+                   [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:otherID:)]) {
+                    
+                    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+                    [_deviceServiceDelegate devService:self
+                                             delDevice:bSuccess
+                                               errcode:ack->err_no
+                                               otherID:[curID intValue]];
+                    
+                }
             }
+
             
-            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-            
-            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_del);
+
             
         }break;
             
@@ -667,6 +723,9 @@
     _allDevices = [[NSMutableSet alloc] init];
     _bFinding = false;
     _timer = nil;
+    
+    _delIDs = [[NSMutableArray alloc] init];
+    curDelIDs = 0;
 }
 
 
@@ -712,9 +771,9 @@ static int __k = 0;
     [self addDev:dluid withName:devName type:type apsn:_apsn luid:_luid];
 }
 
-- (void) delDev:(XAITYPELUID)dluid{
+- (int) delDev:(XAITYPELUID)dluid{
 
-    [self delDev:dluid apsn:_apsn luid:_luid];
+    return [self delDev:dluid apsn:_apsn luid:_luid];
 }
 
 - (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName{
@@ -750,7 +809,7 @@ static int __k = 0;
         [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             [_deviceServiceDelegate devService:self addDevice:false errcode:XAI_ERROR_TIMEOUT];
         
-        }else if(_devOpr == XAIDevServiceOpr_del&&
+    }else if(_devOpr == XAIDevServiceOpr_del&&
              (nil != _deviceServiceDelegate) &&
              [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:)]) {
         

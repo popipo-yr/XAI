@@ -102,9 +102,33 @@
 
 }
 
+-(BOOL)prefersStatusBarHidden{
+
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+
+    [super viewDidAppear:animated];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
+    
+
+    
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self

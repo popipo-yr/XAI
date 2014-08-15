@@ -32,6 +32,7 @@
         _tmpOprs = [[NSMutableArray alloc] init];
         
         _curStatus = XAIObjStatusUnkown;
+        _preStatus = XAIObjStatusUnkown;
         
         //_flag = XAIObjectFlagNormal;
     }
@@ -274,6 +275,51 @@
     if (last != nil) {
         self.curStatus = last.opr;
         [self updateFinish:last];
+    }
+    
+}
+
+
+- (void) startOpr{
+    self.preStatus = self.curStatus;
+}
+- (void) endOpr{
+    
+}
+
+- (void) setCurStatus:(int)status{
+
+    if (status == XAIObjStatusErr) {
+        isShowErr = true;
+        [self performSelector:@selector(_changeToPre) withObject:nil afterDelay:3.0f];
+    }
+    
+    if (status != XAIObjStatusErr &&
+        status!= XAIObjStatusOperStart) {
+    
+        self.preStatus = status;
+    }
+    
+    if (status == XAIObjStatusOperEnd) {
+        _curStatus = self.preStatus;
+        return;
+    }
+    
+    _curStatus = status;
+}
+
+
+
+- (void) _changeToPre{
+    
+    if (isShowErr == false) {
+        return;
+    }
+    
+    if (self.preStatus != XAIObjStatusErr &&
+        self.preStatus != XAIObjStatusOperStart) {
+        
+        _curStatus = self.preStatus;
     }
     
 }

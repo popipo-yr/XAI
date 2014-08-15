@@ -49,11 +49,16 @@ static NSString * const kTableViewCellContentView = @"UITableViewCellContentView
 
 - (void)setEnable:(BOOL)enable{
 
-    self.tableViewPanGestureRecognizer.enabled = enable;
-    self.tableViewPanGestureRecognizer.enabled = enable;
+    //self.tableViewPanGestureRecognizer.enabled = enable;
+    self.tapGestureRecognizer.enabled = enable;
     self.longPressGestureRecognizer.enabled = enable;
     self.cellScrollView.scrollEnabled = enable;
     self.containingTableView.scrollEnabled = enable;
+    
+    self.cellScrollView.delegate = enable ? self : nil;
+    //self.tableViewPanGestureRecognizer.delegate = enable ? self : nil;
+    self.longPressGestureRecognizer.delegate = enable ? self : nil;
+    self.tapGestureRecognizer.delegate = enable ? self : nil;
 }
 
 #pragma mark Initializers

@@ -59,6 +59,27 @@
 }
 
 
+-(BOOL)prefersStatusBarHidden{
+    
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    
+    return UIStatusBarStyleDefault;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }
+}
+
 
 - (void)dealloc{
     

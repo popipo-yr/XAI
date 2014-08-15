@@ -22,6 +22,9 @@
     NSMutableSet* _onlineDevices;
     NSTimer*  _timer;
     BOOL _bFinding;
+    
+    NSMutableArray* _delIDs;
+    uint16_t curDelIDs;
 
 }
 
@@ -32,7 +35,7 @@
 
 - (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type;
 
-- (void) delDev:(XAITYPELUID)dluid ;
+- (int) delDev:(XAITYPELUID)dluid ;
 
 - (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName;
 
@@ -57,6 +60,9 @@
 
 - (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) devs
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+
+- (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID;
 
 @end
 

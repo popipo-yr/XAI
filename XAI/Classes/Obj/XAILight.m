@@ -43,12 +43,14 @@
 - (void) openLight{
 
    // if (_isClosing || _isOpening) return;
-    
+    self.curStatus = XAILightStatus_Start;
+     
     _isOpening = YES;
     [_devSwitch  setCircuitOneStatus:XAIDevCircuitStatusOpen];
 }
 - (void) closeLight{
     
+     self.curStatus = XAILightStatus_Start;
    // if (_isOpening || _isClosing) return;
     
     _isClosing = YES;
@@ -162,7 +164,9 @@
 
     }
     
-   
+    if (err != XAI_ERROR_NONE) {
+        self.curStatus = XAILightStatus_err;
+    }
     
 }
 
