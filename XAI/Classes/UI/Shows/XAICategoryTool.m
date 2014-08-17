@@ -11,6 +11,7 @@
 #import "XAIChatVC.h"
 #import "XAILightListVC.h"
 #import "XAIDoorWinListVC.h"
+#import "XAIInfListVC.h"
 
 
 
@@ -85,7 +86,7 @@
         }
         case XAICategoryType_Inf:{
             
-            
+            nextVC = [XAIInfListVC create];
             break;
         }
         case XAICategoryType_server:{

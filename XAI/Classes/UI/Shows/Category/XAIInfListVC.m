@@ -1,28 +1,24 @@
 //
-//  XAIDoorWinListVC.m
+//  XAIInfListVC.m
 //  XAI
 //
-//  Created by office on 14-8-15.
+//  Created by office on 14-8-17.
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAIDoorWinListVC.h"
+#import "XAIInfListVC.h"
+
+#import "XAIInfListCell.h"
 #import "XAIObjectGenerate.h"
-#import "XAIDoorWinCell.h"
 
-#define _M_CellWidth  35
+#define _ST_InfListVCID @"XAIInfListVCID"
 
-@interface XAIDoorWinListVC ()
-
-@end
-
-@implementation XAIDoorWinListVC
-
+@implementation XAIInfListVC
 
 +(UIViewController*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
-    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_DoorWinListVCID];
+    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_InfListVCID];
     [vc changeIphoneStatus];
     return vc;
     
@@ -41,7 +37,7 @@
         _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
-        _types = @[@(XAIObjectType_door),@(XAIObjectType_window)];
+        _types = @[@(XAIObjectType_IR)];
         _deviceDatas = [[NSMutableArray alloc] init];
         _delInfo = [[NSMutableDictionary alloc] init];
         
@@ -53,7 +49,7 @@
 {
     [super viewDidLoad];
     _curInputCell = nil;
-
+    
     
     // Do any additional setup after loading the view.
 }
@@ -65,9 +61,9 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self updateShowDatas];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
@@ -87,11 +83,8 @@
     //_activityView = nil;
     
     for (XAIObject * obj in _deviceDatas) {
-        if ([obj isKindOfClass:[XAIWindow class]]){
-            ((XAIWindow*)obj).delegate = nil;
-        }
-        if ([obj isKindOfClass:[XAIDoor class]]){
-            ((XAIDoor*)obj).delegate = nil;
+        if ([obj isKindOfClass:[XAIIR  class]]){
+            ((XAIIR*)obj).delegate = nil;
         }
     }
     
@@ -109,27 +102,21 @@
 
 - (void) updateShowDatas{
     
-    
-     XSLog(@"timeA");
-    
     _curInputCell = nil;
     
     
     
     _deviceDatas =  [[NSMutableArray alloc] initWithArray:
-                           [[XAIData shareData] listenObjsWithType:_types]];
-    
-
-    
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+                     [[XAIData shareData] listenObjsWithType:_types]];
     
     
-     XSLog(@"timeA");
+    
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
+//    [_deviceDatas addObject:[[XAIIR alloc] init]];
     
 }
 
@@ -159,34 +146,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XSLog(@"timeA");
     
-    static NSString *CellIdentifier = XAIDoorWinCellID;
+    static NSString *CellIdentifier = XAIInfListCellID;
     
-    XAIDoorWinCell *cell = [tableView
-                                dequeueReusableCellWithIdentifier:CellIdentifier];
+    XAIInfListCell *cell = [tableView
+                            dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[XAIDoorWinCell alloc]
+        cell = [[XAIInfListCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:XAIDoorWinCellID];
+                reuseIdentifier:CellIdentifier];
     }
     
     XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
     
-    if (aObj != nil && [aObj isKindOfClass:[XAIObject class]]) {
+    if (aObj != nil && [aObj isKindOfClass:[XAIIR class]]) {
         
         [cell setInfo:aObj];
     }
     
     
-    // Add utility buttons
-
     [cell setEditBtn];
     [cell setDelBtn];
     cell.delegate = self;
     
     return cell;
-    XSLog(@"timeA");
+    
     
 }
 
@@ -204,8 +188,8 @@
         case 0:
         {
             
-            XAIDoorWinCell* listCell = (XAIDoorWinCell*)cell;
-            if ([listCell isKindOfClass:[XAIDoorWinCell class]]) {
+            XAIInfListCell* listCell = (XAIInfListCell*)cell;
+            if ([listCell isKindOfClass:[XAIInfListCell class]]) {
                 
                 
                 if ([self isSame:listCell]) {
@@ -247,7 +231,7 @@
                 listCell.input.enabled = true;
                 listCell.input.hidden = false;
                 [listCell.input becomeFirstResponder];
-
+                
                 
                 [listCell setSaveBtn];
                 
@@ -278,17 +262,17 @@
                 
                 [obj startOpr];
                 obj.curOprtip = @"正在删除";
-                [((XAIDoorWinCell*)cell) showOprStart:obj.curOprtip];
+                [((XAIInfListCell*)cell) showOprStart:obj.curOprtip];
                 
                 int delID = [_deviceService delDev:obj.luid];
                 [_delInfo setObject:obj forKey:[NSNumber numberWithInt:delID]];
                 
                 [cell hideUtilityButtonsAnimated:true];
-
+                
                 
             } while (0);
-
-
+            
+            
             
             break;
         }
@@ -363,7 +347,7 @@ static SWTableViewCell* curSWCell;
 }
 
 -(void)swipeableTableViewCellCancelEdit:(SWTableViewCell *)cell{
-
+    
     [self hiddenOldInput];
 }
 
@@ -411,7 +395,7 @@ static SWTableViewCell* curSWCell;
         
         
         [_curInputCell hideUtilityButtonsAnimated:true];
-    
+        
         
         [_curInputCell setEditBtn];
     }
@@ -440,17 +424,17 @@ static SWTableViewCell* curSWCell;
 }
 
 - (void) enableAllCtrl:(BOOL)status{
-
+    
     [self.tableView setScrollEnabled:status];
     
     NSArray* cells = [self.tableView visibleCells];
-    for (XAIDoorWinCell* aCell in cells) {
-        if (![aCell isKindOfClass:[XAIDoorWinCell class]]) continue;
+    for (XAIInfListCell* aCell in cells) {
+        if (![aCell isKindOfClass:[XAIInfListCell class]]) continue;
         
         [aCell setEnable:status];
         
     }
-
+    
     
 }
 
@@ -458,7 +442,7 @@ static SWTableViewCell* curSWCell;
 -(void)devService:(XAIDeviceService *)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
     
     if (devService != _deviceService) return;
-
+    
     
     XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (obj != nil && [obj isKindOfClass:[XAIObject class]]) {
@@ -472,15 +456,15 @@ static SWTableViewCell* curSWCell;
             obj.curOprtip = @"删除失败";
         }
         
-        if ([obj isKindOfClass:[XAIDoor class]]) {
+        if ([obj isKindOfClass:[XAIIR class]]) {
             
             
             do {
                 
-                XAIDoorWinCell* cell = (XAIDoorWinCell*)((XAIDoor*)obj).delegate;
+                XAIInfListCell* cell = (XAIInfListCell*)((XAIIR*)obj).delegate;
                 
                 if (cell == nil) break;
-                if (![cell isKindOfClass:[XAIDoorWinCell class]])break;
+                if (![cell isKindOfClass:[XAIInfListCell class]])break;
                 
                 if (!isSuccess) {
                     
@@ -496,48 +480,16 @@ static SWTableViewCell* curSWCell;
                                            withRowAnimation:UITableViewRowAnimationAutomatic];
                     
                 }
-                
-                
-            } while (0);
-            
-        }else if([obj isKindOfClass:[XAIWindow class]]){
-            
-            
-            do {
-                
-                XAIDoorWinCell* cell = (XAIDoorWinCell*)((XAIWindow*)obj).delegate;
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAIDoorWinCell class]])break;
-                
-                
-                if (!isSuccess) {
-                    
-                    [cell showMsg:obj.curOprtip];
-                }else{
-                    [cell showOprEnd];
-                    
-                    [_deviceDatas removeObject:obj];
-                    
-                    NSArray* ary = [NSArray arrayWithObject:[self.tableView indexPathForCell:cell]];
-                    
-                    [self.tableView  deleteRowsAtIndexPaths:ary
-                                           withRowAnimation:UITableViewRowAnimationAutomatic];
-                    
-                }
-                
-                
                 
                 
             } while (0);
             
         }
         
-
+        
     }
     
 }
-
 
 
 @end

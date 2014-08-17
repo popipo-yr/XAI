@@ -48,6 +48,8 @@
 		9612B03219A03F5A004CA9F5 /* cell_opr.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612B02819A03F5A004CA9F5 /* cell_opr.png */; };
 		9612B03319A03F5A004CA9F5 /* cell_unkown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612B02919A03F5A004CA9F5 /* cell_unkown.png */; };
 		9612B03619A06153004CA9F5 /* SWTableViewCellAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03519A06153004CA9F5 /* SWTableViewCellAdd.m */; };
+		9612B03919A0890E004CA9F5 /* XAIInfListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03819A0890E004CA9F5 /* XAIInfListVC.m */; };
+		9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03B19A08934004CA9F5 /* XAIInfListCell.m */; };
 		9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */; };
 		9616802E19206324000682A4 /* DoorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616802D19206324000682A4 /* DoorTest.m */; };
 		9616803119206979000682A4 /* XAITimeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616803019206979000682A4 /* XAITimeOut.m */; };
@@ -379,6 +381,10 @@
 		9612B02919A03F5A004CA9F5 /* cell_unkown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_unkown.png; sourceTree = "<group>"; };
 		9612B03419A06153004CA9F5 /* SWTableViewCellAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCellAdd.h; sourceTree = "<group>"; };
 		9612B03519A06153004CA9F5 /* SWTableViewCellAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCellAdd.m; sourceTree = "<group>"; };
+		9612B03719A0890E004CA9F5 /* XAIInfListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIInfListVC.h; sourceTree = "<group>"; };
+		9612B03819A0890E004CA9F5 /* XAIInfListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIInfListVC.m; sourceTree = "<group>"; };
+		9612B03A19A08934004CA9F5 /* XAIInfListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIInfListCell.h; sourceTree = "<group>"; };
+		9612B03B19A08934004CA9F5 /* XAIInfListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIInfListCell.m; sourceTree = "<group>"; };
 		9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
 		9614F94218FCEBB400CDF4A1 /* LoginPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPlugin.h; sourceTree = "<group>"; };
 		9616802D19206324000682A4 /* DoorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorTest.m; sourceTree = "<group>"; };
@@ -986,6 +992,8 @@
 				962A0073199DA7DC0039E4EE /* XAIDoorWinCell.m */,
 				9612B03419A06153004CA9F5 /* SWTableViewCellAdd.h */,
 				9612B03519A06153004CA9F5 /* SWTableViewCellAdd.m */,
+				9612B03A19A08934004CA9F5 /* XAIInfListCell.h */,
+				9612B03B19A08934004CA9F5 /* XAIInfListCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1065,6 +1073,8 @@
 				963BDB9C199B31910025B304 /* XAILightListVC.m */,
 				962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */,
 				962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */,
+				9612B03719A0890E004CA9F5 /* XAIInfListVC.h */,
+				9612B03819A0890E004CA9F5 /* XAIInfListVC.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2163,6 +2173,7 @@
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
 				C33E77FE18F3B28500808391 /* XAILogin.m in Sources */,
 				968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */,
+				9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */,
 				962DDE0C19161493008F370A /* XAIWindowStatusVC.m in Sources */,
 				967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
@@ -2195,6 +2206,7 @@
 				967BD7941908C5C5007C3C8C /* XAIDevAddVC.m in Sources */,
 				966828391998C27300F25AB9 /* XAIChatVC.m in Sources */,
 				966828381998C27300F25AB9 /* XAIChatCell.m in Sources */,
+				9612B03919A0890E004CA9F5 /* XAIInfListVC.m in Sources */,
 				96569B4719403FD600A96F45 /* XAILinkage.m in Sources */,
 				96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */,
 				962DDE0B19161493008F370A /* XAILightStatusVC.m in Sources */,

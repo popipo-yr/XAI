@@ -153,14 +153,14 @@
 
 - (NSString *)oprOnlyStr{
     
-//    if (_opr == XAIWindowStatus_Open) {
-//        
-//        return NSLocalizedString(@"OpenWindow", nil);
-//        
-//    }else if(_opr == XAIWindowStatus_Close){
-//        
-//        return NSLocalizedString(@"CloseWindow", nil);
-//    }
+    if (_opr == XAIIRStatus_working) {
+        
+        return NSLocalizedString(@"正常工作", nil);
+        
+    }else if(_opr == XAIIRStatus_warning){
+        
+        return NSLocalizedString(@"发出警告", nil);
+    }
     
     return @"";
 }
