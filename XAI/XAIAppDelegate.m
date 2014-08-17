@@ -454,11 +454,13 @@
     if (_reLoginFailAlert == alertView ||
         (_otherLoginTipAlert == alertView && buttonIndex == [alertView cancelButtonIndex])) {
         
-        UIViewController* vc= [self.window.rootViewController.storyboard
-                               instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
-
+        [self initializeStoryBoardBasedOnScreenSize];
         
-        [self.window setRootViewController:vc];
+//        UIViewController* vc= [self.window.rootViewController.storyboard
+//                               instantiateViewControllerWithIdentifier:@"XAILoginVCID"];
+//
+//        
+//        [self.window setRootViewController:vc];
         
         _reLoginFailAlert = nil;
     }

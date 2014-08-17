@@ -7,37 +7,50 @@
 //
 
 #import "SWTableViewCell.h"
+#import "SWTableViewCellAdd.h"
+#import "XAIObject.h"
 
 typedef enum{
     
-    XAIObjectCellShowType_Start,
-    XAIObjectCellShowType_Open,
-    XAIObjectCellShowType_Close,
-    XAIObjectCellShowType_Unkown,
-    XAIObjectCellShowType_Error
+    XAIOCST_Open,
+    XAIOCST_Close,
+    XAIOCST_Unkown,
     
-}XAIObjectCellShowType;
+}XAIOCST;
+
+
+typedef enum{
+    
+    XAIOCOT_None,
+    XAIOCOT_Start,
+    XAIOCOT_Msg,
+    
+    
+}XAIOCOT;
 
 @interface XAIObjectCell : SWTableViewCell{
 
-    XAIObjectCellShowType preType;
-    
-    BOOL isShowErr;
+    XAIOCST  _status;
+    XAIOCOT  _opr;
     
 }
 
-@property (nonatomic,strong)  IBOutlet UIImageView*  headImageView;
+@property (nonatomic,strong)  IBOutlet UIImageView*  tipImageView;
 @property (nonatomic,strong)  IBOutlet UILabel*  nameLable;
 @property (nonatomic,strong)  IBOutlet UILabel*  contextLable;
 @property (nonatomic,strong)  IBOutlet UITextField* input;
+@property (nonatomic,strong)  IBOutlet UILabel*  tipLabel;
 
-- (void) showStart;
-- (void) showClose;
-- (void) showOpen;
-- (void) showError;
-- (void) showUnkonw;
+- (void) showOprStart:(NSString*)tip;
+- (void) showMsg:(NSString*)msg;
+- (void) showOprEnd;
 
-- (void) setPreType:(XAIObjectCellShowType)type;
+
+- (void) setStatus:(XAIOCST)type;
+- (void) firstStatus:(XAIOCST)staus opr:(XAIOCOT)opr tip:(NSString*)tip;
+
+- (XAIOCOT) coverForm:(XAIObjectOprStatus)objOprStatus;
+
 
 
 

@@ -93,6 +93,7 @@ typedef NS_ENUM(NSUInteger,_XAIDevOpr){
 @property (nonatomic,assign) uint32_t time;
 @property (nonatomic,assign) uint16_t msgid;
 @property (nonatomic,assign) XAI_ERROR error;
+@property (nonatomic,assign) XAITYPELUID fromluid;
 
 @end
 

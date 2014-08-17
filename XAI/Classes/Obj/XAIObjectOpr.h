@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "XAIRWProtocol.h"
 
+#import "XAIMQTTDEF.h"
+
+
 #define _Key_OprTime_ @"OprTime"
 #define _Key_OprName_ @"OprName"
 #define _Key_OprID_ @"OprOrder"
 #define _Key_OprOtherID_ @"OprOtherID"
+#define _Key_OprLuid @"OprLuid"
+
 
 @interface XAIObjectOpr : NSObject <XAIDataInfo_DIC>{
     
@@ -22,12 +27,15 @@
     
     uint16_t _otherID; /*比较使用,报文的msgid*/
     
+    XAITYPELUID _oprLuid; /*记录操作的luid*/
+    
 }
 
 @property (nonatomic, assign) int opr;
 @property (nonatomic, assign) uint16_t otherID;
 @property (nonatomic, strong) NSDate* time;
 @property (nonatomic, strong) NSString* name;
+@property (nonatomic, assign) XAITYPELUID oprLuid;
 
 - (NSString*) oprOnlyStr; /*开了灯  子类必须实现*/
 

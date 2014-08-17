@@ -257,11 +257,15 @@
 
     if (isIOS7) {
         
+//        [[UINavigationBar appearance] setBarTintColor:
+//         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+        
         [[UINavigationBar appearance] setBarTintColor:
-         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
+                [UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1]];
+
         
         UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
-        view.backgroundColor=[UIColor whiteColor];
+        view.backgroundColor=[UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1];
         
         [self.view addSubview:view];
         

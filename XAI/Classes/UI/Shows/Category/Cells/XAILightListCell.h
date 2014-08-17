@@ -24,7 +24,8 @@ typedef enum {
 
 @property (nonatomic,weak) XAILight* weakLight;
 
-- (void) setStatus:(XAILightStatus)status;
+- (void) setInfo:(XAIObject*)aObj;
+//- (void) setLightStatus:(XAILightStatus)lightStatus oprstatus:(XAIObjectOprStatus)status;
 @end
 
 
@@ -64,6 +65,6 @@ typedef enum {
 
 - (void) hidenAll;
 
-
+- (void) refreshOpr;
 
 @end

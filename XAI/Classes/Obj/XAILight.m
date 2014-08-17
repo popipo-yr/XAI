@@ -43,14 +43,16 @@
 - (void) openLight{
 
    // if (_isClosing || _isOpening) return;
-    self.curStatus = XAILightStatus_Start;
+    [self startOpr];
+    self.curOprtip = @"正在打开...";
      
     _isOpening = YES;
     [_devSwitch  setCircuitOneStatus:XAIDevCircuitStatusOpen];
 }
 - (void) closeLight{
     
-     self.curStatus = XAILightStatus_Start;
+    [self startOpr];
+    self.curOprtip = @"正在关闭...";
    // if (_isOpening || _isClosing) return;
     
     _isClosing = YES;
@@ -100,6 +102,7 @@
         opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
         opr.opr = lightStatus;
         opr.otherID = otherInfo.msgid;
+        opr.oprLuid = otherInfo.fromluid;
         
         [_tmpOprs addObject:opr];
         
@@ -139,6 +142,8 @@
 
 - (void) switch_:(XAIDevSwitch *)swi setCircuitOneErr:(XAI_ERROR)err{
     
+    NSString* tip = @"";
+    
     if (_isOpening) {
         
         _isOpening = false;
@@ -148,7 +153,7 @@
             [_delegate light:self openSuccess:err == XAI_ERROR_NONE];
         }
         
-        
+        tip = @"打开失败";
         
     }else if (_isClosing) {
         
@@ -161,11 +166,14 @@
         }
         
         
-
+         tip = @"关闭失败";
     }
     
     if (err != XAI_ERROR_NONE) {
-        self.curStatus = XAILightStatus_err;
+        self.curOprtip =  tip;
+        [self showMsg];
+    }else{
+        [self endOpr];
     }
     
 }

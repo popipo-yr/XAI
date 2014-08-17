@@ -8,6 +8,9 @@
 
 #import "XAIHasTableViewVC.h"
 #import "MQTT.h"
+#import "XAIShowVC.h"
+
+#import "SWTableViewCellAdd.h"
 
 @interface XAIHasTableViewVC ()
 
@@ -34,19 +37,19 @@
         
         
         
-        UIImage* editNorImg = [UIImage imageNamed:@"device_edit_nor.png"] ;
+        UIImage* returnNorImg = [UIImage imageNamed:@"back_nor.png"] ;
         
-        if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        if ([returnNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             
-            editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            returnNorImg = [returnNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         }
         
-        _editItem = [[UIBarButtonItem alloc] initWithImage:editNorImg
+        _returnItem = [[UIBarButtonItem alloc] initWithImage:returnNorImg
                                                      style:UIBarButtonItemStylePlain
                                                     target:self
-                                                    action:@selector(editBtnClick:)];
+                                                    action:@selector(returnClick:)];
         
-        [_editItem ios6cleanBackgroud];
+        [_returnItem ios6cleanBackgroud];
 
         
     }
@@ -76,27 +79,37 @@
     //back
     [self.navigationItem OnlyBack];
     
+    [self.theNavigationItem setLeftBarButtonItem:_returnItem];
     
-    if (![[MQTT shareMQTT].curUser isAdmin]) return;
+}
+
+
+-(BOOL)prefersStatusBarHidden{
     
-    UIImage* addNorImg = [UIImage imageNamed:@"device_add_nor.png"];
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
     
-    if ([addNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         
-        addNorImg = [addNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [self setNeedsStatusBarAppearanceUpdate];
+        
     }
+}
+
+
+-(void)returnClick:(id)sender{
     
-    
-    
-    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addNorImg
-                                                                style:UIBarButtonItemStylePlain
-                                                               target:self
-                                                               action:@selector(addBtnClick:)];
-    
-    [addItem ios6cleanBackgroud];
-    
-    [self.navigationItem setRightBarButtonItems:@[addItem,_editItem]];
-    
+    [self.view.window setRootViewController:[XAIShowVC create]];
+
 }
 
 
@@ -119,7 +132,7 @@
     
     if (count > 0) {
         
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }else{
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -127,46 +140,6 @@
 }
 
 
-#pragma mark - Event method
-
-- (void) addBtnClick:(id) sender{
-    
-}
-
-- (void) editBtnClick:(id)sender{
-    
-    
-    [self setTableViewEdit:!self.tableView.editing];
-    
-}
--(void) handleSwipeRight:(id)sender{
-    
-    [self setTableViewEdit:NO];
-    
-}
-
-- (void) setTableViewEdit:(BOOL) bl{
-    
-    self.tableView.editing = bl;
-    
-    NSString* imgName = bl ? @"device_edit_sel.png" : @"device_edit_nor.png";
-    
-    UIImage* editNorImg = [UIImage imageNamed:imgName];
-    
-    if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
-        
-        editNorImg = [editNorImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }
-    
-    
-    _editItem.image = editNorImg;
-    
-}
-
-- (void) delBtnClick:(NSIndexPath*) index{
-    
-    
-}
 
 
 #pragma mark - Table view data source

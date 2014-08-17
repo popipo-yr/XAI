@@ -16,10 +16,13 @@
     if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIWindow class]]) return;
     
     if (status == XAIWindowStatus_Open) {
-        [self showOpen];
-    }else{
+        [self setStatus:XAIOCST_Open];
+    }else if(status == XAIWindowStatus_Close){
         
-        [self showClose];
+        [self setStatus:XAIOCST_Close];
+    }else{
+    
+        [self setStatus:XAIOCST_Unkown];
     }
     
 }
@@ -29,12 +32,19 @@
     if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIDoor class]]) return;
     
     if (status == XAIDoorStatus_Open) {
-        [self showOpen];
+        [self setStatus:XAIOCST_Open];
+    }else if(status == XAIDoorStatus_Close){
+        
+        [self setStatus:XAIOCST_Close];
     }else{
         
-        [self showClose];
+        [self setStatus:XAIOCST_Unkown];
     }
+    
 }
+
+-(void)window:(XAIWindow *)window curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
+-(void)door:(XAIDoor *)door curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
 
 - (void) setInfo:(XAIObject*)aObj{
     
@@ -43,19 +53,20 @@
     if (aObj == nil) return;
     if (![aObj isKindOfClass:[XAIDoor class]] && ![aObj isKindOfClass:[XAIWindow class]]){
     
-        [self  showUnkonw];
-        [self.headImageView setBackgroundColor:[UIColor clearColor]];
-        [self.headImageView setImage:nil];
+        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
+        [self.tipImageView setBackgroundColor:[UIColor clearColor]];
+        [self.tipImageView setImage:nil];
         [self.nameLable setText:nil];
         [self.contextLable setText:nil];
+        [self.tipLabel setText:nil];
     
         return;
     }
     
     
     
-    [self.headImageView setBackgroundColor:[UIColor clearColor]];
-    [self.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
+    [self.tipImageView setBackgroundColor:[UIColor clearColor]];
+    [self.tipImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
     
     if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
         
@@ -68,69 +79,28 @@
     [self.contextLable setText:[aObj.lastOpr allStr]];
     
     
-    if ([aObj isKindOfClass:[XAIDoor class]]) {
-        if (aObj.curStatus == XAIDoorStatus_Open) {
-            [self showOpen];
-        }else if(aObj.curStatus == XAIDoorStatus_Close){
-            [self showClose];
-        }else if(aObj.curStatus == XAIObjStatusOperStart){
+    
+        
+        XAIOCST status = XAIOCST_Unkown;
+        
+        if (aObj.curDevStatus == XAIDoorStatus_Open ||
+            aObj.curDevStatus == XAIWindowStatus_Open) {
             
-            if (aObj.preStatus == XAIDoorStatus_Open) {
-                [self setPreType:XAIObjectCellShowType_Open];
-            }else if(aObj.preStatus == XAIDoorStatus_Close) {
-                [self setPreType:XAIObjectCellShowType_Close];
-            }else{
-                [self setPreType:XAIObjectCellShowType_Unkown];
-            }
-            [self showStart];
+            status = XAIOCST_Open;
             
-        }else if(aObj.curStatus == XAIObjStatusErr){
-            
-            if (aObj.preStatus == XAIDoorStatus_Open) {
-                [self setPreType:XAIObjectCellShowType_Open];
-            }else if(aObj.preStatus == XAIDoorStatus_Close) {
-                [self setPreType:XAIObjectCellShowType_Close];
-            }else{
-                [self setPreType:XAIObjectCellShowType_Unkown];
-            }
-            
-            [self showError];
-        }else{
-            
-            [self showUnkonw];
+        }else if(aObj.curDevStatus == XAIDoorStatus_Close ||
+                 aObj.curDevStatus == XAIWindowStatus_Close){
+            status = XAIOCST_Close;
         }
-        
-    }else{
-        
-        if (aObj.curStatus == XAIWindowStatus_Open) {
-            [self showOpen];
-        }else if(aObj.curStatus == XAIWindowStatus_Close){
-            [self showClose];
-        }else if(aObj.curStatus == XAIObjStatusOperStart){
-            
-            if (aObj.preStatus == XAIDoorStatus_Open) {
-                [self setPreType:XAIObjectCellShowType_Open];
-            }else if(aObj.preStatus == XAIDoorStatus_Close) {
-                [self setPreType:XAIObjectCellShowType_Close];
-            }else{
-                [self setPreType:XAIObjectCellShowType_Unkown];
-            }
-            [self showStart];
-        }else if(aObj.curStatus == XAIObjStatusErr){
-            
-            if (aObj.preStatus == XAIDoorStatus_Open) {
-                [self setPreType:XAIObjectCellShowType_Open];
-            }else if(aObj.preStatus == XAIDoorStatus_Close) {
-                [self setPreType:XAIObjectCellShowType_Close];
-            }else{
-                [self setPreType:XAIObjectCellShowType_Unkown];
-            }
-            [self showError];
-        } else{
-            [self showUnkonw];
-        }
-        
+    
+    if ([aObj.name isEqualToString:@"门磁1"]) {
+        NSLog(@"test");
     }
+            
+        
+        [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
+            
+    
     
     [self _changeWeakObj:aObj];
 

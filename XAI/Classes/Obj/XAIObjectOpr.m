@@ -15,6 +15,7 @@
     if (self = [super init]) {
         
         _name = @"";
+        _oprLuid = 0;
     }
     
     return self;
@@ -28,6 +29,7 @@
     [dic setObject:_time forKey:_Key_OprTime_];
     [dic setObject:_name forKey:_Key_OprName_];
     [dic setObject:[NSNumber numberWithInteger:_otherID] forKey:_Key_OprOtherID_];
+    [dic setObject:[NSNumber numberWithLongLong:_oprLuid] forKey:_Key_OprLuid];
     
     return dic;
     
@@ -40,6 +42,7 @@
     _name = [dic objectForKey:_Key_OprName_];
     
     _otherID = [[dic objectForKey:_Key_OprOtherID_] intValue];
+    _oprLuid = [[dic objectForKey:_Key_OprLuid] longLongValue];
     
 }
 
@@ -80,7 +83,9 @@
     
     [format setDateFormat:@"HH:mm"];
     
-    return [NSString stringWithFormat:@"%@%@ %@",_name,[self oprOnlyStr],[format stringFromDate:_time]];
+//    return [NSString stringWithFormat:@"%@%@ %@",_name,[self oprOnlyStr],[format stringFromDate:_time]];
+    
+    return [NSString stringWithFormat:@"%llx-%@%@ %@",_oprLuid,_name,[self oprOnlyStr],[format stringFromDate:_time]];
 }
 
 - (NSString*) oprOnlyStr{

@@ -125,6 +125,7 @@
             otherInfo.time = param->time;
             otherInfo.msgid = param->normal_param->magic_number;
             otherInfo.error = err;
+            otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
             
             [_infDelegate infrared:self status:curStatus err:err otherInfo:otherInfo];
         }

@@ -267,6 +267,7 @@
                 otherInfo.time = param->time;
                 otherInfo.msgid = param->normal_param->magic_number;
                 otherInfo.error = err;
+                otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
 
                 
                 [_swiDelegate switch_:self circuitOneStatus:curStatus err:err otherInfo:otherInfo];
@@ -285,6 +286,7 @@
                 otherInfo.time = param->time;
                 otherInfo.msgid = param->normal_param->magic_number;
                 otherInfo.error = err;
+                otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
                 
                 [_swiDelegate switch_:self circuitTwoStatus:curStatus err:err therInfo:otherInfo];
             }

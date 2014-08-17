@@ -207,6 +207,19 @@ extern "C" {
      */
     size_t lengthOfGUID();
     
+    /**
+     @to-do:   generate guid from apsn and luid
+     @param:   apsn - APSN
+     luid - local unique identify
+     @returns: a 8 bytes guid
+     */
+    XAITYPELUID luidFromGUID(void* guid);
+    
+    /**
+     @to-do:   apsn  from guid
+     @returns: a 4 bytes guid
+     */
+    XAITYPEAPSN apsnFromGUID(void* guid);
     
     /**
      @to-do:   write  to packet from data

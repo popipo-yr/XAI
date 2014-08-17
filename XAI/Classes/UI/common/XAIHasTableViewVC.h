@@ -11,10 +11,11 @@
 
 
 
+
 @interface XAIHasTableViewVC : UIViewController <UITableViewDataSource,UITableViewDelegate>{
 
     UIActivityIndicatorView* _activityView;
-    UIBarButtonItem* _editItem;
+    UIBarButtonItem* _returnItem;
     
     UISwipeGestureRecognizer* _recognizer;
     
@@ -22,11 +23,9 @@
 }
 
 @property (nonatomic,strong) IBOutlet UITableView* tableView;
+@property (nonatomic,strong) IBOutlet UINavigationItem* theNavigationItem;
 
 - (void)setSeparatorStyle:(int) count;
-
-- (void) addBtnClick:(id) sender;
-- (void) delBtnClick:(NSIndexPath*) index;
 
 
 @end

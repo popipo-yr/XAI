@@ -450,6 +450,20 @@ size_t lengthOfGUID(){
 }
 
 
+XAITYPELUID luidFromGUID(void* guid){
+
+    XAITYPELUID luid = 0x0;
+    memcpy(&luid, guid+4, 8);
+    return luid;
+}
+
+XAITYPEAPSN apsnFromGUID(void* guid){
+
+    XAITYPEAPSN apsn = 0x0;
+    memcpy(&apsn, guid, 4);
+    return apsn;
+}
+
 
 #pragma mark --HELPER
 

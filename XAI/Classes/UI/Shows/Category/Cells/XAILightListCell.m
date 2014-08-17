@@ -12,19 +12,18 @@
 
 @implementation _XAILightListVCCell
 
-- (void) setStatus:(XAILightStatus)status{
-
-    if(status == XAILightStatus_Open){
-        [self showOpen];
-    }else if(status == XAILightStatus_Close){
-        [self showClose];
-    }else if(status == XAILightStatus_Start){
-        [self showStart];
-    }else{
-        [self showError];
-    }
-    
-}
+//- (void) setLightStatus:(XAILightStatus)lightStatus oprstatus:(XAIObjectOprStatus)status;{
+//
+//    if(status == XAILightStatus_Open){
+//        [self setStatus:XAIOCST_Open];
+//    }else if(status == XAILightStatus_Close){
+//        [self setStatus:XAIOCST_Close];
+//    }else{
+//        [self setStatus:XAIOCST_Unkown];
+//    }
+//    
+//    
+//}
 
 #pragma mark -- LightDelegate
 
@@ -35,12 +34,13 @@
     
     if (isSuccess) {
         
-        
-        [self showOpen];
+        [self showOprEnd];
+        [self setStatus:XAIOCST_Open];
         
     }else{
     
-        [self showError];
+        
+        [self showMsg:@"打开失败"];
     }
     
     
@@ -49,24 +49,105 @@
     
     if (isSuccess) {
         
-        
-        [self showClose];
+        [self showOprEnd];
+        [self setStatus:XAIOCST_Close];
         
     }else{
         
-        [self showError];
+        [self showMsg:@"关闭失败"];
     }
 }
 
 - (void) light:(XAILight *)light curStatus:(XAILightStatus)status{
     
     if (status == XAILightStatus_Open) {
-        [self showOpen];
+        [self setStatus:XAIOCST_Open];
+    }else if (status == XAILightStatus_Close) {
+        [self setStatus:XAIOCST_Close];
     }else{
     
-        [self showClose];
+        [self setStatus:XAIOCST_Unkown];
     }
 }
+
+
+- (void) setInfo:(XAILight*)aObj{
+    
+    [self _removeWeakObj];
+    
+    if (aObj == nil) return;
+    if (![aObj isKindOfClass:[XAILight class]] ){
+        
+        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
+        [self.tipImageView setBackgroundColor:[UIColor clearColor]];
+        [self.tipImageView setImage:nil];
+        [self.nameLable setText:nil];
+        [self.contextLable setText:nil];
+        [self.tipLabel setText:nil];
+        
+        return;
+    }
+    
+    
+    
+    [self.tipImageView setBackgroundColor:[UIColor clearColor]];
+    [self.tipImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
+    
+    if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
+        
+        [self.nameLable setText:aObj.nickName];
+    }else{
+        
+        [self.nameLable setText:aObj.name];
+    }
+    
+    [self.contextLable setText:[aObj.lastOpr allStr]];
+    
+    
+    
+    
+    XAIOCST status = XAIOCST_Unkown;
+    
+    if (aObj.curDevStatus == XAILightStatus_Open) {
+        
+        status = XAIOCST_Open;
+        
+    }else if(aObj.curDevStatus == XAILightStatus_Close){
+        status = XAIOCST_Close;
+    }
+    
+    
+    
+    [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
+    
+    
+    [self _changeWeakObj:aObj];
+    
+}
+
+- (void) _removeWeakObj{
+    
+    if (self.weakLight != nil && [self.weakLight isKindOfClass:[XAILight class]]) {
+        ((XAILight*)self.weakLight).delegate = nil;
+        self.weakLight = nil;
+        
+    }
+}
+
+- (void) _changeWeakObj:(XAILight*)aObj{
+    
+    [self _removeWeakObj];
+    
+    
+    if ([aObj isKindOfClass:[XAILight class]]) {
+        
+        self.weakLight = aObj;
+        ((XAILight*)self.weakLight).delegate = self;
+        
+    }
+    
+}
+
 
 
 @end
@@ -98,6 +179,8 @@
     
     _datas = [[NSArray alloc] initWithArray:datas];
     [self.cTableView reloadData];
+    
+    self.cTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 -(void)dealloc{
@@ -142,41 +225,12 @@
     
     if (aObj != nil && [aObj isKindOfClass:[XAILight class]]) {
         
-        [cell.headImageView setBackgroundColor:[UIColor clearColor]];
-        [cell.headImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
-        
-        if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
-            
-            [cell.nameLable setText:aObj.nickName];
-        }else{
-            
-            [cell.nameLable setText:aObj.name];
-        }
-        
-        [cell.contextLable setText:[aObj.lastOpr allStr]];
-        
-        
-        [cell setStatus:aObj.curStatus];
-        
-        if (cell.weakLight != nil) {
-            cell.weakLight.delegate = nil;
-        }
-        cell.weakLight = aObj;
-        cell.weakLight.delegate = cell;
-        //aObj.delegate = cell;
+        [cell setInfo:aObj];
     }
     
     
     // Add utility buttons
-    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-    
-    
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                               title:@"修改备注"];
-    
-    
-    cell.leftUtilityButtons = leftUtilityButtons;
+    [cell setEditBtn];
     cell.delegate = self;
     
     //[cell setBackgroundColor:[UIColor greenColor]];
@@ -239,39 +293,12 @@
 
                 
                 [self.topVC changeInputCell:listCell input:listCell.input];
-//                if (_curInputCell != nil) {
-//                    
-//                    _curInputCell.input.enabled = false;
-//                    _curInputCell.input.hidden = true;
-//                    [_curInputCell.input resignFirstResponder];
-//                    [_curInputCell hideUtilityButtonsAnimated:true];
-//                    
-//                    // Add utility buttons
-//                    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-//                    
-//                    
-//                    [leftUtilityButtons sw_addUtilityButtonWithColor:
-//                     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-//                                                               title:@"修改备注"];
-//                    
-//                    
-//                    _curInputCell.leftUtilityButtons = leftUtilityButtons;
-//                }
                 
                 listCell.input.enabled = true;
                 listCell.input.hidden = false;
                 [listCell.input becomeFirstResponder];
                 
-                // Add utility buttons
-                NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-                
-                
-                [leftUtilityButtons sw_addUtilityButtonWithColor:
-                 [UIColor colorWithRed:1.0f green:1.0f blue:0.75f alpha:0.7]
-                                                           title:@"保存保存"];
-                
-                
-                listCell.leftUtilityButtons = leftUtilityButtons;
+                [listCell setSaveBtn];
                 
                 _curInputCell = listCell;
             }
@@ -283,20 +310,6 @@
     }
 }
 
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-                 }
-        case 1:
-        {
-       
-        }
-        default:
-            break;
-    }
-}
 
 
 static bool _delShow = false;
@@ -359,6 +372,10 @@ static SWTableViewCell* _curSWCell;
     return YES;
 }
 
+-(void)swipeableTableViewCellCancelEdit:(SWTableViewCell *)cell{
+    
+    [self.topVC hiddenOldInput];
+}
 
 - (BOOL) isallInCenter{
 
@@ -378,6 +395,16 @@ static SWTableViewCell* _curSWCell;
     }
 }
 
+- (void) refreshOpr{
+
+    for (XAILightListVCChildCell* cell in _cells){
+        
+        XAIObject* obj = [_datas objectAtIndex:[[self.cTableView indexPathForCell:cell] row]];
+        
+        [cell setInfo:obj];
+    }
+    
+}
 
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -401,18 +428,18 @@ static SWTableViewCell* _curSWCell;
         if (![cell isKindOfClass:[XAILightListVCChildCell class]]) break;
         
         
-        if(aLight.curStatus == XAILightStatus_Open){
+        if(aLight.curDevStatus == XAILightStatus_Open){
             
             [aLight closeLight];
+            [cell showOprStart:aLight.curOprtip];
             
             
-        }else if(aLight.curStatus == XAILightStatus_Close){
+        }else if(aLight.curDevStatus == XAILightStatus_Close){
             
             [aLight openLight];
+            [cell showOprStart:aLight.curOprtip];
             
         }
-        
-        [cell setStatus:aLight.curStatus];
         
         
     } while (0);

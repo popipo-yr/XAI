@@ -92,6 +92,7 @@
         opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
         opr.opr = winStatus;
         opr.otherID = otherInfo.msgid;
+        opr.oprLuid = otherInfo.fromluid;
         
         [_tmpOprs addObject:opr];
         

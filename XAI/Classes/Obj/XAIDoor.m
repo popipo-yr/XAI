@@ -90,6 +90,7 @@
         opr.time = [NSDate dateWithTimeIntervalSince1970:otherInfo.time];
         opr.opr = doorStatus;
         opr.otherID = otherInfo.msgid;
+        opr.oprLuid = otherInfo.fromluid;
         
         [_tmpOprs addObject:opr];
         

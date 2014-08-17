@@ -25,6 +25,10 @@
     NSMutableArray*  _deviceDatas; /*XAIObject数组*/
     
     
+    NSMutableDictionary* _delInfo;
+    NSMutableDictionary* _cell2Infos;
+    
+    
 //    XAILightListVCCell* _curInputCell;
     
     SWTableViewCell* _curInputCell;

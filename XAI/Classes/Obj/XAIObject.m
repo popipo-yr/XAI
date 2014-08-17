@@ -31,8 +31,8 @@
         
         _tmpOprs = [[NSMutableArray alloc] init];
         
-        _curStatus = XAIObjStatusUnkown;
-        _preStatus = XAIObjStatusUnkown;
+        _curDevStatus = XAIObjStatusUnkown;
+        _curOprStatus = XAIObjectOprStatus_none;
         
         //_flag = XAIObjectFlagNormal;
     }
@@ -115,6 +115,7 @@
         [dic setObject:_lastOpr.time forKey:_Key_OprTime_];
         [dic setObject:_lastOpr.name forKey:_Key_OprName_];
         [dic setObject:[NSNumber numberWithInteger:_lastOpr.otherID] forKey:_Key_OprOtherID_];
+        [dic setObject:[NSNumber numberWithLongLong:_lastOpr.oprLuid] forKey:_Key_OprLuid];
     }
     
     return dic;
@@ -137,6 +138,7 @@
     _lastOpr.time = [dic objectForKey:_Key_OprTime_];
     _lastOpr.name = [dic objectForKey:_Key_OprName_];
     _lastOpr.otherID = [[dic objectForKey:_Key_OprOtherID_] intValue];
+    _lastOpr.oprLuid = [[dic objectForKey:_Key_OprLuid] longLongValue];
 }
 
 /*获取操作记录集,读取本地的信息*/
@@ -273,7 +275,7 @@
     
     //如果需要通知结果
     if (last != nil) {
-        self.curStatus = last.opr;
+        self.curDevStatus = last.opr;
         [self updateFinish:last];
     }
     
@@ -281,47 +283,17 @@
 
 
 - (void) startOpr{
-    self.preStatus = self.curStatus;
+    _curOprStatus = XAIObjectOprStatus_start;
 }
 - (void) endOpr{
-    
+    _curOprStatus = XAIObjectOprStatus_none;
+    _curOprtip = nil;
 }
 
-- (void) setCurStatus:(int)status{
+- (void) showMsg{
 
-    if (status == XAIObjStatusErr) {
-        isShowErr = true;
-        [self performSelector:@selector(_changeToPre) withObject:nil afterDelay:3.0f];
-    }
-    
-    if (status != XAIObjStatusErr &&
-        status!= XAIObjStatusOperStart) {
-    
-        self.preStatus = status;
-    }
-    
-    if (status == XAIObjStatusOperEnd) {
-        _curStatus = self.preStatus;
-        return;
-    }
-    
-    _curStatus = status;
-}
-
-
-
-- (void) _changeToPre{
-    
-    if (isShowErr == false) {
-        return;
-    }
-    
-    if (self.preStatus != XAIObjStatusErr &&
-        self.preStatus != XAIObjStatusOperStart) {
-        
-        _curStatus = self.preStatus;
-    }
-    
+    _curOprStatus = XAIObjectOprStatus_showMsg;
+    [self performSelector:@selector(endOpr) withObject:nil afterDelay:3.0f];
 }
 
 
