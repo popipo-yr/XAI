@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XAILinkageUseInfo.h"
+#import "XAIStatus.h"
 
 typedef uint8_t XAILinkageNum;
 
@@ -21,7 +22,7 @@ typedef enum : uint8_t{
 }XAILinkageStatus;
 
 
-@interface XAILinkage : NSObject{
+@interface XAILinkage : XAIStatus{
 
     XAILinkageNum _num;
     XAILinkageStatus _status;

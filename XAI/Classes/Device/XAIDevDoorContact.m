@@ -216,7 +216,7 @@
 }
 
 #pragma mark Linkage
--(NSArray *)getLinkageUseInfos{
+-(NSArray *)getLinkageUseStatusInfos{
     
     
     XAILinkageUseInfoStatus* open = [[XAILinkageUseInfoStatus alloc] init];
@@ -235,6 +235,10 @@
     xai_param_data_set(close_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typeclose, NULL);
     
     [close setApsn:_apsn Luid:_luid ID:Key_StatusID Datas:close_data];
+    
+    
+    purgePacketParamData(open_data);
+    purgePacketParamData(close_data);
     
     
     return [NSArray arrayWithObjects:open, close, nil];

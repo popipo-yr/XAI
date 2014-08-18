@@ -428,6 +428,8 @@
     
     [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
     
+    purgePacketParamData(true_data);
+    purgePacketParamData(false_data);
     
     return [NSArray arrayWithObjects:openone, closeone, nil];
 }
@@ -452,10 +454,67 @@
     
     [closetwo setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
     
+    purgePacketParamData(true_data);
+    purgePacketParamData(false_data);
     
     return [NSArray arrayWithObjects:opentwo, closetwo, nil];
     
 }
+
+
+-(NSArray *)getCirculeOneLinkageStatusInfos{
+    
+    
+    XAILinkageUseInfoStatus* openone = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* true_data = generatePacketParamData();
+    XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
+    
+    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    
+    
+    XAILinkageUseInfoStatus* closeone = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* false_data = generatePacketParamData();
+    XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
+    xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
+    
+    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    
+    purgePacketParamData(true_data);
+    purgePacketParamData(false_data);
+    
+    return [NSArray arrayWithObjects:openone, closeone, nil];
+}
+
+-(NSArray *)getCirculeTwoLinkageStatusInfos{
+    
+    
+    XAILinkageUseInfoStatus* opentwo = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* true_data = generatePacketParamData();
+    XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
+    
+    [opentwo setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    
+    
+    XAILinkageUseInfoStatus* closetwo = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* false_data = generatePacketParamData();
+    XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
+    xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
+    
+    [closetwo setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    
+    purgePacketParamData(true_data);
+    purgePacketParamData(false_data);
+    
+    return [NSArray arrayWithObjects:opentwo, closetwo, nil];
+    
+}
+
 
 @end
 

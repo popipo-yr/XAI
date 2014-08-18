@@ -54,6 +54,15 @@
     [_doorContact getPower];
 }
 
+-(BOOL)hasLinkageTiaojian{
+
+    return true;
+}
+
+-(NSArray *)getLinkageTiaojian{
+    return [_doorContact getLinkageUseStatusInfos];
+}
+
 #pragma --Helper
 - (void)updateFinish:(XAIObjectOpr *)oprInfo{
     

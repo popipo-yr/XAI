@@ -15,6 +15,10 @@
     
     NSMutableArray* _allLinkages;
     XAILinkage*  _getLinkage;
+    
+    NSMutableArray* _delIDs;
+    NSMutableArray* _changeIDs;
+    uint16_t curDelIDs;
 
 }
 
@@ -25,8 +29,8 @@
 - (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfoCtrl *)ctrlInfo
                     status:(XAILinkageStatus)status name:(NSString*)name;
 
-- (void) delLinkage:(XAILinkageNum)linkNum;
-- (void) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus;
+- (int) delLinkage:(XAILinkageNum)linkNum;
+- (int) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus;
 - (void) findAllLinkages;
 - (void) getLinkageDetail:(XAILinkage*)aLinkage;
 
@@ -47,6 +51,10 @@
 
 - (void) linkageService:(XAILinkageService *)service  getLinkageDetail:(XAILinkage*)linkage
              statusCode:(XAI_ERROR)errcode;
+
+
+- (void) linkageService:(XAILinkageService*)service delStatusCode:(XAI_ERROR)errcode otherID:(int)otherID;
+- (void) linkageService:(XAILinkageService*)service changeStatusStatusCode:(XAI_ERROR)errcode otherID:(int)otherID;
 
 @end
 

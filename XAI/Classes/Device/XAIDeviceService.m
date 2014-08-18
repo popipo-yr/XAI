@@ -141,13 +141,14 @@
         if((nil != _deviceServiceDelegate) &&
            [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:otherID:)]) {
             
-            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             [_deviceServiceDelegate devService:self
                                      delDevice:false
                                        errcode:XAI_ERROR_TIMEOUT
                                        otherID:otherID];
             
         }
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
     }
     
 }

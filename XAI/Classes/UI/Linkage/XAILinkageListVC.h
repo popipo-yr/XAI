@@ -6,9 +6,24 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XAIHasTableViewVC.h"
+#import "XAILinkageService.h"
 
-@interface XAILinkageListVC : UIViewController
+@interface XAILinkageListVC : XAIHasTableViewVC
+<XAILinkageServiceDelegate,SWTableViewCellDelegate>{
+    
+    XAILinkageService* _linkageService;
+    NSMutableArray*  _Datas;
+    NSMutableDictionary* _delInfo;
+    NSMutableDictionary* _changeInfo;
+    NSMutableDictionary* _cellInfos;
+    
+    NSArray* _swipes;
+    
+}
+
+@property (nonatomic,strong) IBOutlet UIView* retView;
+
 
 +(UIViewController*)create;
 

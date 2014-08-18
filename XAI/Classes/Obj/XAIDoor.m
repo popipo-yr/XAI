@@ -147,10 +147,15 @@
     
 }
 
--(NSArray *)getLinkageUseInfos{
+-(BOOL)hasLinkageTiaojian{
+
+    return true;
+}
+
+-(NSArray *)getLinkageTiaojian{
     
     
-    return [_doorContact getLinkageUseInfos];
+    return [_doorContact getLinkageUseStatusInfos];
 }
 
 

@@ -78,5 +78,6 @@ center.y -= len; \
 - (void) finish_L2R;
 
 - (void) changeIphoneStatus;
+- (void) changeIphoneStatusClear;
 
 @end

@@ -272,8 +272,8 @@
 - (void)test_Add_TRUE
 {
     
-    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
-                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
+    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageTiaojian] objectAtIndex:0], nil]
+                   ctrlInfo:[[_light getLinkageTiaojian] objectAtIndex:0]
                      status:XAILinkageStatus_Active
                        name:_name4Change];
     
@@ -363,8 +363,8 @@
 
 - (void)testGetDetail_TRUE
 {
-    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
-                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
+    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageTiaojian] objectAtIndex:0], nil]
+                   ctrlInfo:[[_light getLinkageTiaojian] objectAtIndex:0]
                      status:XAILinkageStatus_Active
                        name:_name4Change];
     

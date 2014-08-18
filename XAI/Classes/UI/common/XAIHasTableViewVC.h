@@ -17,7 +17,7 @@
     UIActivityIndicatorView* _activityView;
     UIBarButtonItem* _returnItem;
     
-    UISwipeGestureRecognizer* _recognizer;
+    //UISwipeGestureRecognizer* _recognizer;
     
     NSIndexPath* _curDelIndexPath;
 }

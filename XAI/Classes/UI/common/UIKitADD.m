@@ -319,4 +319,32 @@
 
 }
 
+
+- (void) changeIphoneStatusClear{
+    
+    if (isIOS7) {
+        
+        
+        [[UINavigationBar appearance] setBarTintColor:
+         [UIColor clearColor]];
+        
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+        view.backgroundColor=[UIColor clearColor];
+        
+        [self.view addSubview:view];
+        
+    }else{
+        
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:RGBA(255, 91, 0, 0)
+                                                                            size:CGSizeMake(1, 44)]
+                                           forBarMetrics:UIBarMetricsDefault];
+        
+    }
+    
+    
+    
+}
+
+
 @end

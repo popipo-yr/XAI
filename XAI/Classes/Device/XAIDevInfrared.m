@@ -224,4 +224,31 @@
     [super timeout];
 }
 
+- (NSArray*) getLinkageStatusInfos{
+    
+    XAILinkageUseInfoStatus* open = [[XAILinkageUseInfoStatus alloc] init];
+    
+    _xai_packet_param_data* open_data = generatePacketParamData();
+    XAITYPEBOOL typeopen =  XAITYPEBOOL_TRUE;
+    xai_param_data_set(open_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typeopen, NULL);
+    
+    [open setApsn:_apsn Luid:_luid ID:Key_DetectorStatusID Datas:open_data];
+    
+    
+    XAILinkageUseInfoCtrl* close = [[XAILinkageUseInfoCtrl alloc] init];
+    
+    _xai_packet_param_data* close_data = generatePacketParamData();
+    XAITYPEBOOL typeclose =  XAITYPEBOOL_FALSE;
+    xai_param_data_set(close_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typeclose, NULL);
+    
+    [close setApsn:_apsn Luid:_luid ID:Key_DetectorStatusID Datas:close_data];
+    
+    purgePacketParamData(open_data);
+    purgePacketParamData(close_data);
+    
+    return [NSArray arrayWithObjects:open, close, nil];
+
+
+}
+
 @end

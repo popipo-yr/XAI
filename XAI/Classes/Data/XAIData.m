@@ -394,6 +394,10 @@ static XAIData*  _s_XAIData_ = NULL;
     return retObjs;
 }
 
+- (NSArray*) listenObjs{
+
+    return [NSArray arrayWithArray:_objListenList];
+}
 
 @end
 

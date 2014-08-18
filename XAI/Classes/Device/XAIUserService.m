@@ -112,8 +112,8 @@
     purgePacketParamCtrlAndData(param_ctrl);
     
 
-    _devOpr = XAIUserServiceOpr_del;
-    _DEF_XTO_TIME_Start
+    //_devOpr = XAIUserServiceOpr_del;
+    //_DEF_XTO_TIME_Start
     NSNumber* delIDNum = [NSNumber numberWithInt:curDelIDs];
     [_delIDs addObject:delIDNum];
     [self performSelector:@selector(delTimeOut:) withObject:delIDNum afterDelay:5.0];
@@ -139,13 +139,14 @@
         if((nil != _userServiceDelegate) &&
            [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:otherID:)]) {
             
-            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             [_userServiceDelegate userService:self
                                       delUser:false
                                       errcode:XAI_ERROR_TIMEOUT
                                       otherID:otherID];
             
         }
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
     }
     
 }

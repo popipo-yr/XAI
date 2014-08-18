@@ -252,8 +252,12 @@
 }
 
 
-- (NSArray*) getLinkageUseInfos{
+- (NSArray*) getLinkageTiaojian{
 
+    return NULL;
+}
+
+- (NSArray*) getLinkageJieGuo{
     return NULL;
 }
 
@@ -282,6 +286,12 @@
 }
 
 
+- (BOOL) hasLinkageTiaojian{
+    return false;
+}
+- (BOOL) hasLinkageJieGuo{
+    return false;
+}
 
 
 @end

@@ -21,6 +21,7 @@
 - (void)getCurStatus;
 - (void)getPower;
 
+
 @end
 
 typedef enum XAIIRStatus{

@@ -16,6 +16,7 @@
 
 - (void) getInfraredStatus;
 - (void) getPower;
+- (NSArray*) getLinkageStatusInfos;
 
 @end
 

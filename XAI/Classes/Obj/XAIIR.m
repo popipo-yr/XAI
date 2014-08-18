@@ -52,6 +52,16 @@
     [_infrared getPower];
 }
 
+-(BOOL)hasLinkageTiaojian{
+    return true;
+}
+
+
+-(NSArray *)getLinkageTiaojian{
+    
+    return [_infrared getLinkageStatusInfos];
+}
+
 - (void)updateFinish:(XAIObjectOpr *)oprInfo{
     
     //如果需要通知结果

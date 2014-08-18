@@ -69,6 +69,7 @@
 + (NSString*) getSavePathFile:(NSString*)fileName;
 
 - (NSArray*) listenObjsWithType:(NSArray*)types;
+- (NSArray*) listenObjs;
 
 @end
 

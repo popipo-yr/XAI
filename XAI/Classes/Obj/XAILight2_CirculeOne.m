@@ -166,9 +166,20 @@
     
 }
 
+-(BOOL)hasLinkageTiaojian{
+    return true;
+}
 
--(NSArray *)getLinkageUseInfos{
+-(BOOL)hasLinkageJieGuo{
+    return true;
+}
 
+-(NSArray *)getLinkageTiaojian{
+
+    return [_devSwitch getCirculeTwoLinkageStatusInfos];
+}
+
+-(NSArray *)getLinkageJieGuo{
     return [_devSwitch getCirculeTwoLinkageUseInfos];
 }
 

@@ -114,20 +114,21 @@
 
 }
 
-- (void) delLinkage:(XAILinkageNum)linkNum{
+- (int) delLinkage:(XAILinkageNum)linkNum{
     
-    [self setLinkage_helper:linkNum status:XAILinkageStatus_Del num:Key_LinkageDelMagNum];
+   return  [self setLinkage_helper:linkNum status:XAILinkageStatus_Del num:Key_LinkageDelMagNum];
 }
 
-- (void) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus{
+- (int) setLinkage:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus{
     
-    [self setLinkage_helper:linkNum status:linkageStatus num:Key_LinkageChgMagNum];
+    return [self setLinkage_helper:linkNum status:linkageStatus num:Key_LinkageChgMagNum];
     
 }
 
 
-- (void) setLinkage_helper:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus num:(int)magnum{
+- (int) setLinkage_helper:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus num:(int)magnum{
     
+     curDelIDs += 1;
     
     MQTT* cur_MQTT = [MQTT shareMQTT];
     
@@ -140,7 +141,7 @@
     xai_param_data_set(number_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageNum), &linkNum, status_data);
     xai_param_data_set(status_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageStatus), &linkageStatus, NULL);
     
-    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, 0, magnum,
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, curDelIDs, magnum,
                        Key_LinkageChange,[[NSDate new] timeIntervalSince1970], 2, number_data);
     
     
@@ -159,8 +160,89 @@
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
 
+
+    
+    if (magnum == Key_LinkageDelMagNum) {
+        
+        
+        NSNumber* delIDNum = [NSNumber numberWithInt:curDelIDs];
+        [_delIDs addObject:delIDNum];
+        [self performSelector:@selector(delTimeOut:) withObject:delIDNum afterDelay:5.0];
+
+        
+        
+    }else if(magnum == Key_LinkageChgMagNum){
+        
+        
+        NSNumber* changeIDNum = [NSNumber numberWithInt:curDelIDs];
+        [_changeIDs addObject:changeIDNum];
+        [self performSelector:@selector(changeTimeOut:) withObject:changeIDNum afterDelay:5.0];
+
+     
+        
+    }
+    
+    
+    return curDelIDs;
     
 }
+
+-(void) delTimeOut:(NSNumber*)obj{
+    
+    int otherID = -1;
+    if ([obj isKindOfClass:[NSNumber class]]){
+        otherID = [obj intValue];
+    }
+    
+    
+    NSNumber* curID = [NSNumber numberWithInt:otherID];
+    
+    if (NSNotFound != [_delIDs indexOfObject:curID]) {
+        
+        [_delIDs removeObject:curID];
+        
+        if((nil != _linkageServiceDelegate) &&
+           [_linkageServiceDelegate respondsToSelector:@selector(linkageService:delStatusCode:otherID:)]) {
+            
+            [_linkageServiceDelegate linkageService:self delStatusCode:XAI_ERROR_TIMEOUT otherID:otherID];
+
+        }
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+    }
+    
+}
+
+
+-(void) changeTimeOut:(NSNumber*)obj{
+    
+    int otherID = -1;
+    if ([obj isKindOfClass:[NSNumber class]]){
+        otherID = [obj intValue];
+    }
+    
+    
+    NSNumber* curID = [NSNumber numberWithInt:otherID];
+    
+    if (NSNotFound != [_changeIDs indexOfObject:curID]) {
+        
+        [_changeIDs removeObject:curID];
+        
+        if((nil != _linkageServiceDelegate) &&
+           [_linkageServiceDelegate respondsToSelector:
+            @selector(linkageService:changeStatusStatusCode:otherID:)]) {
+            
+               [_linkageServiceDelegate linkageService:self changeStatusStatusCode:XAI_ERROR_TIMEOUT otherID:otherID];
+            
+        }
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+    }
+    
+}
+
+
+
 - (void) findAllLinkages{
     
     NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
@@ -400,27 +482,66 @@
             
         case Key_LinkageChange:{
             
+//            if (ack->normal_param->magic_number == Key_LinkageDelMagNum) {
+//                
+//                
+//                if ((nil != _linkageServiceDelegate) &&
+//                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:delStatusCode:)]) {
+//                    
+//                    [_linkageServiceDelegate linkageService:self delStatusCode:ack->err_no];
+//                }
+//                
+//                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+//                
+//                
+//            }else if(ack->normal_param->magic_number == Key_LinkageChgMagNum){
+//                
+//                if ((nil != _linkageServiceDelegate) &&
+//                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:changeStatusStatusCode:)]) {
+//                    
+//                    [_linkageServiceDelegate linkageService:self changeStatusStatusCode:ack->err_no];
+//                }
+//                
+//                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+//                
+//            }
+            
+            NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->msgid];
+            
             if (ack->normal_param->magic_number == Key_LinkageDelMagNum) {
                 
                 
-                if ((nil != _linkageServiceDelegate) &&
-                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:delStatusCode:)]) {
+                if (NSNotFound != [_delIDs indexOfObject:curID]) {
                     
-                    [_linkageServiceDelegate linkageService:self delStatusCode:ack->err_no];
+                    [_delIDs removeObject:curID];
+                    
+                    if((nil != _linkageServiceDelegate) &&
+                       [_linkageServiceDelegate respondsToSelector:
+                        @selector(linkageService:delStatusCode:otherID:)]) {
+                        
+                           [_linkageServiceDelegate linkageService:self delStatusCode:ack->err_no otherID:[curID integerValue]];
+                        
+                    }
+                    
+                    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
                 }
-                
-                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
                 
                 
             }else if(ack->normal_param->magic_number == Key_LinkageChgMagNum){
                 
-                if ((nil != _linkageServiceDelegate) &&
-                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:changeStatusStatusCode:)]) {
+                if (NSNotFound != [_changeIDs indexOfObject:curID]) {
                     
-                    [_linkageServiceDelegate linkageService:self changeStatusStatusCode:ack->err_no];
+                    [_changeIDs removeObject:curID];
+                    
+                    if((nil != _linkageServiceDelegate) &&
+                       [_linkageServiceDelegate respondsToSelector:
+                        @selector(linkageService:changeStatusStatusCode:otherID:)]) {
+                           
+                           [_linkageServiceDelegate linkageService:self changeStatusStatusCode:ack->err_no otherID:[curID integerValue]];
+                       }
+                    
+                    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
                 }
-                
-                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
                 
             }
         }break;
@@ -544,6 +665,9 @@
     if (self = [super init]) {
         
         _allLinkages = [[NSMutableArray alloc] init];
+        _delIDs = [[NSMutableArray alloc] init];
+        _changeIDs = [[NSMutableArray alloc] init];
+        curDelIDs = 0;
     }
     
     return self;

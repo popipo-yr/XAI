@@ -98,12 +98,17 @@ typedef enum XAIObjectType{
 - (BOOL) readOprList; /*获取操作记录集,读取本地的信息*/
 - (BOOL) addOpr:(XAIObjectOpr*)aOpr; /*添加一个操作记录 更新最后一次操作和操作列表*/
 - (NSArray*) getOprList;
-- (NSArray*) getLinkageUseInfos; /*获取联动使用信息*/
+
 
 
 - (void) timeout;
 - (void) updateFinish:(XAIObjectOpr*)opr;
 
+
+- (BOOL) hasLinkageTiaojian;
+- (BOOL) hasLinkageJieGuo;
+- (NSArray*) getLinkageTiaojian; /*获取联动使用信息*/
+- (NSArray*) getLinkageJieGuo;
 
 @end
 
