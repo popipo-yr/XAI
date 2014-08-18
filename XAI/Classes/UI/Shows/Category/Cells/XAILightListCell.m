@@ -7,7 +7,6 @@
 //
 
 #import "XAILightListCell.h"
-#import "XAIObjectGenerate.h"
 #import "XAILightListVC.h"
 
 @implementation _XAILightListVCCell
@@ -91,7 +90,6 @@
     
     
     [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-    [self.tipImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
     
     if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
         
@@ -447,6 +445,13 @@ static SWTableViewCell* _curSWCell;
     
     
     return nil;
+}
+
+- (void) enableChild:(BOOL)bl{
+
+    for (XAILightListVCChildCell* cell in _cells){
+        [cell setEnable:bl];
+    }
 }
 
 

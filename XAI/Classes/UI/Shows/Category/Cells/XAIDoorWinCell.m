@@ -66,7 +66,6 @@
     
     
     [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-    [self.tipImageView setImage:[UIImage imageNamed:[XAIObjectGenerate typeImageName:aObj.type]]];
     
     if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
         

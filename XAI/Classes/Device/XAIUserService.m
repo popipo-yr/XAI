@@ -77,8 +77,9 @@
 }
 
 
-- (void) delUser:(XAITYPELUID) uluid apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
+- (int) delUser:(XAITYPELUID) uluid apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
 
+    curDelIDs += 1;
     
     MQTT* cur_MQTT = [MQTT shareMQTT];
     
@@ -93,7 +94,7 @@
     
     xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID, sizeof(XAITYPELUID), &uluid,NULL);
     
-    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, 0,
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL, 0, curDelIDs,
                        DelUserID, [[NSDate new] timeIntervalSince1970], 2, apsn_data);
     
     
@@ -113,7 +114,42 @@
 
     _devOpr = XAIUserServiceOpr_del;
     _DEF_XTO_TIME_Start
+    NSNumber* delIDNum = [NSNumber numberWithInt:curDelIDs];
+    [_delIDs addObject:delIDNum];
+    [self performSelector:@selector(delTimeOut:) withObject:delIDNum afterDelay:5.0];
+    
+    return curDelIDs;
+    
 }
+
+-(void) delTimeOut:(NSNumber*)obj{
+    
+    int otherID = -1;
+    if ([obj isKindOfClass:[NSNumber class]]){
+        otherID = [obj intValue];
+    }
+    
+    
+    NSNumber* curID = [NSNumber numberWithInt:otherID];
+    
+    if (NSNotFound != [_delIDs indexOfObject:curID]) {
+        
+        [_delIDs removeObject:curID];
+        
+        if((nil != _userServiceDelegate) &&
+           [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:otherID:)]) {
+            
+            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+            [_userServiceDelegate userService:self
+                                      delUser:false
+                                      errcode:XAI_ERROR_TIMEOUT
+                                      otherID:otherID];
+            
+        }
+    }
+    
+}
+
 
 
 - (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername
@@ -433,15 +469,37 @@
         case DelUserID:{
             
             
-            if ((nil != _userServiceDelegate) &&
-                [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:)]) {
+//            if ((nil != _userServiceDelegate) &&
+//                [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:)]) {
+//                
+//                [_userServiceDelegate userService:self delUser:bSuccess errcode:ack->err_no];
+//            }
+//            
+//            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
+//            
+//            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_del);
+            
+            
+            NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->magic_number];
+            
+            if (NSNotFound != [_delIDs indexOfObject:curID]) {
                 
-                [_userServiceDelegate userService:self delUser:bSuccess errcode:ack->err_no];
+                [_delIDs removeObject:curID];
+                
+                if((nil != _userServiceDelegate) &&
+                   [_userServiceDelegate respondsToSelector:@selector(userService:delUser:errcode:otherID:)]) {
+                    
+                    [_userServiceDelegate userService:self
+                                              delUser:bSuccess
+                                              errcode:ack->err_no
+                                              otherID:[curID integerValue]];
+ 
+                    
+                }
+                
+                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             }
-            
-            [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-            
-            _DEF_XTO_TIME_END_TRUE(_devOpr, XAIUserServiceOpr_del);
+
      
         
         }break;
@@ -561,9 +619,9 @@
 }
 
 
-- (void) delUser:(XAITYPELUID) uluid{
+- (int) delUser:(XAITYPELUID) uluid{
 
-    [self delUser:uluid apsn:_apsn luid:_luid];
+    return [self delUser:uluid apsn:_apsn luid:_luid];
 }
 
 - (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername{
@@ -650,20 +708,28 @@
     [super timeout];
 }
 
+
+-(void) _init{
+    
+    __s += 1;
+    _delIDs = [[NSMutableArray alloc] init];
+    curDelIDs = 0;
+    //XSLog(@"++++++++++:%d",__s);
+}
+
 static int __s = 0;
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid{
 
     if (self = [super initWithApsn:apsn Luid:luid]) {
-        __s += 1;
-        //XSLog(@"++++++++++:%d",__s);
+
+        [self _init];
     }
     return self;
 }
 -(id)init{
 
     if (self = [super init]) {
-        __s += 1;
-        //XSLog(@"++++++++++:%d",__s);
+        [self _init];
     }
     
     return self;

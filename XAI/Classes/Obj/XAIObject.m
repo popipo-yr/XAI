@@ -282,20 +282,6 @@
 }
 
 
-- (void) startOpr{
-    _curOprStatus = XAIObjectOprStatus_start;
-}
-- (void) endOpr{
-    _curOprStatus = XAIObjectOprStatus_none;
-    _curOprtip = nil;
-}
-
-- (void) showMsg{
-
-    _curOprStatus = XAIObjectOprStatus_showMsg;
-    [self performSelector:@selector(endOpr) withObject:nil afterDelay:3.0f];
-}
-
 
 
 @end

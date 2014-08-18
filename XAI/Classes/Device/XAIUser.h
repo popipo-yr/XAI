@@ -9,19 +9,26 @@
 #import <Foundation/Foundation.h>
 
 #import "XAIMQTTDEF.h"
+#import "XAIStatus.h"
 
-@interface XAIUser : NSObject{
+@interface XAIUser : XAIStatus{
     
     XAITYPELUID _luid;
     XAITYPEAPSN _apsn;
     NSString* _name;
     NSString* _pawd;
+    
+
+    
 }
+
+
 
 @property (nonatomic, assign) XAITYPELUID luid;
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* pawd;
+
 
 - (BOOL) isAdmin;
 

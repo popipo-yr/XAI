@@ -121,12 +121,12 @@
     
 
     
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
-    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
+//    [_deviceDatas addObject:[[XAIDoor alloc] init]];
     
     
      XSLog(@"timeA");

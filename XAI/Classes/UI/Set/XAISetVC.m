@@ -12,6 +12,9 @@
 #import "XAIChangePasswordVC.h"
 #import "XAIAppDelegate.h"
 
+#import "XAIShowVC.h"
+
+
 #define _key_name_index 1
 #define _key_pawd_index 2
 #define _key_home_index 0
@@ -81,6 +84,55 @@
     [self.tableView reloadData];
     
 }
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    _swipes = [[NSArray alloc] initWithArray:[self openSwipe]];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [self stopSwipte:_swipes];
+    
+    [super viewDidDisappear:animated];
+}
+
+
+-(BOOL)prefersStatusBarHidden{
+    
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }
+}
+
+
+
+-(void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer{
+    
+    //    [self animalView_R2L:[XAISetVC create].view];
+    [self animalVC_L2R:[XAIShowVC create]];
+    
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {

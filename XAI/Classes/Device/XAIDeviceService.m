@@ -105,10 +105,10 @@
     
     [curMQTT.packetManager addPacketManagerACK:self];
     
-//    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
-//                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
-//                             withQos:0
-//                              retain:NO];
+    [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
+                             toTopic:[MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid]
+                             withQos:0
+                              retain:NO];
     
     
     purgePacket(packet);
@@ -610,13 +610,14 @@
                 if((nil != _deviceServiceDelegate) &&
                    [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:otherID:)]) {
                     
-                    [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
                     [_deviceServiceDelegate devService:self
                                              delDevice:bSuccess
                                                errcode:ack->err_no
                                                otherID:[curID intValue]];
                     
                 }
+                
+                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             }
 
             

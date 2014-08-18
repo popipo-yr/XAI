@@ -50,6 +50,12 @@
 		9612B03619A06153004CA9F5 /* SWTableViewCellAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03519A06153004CA9F5 /* SWTableViewCellAdd.m */; };
 		9612B03919A0890E004CA9F5 /* XAIInfListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03819A0890E004CA9F5 /* XAIInfListVC.m */; };
 		9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B03B19A08934004CA9F5 /* XAIInfListCell.m */; };
+		9612B04219A09226004CA9F5 /* XAIUserServerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B04119A09226004CA9F5 /* XAIUserServerListVC.m */; };
+		9612B04519A09254004CA9F5 /* XAIUserServerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B04419A09254004CA9F5 /* XAIUserServerListCell.m */; };
+		9612B04819A09C76004CA9F5 /* XAIStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B04719A09C76004CA9F5 /* XAIStatus.m */; };
+		9612B04B19A0ACDF004CA9F5 /* XAINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B04A19A0ACDF004CA9F5 /* XAINavigationController.m */; };
+		9612B04E19A190CA004CA9F5 /* Linkage_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612B04C19A190CA004CA9F5 /* Linkage_iPhone.storyboard */; };
+		9612B05219A191C2004CA9F5 /* XAILinkageListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */; };
 		9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */; };
 		9616802E19206324000682A4 /* DoorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616802D19206324000682A4 /* DoorTest.m */; };
 		9616803119206979000682A4 /* XAITimeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616803019206979000682A4 /* XAITimeOut.m */; };
@@ -385,6 +391,17 @@
 		9612B03819A0890E004CA9F5 /* XAIInfListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIInfListVC.m; sourceTree = "<group>"; };
 		9612B03A19A08934004CA9F5 /* XAIInfListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIInfListCell.h; sourceTree = "<group>"; };
 		9612B03B19A08934004CA9F5 /* XAIInfListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIInfListCell.m; sourceTree = "<group>"; };
+		9612B04019A09226004CA9F5 /* XAIUserServerListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserServerListVC.h; sourceTree = "<group>"; };
+		9612B04119A09226004CA9F5 /* XAIUserServerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserServerListVC.m; sourceTree = "<group>"; };
+		9612B04319A09254004CA9F5 /* XAIUserServerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserServerListCell.h; sourceTree = "<group>"; };
+		9612B04419A09254004CA9F5 /* XAIUserServerListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIUserServerListCell.m; sourceTree = "<group>"; };
+		9612B04619A09C76004CA9F5 /* XAIStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIStatus.h; sourceTree = "<group>"; };
+		9612B04719A09C76004CA9F5 /* XAIStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIStatus.m; sourceTree = "<group>"; };
+		9612B04919A0ACDF004CA9F5 /* XAINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINavigationController.h; sourceTree = "<group>"; };
+		9612B04A19A0ACDF004CA9F5 /* XAINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINavigationController.m; sourceTree = "<group>"; };
+		9612B04D19A190CA004CA9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Linkage_iPhone.storyboard; sourceTree = "<group>"; };
+		9612B05019A191C2004CA9F5 /* XAILinkageListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageListVC.h; sourceTree = "<group>"; };
+		9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageListVC.m; sourceTree = "<group>"; };
 		9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
 		9614F94218FCEBB400CDF4A1 /* LoginPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPlugin.h; sourceTree = "<group>"; };
 		9616802D19206324000682A4 /* DoorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorTest.m; sourceTree = "<group>"; };
@@ -970,6 +987,15 @@
 			path = 2x;
 			sourceTree = "<group>";
 		};
+		9612B04F19A19190004CA9F5 /* Linkage */ = {
+			isa = PBXGroup;
+			children = (
+				9612B05019A191C2004CA9F5 /* XAILinkageListVC.h */,
+				9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */,
+			);
+			path = Linkage;
+			sourceTree = "<group>";
+		};
 		961F934A18F4288F002D4F74 /* ssl */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,6 +1020,8 @@
 				9612B03519A06153004CA9F5 /* SWTableViewCellAdd.m */,
 				9612B03A19A08934004CA9F5 /* XAIInfListCell.h */,
 				9612B03B19A08934004CA9F5 /* XAIInfListCell.m */,
+				9612B04319A09254004CA9F5 /* XAIUserServerListCell.h */,
+				9612B04419A09254004CA9F5 /* XAIUserServerListCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1075,6 +1103,8 @@
 				962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */,
 				9612B03719A0890E004CA9F5 /* XAIInfListVC.h */,
 				9612B03819A0890E004CA9F5 /* XAIInfListVC.m */,
+				9612B04019A09226004CA9F5 /* XAIUserServerListVC.h */,
+				9612B04119A09226004CA9F5 /* XAIUserServerListVC.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1140,6 +1170,8 @@
 				96B75ACC1974F7D500253906 /* XAIIR.m */,
 				96C882221985F60A00571F21 /* XAIObjectOpr.h */,
 				96C882231985F60A00571F21 /* XAIObjectOpr.m */,
+				9612B04619A09C76004CA9F5 /* XAIStatus.h */,
+				9612B04719A09C76004CA9F5 /* XAIStatus.m */,
 			);
 			path = Obj;
 			sourceTree = "<group>";
@@ -1341,6 +1373,8 @@
 			children = (
 				967BD7AB19090F3A007C3C8C /* XAISetVC.h */,
 				967BD7AC19090F3A007C3C8C /* XAISetVC.m */,
+				9612B04919A0ACDF004CA9F5 /* XAINavigationController.h */,
+				9612B04A19A0ACDF004CA9F5 /* XAINavigationController.m */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -1551,6 +1585,7 @@
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9612B04F19A19190004CA9F5 /* Linkage */,
 				96C6BD631998788000D61111 /* Shows */,
 				967BD7951908D874007C3C8C /* common */,
 				967BD7AA19090F3A007C3C8C /* Set */,
@@ -1587,6 +1622,7 @@
 		C341A63A18EBB22000034649 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				9612B04C19A190CA004CA9F5 /* Linkage_iPhone.storyboard */,
 				966828301998A72200F25AB9 /* Set_iPhone.storyboard */,
 				96C6BD601998730800D61111 /* Show_iPhone.storyboard */,
 				96C6BD5A19986E4E00D61111 /* Main_iPhone副本.storyboard */,
@@ -2007,6 +2043,7 @@
 				96E9D989190111F7000BB595 /* tab_bar_devM_sel.png in Resources */,
 				9612B02E19A03F5A004CA9F5 /* cell_unkown.png in Resources */,
 				968A9B47199E05BD00D357BC /* xai_icon@2x.png in Resources */,
+				9612B04E19A190CA004CA9F5 /* Linkage_iPhone.storyboard in Resources */,
 				9612B02A19A03F5A004CA9F5 /* cell_close@2x.png in Resources */,
 				969D6EDA1919EB5F002076A0 /* nav_back.png in Resources */,
 				C387F35C18EA757A0069F98B /* InfoPlist.strings in Resources */,
@@ -2168,12 +2205,14 @@
 				96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */,
 				963BDBAC199B426B0025B304 /* SWCellScrollView.m in Sources */,
 				967BD7981908D896007C3C8C /* XAIChangeNameVC.m in Sources */,
+				9612B04819A09C76004CA9F5 /* XAIStatus.m in Sources */,
 				967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */,
 				C387F36218EA757A0069F98B /* XAIAppDelegate.m in Sources */,
 				C341A66A18EBB2C400034649 /* memory_mosq.c in Sources */,
 				C33E77FE18F3B28500808391 /* XAILogin.m in Sources */,
 				968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */,
 				9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */,
+				9612B04519A09254004CA9F5 /* XAIUserServerListCell.m in Sources */,
 				962DDE0C19161493008F370A /* XAIWindowStatusVC.m in Sources */,
 				967BD7B119090F3A007C3C8C /* XAIUserListVC.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
@@ -2199,6 +2238,8 @@
 				96619DCB1915E0ED009849B0 /* XAIDevShowStatusVCGenerate.m in Sources */,
 				96B75ACD1974F7D500253906 /* XAIIR.m in Sources */,
 				9621FF4F19494A4F004356B1 /* XAIReLogin.m in Sources */,
+				9612B04B19A0ACDF004CA9F5 /* XAINavigationController.m in Sources */,
+				9612B04219A09226004CA9F5 /* XAIUserServerListVC.m in Sources */,
 				96081AAF190E460900E281F9 /* XAIData.m in Sources */,
 				963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */,
 				9608ADDF1960FB5C00E1CE75 /* XAIAlert.m in Sources */,
@@ -2232,6 +2273,7 @@
 				963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
 				9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */,
+				9612B05219A191C2004CA9F5 /* XAILinkageListVC.m in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				967BD7831908AB08007C3C8C /* XAIDevManageVC.m in Sources */,
 				963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */,
@@ -2293,6 +2335,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9612B04C19A190CA004CA9F5 /* Linkage_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9612B04D19A190CA004CA9F5 /* Base */,
+			);
+			name = Linkage_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
 		963046A11923544C0023653E /* DevInfoView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

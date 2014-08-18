@@ -36,19 +36,13 @@ typedef enum XAIObjectType{
 
 #define XAIObjStatusUnkown 9
 
-typedef  enum{
-    
-    XAIObjectOprStatus_start,
-    XAIObjectOprStatus_none,
-    XAIObjectOprStatus_showMsg,
 
-}XAIObjectOprStatus;
 
 
 @class XAIObjectOpr;
 @class XAIDevice;
 
-@interface XAIObject : XAITimeOut<XAIDataInfo_DIC>{
+@interface XAIObject : XAITimeOut <XAIDataInfo_DIC>{
     
     NSString* _name;
     XAIObjectType _type; /*类别,门，窗，灯?*/
@@ -72,14 +66,8 @@ typedef  enum{
     NSMutableArray* _tmpOprs;
     
     
-    XAIObjectOprStatus  _curOprStatus;
-    
 }
 
-- (void) startOpr;
-- (void) showMsg;
-- (void) endOpr;
-//- (void) endOpr;
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, assign) XAIObjectType type; /*类别,门，窗，灯?*/
@@ -91,8 +79,7 @@ typedef  enum{
 @property (nonatomic, assign) BOOL isOnline ;
 
 @property (nonatomic, assign) int  curDevStatus;
-@property (nonatomic, readonly) XAIObjectOprStatus  curOprStatus;
-@property (nonatomic, strong) NSString* curOprtip;
+
 
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/

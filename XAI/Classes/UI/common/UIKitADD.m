@@ -177,6 +177,44 @@
 
 }
 
+
+- (void) animalVC_L2R:(UIViewController*)vc{
+    // Get the views.
+    UIView * fromView = self.view;
+    if (self.parentViewController != nil && [self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        fromView = self.parentViewController.view;
+    }
+    
+    // Get the views.
+    UIView * toView = vc.view;
+    
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    
+    // Position it off screen.
+    toView.frame = CGRectMake( -320 , viewSize.origin.y, 320, viewSize.size.height);
+    
+    [UIView animateWithDuration:0.4 animations:
+     ^{
+         // Animate the views on and off the screen. This will appear to slide.
+         fromView.frame =CGRectMake( 320 , viewSize.origin.y, 320, viewSize.size.height);
+         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+     }
+                     completion:^(BOOL finished)
+     {
+         if (finished)
+         {
+             // Remove the old view from the tabbar view.
+             [fromView removeFromSuperview];
+             [[UIApplication sharedApplication].delegate.window setRootViewController:vc];
+         }
+     }];
+}
+
+
 - (void) animalView_R2L:(UIView*)view{
     
     // Get the views.

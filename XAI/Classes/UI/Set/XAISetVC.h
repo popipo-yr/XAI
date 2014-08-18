@@ -32,6 +32,7 @@
     XAIChangeNameVC* _nameVC;
     XAIChangeNameVC* _homeVC;
     XAIChangePasswordVC* _pawVC;
+    NSArray* _swipes;
 }
 
 + (UIViewController*) create;

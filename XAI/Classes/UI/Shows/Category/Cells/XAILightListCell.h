@@ -57,6 +57,7 @@ typedef enum {
 
 }
 
+@property (nonatomic, weak)  NSObject*  hasMe;
 @property (nonatomic,strong)  IBOutlet UITableView* cTableView;
 @property (nonatomic, weak)  XAILightListVC* topVC;
 
@@ -66,5 +67,7 @@ typedef enum {
 - (void) hidenAll;
 
 - (void) refreshOpr;
+
+- (void) enableChild:(BOOL)bl;
 
 @end

@@ -70,6 +70,7 @@ center.y -= len; \
 
 /*R2L 显示 从右边出现*/
 - (void) animalVC_R2L:(UIViewController*)vc;
+- (void) animalVC_L2R:(UIViewController*)vc;
 - (void) animalView_R2L:(UIView*)view;
 - (void) animalView_L2R:(UIView*)view;
 

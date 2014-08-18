@@ -20,6 +20,9 @@
 
     NSString* _usernameFind;
     BOOL findingAUser;
+    
+    NSMutableArray* _delIDs;
+    uint16_t curDelIDs;
 }
 
 @property (nonatomic,assign) id<XAIUserServiceDelegate> userServiceDelegate;
@@ -27,7 +30,7 @@
 
 - (void) addUser:(NSString*)uname Password:(NSString*)password;
 
-- (void) delUser:(XAITYPELUID) uluid;
+- (int) delUser:(XAITYPELUID) uluid;
 
 - (void) changeUser:(XAITYPELUID)uluid withName:(NSString*)newUsername;
 
@@ -62,6 +65,9 @@
 
 - (void) userService:(XAIUserService*)userService findedAllUser:(NSSet*)users
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
+
+
+- (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID;;
 
 @end
 

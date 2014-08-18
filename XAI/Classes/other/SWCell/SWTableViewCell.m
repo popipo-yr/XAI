@@ -738,8 +738,16 @@ static NSString * const kTableViewPanState = @"state";
         }
         else
         {
-            [scrollView setContentOffset:CGPointMake(0, 0)];
+            //[scrollView setContentOffset:CGPointMake(0, 0)];
             self.tapGestureRecognizer.enabled = YES;
+            
+            scrollView.scrollEnabled = NO;
+            scrollView.scrollEnabled = YES;
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(swipeableTableViewCellDidEndScrolling:)]) {
+                [self.delegate swipeableTableViewCellDidEndScrolling:self];
+            }
+
         }
     }
     

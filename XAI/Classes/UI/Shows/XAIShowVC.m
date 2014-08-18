@@ -9,6 +9,7 @@
 #import "XAIShowVC.h"
 #import "XAICategoryBtn.h"
 #import "XAISetVC.h"
+#import "XAILinkageListVC.h"
 
 @interface XAIShowVC ()
 
@@ -95,16 +96,17 @@
 
 -(void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer{
 
+    [self animalVC_L2R:[XAILinkageListVC create]];
 }
 
--(void)finish_R2L{
-
-    [[UIApplication sharedApplication].delegate.window setRootViewController:[XAISetVC create]];
-    [self changeIphoneStatus];
-}
-
--(void)finish_L2R{
-}
+//-(void)finish_R2L{
+//
+//    [[UIApplication sharedApplication].delegate.window setRootViewController:[XAISetVC create]];
+//    [self changeIphoneStatus];
+//}
+//
+//-(void)finish_L2R{
+//}
 
 
 
@@ -175,13 +177,21 @@
     
     
     if (self.scrollView.contentSize.height > scViewSize.height) {
-        self.scrollView.scrollEnabled = false;
+        self.scrollView.scrollEnabled = true;
     }else{
         self.scrollView.scrollEnabled = false;
     }
     
     
 
+}
+
+
+-(IBAction)userBtnClick:(id)sender{
+
+    XAICategoryBtn* btn = [[XAICategoryBtn alloc] init];
+    btn.type = XAICategoryType_user;
+    [self categoryClick:btn];
 }
 
 @end

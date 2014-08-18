@@ -12,6 +12,7 @@
 #import "XAILightListVC.h"
 #import "XAIDoorWinListVC.h"
 #import "XAIInfListVC.h"
+#import "XAIUserServerListVC.h"
 
 
 
@@ -95,8 +96,7 @@
             break;
         }
         case XAICategoryType_user:{
-            
-            
+            nextVC = [XAIUserServerListVC create];
             break;
         }
             

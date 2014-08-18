@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XAIStatus.h"
 
 
 
-
-@interface XAITimeOut : NSObject{
+@interface XAITimeOut : XAIStatus{
 
     NSTimer* _timeout;
 }

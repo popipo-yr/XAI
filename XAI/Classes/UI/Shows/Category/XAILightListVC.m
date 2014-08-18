@@ -232,6 +232,12 @@
         
         cell.topVC = self;
         
+        if (cell.hasMe != nil) {
+            
+            [_cell2Infos removeObjectForKey:cell.hasMe];
+        }
+        
+        cell.hasMe = objs;
         [_cell2Infos setObject:cell forKey:objs];
         
         return cell;
@@ -399,6 +405,8 @@ static bool changeShow = false;
 static SWTableViewCell* curSWCell;
 -(void)swipeableTableViewCellDidEndScrolling:(SWTableViewCell *)cell{
     
+    NSLog(@"end");
+    
     curSWCell = cell;
     if ( cell.cellState == kCellStateLeft) {
         delShow = false;
@@ -409,10 +417,18 @@ static SWTableViewCell* curSWCell;
         delShow = true;
         changeShow = false;
         
+        if ([cell isKindOfClass:[XAILightListVCCell2 class]]) {
+            [(XAILightListVCCell2*)cell enableChild:false];
+        }
+        
     }else{
         
         delShow = false;
         changeShow = false;
+        
+        if ([cell isKindOfClass:[XAILightListVCCell2 class]]) {
+            [(XAILightListVCCell2*)cell enableChild:true];
+        }
     }
     
 }

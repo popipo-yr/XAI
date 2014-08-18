@@ -22,5 +22,7 @@
 
 @property (nonatomic,strong) IBOutlet UIScrollView* scrollView;
 
+-(IBAction)userBtnClick:(id)sender;
+
 @end
 
