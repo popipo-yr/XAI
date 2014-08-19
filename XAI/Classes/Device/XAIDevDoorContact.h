@@ -9,18 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "XAIDevice.h"
 
-@protocol XAIDevDoorContactDelegate;
-@interface XAIDevDoorContact : XAIDevice
-
-@property (nonatomic,weak) id<XAIDevDoorContactDelegate> dcDelegate;
-
-- (void) getDoorContactStatus;
-- (void) getPower; //BatteryPower
-
--(NSArray *)getLinkageUseStatusInfos;
-
-@end
-
 
 typedef enum XAIDevDoorContactStatus{
     
@@ -30,6 +18,22 @@ typedef enum XAIDevDoorContactStatus{
     XAIDevDoorContactStatusUnkown = 9
     
 }XAIDevDoorContactStatus;
+
+
+@protocol XAIDevDoorContactDelegate;
+@interface XAIDevDoorContact : XAIDevice
+
+@property (nonatomic,weak) id<XAIDevDoorContactDelegate> dcDelegate;
+
+- (void) getDoorContactStatus;
+- (void) getPower; //BatteryPower
+
+-(NSArray *)getLinkageUseStatusInfos;
+-(XAIDevDoorContactStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo;
+
+@end
+
+
 
 
 

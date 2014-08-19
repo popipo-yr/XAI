@@ -19,6 +19,7 @@
     NSMutableArray* _delIDs;
     NSMutableArray* _changeIDs;
     uint16_t curDelIDs;
+    uint16_t curChangeIDs;
 
 }
 

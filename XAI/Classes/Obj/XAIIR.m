@@ -62,6 +62,19 @@
     return [_infrared getLinkageStatusInfos];
 }
 
+- (NSString*) linkageInfoMiaoShu:(XAILinkageUseInfo*)useInfo{
+    
+    XAIDevInfraredStatus status = [_infrared linkageInfoStatus:useInfo];
+    if (status == XAIDevInfraredStatusDetectorNothing) {
+        return @"正常状态";
+    }else if(status == XAIDevInfraredStatusDetectorThing){
+        return @"发出警告";
+    }
+    
+    return nil;
+}
+
+
 - (void)updateFinish:(XAIObjectOpr *)oprInfo{
     
     //如果需要通知结果

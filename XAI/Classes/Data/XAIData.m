@@ -399,6 +399,36 @@ static XAIData*  _s_XAIData_ = NULL;
     return [NSArray arrayWithArray:_objListenList];
 }
 
+- (XAIObject*) findListenObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+    
+    for (int i = 0; i < [_objListenList count]; i++) {
+        
+        XAIObject* obj = [_objListenList objectAtIndex:i];
+        
+        if (obj.apsn == apsn && obj.luid == luid) {
+            
+            return obj;
+        }
+    }
+    
+    return nil;
+}
+
+- (XAIObject*) findListenObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid type:(XAIObjectType)type{
+
+    for (int i = 0; i < [_objListenList count]; i++) {
+        
+        XAIObject* obj = [_objListenList objectAtIndex:i];
+        
+        if (obj.apsn == apsn && obj.luid == luid && type == obj.type) {
+            
+            return obj;
+        }
+    }
+    
+    return nil;
+}
+
 @end
 
 

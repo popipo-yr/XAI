@@ -217,6 +217,18 @@
     return [_devSwitch getCirculeOneLinkageUseInfos];
 }
 
+- (NSString*) linkageInfoMiaoShu:(XAILinkageUseInfo*)useInfo{
+    
+    XAIDevCircuitStatus status = [_devSwitch linkageInfoStatus:useInfo];
+    if (status == XAIDevCircuitStatusClose) {
+        return @"关闭";
+    }else if(status == XAIDevCircuitStatusOpen){
+        return @"打开";
+    }
+    
+    return nil;
+}
+
 @end
 
 @implementation XAILightOpr

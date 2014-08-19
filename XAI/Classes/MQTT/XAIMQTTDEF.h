@@ -35,6 +35,7 @@ typedef  uint64_t  XAITYPELUID;
 typedef  uint32_t  XAITYPEAPSN;
 typedef  uint64_t  XAITYPEUNSIGN;
 typedef  uint8_t   XAITYPEBOOL;
+typedef  uint32_t  XAITYPETime;
 
 #define XAIUSERADMIN   0x1
 
@@ -59,6 +60,8 @@ typedef  enum XAI_DATA_TYPE{
     XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 0Xd, //	无符号数字
     
     XAI_DATA_TYPE_LINKAGE = 0x10, //联动使用的类型
+    
+    XAI_DATA_TYPE_DELAY = 0x11, //时间
         
         
 }XAI_DATA_TYPE;

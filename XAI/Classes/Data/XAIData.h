@@ -70,6 +70,8 @@
 
 - (NSArray*) listenObjsWithType:(NSArray*)types;
 - (NSArray*) listenObjs;
+- (XAIObject*) findListenObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid;
+- (XAIObject*) findListenObj:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid type:(XAIObjectType)type;
 
 @end
 
@@ -92,6 +94,7 @@
 - (void) addOrUpObjectInfo:(XAIObject*)obj;
 - (void) updateObjectInfo:(XAIObject*)obj;
 - (void) removeObjectInfo:(XAIObject*)obj;
+
 
 - (XAIObject*) findLocalObjWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid type:(XAIObjectType)type;
 

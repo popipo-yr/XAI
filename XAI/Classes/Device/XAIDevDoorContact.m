@@ -245,5 +245,29 @@
 }
 
 
+-(XAIDevDoorContactStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo{
+    
+    XAIDevDoorContactStatus status = XAIDevDoorContactStatusUnkown;
+    
+    do {
+        
+        if (useInfo.datas == NULL) break;
+        if (useInfo.datas->data_type != XAI_DATA_TYPE_BIN_BOOL) break;
+        
+        XAITYPEBOOL isOpen = 0;
+        
+        byte_data_copy(&isOpen, useInfo.datas->data, sizeof(XAITYPEBOOL), useInfo.datas->data_len);
+        
+        status = [self coverPacketBOOLToDoorContactStatus:isOpen];
+        
+    } while (0);
+    
+    
+    return status;
+    
+}
+
+
+
 
 @end

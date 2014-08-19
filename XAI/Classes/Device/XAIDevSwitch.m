@@ -417,7 +417,7 @@
     XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
     xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
     
-    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitOneCtrlID Datas:true_data];
     
     
     XAILinkageUseInfoCtrl* closeone = [[XAILinkageUseInfoCtrl alloc] init];
@@ -426,7 +426,7 @@
     XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
     xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
     
-    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitOneCtrlID Datas:false_data];
     
     purgePacketParamData(true_data);
     purgePacketParamData(false_data);
@@ -471,7 +471,7 @@
     XAITYPEBOOL typetrue =  XAITYPEBOOL_TRUE;
     xai_param_data_set(true_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typetrue, NULL);
     
-    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:true_data];
+    [openone setApsn:_apsn Luid:_luid ID:Key_CircuitOneStatusID Datas:true_data];
     
     
     XAILinkageUseInfoStatus* closeone = [[XAILinkageUseInfoStatus alloc] init];
@@ -480,7 +480,7 @@
     XAITYPEBOOL typefalse =  XAITYPEBOOL_FALSE;
     xai_param_data_set(false_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &typefalse, NULL);
     
-    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitTwoCtrlID Datas:false_data];
+    [closeone setApsn:_apsn Luid:_luid ID:Key_CircuitOneStatusID Datas:false_data];
     
     purgePacketParamData(true_data);
     purgePacketParamData(false_data);
@@ -512,6 +512,28 @@
     purgePacketParamData(false_data);
     
     return [NSArray arrayWithObjects:opentwo, closetwo, nil];
+    
+}
+
+-(XAIDevCircuitStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo{
+    
+    XAIDevCircuitStatus status = XAIDevCircuitUnkown;
+    
+    do {
+        
+        if (useInfo.datas == NULL) break;
+        if (useInfo.datas->data_type != XAI_DATA_TYPE_BIN_BOOL) break;
+        
+        XAITYPEBOOL isOpen = 0;
+        
+        byte_data_copy(&isOpen, useInfo.datas->data, sizeof(XAITYPEBOOL), useInfo.datas->data_len);
+        
+        status = [self coverPacketBOOLToCircuit:isOpen];
+        
+    } while (0);
+    
+    
+    return status;
     
 }
 

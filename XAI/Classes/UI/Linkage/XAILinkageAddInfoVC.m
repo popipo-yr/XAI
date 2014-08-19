@@ -9,6 +9,7 @@
 #import "XAILinkageAddInfoVC.h"
 #import "XAIData.h"
 #import "XAIObjectGenerate.h"
+#import "XAILinkageInfoAddCell.h"
 
 
 #define XAILinkageAddInfoVCID @"XAILinkageAddInfoVCID"
@@ -28,7 +29,7 @@
 
     [super viewDidLoad];
     
-    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
 }
 
@@ -94,47 +95,104 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return [_datas count];
+    return [_datas count] + 1;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 50.0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* cellID = @"XAILinkageVCCellID";
+    NSString* cellID = XAILinkageInfoAddCellID;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    XAILinkageInfoAddCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (cell == nil || ![cell isKindOfClass:[UITableViewCell class]]) {
-        cell = [[UITableViewCell alloc]
+        cell = [[XAILinkageInfoAddCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:cellID];
     }
     
-    XAIObject* obj = [_datas objectAtIndex:[indexPath row]];
-    
-    if (obj.nickName != nil && [obj.nickName isEqualToString:@""]) {
+    if ([indexPath row] == 0) {
+        if (_type == XAILinkageOneType_jieguo) {
+            [cell setTip:@"添加延时"];
+        }else{
+            [cell setTip:@"添加定时"];
+        }
         
-        [cell.textLabel setText:obj.nickName];
-        
-    }else{
-    
-        [cell.textLabel setText:obj.name];
+        return cell;
     }
     
     
+    XAIObject* obj = [_datas objectAtIndex:[indexPath row] - 1];
     
-       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (obj.nickName != nil && [obj.nickName isEqualToString:@""]) {
+        
+        [cell setTip:obj.nickName];
+        
+    }else{
+    
+        [cell setTip:obj.name];
+    }
+    
     
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if ([indexPath row] < [_datas count]) {
+    [tableView deselectRowAtIndexPath:indexPath animated:false];
+    
+    if ([indexPath row] == 0) {
         
-        XAIObject* obj = [_datas objectAtIndex:[indexPath row]];
+        if (_linkageTime == nil) {
+            
+            _linkageTime = (XAILinkageTime*)[[[NSBundle mainBundle] loadNibNamed:@"LinkageTime"
+                                                                         owner:nil
+                                                                       options:nil] lastObject];
+            
+            
+            [_linkageTime.closeBtn addTarget:self action:@selector(closeClick:)
+                             forControlEvents:UIControlEventTouchUpInside];
+            
+            [_linkageTime.bgBtn addTarget:self action:@selector(closeClick:)
+                          forControlEvents:UIControlEventTouchUpInside];
+
+            
+            [_linkageTime.rightBtn addTarget:self action:@selector(dateChoose:)
+                             forControlEvents:UIControlEventTouchUpInside];
+
+        }
+        
+        if (_type == XAILinkageOneType_jieguo) {
+            
+            [_linkageTime setYanShi];
+            [self.view addSubview:_linkageTime];
+            self.tableView.scrollEnabled = false;
+            
+        }else{
+            
+            [_linkageTime setDingShi];
+            [self.view addSubview:_linkageTime];
+            self.tableView.scrollEnabled = false;
+
+            
+        }
+
+        return;
+    }
+    
+    int index = [indexPath row] - 1;
+    
+    if (index < [_datas count]) {
+        
+        XAIObject* obj = [_datas objectAtIndex:index];
         
         if (_linkageAlert == nil) {
             _linkageAlert = (XAILinkageAlert*)[[[NSBundle mainBundle] loadNibNamed:@"LinkageAlert" owner:nil options:nil] lastObject];
@@ -213,6 +271,10 @@
         [_linkageAlert removeFromSuperview];
     }
     
+    if (_linkageTime.subviews != nil) {
+        [_linkageTime removeFromSuperview];
+    }
+    
      self.tableView.scrollEnabled = true;
     
 }
@@ -223,9 +285,11 @@
     
     XAILinkageUseInfo*  use = nil;
     
-    if (ary != nil && [ary count] > 0) {
-       use =  [ary objectAtIndex:0];
+    if (ary != nil && [ary count] > 1) {
+       use =  [ary objectAtIndex:1];
     }
+    
+    [self.infoVC setLinkageUseInfo:use];
     
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -238,14 +302,43 @@
     
     XAILinkageUseInfo*  use = nil;
     
-    if (ary != nil && [ary count] > 1) {
-        use =  [ary objectAtIndex:1];
+    if (ary != nil && [ary count] > 0) {
+        use =  [ary objectAtIndex:0];
     }
+    
+    [self.infoVC setLinkageUseInfo:use];
     
     [self.navigationController popViewControllerAnimated:YES];
 
     
 }
+
+- (void)dateChoose:(id)sender{
+    
+    NSDate* date= [_linkageTime.dataPicker date];
+    
+    NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
+    [hourFormat setDateFormat:@"HH"];
+    
+    NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
+    [minuFormat setDateFormat:@"mm"];
+    
+    int hour =[[hourFormat stringFromDate:date] intValue];
+    int min = [[minuFormat stringFromDate:date] intValue];
+    
+    
+    
+    
+    XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
+    timeUseInfo.time = hour*60*60 + min*60;
+    [timeUseInfo change];
+    
+    [self.infoVC setLinkageUseInfo:timeUseInfo];
+
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 
 
 

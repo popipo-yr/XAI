@@ -125,6 +125,10 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
         SwapBytes(in_data, ctrl_param_data->data_len);
     }
     
+    if (XAI_DATA_TYPE_DELAY == ctrl_param_data->data_type) {
+        SwapBytes(in_data, ctrl_param_data->data_len);
+    }
+    
     
    
     
@@ -206,6 +210,11 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
             
             SwapBytes(in_data, ctrl_param_data->data_len);
             
+        }
+        
+        if (XAI_DATA_TYPE_DELAY == ctrl_param_data->data_type) {
+            
+            SwapBytes(in_data, ctrl_param_data->data_len);
         }
         
         

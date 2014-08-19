@@ -63,6 +63,18 @@
     return [_doorContact getLinkageUseStatusInfos];
 }
 
+- (NSString*) linkageInfoMiaoShu:(XAILinkageUseInfo*)useInfo{
+    
+    XAIDevDoorContactStatus status = [_doorContact linkageInfoStatus:useInfo];
+    if (status == XAIDevDoorContactStatusClose) {
+        return @"关闭";
+    }else if(status == XAIDevDoorContactStatusOpen){
+        return @"打开";
+    }
+    
+    return nil;
+}
+
 #pragma --Helper
 - (void)updateFinish:(XAIObjectOpr *)oprInfo{
     

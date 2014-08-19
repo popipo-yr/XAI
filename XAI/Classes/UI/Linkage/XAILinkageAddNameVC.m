@@ -7,19 +7,17 @@
 //
 
 #import "XAILinkageAddNameVC.h"
-#import "XAILinkageAddInfoVC.h"
+#import "XAILinkageInfoVC.h"
 
 #define XAILinkageAddNameVCID @"XAILinkageAddNameVCID"
 
-#define _ST_show_linkage_add @"show_linkage_add"
 
 @implementation XAILinkageAddNameVC
 
 +(UIViewController*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_show_linkage_add];
-    //[vc changeIphoneStatusClear];
+    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageAddNameVCID];
     return vc;
     
 }
@@ -32,15 +30,35 @@
     NSString* text = _tf.text;
     
     
-    XAILinkageAddInfoVC* vc = [XAILinkageAddInfoVC create];
+    UIViewController* vc = [XAILinkageInfoVC create:text];
     
-    [vc setLinkageOneChoosetype:XAILinkageOneType_yuanyin];
-    
-    
-    
-    
-    [self.navigationController pushViewController:vc animated:true];
 
+    
+    self.view.window.rootViewController = vc;
+    
+
+}
+
+
+-(BOOL)prefersStatusBarHidden{
+    
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }
 }
 
 

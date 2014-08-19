@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XAIHasTableViewVC.h"
 #import "XAIObject.h"
 #import "XAILinkageAlert.h"
+#import "XAILinkageTime.h"
+#import "XAILinkageInfoVC.h"
 
 typedef enum {
     
@@ -17,18 +20,22 @@ typedef enum {
 
 }XAILinkageOneType;
 
-@interface XAILinkageAddInfoVC : UITableViewController
+@interface XAILinkageAddInfoVC : XAIHasTableViewVC
 <UITableViewDataSource,UITableViewDelegate>{
 
     NSArray* _datas;
     
     
     XAILinkageAlert* _linkageAlert;
+    XAILinkageTime* _linkageTime;
     XAIObject* _curObj;
     
     XAILinkageOneType _type;
     
 }
+
+
+@property (nonatomic,retain) XAILinkageInfoVC* infoVC;
 
 
 +(XAILinkageAddInfoVC*)create;

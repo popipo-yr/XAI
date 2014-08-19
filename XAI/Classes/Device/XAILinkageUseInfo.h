@@ -68,3 +68,14 @@ typedef enum : uint8_t{
 @interface XAILinkageUseInfoStatusMutable : XAILinkageUseInfoStatus
 
 @end
+
+
+/*时间*/
+@interface XAILinkageUseInfoTime : XAILinkageUseInfoStatus
+
+@property (nonatomic,assign) XAITYPETime time;
+
+- (void)change;
+
+
+@end

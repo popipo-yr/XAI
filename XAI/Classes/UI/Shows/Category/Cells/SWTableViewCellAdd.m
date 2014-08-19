@@ -33,7 +33,7 @@
     
     
     [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]
+     [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]
                                           normalIcon:[UIImage imageNamed:@"edit_nor.png"]
                                         selectedIcon:[UIImage imageNamed:@"edit_sel.png"]];
     
@@ -47,7 +47,7 @@
     
     
     [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.1f green:0.0f blue:1.0f alpha:1.0f]
+     [UIColor colorWithRed:0.1f green:0.0f blue:1.0f alpha:0.0f]
                                                title:@"保存"];
     
     [self setLeftUtilityButtons:leftUtilityButtons WithButtonWidth:_M_CellWidth];

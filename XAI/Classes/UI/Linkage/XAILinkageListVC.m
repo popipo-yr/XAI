@@ -9,6 +9,7 @@
 #import "XAILinkageListVC.h"
 #import "XAILinkageListCell.h"
 #import "XAILinkageAddNameVC.h"
+#import "XAILinkageInfoVC.h"
 
 #import "XAIShowVC.h"
 
@@ -202,6 +203,7 @@
         
         
         [cell setDelBtn];
+        [cell setEditBtn];
         cell.delegate = self;
         
         
@@ -262,6 +264,30 @@
                 [_delInfo setObject:aLinkage forKey:[NSNumber numberWithInt:delID]];
                 
                 [cell hideUtilityButtonsAnimated:true];
+                
+                
+            } while (0);
+            
+            
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index{
+    switch (index) {
+        case 0:
+        {
+            do {
+                
+                XAILinkage* linkage = [_Datas objectAtIndex:
+                                       [[self.tableView indexPathForCell:cell] row]];
+                
+                self.view.window.rootViewController = [XAILinkageInfoVC create:linkage.name linkage:linkage];
                 
                 
             } while (0);
@@ -454,7 +480,7 @@ static SWTableViewCell* curSWCell;
     if (service != _linkageService) return;
     
     
-    XAILinkage * aLinkage = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    XAILinkage * aLinkage = [_changeInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {
         
         [_changeInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
@@ -549,6 +575,10 @@ static SWTableViewCell* curSWCell;
 }
 
 -(void)linkageService:(XAILinkageService *)service findedAllLinkage:(NSArray *)linkageAry errcode:(XAI_ERROR)errcode{
+    
+    if ([_delInfo count] > 0) { //还有删除的不进行炒作
+        return;
+    }
 
     if (errcode == XAI_ERROR_NONE) {
         _Datas = [[NSMutableArray alloc] initWithArray:linkageAry];

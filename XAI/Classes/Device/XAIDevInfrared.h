@@ -9,17 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "XAIDevice.h"
 
-@protocol XAIDevInfraredDelegate;
-@interface XAIDevInfrared : XAIDevice
-
-@property (nonatomic,weak) id <XAIDevInfraredDelegate> infDelegate;
-
-- (void) getInfraredStatus;
-- (void) getPower;
-- (NSArray*) getLinkageStatusInfos;
-
-@end
-
 typedef enum XAIDevInfraredStatus{
     
     XAIDevInfraredStatusDetectorThing = 1, /*探测到物体*/
@@ -28,6 +17,19 @@ typedef enum XAIDevInfraredStatus{
     XAIDevInfraredStatusUnkown = 9
     
 }XAIDevInfraredStatus;
+
+@protocol XAIDevInfraredDelegate;
+@interface XAIDevInfrared : XAIDevice
+
+@property (nonatomic,weak) id <XAIDevInfraredDelegate> infDelegate;
+
+- (void) getInfraredStatus;
+- (void) getPower;
+- (NSArray*) getLinkageStatusInfos;
+-(XAIDevInfraredStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo;
+@end
+
+
 
 
 @protocol XAIDevInfraredDelegate <NSObject>

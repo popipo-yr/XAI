@@ -129,6 +129,22 @@
 - (int) setLinkage_helper:(XAILinkageNum)linkNum status:(XAILinkageStatus)linkageStatus num:(int)magnum{
     
      curDelIDs += 1;
+    if (curDelIDs > 50) {
+        curDelIDs = 1;
+    }
+    curChangeIDs += 1;
+    if (curChangeIDs < 50) {
+        curChangeIDs = 50;
+    }
+    
+    int useID = 0;
+    
+    if (magnum == Key_LinkageDelMagNum) {
+        useID = curDelIDs;
+    }else{
+        useID = curChangeIDs;
+    
+    }
     
     MQTT* cur_MQTT = [MQTT shareMQTT];
     
@@ -141,8 +157,7 @@
     xai_param_data_set(number_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageNum), &linkNum, status_data);
     xai_param_data_set(status_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageStatus), &linkageStatus, NULL);
     
-    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, curDelIDs, magnum,
-                       Key_LinkageChange,[[NSDate new] timeIntervalSince1970], 2, number_data);
+    xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, 0, useID, Key_LinkageChange,[[NSDate new] timeIntervalSince1970], 2, number_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
@@ -174,7 +189,7 @@
     }else if(magnum == Key_LinkageChgMagNum){
         
         
-        NSNumber* changeIDNum = [NSNumber numberWithInt:curDelIDs];
+        NSNumber* changeIDNum = [NSNumber numberWithInt:curChangeIDs];
         [_changeIDs addObject:changeIDNum];
         [self performSelector:@selector(changeTimeOut:) withObject:changeIDNum afterDelay:5.0];
 
@@ -183,7 +198,7 @@
     }
     
     
-    return curDelIDs;
+    return useID;
     
 }
 
@@ -506,9 +521,9 @@
 //                
 //            }
             
-            NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->msgid];
+            NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->magic_number];
             
-            if (ack->normal_param->magic_number == Key_LinkageDelMagNum) {
+            if (ack->normal_param->magic_number < 50) {
                 
                 
                 if (NSNotFound != [_delIDs indexOfObject:curID]) {
@@ -527,7 +542,7 @@
                 }
                 
                 
-            }else if(ack->normal_param->magic_number == Key_LinkageChgMagNum){
+            }else if(ack->normal_param->magic_number >= 50){
                 
                 if (NSNotFound != [_changeIDs indexOfObject:curID]) {
                     

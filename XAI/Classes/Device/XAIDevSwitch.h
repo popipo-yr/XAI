@@ -60,6 +60,7 @@ typedef enum XAIDevCircuitStatus{
 -(NSArray *)getCirculeTwoLinkageUseInfos;
 -(NSArray *)getCirculeOneLinkageStatusInfos;
 -(NSArray *)getCirculeTwoLinkageStatusInfos;
+-(XAIDevCircuitStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo;
 
 
 @end

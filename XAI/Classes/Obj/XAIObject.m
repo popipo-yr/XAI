@@ -261,6 +261,9 @@
     return NULL;
 }
 
+- (NSString*) linkageInfoMiaoShu:(XAILinkageUseInfo*)useInfo{
+    return @"未知信息";
+}
 
 - (void) updateFinish:(XAIObjectOpr*)opr{}
 
