@@ -14,7 +14,22 @@
 
 @end
 
+#define DevAddViewControllerID @"DevAddViewControllerID"
+
 @implementation XAIDevAddVC
+
+
++ (UIViewController*)create:(NSString*)luidStr{
+
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
+    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:DevAddViewControllerID];
+    
+    [(XAIDevAddVC*)vc setLuidStr:luidStr];
+    //[vc changeIphoneStatusClear];
+    return vc;
+
+
+}
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder{

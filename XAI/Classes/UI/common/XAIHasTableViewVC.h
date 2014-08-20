@@ -26,6 +26,7 @@
 @property (nonatomic,strong) IBOutlet UINavigationItem* theNavigationItem;
 
 - (void)setSeparatorStyle:(int) count;
+-(void)returnClick:(id)sender;
 
 
 @end

@@ -1,28 +1,39 @@
 //
-//  ViewController.h
-//  WeixinDeom
+//  XAIChatVC
+//  
 //
 //  Created by iHope on 13-11-8.
-//  Copyright (c) 2013年 任海丽. All rights reserved.
+//  Copyright (c) All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "XAIChatCell.h"
+#import "XAIUser.h"
+#import "XAIMobileControl.h"
 
-@interface XAIChatVC : UIViewController{
+
+@interface XAIChatVC : UIViewController <XAIMobileControlDelegate>{
+    
+    XAIUser* _user;
+    XAIMobileControl* _mobile;
+    
+    NSMutableArray* _msgs ;
 
     CGPoint _oldMovePoint;
 
 }
 
-@property (nonatomic, strong) NSMutableArray *resultArray;
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) IBOutlet UITextField* textField;
 @property (nonatomic, strong) IBOutlet UIView* moveView;
+@property (nonatomic, strong) IBOutlet UINavigationItem* cNavigationItem;
 
 - (IBAction)sendBtnClick:(id)sender;
 
-+(UIViewController*) create;
++(UIViewController*) create:(XAIUser*)user;
+
+
+- (void) setUser:(XAIUser*)user;
 
 @end

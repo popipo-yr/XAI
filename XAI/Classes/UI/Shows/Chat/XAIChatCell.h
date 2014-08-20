@@ -1,12 +1,13 @@
 //
-//  WeiXinCell.h
-//  WeixinDeom
+//  XAIChatCell
+//
 //
 //  Created by iHope on 13-12-31.
-//  Copyright (c) 2013年 任海丽. All rights reserved.
+//  Copyright (c) . All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "XAIUser.h"
 
 #define XAIChatCellID @"XAIChatCellID"
 
@@ -15,6 +16,6 @@
 @property (nonatomic, strong) UIView *bubbleView;
 @property (nonatomic, strong) UIImageView *photo;
 
--(void)setContent:(NSMutableDictionary*)dict;
+-(void)setContent:(XAIMeg*)aMsg isfromeMe:(BOOL)isFromMe;
 
 @end

@@ -24,6 +24,8 @@
     XAIDeviceService* _deviceService;
 }
 
++ (UIViewController*)create:(NSString*)luidStr;
+
 @property (strong, nonatomic) IBOutlet UITableView *typeTableView;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 

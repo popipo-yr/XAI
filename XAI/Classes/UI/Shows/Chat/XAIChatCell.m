@@ -1,9 +1,9 @@
 //
-//  WeiXinCell.m
-//  WeixinDeom
+//  XAIChatCell
+//
 //
 //  Created by iHope on 13-12-31.
-//  Copyright (c) 2013年 任海丽. All rights reserved.
+//  Copyright (c) . All rights reserved.
 //
 
 #import "XAIChatCell.h"
@@ -36,17 +36,34 @@
     // Configure the view for the selected state
 }
 
+-(void)setContent:(XAIMeg*)aMsg isfromeMe:(BOOL)isFromMe{
+
+    if (aMsg.fromLuid != 0x03) {
+        
+        _photo.image = [UIImage imageNamed:@"photoUsr"];
+        
+    }else{
+    
+        _photo.image = [UIImage imageNamed:@"photoXAI"];
+    }
+    
+    if (isFromMe) {
+        
+        _photo.frame = CGRectMake(320-60, 10, 50, 50);
+        
+    }else{
+    
+        _photo.frame = CGRectMake(10, 10, 50, 50);
+    }
+    
+    
+    [self bubbleView:aMsg.context from:isFromMe withPosition:65 withView:_bubbleView];
+
+}
+
 -(void)setContent:(NSMutableDictionary*)dict
 {
     if ([[dict objectForKey:@"name"]isEqualToString:@"rhl"]) {
-        _photo.frame = CGRectMake(320-60, 10, 50, 50);
-        _photo.image = [UIImage imageNamed:@"photoUsr"];
-        
-        if ([[dict objectForKey:@"content"] isEqualToString:@"0"]) {
-            [self yuyinView:1 from:YES withPosition:65 withView:_bubbleView];
-        }else{
-            [self bubbleView:[dict objectForKey:@"content"] from:YES withPosition:65 withView:_bubbleView];
-        }
         
     }else{
         _photo.frame = CGRectMake(10, 10, 50, 50);

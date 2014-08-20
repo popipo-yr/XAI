@@ -33,7 +33,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
     if (self = [super init]) {
         
         _mc = [[XAIMobileControl alloc] init];
-        _mc.delegate = self;
+        _mc.mobileDelegate = self;
     }
     
     return self;
@@ -42,7 +42,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
 -(void)dealloc{
 
     [self stop];
-    _mc.delegate = nil;
+    _mc.mobileDelegate = nil;
     _mc = nil;
 }
 

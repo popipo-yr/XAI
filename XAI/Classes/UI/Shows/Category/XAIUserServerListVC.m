@@ -15,12 +15,14 @@
 
 #define _ST_USListVCID @"XAIUserServerListVCID"
 
+#define _ST_NACCCC @"userserverID"
+
 @implementation XAIUserServerListVC
 
 +(UIViewController*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
-    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_USListVCID];
+    UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_NACCCC];
     [vc changeIphoneStatus];
     return vc;
     
@@ -43,15 +45,37 @@
         _delInfo = [[NSMutableDictionary alloc] init];
         _cellInfos = [[NSMutableDictionary alloc] init];
         
+        
+
+
+        
     }
     return self;
 }
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _curInputCell = nil;
     
+    
+    UIImage* backImg = [UIImage imageNamed:@"back_nor.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(returnClick:)];
+    
+    [backItem ios6cleanBackgroud];
+    
+    [self.navigationItem setLeftBarButtonItem:backItem];
     
     // Do any additional setup after loading the view.
 }
@@ -95,6 +119,8 @@
 }
 
 -(void)xaiDataRefresh:(XAIData *)data{
+    
+    if ([_delInfo count] > 0) return;
     
     [self updateShowDatas];
     [self.tableView reloadData];
@@ -314,7 +340,8 @@ static SWTableViewCell* curSWCell;
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //XAIChatVC* chatVC = [[XAIChatVC alloc] init];
-    [self animalVC_R2L:[XAIChatVC create]];
+    [self.navigationController pushViewController:[XAIChatVC create:[_userDatas objectAtIndex:[indexPath row]]] animated:YES];
+    //[self animalVC_R2L:[XAIChatVC create:[_userDatas objectAtIndex:[indexPath row]]]];
     
     return nil;
 }

@@ -296,7 +296,7 @@ void cleanup(void *arg){
     
 //            if ( _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
 //    
-//                [_delegate xaiIPHelper:self getIp:@"114.215.178.75" errcode:0];
+//                [_delegate xaiIPHelper:self getIp:@"192.168.1.236" errcode:0];
 //            }
 //    
 //    

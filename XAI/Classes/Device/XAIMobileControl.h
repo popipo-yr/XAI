@@ -7,14 +7,19 @@
 //
 
 #import "MQTTPacketManager.h"
+#import "XAIMQTTDEF.h"
+#import "XAIDevice.h"
 
 @protocol XAIMobileControlDelegate;
-@interface XAIMobileControl : NSObject <MQTTPacketManagerDelegate>
+@interface XAIMobileControl : XAIDevice <MQTTPacketManagerDelegate>
 
 - (void) startListene;
 - (void) stopListene;
 
-@property(nonatomic,assign) id<XAIMobileControlDelegate> delegate;
+
+- (void) sendMsg:(NSString*)context toApsn:(XAITYPEAPSN)apsn toLuid:(XAITYPELUID)luid;
+
+@property(nonatomic,assign) id<XAIMobileControlDelegate> mobileDelegate;
 
 @end
 
@@ -26,7 +31,10 @@
 
 @protocol XAIMobileControlDelegate <NSObject>
 
+@optional
 - (void) mobileControl:(XAIMobileControl*)mc getCmd:(XAIMCCMD*)cmd;
+- (void) mobileControl:(XAIMobileControl *)mc sendStatus:(XAI_ERROR)err;
+- (void) mobileControl:(XAIMobileControl *)mc newMsg:(XAIMeg*)msg;
 
 @end
 

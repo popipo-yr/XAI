@@ -91,6 +91,9 @@
     apsnstr = @"210e2b26";
     //apsnstr = @"210e9b6e";
     //apsnstr = @"210e2757";
+    
+    //apsnstr = @"2923AEEA";
+    
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
     }

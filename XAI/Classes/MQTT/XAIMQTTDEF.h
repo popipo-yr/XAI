@@ -23,7 +23,7 @@ typedef enum XAI_PKT_TYPE{
     XAI_PKT_TYPE_STATUS_REQUEST = 4,	//请求状态表
     XAI_PKT_TYPE_STATUS = 5,	//状态表答复报文
     
-    
+    XAI_PKT_TYPE_IM  = 100,
     
     XAI_PKT_FLAG_ACK = 0x80,  //	FLAG最高位为1表示此报文是一个ACK报文
     XAI_PKT_FLAG_ACK_CONTROL = 0x81,  //

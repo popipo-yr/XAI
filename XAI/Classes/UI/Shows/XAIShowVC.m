@@ -10,6 +10,7 @@
 #import "XAICategoryBtn.h"
 #import "XAISetVC.h"
 #import "XAILinkageListVC.h"
+#import "XAIDevAddVC.h"
 
 @interface XAIShowVC ()
 
@@ -193,6 +194,38 @@
     btn.type = XAICategoryType_user;
     [self categoryClick:btn];
 }
+
+-(IBAction)devAddBtnClick:(id)sender{
+
+    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
+    
+    if ([scanvc isKindOfClass:[XAIScanVC class]]) {
+        
+        scanvc.delegate = self;
+        
+        [self presentViewController:scanvc animated:YES completion:nil];
+    }
+
+}
+
+
+-(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
+    
+    
+    const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
+    NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
+    NSString* luidstr = nil;
+    
+    if ([MQTTCover qrStr:symbolStr ToLuidStr:&luidstr]) {
+        
+        [scanVC dismissViewControllerAnimated:YES completion:^(){
+        
+             self.view.window.rootViewController = [XAIDevAddVC create:luidstr];
+        }];
+    }
+    
+}
+
 
 @end
 
