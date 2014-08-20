@@ -10,6 +10,8 @@
 
 #import "XAIUserServerListCell.h"
 #import "XAIObjectGenerate.h"
+#import "XAIChatVC.h"
+
 
 #define _ST_USListVCID @"XAIUserServerListVCID"
 
@@ -105,9 +107,15 @@
     _curInputCell = nil;
     
     
+    XAIUser* server = [[XAIUser alloc] init];
+    server.apsn = [MQTT shareMQTT].apsn;
+    server.luid = MQTTCover_LUID_Server_03;
+    server.name = @"XAI";
     
-    _userDatas =  [[NSMutableArray alloc] initWithArray:
-                     [[XAIData shareData] getUserList]];
+    _userDatas =  [[NSMutableArray alloc] init];
+    
+    [_userDatas  addObject:server];
+    [_userDatas addObjectsFromArray:[[XAIData shareData] getUserList]];
     
     
     
@@ -146,7 +154,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     static NSString *CellIdentifier = XAIUserServerListCellID;
     
     XAIUserServerListCell *cell = [tableView
@@ -305,6 +313,8 @@ static SWTableViewCell* curSWCell;
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    //XAIChatVC* chatVC = [[XAIChatVC alloc] init];
+    [self animalVC_R2L:[XAIChatVC create]];
     
     return nil;
 }

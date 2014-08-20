@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define XAIChatCellID @"XAIChatCellID"
+
 @interface XAIChatCell : UITableViewCell
 
 @property (nonatomic, strong) UIView *bubbleView;

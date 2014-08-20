@@ -22,6 +22,9 @@
         
         [self.contentView addSubview:_bubbleView];
         [self.contentView addSubview:_photo];
+        
+        [self.contentView setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
@@ -37,7 +40,7 @@
 {
     if ([[dict objectForKey:@"name"]isEqualToString:@"rhl"]) {
         _photo.frame = CGRectMake(320-60, 10, 50, 50);
-        _photo.image = [UIImage imageNamed:@"photo1"];
+        _photo.image = [UIImage imageNamed:@"photoUsr"];
         
         if ([[dict objectForKey:@"content"] isEqualToString:@"0"]) {
             [self yuyinView:1 from:YES withPosition:65 withView:_bubbleView];
@@ -47,7 +50,7 @@
         
     }else{
         _photo.frame = CGRectMake(10, 10, 50, 50);
-        _photo.image = [UIImage imageNamed:@"photo"];
+        _photo.image = [UIImage imageNamed:@"photoXAI"];
         
         if ([[dict objectForKey:@"content"] isEqualToString:@"0"]) {
             [self yuyinView:1 from:NO withPosition:65 withView:_bubbleView];
@@ -68,6 +71,8 @@
     UIFont *font = [UIFont systemFontOfSize:14];
 	CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
     
+//    CGSize size = [text boundingRectWithSize:CGSizeMake(180.0f, 20000.0f) options:NSStringDrawingTruncatesLastVisibleLine attributes:nil context:nil].size;
+    
 	// build single chat bubble cell with given text
 	UIView *returnView = bulleView;
 	returnView.backgroundColor = [UIColor clearColor];
@@ -78,6 +83,12 @@
 //	UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
     
     UIEdgeInsets edge = UIEdgeInsetsMake(30,30,25,18);
+//    UIEdgeInsets edge = UIEdgeInsetsMake(25,25,15,30);
+//    
+//    if (fromSelf == YES) {
+//        edge = UIEdgeInsetsMake(25,25,15,18);
+//    }
+    
     UIImage* image = [bubble resizableImageWithCapInsets:edge];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:image];
     
