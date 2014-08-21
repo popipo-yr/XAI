@@ -16,7 +16,7 @@
 
 +(UIViewController*) create:(XAIUser *)user{
 
-    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone_Other" bundle:nil];
     UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAIChatVCID];
     
     [(XAIChatVC*)vc setUser:user];
@@ -36,29 +36,18 @@
         _mobile.mobileDelegate = self;
         
         _msgs = [[NSMutableArray alloc] init];
-        
-        
-//        UIImage* backImg = [UIImage imageNamed:@"back_nor.png"] ;
-//        
-//        if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
-//            
-//            backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//        }
-//        
-//        UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
-//                                                                     style:UIBarButtonItemStylePlain
-//                                                                    target:self
-//                                                                    action:@selector(backClick:)];
-//        
-//        [backItem ios6cleanBackgroud];
-//        
-//        
-//        [self.navigationItem setLeftBarButtonItem:backItem];
+        _KeyBoardHeight = 0;
 
     }
     
     return self;
     
+}
+
+-(void)dealloc{
+
+    [_mobile willRemove];
+    _mobile.mobileDelegate = nil;
 }
 
 -(void)backClick:(id)sender{
@@ -91,6 +80,7 @@
     _msgs = [[NSMutableArray alloc] initWithArray:[XAIUser readIM:_user.luid apsn:_user.apsn]];
     
     
+    _oldTableFrame = self.tableView.frame;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -100,6 +90,9 @@
     [_mobile startListene];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeContentViewPoint:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [self changeTableView];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -132,10 +125,19 @@
                         keyBoardEndY - STATUS_BAR_HEIGHT - _moveView.bounds.size.height/2.0);
         // keyBoardEndY的坐标包括了状态栏的高度，要减去
         
+        
+        _KeyBoardHeight = self.view.frame.size.height - keyBoardEndY;
+        
+        self.tableView.frame = CGRectMake(_oldTableFrame.origin.x,
+                                          _oldTableFrame.origin.y + _KeyBoardHeight,
+                                          _oldTableFrame.size.width,
+                                          _oldTableFrame.size.height - _KeyBoardHeight);
+        
+        [self performSelector:@selector(changeTableView) withObject:nil];
+        
     }];
     
-    
-    
+
 }
 
 
@@ -164,6 +166,7 @@
 }
 
 
+
 -(void)sendBtnClick:(id)sender{
     
     if (_textField.text == nil ||  [_textField.text isEqualToString:@""]) return;
@@ -182,7 +185,10 @@
     
     [_mobile sendMsg:_textField.text toApsn:_user.apsn toLuid:_user.luid];
     
-
+    _textField.text = nil;
+    [self.tableView reloadData];
+    
+    [self changeTableView];
 }
 
 
@@ -201,12 +207,59 @@
     }];
     
     
+    self.tableView.frame = _oldTableFrame;
+    
+    _KeyBoardHeight = 0;
+    
 }
 
 
 
 
+#pragma helper
 
+- (float) cellHeight:(NSIndexPath*)indexPath{
+
+    XAIMeg *amsg = [_msgs  objectAtIndex:indexPath.row];
+    
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+    CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    
+    
+    return size.height+44;
+}
+
+- (BOOL) needChange{
+
+    BOOL needChange = false;
+    
+    float allHeight = 0;
+    
+    for (int i = [_msgs count] - 1; i >= 0 ; i--) {
+        
+        allHeight += [self cellHeight:[NSIndexPath indexPathForRow:i inSection:0]];
+    
+        if (allHeight >  self.tableView.frame.size.height ) {
+            
+            needChange = true;
+            break;
+        }
+    }
+    
+    return needChange;
+    
+}
+
+- (void)changeTableView{
+
+    if ([_msgs count] > 0 &&
+        (_KeyBoardHeight <= 0 || (_KeyBoardHeight > 0 && [self needChange]))) {
+        
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:([_msgs count] - 1) inSection:0];
+        [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
+
+}
 
 #pragma UITableView
 
@@ -222,11 +275,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XAIMeg *amsg = [_msgs  objectAtIndex:indexPath.row];
-    UIFont *font = [UIFont systemFontOfSize:14];
-	CGSize size = [amsg.context sizeWithFont:font constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
-    
-    return size.height+44;
+    return [self cellHeight:indexPath];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,11 +298,6 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
 
 -(void)mobileControl:(XAIMobileControl *)mc sendStatus:(XAI_ERROR)err{
 
@@ -263,6 +307,9 @@
 
     [_msgs addObject:msg];
     [self.tableView reloadData];
+    
+    [self changeTableView];
+    
 }
 
 @end

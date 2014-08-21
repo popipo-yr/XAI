@@ -14,6 +14,16 @@
 
 @implementation XAIScanVC
 
++ (XAIScanVC*)create{
+    
+    
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone_Other" bundle:nil];
+    XAIScanVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
+
+    return vc;
+
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

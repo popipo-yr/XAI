@@ -197,7 +197,7 @@
 
 -(IBAction)devAddBtnClick:(id)sender{
 
-    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
+    XAIScanVC* scanvc =[XAIScanVC create];
     
     if ([scanvc isKindOfClass:[XAIScanVC class]]) {
         

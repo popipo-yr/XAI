@@ -20,6 +20,10 @@
     NSMutableArray* _msgs ;
 
     CGPoint _oldMovePoint;
+    
+    CGRect _oldTableFrame;
+    
+    float _KeyBoardHeight;
 
 }
 

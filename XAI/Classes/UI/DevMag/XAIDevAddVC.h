@@ -28,6 +28,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *typeTableView;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
+@property (strong, nonatomic) IBOutlet UINavigationItem* cNavigationItem;
 
 @property (nonatomic,strong) NSString* luidStr;
 

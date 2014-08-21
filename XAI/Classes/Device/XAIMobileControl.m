@@ -14,9 +14,15 @@
 #import "XAIPacketIM.h"
 
 
-#define _IM_ID 100
+#define _IM_ID 8
+static XAIMobileControl* __S_MSGSAVE = nil;
 
 @implementation XAIMobileControl
+
++ (void) setMsgSave:(XAIMobileControl*)megSave{
+
+    __S_MSGSAVE = megSave;
+}
 
 - (void) startListene{
     
@@ -24,7 +30,7 @@
     NSString* topic = [MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
-    [[MQTT shareMQTT].client subscribe:topic];
+    [[MQTT shareMQTT].client subscribe:topic withQos:2];
 }
 
 - (void) stopListene{
@@ -53,7 +59,7 @@
                        [data length], (void*)[context UTF8String],nil);
     
     
-    xai_param_IM_set(param_IM, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, _IM_ID,
+    xai_param_IM_set(param_IM, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, XAI_PKT_TYPE_IM,
                        0, 0,[[NSDate new] timeIntervalSince1970], 1, context_data);
     
     
@@ -88,44 +94,10 @@
     if (ctrl == NULL) return;
     
     
-    if (ctrl->oprId == _IM_ID) {
+    if (_mobileDelegate != nil && [_mobileDelegate respondsToSelector:@selector(mobileControl:getCmd:)]) {
         
-        XAITYPELUID fromLuid = luidFromGUID(ctrl->normal_param->from_guid);
-        XAITYPEAPSN fromApsn = apsnFromGUID(ctrl->normal_param->from_guid);
-        
-        XAIMeg* newMsg = [[XAIMeg alloc] init];
-        newMsg.fromAPSN = fromApsn;
-        newMsg.fromLuid = fromLuid;
-        newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
-        newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
-        
-        
-        NSMutableArray* msgs = [[NSMutableArray alloc] init];
-        [msgs addObjectsFromArray:[XAIUser readIM:fromLuid apsn:fromApsn]];
-        [msgs addObject:newMsg];
-        
-        
-        [XAIUser saveIM:msgs luid:fromLuid apsn:fromApsn];
-        
-        if (_mobileDelegate != nil && [_mobileDelegate respondsToSelector:@selector(mobileControl:newMsg:)]) {
-            
-            [_mobileDelegate mobileControl:self newMsg:newMsg];
-        }
-        
-
-        
-    }else{
-    
-        if (_mobileDelegate != nil && [_mobileDelegate respondsToSelector:@selector(mobileControl:getCmd:)]) {
-            
-            [_mobileDelegate mobileControl:self getCmd:nil];
-        }
-        
-    
+        [_mobileDelegate mobileControl:self getCmd:nil];
     }
-    
-    
-
     
     
     purgePacketParamCtrlAndData(ctrl);
@@ -140,41 +112,39 @@
     if (IM == NULL) return;
     
     
+    
+    XAITYPELUID fromLuid = luidFromGUID(IM->normal_param->from_guid);
+    XAITYPEAPSN fromApsn = apsnFromGUID(IM->normal_param->from_guid);
+    
+    XAIMeg* newMsg = [[XAIMeg alloc] init];
+    newMsg.fromAPSN = fromApsn;
+    newMsg.fromLuid = fromLuid;
+    newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
+    newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
+    
+    _xai_packet_param_data* data = getParamDataFromParamIM(IM, 0);
+    if (data != NULL && (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) && data->data_len > 0){
         
-        XAITYPELUID fromLuid = luidFromGUID(IM->normal_param->from_guid);
-        XAITYPEAPSN fromApsn = apsnFromGUID(IM->normal_param->from_guid);
-        
-        XAIMeg* newMsg = [[XAIMeg alloc] init];
-        newMsg.fromAPSN = fromApsn;
-        newMsg.fromLuid = fromLuid;
-        newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
-        newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
-        
-        _xai_packet_param_data* data = getParamDataFromParamIM(IM, 0);
-        if (data != NULL && (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) && data->data_len > 0){
-            
-            newMsg.context = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
-        }
-        
-
-        
+        newMsg.context = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
+    }
+    
+    
+    /*防止被多次写入*/
+    if (__S_MSGSAVE == self) {
         
         NSMutableArray* msgs = [[NSMutableArray alloc] init];
         [msgs addObjectsFromArray:[XAIUser readIM:fromLuid apsn:fromApsn]];
         [msgs addObject:newMsg];
         
-        
         [XAIUser saveIM:msgs luid:fromLuid apsn:fromApsn];
-        
-        if (_mobileDelegate != nil && [_mobileDelegate respondsToSelector:@selector(mobileControl:newMsg:)]) {
-            
-            [_mobileDelegate mobileControl:self newMsg:newMsg];
-        }
-        
-        
+    }
     
     
     
+    if (_mobileDelegate != nil && [_mobileDelegate respondsToSelector:@selector(mobileControl:newMsg:)]) {
+        
+        [_mobileDelegate mobileControl:self newMsg:newMsg];
+    }
     
     
     purgePacketParamIMAndData(IM);

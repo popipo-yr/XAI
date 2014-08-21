@@ -12,6 +12,9 @@
 #import "XAIObjectGenerate.h"
 #import "XAIChatVC.h"
 
+#import "XAIUserAddVC.h"
+
+
 
 #define _ST_USListVCID @"XAIUserServerListVCID"
 
@@ -46,9 +49,6 @@
         _cellInfos = [[NSMutableDictionary alloc] init];
         
         
-
-
-        
     }
     return self;
 }
@@ -76,6 +76,25 @@
     [backItem ios6cleanBackgroud];
     
     [self.navigationItem setLeftBarButtonItem:backItem];
+    
+    
+    
+    UIImage* addImg = [UIImage imageNamed:@"add_nor.png"] ;
+    
+    if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        addImg = [addImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(addOneUser:)];
+
+    
+    [addItem ios6cleanBackgroud];
+    
+    [self.navigationItem setRightBarButtonItem:addItem];
     
     // Do any additional setup after loading the view.
 }
@@ -128,6 +147,7 @@
 
 
 
+
 - (void) updateShowDatas{
     
     _curInputCell = nil;
@@ -143,14 +163,32 @@
     [_userDatas  addObject:server];
     [_userDatas addObjectsFromArray:[[XAIData shareData] getUserList]];
     
+    for (XAIUser* aUser in _userDatas) {
+        if (aUser.luid == [MQTT shareMQTT].curUser.luid &&
+            aUser.apsn == [MQTT shareMQTT].curUser.apsn) {
+            
+            [_userDatas removeObject:aUser];
+            break;
+        }
+    }
     
     
+    
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
     //    [_deviceDatas addObject:[[XAIIR alloc] init]];
+    
+}
+
+
+- (void)addOneUser:(id)sender{
+    
+    XAIUserAddVC* vc = [XAIUserAddVC create];
+    
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

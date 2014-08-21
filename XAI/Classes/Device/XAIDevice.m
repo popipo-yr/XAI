@@ -255,7 +255,7 @@
 - (void) willRemove{
 
     [super willRemove];
-    //[[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
+    [[MQTT shareMQTT].packetManager forceRemovePacketManager:self];
 }
 
 

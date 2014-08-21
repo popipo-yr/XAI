@@ -25,6 +25,8 @@
 @property (nonatomic,strong) IBOutlet UIImageView* scanView;
 @property (nonatomic,weak)  id<XAIScanVCDelegate> delegate;
 
++ (XAIScanVC*)create;
+
 
 - (IBAction)cancelBtnClick:(id)sender;
 

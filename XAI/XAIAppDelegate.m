@@ -440,7 +440,8 @@
 //        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
 //                                                                  luid:MQTTCover_LUID_Server_03]];
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn
-                                                               luid:curMQTT.luid]];
+                                                               luid:curMQTT.luid]
+                          withQos:2];
         [[XAIData shareData] startRefresh];
     }
     

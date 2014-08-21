@@ -9,11 +9,20 @@
 #import "XAIUserAddVC.h"
 #import "XAIChangeCell.h"
 
-@interface XAIUserAddVC ()
-
-@end
+#define XAIUserAddVCID @"XAIUserAddVCID"
 
 @implementation XAIUserAddVC
+
++(XAIUserAddVC*)create{
+
+    
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone_Other" bundle:nil];
+    XAIUserAddVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAIUserAddVCID];
+    //[vc changeIphoneStatus];
+    return vc;
+
+    
+}
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder{

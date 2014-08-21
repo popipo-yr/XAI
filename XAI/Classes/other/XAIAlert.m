@@ -48,7 +48,8 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
 
 
 - (void) startFocus{
-
+    
+    [XAIMobileControl setMsgSave:_mc];
     [_mc startListene];
 }
 - (void) stop{
@@ -56,7 +57,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
     if (_alertView != nil && [_alertView isVisible]) {
         [_alertView dismissWithClickedButtonIndex:0 animated:false];
     }
-
+    [XAIMobileControl setMsgSave:nil];
     [_mc stopListene];
 }
 

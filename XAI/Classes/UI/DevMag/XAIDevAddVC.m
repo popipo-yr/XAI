@@ -9,6 +9,8 @@
 #import "XAIDevAddVC.h"
 #import "XAIObject.h"
 #import "XAIDeviceType.h"
+#import "XAIShowVC.h"
+
 
 @interface XAIDevAddVC ()
 
@@ -21,11 +23,11 @@
 
 + (UIViewController*)create:(NSString*)luidStr{
 
-    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone" bundle:nil];
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone_Other" bundle:nil];
     UIViewController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:DevAddViewControllerID];
     
     [(XAIDevAddVC*)vc setLuidStr:luidStr];
-    //[vc changeIphoneStatusClear];
+    [vc changeIphoneStatus];
     return vc;
 
 
@@ -68,7 +70,26 @@
     
     [okItem ios6cleanBackgroud];
     
-    [self.navigationItem setRightBarButtonItem:okItem];
+    [self.cNavigationItem setRightBarButtonItem:okItem];
+    
+    
+    UIImage* backImg = [UIImage imageNamed:@"back_nor.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(backClick:)];
+    
+    [backItem ios6cleanBackgroud];
+    
+    
+    [self.cNavigationItem setLeftBarButtonItem:backItem];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,6 +229,12 @@
 - (void)nameTextReturn:(id)seder{
 
     [_nameTextField resignFirstResponder];
+}
+
+
+- (void)backClick:(id)seder{
+
+    [self animalVC_L2R:[XAIShowVC create]];
 }
 
 

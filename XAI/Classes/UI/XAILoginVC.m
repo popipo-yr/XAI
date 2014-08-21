@@ -599,7 +599,7 @@
 //                                                                  luid:MQTTCover_LUID_Server_03]];
         
         
-        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]];
+        [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid] withQos:2];
 
 
     
@@ -611,7 +611,9 @@
 -(IBAction)qrcodeBtnClick:(id)sender{
 
     
-    XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
+    //XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
+    XAIScanVC* scanvc = [XAIScanVC create];
+
     
     if ([scanvc isKindOfClass:[XAIScanVC class]]) {
         

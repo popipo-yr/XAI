@@ -16,7 +16,7 @@
 - (void) startListene;
 - (void) stopListene;
 
-
++ (void) setMsgSave:(XAIMobileControl*)megSave;
 - (void) sendMsg:(NSString*)context toApsn:(XAITYPEAPSN)apsn toLuid:(XAITYPELUID)luid;
 
 @property(nonatomic,assign) id<XAIMobileControlDelegate> mobileDelegate;

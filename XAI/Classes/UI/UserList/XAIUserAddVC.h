@@ -22,4 +22,6 @@
     XAIUserService* _userService;
 }
 
++(XAIUserAddVC*)create;
+
 @end
