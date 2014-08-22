@@ -94,10 +94,6 @@
                  aObj.curDevStatus == XAIWindowStatus_Close){
             status = XAIOCST_Close;
         }
-    
-    if ([aObj.name isEqualToString:@"门磁1"]) {
-        NSLog(@"test");
-    }
             
         
         [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];

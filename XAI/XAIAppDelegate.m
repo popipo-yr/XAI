@@ -358,7 +358,6 @@
         
         [_reLoginStartAlert show];
         
-        
         _reLogin.delegate = self;
         [_reLogin start];
         [_reLogin relogin];
@@ -462,7 +461,7 @@
 #pragma mark -- KeepAlive
 -(void)didDisconnect{
 
-    if ([MQTT shareMQTT].isLogin == true && _needKeepTip == true) {
+    if (_isReConnect == false && [MQTT shareMQTT].isLogin == true && _needKeepTip == true) {
         
         [MQTT shareMQTT].isLogin = false;
         

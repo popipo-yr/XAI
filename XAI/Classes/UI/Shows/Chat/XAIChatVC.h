@@ -18,6 +18,8 @@
     XAIMobileControl* _mobile;
     
     NSMutableArray* _msgs ;
+    
+    NSMutableArray* _shows;
 
     CGPoint _oldMovePoint;
     

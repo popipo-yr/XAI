@@ -88,6 +88,11 @@
             [msgs addObject:dic];
         }
         
+        int maxMeg =  50;
+        for (int i = [msgs count]; i > maxMeg; i--) {
+            [msgs removeObjectAtIndex:0];
+        }
+        
         
         [msgs writeToFile:localFile atomically:YES];
         

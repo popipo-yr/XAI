@@ -11,11 +11,26 @@
 
 #define XAIChatCellID @"XAIChatCellID"
 
-@interface XAIChatCell : UITableViewCell
+@interface XAIChatCell : UITableViewCell{
 
-@property (nonatomic, strong) UIView *bubbleView;
-@property (nonatomic, strong) UIImageView *photo;
+    UIView* _bubbleView;
+    UIImageView* _photo;
+}
+
 
 -(void)setContent:(XAIMeg*)aMsg isfromeMe:(BOOL)isFromMe;
+
+@end
+
+
+#define XAIChatTimeCellID @"XAIChatTimeCellID"
+@interface XAIChatTimeCell : UITableViewCell{
+
+    UILabel* _label;
+
+}
+
+
+-(void)setDate:(NSDate*)date;
 
 @end

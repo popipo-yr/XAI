@@ -153,9 +153,10 @@
         
         if (_linkageTime == nil) {
             
-            _linkageTime = (XAILinkageTime*)[[[NSBundle mainBundle] loadNibNamed:@"LinkageTime"
-                                                                         owner:nil
-                                                                       options:nil] lastObject];
+            _linkageTime = [[[UINib nibWithNibName:@"LinkageTime" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+//            _linkageTime = (XAILinkageTime*)[[[NSBundle mainBundle] loadNibNamed:@"LinkageTime"
+//                                                                         owner:nil
+//                                                                       options:nil] lastObject];
             
             
             [_linkageTime.closeBtn addTarget:self action:@selector(closeClick:)

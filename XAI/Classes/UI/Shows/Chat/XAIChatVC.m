@@ -37,6 +37,8 @@
         
         _msgs = [[NSMutableArray alloc] init];
         _KeyBoardHeight = 0;
+        
+        _shows = [[NSMutableArray alloc] init];
 
     }
     
@@ -81,6 +83,8 @@
     _msgs = [[NSMutableArray alloc] initWithArray:
              [XAIUser readIM:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn]];
     
+    [self createShows];
+    
     
     _oldTableFrame = self.tableView.frame;
 }
@@ -103,6 +107,68 @@
     [_mobile stopListene];
     
     [super viewDidDisappear:animated];
+}
+
+
+- (void) createShows{
+    
+
+    XAIMeg* preMsg = nil;
+    
+    NSMutableArray* msgAndDate = [[NSMutableArray alloc] init];
+
+    
+    for (int i = 0; i < [_msgs count]; i++) {
+        
+        XAIMeg* curMsg = [_msgs objectAtIndex:i];
+        
+        if (preMsg == nil) {
+            
+            [msgAndDate addObject:curMsg];
+            preMsg = curMsg;
+            continue;
+        }
+        
+        if ([curMsg.date timeIntervalSinceNow]*-1 > 24*60*60) {
+            
+            if ([curMsg.date timeIntervalSinceDate:preMsg.date] > 24*60*60 ) {
+                
+                [msgAndDate addObject:preMsg.date];
+            }
+            
+            [msgAndDate addObject:curMsg];
+            
+        }else if([curMsg.date timeIntervalSinceNow]*-1 > 1*60*60){
+        
+            if ([curMsg.date timeIntervalSinceDate:preMsg.date] > 1*60*60 ) {
+                
+                [msgAndDate addObject:preMsg.date];
+                
+            }
+            
+            [msgAndDate addObject:curMsg];
+        
+        }else{
+        
+        
+            if ([curMsg.date timeIntervalSinceDate:preMsg.date] > 5*60 ) {
+                
+                [msgAndDate addObject:preMsg.date];
+            }
+            
+            [msgAndDate addObject:curMsg];
+        }
+        
+        preMsg = curMsg;
+        
+    }
+    
+    if ([preMsg.date timeIntervalSinceNow]*-1 > 5*60) {
+        [msgAndDate addObject:preMsg.date];
+    }
+    
+    _shows = [[NSMutableArray alloc] initWithArray:msgAndDate];
+
 }
 
 
@@ -183,6 +249,26 @@
     
     [_msgs addObject:msg];
     
+    do {
+        
+        if ([_shows count] == 0) break;
+        
+        XAIMeg* obj = [_shows lastObject];
+        
+        if (![obj isKindOfClass:[XAIMeg class]])break;
+        
+        
+        if ([obj.date timeIntervalSinceNow] < 5*60) break;
+        
+        [_shows addObject:obj.date];
+        
+        
+    } while (0);
+    
+    
+    [_shows addObject:msg];
+
+    
     XAIUser* curUser = [MQTT shareMQTT].curUser;
     [XAIUser saveIM:_msgs meLuid:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
     
@@ -223,13 +309,21 @@
 
 - (float) cellHeight:(NSIndexPath*)indexPath{
 
-    XAIMeg *amsg = [_msgs  objectAtIndex:indexPath.row];
+    XAIMeg *amsg = [_shows  objectAtIndex:indexPath.row];
     
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-    CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    if ([amsg isKindOfClass:[XAIMeg class]]) {
+        
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+        CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+        
+        
+        return size.height+44;
+    }else{
     
+        return 30;
+    }
     
-    return size.height+44;
+
 }
 
 - (BOOL) needChange{
@@ -238,7 +332,7 @@
     
     float allHeight = 0;
     
-    for (int i = [_msgs count] - 1; i >= 0 ; i--) {
+    for (int i = [_shows count] - 1; i >= 0 ; i--) {
         
         allHeight += [self cellHeight:[NSIndexPath indexPathForRow:i inSection:0]];
     
@@ -255,10 +349,10 @@
 
 - (void)changeTableView{
 
-    if ([_msgs count] > 0 &&
+    if ([_shows count] > 0 &&
         (_KeyBoardHeight <= 0 || (_KeyBoardHeight > 0 && [self needChange]))) {
         
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:([_msgs count] - 1) inSection:0];
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:([_shows count] - 1) inSection:0];
         [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 
@@ -273,7 +367,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _msgs.count;
+    return _shows.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -284,21 +378,45 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = XAIChatCellID;
-    XAIChatCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[XAIChatCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    NSObject* aObj = [_shows objectAtIndex:indexPath.row];
+    
+    if ([aObj isKindOfClass:[XAIMeg class]]) {
         
+        
+        static NSString *CellIdentifier = XAIChatCellID;
+        XAIChatCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[XAIChatCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
+        
+        XAIMeg *aMsg = (XAIMeg*)aObj;
+        
+        BOOL isMe = (aMsg.fromLuid == [MQTT shareMQTT].curUser.luid &&
+                     aMsg.fromAPSN == [MQTT shareMQTT].curUser.apsn);
+        [cell setContent:aMsg isfromeMe:isMe];
+        
+        return cell;
+        
+    }else if([aObj isKindOfClass:[NSDate class]]){
+    
+        static NSString *CellIdentifier = XAIChatTimeCellID;
+        XAIChatTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[XAIChatTimeCell alloc]initWithStyle:UITableViewCellStyleDefault
+                                         reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
+        
+        [cell setDate:(NSDate*)aObj];
+        
+        return cell;
+    
     }
     
-    XAIMeg *aMsg = [_msgs objectAtIndex:indexPath.row];
-    BOOL isMe = (aMsg.fromLuid == [MQTT shareMQTT].curUser.luid &&
-                 aMsg.fromAPSN == [MQTT shareMQTT].curUser.apsn);
-    [cell setContent:aMsg isfromeMe:isMe];
-       
-    return cell;
-    
+    return nil;
 }
 
 
@@ -309,6 +427,26 @@
 -(void)mobileControl:(XAIMobileControl *)mc newMsg:(XAIMeg *)msg{
 
     [_msgs addObject:msg];
+    
+    do {
+        
+        if ([_shows count] == 0) break;
+        
+        XAIMeg* obj = [_shows lastObject];
+        
+        if (![obj isKindOfClass:[XAIMeg class]])break;
+        
+        
+        if ([obj.date timeIntervalSinceNow] < 5*60) break;
+        
+        [_shows addObject:obj.date];
+        
+        
+    } while (0);
+    
+    
+    [_shows addObject:msg];
+    
     [self.tableView reloadData];
     
     [self changeTableView];

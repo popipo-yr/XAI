@@ -113,7 +113,7 @@
 //    UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
     
    
-	NSLog(@"%f,%f",size.width,size.height);
+	//NSLog(@"%f,%f",size.width,size.height);
 	
     
     //添加文本信息
@@ -175,6 +175,45 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     [button addSubview:label];
+    
+}
+
+@end
+
+@implementation XAIChatTimeCell
+
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];
+        [view setBackgroundColor:[UIColor grayColor]];
+        view.alpha = 0.2;
+        
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.alpha = 0.5;
+        
+        [self.contentView addSubview:view];
+        [self.contentView addSubview:_label];
+        
+        
+        [self.contentView setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
+    }
+    return self;
+}
+
+
+-(void)setDate:(NSDate *)date{
+    
+    
+    NSDateFormatter* format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+
+    _label.text = [format stringFromDate:date];
     
 }
 

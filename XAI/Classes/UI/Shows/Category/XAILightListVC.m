@@ -416,7 +416,7 @@ static bool changeShow = false;
 static SWTableViewCell* curSWCell;
 -(void)swipeableTableViewCellDidEndScrolling:(SWTableViewCell *)cell{
     
-    NSLog(@"end");
+    XSLog(@"end");
     
     curSWCell = cell;
     if ( cell.cellState == kCellStateLeft) {
@@ -447,7 +447,7 @@ static SWTableViewCell* curSWCell;
 - (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
 {
     
-    NSLog(@"TOP...");
+    XSLog(@"TOP...");
     
     if ([self hasInput] == true) {
         

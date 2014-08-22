@@ -306,7 +306,7 @@
     if ((0 != param->data_count % linkageParamCout) || realCount < 0) {
         
         realCount = 0;
-        NSLog(@"err...");
+        XSLog(@"err...");
     }
     
     for (int i = 0; i < realCount; i++) {

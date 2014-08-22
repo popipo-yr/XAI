@@ -269,7 +269,7 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
     
-    NSLog(@"%d",state);
+    //NSLog(@"%d",state);
     return;
 }
 
