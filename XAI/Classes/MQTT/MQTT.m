@@ -11,6 +11,9 @@
 @implementation MQTT
 
 
+#define _K_Bufang @"_K_Bufang"
+
+
 static MQTT*  _MQTTSTATIC = NULL;
 
 + (MQTT*) shareMQTT{
@@ -22,10 +25,27 @@ static MQTT*  _MQTTSTATIC = NULL;
         _MQTTSTATIC.packetManager = NULL;
         _MQTTSTATIC.isLogin = false;
         _MQTTSTATIC.isFromRoute = true;
-        _MQTTSTATIC.isBufang  = true;
+       
     }
 
     return _MQTTSTATIC;
+    
+}
+
+-(id)init{
+
+    if (self = [super init]) {
+       
+         self.isBufang  = [[NSUserDefaults standardUserDefaults] boolForKey:_K_Bufang];
+    }
+    
+    return self;
+}
+
+-(void)setIsBufang:(BOOL)isBufang{
+
+    [[NSUserDefaults standardUserDefaults] setBool:isBufang forKey:_K_Bufang];
+    _isBufang = isBufang;
     
 }
 
