@@ -202,7 +202,7 @@
         <image name="login_btn_dis.png" width="285" height="42"/>
         <image name="login_btn_normal.png" width="285" height="42"/>
         <image name="login_btn_sel.png" width="285" height="42"/>
-        <image name="login_ip.png" width="259" height="37"/>
+        <image name="login_ip.png" width="312" height="57"/>
         <image name="login_other_spe.png" width="247" height="1"/>
         <image name="login_tip_mima.png" width="18" height="22"/>
         <image name="login_tip_name.png" width="22" height="22"/>

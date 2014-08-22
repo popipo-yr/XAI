@@ -248,7 +248,7 @@
         
         cell.lable.text = NSLocalizedString(@"Home", nil);
         
-        [cell setTextFiledWithLable:@"小明爱家"];
+        [cell setTextFiledWithLable:@"XAI智能的家"];
         
     }else if ([indexPath row] == _key_name_index) {
         
@@ -277,6 +277,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if ([indexPath row] == _key_home_index) {
+        
+        return;
         
         XAIChangeNameVC* nameVC = [self.storyboard
                                    instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];

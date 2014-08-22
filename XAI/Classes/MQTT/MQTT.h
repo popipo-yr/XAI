@@ -34,6 +34,9 @@
 //@property (nonatomic, strong) NSString* curUserName;
 @property (nonatomic, strong) XAIUser* curUser;
 
+@property (nonatomic, assign) BOOL isFromRoute; /*yes 就不是指连*/
+@property (nonatomic, assign) BOOL isBufang; 
+
 
 + (MQTT*) shareMQTT;
 

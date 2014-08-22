@@ -19,6 +19,7 @@
 }
 
 @property(nonatomic,assign) XAICategoryType type;
+@property (nonatomic,strong) UILabel* label;
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state;

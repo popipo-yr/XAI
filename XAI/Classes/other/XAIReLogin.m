@@ -9,6 +9,7 @@
 #import "XAIReLogin.h"
 
 #import "XAIData.h"
+#import "XAIToken.h"
 
 #import "Reachability.h"
 
@@ -69,6 +70,12 @@
     _IPHelper.delegate = nil;
     
     if (rc == _err_none) {
+
+        if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
+            [MQTT shareMQTT].isFromRoute = true;
+        }else{
+            [MQTT shareMQTT].isFromRoute = false;
+        }
         
         XSLog(@"name =%@ , pwd = %@",[MQTT shareMQTT].curUser.name , [MQTT shareMQTT].curUser.pawd);
         _login.delegate = self;
@@ -82,6 +89,22 @@
     }
 }
 
+- (void) pushToken{
+    
+    void* token = malloc(TokenSize+20);
+    memset(token, 0, TokenSize);
+    
+    BOOL bl = [XAIToken getToken:&token size:NULL];
+    
+    if (bl) {
+        
+        [_userService pushToken:token size:TokenSize isBufang:[MQTT shareMQTT].isBufang];
+    }
+    
+    free(token);
+    
+    
+}
 
 
 #pragma mark - Delegate
@@ -100,6 +123,7 @@
         
     }
     
+    [self pushToken];
     [self getDateFinsh];
     
 }

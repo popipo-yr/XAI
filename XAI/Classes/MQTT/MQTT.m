@@ -21,6 +21,8 @@ static MQTT*  _MQTTSTATIC = NULL;
         _MQTTSTATIC.client = NULL;
         _MQTTSTATIC.packetManager = NULL;
         _MQTTSTATIC.isLogin = false;
+        _MQTTSTATIC.isFromRoute = true;
+        _MQTTSTATIC.isBufang  = true;
     }
 
     return _MQTTSTATIC;

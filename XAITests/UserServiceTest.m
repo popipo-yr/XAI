@@ -597,7 +597,7 @@ XAITYPELUID  ____luid;
     if (_loginStatus == Success) {
         
         uint8_t token2[32] = {0xee};
-        [_userService pushToken:token2 size:32 user:0x1];
+        [_userService pushToken:token2 size:32 isBufang:true];
         
         _pushStatus = start;
         

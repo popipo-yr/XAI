@@ -243,7 +243,11 @@
         [cell setInfo:aUser];
     }
     
-    [cell setDelBtn];
+    if ([indexPath row] != 0 && [[MQTT shareMQTT].curUser isAdmin]) {
+        [cell setDelBtn];
+    }
+    
+    
     cell.delegate = self;
     
     

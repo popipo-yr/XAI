@@ -20,7 +20,7 @@
 
 #define _k_type 99
 
-+ (NSArray*) readIM:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
++ (NSArray*) readIM:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
     
     
     
@@ -31,7 +31,8 @@
         
         
         NSString* localFile = [XAIData getSavePathFile:
-                               [NSString stringWithFormat:@"%u-%llu-%d.plist",apsn,luid,_k_type]];
+                               [NSString stringWithFormat:@"%u-%llu-%u-%llu-%d.plist",meapsn,meluid,
+                                apsn,luid,_k_type]];
         
         if (localFile == nil || [localFile isEqualToString:@""]) break;
         
@@ -61,14 +62,15 @@
 
 }
 
-+ (BOOL) saveIM:(NSArray*)ary luid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
++ (BOOL) saveIM:(NSArray *)ary meLuid:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
 
     BOOL isSuccess = false;
     
     do {
         
         NSString* localFile = [XAIData getSavePathFile:
-                               [NSString stringWithFormat:@"%u-%llu-%d.plist",apsn,luid,_k_type]];
+                               [NSString stringWithFormat:@"%u-%llu-%u-%llu-%d.plist",meapsn,meluid,
+                                apsn,luid,_k_type]];
         
         if (localFile == nil || [localFile isEqualToString:@""]) break;
         

@@ -44,8 +44,10 @@
 @property (nonatomic, strong) NSString* pawd;
 
 
-+ (NSArray*) readIM:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
-+ (BOOL) saveIM:(NSArray*)ary luid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
++ (NSArray*) readIM:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+           withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
++ (BOOL) saveIM:(NSArray*)ary meLuid:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+       withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
 
 
 - (BOOL) isAdmin;

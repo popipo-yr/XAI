@@ -70,6 +70,7 @@ typedef struct Helper{
 }
 
 @property (nonatomic,weak) id <XAIIPHelperDelegate> delegate;
+@property (nonatomic,readonly) _XAIIPHelper_GetStep  getStep;
 
 - (void)getApserverIpWithApsn:(XAITYPEAPSN)apsn fromRoute:(NSString*)host;
 

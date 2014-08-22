@@ -169,7 +169,9 @@
     
     XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
     
-    if (aObj != nil && [aObj isKindOfClass:[XAIIR class]]) {
+    if (aObj != nil &&
+        [aObj isKindOfClass:[XAIIR class]] &&
+        [[MQTT shareMQTT].curUser isAdmin]) {
         
         [cell setInfo:aObj];
     }

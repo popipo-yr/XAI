@@ -12,6 +12,7 @@
 
     UITextField* _newPwdTextField;
     UITextField* _newPwdRepTextField;
+    UITextField* _oldPwdTextField;
     id _okTarget;
     SEL _okSelector;
     

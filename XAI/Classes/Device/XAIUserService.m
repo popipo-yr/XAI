@@ -252,21 +252,39 @@
 }
 
 
-- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+- (void) pushToken:(void*)token size:(size_t)size isBufang:(BOOL)bBufang apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
     
     MQTT* cur_MQTT = [MQTT shareMQTT];
     
     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
-    _xai_packet_param_data* luid_data = generatePacketParamData();
+    _xai_packet_param_data* bufang_data = generatePacketParamData();
+    _xai_packet_param_data* fromRoute_data = generatePacketParamData();
     _xai_packet_param_data* token_data = generatePacketParamData();
     
-    xai_param_data_set(luid_data, XAI_DATA_TYPE_BIN_LUID , sizeof(XAITYPELUID), &uluid, token_data);
+    XAITYPEBOOL bufang = XAITYPEBOOL_UNKOWN;
+    if (bBufang) {
+        bufang = XAITYPEBOOL_TRUE;
+    }else{
+        bufang = XAITYPEBOOL_FALSE;
+    }
+    
+    XAITYPEBOOL fromRoute = XAITYPEBOOL_UNKOWN;
+    if ([MQTT shareMQTT].isFromRoute) {
+        fromRoute = XAITYPEBOOL_TRUE;
+    }else{
+        fromRoute = XAITYPEBOOL_FALSE;
+    }
+    
+    xai_param_data_set(bufang_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &bufang,
+                       fromRoute_data);
+    xai_param_data_set(fromRoute_data, XAI_DATA_TYPE_BIN_BOOL, sizeof(XAITYPEBOOL), &fromRoute,
+                       token_data);
     xai_param_data_set(token_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, size, token, NULL);
     
     
     xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, apsn , luid, XAI_PKT_TYPE_CONTROL, 0, 0,
-                       PushTokenID,[[NSDate new] timeIntervalSince1970], 2, luid_data);
+                       PushTokenID,[[NSDate new] timeIntervalSince1970], 3, bufang_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
@@ -636,9 +654,9 @@
     [self changeUser:luid oldPassword:oldPassword to:newPassword apsn:_apsn luid:_luid];
 }
 
-- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid{
+- (void) pushToken:(void*)token size:(size_t)size isBufang:(BOOL)bBufang{
     
-    [self pushToken:token  size:size user:uluid apsn:_apsn luid:_luid];
+    [self pushToken:token  size:size isBufang:bBufang apsn:_apsn luid:_luid];
 }
 
 - (void) finderUserLuidHelper:(NSString*)username{

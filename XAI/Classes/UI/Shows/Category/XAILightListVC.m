@@ -234,7 +234,10 @@
         
         [cell setDatas:objs];
         
-        [cell setDelBtn];
+        if ([[MQTT shareMQTT].curUser isAdmin]) {
+            [cell setDelBtn];
+        }
+
         
         cell.delegate = self;
         

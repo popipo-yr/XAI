@@ -113,12 +113,25 @@
         return;
     }
     
+    if (_linkage != nil) {/*先删除后设置*/
+        [_linkageService delLinkage:_linkage.num];
+        
+    }else{
     
+        [self addLinkage];
+    }
+    
+    
+
+
+}
+
+-(void)addLinkage{
+
     NSMutableArray* jieguos = [NSMutableArray arrayWithArray:_datas];
     [jieguos removeObjectAtIndex:0];
     
     [_linkageService addLinkageParams:jieguos ctrlInfo:[_datas objectAtIndex:0] status:XAILinkageStatus_Active name:_name];
-
 }
 
 
@@ -366,6 +379,11 @@
     
     [alert show];
 
+}
+
+-(void)linkageService:(XAILinkageService *)service delStatusCode:(XAI_ERROR)errcode otherID:(int)otherID{
+
+    [self addLinkage];
 }
 
 -(void)linkageService:(XAILinkageService *)service getLinkageDetail:(XAILinkage *)linkage statusCode:(XAI_ERROR)errcode{

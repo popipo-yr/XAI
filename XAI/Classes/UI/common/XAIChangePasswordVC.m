@@ -77,27 +77,33 @@
         
         cell.lable.text = NSLocalizedString(@"TipOldPawd", nil);
         
-        [cell setTextFiledWithLable:_oldPwd];
+//        [cell setTextFiledWithLable:_oldPwd];
+//        
+//        NSMutableString* dottedPassword = [[NSMutableString alloc] init];
+//        
+//        if (_oldPwd != nil) {
+//            
+//            for (int i = 0; i < [_oldPwd length] -1 ; i++)
+//            {
+//                [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
+//            }
+//            
+//            NSRange range;
+//            range.length = 1;
+//            range.location = [_oldPwd length] - 1;
+//            
+//            [dottedPassword appendString:[_oldPwd substringWithRange:range]];
+//        }
+//        
+//
+//        
+//        [cell setTextFiledWithLable:dottedPassword];
         
-        NSMutableString* dottedPassword = [[NSMutableString alloc] init];
         
-        if (_oldPwd != nil) {
-            
-            for (int i = 0; i < [_oldPwd length] -1 ; i++)
-            {
-                [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
-            }
-            
-            NSRange range;
-            range.length = 1;
-            range.location = [_oldPwd length] - 1;
-            
-            [dottedPassword appendString:[_oldPwd substringWithRange:range]];
-        }
+        _oldPwdTextField = cell.textFiled;
+        [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
         
-
-        
-        [cell setTextFiledWithLable:dottedPassword];
+        cell.textFiled.secureTextEntry = YES;
         
         
     }else if([indexPath row] == 1){
@@ -175,7 +181,12 @@
 
 - (void) editEnd:(id)sender{
     
-    if (sender == _newPwdTextField) {
+    if (sender == _oldPwdTextField) {
+        
+        [_oldPwdTextField resignFirstResponder];
+        [_newPwdTextField becomeFirstResponder];
+        
+    }if (sender == _newPwdTextField) {
         
         [_newPwdTextField resignFirstResponder];
         [_newPwdRepTextField becomeFirstResponder];
@@ -198,15 +209,27 @@
     
     do {
         
+        if (nil == _oldPwdTextField.text ||[_oldPwdTextField.text isEqualToString:@""]) {
+            
+            errTip = NSLocalizedString(@"旧密码不能为空", nil);
+            break;
+        }
+        
         if (nil == _newPwdTextField.text ||[_newPwdTextField.text isEqualToString:@""]) {
             
-            errTip = NSLocalizedString(@"UserChangePawdNULL", nil);
+            errTip = NSLocalizedString(@"新密码不能为空", nil);
             break;
         }
         
         if (nil == _newPwdRepTextField.text ||[_newPwdRepTextField.text isEqualToString:@""]) {
             
-            errTip = NSLocalizedString(@"UserChangePawdRepNULL", nil);
+            errTip = NSLocalizedString(@"重复密码不能为空", nil);
+            break;
+        }
+        
+        if (![_oldPwdTextField.text isEqualToString:_oldPwd]) {
+            
+            errTip = NSLocalizedString(@"输入的旧密码与原来不一致", nil);
             break;
         }
         

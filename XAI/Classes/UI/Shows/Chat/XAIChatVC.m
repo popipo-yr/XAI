@@ -77,7 +77,9 @@
     
     self.navigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
     //_cNavigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
-    _msgs = [[NSMutableArray alloc] initWithArray:[XAIUser readIM:_user.luid apsn:_user.apsn]];
+    XAIUser* curUser = [MQTT shareMQTT].curUser;
+    _msgs = [[NSMutableArray alloc] initWithArray:
+             [XAIUser readIM:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn]];
     
     
     _oldTableFrame = self.tableView.frame;
@@ -181,7 +183,8 @@
     
     [_msgs addObject:msg];
     
-    [XAIUser saveIM:_msgs luid:_user.luid apsn:_user.apsn];
+    XAIUser* curUser = [MQTT shareMQTT].curUser;
+    [XAIUser saveIM:_msgs meLuid:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
     
     [_mobile sendMsg:_textField.text toApsn:_user.apsn toLuid:_user.luid];
     

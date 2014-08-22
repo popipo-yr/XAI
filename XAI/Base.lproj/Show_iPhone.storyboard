@@ -72,6 +72,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addBtn" destination="qQO-ql-pNG" id="Hhr-hi-w8e"/>
                         <outlet property="scrollView" destination="2ny-Sg-Lm1" id="Hqr-h7-EUf"/>
                     </connections>
                 </viewController>

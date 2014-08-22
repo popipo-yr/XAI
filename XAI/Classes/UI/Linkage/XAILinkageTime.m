@@ -13,9 +13,11 @@
 - (void) setDingShi{
     
     [self.dataPicker setDatePickerMode:UIDatePickerModeTime];
+    [self.dataPicker setLocale:[NSLocale currentLocale]];
 }
 - (void) setYanShi{
     [self.dataPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    [self.dataPicker setLocale:[NSLocale currentLocale]];
     
 }
 

@@ -61,6 +61,10 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
 }
 
 -(void)mobileControl:(XAIMobileControl *)mc getCmd:(XAIMCCMD *)cmd{
+    
+    if ([MQTT shareMQTT].isBufang == false) {
+        return;
+    }
 
     _alertView = [[UIAlertView alloc] initWithTitle:nil
                                             message:@"SHOWWWW"

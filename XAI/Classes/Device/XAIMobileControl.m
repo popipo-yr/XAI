@@ -136,11 +136,13 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     /*防止被多次写入*/
     if (__S_MSGSAVE == self) {
         
+        XAIUser* curUser = [MQTT shareMQTT].curUser;
         NSMutableArray* msgs = [[NSMutableArray alloc] init];
-        [msgs addObjectsFromArray:[XAIUser readIM:fromLuid apsn:fromApsn]];
+        [msgs addObjectsFromArray:[XAIUser readIM:curUser.luid apsn:curUser.apsn
+                                         withLuid:fromLuid apsn:fromApsn]];
         [msgs addObject:newMsg];
         
-        [XAIUser saveIM:msgs luid:fromLuid apsn:fromApsn];
+        [XAIUser saveIM:msgs meLuid:curUser.luid apsn:curUser.apsn withLuid:fromLuid apsn:fromApsn];
     }
     
     

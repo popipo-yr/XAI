@@ -42,7 +42,7 @@
 - (void) finderAllUser;
 
 
-- (void) pushToken:(void*)token size:(size_t)size user:(XAITYPELUID)uluid;
+- (void) pushToken:(void*)token size:(size_t)size isBufang:(BOOL)bBufang;
 
 
 @end

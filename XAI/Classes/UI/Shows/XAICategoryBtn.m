@@ -7,6 +7,8 @@
 //
 
 #import "XAICategoryBtn.h"
+#import "MQTT.h"
+
 
 @implementation XAICategoryBtn
 
@@ -43,6 +45,8 @@
     label.text = [XAICategoryTool typeToName:self.type];
     [label setTextColor:[UIColor whiteColor]];
     [_showBtn addSubview:label];
+    
+    self.label = label;
 
     _target = target;
     _action = action;
@@ -66,9 +70,10 @@
               forState:UIControlStateNormal];
     [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool selImgStrForType:type]]
               forState:UIControlStateHighlighted];
-
     
     _type = type;
 }
+
+
 
 @end

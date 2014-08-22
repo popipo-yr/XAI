@@ -249,7 +249,12 @@
         
         if ( nil == _nameTextField.text || [_nameTextField.text isEqualToString:@""]) {
             
-            errTip = NSLocalizedString(@"DevNameNull", nil);
+            errTip = NSLocalizedString(@"请输入设备名称", nil);
+            break;
+        }
+        
+        if ([_curSelIndexPath length] <= 0) {
+            errTip = NSLocalizedString(@"请选择设备类型", nil);
             break;
         }
         

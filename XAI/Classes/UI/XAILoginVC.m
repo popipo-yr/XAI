@@ -88,11 +88,17 @@
 
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    apsnstr = @"210e2b26";
-    //apsnstr = @"210e9b6e";
-    //apsnstr = @"210e2757";
     
-    //apsnstr = @"2923AEEA";
+    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
+        
+        apsnstr = @"210e2b26";
+        //apsnstr = @"210e9b6e";
+        //apsnstr = @"210e2757";
+        
+        //apsnstr = @"2923AEEA";
+        
+    }
+
     
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
         [self hasGetApsn:apsnstr];
@@ -504,7 +510,7 @@
         
         _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
         _userService.userServiceDelegate = self;
-        [_userService pushToken:token size:TokenSize user:[MQTT shareMQTT].curUser.luid];
+        [_userService pushToken:token size:TokenSize isBufang:[MQTT shareMQTT].isBufang];
     }else{
     
         [self getData];
@@ -670,6 +676,13 @@
         _scanIP = ip;
         [_qrcodeLabel setText:ip];
         [_qrcodeLabel setEnabled:false];
+        
+        if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
+            [MQTT shareMQTT].isFromRoute = true;
+        }else{
+            [MQTT shareMQTT].isFromRoute = false;
+        }
+        
         
     }else{
     

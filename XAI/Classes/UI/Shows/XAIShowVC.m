@@ -11,6 +11,7 @@
 #import "XAISetVC.h"
 #import "XAILinkageListVC.h"
 #import "XAIDevAddVC.h"
+#import "XAIToken.h"
 
 @interface XAIShowVC ()
 
@@ -32,15 +33,31 @@
     if (self = [super initWithCoder:aDecoder]) {
         
         _categorys = [[NSMutableArray alloc] init];
+        
+        _userService = [[XAIUserService alloc] initWithApsn:[MQTT shareMQTT].apsn Luid:MQTTCover_LUID_Server_03];
+        _userService.userServiceDelegate = self;
+        
+        _isChangeBufang = false;
+
     }
     
     return self;
     
 }
 
+-(void)dealloc{
+
+    _userService.userServiceDelegate = nil;
+    [_userService willRemove];
+}
+
 - (void)viewDidLoad{
 
     [super viewDidLoad];
+    
+    if ([[MQTT shareMQTT].curUser isAdmin] == false) {
+        _addBtn.hidden = true;
+    }
     
     [self addDevCategory];
 }
@@ -83,9 +100,6 @@
 }
 
 
-- (void)dealloc{
-    
-}
 
 -(void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer{
     
@@ -125,12 +139,38 @@
 
     if (![sender isKindOfClass:[XAICategoryBtn class]]) return;
     
+    if (sender.type == XAICategoryType_bufang) {
+        [self changeBufang];
+    }
+    
     UIViewController* next = [XAICategoryTool nextViewforType:sender.type];
     if (nil == next) return;
     
     [self.view.window setRootViewController:next];
 }
 
+
+- (void) changeBufang{
+
+    if (_isChangeBufang == true) {
+        return;
+    }
+    
+    _isChangeBufang = true;
+    
+    
+    
+    void* token = malloc(TokenSize+20);
+    memset(token, 0, TokenSize);
+    
+    [XAIToken getToken:&token size:NULL];
+    
+    
+    [_userService pushToken:token size:TokenSize isBufang:![MQTT shareMQTT].isBufang];
+    
+    free(token);
+
+}
 
 #pragma mark - Helper
 //- (void) addDevCategory{
@@ -225,7 +265,9 @@
         XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
                                   CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
         
-        [catbtn setType:[[devCategorys objectAtIndex:i] intValue]];
+        XAICategoryType type = [[devCategorys objectAtIndex:i] intValue];
+        
+        [catbtn setType:type];
         
         [catbtn addTarget:self
                    action:@selector(categoryClick:)
@@ -234,6 +276,14 @@
         [self.scrollView addSubview:[catbtn view]];
         
         [_categorys addObject:catbtn];
+        
+        if (type == XAICategoryType_bufang) {
+            if ([MQTT shareMQTT].isBufang == true) {
+                catbtn.label.text = @"撤防";
+            }
+            
+            _bufangBtn = catbtn;
+        }
         
     }
     
@@ -289,6 +339,32 @@
     
 }
 
+-(void)userService:(XAIUserService *)userService pushToken:(BOOL)isSuccess
+           errcode:(XAI_ERROR)errcode{
+
+    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
+        
+        
+        [MQTT shareMQTT].isBufang = ![MQTT shareMQTT].isBufang;
+        
+    }else{
+        
+        
+    }
+    
+    if (_bufangBtn != nil) {
+        
+        if ([MQTT shareMQTT].isBufang) {
+            _bufangBtn.label.text = @"撤防";
+        }else{
+            _bufangBtn.label.text = @"布防";
+        }
+    }
+    
+
+    _isChangeBufang = false;
+    
+}
 
 @end
 
