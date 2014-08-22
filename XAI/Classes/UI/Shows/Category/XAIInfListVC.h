@@ -9,10 +9,12 @@
 #import "XAIHasTableViewVC.h"
 
 #import "XAIDeviceService.h"
+#import "XAIReLoginRefresh.h"
+
 #include "XAIData.h"
 
 @interface XAIInfListVC : XAIHasTableViewVC
-<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate>{
+<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate,XAIReLoginRefresh>{
     
     XAIDeviceService* _deviceService;
     

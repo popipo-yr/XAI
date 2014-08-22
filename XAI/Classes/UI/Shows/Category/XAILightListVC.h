@@ -12,11 +12,13 @@
 #import "XAIDeviceService.h"
 
 #import "XAILightListCell.h"
+#import "XAIReLoginRefresh.h"
+
 
 #define _ST_LightListVCID @"XAILightListVCID"
 
 @interface XAILightListVC : XAIHasTableViewVC
-<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate>{
+<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate,XAIReLoginRefresh>{
 
     XAIDeviceService* _deviceService;
     

@@ -205,8 +205,9 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self animalVC_L2R:[XAIShowVC create]];
 }
 
 

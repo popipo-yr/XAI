@@ -11,9 +11,10 @@
 #import "XAIUserService.h"
 
 #include "XAIData.h"
+#import "XAIReLoginRefresh.h"
 
 @interface XAIUserServerListVC : XAIHasTableViewVC
-<XAIUserServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate>{
+<XAIUserServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate,XAIReLoginRefresh>{
     
     XAIUserService* _userServiece;
     

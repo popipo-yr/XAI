@@ -53,12 +53,16 @@ typedef enum {
     
     XAILightListVCChildCell* _curInputCell;
     
+    UIImageView* _xuxianView;
+    UIImageView* _xuxianView2;
+    
 
 
 }
 
 @property (nonatomic, weak)  NSObject*  hasMe;
 @property (nonatomic,strong)  IBOutlet UITableView* cTableView;
+@property (nonatomic,strong)  IBOutlet UIView* backView;
 @property (nonatomic, weak)  XAILightListVC* topVC;
 
 - (BOOL) isallInCenter;

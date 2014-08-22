@@ -9,8 +9,9 @@
 #import "XAIAppDelegate.h"
 
 #import "XAIData.h"
-
+#import "XAIReLoginRefresh.h"
 #include "XAIToken.h"
+
 
 #include "mosquitto.h"
 
@@ -18,6 +19,7 @@
 #include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
+
 
 #import "ssl/openssl/crypto.h"
 
@@ -411,24 +413,14 @@
         
         do {
             
-            UIViewController*  tabBarVC = self.window.rootViewController;
+            UIViewController*  vc = self.window.rootViewController;
             
-            if (![tabBarVC isKindOfClass:[UITabBarController class]]) break;
-            
-           
-             NSArray* curVCS = ((UITabBarController*)tabBarVC).viewControllers;
-            
-            for (int i = 0; i < [curVCS count]; i++) {
+            if ([vc conformsToProtocol:@protocol(XAIReLoginRefresh)]) {
                 
-                UIViewController* curVC = [curVCS  objectAtIndex:i];
-                
-                if (![curVC isKindOfClass:[UINavigationController class]]) continue;
-                
-                [(UINavigationController*)curVC popToRootViewControllerAnimated:false]; //回到起始位置
-                
+                if ([vc respondsToSelector:@selector(reloginRefresh)]) {
+                    [vc performSelector:@selector(reloginRefresh) withObject:nil];
+                }
             }
-            
-
             
         } while (0);
         

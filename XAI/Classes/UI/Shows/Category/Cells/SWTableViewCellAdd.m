@@ -47,8 +47,9 @@
     
     
     [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.1f green:0.0f blue:1.0f alpha:0.0f]
-                                               title:@"保存"];
+     [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]
+                                          normalIcon:[UIImage imageNamed:@"save_nor.png"]
+                                        selectedIcon:[UIImage imageNamed:@"save_sel.png"]];
     
     [self setLeftUtilityButtons:leftUtilityButtons WithButtonWidth:_M_CellWidth];
 }

@@ -17,8 +17,9 @@
     
     if (status == XAIWindowStatus_Open) {
         [self setStatus:XAIOCST_Open];
+        [self.contextLable setText:[window.lastOpr allStr]];
     }else if(status == XAIWindowStatus_Close){
-        
+        [self.contextLable setText:[window.lastOpr allStr]];
         [self setStatus:XAIOCST_Close];
     }else{
     
@@ -33,9 +34,11 @@
     
     if (status == XAIDoorStatus_Open) {
         [self setStatus:XAIOCST_Open];
+        [self.contextLable setText:[door.lastOpr allStr]];
     }else if(status == XAIDoorStatus_Close){
         
         [self setStatus:XAIOCST_Close];
+        [self.contextLable setText:[door.lastOpr allStr]];
     }else{
         
         [self setStatus:XAIOCST_Unkown];

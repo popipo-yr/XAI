@@ -9,11 +9,12 @@
 #import "XAIHasTableViewVC.h"
 #import "XAIDeviceService.h"
 #import "XAIData.h"
+#import "XAIReLoginRefresh.h"
 
 #define _ST_DoorWinListVCID @"XAIDoorWinListVCID"
 
 @interface XAIDoorWinListVC : XAIHasTableViewVC
-<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate>{
+<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate,XAIReLoginRefresh>{
     
     XAIDeviceService* _deviceService;
     

@@ -61,8 +61,10 @@
     
     if (status == XAILightStatus_Open) {
         [self setStatus:XAIOCST_Open];
+        [self.contextLable setText:[light.lastOpr allStr]];
     }else if (status == XAILightStatus_Close) {
         [self setStatus:XAIOCST_Close];
+        [self.contextLable setText:[light.lastOpr allStr]];
     }else{
     
         [self setStatus:XAIOCST_Unkown];
@@ -179,6 +181,32 @@
     [self.cTableView reloadData];
     
     self.cTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if (_xuxianView == nil) {
+        
+        float jianju = 100;
+        
+        _xuxianView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xuxian.png"]];
+        CGRect bgFram = self.backView.frame;
+        _xuxianView.frame = CGRectMake(bgFram.size.width*0.5f - jianju*0.5f,
+                                       (bgFram.size.height - _xuxianView.frame.size.height)*0.5f,
+                                       _xuxianView.frame.size.width,
+                                       _xuxianView.frame.size.height);
+        [self.backView insertSubview:_xuxianView atIndex:0];
+        
+        
+        _xuxianView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xuxian.png"]];
+        _xuxianView2.frame = CGRectMake(bgFram.size.width*0.5f + jianju*0.5f,
+                                       (bgFram.size.height - _xuxianView2.frame.size.height)*0.5f,
+                                       _xuxianView2.frame.size.width,
+                                       _xuxianView2.frame.size.height);
+        [self.backView insertSubview:_xuxianView2 atIndex:0];
+        
+    }
+    
+
+    _xuxianView.hidden = [datas count] > 1 ? false : true;
+
 }
 
 -(void)dealloc{

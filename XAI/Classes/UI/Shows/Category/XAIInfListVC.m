@@ -100,6 +100,14 @@
     [self.tableView reloadData];
 }
 
+-(void)reloginRefresh{
+
+    if ([_delInfo count] > 0) return;
+    
+    [self updateShowDatas];
+    [self.tableView reloadData];
+
+}
 
 
 - (void) updateShowDatas{
