@@ -17,24 +17,122 @@
     self.contextLable.hidden = bl;
 }
 
+#define  banjin  24.0f
+#define  bian    19.f
+
 - (void) showOprStart:(NSString *)tip{
     _opr = XAIOCOT_Start;
     [self.tipImageView setImage:[UIImage imageNamed:@"cell_opr.png"]];
     
+    if (_moves != nil) {
+        _moves.hidden = false;
+        
+        _moves.frame = CGRectMake(bian-2,
+                                  _moves.frame.size.height*-0.5,
+                                  _moves.frame.size.width,
+                                  _moves.frame.size.height);
+
+        
+    }else{
+        _moves = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"animal_move.png"]];
+        [self.tipImageView addSubview:_moves];
+        
+        _moves.frame = CGRectMake(bian-2,
+                                  _moves.frame.size.height*-0.5,
+                                  _moves.frame.size.width,
+                                  _moves.frame.size.height);
+    }
+    
+    [self oneloop];
+    
     [self.tipLabel setText:tip];
     [self showTipLable:true];
 }
+
+
+- (void) oneloop{
+
+    CGSize size = self.tipImageView.frame.size;
+    
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, bian, 0);
+    CGPathAddLineToPoint(path, NULL, size.width - bian, 0);
+    CGPathAddArc(path, NULL, size.width - banjin, size.height/2,banjin, M_PI*-80/180, M_PI*80/180, NO);
+    CGPathAddLineToPoint(path, NULL, size.width - bian, size.height);
+    CGPathAddLineToPoint(path, NULL, bian, size.height);
+    CGPathAddArc(path, NULL, banjin, size.height/2, banjin, M_PI*90/180, M_PI*270/180, NO);
+    CGPathAddLineToPoint(path, NULL, bian, 0);
+    
+    
+    
+    CAKeyframeAnimation *leafAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    leafAnimation.duration = 2.0;
+    leafAnimation.path =path;/* your CGPathRef */;
+    [leafAnimation setValue:@"toViewValue" forKey:@"toViewKey"];
+    leafAnimation.calculationMode = kCAAnimationLinear;
+    leafAnimation.keyTimes = [NSArray
+                              arrayWithObjects:
+                              [NSNumber numberWithFloat:0],
+                              [NSNumber numberWithFloat:0.3],  //shangmianyidong
+                              [NSNumber numberWithFloat:0.3], //JIRU
+                              [NSNumber numberWithFloat:0.46], //SHANGBANQUAN
+                              [NSNumber numberWithFloat:0.60], //XIABANQUAN
+                              [NSNumber numberWithFloat:0.6], //CHU
+                              [NSNumber numberWithFloat:0.81], //YIDONG
+                              [NSNumber numberWithFloat:0.81], //XIABANQUAN
+                              [NSNumber numberWithFloat:0.90], //SHANGBANQUAN
+                              [NSNumber numberWithFloat:1.0], //SHANGBANQUAN
+                              [NSNumber numberWithFloat:1.0],
+                              nil];
+    leafAnimation.delegate = self;
+    [_moves.layer addAnimation:leafAnimation forKey:@"leafAnimation"];
+
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+
+    if ([[anim valueForKey:@"toViewKey"] isEqualToString:@"toViewValue"]
+        && flag == true
+        && _moves.hidden == false) {
+        
+        [self oneloop];
+        //CGPoint S = _moves.frame.origin;
+    }
+    
+    //anim.delegate = nil;
+
+}
+
 - (void) showMsg:(NSString *)msg{
+    
+    if (_moves != nil) {
+        _moves.hidden = true;
+    }
     _opr = XAIOCOT_Msg;
     [self.tipImageView setImage:[UIImage imageNamed:@"cell_err.png"]];
     
     [self.tipLabel setText:msg];
     [self showTipLable:true];
     
-    [self performSelector:@selector(showOprEnd) withObject:nil afterDelay:3.0f];
+    [self performSelector:@selector(showErrEnd) withObject:nil afterDelay:3.0f];
 }
 
+- (void) showErrEnd{
+    
+    if (_opr != XAIOCOT_Msg) {
+        return;
+    }
+
+    [self showOprEnd];
+}
+
+
 - (void) showOprEnd{
+    
+    if (_moves != nil) {
+        _moves.hidden = true;
+    }
     
     _opr = XAIOCOT_None;
     [self setStatus:_status];
@@ -69,6 +167,10 @@
 
     _opr = opr;
     _status = staus;
+    
+    if (_moves != nil) {
+        _moves.hidden = true;
+    }
     
     switch (opr) {
         case XAIOCOT_None:

@@ -68,6 +68,10 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     
     NSString* imTopic =  [MQTTCover mobileCtrTopicWithAPNS:apsn luid:luid];
     
+    if (luid == MQTTCover_LUID_Server_03) {
+        imTopic = [MQTTCover serverCtrlTopicWithAPNS:apsn luid:luid];
+    }
+    
     
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:imTopic

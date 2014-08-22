@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XAILinkageAddNameVC : UIViewController
+@interface XAILinkageAddNameVC : UIViewController{
+
+    BOOL _keyboardIsUp;
+}
 
 @property (nonatomic,strong) IBOutlet UITextField* tf;
 

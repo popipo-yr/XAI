@@ -162,22 +162,21 @@
 
 
     ////////////////
-//    [newDatas removeAllObjects];
-    [newDatas addObject:[[XAILight alloc] init]];
-    
-    NSArray* ary = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
-                    [[XAILight2_CirculeTwo alloc] init],nil];
-    [newDatas addObject:ary];
-
-    [newDatas addObject:[[XAILight alloc] init]];
-    
-    
-    NSArray* ary2 = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
-                    [[XAILight2_CirculeTwo alloc] init],nil];
-    [newDatas addObject:ary2];
-    [newDatas addObject:[[XAILight alloc] init]];
-    [newDatas addObject:[[XAILight alloc] init]];
-    [newDatas addObject:[[XAILight alloc] init]];
+//    [newDatas addObject:[[XAILight alloc] init]];
+//    
+//    NSArray* ary = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
+//                    [[XAILight2_CirculeTwo alloc] init],nil];
+//    [newDatas addObject:ary];
+//
+//    [newDatas addObject:[[XAILight alloc] init]];
+//    
+//    
+//    NSArray* ary2 = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
+//                    [[XAILight2_CirculeTwo alloc] init],nil];
+//    [newDatas addObject:ary2];
+//    [newDatas addObject:[[XAILight alloc] init]];
+//    [newDatas addObject:[[XAILight alloc] init]];
+//    [newDatas addObject:[[XAILight alloc] init]];
     
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
 
@@ -534,9 +533,11 @@ static SWTableViewCell* curSWCell;
             [cell showOprStart:aLight.curOprtip];
         }
     
-        
+//        [aLight closeLight];
+//        [cell showOprStart:aLight.curOprtip];
         
     } while (0);
+    
     
     
     

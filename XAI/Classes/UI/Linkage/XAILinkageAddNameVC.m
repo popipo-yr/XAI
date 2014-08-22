@@ -22,6 +22,9 @@
     
 }
 
+
+
+
 - (IBAction)btnClick:(id)sender{
     
     
@@ -59,6 +62,86 @@
         [self setNeedsStatusBarAppearanceUpdate];
         
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification                                               object:nil];
+    
+    _keyboardIsUp = false;
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:Nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:Nil];
+    
+    [super viewDidDisappear:animated];
+}
+
+
+
+#define  moveLength  30
+#define  _35moreLength 60
+
+- (void)keyboardWillShow:(NSNotification *)notif {
+    
+    if (_keyboardIsUp == true) return;
+    
+    _keyboardIsUp = true;
+    
+    CGPoint  oldPoint = self.view.center;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.25];
+    
+    float  addLenght = 0;
+    
+    if ([UIScreen is_35_Size]) {
+        
+        addLenght = _35moreLength;
+    }
+    
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y - (moveLength + addLenght));
+    
+    [UIView commitAnimations];
+}
+
+
+
+- (void)keyboardWillHide:(NSNotification *)notif {
+    
+    _keyboardIsUp = false;
+    
+    CGPoint  oldPoint = self.view.center;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.25];
+    
+    float  addLenght = 0;
+    if ([UIScreen is_35_Size]) {
+        
+        addLenght = _35moreLength;
+    }
+    
+    
+    self.view.center = CGPointMake(oldPoint.x , oldPoint.y + moveLength + addLenght);
+    
+    [UIView commitAnimations];
+    
 }
 
 

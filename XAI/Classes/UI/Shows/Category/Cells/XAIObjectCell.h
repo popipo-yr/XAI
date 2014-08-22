@@ -33,6 +33,8 @@ typedef enum{
     XAIOCST  _status;
     XAIOCOT  _opr;
     
+    UIImageView* _moves;
+    
 }
 
 @property (nonatomic,strong)  IBOutlet UIImageView*  tipImageView;

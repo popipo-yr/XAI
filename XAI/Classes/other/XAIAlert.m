@@ -9,7 +9,6 @@
 #import "XAIAlert.h"
 #import "XAIAppDelegate.h"
 #import "XAIData.h"
-#import "XAIDevShowStatusVCGenerate.h"
 
 
 static XAIAlert*  _XAIAlertSTATIC = NULL;
@@ -95,11 +94,11 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
         
         /*进入提示位置*/
         
-        XAIObject* obj = [[XAIData shareData] findObj:0x210e2b26 luid:0x124b000413c931];
-        
-        
-        [curVC pushViewController:
-         [XAIDevShowStatusVCGenerate statusWithObject:obj storyboard:tabBarVC.storyboard] animated:YES];
+//        XAIObject* obj = [[XAIData shareData] findObj:0x210e2b26 luid:0x124b000413c931];
+//
+//
+//        [curVC pushViewController:
+//         [XAIDevShowStatusVCGenerate statusWithObject:obj storyboard:tabBarVC.storyboard] animated:YES];
         
         
         

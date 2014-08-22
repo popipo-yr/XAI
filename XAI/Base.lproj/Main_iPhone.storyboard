@@ -134,47 +134,47 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="5Zp-Zp-p7U" userLabel="name">
-                                <rect key="frame" x="60" y="265" width="200" height="32"/>
+                                <rect key="frame" x="60" y="260" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_spe.png" id="rZE-KV-an4">
-                                        <rect key="frame" x="0.0" y="30" width="200" height="2"/>
+                                        <rect key="frame" x="0.0" y="35" width="200" height="2"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_tip_name.png" id="k4x-id-7v7">
-                                        <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                        <rect key="frame" x="0.0" y="5" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="用户名" minimumFontSize="17" id="hpN-4L-ywU">
-                                        <rect key="frame" x="30" y="0.0" width="170" height="30"/>
+                                        <rect key="frame" x="30" y="0.0" width="170" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="phW-LN-qPy" userLabel="pasw">
-                                <rect key="frame" x="60" y="315" width="200" height="32"/>
+                                <rect key="frame" x="60" y="310" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_spe.png" id="wGn-wF-Dkn">
-                                        <rect key="frame" x="0.0" y="30" width="200" height="2"/>
+                                        <rect key="frame" x="0.0" y="35" width="200" height="2"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_tip_mima.png" id="Szu-uq-fZu">
-                                        <rect key="frame" x="1" y="0.0" width="22" height="22"/>
+                                        <rect key="frame" x="1" y="5" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="密码" minimumFontSize="17" id="1HH-oP-bAX">
-                                        <rect key="frame" x="30" y="0.0" width="170" height="30"/>
+                                        <rect key="frame" x="30" y="0.0" width="170" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -188,6 +188,7 @@
                         <outlet property="nameLabel" destination="hpN-4L-ywU" id="j7M-jB-luF"/>
                         <outlet property="passwordLabel" destination="1HH-oP-bAX" id="xGG-Um-0FA"/>
                         <outlet property="qrcodeLabel" destination="rzg-GT-8IT" id="ZJb-yi-Nbf"/>
+                        <outlet property="qrcodeView" destination="bsM-FV-FV6" id="nZ4-S2-AyM"/>
                         <segue destination="hsi-Ff-krP" kind="modal" identifier="loginerweimaID" id="pW5-b2-wSV"/>
                     </connections>
                 </viewController>

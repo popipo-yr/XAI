@@ -84,7 +84,7 @@
 //    [_qrcodeLabel setEnabled:YES];
     [_qrcodeLabel setPlaceholder:@"Server-IP"];
     
-    
+    _qrcodeView.hidden = true;
 
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
@@ -673,6 +673,7 @@
         
     }else{
     
+        _qrcodeView.hidden = false;
         [_qrcodeLabel setText:nil];
         [_qrcodeLabel setEnabled:true];
     }

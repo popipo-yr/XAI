@@ -133,8 +133,64 @@
 
 
 #pragma mark - Helper
-- (void) addDevCategory{
+//- (void) addDevCategory{
+//
+//    NSArray* devCategorys =  [XAICategoryTool devCategorys];
+//    int buttonCount  = [devCategorys count];
+//    int rowButtons = 2;
+//    int rows = (buttonCount + 1)/rowButtons;
+//    
+//    CGSize scViewSize = self.scrollView.frame.size;
+//    
+//    float sideSpaceLR = 8.0f;
+//    float sideSpaceUD = 8.0f;
+//    float udSpace = 15.0f;
+//    float midSpace =  15.0f;
+//    float buttonHeight = 142.0f;
+//    float buttonWidth = (scViewSize.width - 2*sideSpaceLR - (rowButtons - 1)*midSpace) / rowButtons;
+//    buttonWidth =  142.f;
+//    
+//    float height = rows*buttonHeight + (rows - 1)*udSpace + 2*sideSpaceUD;
+//    
+//    [self.scrollView setContentSize:CGSizeMake(scViewSize.width, height)];
+//    
+//    for (int i = 0; i < buttonCount; i++) {
+//        
+//        float rowIn = (i + 2) / rowButtons;
+//        float colIn = i % rowButtons + 1;
+//        
+//        float orignX = (colIn - 1) * (midSpace + buttonWidth) + sideSpaceLR;
+//        float orignY = (rowIn - 1) * (udSpace + buttonHeight) + sideSpaceUD;
+//        XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
+//                               CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
+//        
+//        [catbtn setType:[[devCategorys objectAtIndex:i] intValue]];
+//        
+//        [catbtn addTarget:self
+//                   action:@selector(categoryClick:)
+//         forControlEvents:UIControlEventTouchUpInside];
+//        
+//        [self.scrollView addSubview:[catbtn view]];
+//        
+//        [_categorys addObject:catbtn];
+//        
+//    }
+//    
+//    
+//    if (self.scrollView.contentSize.height > scViewSize.height) {
+//        self.scrollView.scrollEnabled = true;
+//    }else{
+//        self.scrollView.scrollEnabled = false;
+//    }
+//    
+//    
+//
+//}
 
+
+
+- (void) addDevCategory{
+    
     NSArray* devCategorys =  [XAICategoryTool devCategorys];
     int buttonCount  = [devCategorys count];
     int rowButtons = 2;
@@ -150,6 +206,11 @@
     float buttonWidth = (scViewSize.width - 2*sideSpaceLR - (rowButtons - 1)*midSpace) / rowButtons;
     buttonWidth =  142.f;
     
+    if ([UIScreen is_35_Size]) {
+        
+        buttonHeight = 100.0f;
+    }
+    
     float height = rows*buttonHeight + (rows - 1)*udSpace + 2*sideSpaceUD;
     
     [self.scrollView setContentSize:CGSizeMake(scViewSize.width, height)];
@@ -162,7 +223,7 @@
         float orignX = (colIn - 1) * (midSpace + buttonWidth) + sideSpaceLR;
         float orignY = (rowIn - 1) * (udSpace + buttonHeight) + sideSpaceUD;
         XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
-                               CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
+                                  CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
         
         [catbtn setType:[[devCategorys objectAtIndex:i] intValue]];
         
@@ -178,14 +239,16 @@
     
     
     if (self.scrollView.contentSize.height > scViewSize.height) {
-        self.scrollView.scrollEnabled = true;
+        self.scrollView.scrollEnabled = false;
     }else{
         self.scrollView.scrollEnabled = false;
     }
     
     
-
+    
 }
+
+
 
 
 -(IBAction)userBtnClick:(id)sender{

@@ -24,7 +24,7 @@
                                            normalIcon:[UIImage imageNamed:@"del_nor.png"]
                                          selectedIcon:[UIImage imageNamed:@"del_sel.png"]];
     
-    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:_M_CellWidth];
+    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:40];
 }
 - (void) setEditBtn{
     

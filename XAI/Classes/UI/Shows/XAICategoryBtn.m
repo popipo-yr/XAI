@@ -39,9 +39,9 @@
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents{
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, 20)];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 70, 20)];
     label.text = [XAICategoryTool typeToName:self.type];
-    [label setTextColor:[UIColor blackColor]];
+    [label setTextColor:[UIColor whiteColor]];
     [_showBtn addSubview:label];
 
     _target = target;
@@ -65,7 +65,7 @@
     [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool norImgStrForType:type]]
               forState:UIControlStateNormal];
     [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool selImgStrForType:type]]
-              forState:UIControlStateSelected];
+              forState:UIControlStateHighlighted];
 
     
     _type = type;

@@ -110,20 +110,22 @@
 
 + (NSString*) selImgStrForType:(XAICategoryType)type{
     
+    NSString* name = nil;
+    
     switch (type) {
         case XAICategoryType_doorwin:
         {
-            return @"cg_dw_sel.png";
+            name = @"cg_dw_sel";
         }
             break;
         case XAICategoryType_light:
         {
-            return @"cg_sw_sel.png";
+            name = @"cg_sw_sel";
         }
             break;
         case XAICategoryType_Inf:
         {
-            return @"cg_inf_sel.png";
+            name = @"cg_inf_sel";
         }
             break;
         case XAICategoryType_server:
@@ -133,57 +135,76 @@
             break;
         case XAICategoryType_user:
         {
-            return @"cg_user_sel.png";
+            return  @"cg_user_sel.png";
         }
             break;
         case XAICategoryType_bufang:
         {
-            return @"cg_bufang_sel.png";
+            name = @"cg_bufang_sel";
         }
             break;
         default:
             break;
     }
     
+    if (name != nil) {
+        
+        if ([UIScreen is_35_Size]) {
+            return [NSString stringWithFormat:@"%@_35.png",name];
+        }
+        
+        return [NSString stringWithFormat:@"%@.png",name];;
+    }
+
+    
     return nil;
 
 }
 + (NSString*) norImgStrForType:(XAICategoryType) type{
     
+    NSString* name = nil;
     
     switch (type) {
         case XAICategoryType_doorwin:
         {
-            return @"cg_dw_nor.png";
+            name = @"cg_dw_nor";
         }
             break;
         case XAICategoryType_light:
         {
-            return @"cg_sw_nor.png";
+            name = @"cg_sw_nor";
         }
             break;
         case XAICategoryType_Inf:
         {
-            return @"cg_inf_nor.png";
+            name = @"cg_inf_nor";
         }
             break;
         case XAICategoryType_server:
         {
-            return nil;
         }
             break;
         case XAICategoryType_user:
         {
-            return @"cg_user_nor.png";
+            return  @"cg_user_nor.png";
         }
             break;
         case XAICategoryType_bufang:
         {
-            return @"cg_bufang_nor.png";
+            name = @"cg_bufang_nor";
         }
             break;
         default:
             break;
+    }
+    
+    if (name != nil) {
+        
+        if ([UIScreen is_35_Size]) {
+            return [NSString stringWithFormat:@"%@_35.png",name];
+        }
+        
+        return [NSString stringWithFormat:@"%@.png",name];;
     }
     
     return nil;
