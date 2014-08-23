@@ -257,7 +257,8 @@
     
     
     Reachability* curReach = [note object];
-    if (![curReach isKindOfClass:[Reachability class]]) {
+    if (![curReach isKindOfClass:[Reachability class]] ||
+         [MQTT shareMQTT].isLogin == false) {
         return ;
     }
     //NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
@@ -274,7 +275,6 @@
     if(status == ReachableViaWiFi || status == ReachableViaWWAN)
     {
         XSLog(@"WIFI");
-        
         [[XAIData shareData] stopRefresh];
         [self reloginIsLogin:true];
        
@@ -282,6 +282,10 @@
     if(status == ReachableViaWWAN)
     {
         XSLog(@"3G");
+       
+        [[XAIData shareData] stopRefresh];
+        [self reloginIsLogin:true];
+        
     }
 }
 

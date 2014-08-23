@@ -193,7 +193,7 @@ _xai_packet* generatePacketFromeDataOne(_xai_packet_param_data* ctrl_param_data)
         memcpy(in_data, ctrl_param_data->data, ctrl_param_data->data_len);
         
         
-        if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type) {
+        if (XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN == ctrl_param_data->data_type && ctrl_param_data->data_len <= 8) {
             
             
             SwapBytes(in_data, ctrl_param_data->data_len);

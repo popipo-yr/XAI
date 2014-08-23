@@ -98,6 +98,7 @@
     
     [self updateShowDatas];
     [self.tableView reloadData];
+    
 }
 
 -(void)reloginRefresh{
@@ -186,6 +187,8 @@
 //    [newDatas addObject:[[XAILight alloc] init]];
     
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
+    
+    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
 
 }
 

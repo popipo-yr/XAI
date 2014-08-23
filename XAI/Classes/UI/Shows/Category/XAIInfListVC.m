@@ -120,6 +120,7 @@
                      [[XAIData shareData] listenObjsWithType:_types]];
     
     
+    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
     
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];

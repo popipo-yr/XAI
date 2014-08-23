@@ -138,6 +138,7 @@
 //    [_deviceDatas addObject:[[XAIDoor alloc] init]];
 //    [_deviceDatas addObject:[[XAIDoor alloc] init]];
     
+    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
     
      XSLog(@"timeA");
     

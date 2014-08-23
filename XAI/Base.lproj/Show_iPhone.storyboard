@@ -10,7 +10,7 @@
             <objects>
                 <viewController storyboardIdentifier="show_main" id="Vti-oI-JhL" customClass="XAIShowVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kfr-Dg-VY3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="6R9-rX-pgN">
@@ -18,12 +18,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2ny-Sg-Lm1">
-                                <rect key="frame" x="3" y="75" width="315" height="313"/>
+                                <rect key="frame" x="3" y="75" width="315" height="225"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rFx-bj-MCd">
-                                <rect key="frame" x="108" y="442" width="104" height="104"/>
+                                <rect key="frame" x="108" y="354" width="104" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Button" image="cg_usr_nor.png">
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cg_spe.png" id="1ah-Fy-0uf">
-                                <rect key="frame" x="10" y="431" width="300" height="2"/>
+                                <rect key="frame" x="10" y="343" width="300" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TXq-d5-mY0">
-                                <rect key="frame" x="113" y="401" width="95" height="21"/>
+                                <rect key="frame" x="113" y="313" width="95" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,11 +85,16 @@
             <objects>
                 <viewController storyboardIdentifier="XAILightListVCID" id="bJ9-Rj-pYR" customClass="XAILightListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ly8-8s-E0q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         <subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch-no.png" id="NH3-q3-GN0">
+                                <rect key="frame" x="0.0" y="200" width="320" height="141"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EWA-U5-er6">
-                                <rect key="frame" x="12" y="80" width="297" height="488"/>
+                                <rect key="frame" x="12" y="80" width="297" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -160,6 +165,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="297" height="125"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <prototypes>
                                                                 <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILightListCellChildID" rowHeight="63" id="MvO-Ak-cbk" userLabel="light childCell" customClass="XAILightListVCChildCell">
                                                                     <rect key="frame" x="0.0" y="22" width="297" height="63"/>
@@ -223,7 +229,9 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="backView" destination="nlO-eJ-wSg" id="WsG-he-Omf"/>
                                             <outlet property="cTableView" destination="rjE-tA-gdY" id="op4-Fh-FKg"/>
@@ -243,11 +251,12 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="EWA-U5-er6" id="15S-rE-6C0"/>
                         <outlet property="theNavigationItem" destination="u6F-7I-WkY" id="oXM-cF-Dc9"/>
+                        <outlet property="tipImgView" destination="NH3-q3-GN0" id="KpB-TH-drL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZb-x2-dmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -259,13 +268,18 @@
             <objects>
                 <viewController storyboardIdentifier="XAIDoorWinListVCID" id="VLG-ZO-7am" userLabel="door window List" customClass="XAIDoorWinListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jh7-1Y-Lwr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw-no.png" id="AtZ-XO-hs9">
+                                <rect key="frame" x="0.0" y="192" width="320" height="142"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LCj-Lb-Sp6">
-                                <rect key="frame" x="15" y="75" width="292" height="493"/>
+                                <rect key="frame" x="15" y="75" width="292" height="405"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIDoorWinCellID" rowHeight="63" id="tOw-Yd-7uO" userLabel="light Cell" customClass="XAIDoorWinCell">
                                         <rect key="frame" x="0.0" y="22" width="292" height="63"/>
@@ -310,6 +324,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="contextLable" destination="uYt-1y-iSX" id="XjL-eQ-SnT"/>
                                             <outlet property="input" destination="9ZO-jK-bU5" id="NJP-0e-zNw"/>
@@ -333,11 +348,12 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="LCj-Lb-Sp6" id="rEO-X4-eeh"/>
                         <outlet property="theNavigationItem" destination="mXZ-Mr-UNU" id="Z7K-tY-OJ2"/>
+                        <outlet property="tipImgView" destination="AtZ-XO-hs9" id="RBF-Xq-73Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MrX-A7-IiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,13 +365,18 @@
             <objects>
                 <viewController storyboardIdentifier="XAIInfListVCID" id="fsG-GU-SFR" userLabel="inf List" customClass="XAIInfListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sZa-yn-cWi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inf-no.png" id="s4y-Eb-Vsm">
+                                <rect key="frame" x="0.0" y="200" width="320" height="141"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7Cq-Au-qlW">
-                                <rect key="frame" x="15" y="75" width="292" height="493"/>
+                                <rect key="frame" x="15" y="75" width="292" height="405"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIInfListCellID" rowHeight="63" id="9go-zt-agf" userLabel="light Cell" customClass="XAIInfListCell">
                                         <rect key="frame" x="0.0" y="22" width="292" height="63"/>
@@ -400,6 +421,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="contextLable" destination="rXj-tG-3CC" id="qBr-ya-Wu9"/>
                                             <outlet property="input" destination="e97-fh-Vy3" id="cKf-Fd-cBh"/>
@@ -423,11 +445,12 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="7Cq-Au-qlW" id="lGe-HY-sJJ"/>
                         <outlet property="theNavigationItem" destination="sdl-U0-Blp" id="AMJ-M4-EWR"/>
+                        <outlet property="tipImgView" destination="s4y-Eb-Vsm" id="A5X-n1-kgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i14-DR-sb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,11 +462,11 @@
             <objects>
                 <viewController storyboardIdentifier="XAIUserServerListVCID" id="5gp-WU-fir" userLabel="user list" customClass="XAIUserServerListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BHu-Ik-uOD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vt9-um-Kx3">
-                                <rect key="frame" x="15" y="0.0" width="292" height="568"/>
+                                <rect key="frame" x="15" y="0.0" width="292" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -543,10 +566,13 @@
         <image name="cell_close.png" width="359" height="65"/>
         <image name="cg_spe.png" width="294" height="1"/>
         <image name="cg_usr_nor.png" width="104" height="103"/>
+        <image name="dw-no.png" width="320" height="145"/>
+        <image name="inf-no.png" width="320" height="146"/>
+        <image name="switch-no.png" width="320" height="146"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

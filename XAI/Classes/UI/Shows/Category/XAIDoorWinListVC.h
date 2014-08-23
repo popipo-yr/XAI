@@ -30,6 +30,7 @@
     
 }
 
+@property (nonatomic,strong) IBOutlet UIImageView* tipImgView;
 
 +(UIViewController*)create;
     

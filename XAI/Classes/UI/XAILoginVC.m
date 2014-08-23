@@ -91,11 +91,11 @@
     
     //if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
         
-        apsnstr = @"210e2b26";
+        //apsnstr = @"210e2b26";
         //apsnstr = @"210e9b6e";
         //apsnstr = @"210e2757";
         
-        //apsnstr = @"2923AEEA";
+        apsnstr = @"2923AEEA";
         
     //}
 

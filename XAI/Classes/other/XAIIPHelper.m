@@ -294,13 +294,13 @@ void cleanup(void *arg){
 
 - (void)getApserverIpWithApsn:(XAITYPEAPSN)apsn fromRoute:(NSString*)host{
     
-//            if ( _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
-//    
-//                [_delegate xaiIPHelper:self getIp:@"192.168.1.236" errcode:0];
-//            }
-//    
-//    
-//        return;
+            if ( _delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
+    
+                [_delegate xaiIPHelper:self getIp:@"192.168.1.236" errcode:0];
+            }
+    
+    
+        return;
     
     _host = host;
     _ipStr = nil;

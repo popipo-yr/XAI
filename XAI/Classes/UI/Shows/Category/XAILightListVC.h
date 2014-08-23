@@ -37,7 +37,7 @@
     UITextField*  _curInputTF;
 }
 
-
+@property (nonatomic,strong) IBOutlet UIImageView* tipImgView;
 
 +(UIViewController*)create;
 
