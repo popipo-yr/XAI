@@ -20,6 +20,8 @@
     NSString* _twoLabName;
     
     NSString* _barItemTitle;
+    
+    UIActivityIndicatorView* _activityView;
 
 
 }
@@ -34,5 +36,8 @@
 - (void) endFailEvent:(NSString*)str;
 
 - (void) setBarTitle:(NSString*)title;
+
+- (void) starAnimal;
+- (void) stopAnimal;
 
 @end

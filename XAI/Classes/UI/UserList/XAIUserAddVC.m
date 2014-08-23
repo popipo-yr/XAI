@@ -52,6 +52,13 @@
     
     [self.navigationItem setRightBarButtonItem:okItem];
     
+    _activityView.frame = CGRectMake(_activityView.frame.origin.x,
+                                     _activityView.frame.origin.y - 130,
+                                     _activityView.frame.size.width,
+                                     _activityView.frame.size.height);
+    
+    [self.view addSubview:_activityView];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,6 +157,9 @@
     
     _userService.userServiceDelegate = self;
     [_userService addUser:_userNameTF.text Password:_userPawdTF.text];
+    
+    [_activityView startAnimating];
+    _activityView.hidden = false;
 }
 
 - (void)nameFinish:(id)sender{
@@ -216,12 +226,14 @@
     }else if ( 1 == [indexPath row]){
     
         _userPawdTF = cell.textFiled;
+        _userPawdTF.secureTextEntry = true;
         [_userPawdTF addTarget:self action:@selector(pawdFinish:)
               forControlEvents:UIControlEventEditingDidEndOnExit];
         
     }else if (2 == [indexPath row]){
     
         _userPawdRepTF = cell.textFiled;
+        _userPawdRepTF.secureTextEntry = true;
         [_userPawdRepTF addTarget:self action:@selector(pawdRepFinish:)
                  forControlEvents:UIControlEventEditingDidEndOnExit];
     }
@@ -266,6 +278,8 @@
     }
     
     [alert show];
+    
+    _activityView.hidden = true;
 
 }
 

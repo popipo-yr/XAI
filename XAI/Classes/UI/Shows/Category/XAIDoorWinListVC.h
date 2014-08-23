@@ -27,6 +27,8 @@
     UITextField*  _curInputTF;
     
     NSMutableDictionary* _delInfo;
+    NSMutableArray* _delAnimalIDs;
+    BOOL _canDel;
     
 }
 

@@ -36,6 +36,12 @@
     self.navigationItem.rightBarButtonItem = okItem;
     
     self.navigationItem.title = _barItemTitle;
+    
+    [self.view addSubview:_activityView];
+    _activityView.frame = CGRectMake(_activityView.frame.origin.x,
+                                     _activityView.frame.origin.y - 130,
+                                     _activityView.frame.size.width,
+                                     _activityView.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -288,5 +294,12 @@
     _barItemTitle = title;
 }
 
+- (void) starAnimal{
+    [_activityView startAnimating];
+    _activityView.hidden = false;
+}
+- (void) stopAnimal{
+    _activityView.hidden = true;
+}
 
 @end

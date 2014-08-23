@@ -67,6 +67,9 @@
         _delInfo = [[NSMutableDictionary alloc] init];
         _changeInfo = [[NSMutableDictionary alloc] init];
         _cellInfos = [[NSMutableDictionary alloc] init];
+        _delAnimalIDs = [[NSMutableArray alloc] init];
+        _canDel = true;
+        
         
     }
     return self;
@@ -96,6 +99,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self stopSwipte:_swipes];
     
     [super viewDidDisappear:animated];
@@ -526,6 +530,16 @@ static SWTableViewCell* curSWCell;
     if (service != _linkageService) return;
     
     
+    if (errcode == XAI_ERROR_NONE) {
+        
+        [_delAnimalIDs addObject:[NSNumber numberWithInt:otherID]];
+        
+        [self realMove];
+        return;
+        
+    }
+    
+    
     XAILinkage * aLinkage = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {
         
@@ -597,6 +611,87 @@ static SWTableViewCell* curSWCell;
     
 
 }
+
+- (void) realMove{
+    
+    if (_canDel == false) {
+        return;
+    }
+    
+    _canDel = false;
+    
+    int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
+    XAI_ERROR  errcode = XAI_ERROR_NONE;
+    
+    [_delAnimalIDs removeObjectAtIndex:0];
+    
+    XAILinkage * aLinkage = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {
+        
+        [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
+        
+        if (errcode == XAI_ERROR_NONE) {
+            [aLinkage endOpr];
+        }else{
+            [aLinkage showMsg];
+            aLinkage.curOprtip = @"删除失败";
+        }
+        
+        
+        
+        do {
+            
+            id obj = [_cellInfos objectForKey:[NSNumber numberWithInt:aLinkage.num]];
+            
+            XAILinkageListCell* cell = (XAILinkageListCell*)obj;
+            
+            if (cell == nil) break;
+            if (![cell isKindOfClass:[XAILinkageListCell class]])break;
+            
+            if (errcode != XAI_ERROR_NONE) {
+                
+                [cell showMsg:aLinkage.curOprtip];
+            }else{
+                [cell showOprEnd];
+                
+                [_Datas removeObject:aLinkage];
+                
+                NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                
+                if (indexPath != nil) {
+                    
+                    NSArray* ary = [NSArray arrayWithObject:indexPath];
+                    
+                    [self.tableView  deleteRowsAtIndexPaths:ary
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                }else{
+                    
+                    NSLog(@"cell");
+                    
+                }
+                
+            }
+            
+            
+        } while (0);
+        
+    }
+    
+    
+    [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
+    
+}
+
+- (void) changeCanMove{
+    
+    _canDel = true;
+    
+    if ([_delAnimalIDs count] > 0 ) {
+        
+        [self realMove];
+    }
+}
+
 
 
 

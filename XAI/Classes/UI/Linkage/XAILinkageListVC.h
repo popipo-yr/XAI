@@ -20,6 +20,9 @@
     
     NSArray* _swipes;
     
+    NSMutableArray* _delAnimalIDs;
+    BOOL _canDel;
+    
 }
 
 @property (nonatomic,strong) IBOutlet UIView* retView;

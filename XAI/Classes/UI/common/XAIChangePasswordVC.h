@@ -31,5 +31,7 @@
 - (void) endFailEvent:(NSString*)str;
 - (void) setBarTitle:(NSString*)title;
 
+- (void) starAnimal;
+- (void) stopAnimal;
 
 @end

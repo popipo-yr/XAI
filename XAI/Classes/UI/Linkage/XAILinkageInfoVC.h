@@ -22,6 +22,8 @@
     NSIndexPath* _selIndex;
     
     XAILinkage* _linkage;
+    
+    UIActivityIndicatorView* _activityView;
 }
 
 

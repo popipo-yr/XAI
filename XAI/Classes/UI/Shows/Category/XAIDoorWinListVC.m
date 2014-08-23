@@ -44,6 +44,8 @@
         _types = @[@(XAIObjectType_door),@(XAIObjectType_window)];
         _deviceDatas = [[NSMutableArray alloc] init];
         _delInfo = [[NSMutableDictionary alloc] init];
+        _delAnimalIDs = [[NSMutableArray alloc] init];
+        _canDel = true;
         
     }
     return self;
@@ -75,6 +77,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [[XAIData shareData] removeRefreshDelegate:self];
     [super viewDidDisappear:animated];
 }
@@ -473,6 +476,14 @@ static SWTableViewCell* curSWCell;
     
     if (devService != _deviceService) return;
 
+    if (isSuccess) {
+        
+        [_delAnimalIDs addObject:[NSNumber numberWithInt:otherID]];
+        
+        [self realMove];
+        return;
+        
+    }
     
     XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (obj != nil && [obj isKindOfClass:[XAIObject class]]) {
@@ -562,6 +573,122 @@ static SWTableViewCell* curSWCell;
 
     }
     
+}
+
+
+- (void) realMove{
+    
+    if (_canDel == false) {
+        return;
+    }
+    
+    _canDel = false;
+    
+    int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
+    BOOL isSuccess = true;
+    
+    [_delAnimalIDs removeObjectAtIndex:0];
+    
+    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (obj != nil && [obj isKindOfClass:[XAIObject class]]) {
+        
+        [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
+        
+        if (isSuccess) {
+            [obj endOpr];
+        }else{
+            [obj showMsg];
+            obj.curOprtip = @"删除失败";
+        }
+        
+        if ([obj isKindOfClass:[XAIDoor class]]) {
+            
+            
+            do {
+                
+                XAIDoorWinCell* cell = (XAIDoorWinCell*)((XAIDoor*)obj).delegate;
+                
+                if (cell == nil) break;
+                if (![cell isKindOfClass:[XAIDoorWinCell class]])break;
+                
+                if (!isSuccess) {
+                    
+                    [cell showMsg:obj.curOprtip];
+                }else{
+                    [cell showOprEnd];
+                    
+                    [_deviceDatas removeObject:obj];
+                    
+                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                    
+                    if (indexPath != nil) {
+                        
+                        NSArray* ary = [NSArray arrayWithObject:indexPath];
+                        
+                        [self.tableView  deleteRowsAtIndexPaths:ary
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            } while (0);
+            
+        }else if([obj isKindOfClass:[XAIWindow class]]){
+            
+            
+            do {
+                
+                XAIDoorWinCell* cell = (XAIDoorWinCell*)((XAIWindow*)obj).delegate;
+                
+                if (cell == nil) break;
+                if (![cell isKindOfClass:[XAIDoorWinCell class]])break;
+                
+                
+                if (!isSuccess) {
+                    
+                    [cell showMsg:obj.curOprtip];
+                }else{
+                    [cell showOprEnd];
+                    
+                    [_deviceDatas removeObject:obj];
+                    
+                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                    
+                    if (indexPath != nil) {
+                        
+                        NSArray* ary = [NSArray arrayWithObject:indexPath];
+                        
+                        [self.tableView  deleteRowsAtIndexPaths:ary
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                    
+                }
+                
+                
+                
+                
+            } while (0);
+            
+        }
+        
+        
+    }
+    
+    [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
+    
+}
+
+- (void) changeCanMove{
+    
+    _canDel = true;
+    
+    if ([_delAnimalIDs count] > 0 ) {
+        
+        [self realMove];
+    }
 }
 
 

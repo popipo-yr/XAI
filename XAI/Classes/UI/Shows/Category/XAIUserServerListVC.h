@@ -27,6 +27,8 @@
     
     NSMutableDictionary* _delInfo;
     NSMutableDictionary* _cellInfos;
+    NSMutableArray* _delAnimalIDs;
+    BOOL _canDel;
     
 }
 

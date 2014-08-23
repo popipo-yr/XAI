@@ -193,12 +193,14 @@
 
     _newName = newName;
     [_userService changeUser:_userInfo.luid withName:newName];
+    [_nameVC starAnimal];
 }
 
 - (void) changePassword:(NSString*)newPwd{
     
     _newPwd = newPwd;
     [_userService changeUser:_userInfo.luid oldPassword:_userInfo.pawd to:newPwd];
+    [_pawVC starAnimal];
 }
 
 
@@ -347,12 +349,13 @@
         if (errcode == XAI_ERROR_NAME_EXISTED) {
             
             [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeExist", nil)];
-        }
+        }else{
         
-        [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeFaild", nil)];
+            [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeFaild", nil)];
+        }
     }
     
-    
+    [_nameVC stopAnimal];
 }
 
 -(void)userService:(XAIUserService *)userService changeUserPassword:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
@@ -369,7 +372,7 @@
         [_pawVC endFailEvent:NSLocalizedString(@"UserPawdChangeFaild", nil)];
     }
     
-    
+    [_pawVC stopAnimal];
 }
 
 

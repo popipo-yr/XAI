@@ -43,6 +43,8 @@
         
         _delInfo = [[NSMutableDictionary alloc] init];
         _cell2Infos = [[NSMutableDictionary alloc] init];
+        _delAnimalIDs = [[NSMutableArray alloc] init];
+        _canDel = true;
         
     }
     return self;
@@ -72,6 +74,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [[XAIData shareData] removeRefreshDelegate:self];
     [super viewDidDisappear:animated];
 }
@@ -643,6 +646,15 @@ static SWTableViewCell* curSWCell;
     
     if (devService != _deviceService) return;
     
+    if (isSuccess) {
+        
+        [_delAnimalIDs addObject:[NSNumber numberWithInt:otherID]];
+        
+        [self realMove];
+        return;
+        
+    }
+    
     
     XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (obj != nil ) {
@@ -753,6 +765,143 @@ static SWTableViewCell* curSWCell;
     }
     
 }
+
+
+- (void) realMove{
+    
+    if (_canDel == false) {
+        return;
+    }
+    
+    _canDel = false;
+    
+    int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
+    BOOL isSuccess = true;
+    
+    [_delAnimalIDs removeObjectAtIndex:0];
+    
+    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (obj != nil ) {
+        
+        [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
+        
+        
+        if ([obj isKindOfClass:[XAILight class]]) {
+            
+            
+            if (isSuccess) {
+                [obj endOpr];
+            }else{
+                [obj showMsg];
+                obj.curOprtip = @"删除失败";
+            }
+            
+            
+            do {
+                
+                XAILightListVCCell* cell = (XAILightListVCCell*)((XAILight*)obj).delegate;
+                
+                if (cell == nil) break;
+                if (![cell isKindOfClass:[XAILightListVCCell class]])break;
+                
+                if (!isSuccess) {
+                    
+                    [cell showMsg:obj.curOprtip];
+                }else{
+                    [cell showOprEnd];
+                    
+                    [_deviceDatas removeObject:obj];
+                    
+                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                    
+                    if (indexPath != nil) {
+                        
+                        NSArray* ary = [NSArray arrayWithObject:indexPath];
+                        
+                        [self.tableView  deleteRowsAtIndexPaths:ary
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                    
+                }
+                
+                
+            } while (0);
+            
+        }else if([obj isKindOfClass:[NSArray class]]){
+            
+            do {
+                
+                NSArray* objs = (NSArray*)obj;
+                
+                if (isSuccess) {
+                    
+                    for (XAIObject* oneObj in objs) {
+                        
+                        [oneObj endOpr];
+                    }
+                    
+                }else{
+                    
+                    
+                    for (XAIObject* oneObj in objs) {
+                        
+                        [oneObj showMsg];
+                        oneObj.curOprtip = @"删除失败";
+                        
+                    }
+                }
+                
+                
+                XAILightListVCCell2* cell = (XAILightListVCCell2*)[_cell2Infos objectForKey:objs];
+                
+                if (cell == nil) break;
+                if (![cell isKindOfClass:[XAILightListVCCell2 class]])break;
+                
+                
+                
+                if (!isSuccess) {
+                    
+                    [cell refreshOpr];
+                }else{
+                    [cell refreshOpr];
+                    
+                    [_deviceDatas removeObject:objs];
+                    
+                    
+                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                    
+                    if (indexPath != nil) {
+                        
+                        NSArray* ary = [NSArray arrayWithObject:indexPath];
+                        
+                        [self.tableView  deleteRowsAtIndexPaths:ary
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                    
+                }
+                
+                
+            } while (0);
+            
+        }
+        
+        
+    }
+
+    [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
+    
+}
+
+- (void) changeCanMove{
+    
+    _canDel = true;
+    
+    if ([_delAnimalIDs count] > 0 ) {
+        
+        [self realMove];
+    }
+}
+
 
 
 

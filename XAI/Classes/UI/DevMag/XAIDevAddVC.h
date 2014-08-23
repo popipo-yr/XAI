@@ -22,6 +22,8 @@
     NSIndexPath* _curSelIndexPath;
     
     XAIDeviceService* _deviceService;
+    
+    UIActivityIndicatorView* _activityView;
 }
 
 + (UIViewController*)create:(NSString*)luidStr;

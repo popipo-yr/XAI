@@ -35,6 +35,8 @@
     
     SWTableViewCell* _curInputCell;
     UITextField*  _curInputTF;
+    NSMutableArray* _delAnimalIDs;
+    BOOL _canDel;
 }
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;

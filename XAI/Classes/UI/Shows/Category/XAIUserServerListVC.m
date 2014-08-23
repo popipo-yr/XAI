@@ -47,6 +47,8 @@
         _userDatas = [[NSMutableArray alloc] init];
         _delInfo = [[NSMutableDictionary alloc] init];
         _cellInfos = [[NSMutableDictionary alloc] init];
+        _delAnimalIDs = [[NSMutableArray alloc] init];
+        _canDel = true;
         
         
     }
@@ -118,6 +120,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [[XAIData shareData] removeRefreshDelegate:self];
     [super viewDidDisappear:animated];
 }
@@ -472,6 +475,17 @@ otherID:(int)otherID{
     
     if (userService != _userServiece) return;
     
+    if (isSuccess) {
+        
+        [_delAnimalIDs addObject:[NSNumber numberWithInt:otherID]];
+        
+        [self realMove];
+        return;
+        
+    }
+    
+   
+    
     
     XAIUser* auser = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (auser != nil && [auser isKindOfClass:[XAIUser class]]) {
@@ -485,7 +499,76 @@ otherID:(int)otherID{
             auser.curOprtip = @"删除失败";
         }
         
+        BOOL isFalse = false;
         
+        do {
+            
+            id obj = [_cellInfos objectForKey:[NSNumber numberWithLongLong:auser.luid]];
+            
+            XAIUserServerListCell* cell = (XAIUserServerListCell*)obj;
+            
+            if (cell == nil) break;
+            if (![cell isKindOfClass:[XAIUserServerListCell class]])break;
+            
+            if (!isSuccess) {
+                
+                [cell showMsg:auser.curOprtip];
+            }else{
+                [cell showOprEnd];
+                
+                [_userDatas removeObject:auser];
+                
+                NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+                
+                if (indexPath != nil) {
+                    
+                    NSArray* ary = [NSArray arrayWithObject:indexPath];
+                    
+                    [self.tableView  deleteRowsAtIndexPaths:ary
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+                
+            }
+            
+            isFalse = true;
+            
+            
+        } while (0);
+        
+        if (isFalse == false) {
+            
+            NSLog(@"...");
+            
+        }
+        
+    }
+    
+}
+
+- (void) realMove{
+    
+    if (_canDel == false) {
+        return;
+    }
+    
+    _canDel = false;
+    
+    int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
+    BOOL isSuccess = true;
+    
+    [_delAnimalIDs removeObjectAtIndex:0];
+    
+    XAIUser* auser = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (auser != nil && [auser isKindOfClass:[XAIUser class]]) {
+        
+        [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
+        
+        if (isSuccess) {
+            [auser endOpr];
+        }else{
+            [auser showMsg];
+            auser.curOprtip = @"删除失败";
+        }
         
         do {
             
@@ -520,7 +603,19 @@ otherID:(int)otherID{
         } while (0);
         
     }
+
+    [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
+
+}
+
+- (void) changeCanMove{
+
+    _canDel = true;
     
+    if ([_delAnimalIDs count] > 0 ) {
+        
+        [self realMove];
+    }
 }
 
 

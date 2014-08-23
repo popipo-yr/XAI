@@ -44,6 +44,28 @@
      self.navigationItem.rightBarButtonItem = okItem;
     
     self.navigationItem.title = _barItemTitle;
+    
+    
+    CGRect rx = [ UIScreen mainScreen ].bounds;
+    
+    _activityView = [[UIActivityIndicatorView alloc] init];
+    
+    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
+    _activityView.hidesWhenStopped = YES;
+    
+    
+    _activityView.frame = CGRectMake(_activityView.frame.origin.x,
+                                     _activityView.frame.origin.y - 130,
+                                     _activityView.frame.size.width,
+                                     _activityView.frame.size.height);
+
+    
+    
+    [self.view addSubview:_activityView];
+
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -178,6 +200,14 @@
 - (void) setBarTitle:(NSString*)title{
 
     _barItemTitle = title;
+}
+
+- (void) starAnimal{
+    [_activityView startAnimating];
+    _activityView.hidden = false;
+}
+- (void) stopAnimal{
+    _activityView.hidden = true;
 }
 
 @end

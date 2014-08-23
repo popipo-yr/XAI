@@ -20,6 +20,7 @@
     UITextField* _userPawdRepTF;
     
     XAIUserService* _userService;
+    
 }
 
 +(XAIUserAddVC*)create;

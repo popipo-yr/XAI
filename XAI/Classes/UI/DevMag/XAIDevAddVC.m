@@ -89,6 +89,20 @@
     
     
     [self.cNavigationItem setLeftBarButtonItem:backItem];
+    
+    
+    CGRect rx = [ UIScreen mainScreen ].bounds;
+    
+    _activityView = [[UIActivityIndicatorView alloc] init];
+    
+    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
+    _activityView.hidesWhenStopped = YES;
+
+    
+    [self.view addSubview:_activityView];
+
 
 }
 
@@ -201,6 +215,8 @@
     }
     
     [alert show];
+    
+    _activityView.hidden = true;
 
 }
 
@@ -295,6 +311,9 @@
     
     
     [_deviceService addDev:luid withName:name type:[XAIDeviceTypeUtil nameToType:type]];
+    
+    [_activityView startAnimating];
+    _activityView.hidden = false;
 }
 
 
