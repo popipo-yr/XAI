@@ -7,17 +7,41 @@
 //
 
 #import "XAILinkageTime.h"
+#import "XAIAppDelegate.h"
+
 
 @implementation XAILinkageTime
 
 - (void) setDingShi{
     
-    [self.dataPicker setDatePickerMode:UIDatePickerModeTime];
+    self.dataPicker = ((XAIAppDelegate*)[UIApplication sharedApplication].delegate).datePicker;
+    
+    if (self.dataPicker.superview != nil) {
+        
+        [self.dataPicker removeFromSuperview];
+    }
+    
+    self.dataPicker.frame = CGRectMake(50, 115, 220, 162);
+    [self addSubview:self.dataPicker];
     [self.dataPicker setLocale:[NSLocale currentLocale]];
+    [self.dataPicker setDatePickerMode:UIDatePickerModeTime];
+    
 }
 - (void) setYanShi{
-    [self.dataPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    
+    self.dataPicker = ((XAIAppDelegate*)[UIApplication sharedApplication].delegate).datePicker;
+    
+    if (self.dataPicker.superview != nil) {
+    
+        [self.dataPicker removeFromSuperview];
+    }
+    
+    self.dataPicker.frame = CGRectMake(50, 115, 220, 162);
+    [self addSubview:self.dataPicker];
+    
     [self.dataPicker setLocale:[NSLocale currentLocale]];
+    [self.dataPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    
     
 }
 

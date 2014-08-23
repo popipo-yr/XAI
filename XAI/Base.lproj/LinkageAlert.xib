@@ -79,7 +79,7 @@
     <resources>
         <image name="linkage_close_nor.png" width="92" height="36"/>
         <image name="linkage_open_nor.png" width="92" height="36"/>
-        <image name="linkage_tip.png" width="259" height="132"/>
+        <image name="linkage_tip.png" width="240" height="260"/>
         <image name="linkage_tip_close_n.png" width="27" height="27"/>
     </resources>
 </document>

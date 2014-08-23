@@ -39,6 +39,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic)  BOOL  needKeepTip;
 
+@property (strong, nonatomic) UIDatePicker* datePicker;
+
 - (void) changeMQTTClinetID:(NSString*)clientID;
 
 @end
