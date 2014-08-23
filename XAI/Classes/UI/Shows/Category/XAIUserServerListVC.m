@@ -504,10 +504,15 @@ otherID:(int)otherID{
                 
                 [_userDatas removeObject:auser];
                 
-                NSArray* ary = [NSArray arrayWithObject:[self.tableView indexPathForCell:cell]];
+                NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
                 
-                [self.tableView  deleteRowsAtIndexPaths:ary
-                                       withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (indexPath != nil) {
+                    
+                    NSArray* ary = [NSArray arrayWithObject:indexPath];
+                    
+                    [self.tableView  deleteRowsAtIndexPaths:ary
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
                 
             }
             
