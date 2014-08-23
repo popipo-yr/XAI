@@ -269,7 +269,13 @@
     cell.textFiled.enabled = false;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if ([indexPath row] == _key_home_index) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     
     return cell;
 }

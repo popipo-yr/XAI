@@ -78,23 +78,25 @@
     [self.navigationItem setLeftBarButtonItem:backItem];
     
     
-    
-    UIImage* addImg = [UIImage imageNamed:@"add_nor.png"] ;
-    
-    if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+    if ([[MQTT shareMQTT].curUser isAdmin]) {
+     
+        UIImage* addImg = [UIImage imageNamed:@"add_nor.png"] ;
         
-        addImg = [addImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+            
+            addImg = [addImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
+        
+        UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addImg
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(addOneUser:)];
+        
+        
+        [addItem ios6cleanBackgroud];
+        
+        [self.navigationItem setRightBarButtonItem:addItem];
     }
-    
-    UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addImg
-                                                                 style:UIBarButtonItemStylePlain
-                                                                target:self
-                                                                action:@selector(addOneUser:)];
-
-    
-    [addItem ios6cleanBackgroud];
-    
-    [self.navigationItem setRightBarButtonItem:addItem];
     
     // Do any additional setup after loading the view.
 }

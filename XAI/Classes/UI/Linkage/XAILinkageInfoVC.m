@@ -251,7 +251,7 @@
                         
                     }else{
                         
-                        [cell setJieGuo:@"未知信息"];
+                        [cell setJieGuo:@"未知控制"];
                         
                     }
                 }else{
@@ -268,7 +268,7 @@
                     
                     if ([indexPath row] == 0) {
                         // tiaojian
-                        if (miaoshu == nil) {
+                        if (miaoshu == nil || ![obj  hasLinkageTiaojian]) {
                             tip = [NSString stringWithFormat:@"%@未知条件",name];
                         }else{
                             tip = [NSString stringWithFormat:@"当%@%@时",name,miaoshu];
@@ -279,7 +279,7 @@
                         
                     }else{
                         //结果
-                        if (miaoshu == nil) {
+                        if (miaoshu == nil || ![obj hasLinkageJieGuo]) {
                             tip = [NSString stringWithFormat:@"%@未知控制",name];
                         }else{
                             tip = [NSString stringWithFormat:@"%@%@",miaoshu,name];

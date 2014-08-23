@@ -184,17 +184,18 @@
     XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
     
     if (aObj != nil
-        && [aObj isKindOfClass:[XAIObject class]]
-        && [[MQTT shareMQTT].curUser isAdmin]) {
+        && [aObj isKindOfClass:[XAIObject class]]) {
         
         [cell setInfo:aObj];
     }
     
     
     // Add utility buttons
-
+    if ([[MQTT shareMQTT].curUser isAdmin]) {
+        [cell setDelBtn];
+    }
     [cell setEditBtn];
-    [cell setDelBtn];
+    
     cell.delegate = self;
     
     return cell;
