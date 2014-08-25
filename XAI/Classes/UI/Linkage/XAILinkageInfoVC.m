@@ -99,7 +99,7 @@
     _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
     _activityView.hidesWhenStopped = YES;
     
-    [_activityView startAnimating];
+    //[_activityView startAnimating];
     
     [self.view addSubview:_activityView];
 }

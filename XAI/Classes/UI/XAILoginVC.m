@@ -89,7 +89,7 @@
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
     
-    //if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
+    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
         
         apsnstr = @"210e2b26";
         //apsnstr = @"210e9b6e";
@@ -97,7 +97,7 @@
         
         //apsnstr = @"2923AEEA";
         
-    //}
+    }
 
     
     if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
