@@ -87,22 +87,6 @@
     _qrcodeView.hidden = true;
 
     
-    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    
-    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
-        
-        apsnstr = @"210e2b26";
-        //apsnstr = @"210e9b6e";
-        //apsnstr = @"210e2757";
-        
-        //apsnstr = @"2923AEEA";
-        
-    }
-
-    
-    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
-        [self hasGetApsn:apsnstr];
-    }
     
     NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:_K_Username];
     if (username != nil && [username isKindOfClass:[NSString class]] && ![username isEqualToString:@""]) {
@@ -157,6 +141,22 @@
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.qrcodeLabel addTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
+    
+    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
+        
+        apsnstr = @"210e2b26";
+        //apsnstr = @"210e9b6e";
+        //apsnstr = @"210e2757";
+        
+        //apsnstr = @"2923AEEA";
+        
+    }
+    
+    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
+        [self hasGetApsn:apsnstr];
+    }
 }
 
 

@@ -257,19 +257,23 @@
     
     
     Reachability* curReach = [note object];
-    if (![curReach isKindOfClass:[Reachability class]] ||
-         [MQTT shareMQTT].isLogin == false) {
-        return ;
-    }
     //NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     NetworkStatus status = [curReach currentReachabilityStatus];
     
     if (status == NotReachable) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:NSLocalizedString(@"NetNotConnect", nil)
-                                                       delegate:nil
+                                                       delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
         [alert show];
+        
+        _hasAlert = true;
+    }
+    
+    if (![curReach isKindOfClass:[Reachability class]] ||
+        [MQTT shareMQTT].isLogin == false ||
+        _isReConnect == true) {
+        return ;
     }
     
     if(status == ReachableViaWiFi || status == ReachableViaWWAN)
@@ -307,6 +311,10 @@
 
 
 - (void)reloginIsLogin:(BOOL)islogin{
+    
+    if (_isReConnect == true) {
+        return;
+    }
     
     XSLog(@"-------------");
     XSLog(@"islong = %@, hasalert = %@, is noreachable= %@",
@@ -370,6 +378,8 @@
         
         
     }else{
+        
+        if (_hasAlert) return;
     
         _isReConnect = true;
         [self XAIRelogin:nil loginErrCode:XAIReLoginErr_LoginFail];
@@ -462,6 +472,8 @@
         
         _reLoginFailAlert = nil;
     }
+    
+    _hasAlert = false;
 }
 
 #pragma mark -- KeepAlive

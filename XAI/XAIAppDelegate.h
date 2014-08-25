@@ -33,6 +33,8 @@
     BOOL  _isRelogin;
     BOOL  _isReConnect;
     BOOL  _needKeepTip;
+    
+    BOOL _hasAlert;
 
 }
 
