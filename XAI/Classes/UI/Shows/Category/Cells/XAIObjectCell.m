@@ -22,7 +22,7 @@
 
 - (void) showOprStart:(NSString *)tip{
     _opr = XAIOCOT_Start;
-    [self.tipImageView setImage:[UIImage imageNamed:@"cell_opr.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_opr.png"]];
     
     if (_moves != nil) {
         _moves.hidden = false;
@@ -34,7 +34,7 @@
 
         
     }else{
-        _moves = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"animal_move.png"]];
+        _moves = [[UIImageView alloc]initWithImage:[UIImage imageWithFile:@"animal_move.png"]];
         [self.tipImageView addSubview:_moves];
         
         _moves.frame = CGRectMake(bian-2,
@@ -110,7 +110,7 @@
         _moves.hidden = true;
     }
     _opr = XAIOCOT_Msg;
-    [self.tipImageView setImage:[UIImage imageNamed:@"cell_err.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_err.png"]];
     
     [self.tipLabel setText:msg];
     [self showTipLable:true];
@@ -195,18 +195,18 @@
 
 - (void) showClose{
     
-    [self.tipImageView setImage:[UIImage imageNamed:@"cell_close.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_close.png"]];
     [self showTipLable:false];
 }
 - (void) showOpen{
     
-    [self.tipImageView setImage:[UIImage imageNamed:@"cell_open.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_open.png"]];
     [self showTipLable:false];
 }
 
 - (void) showUnkonw{
 
-    [self.tipImageView setImage:[UIImage imageNamed:@"cell_unkown.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_unkown.png"]];
     [self showTipLable:false];
 }
 
@@ -235,6 +235,10 @@
     }
 
     [self hideUtilityButtonsAnimated:true];
+}
+
+-(void)dealloc{
+
 }
 
 @end

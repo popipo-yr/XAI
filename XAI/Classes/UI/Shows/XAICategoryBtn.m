@@ -66,14 +66,13 @@
 
 -(void)setType:(XAICategoryType)type{
 
-    [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool norImgStrForType:type]]
+    [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool norImgStrForType:type]]
               forState:UIControlStateNormal];
-    [_showBtn setImage:[UIImage imageNamed:[XAICategoryTool selImgStrForType:type]]
+    [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool selImgStrForType:type]]
               forState:UIControlStateHighlighted];
     
     _type = type;
 }
-
 
 
 @end

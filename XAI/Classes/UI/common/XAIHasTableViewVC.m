@@ -37,7 +37,7 @@
         
         
         
-        UIImage* returnNorImg = [UIImage imageNamed:@"back_nor.png"] ;
+        UIImage* returnNorImg = [UIImage imageWithFile:@"back_nor.png"] ;
         
         if ([returnNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             

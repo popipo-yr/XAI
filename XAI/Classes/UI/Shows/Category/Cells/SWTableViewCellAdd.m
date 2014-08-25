@@ -21,8 +21,8 @@
     
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]
-                                           normalIcon:[UIImage imageNamed:@"del_nor.png"]
-                                         selectedIcon:[UIImage imageNamed:@"del_sel.png"]];
+                                           normalIcon:[UIImage imageWithFile:@"del_nor.png"]
+                                         selectedIcon:[UIImage imageWithFile:@"del_sel.png"]];
     
     [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:40];
 }
@@ -34,8 +34,8 @@
     
     [leftUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]
-                                          normalIcon:[UIImage imageNamed:@"edit_nor.png"]
-                                        selectedIcon:[UIImage imageNamed:@"edit_sel.png"]];
+                                          normalIcon:[UIImage imageWithFile:@"edit_nor.png"]
+                                        selectedIcon:[UIImage imageWithFile:@"edit_sel.png"]];
     
     
     [self setLeftUtilityButtons:leftUtilityButtons WithButtonWidth:_M_CellWidth];
@@ -48,8 +48,8 @@
     
     [leftUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0f]
-                                          normalIcon:[UIImage imageNamed:@"save_nor.png"]
-                                        selectedIcon:[UIImage imageNamed:@"save_sel.png"]];
+                                          normalIcon:[UIImage imageWithFile:@"save_nor.png"]
+                                        selectedIcon:[UIImage imageWithFile:@"save_sel.png"]];
     
     [self setLeftUtilityButtons:leftUtilityButtons WithButtonWidth:_M_CellWidth];
 }

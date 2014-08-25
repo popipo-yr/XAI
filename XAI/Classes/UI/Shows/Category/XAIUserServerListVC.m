@@ -63,7 +63,7 @@
     _curInputCell = nil;
     
     
-    UIImage* backImg = [UIImage imageNamed:@"back_nor.png"] ;
+    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
     
     if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
         
@@ -82,7 +82,7 @@
     
     if ([[MQTT shareMQTT].curUser isAdmin]) {
      
-        UIImage* addImg = [UIImage imageNamed:@"add_nor.png"] ;
+        UIImage* addImg = [UIImage imageWithFile:@"add_nor.png"] ;
         
         if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             

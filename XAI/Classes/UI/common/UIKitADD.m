@@ -31,6 +31,12 @@
     
 }
 
++ (UIImage*) imageWithFile:(NSString*)file{
+
+    NSString *fullFile = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], file];
+    return [UIImage imageWithContentsOfFile:fullFile];
+}
+
 
 @end
 

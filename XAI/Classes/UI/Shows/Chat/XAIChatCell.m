@@ -40,11 +40,11 @@
 
     if (aMsg.fromLuid != 0x03) {
         
-        _photo.image = [UIImage imageNamed:@"photoUsr"];
+        _photo.image = [UIImage imageWithFile:@"photoUsr"];
         
     }else{
     
-        _photo.image = [UIImage imageNamed:@"photoXAI"];
+        _photo.image = [UIImage imageWithFile:@"photoXAI"];
     }
     
     if (isFromMe) {

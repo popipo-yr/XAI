@@ -186,7 +186,7 @@
         
         float jianju = 100;
         
-        _xuxianView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xuxian.png"]];
+        _xuxianView = [[UIImageView alloc] initWithImage:[UIImage imageWithFile:@"xuxian.png"]];
         CGRect bgFram = self.backView.frame;
         _xuxianView.frame = CGRectMake(bgFram.size.width*0.5f - jianju*0.5f,
                                        (bgFram.size.height - _xuxianView.frame.size.height)*0.5f,
@@ -195,7 +195,7 @@
         [self.backView insertSubview:_xuxianView atIndex:0];
         
         
-        _xuxianView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xuxian.png"]];
+        _xuxianView2 = [[UIImageView alloc] initWithImage:[UIImage imageWithFile:@"xuxian.png"]];
         _xuxianView2.frame = CGRectMake(bgFram.size.width*0.5f + jianju*0.5f,
                                        (bgFram.size.height - _xuxianView2.frame.size.height)*0.5f,
                                        _xuxianView2.frame.size.width,

@@ -65,7 +65,7 @@
         _datas = [[NSMutableArray alloc] init];
         
         
-        UIImage* backImg = [UIImage imageNamed:@"back_nor.png"] ;
+        UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
         
         if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             

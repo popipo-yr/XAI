@@ -22,7 +22,7 @@
     if (self) {
         // Custom initialization
         
-        UIImage* editNorImg = [UIImage imageNamed:@"device_edit_nor.png"] ;
+        UIImage* editNorImg = [UIImage imageWithFile:@"device_edit_nor.png"] ;
         
         if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             
@@ -50,7 +50,7 @@
     
     if (![[MQTT shareMQTT].curUser isAdmin]) return;
     
-    UIImage* addNorImg = [UIImage imageNamed:@"device_add_nor.png"];
+    UIImage* addNorImg = [UIImage imageWithFile:@"device_add_nor.png"];
     
     if ([addNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
         
@@ -119,7 +119,7 @@
     
     NSString* imgName = bl ? @"device_edit_sel.png" : @"device_edit_nor.png";
     
-    UIImage* editNorImg = [UIImage imageNamed:imgName];
+    UIImage* editNorImg = [UIImage imageWithFile:imgName];
     
     if ([editNorImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
         

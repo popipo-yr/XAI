@@ -13,7 +13,7 @@
 
     UIButton* _showBtn;
     
-    id _target;
+    __weak id _target;
     SEL _action;
 
 }

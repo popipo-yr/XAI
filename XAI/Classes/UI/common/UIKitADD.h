@@ -28,6 +28,7 @@ center.y -= len; \
 @interface UIImage (ADD)
 
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
++ (UIImage*) imageWithFile:(NSString*)file;
 
 @end
 
