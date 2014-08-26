@@ -201,6 +201,7 @@
     if (_findDev == findFail || _findUser == findFail) {
         
         err = XAIReLoginErr_GetDataFail;
+        [MQTT shareMQTT].isLogin = false;
         
     }
     

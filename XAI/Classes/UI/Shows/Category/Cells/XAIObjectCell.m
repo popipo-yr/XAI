@@ -190,6 +190,7 @@
     [_input addTarget:self action:@selector(keyReturn:)
      forControlEvents:UIControlEventEditingDidEndOnExit];
 
+    _input.returnKeyType =  UIReturnKeyDone;
 }
 
 

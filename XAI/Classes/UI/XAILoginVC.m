@@ -71,7 +71,7 @@
     
     
     [nameLabel setText:nil];
-    [nameLabel setPlaceholder:NSLocalizedString(@"TipName", nil)];
+    [nameLabel setPlaceholder:NSLocalizedString(@"用户名", nil)];
     
     //TODO: THERE IS
     //_scanApsn = 0x1;
@@ -573,6 +573,7 @@
         
          [_activityView stopAnimating];
         
+        [MQTT shareMQTT].isLogin = false;
         
     }else{
         
