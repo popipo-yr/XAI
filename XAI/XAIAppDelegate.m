@@ -462,6 +462,8 @@
     if (_reLoginFailAlert == alertView ||
         (_otherLoginTipAlert == alertView && buttonIndex == [alertView cancelButtonIndex])) {
         
+        [self.window.rootViewController.view  endEditing:YES];
+        
         [self initializeStoryBoardBasedOnScreenSize];
         
 //        UIViewController* vc= [self.window.rootViewController.storyboard
