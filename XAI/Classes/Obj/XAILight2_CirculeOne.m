@@ -64,7 +64,7 @@
     
 }
 
--(void)switch_:(XAIDevSwitch *)swi circuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+-(void)switch_:(XAIDevSwitch *)swi circuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err therInfo:(XAIOtherInfo *)otherInfo{
     
     if (_devSwitch != swi) return;
     
