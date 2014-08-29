@@ -423,7 +423,12 @@
                     dev2.corObjType = XAIObjectType_light2_2;
                     [devAry addObject:dev2]; //添加2次
                     
+                    aDevice.name = [NSString stringWithFormat:@"%@(A)",aDevice.name];
+                    dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
+                    
                 }
+                
+               
                 
             }
             //TODO:must del end

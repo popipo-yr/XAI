@@ -85,7 +85,9 @@
     
 //    return [NSString stringWithFormat:@"%@%@ %@",_name,[self oprOnlyStr],[format stringFromDate:_time]];
     
-    return [NSString stringWithFormat:@"%llx-%@%@ %@",_oprLuid,_name,[self oprOnlyStr],[format stringFromDate:_time]];
+//    return [NSString stringWithFormat:@"%llx-%@%@ %@",_oprLuid,_name,[self oprOnlyStr],[format stringFromDate:_time]];
+    
+        return [NSString stringWithFormat:@"%@ %@%@",[format stringFromDate:_time],_name,[self oprOnlyStr]];
 }
 
 - (NSString*) oprOnlyStr{

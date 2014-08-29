@@ -270,6 +270,17 @@
                 
                 _curInputCell = listCell;
                 _curInputTF = listCell.input;
+                
+                float least = self.view.frame.size.height - (self.tableView.frame.origin.y + cell.frame.origin.y - self.tableView.contentOffset.y + 60);
+                float keyboardHeight =  250;
+                float move = keyboardHeight - least;
+                if (move > 0) {
+                    
+                    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
+                                                      self.tableView.frame.origin.y - move,
+                                                      self.tableView.frame.size.width,
+                                                      self.tableView.frame.size.height);
+                }
             }
             
             
@@ -444,6 +455,9 @@ static SWTableViewCell* curSWCell;
     [_curInputCell setEnable:true];
     _curInputCell = nil;
     _curInputTF = nil;
+    
+    [self moveTableViewToOld];
+    [self.tableView setScrollEnabled:true];
 }
 
 - (BOOL) hasInput{

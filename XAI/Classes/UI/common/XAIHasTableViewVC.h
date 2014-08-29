@@ -20,6 +20,8 @@
     //UISwipeGestureRecognizer* _recognizer;
     
     NSIndexPath* _curDelIndexPath;
+    
+    CGRect _oldRect;
 }
 
 @property (nonatomic,strong) IBOutlet UITableView* tableView;
@@ -28,5 +30,6 @@
 - (void)setSeparatorStyle:(int) count;
 -(void)returnClick:(id)sender;
 
+- (void)moveTableViewToOld;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "XAILightListCell.h"
 #import "XAILightListVC.h"
+#import "XAIObjectGenerate.h"
+
 
 @implementation _XAILightListVCCell
 
@@ -35,6 +37,7 @@
         
         [self showOprEnd];
         [self setStatus:XAIOCST_Open];
+        [self changeHead:XAIObjectType_light status:XAILightStatus_Open];
         
     }else{
     
@@ -50,6 +53,7 @@
         
         [self showOprEnd];
         [self setStatus:XAIOCST_Close];
+        [self changeHead:XAIObjectType_light status:XAILightStatus_Open];
         
     }else{
         
@@ -69,6 +73,8 @@
     
         [self setStatus:XAIOCST_Unkown];
     }
+    
+    [self changeHead:XAIObjectType_light status:status];
 }
 
 
@@ -122,7 +128,7 @@
     
     
     [self _changeWeakObj:aObj];
-    
+    [self changeHead:aObj.type status:aObj.curDevStatus];
 }
 
 - (void) _removeWeakObj{
@@ -148,6 +154,28 @@
     
 }
 
+- (void)changeHead:(XAIObjectType)type status:(int)status{
+    
+    if (_headView == nil) {
+        
+        float height = 50;
+        float y = (self.frame.size.height-height)*0.5f;
+        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
+                                                                  ,y
+                                                                  ,40
+                                                                  ,height)];
+        
+        [self.contentView addSubview:_headView];
+    }
+    
+    UIImage* head = [UIImage imageWithFile:[XAIObjectGenerate typeImageName:type]];
+    
+    if (status == XAILightStatus_Open) {
+        head = [UIImage imageWithFile:[XAIObjectGenerate typeImageOpenName:type]];
+    }
+    
+    [_headView setImage:head];
+}
 
 
 @end
@@ -327,6 +355,20 @@
                 [listCell setSaveBtn];
                 
                 _curInputCell = listCell;
+                
+                //if (self.frame.origin.y > 150) {
+                float least = self.topVC.view.frame.size.height - (self.topVC.tableView.frame.origin.y + self.frame.origin.y + cell.frame.origin.y - self.topVC.tableView.contentOffset.y + 60);
+                float keyboardHeight =  250;
+                float move = keyboardHeight - least;
+                if ( move > 0) {
+                    
+//                    [self.topVC.tableView scrollToRowAtIndexPath:[self.topVC.tableView indexPathForCell:self] atScrollPosition:UITableViewScrollPositionMiddle animated:true];
+//                    
+                    self.topVC.tableView.frame = CGRectMake(self.topVC.tableView.frame.origin.x,
+                                                      self.topVC.tableView.frame.origin.y - move,
+                                                      self.topVC.tableView.frame.size.width,
+                                                      self.topVC.tableView.frame.size.height);
+                }
             }
 
             break;

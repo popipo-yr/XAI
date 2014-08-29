@@ -27,6 +27,7 @@
         [self setStatus:XAIOCST_Unkown];
     }
     
+    [self changeHead:XAIObjectType_IR status:status];
 }
 
 -(void)ir:(XAIIR *)ir curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
@@ -84,6 +85,7 @@
     
     [self _changeWeakObj:aObj];
     
+    [self changeHead:aObj.type status:aObj.curDevStatus];
 }
 
 - (void) _removeWeakObj{
@@ -106,6 +108,41 @@
         ((XAIIR*)self.weakObj).delegate = self;
         
     }
+}
+
+
+- (void)changeHead:(XAIObjectType)type status:(int)status{
+    
+    if (_headView == nil) {
+        
+        float height = 50;
+        float y = (self.frame.size.height-height)*0.5f;
+        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
+                                                                  ,y
+                                                                  ,40
+                                                                  ,height)];
+        
+        [self.contentView addSubview:_headView];
+    }
+    
+    UIImage* head = [UIImage imageWithFile:[XAIObjectGenerate typeImageName:type]];
+    
+    if (status == XAIIRStatus_warning) {
+        head = [UIImage imageWithFile:[XAIObjectGenerate typeImageOpenName:type]];
+    }
+    
+    [_headView setImage:head];
+}
+
+
+- (NSString*)closeImg{
+    
+    return @"cell_close_inf.png";
+}
+
+- (NSString*)openImg{
+    
+    return @"cell_open_inf.png";
 }
 
 @end

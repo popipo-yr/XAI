@@ -35,6 +35,8 @@ typedef enum{
     
     UIImageView* _moves;
     
+    UIImageView* _headView;
+    
 }
 
 @property (nonatomic,strong)  IBOutlet UIImageView*  tipImageView;
@@ -54,7 +56,8 @@ typedef enum{
 - (XAIOCOT) coverForm:(XAIObjectOprStatus)objOprStatus;
 
 
-
+- (NSString*)closeImg;
+- (NSString*)openImg;
 
 @end
 

@@ -196,12 +196,12 @@
 
 - (void) showClose{
     
-    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_close.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:[self closeImg]]];
     [self showTipLable:false];
 }
 - (void) showOpen{
     
-    [self.tipImageView setImage:[UIImage imageWithFile:@"cell_open.png"]];
+    [self.tipImageView setImage:[UIImage imageWithFile:[self openImg]]];
     [self showTipLable:false];
 }
 
@@ -210,6 +210,17 @@
     [self.tipImageView setImage:[UIImage imageWithFile:@"cell_unkown.png"]];
     [self showTipLable:false];
 }
+
+- (NSString*)closeImg{
+
+    return @"cell_close.png";
+}
+
+- (NSString*)openImg{
+
+    return @"cell_open.png";
+}
+
 
 
 -(XAIOCOT)coverForm:(XAIObjectOprStatus)objOprStatus{

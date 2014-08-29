@@ -23,5 +23,6 @@
 + (NSString*) typeImageName:(XAIObjectType)type; /*类型对应的图片*/
 + (NSString*) typeOprClassName:(XAIObjectType)type; /*对应操作的类名*/
 + (NSString*) typeClassName:(XAIObjectType)type; /*对应的类名*/
++ (NSString*) typeImageOpenName:(XAIObjectType)type;
 
 @end

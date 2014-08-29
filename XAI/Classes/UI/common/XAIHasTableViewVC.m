@@ -81,6 +81,8 @@
     
     [self.theNavigationItem setLeftBarButtonItem:_returnItem];
     
+    _oldRect = self.tableView.frame;
+    
 }
 
 
@@ -112,6 +114,11 @@
 
 }
 
+
+- (void)moveTableViewToOld{
+
+    self.tableView.frame  = _oldRect;
+}
 
 
 - (void)setExtraCellLineHidden: (UITableView *)tableView{

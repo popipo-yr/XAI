@@ -26,6 +26,7 @@
         [self setStatus:XAIOCST_Unkown];
     }
     
+    [self changeHead:XAIObjectType_window status:status];
 }
 
 -(void)door:(XAIDoor *)door curStatus:(XAIDoorStatus)status getIsSuccess:(BOOL)isSuccess{
@@ -44,6 +45,7 @@
         [self setStatus:XAIOCST_Unkown];
     }
     
+    [self changeHead:XAIObjectType_door status:status];
 }
 
 -(void)window:(XAIWindow *)window curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
@@ -97,10 +99,13 @@
             
         
         [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
-            
     
+    
+    [self changeHead:aObj.type status:aObj.curDevStatus];
     
     [self _changeWeakObj:aObj];
+    
+    
 
 }
 
@@ -134,6 +139,30 @@
     }
     
 }
+
+- (void)changeHead:(XAIObjectType)type status:(int)status{
+    
+    if (_headView == nil) {
+        
+        float height = 50;
+        float y = (self.frame.size.height-height)*0.5f;
+        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
+                                                                  ,y
+                                                                  ,40
+                                                                  ,height)];
+        
+        [self.contentView addSubview:_headView];
+    }
+    
+    UIImage* head = [UIImage imageWithFile:[XAIObjectGenerate typeImageName:type]];
+    
+    if (status == XAIDoorStatus_Open || status == XAIWindowStatus_Open) {
+        head = [UIImage imageWithFile:[XAIObjectGenerate typeImageOpenName:type]];
+    }
+    
+    [_headView setImage:head];
+}
+
 
 @end
     
