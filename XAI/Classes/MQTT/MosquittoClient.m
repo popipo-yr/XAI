@@ -266,6 +266,12 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
     mosquitto_will_set(mosq, cstrTopic, cstrlen, cstrPayload, willQos, retain);
 }
 
+- (void)setWillB:(uint8_t)payload toTopic:(NSString *)willTopic withQos:(NSUInteger)willQos retain:(BOOL)retain{
+
+    const char* cstrTopic = [willTopic cStringUsingEncoding:NSUTF8StringEncoding];
+    mosquitto_will_set(mosq, cstrTopic, 1, &payload, willQos, retain);
+
+}
 
 - (void)clearWill
 {

@@ -85,7 +85,9 @@
     
     
         
-        XAIOCST status = XAIOCST_Unkown;
+    XAIOCST status = XAIOCST_Unkown;
+    
+    if (aObj.isOnline){
         
         if (aObj.curDevStatus == XAIDoorStatus_Open ||
             aObj.curDevStatus == XAIWindowStatus_Open) {
@@ -96,9 +98,12 @@
                  aObj.curDevStatus == XAIWindowStatus_Close){
             status = XAIOCST_Close;
         }
-            
-        
-        [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
+    }
+    
+    
+    
+    
+    [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
     
     
     [self changeHead:aObj.type status:aObj.curDevStatus];

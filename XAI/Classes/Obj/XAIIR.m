@@ -29,12 +29,13 @@
     [self step];
     
     [_infrared startFocusStatus];
-    
+    //[_infrared startDeviceStatus];
 }
 
 - (void) endControl{
     
     [_infrared endFocusStatus];
+    //[_infrared stopDeviceStatus];
     _infrared = nil;
     
 }

@@ -626,6 +626,9 @@
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
+    if (param == NULL) {
+        return;
+    }
     
     switch (param->flag) {
         case XAI_PKT_FLAG_ACK_CONTROL:{

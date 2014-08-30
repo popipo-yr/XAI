@@ -42,7 +42,7 @@
 @property (nonatomic, assign) XAITYPEAPSN apsn;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* pawd;
-
+@property (nonatomic, assign) BOOL isOnline;
 
 + (NSArray*) readIM:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
            withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
@@ -51,5 +51,7 @@
 
 
 - (BOOL) isAdmin;
+
+- (void) getStatus;
 
 @end

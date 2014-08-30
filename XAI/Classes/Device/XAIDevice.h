@@ -53,6 +53,8 @@ typedef enum XAIDeviceStatus{
 
 - (void) getDeviceStatus;
 - (void) getDeviceInfo;
+- (void) startDeviceStatus;
+- (void) stopDeviceStatus;
 //- (void) stopGetInfo;
 
 /*状态关心*/

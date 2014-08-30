@@ -31,11 +31,13 @@
     
     [self step];
     [_devSwitch startFocusStatus];
+    //[_devSwitch startDeviceStatus];
 }
 
 - (void) endControl{
     
     [_devSwitch endFocusStatus];
+    //[_devSwitch stopDeviceStatus];
     _devSwitch = nil;
     
 }

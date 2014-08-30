@@ -76,7 +76,7 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:imTopic
                              withQos:0
-                              retain:NO];
+                              retain:true];
     
     
     purgePacket(packet);
@@ -192,6 +192,9 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
+    if (param == NULL) {
+        return;
+    }
     
     switch (param->flag) {
         case XAI_PKT_TYPE_CONTROL:{

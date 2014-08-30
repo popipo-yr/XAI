@@ -49,6 +49,7 @@
     obj.vender = _vender; /*生产商*/
     obj.model = _model; /*型号*/
     obj.type = _type;
+    obj.isOnline = _isOnline;
     
     return obj;
     

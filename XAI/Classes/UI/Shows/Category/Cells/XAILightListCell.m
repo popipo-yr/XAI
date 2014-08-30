@@ -114,14 +114,16 @@
     
     XAIOCST status = XAIOCST_Unkown;
     
-    if (aObj.curDevStatus == XAILightStatus_Open) {
+    if (aObj.isOnline) {
         
-        status = XAIOCST_Open;
-        
-    }else if(aObj.curDevStatus == XAILightStatus_Close){
-        status = XAIOCST_Close;
+        if (aObj.curDevStatus == XAILightStatus_Open) {
+            
+            status = XAIOCST_Open;
+            
+        }else if(aObj.curDevStatus == XAILightStatus_Close){
+            status = XAIOCST_Close;
+        }
     }
-    
     
     
     [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];

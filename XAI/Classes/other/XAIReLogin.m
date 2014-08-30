@@ -223,6 +223,16 @@
         [_delegate XAIRelogin:self loginErrCode:err];
     }
     
+    if (err == XAIReLoginErr_NONE) {
+        uint8_t isOnline = 1;
+        XAIUser* curUser = [MQTT shareMQTT].curUser;
+        [[MQTT shareMQTT].client publish:&isOnline
+                           size:1
+                        toTopic:[MQTTCover mobileCtrTopicWithAPNS:curUser.apsn luid:curUser.luid]
+                        withQos:2
+                         retain:true];
+    }
+    
     _bRetry = false;
 }
 

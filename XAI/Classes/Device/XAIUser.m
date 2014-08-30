@@ -10,6 +10,8 @@
 #import "XAIMQTTDEF.h"
 #import "XAIData.h"
 
+#include "XAIPacketStatus.h"
+
 
 @implementation XAIUser
 
@@ -103,6 +105,59 @@
     
     return isSuccess;
 
+}
+
+- (void) getStatus{
+
+    
+    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                         luid:_luid
+                                                        other:Key_DeviceStatusID];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+
+    [self performSelector:@selector(timeout) withObject:nil afterDelay:5.0];
+}
+
+
+
+
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
+    
+    if (size != 1) {
+        return;
+    }
+    
+    if (![topic isEqualToString:[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]]) {
+        
+
+        return;
+    }
+    
+    uint8_t status;
+    memcpy(&status, datas, 1);
+    
+    if (status == 0) {
+        _isOnline = false;
+    }else{
+        _isOnline = true;
+    }
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
+}
+
+- (void) timeout{
+
+    _isOnline = false;
+    
+    NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
+                                                         luid:_luid
+                                                        other:Key_DeviceStatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
 }
 
 @end

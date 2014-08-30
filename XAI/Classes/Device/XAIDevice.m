@@ -33,6 +33,23 @@
 
 }
 
+- (void) startDeviceStatus{
+    
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID];
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+
+}
+
+-(void)stopDeviceStatus{
+    
+    NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
+
+}
+
 - (void) getDeviceInfo{
     
     NSString* topicStr = [MQTTCover  nodeDevTableTopicWithAPNS:_apsn luid:_luid];
@@ -67,8 +84,8 @@
         
         [_delegate device:self getStatus:XAIDeviceStatus_UNKOWN isSuccess:false isTimeOut:true];
         
-        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
+//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+//         [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     }
     
     
@@ -92,7 +109,7 @@
 
 - (void) _reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
-    return;
+    //return;
     
     //NSString* c = [[NSString alloc] initWithString:[MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     
@@ -142,8 +159,8 @@
         [_delegate device:self getStatus:devStatus isSuccess:isSuccess isTimeOut:false];
     }
     
-    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
-     [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
+//    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:
+//     [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_DeviceStatusID]];
     
     purgePacketParamStatusAndData(param);
 
@@ -203,10 +220,13 @@
 
 - (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
     
-    return;
+    //return;
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
+    if (param == NULL) {
+        return;
+    }
     
     switch (param->flag) {
             

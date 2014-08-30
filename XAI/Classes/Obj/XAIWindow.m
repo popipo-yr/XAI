@@ -31,12 +31,14 @@
     [self step];
     
     [_doorContact startFocusStatus];
+    //[_doorContact startDeviceStatus];
 
 }
 
 - (void) endControl{
     
     [_doorContact endFocusStatus];
+    //[_doorContact stopDeviceStatus];
     _doorContact = nil;
     
 }
