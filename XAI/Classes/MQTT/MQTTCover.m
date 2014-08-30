@@ -271,6 +271,13 @@
 
 }
 
++ (NSString*) mobileAllCtrTopicWithAPNS:(uint32_t)APNS{
+    //0x%08x/MOBILES/0x%016llx/IN
+    
+    return [NSString stringWithFormat:@"%@/MOBILES/+/IN",[MQTTCover apsnToString:APNS]];
+    
+}
+
 
 + (BOOL) isNodeTopic:(NSString*)topic{
     

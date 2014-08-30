@@ -328,6 +328,12 @@
     int min = [[minuFormat stringFromDate:date] intValue];
     
     
+    if (_linkageTime.dataPicker.datePickerMode == UIDatePickerModeCountDownTimer) {
+        float couteDown = _linkageTime.dataPicker.countDownDuration;
+        hour = couteDown / 60 / 60;
+        min  = (couteDown - hour*60*60)/ 60;
+    }
+    
     
     
     XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];

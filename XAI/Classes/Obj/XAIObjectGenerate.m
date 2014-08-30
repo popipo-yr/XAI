@@ -70,7 +70,7 @@
         } break;
             
         case XAIObjectType_IR:{
-            imgNameStr = @"obj_IR_open.png";
+            imgNameStr = @"obj_IR_warning.png";
         }
             
         default:

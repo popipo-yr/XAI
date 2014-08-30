@@ -24,6 +24,7 @@
 - (id)initWithFrame:(CGRect)frame;
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state;
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+- (void) setSelect:(BOOL)bsel;
 
 - (UIView*) view;
 

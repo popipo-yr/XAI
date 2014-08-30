@@ -284,6 +284,7 @@
                 catbtn.label.text = @"撤防";
             }
             
+            [catbtn setSelect:[MQTT shareMQTT].isBufang];
             _bufangBtn = catbtn;
         }
         
@@ -364,6 +365,7 @@
     }
     
 
+    [_bufangBtn setSelect:[MQTT shareMQTT].isBufang];
     _isChangeBufang = false;
     
 }

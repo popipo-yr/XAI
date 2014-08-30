@@ -19,6 +19,8 @@
     
     if (status == XAIIRStatus_warning) {
         [self setStatus:XAIOCST_Open];
+    
+        
     }else if(status == XAIIRStatus_working){
         
         [self setStatus:XAIOCST_Close];
@@ -27,6 +29,7 @@
         [self setStatus:XAIOCST_Unkown];
     }
     
+    [self showWorning:XAIIRStatus_warning == status];
     [self changeHead:XAIObjectType_IR status:status];
 }
 
@@ -85,7 +88,10 @@
     
     [self _changeWeakObj:aObj];
     
+    [self showWorning:XAIIRStatus_warning == aObj.curDevStatus];
     [self changeHead:aObj.type status:aObj.curDevStatus];
+    
+
 }
 
 - (void) _removeWeakObj{
@@ -115,11 +121,11 @@
     
     if (_headView == nil) {
         
-        float height = 50;
+        float height = 46;
         float y = (self.frame.size.height-height)*0.5f;
         _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
                                                                   ,y
-                                                                  ,40
+                                                                  ,46
                                                                   ,height)];
         
         [self.contentView addSubview:_headView];
@@ -135,14 +141,77 @@
 }
 
 
-- (NSString*)closeImg{
+- (void) showWorning:(BOOL)bl{
+
+    if (bl) {
+        
+//        CAKeyframeAnimation *leafAnimation = [CAKeyframeAnimation animationWithKeyPath:@"alpha"];
+//        leafAnimation.duration = 5.0;
+////        leafAnimation.calculationMode = kCAAnimationLinear;
+////        leafAnimation.keyTimes = [NSArray
+////                                  arrayWithObjects:
+////                                  nil];
+//        
+//        
+//        leafAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        
+//        [self.tipImageView.layer addAnimation:leafAnimation forKey:@"leafAnimation"];
+        
+        if (timer != nil) {
+         
+            [timer invalidate];
+        }
+        
+            
+        timer=[NSTimer scheduledTimerWithTimeInterval:3
+                                               target:self
+                                             selector:@selector(showArrow)
+                                             userInfo:nil
+                                              repeats:YES];
+        
+        
+    }else{
     
-    return @"cell_close_inf.png";
+        self.tipImageView.alpha = 1;
+        [self.tipImageView.layer removeAllAnimations];
+        
+        [timer invalidate];
+        timer = nil;
+    }
+    
 }
 
 - (NSString*)openImg{
     
-    return @"cell_open_inf.png";
+    return @"cell_err.png";
+}
+
+
+-(void)showArrow{
+    UIView *arrow = self.contentView;
+    [UIView beginAnimations:@"ShowArrow" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(showArrowDidStop:finished:context:)];
+    // Make the animatable changes.
+    arrow.alpha = 0.3;
+    // Commit the changes and perform the animation.
+    [UIView commitAnimations];
+}
+// Called at the end of the preceding animation.
+
+- (void)showArrowDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+
+{
+    UIView *arrow = self.contentView;
+    [UIView beginAnimations:@"HideArrow" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDelay:1.0];
+    arrow.alpha = 1.0;
+    [UIView commitAnimations];
+    
 }
 
 @end

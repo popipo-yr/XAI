@@ -11,7 +11,10 @@
 
 #define  XAIInfListCellID @"XAIInfListCellID"
 
-@interface XAIInfListCell : XAIObjectCell<XAIIRDelegate>
+@interface XAIInfListCell : XAIObjectCell<XAIIRDelegate>{
+
+    NSTimer* timer;
+}
 
 @property (nonatomic,weak) XAIObject* weakObj;
 - (void) setInfo:(XAIObject*)object;

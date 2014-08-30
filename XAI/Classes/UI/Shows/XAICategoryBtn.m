@@ -70,9 +70,15 @@
               forState:UIControlStateNormal];
     [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool selImgStrForType:type]]
               forState:UIControlStateHighlighted];
+    [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool selImgStrForType:type]]
+              forState:UIControlStateSelected];
     
     _type = type;
 }
 
+- (void) setSelect:(BOOL)bsel{
+
+    _showBtn.selected = bsel;
+}
 
 @end

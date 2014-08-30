@@ -36,6 +36,8 @@
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
+    //[mosq setWill:nil toTopic:[MQTTCover mobileAllCtrTopicWithAPNS:apsn] withQos:2 retain:false];
+    
     [mosq connect];
     
     _DEF_XTO_TIME_Start;

@@ -144,11 +144,11 @@
     
     if (_headView == nil) {
         
-        float height = 50;
+        float height = 46;
         float y = (self.frame.size.height-height)*0.5f;
         _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
                                                                   ,y
-                                                                  ,40
+                                                                  ,46
                                                                   ,height)];
         
         [self.contentView addSubview:_headView];

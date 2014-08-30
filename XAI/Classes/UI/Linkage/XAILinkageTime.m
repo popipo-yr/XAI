@@ -25,6 +25,8 @@
     [self addSubview:self.dataPicker];
     [self.dataPicker setLocale:[NSLocale currentLocale]];
     [self.dataPicker setDatePickerMode:UIDatePickerModeTime];
+    //[self.dataPicker setTimeZone:[NSTimeZone localTimeZone]];
+    //[self.dataPicker setDate:[NSDate new]];
     
 }
 - (void) setYanShi{
@@ -41,6 +43,8 @@
     
     [self.dataPicker setLocale:[NSLocale currentLocale]];
     [self.dataPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
+    //[self.dataPicker setDate:[NSDate dateWithTimeIntervalSince1970:1]];
+    //[self.dataPicker setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     
     
 }
