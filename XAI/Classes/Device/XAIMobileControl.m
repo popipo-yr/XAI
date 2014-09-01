@@ -76,7 +76,7 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     [[MQTT shareMQTT].client publish:packet->all_load size:packet->size
                              toTopic:imTopic
                              withQos:0
-                              retain:true];
+                              retain:false];
     
     
     purgePacket(packet);
