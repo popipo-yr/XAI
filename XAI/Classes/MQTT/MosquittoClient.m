@@ -239,6 +239,13 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
 }
 
 - (void) reconnect {
+    //mosquitto_reconnect(mosq);
+    
+        [NSThread detachNewThreadSelector:@selector(asynReconnect) toTarget:self withObject:nil];
+}
+
+
+- (void)asynReconnect{
     mosquitto_reconnect(mosq);
 }
 
