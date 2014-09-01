@@ -11,8 +11,8 @@
 
 #import "XAIObject.h"
 #import "XAILight.h"
-#import "XAILight2_CirculeOne.h"
 #import "XAILight2_CirculeTwo.h"
+#import "XAILight2_CirculeOne.h"
 #import "XAIDoor.h"
 #import "XAIWindow.h"
 #import "XAIIR.h"
