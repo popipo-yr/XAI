@@ -192,9 +192,11 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
-    if (param == NULL) {
+    if (param == NULL){
+        XSLog(@"packer err");
         return;
     }
+
     
     switch (param->flag) {
         case XAI_PKT_TYPE_CONTROL:{

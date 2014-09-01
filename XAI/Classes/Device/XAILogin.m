@@ -36,7 +36,7 @@
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
-    [mosq setWillB:0 toTopic:[MQTTCover mobileAllCtrTopicWithAPNS:apsn] withQos:2 retain:true];
+    //[mosq setWillB:0 toTopic:[MQTTCover mobileAllCtrTopicWithAPNS:apsn] withQos:2 retain:true];
     
     [mosq connect];
     

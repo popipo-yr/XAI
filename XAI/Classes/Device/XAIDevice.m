@@ -224,7 +224,8 @@
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
-    if (param == NULL) {
+    if (param == NULL){
+        XSLog(@"packer err");
         return;
     }
     

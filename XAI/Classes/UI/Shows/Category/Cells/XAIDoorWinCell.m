@@ -15,6 +15,13 @@
 
     if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIWindow class]]) return;
     
+    if (window.isOnline == false) {
+        
+        [self setStatus:XAIOCST_Unkown];
+        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
+        return;
+    }
+    
     if (status == XAIWindowStatus_Open) {
         [self setStatus:XAIOCST_Open];
         [self.contextLable setText:[window.lastOpr allStr]];
@@ -32,6 +39,13 @@
 -(void)door:(XAIDoor *)door curStatus:(XAIDoorStatus)status getIsSuccess:(BOOL)isSuccess{
 
     if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIDoor class]]) return;
+    
+    if (door.isOnline == false) {
+        
+        [self setStatus:XAIOCST_Unkown];
+        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
+        return;
+    }
     
     if (status == XAIDoorStatus_Open) {
         [self setStatus:XAIOCST_Open];
@@ -98,15 +112,20 @@
                  aObj.curDevStatus == XAIWindowStatus_Close){
             status = XAIOCST_Close;
         }
+        
+        [self changeHead:aObj.type status:aObj.curDevStatus];
+        
+    }else{
+        
+        [self changeHead:aObj.type status:XAIObjStatusUnkown];
     }
+
     
     
     
     
     [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
     
-    
-    [self changeHead:aObj.type status:aObj.curDevStatus];
     
     [self _changeWeakObj:aObj];
     

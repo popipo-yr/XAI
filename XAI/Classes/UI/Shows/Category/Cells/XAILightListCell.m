@@ -63,6 +63,13 @@
 
 - (void) light:(XAILight *)light curStatus:(XAILightStatus)status{
     
+    if (light.isOnline == false) {
+        
+        [self setStatus:XAIOCST_Unkown];
+        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
+        return;
+    }
+    
     if (status == XAILightStatus_Open) {
         [self setStatus:XAIOCST_Open];
         [self.contextLable setText:[light.lastOpr allStr]];
@@ -123,6 +130,12 @@
         }else if(aObj.curDevStatus == XAILightStatus_Close){
             status = XAIOCST_Close;
         }
+        
+        [self changeHead:aObj.type status:aObj.curDevStatus];
+        
+    }else{
+    
+         [self changeHead:aObj.type status:XAIObjStatusUnkown];
     }
     
     
@@ -130,7 +143,7 @@
     
     
     [self _changeWeakObj:aObj];
-    [self changeHead:aObj.type status:aObj.curDevStatus];
+    
 }
 
 - (void) _removeWeakObj{

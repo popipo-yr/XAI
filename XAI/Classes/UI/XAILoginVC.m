@@ -608,12 +608,14 @@
         
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid] withQos:2];
 
-        uint8_t isOnline = 1;
-        [curMQTT.client publish:&isOnline
-                           size:1
-                        toTopic:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]
-                        withQos:2
-                         retain:true];
+//        uint8_t isOnline = 1;
+//        [curMQTT.client publish:&isOnline
+//                           size:1
+//                        toTopic:[MQTTCover mobileStatusTopicWithAPNS:curMQTT.apsn
+//                                                                luid:curMQTT.luid
+//                                 other:0x7f]
+//                        withQos:2
+//                         retain:true];
     
     }
 

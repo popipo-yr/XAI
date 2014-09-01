@@ -17,6 +17,14 @@
     
     if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIIR class]]) return;
     
+    
+    if (ir.isOnline == false) {
+        
+        [self setStatus:XAIOCST_Unkown];
+        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
+        return;
+    }
+    
     if (status == XAIIRStatus_warning) {
         [self setStatus:XAIOCST_Open];
     
@@ -81,7 +89,14 @@
         }else if(aObj.curDevStatus == XAIIRStatus_working){
             status = XAIOCST_Close;
         }
+        
+        [self changeHead:aObj.type status:aObj.curDevStatus];
+        
+    }else{
+        
+        [self changeHead:aObj.type status:XAIObjStatusUnkown];
     }
+
     
 
     [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
@@ -91,7 +106,6 @@
     [self _changeWeakObj:aObj];
     
     [self showWorning:XAIIRStatus_warning == aObj.curDevStatus];
-    [self changeHead:aObj.type status:aObj.curDevStatus];
     
 
 }
