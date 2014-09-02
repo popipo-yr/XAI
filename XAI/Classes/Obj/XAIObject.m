@@ -198,6 +198,11 @@
         
         NSMutableArray* oprAry = [[NSMutableArray alloc] init];
         
+        //最多100条
+        for (int i = [_objOprList count]; i > 100; i--) {
+            [_objOprList removeObjectAtIndex:0];
+        }
+        
         
         for (int i =0; i < [_objOprList count]; i++) {
             

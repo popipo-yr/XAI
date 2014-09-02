@@ -281,7 +281,8 @@
         
         if (type == XAICategoryType_bufang) {
             if ([MQTT shareMQTT].isBufang == true) {
-                catbtn.label.text = @"撤防";
+                catbtn.imgView.image = [UIImage imageWithFile:@"font_chefang.png"];
+                catbtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2f, 1.2f);
             }
             
             [catbtn setSelect:[MQTT shareMQTT].isBufang];
@@ -358,9 +359,11 @@
     if (_bufangBtn != nil) {
         
         if ([MQTT shareMQTT].isBufang) {
-            _bufangBtn.label.text = @"撤防";
+            _bufangBtn.imgView.image = [UIImage imageWithFile:@"font_chefang.png"];
+            _bufangBtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2f, 1.2f);
         }else{
-            _bufangBtn.label.text = @"布防";
+            _bufangBtn.imgView.image = [UIImage imageWithFile:@"font_bufang.png"];
+            _bufangBtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
         }
     }
     

@@ -80,11 +80,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="exZ-Y8-xp6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeKeyboard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6wU-Wy-3Ih"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" id="yQD-3j-PXw" userLabel="xai">
                                 <rect key="frame" x="87" y="48" width="147" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xai_icon.png" id="rYV-vu-FMO">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rYV-vu-FMO">
                                         <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -93,8 +103,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal">
+                                        <state key="normal" image="xai_icon.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="xai_icon_sel.png"/>
+                                        <state key="highlighted" image="xai_icon_sel.png">
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="qrcodeBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3GJ-sz-cyQ"/>
@@ -104,7 +118,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rin-An-rYW" userLabel="login">
-                                <rect key="frame" x="40" y="373" width="240" height="40"/>
+                                <rect key="frame" x="80" y="382" width="160" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" image="login_btn_normal.png"/>
@@ -115,7 +129,7 @@
                                     <action selector="loginBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tIV-Zo-3Pp"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="bsM-FV-FV6" userLabel="ip">
+                            <view hidden="YES" contentMode="scaleToFill" id="bsM-FV-FV6" userLabel="ip">
                                 <rect key="frame" x="60" y="210" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -134,23 +148,22 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="5Zp-Zp-p7U" userLabel="name">
-                                <rect key="frame" x="60" y="260" width="200" height="37"/>
+                                <rect key="frame" x="60" y="264" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_spe.png" id="rZE-KV-an4">
-                                        <rect key="frame" x="0.0" y="35" width="200" height="2"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textField_bg.png" id="rZE-KV-an4">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_tip_name.png" id="k4x-id-7v7">
-                                        <rect key="frame" x="0.0" y="5" width="22" height="22"/>
+                                        <rect key="frame" x="10" y="7" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="用户名" minimumFontSize="17" id="hpN-4L-ywU">
-                                        <rect key="frame" x="30" y="0.0" width="170" height="35"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" minimumFontSize="17" id="hpN-4L-ywU">
+                                        <rect key="frame" x="40" y="3" width="160" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -158,28 +171,31 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="phW-LN-qPy" userLabel="pasw">
-                                <rect key="frame" x="60" y="310" width="200" height="37"/>
+                                <rect key="frame" x="60" y="317" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_spe.png" id="wGn-wF-Dkn">
-                                        <rect key="frame" x="0.0" y="35" width="200" height="2"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textField_bg.png" id="wGn-wF-Dkn">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_tip_mima.png" id="Szu-uq-fZu">
-                                        <rect key="frame" x="1" y="5" width="22" height="22"/>
+                                        <rect key="frame" x="10" y="14" width="22" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="密码" minimumFontSize="17" id="1HH-oP-bAX">
-                                        <rect key="frame" x="30" y="0.0" width="170" height="35"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" id="1HH-oP-bAX">
+                                        <rect key="frame" x="40" y="3" width="160" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hoodo.png" id="vhr-2j-Bvr">
+                                <rect key="frame" x="107" y="518" width="107" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -199,16 +215,18 @@
     </scenes>
     <resources>
         <image name="bg.png" width="320" height="568"/>
-        <image name="login_btn_dis.png" width="285" height="42"/>
-        <image name="login_btn_normal.png" width="285" height="42"/>
-        <image name="login_btn_sel.png" width="285" height="42"/>
+        <image name="hoodo.png" width="107" height="31"/>
+        <image name="login_btn_dis.png" width="144" height="22"/>
+        <image name="login_btn_normal.png" width="144" height="22"/>
+        <image name="login_btn_sel.png" width="141" height="22"/>
         <image name="login_ip.png" width="312" height="57"/>
-        <image name="login_other_spe.png" width="247" height="1"/>
-        <image name="login_tip_mima.png" width="18" height="22"/>
-        <image name="login_tip_name.png" width="22" height="22"/>
+        <image name="login_tip_mima.png" width="24" height="10"/>
+        <image name="login_tip_name.png" width="23" height="21"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>
-        <image name="xai_icon.png" width="148" height="147"/>
+        <image name="textField_bg.png" width="207" height="31"/>
+        <image name="xai_icon.png" width="147" height="147"/>
+        <image name="xai_icon_sel.png" width="147" height="147"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

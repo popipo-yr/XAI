@@ -11,6 +11,7 @@
 
 @interface XAICategoryBtn : NSObject{
 
+    UIView*  _showView;
     UIButton* _showBtn;
     
     __weak id _target;
@@ -19,7 +20,8 @@
 }
 
 @property(nonatomic,assign) XAICategoryType type;
-@property (nonatomic,strong) UILabel* label;
+@property (nonatomic,readonly) UIButton* showBtn;
+@property (nonatomic,strong) UIImageView* imgView;
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state;

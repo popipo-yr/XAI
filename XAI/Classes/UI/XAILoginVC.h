@@ -45,6 +45,7 @@
 
 -(IBAction)loginBtnClick:(id)sender;
 -(IBAction)qrcodeBtnClick:(id)sender;
+-(IBAction)closeKeyboard:(id)sender;
 
 
 @end

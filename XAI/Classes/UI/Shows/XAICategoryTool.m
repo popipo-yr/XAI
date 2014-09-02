@@ -19,16 +19,23 @@
 @implementation XAICategoryTool
 
 
-#define __CT_doorwin  @"门窗"
-#define __CT_switch @"开关"
-#define __CT_inf   @"红外"
-#define __CT_server @"服务器"
-#define __CT_user @"用户"
-#define __CT_bufang @"布防"
+//#define __CT_doorwin  @"门窗"
+//#define __CT_switch @"开关"
+//#define __CT_inf   @"红外"
+//#define __CT_server @"服务器"
+//#define __CT_user @"用户"
+//#define __CT_bufang @"布防"
+
+#define __CT_doorwin  @"font_dw.png"
+#define __CT_switch @"font_sw.png"
+#define __CT_inf   @"font_inf.png"
+#define __CT_server @"font_jiaohu.png"
+#define __CT_user @"font_jiaohu.png"
+#define __CT_bufang @"font_bufang.png"
 
 + (NSArray*) devCategorys{
 
-    return @[@(XAICategoryType_doorwin),@(XAICategoryType_light),@(XAICategoryType_Inf),@(XAICategoryType_bufang)];
+    return @[@(XAICategoryType_light),@(XAICategoryType_doorwin),@(XAICategoryType_Inf),@(XAICategoryType_bufang)];
 }
 
 + (NSString*) typeToName:(XAICategoryType)type{
@@ -149,9 +156,9 @@
     
     if (name != nil) {
         
-        if ([UIScreen is_35_Size]) {
-            return [NSString stringWithFormat:@"%@_35.png",name];
-        }
+//        if ([UIScreen is_35_Size]) {
+//            return [NSString stringWithFormat:@"%@_35.png",name];
+//        }
         
         return [NSString stringWithFormat:@"%@.png",name];;
     }
@@ -200,9 +207,9 @@
     
     if (name != nil) {
         
-        if ([UIScreen is_35_Size]) {
-            return [NSString stringWithFormat:@"%@_35.png",name];
-        }
+//        if ([UIScreen is_35_Size]) {
+//            return [NSString stringWithFormat:@"%@_35.png",name];
+//        }
         
         return [NSString stringWithFormat:@"%@.png",name];;
     }

@@ -16,8 +16,16 @@
 
     if (self = [super init]) {
         
-        _showBtn = [[UIButton alloc] initWithFrame:frame];
+        _showView = [[UIView alloc] initWithFrame:frame];
+        
+        _showBtn = [[UIButton alloc] init];
         [_showBtn setBackgroundColor:[UIColor clearColor]];
+        
+        _imgView = [[UIImageView alloc] init];
+        //[_imgView setBackgroundColor:[UIColor clearColor]];
+        
+        [_showView addSubview:_showBtn];
+        [_showView addSubview:_imgView];
     }
     
     return self;
@@ -30,7 +38,8 @@
 
 - (UIView*) view{
 
-    return _showBtn;
+    return _showView;
+//    return _showBtn;
 }
 
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state{
@@ -41,12 +50,13 @@
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents{
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 70, 20)];
-    label.text = [XAICategoryTool typeToName:self.type];
-    [label setTextColor:[UIColor whiteColor]];
-    [_showBtn addSubview:label];
+//    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 70, 20)];
+//    label.text = [XAICategoryTool typeToName:self.type];
+//    [label setTextColor:[UIColor whiteColor]];
+//    [_showBtn addSubview:label];
+//    
+//    self.label = label;
     
-    self.label = label;
 
     _target = target;
     _action = action;
@@ -66,12 +76,44 @@
 
 -(void)setType:(XAICategoryType)type{
 
-    [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool norImgStrForType:type]]
+    UIImage* norImg = [UIImage imageWithFile:[XAICategoryTool norImgStrForType:type]];
+    CGSize btnSize = norImg.size;
+    
+    [_showBtn setImage:norImg
               forState:UIControlStateNormal];
     [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool selImgStrForType:type]]
               forState:UIControlStateHighlighted];
     [_showBtn setImage:[UIImage imageWithFile:[XAICategoryTool selImgStrForType:type]]
               forState:UIControlStateSelected];
+    
+    
+    CGRect topFrame = _showView.frame;
+    float centerx = topFrame.size.width*0.5f;
+    
+    float moveB = 0;
+    float moveI = 0;
+    if ([UIScreen is_35_Size]) {
+        moveB = -10;
+        moveI = -25;
+    }
+    
+    _showBtn.frame = CGRectMake(centerx - btnSize.width*0.5f,
+                                5 + moveB,
+                                btnSize.width,
+                                btnSize.height);
+    
+    
+    UIImage* image = [UIImage imageWithFile:[XAICategoryTool typeToName:type]];
+    CGSize fontSize = image.size;
+    [_imgView setImage:image];
+    _imgView.frame = CGRectMake(centerx - fontSize.width*0.5f,
+                                btnSize.height + 25 + moveI,
+                                fontSize.width,
+                                fontSize.height);
+    
+
+    
+    
     
     _type = type;
 }

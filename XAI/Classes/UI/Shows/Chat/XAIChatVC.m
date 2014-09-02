@@ -313,7 +313,7 @@
     
     if ([amsg isKindOfClass:[XAIMeg class]]) {
         
-        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:20]};
         CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
         
         

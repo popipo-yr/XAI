@@ -623,6 +623,10 @@
 }
 
 -(IBAction)qrcodeBtnClick:(id)sender{
+    
+    if (_isLoging) {
+        return;
+    }
 
     
     //XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
@@ -701,6 +705,11 @@
     
     //_scanIP = @"192.168.0.33";
     //[_qrcodeLabel setText:_scanIP];
+}
+
+-(void)closeKeyboard:(id)sender{
+
+    [self.view endEditing:true];
 }
 
 @end

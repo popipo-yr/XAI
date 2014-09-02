@@ -84,11 +84,12 @@
         [subView removeFromSuperview];
     }
     
+    
     //计算大小
-    UIFont *font = [UIFont systemFontOfSize:14];
+    UIFont *font = [UIFont systemFontOfSize:20];
 //	CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
     
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+    NSDictionary *attribute = @{NSFontAttributeName: font};
     CGSize size = [text boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     
 	// build single chat bubble cell with given text
@@ -123,6 +124,11 @@
 	bubbleText.numberOfLines = 0;
 	bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
 	bubbleText.text = text;
+    bubbleText.font = font;
+    
+    if (fromSelf) {
+        //bubbleText.textColor = [UIColor whiteColor];
+    }
 	
 
 	bubbleImageView.frame = CGRectMake(0.0f, 14.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+20.0f);
