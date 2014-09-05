@@ -35,6 +35,8 @@
     
     NSString* _scanIP;
     XAITYPEAPSN _scanApsn;
+    
+    BOOL _pushScan;
 }
 
 

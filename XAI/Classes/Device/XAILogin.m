@@ -9,6 +9,7 @@
 #import "XAILogin.h"
 #import "XAIToken.h"
 #import "XAIPacketStatus.h"
+
 //#include "openssl/ssl.h"
 
 @implementation XAILogin
@@ -44,7 +45,26 @@
     
 }
 
-- (void) relogin{
+//- (void) relogin{
+//    
+//    _isLogin = true;
+//    
+//    MosquittoClient*  mosq = [MQTT shareMQTT].client;
+//    
+//    _name = [MQTT shareMQTT].curUser.name;
+//    _apsn = [MQTT shareMQTT].apsn;
+//    _pawd = [MQTT shareMQTT].curUser.pawd;
+//    
+//    
+//    
+//    [[MQTT shareMQTT].packetManager setConnectDelegate:self];
+//    
+//    [mosq reconnect];
+//    _DEF_XTO_TIME_Start;
+//    
+//}
+
+- (void) relogin:(NSString *)host{
 
     _isLogin = true;
 
@@ -55,10 +75,19 @@
     _pawd = [MQTT shareMQTT].curUser.pawd;
 
     
+    NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@",_name,[MQTTCover apsnToString:_apsn]];
+    
+	[mosq setHost:host];
+    [mosq setUsername:nameWithAPSN];
+    [mosq setPassword:_pawd];
+    [mosq setPort:9001];
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:self];
     
-    [mosq reconnect];
+    
+    [mosq connect];
+    
+
     _DEF_XTO_TIME_Start;
 
 }

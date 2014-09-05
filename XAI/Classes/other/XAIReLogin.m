@@ -11,6 +11,9 @@
 #import "XAIData.h"
 #import "XAIToken.h"
 
+#import "XAIAppDelegate.h"
+
+
 #import "Reachability.h"
 
 
@@ -79,7 +82,16 @@
         
         XSLog(@"name =%@ , pwd = %@",[MQTT shareMQTT].curUser.name , [MQTT shareMQTT].curUser.pawd);
         _login.delegate = self;
-        [_login relogin];
+        
+        NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
+                                  ,[MQTT shareMQTT].curUser.name,
+                                  [MQTTCover apsnToString:[MQTT shareMQTT].apsn]];
+        
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+        [appDelegate changeMQTTClinetID:nameWithAPSN];
+        
+        
+        [_login relogin:ip];
         
     }else{
         /*提示获取失败 返回登录页面*/

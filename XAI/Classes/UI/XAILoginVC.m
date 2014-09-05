@@ -43,6 +43,7 @@
         _IPHelper = [[XAIIPHelper alloc] init];
         _IPHelper.delegate = self;
         _isLoging = false;
+        _pushScan = false;
     }
     
     return self;
@@ -141,6 +142,10 @@
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.qrcodeLabel addTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    if (_pushScan) {//扫描返回不需要get
+        return;
+    }
     
     NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
     
@@ -639,7 +644,7 @@
         [self.passwordLabel resignFirstResponder];
         
         scanvc.delegate = self;
-        
+        _pushScan = true;
         [self presentViewController:scanvc animated:YES completion:nil];
     }
 
@@ -658,7 +663,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:symbolStr forKey:_K_APSN];
    
-   
+    _pushScan = false;
 }
 
 - (void) hasGetApsn:(NSString*)apsn{
@@ -687,6 +692,7 @@
         
         _scanIP = ip;
         [_qrcodeLabel setText:ip];
+        [_qrcodeLabel setHidden:true];
         [_qrcodeLabel setEnabled:false];
         
         if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
