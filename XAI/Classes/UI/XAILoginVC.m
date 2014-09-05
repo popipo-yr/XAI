@@ -691,8 +691,8 @@
     if (rc == _err_none) {
         
         _scanIP = ip;
+        _qrcodeView.hidden = true;
         [_qrcodeLabel setText:ip];
-        [_qrcodeLabel setHidden:true];
         [_qrcodeLabel setEnabled:false];
         
         if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
