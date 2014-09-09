@@ -136,7 +136,10 @@
                                                  name:UIKeyboardWillHideNotification                                               object:nil];
     
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateSettings)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
     
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -177,7 +180,9 @@
                                                   object:Nil];
     
     
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:Nil];
     
     [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -191,6 +196,29 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)updateSettings{
+
+    if (_pushScan) {//扫描返回不需要get
+        return;
+    }
+    
+    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
+    
+    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
+        
+        apsnstr = @"210e2b26";
+        //apsnstr = @"210e9b6e";
+        //apsnstr = @"210e2757";
+        
+        //apsnstr = @"2923AEEA";
+        
+    }
+    
+    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
+        [self hasGetApsn:apsnstr];
+    }
+
+}
 
 - (void)nameLabelReturn:(id)sender {
     

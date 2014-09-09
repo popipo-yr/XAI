@@ -269,6 +269,8 @@ void cleanup(void *arg){
         
     }else{
         
+        [_timer invalidate]; //必须在前面
+        
         /*所有方式结束,通知*/
         
         if (_delegate != NULL && [_delegate respondsToSelector:@selector(xaiIPHelper:getIp:errcode:)]) {
@@ -281,8 +283,6 @@ void cleanup(void *arg){
             pthread_cancel(thread_id);
             _create_p = false;
         }
-        
-        [_timer invalidate];
         
         printf("%i",_p_helper->err);
         
@@ -309,7 +309,7 @@ void cleanup(void *arg){
     _getStep = _XAIIPHelper_GetStep_Start;
     
     _p_helper->isFinish = false;
-    
+    _p_helper->isGetSuc = false;
     
     [self getApserverIpHelper];
     

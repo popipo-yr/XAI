@@ -223,6 +223,8 @@ static void on_log(struct mosquitto *mosq, void *userdata, int level, const char
                                                selector:@selector(loop:)
                                                userInfo:nil
                                                 repeats:YES];
+        
+        __ISING = false;
     }else{
         
         
