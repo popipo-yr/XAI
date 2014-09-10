@@ -2969,7 +2969,7 @@
 				PROVISIONING_PROFILE = "7797c12f-9c24-4b9b-892d-56482aebafa4";
 				SDKROOT = iphoneos7.1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3012,7 +3012,7 @@
 				PROVISIONING_PROFILE = "7797c12f-9c24-4b9b-892d-56482aebafa4";
 				SDKROOT = iphoneos7.1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
