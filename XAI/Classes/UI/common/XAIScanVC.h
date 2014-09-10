@@ -37,5 +37,6 @@
 @protocol XAIScanVCDelegate <NSObject>
 
 - (void)scanVC:(XAIScanVC*)scanVC didReadSymbols:(ZBarSymbolSet *)symbols;
+- (void)scanVC:(XAIScanVC*)scanVC closeWithCacncel:(BOOL)cancel;
 
 @end

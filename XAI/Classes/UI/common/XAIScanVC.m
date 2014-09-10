@@ -161,6 +161,11 @@
 
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self removeFromParentViewController];
+    
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(scanVC:closeWithCacncel:)]) {
+        
+        [_delegate scanVC:self closeWithCacncel:true];
+    }
 
 }
 

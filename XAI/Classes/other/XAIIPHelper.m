@@ -164,7 +164,7 @@ void cleanup(void *arg){
         
         char*  routeip = inet_ntoa(*(struct in_addr *)&gataway);
         
-        size_t size = strlen(routeip)+1;
+        size_t size = strlen(routeip)+10;
         char*  s = malloc(size);
         memcpy(s, routeip, size);
         
@@ -204,7 +204,7 @@ void cleanup(void *arg){
         _p_helper->host = NULL;
     }
     
-    size_t size = [[_host dataUsingEncoding:NSUTF8StringEncoding] length]+1;
+    size_t size = [[_host dataUsingEncoding:NSUTF8StringEncoding] length]+10;
     char*  s = malloc(size);
     memset(s, 0, size);
     memcpy(s, [_host UTF8String], size);
@@ -382,7 +382,7 @@ void *_getIp_thread_ever(void *obj){
         
         if(s){
             
-            printf("getaddr %s  : %s\n", p_helper->host, gai_strerror(s));
+            //printf("getaddr %s  : %s\n", p_helper->host, gai_strerror(s));
             res = _err_get_host_ip_fail;
             break;
         }

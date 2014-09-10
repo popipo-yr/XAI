@@ -44,6 +44,7 @@
         _IPHelper.delegate = self;
         _isLoging = false;
         _pushScan = false;
+        _beBackgroud = false;
     }
     
     return self;
@@ -141,6 +142,11 @@
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enterBackground)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
@@ -184,6 +190,11 @@
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:Nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:Nil];
+    
+    
     [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
@@ -197,6 +208,12 @@
 }
 
 - (void)updateSettings{
+    
+    if (_beBackgroud == false) {
+        return;
+    }
+    
+    _beBackgroud = false;
 
     if (_pushScan) {//扫描返回不需要get
         return;
@@ -218,6 +235,11 @@
         [self hasGetApsn:apsnstr];
     }
 
+}
+
+-(void)enterBackground{
+
+    _beBackgroud = true;
 }
 
 - (void)nameLabelReturn:(id)sender {
@@ -691,6 +713,11 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:symbolStr forKey:_K_APSN];
    
+    _pushScan = false;
+}
+
+-(void)scanVC:(XAIScanVC *)scanVC closeWithCacncel:(BOOL)cancel{
+
     _pushScan = false;
 }
 
