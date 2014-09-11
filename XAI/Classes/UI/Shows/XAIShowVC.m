@@ -470,6 +470,7 @@
     [_label setText:[NSString stringWithFormat:@"%d",notReadImCount]];
     [_labelIV setHidden:notReadImCount <=0 ? true : false];
     [_label setHidden:notReadImCount <=0 ? true : false];
+    [_chatTipV setHidden:notReadImCount <=0 ? true : false];
 
 }
 

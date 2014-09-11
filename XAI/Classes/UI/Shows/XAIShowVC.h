@@ -40,6 +40,7 @@
 @property (nonatomic,strong) IBOutlet UIButton* addBtn;
 @property (nonatomic,strong) IBOutlet UILabel* label;
 @property (nonatomic,strong) IBOutlet UIImageView* labelIV;
+@property (nonatomic,strong) IBOutlet UIImageView* chatTipV;
 
 
 -(IBAction)userBtnClick:(id)sender;
