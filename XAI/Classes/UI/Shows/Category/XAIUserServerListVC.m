@@ -631,7 +631,7 @@ otherID:(int)otherID{
     NSArray* cells = [self.tableView visibleCells];
     
     for (XAIUserServerListCell* cell in cells){
-        if (![cells isKindOfClass:[XAIUserServerListCell class]]) continue;
+        if (![cell isKindOfClass:[XAIUserServerListCell class]]) continue;
         
         NSIndexPath* index = [self.tableView indexPathForCell:cell];
         if ([index row] < [_userDatas count]) {
