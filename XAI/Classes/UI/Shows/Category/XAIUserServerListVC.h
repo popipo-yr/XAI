@@ -30,6 +30,8 @@
     NSMutableArray* _delAnimalIDs;
     BOOL _canDel;
     
+    NSTimer* _refreshTimer;
+    
 }
 
 

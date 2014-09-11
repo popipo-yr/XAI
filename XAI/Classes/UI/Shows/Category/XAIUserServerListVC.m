@@ -116,6 +116,9 @@
     [self updateShowDatas];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
+    
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTipNum) userInfo:nil repeats:true];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -123,6 +126,9 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [[XAIData shareData] removeRefreshDelegate:self];
     [super viewDidDisappear:animated];
+    
+    [_refreshTimer invalidate];
+    _refreshTimer = nil;
 }
 
 - (void) dealloc{
@@ -615,6 +621,22 @@ otherID:(int)otherID{
     if ([_delAnimalIDs count] > 0 ) {
         
         [self realMove];
+    }
+}
+
+
+//显示提示数字
+- (void) showTipNum{
+    
+    NSArray* cells = [self.tableView visibleCells];
+    
+    for (XAIUserServerListCell* cell in cells){
+        if (![cells isKindOfClass:[XAIUserServerListCell class]]) continue;
+        
+        NSIndexPath* index = [self.tableView indexPathForCell:cell];
+        if ([index row] < [_userDatas count]) {
+            [cell changeHead:[_userDatas objectAtIndex:[index row]]];
+        }
     }
 }
 

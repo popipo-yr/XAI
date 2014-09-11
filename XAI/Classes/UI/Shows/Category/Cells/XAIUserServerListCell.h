@@ -10,9 +10,13 @@
 
 #define XAIUserServerListCellID @"XAIUserServerListCellID"
 
-@interface XAIUserServerListCell : XAIObjectCell
+@interface XAIUserServerListCell : XAIObjectCell{
+
+    UILabel* _label;
+}
 
 @property (nonatomic, weak)  NSObject*  hasMe;
 
 - (void) setInfo:(XAIUser*)object;
+- (void)changeHead:(XAIUser*)aUser;
 @end

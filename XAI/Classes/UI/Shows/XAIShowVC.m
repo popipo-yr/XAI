@@ -12,6 +12,8 @@
 #import "XAILinkageListVC.h"
 #import "XAIDevAddVC.h"
 #import "XAIToken.h"
+#import "XAIObjectGenerate.h"
+
 
 @interface XAIShowVC ()
 
@@ -60,6 +62,7 @@
     }
     
     [self addDevCategory];
+    
 }
 
 
@@ -68,6 +71,8 @@
     [super viewWillAppear:animated];
     
     _swipes = [[NSArray alloc] initWithArray:[self openSwipe]];
+    
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTipNum) userInfo:nil repeats:true];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -75,6 +80,9 @@
     [self stopSwipte:_swipes];
     
     [super viewDidDisappear:animated];
+    
+    [_refreshTimer invalidate];
+    _refreshTimer = nil;
 }
 
 
@@ -371,6 +379,98 @@
     [_bufangBtn setSelect:[MQTT shareMQTT].isBufang];
     _isChangeBufang = false;
     
+}
+
+//显示提示数字
+- (void) showTipNum{
+
+    NSArray*  allObjs = [[XAIData shareData] listenObjs];
+    int openLightCount = 0;
+    int openDWCount = 0;
+    int openInfCount = 0;
+    int notReadImCount = 0;
+    
+    for (XAIObject* aObj in allObjs) {
+        
+        if (![aObj isKindOfClass:[XAIObject class]]) continue;
+        
+        switch (aObj.type) {
+            case XAIObjectType_light:
+            case XAIObjectType_light2_1:
+            case XAIObjectType_light2_2:{
+            
+                if (aObj.curDevStatus == XAILightStatus_Open) {
+                    
+                    openLightCount += 1;
+                }
+                
+                break;
+            }
+            
+            case XAIObjectType_door:{
+            
+                if (aObj.curDevStatus == XAIDoorStatus_Open) {
+                    
+                    openDWCount += 1;
+                }
+                
+                break;
+            }
+            
+            case XAIObjectType_window:{
+            
+                if (aObj.curDevStatus == XAIWindowStatus_Open) {
+                    
+                    openDWCount += 1;
+                }
+                
+                break;
+            }
+            
+            case XAIObjectType_IR:{
+            
+                if (aObj.curDevStatus == XAIIRStatus_warning) {
+                    
+                    openInfCount += 1;
+                }
+                
+                break;
+            
+            }
+                
+            default:
+                break;
+        }
+    }
+    
+    notReadImCount = [XAIUser countOfAllNotReadIMCount];
+    
+    for (XAICategoryBtn* btn in  _categorys) {
+        
+        switch (btn.type) {
+            case XAICategoryType_light:
+                [btn setNumber:openLightCount];
+                break;
+            case XAICategoryType_doorwin:
+                [btn setNumber:openDWCount];
+                break;
+            case XAICategoryType_Inf:
+                [btn setNumber:openInfCount];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
+    if (notReadImCount > 99) {
+        notReadImCount = 99;
+    }
+    
+    [_label setText:[NSString stringWithFormat:@"%d",notReadImCount]];
+    [_labelIV setHidden:notReadImCount <=0 ? true : false];
+    [_label setHidden:notReadImCount <=0 ? true : false];
+
 }
 
 @end

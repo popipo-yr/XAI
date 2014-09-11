@@ -24,8 +24,16 @@
         _imgView = [[UIImageView alloc] init];
         //[_imgView setBackgroundColor:[UIColor clearColor]];
         
+        _label = [[UILabel alloc] init];
+        _labelIV = [[UIImageView alloc] init];
+        [_labelIV setBackgroundColor:[UIColor clearColor]];
+        [_labelIV setHidden:true];
+        [_labelIV addSubview:_label];
+        
         [_showView addSubview:_showBtn];
         [_showView addSubview:_imgView];
+        [_showView addSubview:_labelIV];
+        
     }
     
     return self;
@@ -92,9 +100,11 @@
     
     float moveB = 0;
     float moveI = 0;
+    float moveN = 0;
     if ([UIScreen is_35_Size]) {
         moveB = -10;
         moveI = -25;
+        moveN = 10;
     }
     
     _showBtn.frame = CGRectMake(centerx - btnSize.width*0.5f,
@@ -112,7 +122,17 @@
                                 fontSize.height);
     
 
+    UIImage* msgNumImg = [UIImage imageWithFile:@"msgNum1.png"];
+    CGSize numSize = msgNumImg.size;
+    [_labelIV setImage:msgNumImg];
+    _labelIV.frame = CGRectMake(_showBtn.frame.origin.x + btnSize.width - 5,
+                              _showBtn.frame.origin.y - 10 + moveN,
+                              numSize.width,
+                              numSize.height);
     
+    _label.frame = CGRectMake(0, -2, numSize.width, numSize.height);
+    _label.textAlignment = NSTextAlignmentCenter;
+    _label.textColor = [UIColor whiteColor];
     
     
     _type = type;
@@ -121,6 +141,17 @@
 - (void) setSelect:(BOOL)bsel{
 
     _showBtn.selected = bsel;
+}
+
+- (void) setNumber:(int)number{
+
+    if (number > 99) {
+        number = 99;
+    }
+    
+    [_label setText:[NSString stringWithFormat:@"%d",number]];
+    [_labelIV setHidden: number <=0 ? true : false];
+    
 }
 
 @end

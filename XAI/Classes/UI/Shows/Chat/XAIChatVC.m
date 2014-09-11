@@ -99,6 +99,8 @@
     
     [self changeTableView];
 
+    XAIUser* curUser = [MQTT shareMQTT].curUser;
+    [XAIUser readIMEnd:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -107,6 +109,9 @@
     [_mobile stopListene];
     
     [super viewDidDisappear:animated];
+    
+    XAIUser* curUser = [MQTT shareMQTT].curUser;
+    [XAIUser readIMEnd:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
 }
 
 

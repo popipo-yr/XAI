@@ -54,4 +54,11 @@
 
 - (void) getStatus;
 
++ (void) readIMEnd:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+           withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
+
++ (int) countOfAllNotReadIMCount;
++ (int) countOfOneNotReadIMCount:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+                        withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
+
 @end

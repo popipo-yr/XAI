@@ -28,13 +28,19 @@
     
     XAICategoryBtn* _bufangBtn;
     
-
+    NSTimer* _refreshTimer;
+    
+   
+    
 }
 
 + (UIViewController*) create;
 
 @property (nonatomic,strong) IBOutlet UIScrollView* scrollView;
 @property (nonatomic,strong) IBOutlet UIButton* addBtn;
+@property (nonatomic,strong) IBOutlet UILabel* label;
+@property (nonatomic,strong) IBOutlet UIImageView* labelIV;
+
 
 -(IBAction)userBtnClick:(id)sender;
 -(void)devAddBtnClick:(id)sender;

@@ -100,6 +100,20 @@
         
         isSuccess = true;
         
+        //记录未读的个数
+        NSString* allNotReadKey = @"allNotReadKey";
+        NSString* oneNotReadKey = [NSString stringWithFormat:@"%u-%llu-%u-%llu-%d.plist",meapsn,meluid,
+                                   apsn,luid,_k_type];
+        
+        int allNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:allNotReadKey] intValue];
+        int oneNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:oneNotReadKey] intValue];
+        
+        allNotRead += 1;
+        oneNotRead += 1;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:allNotRead] forKey:allNotReadKey];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:oneNotRead] forKey:oneNotReadKey];
+        
     } while (0);
     
     
@@ -122,6 +136,47 @@
     [self performSelector:@selector(timeout) withObject:nil afterDelay:5.0];
 }
 
+
++ (void) readIMEnd:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+          withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
+
+    //记录未读的个数
+    NSString* allNotReadKey = @"allNotReadKey";
+    NSString* oneNotReadKey = [NSString stringWithFormat:@"%u-%llu-%u-%llu-%d.plist",meapsn,meluid,
+                               apsn,luid,_k_type];
+    
+    int allNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:allNotReadKey] intValue];
+    int oneNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:oneNotReadKey] intValue];
+    
+    allNotRead -= oneNotRead;
+    oneNotRead = 0;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:allNotRead] forKey:allNotReadKey];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:oneNotRead] forKey:oneNotReadKey];
+
+}
+
++ (int) countOfAllNotReadIMCount{
+
+    //记录未读的个数
+    NSString* allNotReadKey = @"allNotReadKey";
+    
+    int allNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:allNotReadKey] intValue];
+    
+    return allNotRead;
+    
+}
++ (int) countOfOneNotReadIMCount:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
+                        withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn{
+
+
+    NSString* oneNotReadKey = [NSString stringWithFormat:@"%u-%llu-%u-%llu-%d.plist",meapsn,meluid,
+                               apsn,luid,_k_type];
+    
+    int oneNotRead = [[[NSUserDefaults standardUserDefaults] objectForKey:oneNotReadKey] intValue];
+    
+    return oneNotRead;
+}
 
 
 

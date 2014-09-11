@@ -67,6 +67,17 @@
                                     <action selector="userBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ulT-B2-Gn2"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
+                                <rect key="frame" x="194" y="333" width="27" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Env-aE-P8r">
+                                <rect key="frame" x="194" y="331" width="27" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="font_jiaohu.png" id="Li0-Z4-87J">
                                 <rect key="frame" x="119" y="436" width="76" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -76,6 +87,8 @@
                     </view>
                     <connections>
                         <outlet property="addBtn" destination="qQO-ql-pNG" id="Hhr-hi-w8e"/>
+                        <outlet property="label" destination="Env-aE-P8r" id="RAK-12-NFu"/>
+                        <outlet property="labelIV" destination="k50-KG-IHs" id="gCb-yb-XU1"/>
                         <outlet property="scrollView" destination="2ny-Sg-Lm1" id="Hqr-h7-EUf"/>
                     </connections>
                 </viewController>
@@ -574,6 +587,7 @@
         <image name="dw-no.png" width="320" height="145"/>
         <image name="font_jiaohu.png" width="76" height="19"/>
         <image name="inf-no.png" width="320" height="146"/>
+        <image name="msgNum1.png" width="27" height="22"/>
         <image name="switch-no.png" width="320" height="146"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

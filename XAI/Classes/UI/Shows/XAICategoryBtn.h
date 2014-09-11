@@ -16,6 +16,9 @@
     
     __weak id _target;
     SEL _action;
+    
+    UILabel* _label;
+    UIImageView* _labelIV;
 
 }
 
@@ -27,6 +30,7 @@
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state;
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 - (void) setSelect:(BOOL)bsel;
+- (void) setNumber:(int)number;
 
 - (UIView*) view;
 
