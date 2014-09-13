@@ -431,6 +431,8 @@
 
 -(void)mobileControl:(XAIMobileControl *)mc newMsg:(XAIMeg *)msg{
 
+    if (msg.fromLuid != _user.luid) return;
+    
     [_msgs addObject:msg];
     
     do {
