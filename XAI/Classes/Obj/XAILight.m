@@ -155,7 +155,7 @@
             [_delegate light:self openSuccess:err == XAI_ERROR_NONE];
         }
         
-        tip = @"打开失败";
+        tip = @"打开超时";
         
     }else if (_isClosing) {
         
@@ -168,7 +168,7 @@
         }
         
         
-         tip = @"关闭失败";
+         tip = @"关闭超时";
     }
     
     if (err != XAI_ERROR_NONE) {

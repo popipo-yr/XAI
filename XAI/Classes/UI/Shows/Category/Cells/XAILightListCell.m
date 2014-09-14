@@ -42,7 +42,7 @@
     }else{
     
         
-        [self showMsg:@"打开失败"];
+        [self showMsg:@"打开超时"];
     }
     
     
@@ -57,7 +57,7 @@
         
     }else{
         
-        [self showMsg:@"关闭失败"];
+        [self showMsg:@"关闭超时"];
     }
 }
 
