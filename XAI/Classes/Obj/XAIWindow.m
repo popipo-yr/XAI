@@ -181,11 +181,11 @@
     
     if (_opr == XAIWindowStatus_Open) {
         
-        return NSLocalizedString(@"OpenWindow", nil);
+        return NSLocalizedString(@"被打开", nil);
         
     }else if(_opr == XAIWindowStatus_Close){
         
-        return NSLocalizedString(@"CloseWindow", nil);
+        return NSLocalizedString(@"被关闭", nil);
     }
     
     return @"";

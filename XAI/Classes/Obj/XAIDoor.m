@@ -183,11 +183,11 @@
     
     if (_opr == XAIDoorStatus_Open) {
         
-        return NSLocalizedString(@"OpenDoor", nil);
+        return NSLocalizedString(@"被打开", nil);
         
     }else if(_opr == XAIDoorStatus_Close){
         
-        return NSLocalizedString(@"CloseDoor", nil);
+        return NSLocalizedString(@"被关闭", nil);
     }
     
     return @"";
