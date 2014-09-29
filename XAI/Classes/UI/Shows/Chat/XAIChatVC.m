@@ -81,7 +81,7 @@
     //_cNavigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
     XAIUser* curUser = [MQTT shareMQTT].curUser;
     _msgs = [[NSMutableArray alloc] initWithArray:
-             [XAIUser readIM:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn]];
+             [curUser readIMWithLuid:_user.luid apsn:_user.apsn]];
     
     [self createShows];
     
@@ -100,18 +100,19 @@
     [self changeTableView];
 
     XAIUser* curUser = [MQTT shareMQTT].curUser;
-    [XAIUser readIMEnd:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
+    [curUser readIMEndLuid:_user.luid apsn:_user.apsn];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];;
     [_mobile stopListene];
     
-    [super viewDidDisappear:animated];
     
     XAIUser* curUser = [MQTT shareMQTT].curUser;
-    [XAIUser readIMEnd:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
+    [curUser readIMEndLuid:_user.luid apsn:_user.apsn];
+    
+     [super viewWillDisappear:animated];
 }
 
 
@@ -275,7 +276,7 @@
 
     
     XAIUser* curUser = [MQTT shareMQTT].curUser;
-    [XAIUser saveIM:_msgs meLuid:curUser.luid apsn:curUser.apsn withLuid:_user.luid apsn:_user.apsn];
+    [curUser saveIM:_msgs withLuid:_user.luid apsn:_user.apsn];
     
     [_mobile sendMsg:_textField.text toApsn:_user.apsn toLuid:_user.luid];
     

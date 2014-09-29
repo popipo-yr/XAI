@@ -443,7 +443,15 @@
         }
     }
     
-    notReadImCount = [XAIUser countOfAllNotReadIMCount];
+    
+    NSArray* users = [[XAIData shareData] getUserList];
+    XAIUser* curUser =  [MQTT shareMQTT].curUser;
+    
+    for (XAIUser* aUser in users) {
+        
+        notReadImCount +=  [curUser countOfOneNotReadIMCountWithLuid:aUser.luid
+                                                                apsn:aUser.apsn];
+    }
     
     for (XAICategoryBtn* btn in  _categorys) {
         

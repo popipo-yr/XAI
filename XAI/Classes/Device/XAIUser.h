@@ -44,21 +44,16 @@
 @property (nonatomic, strong) NSString* pawd;
 @property (nonatomic, assign) BOOL isOnline;
 
-+ (NSArray*) readIM:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
-           withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
-+ (BOOL) saveIM:(NSArray*)ary meLuid:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
-       withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
+
+- (NSArray*) readIMWithLuid:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn;
+- (BOOL) saveIM:(NSArray*)ary withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
+- (void) readIMEndLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
+- (int) countOfOneNotReadIMCountWithLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
 
 
 - (BOOL) isAdmin;
 
 - (void) getStatus;
 
-+ (void) readIMEnd:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
-           withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
-
-+ (int) countOfAllNotReadIMCount;
-+ (int) countOfOneNotReadIMCount:(XAITYPELUID)meluid apsn:(XAITYPEAPSN)meapsn
-                        withLuid:(XAITYPELUID)luid apsn:(XAITYPEAPSN)apsn;
 
 @end

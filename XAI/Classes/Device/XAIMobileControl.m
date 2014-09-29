@@ -138,11 +138,11 @@ static XAIMobileControl* __S_MSGSAVE = nil;
         
         XAIUser* curUser = [MQTT shareMQTT].curUser;
         NSMutableArray* msgs = [[NSMutableArray alloc] init];
-        [msgs addObjectsFromArray:[XAIUser readIM:curUser.luid apsn:curUser.apsn
-                                         withLuid:fromLuid apsn:fromApsn]];
+        [msgs addObjectsFromArray:[curUser readIMWithLuid:fromLuid apsn:fromApsn]];
+ 
         [msgs addObject:newMsg];
         
-        [XAIUser saveIM:msgs meLuid:curUser.luid apsn:curUser.apsn withLuid:fromLuid apsn:fromApsn];
+        [curUser saveIM:msgs withLuid:fromLuid apsn:fromApsn];
     }
     
     

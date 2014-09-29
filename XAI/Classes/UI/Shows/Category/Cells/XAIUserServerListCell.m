@@ -55,7 +55,7 @@
     
     
     XAIUser* curUser = [MQTT shareMQTT].curUser;
-    int number = [XAIUser countOfOneNotReadIMCount:curUser.luid apsn:curUser.apsn withLuid:aUser.luid apsn:aUser.apsn];
+    int number = [curUser countOfOneNotReadIMCountWithLuid:aUser.luid apsn:aUser.apsn];
     
     
     if (_headView == nil) {
