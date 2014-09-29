@@ -8,7 +8,7 @@
         <!--Linkage Add NameVC - 联动名称-->
         <scene sceneID="b3D-BB-SGS">
             <objects>
-                <viewController storyboardIdentifier="XAILinkageAddNameVCID" id="3QL-Dp-I2S" customClass="XAILinkageAddNameVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAILinkageAddNameVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3QL-Dp-I2S" customClass="XAILinkageAddNameVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mck-sP-aqI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -135,7 +135,7 @@
         <!--Linkage Add InfoVC-->
         <scene sceneID="j5k-Vp-XUG">
             <objects>
-                <viewController storyboardIdentifier="XAILinkageAddInfoVCID" id="lmT-qe-t82" customClass="XAILinkageAddInfoVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAILinkageAddInfoVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lmT-qe-t82" customClass="XAILinkageAddInfoVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="evx-Vr-Fl7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -197,7 +197,7 @@
         <!--linkage List-->
         <scene sceneID="MV6-D1-b1Z">
             <objects>
-                <viewController storyboardIdentifier="XAILinkageListVCID" id="2dM-uB-x6l" userLabel="linkage List" customClass="XAILinkageListVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XAILinkageListVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2dM-uB-x6l" userLabel="linkage List" customClass="XAILinkageListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CIg-uf-GE6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -264,7 +264,7 @@
                     <connections>
                         <outlet property="retView" destination="E8L-Ic-wmz" id="t8f-N8-Z8D"/>
                         <outlet property="tableView" destination="iAp-Ki-5UZ" id="qIS-Pn-UAw"/>
-                        <segue destination="3QL-Dp-I2S" kind="modal" id="qd3-Bq-nVh"/>
+                        <segue destination="3QL-Dp-I2S" kind="modal" identifier="noting1" id="qd3-Bq-nVh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fb3-Do-4a3" userLabel="First Responder" sceneMemberID="firstResponder"/>

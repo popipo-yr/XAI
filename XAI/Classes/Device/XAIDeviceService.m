@@ -22,7 +22,7 @@
 @implementation XAIDeviceService
 
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName
            apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid
 {
     
@@ -34,7 +34,6 @@
     _xai_packet_param_data* apsn_data = generatePacketParamData();
     _xai_packet_param_data* luid_data = generatePacketParamData();
     _xai_packet_param_data* name_data = generatePacketParamData();
-    _xai_packet_param_data* type_data = generatePacketParamData();
     
     
     
@@ -44,19 +43,12 @@
     
     NSData* data = [devName dataUsingEncoding:NSUTF8StringEncoding];
     xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       [data length], (void*)[devName UTF8String],type_data);
+                       [data length], (void*)[devName UTF8String],nil);
     
-    
-//    NSString* typestr = @"中文";
-//    NSData* typeData  = [typestr dataUsingEncoding:NSUTF8StringEncoding];
-//    xai_param_data_set(type_data, XAI_DATA_TYPE_ASCII_TEXT,
-//                       [typeData length], (void*)[typestr UTF8String],NULL);
-    /*一个字节*/
-    xai_param_data_set(type_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(uint8_t), &type,NULL);
 
     
     xai_param_ctrl_set(param_ctrl, curMQTT.apsn, curMQTT.luid, apsn, luid, XAI_PKT_TYPE_CONTROL,
-                       0, 0, AddDevID,[[NSDate new] timeIntervalSince1970],4, apsn_data);
+                       0, 0, AddDevID,[[NSDate new] timeIntervalSince1970],3, apsn_data);
     
     
     _xai_packet* packet = generatePacketFromParamCtrl(param_ctrl);
@@ -216,6 +208,8 @@
     
     if (!_bFinding) {
      
+        _bFinding = YES;
+        
         _devOpr = XAIDevServiceOpr_findAll;
         _DEF_XTO_TIME_Start
         
@@ -228,32 +222,34 @@
     [_timer invalidate];
     _timer = nil;
     
-//    for (id obj in _allDevices) {
-//        
-//        if (![obj isKindOfClass:[XAIDevice class]]) continue;
-//        
-//        XAIDevice*  dev = obj;
-//        
-//        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
-//        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
-//        [[MQTT shareMQTT].client unsubscribe:topic];
-//    }
-    
-    if (_deviceServiceDelegate != nil &&
-        [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
+    for (id obj in _allDevices) {
         
-        [_deviceServiceDelegate  devService:self finddedAllOnlineDevices:_onlineDevices status:YES errcode:XAI_ERROR_NONE];
+        if (![obj isKindOfClass:[XAIDevice class]]) continue;
         
+        XAIDevice*  dev = obj;
         
-        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findOnline);
+        dev.delegate = nil;
     }
+
+    
+    
+    if ((nil != _deviceServiceDelegate) &&
+        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
+        
+        [_deviceServiceDelegate devService:self
+                           findedAllDevice:[_allDevices allObjects]
+                                    status:YES
+                                   errcode:XAI_ERROR_NONE];
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
+    }
+
     
     _bFinding = false;
 }
 
 - (void) startFindOnline{
 
-    if (!_bFinding) return;
     
     for (id obj in _allDevices) {
         
@@ -263,45 +259,20 @@
         
         dev.delegate = self;
         [dev getDeviceInfo];
-        
-//        NSString* topic = [MQTTCover nodeDevTableTopicWithAPNS:dev.apsn luid:dev.luid];
-//        
-//        [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
-//        [[MQTT shareMQTT].client subscribe:topic];
-    }
-}
-
-- (void) findAllOnlineDevWithApsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid useSecond:(int) sec{
-
-    if (_bFinding) {
-        
-        return;
+    
     }
     
-    [_onlineDevices removeAllObjects];
-    _bFinding = YES;
-    
-    
-    _timer = [NSTimer scheduledTimerWithTimeInterval:sec  // 10ms
-                                             target:self
-                                           selector:@selector(stopfindAllOnlineDev)
-                                           userInfo:nil
-                                            repeats:YES];
-    
-    [self findAllDevWithApsn:apsn luid:luid];
-    
-    _devOpr = XAIDevServiceOpr_findOnline;
-    _DEF_XTO_TIME_Start
+    _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
+
 }
+
 
 #pragma mark -- Helper
 
 - (int) findAllDevWithParamStatus:(_xai_packet_param_status*) param{
     
+    
     [_allDevices removeAllObjects];
-    
-    NSMutableArray* devAry = [[NSMutableArray alloc] init];
-    
     
     int devParamCout = 5; /*每个设备有5个参数*/
     
@@ -317,7 +288,7 @@
         
         XAIDevice* aDevice = [[XAIDevice alloc] init];
         
-        BOOL  allType = false;
+        //BOOL  allType = false;
         
         do {
             
@@ -338,36 +309,18 @@
 
 
             
-            
-            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
-            
-            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
-            
-            
-            uint8_t _type = *((uint8_t*)type_data->data);
-            
-            XAIDeviceType type = _type;
-            aDevice.devType = type;
-            
-            
-
-//            if (type_data->data_len != sizeof(XAIDeviceType)) {
-//                
-//                XAIDeviceType type = 0; //必须初始化
-//                byte_data_copy(&type, type_data->data, sizeof(XAIDeviceType), type_data->data_len);
-//                
-//                aDevice.devType = type;
-//                
-//                
-//            }else{
+            //device type
+//            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
 //            
-//                XAIDeviceType type = *((XAIDeviceType*)(type_data->data));
-//                aDevice.devType = type;
-//            }
+//            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
+//            
+//            
+//            uint8_t _type = *((uint8_t*)type_data->data);
+//            
+//            XAIDeviceType type = _type;
+//            aDevice.devType = type;
             
 
-            
-            
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
             
             if (data == NULL || (data->data_type != XAI_DATA_TYPE_ASCII_TEXT) || data->data_len <= 0) break;
@@ -402,9 +355,9 @@
             aDevice.apsn = apsn;
             
             
-            if ([self converToObjType:aDevice] == false) break;
+            //if ([self converToObjType:aDevice] == false) break;
             
-            allType = YES;
+            //allType = YES;
             
             
             [_allDevices addObject:aDevice];
@@ -412,47 +365,43 @@
             
         } while (0);
         
-        if (allType) {
-            //TODO:must del start
-            
-            if ([self converToObjType:aDevice]) {
-                
-                if (aDevice.devType == XAIDeviceType_light_2) {
-                    
-                    XAIDevice* dev2 = [aDevice copy];
-                    dev2.corObjType = XAIObjectType_light2_2;
-                    [devAry addObject:dev2]; //添加2次
-                    
-                    aDevice.name = [NSString stringWithFormat:@"%@(A)",aDevice.name];
-                    dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
-                    
-                }
-                
-               
-                
-            }
-            //TODO:must del end
-            
-            [devAry addObject:aDevice];
-        }
+//        if (allType) {
+//            //TODO:must del start
+//            
+//            if ([self converToObjType:aDevice]) {
+//                
+//                if (aDevice.devType == XAIDeviceType_light_2) {
+//                    
+//                    XAIDevice* dev2 = [aDevice copy];
+//                    dev2.corObjType = XAIObjectType_light2_2;
+//                    [devAry addObject:dev2]; //添加2次
+//                    
+//                    aDevice.name = [NSString stringWithFormat:@"%@(A)",aDevice.name];
+//                    dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
+//                    
+//                }
+//                
+//               
+//                
+//            }
+//            //TODO:must del end
+//            
+//            [devAry addObject:aDevice];
+//        }
         
     }
     
-    if ((nil != _deviceServiceDelegate) &&
-        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
-        
-        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_NONE];
-        
-        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
-    }
+//    if ((nil != _deviceServiceDelegate) &&
+//        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
+//        
+//        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_NONE];
+//        
+//        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
+//    }
     
     
-    if (_bFinding) {/*查找在线的设备*/
         
-        [self startFindOnline];
-        
-    }
-
+    [self startFindOnline];
     
     return 0;
 }
@@ -510,47 +459,42 @@
     if (bSuccess) {
         
         
-        
-        
-//        /*mustchange*/
-//        if ([device.model isEqualToString:@"SWITCH-1"]) {//单控灯
-//            
-//            device.type = XAIObjectType_light;
-//            
-//        }else if([device.model isEqualToString:@"MAGNET"]){
-//            
-//            device.type = XAIObjectType_window;
-//            
-//        }else{
-//            
-//            device.type = XAIObjectType_light;
-//            
-//        }
-//        
-//        if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
-//            
-//            XAIDevice* dev2 = [device copy];
-//            dev2.type = XAIObjectType_light2_1;
-//            [_onlineDevices addObject:dev2]; //添加2次
-//        }
-        
-        
         /*mustchange*/
+        if ([device.model isEqualToString:@"SWITCH-1"]) {//单控灯
+            
+            device.corObjType = XAIObjectType_light;
+            
+        }else if([device.model isEqualToString:@"MAGNET"]){
+            
+            device.corObjType = XAIObjectType_window;
+            
+        }else if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
+            
+            
+            device.corObjType = XAIObjectType_light2_1;
+            device.name = [NSString stringWithFormat:@"%@(A)",device.name];
+            
+            //添加2次
+            XAIDevice* dev2 = [device copy];
+            dev2.corObjType = XAIObjectType_light2_2;
+            dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
+            
+            [_onlineDevices addObject:dev2];
+            [_allDevices addObject:dev2];
+            
+            
+        }else if([device.model isEqualToString:@"IR"]) {
+            
+            device.corObjType = XAIObjectType_IR;
+            
+        }else{
         
-        if ([self converToObjType:device]) {
-            
-            if (device.devType == XAIDeviceType_light_2) {
-                
-                XAIDevice* dev2 = [device copy];
-                dev2.corObjType = XAIObjectType_light2_2;
-                [_onlineDevices addObject:dev2]; //添加2次
-            
-            }
-            
-            [_onlineDevices addObject:device];
-            
+            device.corObjType = XAIObjectType_UnKown;
         }
         
+        
+
+        [_onlineDevices addObject:device];
         
         
         if(_timer != nil){
@@ -778,9 +722,9 @@ static int __k = 0;
 }
 
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type{
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName{
 
-    [self addDev:dluid withName:devName type:type apsn:_apsn luid:_luid];
+    [self addDev:dluid withName:devName apsn:_apsn luid:_luid];
 }
 
 - (int) delDev:(XAITYPELUID)dluid{
@@ -798,11 +742,6 @@ static int __k = 0;
     [self findAllDevWithApsn:_apsn luid:_luid];
 }
 
-/*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
-- (void) findAllOnlineDevWithuseSecond:(int) sec{
-
-    [self findAllOnlineDevWithApsn:_apsn luid:_luid useSecond:sec];
-}
 
 - (void) _setFindOnline{
 
@@ -847,16 +786,6 @@ static int __k = 0;
         [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
         [_deviceServiceDelegate devService:self findedAllDevice:nil status:false errcode: XAI_ERROR_TIMEOUT];
         
-    }else if (_devOpr == XAIDevServiceOpr_findOnline&&
-              (nil != _deviceServiceDelegate) &&
-              [_deviceServiceDelegate respondsToSelector:@selector(devService:finddedAllOnlineDevices:status:errcode:)]) {
-        
-        NSString* topicStr = [MQTTCover serverStatusTopicWithAPNS:_apsn
-                                                             luid:_luid
-                                                            other:MQTTCover_DevTable_Other];
-        
-        [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
-        [_deviceServiceDelegate devService:self finddedAllOnlineDevices:nil status:false errcode: XAI_ERROR_TIMEOUT];
     }
     
     [super timeout];

@@ -137,7 +137,7 @@
     if (_loginStatus == Success) {
         
         
-        [_devService addDev:luid  withName:name type:type];
+        [_devService addDev:luid  withName:name];
         
         
         _addStatus = 0;
@@ -551,7 +551,7 @@
         
         
         
-        [_devService findAllOnlineDevWithuseSecond:20];
+        [_devService findAllDev];
         
         _findOnlineStatus = start;
         

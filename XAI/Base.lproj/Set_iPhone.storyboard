@@ -51,7 +51,7 @@
                     <navigationItem key="navigationItem" title="用户设置" id="b9G-Bk-S78"/>
                     <connections>
                         <segue destination="vRk-Hb-KGT" kind="push" identifier="xaisetchangepawdpushid" id="n01-em-JJa"/>
-                        <segue destination="Ujw-Ai-Cdk" kind="push" id="kgP-e3-zEP"/>
+                        <segue destination="Ujw-Ai-Cdk" kind="push" identifier="noting1" id="kgP-e3-zEP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEx-B2-9H5" userLabel="First Responder" sceneMemberID="firstResponder"/>

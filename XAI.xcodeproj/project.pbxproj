@@ -148,6 +148,7 @@
 		963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
+		964525A419CABB520037129C /* XAICloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964525A319CABB520037129C /* XAICloudService.m */; };
 		9648E6E0190A05A900D630D8 /* user_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DE190A05A900D630D8 /* user_head@2x.png */; };
 		9648E6E1190A05A900D630D8 /* user_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9648E6DF190A05A900D630D8 /* user_head.png */; };
 		9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */; };
@@ -621,6 +622,8 @@
 		963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
+		964525A219CABB520037129C /* XAICloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICloudService.h; sourceTree = "<group>"; };
+		964525A319CABB520037129C /* XAICloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICloudService.m; sourceTree = "<group>"; };
 		9648E6DE190A05A900D630D8 /* user_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_head@2x.png"; sourceTree = "<group>"; };
 		9648E6DF190A05A900D630D8 /* user_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_head.png; sourceTree = "<group>"; };
 		9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserAddVC.h; sourceTree = "<group>"; };
@@ -1118,6 +1121,8 @@
 				96AF0A81195A695C00AF3C88 /* XAIToken.m */,
 				9608ADE01960FBFE00E1CE75 /* XAIMobileControl.h */,
 				9608ADE11960FBFE00E1CE75 /* XAIMobileControl.m */,
+				964525A219CABB520037129C /* XAICloudService.h */,
+				964525A319CABB520037129C /* XAICloudService.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -2634,6 +2639,7 @@
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961071DE192B3EFA00D5F75A /* XAIDeviceType.m in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
+				964525A419CABB520037129C /* XAICloudService.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
 				962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */,
 				962A0074199DA7DC0039E4EE /* XAIDoorWinCell.m in Sources */,

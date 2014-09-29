@@ -33,16 +33,13 @@
 
 - (void) _setFindOnline;
 
-- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName type:(XAIDeviceType)type;
+- (void) addDev:(XAITYPELUID)dluid  withName:(NSString*)devName;
 
 - (int) delDev:(XAITYPELUID)dluid ;
 
 - (void) changeDev:(XAITYPELUID)dluid withName:(NSString*)newName;
 
 - (void) findAllDev;
-
-/*获取路由下所有在线设备的luid,订阅所有设备的status节点,返回信息的则在线*/
-- (void) findAllOnlineDevWithuseSecond:(int) sec;
 
 @end
 
@@ -58,10 +55,6 @@
 - (void) devService:(XAIDeviceService*)devService findedAllDevice:(NSArray*) devAry
              status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
 
-- (void) devService:(XAIDeviceService*)devService finddedAllOnlineDevices:(NSSet*) devs
-             status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode;
-
-
 - (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID;
 
 @end
@@ -73,6 +66,5 @@ typedef NS_ENUM(NSUInteger,_XAIDevServiceOpr){
     XAIDevServiceOpr_del,
     XAIDevServiceOpr_changeName,
     XAIDevServiceOpr_findAll,
-    XAIDevServiceOpr_findOnline,
     __DevService_lastItem,
 };

@@ -38,7 +38,6 @@
     
     if (self = [super initWithCoder:aDecoder]) {
         
-        _typeStrAry = [XAIDeviceTypeUtil typeNameAry];
         _deviceService = [[XAIDeviceService alloc] init];
         _deviceService.apsn = [MQTT shareMQTT].apsn;
         _deviceService.luid = MQTTCover_LUID_Server_03;
@@ -57,9 +56,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setExtraCellLineHidden:_typeTableView];
-    _typeTableView.dataSource = self;
-    _typeTableView.delegate = self;
 
     [_nameTextField addTarget:self action:@selector(nameTextReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
@@ -113,74 +109,6 @@
 }
 
 
-#pragma mark -
-#pragma mark Table Data Source Methods
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if ([_typeStrAry count] > 0) {
-        
-        _typeTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }else{
-        
-        _typeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-
-    return [_typeStrAry count];
-    
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    
-
-   
-    cell.textLabel.text = [_typeStrAry objectAtIndex:[indexPath row]];
-    
-    return cell;
-}
-
-#pragma mark Table Delegate Methods
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 60;
-//}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    
-    if ([_curSelIndexPath length] > 0) {
-        
-        UITableViewCell* preCell = [tableView cellForRowAtIndexPath:_curSelIndexPath];
-        [preCell setAccessoryType:UITableViewCellAccessoryNone];
-        
-    }
-    
-    _curSelIndexPath =  indexPath;
-    
-}
-  
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark -- DeviceServiceDelegate
 
@@ -229,20 +157,6 @@
 
 #pragma mark --Helper
 
-- (void)setExtraCellLineHidden: (UITableView *)tableView{
-    
-    UIView *view =[ [UIView alloc]init];
-    view.backgroundColor = [UIColor clearColor];
-    [tableView setTableFooterView:view];
-    [tableView setTableHeaderView:view];
-    
-    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]){
-        
-        [tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-}
-
-
 - (void)nameTextReturn:(id)seder{
 
     [_nameTextField resignFirstResponder];
@@ -269,10 +183,6 @@
             break;
         }
         
-        if ([_curSelIndexPath length] <= 0) {
-            errTip = NSLocalizedString(@"请选择设备类型", nil);
-            break;
-        }
         
         hasErr = false;
         
@@ -294,13 +204,6 @@
     }
 
     
-    NSString* type = nil;
-    
-    if ([_curSelIndexPath length] > 0) {
-        
-         type = [_typeStrAry  objectAtIndex:[_curSelIndexPath row]];
-    }
-    
     NSString* name =  _nameTextField.text;
    
     
@@ -309,8 +212,7 @@
     NSScanner* scanner = [NSScanner scannerWithString:_luidStr];
     [scanner scanHexLongLong:&luid];
     
-    
-    [_deviceService addDev:luid withName:name type:[XAIDeviceTypeUtil nameToType:type]];
+    [_deviceService addDev:luid withName:name];
     
     [_activityView startAnimating];
     _activityView.hidden = false;

@@ -90,7 +90,7 @@
             [msgs addObject:dic];
         }
         
-        int maxMeg =  50;
+        int maxMeg =  100;
         for (int i = [msgs count]; i > maxMeg; i--) {
             [msgs removeObjectAtIndex:0];
         }

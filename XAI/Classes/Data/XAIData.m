@@ -356,14 +356,6 @@ static XAIData*  _s_XAIData_ = NULL;
 
 }
 
-- (void) devService:(XAIDeviceService *)devService finddedAllOnlineDevices:(NSSet *)devs status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
-    
-    if (isSuccess) {
-        
-        //[self setObjList:[devs allObjects]];
-        //[self callBack];
-    }
-}
 
 
 - (void)devService:(XAIDeviceService *)devService findedAllDevice:(NSArray *)devAry status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{

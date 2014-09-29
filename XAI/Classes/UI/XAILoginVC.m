@@ -590,7 +590,6 @@
     
     
     [_userService finderAllUser];
-    //[_devService findAllOnlineDevWithuseSecond:2];
     [_devService findAllDev];
 
 }
