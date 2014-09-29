@@ -947,6 +947,9 @@
 		96B75AC81974F77300253906 /* obj_IR_working@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "obj_IR_working@2x.png"; sourceTree = "<group>"; };
 		96B75ACB1974F7D500253906 /* XAIIR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIR.h; sourceTree = "<group>"; };
 		96B75ACC1974F7D500253906 /* XAIIR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIR.m; sourceTree = "<group>"; };
+		96BB4A9F19D94F42004CF666 /* QZBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZBar.h; sourceTree = "<group>"; };
+		96BB4AA019D94F42004CF666 /* QZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZBarImage.h; sourceTree = "<group>"; };
+		96BB4AA119D94F42004CF666 /* zbargtk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbargtk.h; sourceTree = "<group>"; };
 		96C6BD611998730800D61111 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Show_iPhone.storyboard; sourceTree = "<group>"; };
 		96C6BD641998789E00D61111 /* XAIShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIShowVC.h; sourceTree = "<group>"; };
 		96C6BD651998789E00D61111 /* XAIShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIShowVC.m; sourceTree = "<group>"; };
@@ -2229,6 +2232,9 @@
 		C38AC1D718EBC8E3002F20C1 /* zbar */ = {
 			isa = PBXGroup;
 			children = (
+				96BB4A9F19D94F42004CF666 /* QZBar.h */,
+				96BB4AA019D94F42004CF666 /* QZBarImage.h */,
+				96BB4AA119D94F42004CF666 /* zbargtk.h */,
 				C38AC1D818EBC8E3002F20C1 /* Decoder.h */,
 				C38AC1D918EBC8E3002F20C1 /* Exception.h */,
 				C38AC1DA18EBC8E3002F20C1 /* Image.h */,
@@ -2985,8 +2991,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
-				PROVISIONING_PROFILE = "7797c12f-9c24-4b9b-892d-56482aebafa4";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "3d8813a3-45a9-46ab-b38b-64612721ee70";
+				SDKROOT = iphoneos8.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -3030,8 +3036,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
-				PROVISIONING_PROFILE = "7797c12f-9c24-4b9b-892d-56482aebafa4";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "3d8813a3-45a9-46ab-b38b-64612721ee70";
+				SDKROOT = iphoneos8.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -3042,12 +3048,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3058,6 +3064,7 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XAI/XAI-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -3072,12 +3079,14 @@
 					"$(SRCROOT)/XAI/ssl",
 					"$(SRCROOT)/XAI/ZBarSDK",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1c078db1-58b2-48df-a778-47ec6e216153";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos8.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s  arm64";
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3086,12 +3095,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3101,6 +3110,7 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XAI/XAI-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -3115,12 +3125,14 @@
 					"$(SRCROOT)/XAI/ssl",
 					"$(SRCROOT)/XAI/ZBarSDK",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1c078db1-58b2-48df-a778-47ec6e216153";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos8.0;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s  arm64";
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

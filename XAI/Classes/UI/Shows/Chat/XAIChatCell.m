@@ -175,7 +175,7 @@
     [button setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(fromSelf?-30:button.frame.size.width, 0, 30, button.frame.size.height)];
-    label.text = [NSString stringWithFormat:@"%d''",logntime];
+    label.text = [NSString stringWithFormat:@"%d''",(int)logntime];
     label.textColor = [UIColor grayColor];
     label.font = [UIFont systemFontOfSize:13];
     label.textAlignment = NSTextAlignmentCenter;
