@@ -52,7 +52,17 @@
     
     [XAIObjectGroupManager shareManager];
     
-    [self initializeStoryBoardBasedOnScreenSize];
+    //[self initializeStoryBoardBasedOnScreenSize];
+    
+    XAILauchVC* lauchVC = (XAILauchVC*)[XAILauchVC create];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // Set the initial view controller to be the root view controller of the window object
+    self.window.rootViewController  = lauchVC;
+    
+    // Set the window object to be the key window and show it
+    [self.window makeKeyAndVisible];
+    
     
     _mqttPacketManager = [[MQTTPacketManager alloc] init];
     //_noAcceptHandle = [[XAINoAcceptPacketHandle alloc] init];

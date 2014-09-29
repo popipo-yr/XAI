@@ -13,6 +13,7 @@
 #import "Reachability.h"
 #import "XAIReLogin.h"
 #import "XAINoAcceptPacketHandle.h"
+#import "XAILauchVC.h"
 
 #define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 ? YES : NO)
 

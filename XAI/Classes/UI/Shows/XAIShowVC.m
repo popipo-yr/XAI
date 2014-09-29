@@ -447,11 +447,16 @@
     NSArray* users = [[XAIData shareData] getUserList];
     XAIUser* curUser =  [MQTT shareMQTT].curUser;
     
+    
     for (XAIUser* aUser in users) {
         
         notReadImCount +=  [curUser countOfOneNotReadIMCountWithLuid:aUser.luid
                                                                 apsn:aUser.apsn];
     }
+    
+    //添加server
+    notReadImCount += [curUser countOfOneNotReadIMCountWithLuid:MQTTCover_LUID_Server_03
+                                                           apsn:[MQTT shareMQTT].apsn];
     
     for (XAICategoryBtn* btn in  _categorys) {
         
