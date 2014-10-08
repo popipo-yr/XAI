@@ -12,6 +12,7 @@
 @optional
 - (void) didConnect: (NSUInteger)code;
 - (void) didDisconnect;
+- (void) didDisconnect: (NSUInteger)code;
 - (void) didPublish: (NSUInteger)messageId;
 
 - (void) didReceiveMessage: (MosquittoMessage*)mosq_msg;

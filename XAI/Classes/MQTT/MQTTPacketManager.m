@@ -383,6 +383,13 @@
     }
 }
 
+- (void) didDisconnect:(NSUInteger)rc {
+    
+    if (_connectDelegate != nil && [_connectDelegate respondsToSelector:@selector(didDisconnect:)]) {
+        [_connectDelegate didDisconnect:rc];
+    }
+}
+
 
 
 

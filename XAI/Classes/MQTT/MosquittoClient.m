@@ -41,6 +41,9 @@ static void on_disconnect(struct mosquitto *mosq, void *obj, int rc)
         [[client delegate] didDisconnect];
     }
     
+    if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(didDisconnect:)]) {
+        [[client delegate] didDisconnect:rc];
+    }
     
     if (client != nil && client.keepAliveDelegate != nil && [client.keepAliveDelegate respondsToSelector:@selector(didDisconnect)]) {
         [client.keepAliveDelegate didDisconnect];

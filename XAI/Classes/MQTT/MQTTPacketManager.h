@@ -28,6 +28,7 @@
 
 - (void) didConnect:(NSUInteger)code ;
 - (void) didDisconnect;
+- (void) didDisconnect:(NSUInteger)code ;
 @end
 
 

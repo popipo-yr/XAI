@@ -114,15 +114,20 @@
     
 }
 
-- (void) didDisconnect {
+- (void) didDisconnect:(NSUInteger)code {
     
      if (!_isLogin) return;
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
+    
+    XAILoginErr loginErr = XAILoginErr_UnKnow;
+    if (code ==  7 /*SSL_ERROR_WANT_CONNECT*/) {
+        loginErr = XAILoginErr_UPErr;
+    }
 	
     if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
         
-        [_delegate loginFinishWithStatus:false loginErr:XAILoginErr_UnKnow];
+        [_delegate loginFinishWithStatus:false loginErr:loginErr];
     }
     
     _isLogin = false;
