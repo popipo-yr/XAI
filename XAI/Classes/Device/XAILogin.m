@@ -16,8 +16,9 @@
 
 #pragma mark Outer methods
 
-- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn{
+- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn needCheckCloud:(BOOL)bNeed{
     
+    _needCheckCloud = bNeed;
     _ip = host;
     _apsn = apsn;
     _name = name;
@@ -64,9 +65,10 @@
 //    
 //}
 
-- (void) relogin:(NSString *)host{
+- (void) relogin:(NSString *)host needCheckCloud:(BOOL)bNeed{
 
     _isLogin = true;
+    _needCheckCloud = bNeed;
 
     MosquittoClient*  mosq = [MQTT shareMQTT].client;
     
@@ -100,7 +102,13 @@
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
     _userService.apsn = _apsn;
-    [_userService finderUserLuidHelper:_name];
+    _cloud.apsn = _apsn;
+    
+    if (_needCheckCloud) {
+        [_cloud bridgeStatus];
+    }else{
+        [_userService finderUserLuidHelper:_name];
+    }
     
     _DEF_XTO_TIME_End;
     
@@ -112,9 +120,9 @@
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
 	
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
         
-        [_delegate loginFinishWithStatus:false isTimeOut:false];
+        [_delegate loginFinishWithStatus:false loginErr:XAILoginErr_UnKnow];
     }
     
     _isLogin = false;
@@ -128,9 +136,9 @@
     [_timeout invalidate];
     _timeout = nil;
 
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
         
-        [_delegate loginFinishWithStatus:false isTimeOut:true];
+        [_delegate loginFinishWithStatus:false loginErr:XAILoginErr_TimeOut];
     }
     
     //[[MQTT shareMQTT].client disconnect];
@@ -147,6 +155,8 @@
 
 - (void) userService:(XAIUserService *)userService findedUser:(XAITYPELUID)luid
             withName:(NSString *)name status:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+    
+    XAILoginErr loginErr = XAILoginErr_UnKnow;
     
     if ( (YES == isSuccess) &&  [name isEqualToString:_name]) {
         
@@ -167,18 +177,61 @@
         
         curMQTT.isLogin = true;
         
+        loginErr = XAILoginErr_None;
+        
+    }else if(errcode == XAI_ERROR_TIMEOUT){
+    
+        loginErr = XAILoginErr_TimeOut;
+        
+    }else{
+    
+        loginErr = XAILoginErr_UPErr;
     }
     
     
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:isTimeOut:)]) {
+    
+    
+    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
         
-        [_delegate loginFinishWithStatus:isSuccess isTimeOut:false];
+        [_delegate loginFinishWithStatus:isSuccess loginErr:loginErr];
     }
     
     _isLogin = false;
     
     
 
+}
+
+
+#pragma mark - Cloud delegates
+-(void)cloud:(XAICloud *)cloud status:(XAICloudStatus)status err:(XAI_ERROR)err{
+
+    XAILoginErr loginErr = XAILoginErr_UnKnow;
+    
+    if (status == XAICloudStatus_ON && err == XAI_ERROR_NONE) {
+        
+        [_userService finderUserLuidHelper:_name];
+        loginErr = XAILoginErr_None;
+        
+    }else if(err == XAILoginErr_TimeOut){
+     
+        loginErr = XAILoginErr_TimeOut;
+        
+    }else if (status == XAICloudStatus_OFF){
+        
+        loginErr = XAILoginErr_CloudOff;
+    
+    }else if(status == XAICloudStatus_UNKown){
+    
+        loginErr = XAILoginErr_CloudUnkown;
+    }
+    
+    if ( loginErr != XAILoginErr_None &&
+        (nil != _delegate) &&
+        [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
+        
+        [_delegate loginFinishWithStatus:false loginErr:loginErr];
+    }
 }
 
 
@@ -192,7 +245,9 @@
         _userService.luid = MQTTCover_LUID_Server_03;
         _userService.userServiceDelegate = self;
         
-        //_name = [[NSMutableString alloc] init];
+        _cloud = [[XAICloud alloc] init];
+        _cloud.cloudDelegate = self;
+        
         _isLogin =false;
         
     }
@@ -203,6 +258,7 @@
 - (void)dealloc{
 
     _userService.userServiceDelegate = nil;
+    _cloud.cloudDelegate = nil;
 
 }
 

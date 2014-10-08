@@ -91,7 +91,8 @@
         [appDelegate changeMQTTClinetID:nameWithAPSN];
         
         
-        [_login relogin:ip];
+        [_login relogin:ip
+         needCheckCloud:![MQTT shareMQTT].isFromRoute];
         
     }else{
         /*提示获取失败 返回登录页面*/
@@ -154,7 +155,7 @@
     [self getDateFinsh];
 }
 
-- (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
+- (void)loginFinishWithStatus:(BOOL)status loginErr:(XAILoginErr)err{
     
     _login.delegate = nil;
     

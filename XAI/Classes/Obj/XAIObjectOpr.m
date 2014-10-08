@@ -81,7 +81,7 @@
     
     [format setTimeZone:[NSTimeZone localTimeZone]];
     
-    [format setDateFormat:@"HH:mm"];
+    [format setDateFormat:@"MM-dd HH:mm"];
     
 //    return [NSString stringWithFormat:@"%@%@ %@",_name,[self oprOnlyStr],[format stringFromDate:_time]];
     

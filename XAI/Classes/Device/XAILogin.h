@@ -9,14 +9,26 @@
 #import "XAITimeOut.h"
 #import "MQTT.h"
 #import "XAIUserService.h"
+#import "XAICloud.h"
+
+
+typedef NS_ENUM(NSUInteger, XAILoginErr){
+
+    XAILoginErr_None,
+    XAILoginErr_UPErr,
+    XAILoginErr_TimeOut,
+    XAILoginErr_CloudOff,
+    XAILoginErr_CloudUnkown,
+    XAILoginErr_UnKnow
+};
 
 @protocol XAILoginDelegate <NSObject>
 
-- (void)  loginFinishWithStatus:(BOOL) status isTimeOut:(BOOL)bTimeOut;
+- (void)  loginFinishWithStatus:(BOOL) status loginErr:(XAILoginErr)err;
 
 @end
 
-@interface XAILogin : XAITimeOut <MQTTConnectDelegate,XAIUserServiceDelegate>{
+@interface XAILogin : XAITimeOut <MQTTConnectDelegate,XAIUserServiceDelegate,XAICloudDelegate>{
 
 
     NSString*  _name;
@@ -28,13 +40,14 @@
     
     BOOL _isLogin ;
 
+    XAICloud* _cloud;
+    BOOL  _needCheckCloud;
 
 }
 
 @property (nonatomic,weak) id <XAILoginDelegate> delegate;
 
-
-- (void) relogin:(NSString*)host;
-- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn;
+- (void) relogin:(NSString*)host needCheckCloud:(BOOL)bNeed;
+- (void) loginWithName:(NSString*)name Password:(NSString*)password Host:(NSString*)host apsn:(XAITYPEAPSN)apsn needCheckCloud:(BOOL)bNeed;;
 
 @end

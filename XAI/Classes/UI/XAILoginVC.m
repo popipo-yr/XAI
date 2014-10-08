@@ -455,7 +455,7 @@
     }
     _isLoging = true;
     
-    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn];
+    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn needCheckCloud:![MQTT shareMQTT].isFromRoute];
     //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
 
 
@@ -517,7 +517,7 @@
     
 }
 
-- (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
+- (void)loginFinishWithStatus:(BOOL)status loginErr:(XAILoginErr)err{
     
     if (status) {
         
@@ -529,9 +529,18 @@
     
         NSString* errstr = NSLocalizedString(@"LoginFailed", nil);
     
-        if (bTimeOut) {
+        if (err == XAILoginErr_TimeOut) {
             
             errstr = NSLocalizedString(@"LoginTimeOut", nil);
+        }else if (err == XAILoginErr_UPErr) {
+            
+            errstr = NSLocalizedString(@"用户名或密码错误", nil);
+        }else if(err == XAILoginErr_CloudOff){
+        
+            errstr = NSLocalizedString(@"云端处于离线状态", nil);
+        }else if(err == XAILoginErr_CloudUnkown){
+            
+            errstr = NSLocalizedString(@"云端处于未知状态", nil);
         }
         
         

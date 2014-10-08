@@ -209,6 +209,7 @@
 		966828521998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */; };
 		966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */; };
 		966828541998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */; };
+		966D910A19E4DB4D00571345 /* XAICloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 966D910919E4DB4D00571345 /* XAICloud.m */; };
 		9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
@@ -700,6 +701,8 @@
 		966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
 		966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying.png; sourceTree = "<group>"; };
 		966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying@2x.png"; sourceTree = "<group>"; };
+		966D910819E4DB4D00571345 /* XAICloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICloud.h; sourceTree = "<group>"; };
+		966D910919E4DB4D00571345 /* XAICloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICloud.m; sourceTree = "<group>"; };
 		967101891988979B0037C21E /* XAINoAcceptPacketHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINoAcceptPacketHandle.h; sourceTree = "<group>"; };
 		9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINoAcceptPacketHandle.m; sourceTree = "<group>"; };
 		96729FD0192B1E81002A8C40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1153,6 +1156,8 @@
 				9608ADE11960FBFE00E1CE75 /* XAIMobileControl.m */,
 				964525A219CABB520037129C /* XAICloudService.h */,
 				964525A319CABB520037129C /* XAICloudService.m */,
+				966D910819E4DB4D00571345 /* XAICloud.h */,
+				966D910919E4DB4D00571345 /* XAICloud.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -2734,6 +2739,7 @@
 				9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */,
 				9612B04519A09254004CA9F5 /* XAIUserServerListCell.m in Sources */,
 				96F93A2419A488790057C0FC /* XAIPacketIM.c in Sources */,
+				966D910A19E4DB4D00571345 /* XAICloud.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
 				9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,

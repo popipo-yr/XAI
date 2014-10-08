@@ -207,8 +207,6 @@
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     
     if (!_bFinding) {
-     
-        _bFinding = YES;
         
         _devOpr = XAIDevServiceOpr_findAll;
         _DEF_XTO_TIME_Start
@@ -288,7 +286,7 @@
         
         XAIDevice* aDevice = [[XAIDevice alloc] init];
         
-        //BOOL  allType = false;
+        BOOL  allType = false;
         
         do {
             
@@ -310,15 +308,15 @@
 
             
             //device type
-//            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
-//            
-//            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
-//            
-//            
-//            uint8_t _type = *((uint8_t*)type_data->data);
-//            
-//            XAIDeviceType type = _type;
-//            aDevice.devType = type;
+            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
+            
+            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
+            
+            
+            uint8_t _type = *((uint8_t*)type_data->data);
+            
+            XAIDeviceType type = _type;
+            aDevice.devType = type;
             
 
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
@@ -355,9 +353,9 @@
             aDevice.apsn = apsn;
             
             
-            //if ([self converToObjType:aDevice] == false) break;
+            if ([self converToObjType:aDevice] == false) break;
             
-            //allType = YES;
+            allType = YES;
             
             
             [_allDevices addObject:aDevice];
@@ -365,43 +363,43 @@
             
         } while (0);
         
-//        if (allType) {
-//            //TODO:must del start
-//            
-//            if ([self converToObjType:aDevice]) {
-//                
-//                if (aDevice.devType == XAIDeviceType_light_2) {
-//                    
-//                    XAIDevice* dev2 = [aDevice copy];
-//                    dev2.corObjType = XAIObjectType_light2_2;
-//                    [devAry addObject:dev2]; //添加2次
-//                    
-//                    aDevice.name = [NSString stringWithFormat:@"%@(A)",aDevice.name];
-//                    dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
-//                    
-//                }
-//                
-//               
-//                
-//            }
-//            //TODO:must del end
-//            
-//            [devAry addObject:aDevice];
-//        }
+        if (allType) {
+            
+            if ([self converToObjType:aDevice]) {
+                
+                if (aDevice.devType == XAIDeviceType_light_2) {
+                    
+                    XAIDevice* dev2 = [aDevice copy];
+                    dev2.corObjType = XAIObjectType_light2_2;
+                    [_allDevices addObject:dev2]; //添加2次
+                    
+                    aDevice.name = [NSString stringWithFormat:@"%@(A)",aDevice.name];
+                    dev2.name = [NSString stringWithFormat:@"%@(B)",dev2.name];
+                    
+                }
+                
+            }
+        }
         
     }
     
-//    if ((nil != _deviceServiceDelegate) &&
-//        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
-//        
-//        [_deviceServiceDelegate devService:self findedAllDevice:devAry status:YES errcode:XAI_ERROR_NONE];
-//        
-//        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
-//    }
-    
-    
+    if ((nil != _deviceServiceDelegate) &&
+        [_deviceServiceDelegate respondsToSelector:@selector(devService:findedAllDevice:status:errcode:)]) {
         
-    [self startFindOnline];
+        [_deviceServiceDelegate devService:self
+                           findedAllDevice:[_allDevices allObjects]
+                                    status:YES
+                                   errcode:XAI_ERROR_NONE];
+        
+        _DEF_XTO_TIME_END_TRUE(_devOpr, XAIDevServiceOpr_findAll);
+    }
+    
+    if (_bFinding) {
+        
+        [self startFindOnline];
+    }
+        
+    
     
     return 0;
 }
