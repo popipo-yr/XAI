@@ -135,7 +135,7 @@
                [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_BatteryPowerId]]){
         
         
-        float curPower = 1;
+        XAIDevPowerStatus curPower = XAIDevPowerStatus_Unkown;
         
         do {
             
@@ -149,7 +149,13 @@
             
             byte_data_copy(&power, data->data, sizeof(int), data->data_len);
             
-            curPower = power*1.0 / 10.0;
+            if (power == 0) {
+                curPower = XAIDevPowerStatus_Normal;
+            }else if (power == 1){
+                curPower = XAIDevPowerStatus_Low;
+            }else if (power == 2){
+                curPower = XAIDevPowerStatus_Less;
+            }
             
             err = XAI_ERROR_NONE;
             

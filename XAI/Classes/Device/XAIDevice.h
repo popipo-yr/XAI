@@ -24,6 +24,15 @@ typedef enum XAIDeviceStatus{
     
 }XAIDeviceStatus;
 
+
+typedef NS_ENUM(NSUInteger, XAIDevPowerStatus){
+    
+    XAIDevPowerStatus_Normal,
+    XAIDevPowerStatus_Low,
+    XAIDevPowerStatus_Less,
+    XAIDevPowerStatus_Unkown
+};
+
 @protocol XAIDeviceStatusDelegate;
 @interface  XAIDevice: XAITimeOut <MQTTPacketManagerDelegate>{
 
