@@ -101,7 +101,7 @@
     
 //	UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
     
-    UIEdgeInsets edge = UIEdgeInsetsMake(30,30,25,18);
+    UIEdgeInsets edge = UIEdgeInsetsMake(30,35,25,18);
 //    UIEdgeInsets edge = UIEdgeInsetsMake(25,25,15,30);
 //    
 //    if (fromSelf == YES) {
