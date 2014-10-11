@@ -29,7 +29,10 @@
     XAICategoryBtn* _bufangBtn;
     
     NSTimer* _refreshTimer;
+    NSTimer* _alphaTimer;
     
+    float _tipAlpha;
+    float _tipAlphaAdd;
    
     
 }

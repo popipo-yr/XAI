@@ -41,6 +41,7 @@
         
         _isChangeBufang = false;
 
+        _tipAlpha = 1.0;
     }
     
     return self;
@@ -73,6 +74,10 @@
     _swipes = [[NSArray alloc] initWithArray:[self openSwipe]];
     
     _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTipNum) userInfo:nil repeats:true];
+    
+    _alphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(alphaChange) userInfo:nil repeats:true];
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -82,7 +87,9 @@
     [super viewDidDisappear:animated];
     
     [_refreshTimer invalidate];
+    [_alphaTimer invalidate];
     _refreshTimer = nil;
+    _alphaTimer = nil;
 }
 
 
@@ -484,6 +491,26 @@
     [_labelIV setHidden:notReadImCount <=0 ? true : false];
     [_label setHidden:notReadImCount <=0 ? true : false];
     [_chatTipV setHidden:notReadImCount <=0 ? true : false];
+    
+}
+
+- (void) alphaChange{
+
+    _tipAlpha += _tipAlphaAdd;
+    
+    if (_tipAlphaAdd == 0) {// 第一次进入
+        _tipAlphaAdd = -0.03;
+    }
+    
+    if (_tipAlpha <= 0.3) {
+        _tipAlphaAdd = 0.04;
+    }else if(_tipAlpha >= 1.2){
+        _tipAlphaAdd = -0.04;
+    }
+    
+    _chatTipV.alpha = _tipAlpha;
+    
+    //_chatTipV.hidden = true;
 
 }
 
