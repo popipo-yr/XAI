@@ -45,11 +45,16 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
     _mc = nil;
 }
 
+- (void) setApsn:(XAITYPEAPSN)apsn{
+    
+    _apsn = apsn;
+}
+
 
 - (void) startFocus{
     
     [XAIMobileControl setMsgSave:_mc];
-    [_mc startListene];
+    [_mc startListeneAll:_apsn];
 }
 - (void) stop{
     
@@ -57,7 +62,7 @@ static XAIAlert*  _XAIAlertSTATIC = NULL;
         [_alertView dismissWithClickedButtonIndex:0 animated:false];
     }
     [XAIMobileControl setMsgSave:nil];
-    [_mc stopListene];
+    [_mc stopListeneAll:_apsn];
 }
 
 -(void)mobileControl:(XAIMobileControl *)mc getCmd:(XAIMCCMD *)cmd{

@@ -8,6 +8,7 @@
 
 #import "XAILogin.h"
 #import "XAIToken.h"
+#import "XAIAlert.h"
 #import "XAIPacketStatus.h"
 
 //#include "openssl/ssl.h"
@@ -100,6 +101,8 @@
 	
     if (!_isLogin) return;
     
+    [[XAIAlert shareAlert] startFocus];
+    
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
     _userService.apsn = _apsn;
     _cloud.apsn = _apsn;
@@ -117,6 +120,8 @@
 - (void) didDisconnect:(NSUInteger)code {
     
      if (!_isLogin) return;
+    
+    [[XAIAlert shareAlert] stop];
     
     [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
     

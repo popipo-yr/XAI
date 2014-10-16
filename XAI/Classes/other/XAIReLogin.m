@@ -88,7 +88,7 @@
                                   [MQTTCover apsnToString:[MQTT shareMQTT].apsn]];
         
         XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
-        [appDelegate changeMQTTClinetID:nameWithAPSN];
+        [appDelegate changeMQTTClinetID:nameWithAPSN apsn:[MQTT shareMQTT].apsn];
         
         
         [_login relogin:ip

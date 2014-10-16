@@ -41,6 +41,17 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
 }
 
+- (void) startListeneAll:(XAITYPEAPSN)apsn{
+    
+    NSString* topic = [MQTTCover mobileAllCtrTopicWithAPNS:apsn];
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topic];
+    //[[MQTT shareMQTT].client subscribe:topic withQos:2]; //不需要订阅
+}
+- (void) stopListeneAll:(XAITYPEAPSN)apsn{
+    
+    NSString* topic = [MQTTCover mobileAllCtrTopicWithAPNS:apsn];
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topic];
+}
 
 - (void) sendMsg:(NSString*)context toApsn:(XAITYPEAPSN)apsn toLuid:(XAITYPELUID)luid{
     
@@ -120,11 +131,16 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     XAITYPELUID fromLuid = luidFromGUID(IM->normal_param->from_guid);
     XAITYPEAPSN fromApsn = apsnFromGUID(IM->normal_param->from_guid);
     
+    XAITYPELUID toLuid = luidFromGUID(IM->normal_param->to_guid);
+    XAITYPEAPSN toApsn = apsnFromGUID(IM->normal_param->to_guid);
+    
     XAIMeg* newMsg = [[XAIMeg alloc] init];
     newMsg.fromAPSN = fromApsn;
     newMsg.fromLuid = fromLuid;
-    newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
-    newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
+    newMsg.toAPSN = toApsn;
+    newMsg.toLuid = toLuid;
+//    newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
+//    newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
     
     _xai_packet_param_data* data = getParamDataFromParamIM(IM, 0);
     if (data != NULL && (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) && data->data_len > 0){
@@ -136,13 +152,24 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     /*防止被多次写入*/
     if (__S_MSGSAVE == self) {
         
-        XAIUser* curUser = [MQTT shareMQTT].curUser;
+        XAIUser* oneUser = [[XAIUser alloc] init];
+        oneUser.apsn = toApsn;
+        oneUser.luid = toLuid;
+        
         NSMutableArray* msgs = [[NSMutableArray alloc] init];
-        [msgs addObjectsFromArray:[curUser readIMWithLuid:fromLuid apsn:fromApsn]];
- 
+        [msgs addObjectsFromArray:[oneUser readIMWithLuid:fromLuid apsn:fromApsn]];
+        
         [msgs addObject:newMsg];
         
-        [curUser saveIM:msgs withLuid:fromLuid apsn:fromApsn];
+        [oneUser saveIM:msgs withLuid:fromLuid apsn:fromApsn];
+        
+//        XAIUser* curUser = [MQTT shareMQTT].curUser;
+//        NSMutableArray* msgs = [[NSMutableArray alloc] init];
+//        [msgs addObjectsFromArray:[curUser readIMWithLuid:fromLuid apsn:fromApsn]];
+// 
+//        [msgs addObject:newMsg];
+//        
+//        [curUser saveIM:msgs withLuid:fromLuid apsn:fromApsn];
     }
     
     
@@ -188,7 +215,10 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     
     MQTT* curMQTT = [MQTT shareMQTT];
     
-    if(![topic isEqualToString:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]]) return;
+    
+    
+   if(curMQTT.isLogin &&
+      ![topic isEqualToString:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid]]) return;
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     

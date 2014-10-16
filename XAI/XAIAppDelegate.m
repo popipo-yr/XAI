@@ -33,7 +33,7 @@
     return YES;
 }
 
-- (void) changeMQTTClinetID:(NSString*)clientID{
+- (void) changeMQTTClinetID:(NSString*)clientID apsn:(XAITYPEAPSN)apsn{
     
     
     _mosquittoClient = [[MosquittoClient alloc] initWithClientId:clientID];
@@ -42,7 +42,12 @@
     [_mosquittoClient setKeepAliveDelegate:self];
     [[MQTT shareMQTT].client willRemove];
     [[MQTT shareMQTT] setClient:_mosquittoClient];
+    [MQTT shareMQTT].tmpApsn = apsn;
     
+    [[XAIAlert shareAlert] stop];
+    [[XAIAlert shareAlert] setApsn:apsn];
+    
+    //[[XAIAlert shareAlert] startFocus];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -157,6 +162,8 @@
 //    NSLog(@"xxxxxxxxxxxxxxxxxxxx");
 //    [self reloginIsLogin:false];
 //    [_mosquittoClient reconnect];
+    
+    [[XAIAlert shareAlert] startFocus];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -449,7 +456,7 @@
             
         } while (0);
         
-        [[XAIAlert shareAlert] startFocus];
+        //[[XAIAlert shareAlert] startFocus];
         
         
         MQTT* curMQTT = [MQTT shareMQTT];

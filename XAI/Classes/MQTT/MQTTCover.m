@@ -305,6 +305,13 @@
 
 }
 
++ (BOOL) isMobileTopic:(NSString*)topic{
+
+    NSString* sub =  @"/MOBILES/";
+    
+    return [sub  isEqualToString:[topic substringWithRange:NSMakeRange(2+APNS_STR_TOTAL_LEN, [sub length])]];
+}
+
 
 + (uint32_t) nodeTopicAPSN:(NSString*)topic{
     

@@ -16,6 +16,9 @@
 - (void) startListene;
 - (void) stopListene;
 
+- (void) startListeneAll:(XAITYPEAPSN)apsn;
+- (void) stopListeneAll:(XAITYPEAPSN)apsn;
+
 + (void) setMsgSave:(XAIMobileControl*)megSave;
 - (void) sendMsg:(NSString*)context toApsn:(XAITYPEAPSN)apsn toLuid:(XAITYPELUID)luid;
 

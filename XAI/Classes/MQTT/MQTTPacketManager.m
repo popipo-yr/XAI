@@ -310,7 +310,12 @@
 
     _isPostMsg = true;
     
-    NSArray*  delegeteAry  = [[NSArray alloc] initWithArray:[_delegates objectForKey:mosq_msg.topic]];
+    NSMutableArray*  delegeteAry  = [[NSMutableArray alloc] initWithArray:[_delegates objectForKey:mosq_msg.topic]];
+    
+    if ([MQTTCover isMobileTopic:mosq_msg.topic]) {
+        NSString* topicAll = [MQTTCover mobileAllCtrTopicWithAPNS:[MQTT shareMQTT].tmpApsn];
+        [delegeteAry addObjectsFromArray:[_delegates objectForKey:topicAll]];
+    }
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         

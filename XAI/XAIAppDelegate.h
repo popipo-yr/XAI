@@ -44,6 +44,6 @@
 
 @property (strong, nonatomic) UIDatePicker* datePicker;
 
-- (void) changeMQTTClinetID:(NSString*)clientID;
+- (void) changeMQTTClinetID:(NSString*)clientID apsn:(XAITYPEAPSN)apsn;
 
 @end

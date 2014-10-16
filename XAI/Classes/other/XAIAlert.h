@@ -13,8 +13,11 @@
 
     XAIMobileControl* _mc;
     UIAlertView*  _alertView;
+    
+    XAITYPEAPSN _apsn;
 }
 
+- (void) setApsn:(XAITYPEAPSN)apsn;
 - (void) startFocus;
 - (void) stop;
 + (XAIAlert*) shareAlert;
