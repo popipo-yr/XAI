@@ -446,7 +446,7 @@
                               ,self.nameLabel.text,[MQTTCover apsnToString:_scanApsn]];
     
     XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate changeMQTTClinetID:nameWithAPSN];
+    [appDelegate changeMQTTClinetID:nameWithAPSN apsn:_scanApsn];
     
     [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
 
@@ -662,7 +662,7 @@
         _devService = nil;
         _userService = nil;
         
-        [[XAIAlert shareAlert] startFocus];
+        //[[XAIAlert shareAlert] startFocus];
         MQTT* curMQTT = [MQTT shareMQTT];
         /*订阅主题*/
 //        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
