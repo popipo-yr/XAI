@@ -19,6 +19,8 @@
 
 #define _IP_SIZE_MAX  30
 
+#define _Sock_None -1
+
 int getdefaultgateway(in_addr_t * addr);
 
 void *_getIp_thread_ever(void *obj);
@@ -72,6 +74,12 @@ void cleanup(void *arg){
 -(void)dealloc{
     
     _p_helper->who = nil;
+    
+    if (_p_helper->sock != _Sock_None) {
+        close(_p_helper->sock);
+        _p_helper->sock = _Sock_None;
+    }
+    
     
     if (_create_p) {
         
@@ -179,7 +187,7 @@ void cleanup(void *arg){
         pthread_create(&thread_id, NULL, _getIp_thread_ever, _p_helper);
         
         [[self class] cancelPreviousPerformRequestsWithTarget:self];
-        [self performSelector:@selector(timeout) withObject:NULL afterDelay:1.0f];
+        [self performSelector:@selector(timeout) withObject:NULL afterDelay:3.0f];
         
         return 0;
         
@@ -230,6 +238,11 @@ void cleanup(void *arg){
 
 - (void)getApserverIpHelper{
     
+    
+    if (_p_helper->sock != _Sock_None) {
+        printf("shutdown:-%d",close(_p_helper->sock));
+        _p_helper->sock = _Sock_None;
+    }
     
     if (_p_helper->isGetSuc){
         
@@ -406,7 +419,7 @@ void *_getIp_thread_ever(void *obj){
             
             //ioctlsocket();
             if(connect(sock, rp->ai_addr, rp->ai_addrlen) != -1){
-                
+                p_helper->sock = sock;
                 bconnected = true;
                 break;
             }
@@ -441,9 +454,17 @@ void *_getIp_thread_ever(void *obj){
         
         memset(buffer, 0 , sizeof(buffer));
         
+        struct timeval timeout;
+        timeout.tv_sec=2;
+        timeout.tv_usec=0;
+        int result = setsockopt(sock,SOL_SOCKET,SO_RCVTIMEO,(char *)&timeout.tv_sec,sizeof(struct timeval));
+        
+        printf("timeout - %d",result);
+        
         if(pack_size != (recbytes = read(sock,buffer,1024)))
         {
             printf("read data fail !\r\n");
+            p_helper->sock = _Sock_None;
             close(sock);
             res = _err_get_data_fail;
             break;
@@ -466,7 +487,7 @@ void *_getIp_thread_ever(void *obj){
         memcpy(p_helper->ip_char, ipstr, copysize);
         
         close(sock);
-        
+        p_helper->sock = _Sock_None;
         p_helper->isGetSuc = true;
         res = _err_none;
         

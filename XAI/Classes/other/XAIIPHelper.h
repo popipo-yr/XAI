@@ -45,6 +45,8 @@ typedef struct Helper{
     
     BOOL isFinish;
     
+    int sock;
+    
     XAITYPEAPSN  apsn;
     
     void (*getApserverIpResult)(struct Helper* p_helper, _err rc);
