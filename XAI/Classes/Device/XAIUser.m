@@ -212,6 +212,7 @@
 #define _K_ToLuid @"_K_ToApsn"
 #define _K_Date @"_K_Date"
 #define _K_Context @"_K_Context"
+#define _K_Ctrls @"_K_Ctrls"
 
 @implementation XAIMeg
 
@@ -231,6 +232,17 @@
     [dic setObject:[NSNumber numberWithLongLong:_fromLuid] forKey:_K_FromLuid];
     [dic setObject:[NSNumber numberWithLong:_toAPSN] forKey:_K_ToApsn];
     [dic setObject:[NSNumber numberWithLongLong:_toLuid] forKey:_K_ToLuid];
+    
+    NSMutableArray* writeAry = [[NSMutableArray alloc] init];
+
+    for (XAIMegCtrlInfo* aCtrl in _ctrlInfo) {
+        if ([aCtrl isKindOfClass:[XAIMegCtrlInfo class]]) {
+            
+            [writeAry addObject:[aCtrl writeToDIC]];
+        }
+    }
+    
+    [dic setObject:writeAry forKey:_K_Ctrls];
 
 
     return dic;
@@ -247,7 +259,67 @@
     _toAPSN = [[dic objectForKey:_K_ToApsn] longValue];
     _toLuid = [[dic objectForKey:_K_ToLuid] longLongValue];
     
+    NSMutableArray* ctrls  = [[NSMutableArray alloc] init];
+    
+    NSArray* ctrlInfos = [dic objectForKey:_K_Ctrls];
+    for (NSDictionary* dic in ctrlInfos) {
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            XAIMegCtrlInfo* ctrl = [[XAIMegCtrlInfo alloc] init];
+            [ctrl readFromDIC:dic];
+            [ctrls addObject:ctrl];
+        }
+    }
+    
+    _ctrlInfo = [NSArray arrayWithArray:ctrls];
+    
+}
+
+@end
+
+
+@implementation XAIMegCtrlInfo
+
+#define _K_Topic @"_K_Topic"
+#define _K_ActionData @"_K_Data"
+#define _K_Name @"_K_Name"
+#define _K_Date @"_K_Date"
+
+
+-(NSDictionary *)writeToDIC{
+    
+    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
+    if (_topic != nil) {
+        
+        [dic setObject:_topic forKey:_K_Topic];
+    }
+    
+    if (_actionData != nil) {
+        [dic setObject:_actionData forKey:_K_ActionData];
+    }
+    
+    if (_name != nil) {
+        [dic setObject:_name forKey:_K_Name];
+    }
+    
+    if (_date != nil) {
+        [dic setObject:_date forKey:_K_Date];
+    }
+    
+    
+    return dic;
+}
+
+-(void)readFromDIC:(NSDictionary *)dic{
+    
+    if (dic == nil) return;
+    
+    _topic  = [dic objectForKey:_K_Topic];
+    _actionData = [dic objectForKey:_K_ActionData];
+    _name = [dic objectForKey:_K_Name];
+    _date = [dic objectForKey:_K_Date];
 
 }
+
+
 
 @end

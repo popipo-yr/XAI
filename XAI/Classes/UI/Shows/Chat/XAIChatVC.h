@@ -12,7 +12,7 @@
 #import "XAIMobileControl.h"
 
 
-@interface XAIChatVC : UIViewController <XAIMobileControlDelegate>{
+@interface XAIChatVC : UIViewController <XAIMobileControlDelegate,XAIChatCellDelegate>{
     
     XAIUser* _user;
     XAIMobileControl* _mobile;

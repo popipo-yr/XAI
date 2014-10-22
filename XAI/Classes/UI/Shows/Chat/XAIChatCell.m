@@ -49,15 +49,24 @@
     
     if (isFromMe) {
         
-        _photo.frame = CGRectMake(320-60, 10, 50, 50);
+        float width = [UIScreen mainScreen].bounds.size.width; //320
+        _photo.frame = CGRectMake(width-60, 10, 50, 50);
         
     }else{
     
         _photo.frame = CGRectMake(10, 10, 50, 50);
     }
     
+    if (aMsg.type == XAIMegType_Ctrl) {
+      
+      [self bubbleCtrlView:aMsg withPosition:65 withView:_bubbleView];
+        
+    }else{
     
-    [self bubbleView:aMsg.context from:isFromMe withPosition:65 withView:_bubbleView];
+        [self bubbleView:aMsg.context from:isFromMe withPosition:65 withView:_bubbleView];
+    }
+    
+    
 
 }
 
@@ -143,6 +152,114 @@
     
 }
 
+
+//泡泡文本带控制
+- (void)bubbleCtrlView:(XAIMeg*)aMsg withPosition:(int)position withView:(UIView*)bulleView{
+    for (UIView *subView in bulleView.subviews) {
+        [subView removeFromSuperview];
+    }
+    
+    
+    //计算大小
+    UIFont *font = [UIFont systemFontOfSize:20];
+    
+    NSDictionary *attribute = @{NSFontAttributeName: font};
+    CGSize size = [aMsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    
+    // build single chat bubble cell with given text
+    UIView *returnView = bulleView;
+    returnView.backgroundColor = [UIColor clearColor];
+    
+    //背影图片
+    UIImage *bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ReceiverTextNodeBkg" ofType:@"png"]];
+    
+    
+    UIEdgeInsets edge = UIEdgeInsetsMake(30,35,25,18);
+    
+    UIImage* image = [bubble resizableImageWithCapInsets:edge];
+    UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:image];
+    
+    
+    
+    //添加文本信息
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(22.0f, 20.0f, size.width+10, size.height+10)];
+    bubbleText.backgroundColor = [UIColor clearColor];
+    bubbleText.font = font;
+    bubbleText.numberOfLines = 0;
+    bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
+    bubbleText.text = aMsg.context;
+    bubbleText.font = font;
+    
+    //按钮的摆放,居中摆放
+    float btnInvert = 2; //间隔
+    float btnWidth = 50;
+    float btnHeight = 30;
+    
+    int btnCount = [aMsg.ctrlInfo count];
+    btnCount  = 3;
+    
+    float totalWidth = bubbleText.frame.size.width+30.0f;
+    float perNor = 0;
+    float needWidth = btnWidth*btnCount + btnInvert*(btnCount - 1) + 20*2;
+    
+    if (totalWidth < needWidth) {
+        //totalWidth = 170 + perNor; //需要放下2个按钮
+        totalWidth = needWidth;
+    }
+    
+
+    float btnStartX = (totalWidth - btnWidth*btnCount - btnInvert*(btnCount-1))*0.5 +perNor;
+    float btnStartY = bubbleText.frame.origin.y + bubbleText.frame.size.height+10.0f;
+    
+    float totalHeight = btnStartY + btnHeight + 5;
+    
+    
+    bubbleImageView.frame = CGRectMake(0.0f, 14.0f, totalWidth , totalHeight);
+    
+    returnView.frame = CGRectMake(position, 0.0f, totalWidth+10.0f, totalHeight+10.0f);
+    
+    [returnView addSubview:bubbleImageView];
+    [returnView addSubview:bubbleText];
+    
+    
+    for (int i = 0; i < btnCount; i++) {
+    
+        
+        XAIMegCtrlInfo* ctrlInfo = [aMsg.ctrlInfo objectAtIndex:i];
+        if ([ctrlInfo isKindOfClass:[XAIMegCtrlInfo class]]) {
+            
+            UIButton* aBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [aBtn setTitle:ctrlInfo.name forState:UIControlStateNormal];
+            aBtn.frame = CGRectMake(btnStartX+btnInvert*i+btnWidth*i, btnStartY,
+                                         btnWidth, btnHeight);
+            
+            [aBtn addTarget:self
+                      action:@selector(btnClick:)
+            forControlEvents:UIControlEventTouchUpInside];
+            
+            aBtn.tag = i;
+
+            [returnView addSubview:aBtn];
+        }
+    }
+    
+}
+
+-(void)btnClick:(id)sender{
+    
+    UIButton* btn = (UIButton*)sender;
+    if (![btn isKindOfClass:[UIButton class]]) return;
+    
+    if (self.delegate != nil
+        && [_delegate respondsToSelector:@selector(chatCell:clickBtnIndex:)]) {
+        
+        [_delegate chatCell:self clickBtnIndex:btn.tag];
+    }
+}
+
+
+
+
 //泡泡语音
 - (void)yuyinView:(NSInteger)logntime from:(BOOL)fromSelf  withPosition:(int)position withView:(UIView *)yuyinView{
     
@@ -184,6 +301,24 @@
     
 }
 
++ (float) allHeight:(XAIMeg*)amsg{
+
+    if ([amsg isKindOfClass:[XAIMeg class]]) {
+        
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:20]};
+        CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+        
+        if (amsg.type == XAIMegType_Ctrl) {
+            return size.height + 44 + 40;
+        }
+        
+        
+        return size.height+44;
+    }
+    
+    return 0;
+}
+
 @end
 
 @implementation XAIChatTimeCell
@@ -221,6 +356,11 @@
 
     _label.text = [format stringFromDate:date];
     
+}
+
++ (float) allHeight{
+
+    return 30;
 }
 
 @end

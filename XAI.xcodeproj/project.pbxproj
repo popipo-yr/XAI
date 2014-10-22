@@ -293,6 +293,7 @@
 		9696856E19D926C4009B1DFD /* lauchnew-3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9696856A19D926C4009B1DFD /* lauchnew-3.5@2x.png */; };
 		9696856F19D926C4009B1DFD /* lauchnew-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9696856B19D926C4009B1DFD /* lauchnew-4.png */; };
 		9696857019D926C4009B1DFD /* lauchnew-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9696856C19D926C4009B1DFD /* lauchnew-4@2x.png */; };
+		9697918519F4ECC000153CF5 /* XAIPacketIMCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 9697918419F4ECC000153CF5 /* XAIPacketIMCtrl.c */; };
 		969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 969D6E6119187BA8002076A0 /* XAIScanVC.m */; };
 		969D6E6B191881B7002076A0 /* login_btn_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E65191881B7002076A0 /* login_btn_nor@2x.png */; };
 		969D6E6D191881B7002076A0 /* login_btn_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969D6E67191881B7002076A0 /* login_btn_sel@2x.png */; };
@@ -873,6 +874,8 @@
 		9696856A19D926C4009B1DFD /* lauchnew-3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lauchnew-3.5@2x.png"; sourceTree = "<group>"; };
 		9696856B19D926C4009B1DFD /* lauchnew-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lauchnew-4.png"; sourceTree = "<group>"; };
 		9696856C19D926C4009B1DFD /* lauchnew-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lauchnew-4@2x.png"; sourceTree = "<group>"; };
+		9697918319F4ECC000153CF5 /* XAIPacketIMCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIPacketIMCtrl.h; sourceTree = "<group>"; };
+		9697918419F4ECC000153CF5 /* XAIPacketIMCtrl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XAIPacketIMCtrl.c; sourceTree = "<group>"; };
 		969D6E6019187BA8002076A0 /* XAIScanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIScanVC.h; sourceTree = "<group>"; };
 		969D6E6119187BA8002076A0 /* XAIScanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIScanVC.m; sourceTree = "<group>"; };
 		969D6E65191881B7002076A0 /* login_btn_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_nor@2x.png"; sourceTree = "<group>"; };
@@ -2292,8 +2295,10 @@
 				1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */,
 				1A1C542D18F1417E00C9FA8B /* XAIPacketCtrl.h */,
 				1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */,
-				96F93A2219A488790057C0FC /* XAIPacketIM.c */,
 				96F93A2319A488790057C0FC /* XAIPacketIM.h */,
+				96F93A2219A488790057C0FC /* XAIPacketIM.c */,
+				9697918319F4ECC000153CF5 /* XAIPacketIMCtrl.h */,
+				9697918419F4ECC000153CF5 /* XAIPacketIMCtrl.c */,
 				961F95D118F79EF5002D4F74 /* XAIPacketACK.h */,
 				961F95D218F79EF5002D4F74 /* XAIPacketACK.c */,
 				C33E77F618F38DF000808391 /* XAIPacketStatus.h */,
@@ -2784,6 +2789,7 @@
 				96E44802191C6B22008A424B /* Reachability.m in Sources */,
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9648E6F3190A3B8100D630D8 /* XAIChangePasswordVC.m in Sources */,
+				9697918519F4ECC000153CF5 /* XAIPacketIMCtrl.c in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
 				968105E71917601A00171BF3 /* XAILight2_CirculeTwo.m in Sources */,
 				968120BC18FF91D80016DDB7 /* XAIDevInfrared.m in Sources */,

@@ -13,6 +13,20 @@
 
 #import "XAIRWProtocol.h"
 
+typedef NS_ENUM(NSUInteger, XAIMegType) {
+
+    XAIMegType_Normal,
+    XAIMegType_Ctrl
+};
+
+@interface XAIMegCtrlInfo : NSObject <XAIDataInfo_DIC>
+
+@property (nonatomic,strong) NSString* name;
+@property (nonatomic,strong)  NSString* topic;
+@property (nonatomic,strong) NSData*  actionData;
+@property (nonatomic,strong) NSDate*  date;
+
+@end
 
 @interface XAIMeg : NSObject <XAIDataInfo_DIC>
 
@@ -23,7 +37,14 @@
 @property (nonatomic,assign) XAITYPEAPSN fromAPSN;
 @property (nonatomic,assign) XAITYPEAPSN toAPSN;
 
+@property (nonatomic,strong) NSArray* ctrlInfo;
+
+@property (nonatomic,assign) XAIMegType type;
+
 @end
+
+
+
 
 @interface XAIUser : XAIStatus{
     

@@ -318,15 +318,12 @@
     XAIMeg *amsg = [_shows  objectAtIndex:indexPath.row];
     
     if ([amsg isKindOfClass:[XAIMeg class]]) {
-        
-        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:20]};
-        CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-        
-        
-        return size.height+44;
+
+        return [XAIChatCell allHeight:amsg];
+
     }else{
     
-        return 30;
+        return [XAIChatTimeCell allHeight];
     }
     
 
@@ -402,7 +399,7 @@
         BOOL isMe = (aMsg.fromLuid == [MQTT shareMQTT].curUser.luid &&
                      aMsg.fromAPSN == [MQTT shareMQTT].curUser.apsn);
         [cell setContent:aMsg isfromeMe:isMe];
-        
+        cell.delegate = self;
         return cell;
         
     }else if([aObj isKindOfClass:[NSDate class]]){
@@ -459,6 +456,31 @@
     
     [self changeTableView];
     
+}
+
+#pragma MARK  chatcell delegate
+-(void)chatCell:(XAIChatCell *)cell clickBtnIndex:(int)index{
+    
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    
+    XAIMeg* aObj = [_shows objectAtIndex:indexPath.row];
+    
+    if ([aObj isKindOfClass:[XAIMeg class]] && [aObj.ctrlInfo count] > index) {
+    
+        XAIMegCtrlInfo* ctrl = [aObj.ctrlInfo objectAtIndex:index];
+        
+        if (ctrl != nil && [ctrl isKindOfClass:[XAIMegCtrlInfo class]]) {
+            
+            [[MQTT shareMQTT].client publish:((void*)[ctrl.actionData bytes])
+                                        size:[ctrl.actionData length]
+                                     toTopic:ctrl.topic
+                                     withQos:2
+                                      retain:false];
+        }
+    
+    }
+
+
 }
 
 @end

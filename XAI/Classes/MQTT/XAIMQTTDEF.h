@@ -62,6 +62,8 @@ typedef  enum XAI_DATA_TYPE{
     XAI_DATA_TYPE_LINKAGE = 0x10, //联动使用的类型
     
     XAI_DATA_TYPE_DELAY = 0x11, //时间
+    
+    XAI_DATA_TYPE_BIN_BUTTON = 0x12, //im消息中 带控制
         
         
 }XAI_DATA_TYPE;

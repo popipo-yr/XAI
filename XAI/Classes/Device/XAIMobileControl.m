@@ -12,6 +12,7 @@
 #import "XAIPacketCtrl.h"
 #import "XAIPacketACK.h"
 #import "XAIPacketIM.h"
+#import "XAIPacketIMCtrl.h"
 
 
 #define _IM_ID 8
@@ -142,12 +143,61 @@ static XAIMobileControl* __S_MSGSAVE = nil;
 //    newMsg.toAPSN = [MQTT shareMQTT].curUser.apsn;
 //    newMsg.toLuid = [MQTT shareMQTT].curUser.luid;
     
+    
+    
     _xai_packet_param_data* data = getParamDataFromParamIM(IM, 0);
-    if (data != NULL && (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) && data->data_len > 0){
+
+    
+    if (data != NULL &&  data->data_len > 0){
         
-        newMsg.context = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
+        if (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) {
+            
+            newMsg.context = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
+            
+        }
     }
     
+    
+    
+    NSMutableArray* ctrls = [[NSMutableArray alloc] init];
+    
+
+    data = data->next;
+    while (data != NULL && data->data_len > 0) {
+        
+        if(data->data_type == XAI_DATA_TYPE_BIN_BUTTON){
+            
+            _xai_packet_param_IM_Ctrl* im_ctrl = generateParamIMCtrFromData(data->data, data->data_len);
+            
+            XAIMegCtrlInfo* ctrInfo = [[XAIMegCtrlInfo alloc] init];
+            
+            ctrInfo.name = [[NSString alloc] initWithBytes:im_ctrl->name
+                                                      length:sizeof(im_ctrl->name)
+                                                    encoding:NSUTF8StringEncoding];
+            
+            ctrInfo.actionData = [NSData dataWithBytes:im_ctrl->data length:im_ctrl->dataSize];
+            
+            
+            ctrInfo.topic = [[NSString alloc] initWithBytes:im_ctrl->topic length:sizeof(im_ctrl->topic) encoding:NSUTF8StringEncoding];
+            
+            ctrInfo.date = [NSDate dateWithTimeIntervalSince1970:im_ctrl->time];
+            
+            [ctrls addObject:ctrInfo];
+            
+            data =  data->next;
+            
+        }else{
+            
+            break;
+        }
+    }
+    
+    if ([ctrls count] > 0) {
+        newMsg.type = XAIMegType_Ctrl;
+        newMsg.ctrlInfo = ctrls;
+    }else{
+        newMsg.type = XAIMegType_Normal;
+    }
     
     /*防止被多次写入*/
     if (__S_MSGSAVE == self) {
