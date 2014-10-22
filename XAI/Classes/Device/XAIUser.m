@@ -213,6 +213,7 @@
 #define _K_Date @"_K_Date"
 #define _K_Context @"_K_Context"
 #define _K_Ctrls @"_K_Ctrls"
+#define _K_Type @"_K_type"
 
 @implementation XAIMeg
 
@@ -232,6 +233,7 @@
     [dic setObject:[NSNumber numberWithLongLong:_fromLuid] forKey:_K_FromLuid];
     [dic setObject:[NSNumber numberWithLong:_toAPSN] forKey:_K_ToApsn];
     [dic setObject:[NSNumber numberWithLongLong:_toLuid] forKey:_K_ToLuid];
+    [dic setObject:[NSNumber numberWithInt:_type] forKey:_K_Type];
     
     NSMutableArray* writeAry = [[NSMutableArray alloc] init];
 
@@ -258,6 +260,7 @@
     _fromLuid = [[dic objectForKey:_K_FromLuid] longLongValue];
     _toAPSN = [[dic objectForKey:_K_ToApsn] longValue];
     _toLuid = [[dic objectForKey:_K_ToLuid] longLongValue];
+    _type = [[dic objectForKey:_K_Type] intValue];
     
     NSMutableArray* ctrls  = [[NSMutableArray alloc] init];
     
