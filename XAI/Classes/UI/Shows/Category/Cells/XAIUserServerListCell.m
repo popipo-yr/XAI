@@ -64,8 +64,9 @@
         UIImage* msgNumImg = [UIImage imageWithFile:@"msgNum2.png"];
         CGSize numSize = msgNumImg.size;
         
-        float y = (self.frame.size.height-numSize.height)*0.5f;
-        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
+        float y = (self.contentView.frame.size.height - numSize.height)*0.5f + 5.0f;
+        float x = [UIScreen mainScreen].bounds.size.width - 15 - numSize.width;
+        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(x
                                                                   ,y
                                                                   ,numSize.width
                                                                   ,numSize.height)];

@@ -49,7 +49,7 @@
     if (!isIOS7) {
         
         backItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStyleBordered target:nil action:nil];
-        [backItem setBackButtonBackgroundImage:[[UIImage imageNamed:@"nav_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 0)]
+        [backItem setBackButtonBackgroundImage:[[UIImage imageNamed:@"back_nor"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 0)]
                                       forState:UIControlStateNormal
                                     barMetrics:UIBarMetricsDefault];
         
@@ -304,14 +304,18 @@
 //        [[UINavigationBar appearance] setBarTintColor:
 //         [UIColor colorWithRed:255/256.0f green:91/256.0f blue:0 alpha:1]];
         
-        [[UINavigationBar appearance] setBarTintColor:
-                [UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1]];
-
+//        [[UINavigationBar appearance] setBarTintColor:
+//                [UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1]];
+//
+//        
+//        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+//        view.backgroundColor=[UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1];
+//        
+//        [self.view addSubview:view];
         
-        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
-        view.backgroundColor=[UIColor colorWithRed:54.0f/256.0 green:55.0f/256.0 blue:57.0/256.0 alpha:1];
         
-        [self.view addSubview:view];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setShadowImage:[UIImage new]];
         
     }else{
         

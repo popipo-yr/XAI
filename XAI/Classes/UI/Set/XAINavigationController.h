@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XAINavigationController : UINavigationController
+@protocol  XAINavigationControllerStatus
+-(BOOL)statusDefault;
+@end
+
+@interface XAINavigationController : UINavigationController{
+
+}
+
+@property (nonatomic,assign) BOOL statusDefault;
+
 
 @end

@@ -61,9 +61,37 @@
     _user = user;
 }
 
+-(BOOL)statusDefault{
+
+    return YES;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIImage* backImg = [UIImage imageWithFile:@"back_sel.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+        
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(back:)];
+
+    [backItem ios6cleanBackgroud];
+    
+    [self.navigationItem setLeftBarButtonItem:backItem];
+    
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
+    
+
+    
     
     [self.tableView setSeparatorColor:[UIColor clearColor]];
     
@@ -113,6 +141,11 @@
     [curUser readIMEndLuid:_user.luid apsn:_user.apsn];
     
      [super viewWillDisappear:animated];
+}
+
+-(void)back:(id)sender{
+
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 
@@ -223,10 +256,6 @@
 }
 
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    
-    return UIStatusBarStyleLightContent;
-}
 
 -(void)viewDidAppear:(BOOL)animated{
     

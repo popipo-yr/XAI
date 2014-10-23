@@ -10,19 +10,26 @@
 
 #import "XAIUserService.h"
 
-@interface XAIUserAddVC : XAITableViewController
-<UIAlertViewDelegate,XAIUserServiceDelegate>{
+@interface XAIUserAddVC : UIViewController
+<UIAlertViewDelegate,XAIUserServiceDelegate,UITextFieldDelegate>{
 
     NSArray* _addUserInfoAry;
     
-    UITextField* _userNameTF;
-    UITextField* _userPawdTF;
-    UITextField* _userPawdRepTF;
     
     XAIUserService* _userService;
     
+    UIActivityIndicatorView* _activityView;
+    
 }
 
-+(XAIUserAddVC*)create;
+@property (nonatomic,strong) IBOutlet UITextField* userNameTF;
+@property (nonatomic,strong) IBOutlet UITextField* userPawdTF;
+@property (nonatomic,strong) IBOutlet UITextField* userPawdRepTF;
+@property (nonatomic,strong) IBOutlet UIButton*  sexBtn;
 
++(XAIUserAddVC*)create;
+- (IBAction)sexClick:(id)sender;
+
+- (IBAction)headImgClick:(id)sender;
+- (IBAction)okBtnClick:(id)sender;
 @end

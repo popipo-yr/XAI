@@ -103,7 +103,7 @@
     float moveN = 0;
     if ([UIScreen is_35_Size]) {
         moveB = -10;
-        moveI = -25;
+        moveI = -30;
         moveN = 10;
     }
     

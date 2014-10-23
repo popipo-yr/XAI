@@ -83,17 +83,21 @@
     if ([[MQTT shareMQTT].curUser isAdmin]) {
      
         UIImage* addImg = [UIImage imageWithFile:@"add_nor.png"] ;
+        //UIImage* addImg_sel = [UIImage imageWithFile:@"add_sel.png"];
         
         if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
             
             addImg = [addImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         }
+    
         
         UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addImg
                                                                     style:UIBarButtonItemStylePlain
                                                                    target:self
                                                                    action:@selector(addOneUser:)];
-        
+//        [addItem setBackButtonBackgroundImage:[UIImage imageWithFile:@"add_sel.png"]
+//                                     forState:UIControlStateSelected
+//                                   barMetrics:UIBarMetricsDefault];
         
         [addItem ios6cleanBackgroud];
         
@@ -116,6 +120,8 @@
     [self updateShowDatas];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
+    
+    _nameLabel.text = [MQTT shareMQTT].curUser.name;
     
     _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTipNum) userInfo:nil repeats:true];
 
@@ -254,6 +260,7 @@
         [cell setInfo:aUser];
     }
     
+    [cell removeDelBtn];
     if ([indexPath row] != 0 && [[MQTT shareMQTT].curUser isAdmin]) {
         [cell setDelBtn];
     }
@@ -393,7 +400,7 @@ static SWTableViewCell* curSWCell;
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 63.0;
+    return 78.0;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView

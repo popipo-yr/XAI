@@ -24,8 +24,14 @@
                                            normalIcon:[UIImage imageWithFile:@"del_nor.png"]
                                          selectedIcon:[UIImage imageWithFile:@"del_sel.png"]];
     
-    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:40];
+    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:70];
 }
+
+- (void) removeDelBtn{
+        
+    [self setRightUtilityButtons:nil];
+}
+
 - (void) setEditBtn{
     
     // Add utility buttons

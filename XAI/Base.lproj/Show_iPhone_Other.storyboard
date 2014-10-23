@@ -85,9 +85,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YI5-7M-VNY">
-                                        <rect key="frame" x="0.0" y="67" width="320" height="362"/>
+                                        <rect key="frame" x="0.0" y="139" width="320" height="290"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="qKg-je-DN0" id="lXQ-Ji-Zb7"/>
                                             <outlet property="delegate" destination="qKg-je-DN0" id="hGF-cQ-bbU"/>
@@ -125,6 +127,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="yPZ-CC-sNF">
+                                <rect key="frame" x="0.0" y="-64" width="320" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_tbg.png" id="7zB-21-5Ua">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -138,53 +151,114 @@
             </objects>
             <point key="canvasLocation" x="-1967" y="-1913"/>
         </scene>
-        <!--XAIUserAddVC-->
-        <scene sceneID="fLP-hm-cJw">
+        <!--User AddVC-->
+        <scene sceneID="9MA-ma-V9L">
             <objects>
-                <tableViewController storyboardIdentifier="XAIUserAddVCID" id="r9J-Yd-Yha" userLabel="XAIUserAddVC" customClass="XAIUserAddVC" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="C1J-cg-YiY">
+                <viewController storyboardIdentifier="XAIUserAddVCID" id="FfJ-G2-Idm" customClass="XAIUserAddVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5ga-qR-PV6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="XAIUserAddVCCellID" id="cdi-cm-ra9" customClass="XAIChangeCell">
-                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cdi-cm-ra9" id="U0E-ox-emY">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" id="qvv-dE-5cX">
-                                            <rect key="frame" x="111" y="7" width="179" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tl6-tF-IZD">
-                                            <rect key="frame" x="20" y="11" width="73" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="twD-v3-I9r">
+                                <rect key="frame" x="0.0" y="-64" width="320" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_tbg.png" id="o7b-3I-NNa">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-admin.png" id="kZG-Mc-uQL">
+                                        <rect key="frame" x="125" y="98" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_tbg_t.png" id="Cem-la-7QL">
+                                        <rect key="frame" x="88" y="217" width="144" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5bn-84-niL">
+                                        <rect key="frame" x="0.0" y="168" width="320" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="Xdt-SM-B4J">
+                                <rect key="frame" x="0.0" y="191" width="320" height="190"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_cbg.png" id="pfo-qd-GuJ">
+                                        <rect key="frame" x="0.0" y="15" width="320" height="174"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="o9j-Be-wGf">
+                                        <rect key="frame" x="128" y="6" width="164" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Rgc-RX-GUP">
+                                        <rect key="frame" x="128" y="55" width="164" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fSE-Lm-dah">
+                                        <rect key="frame" x="128" y="105" width="164" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uQm-3T-PTr">
+                                        <rect key="frame" x="128" y="153" width="90" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="sex_man.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="sex_woman.png"/>
+                                        <connections>
+                                            <action selector="sexClick:" destination="FfJ-G2-Idm" eventType="touchUpInside" id="ZQk-V6-V4x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WNG-Iv-OV8">
+                                        <rect key="frame" x="247" y="152" width="45" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="headImg.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="headImgClick:" destination="FfJ-G2-Idm" eventType="touchUpInside" id="qXQ-Nk-9oZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qWX-Qh-6WD">
+                                <rect key="frame" x="57" y="433" width="206" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="useradd_ok_nor.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="useradd_ok_sel.png"/>
                                 <connections>
-                                    <outlet property="lable" destination="tl6-tF-IZD" id="VDL-yl-HvQ"/>
-                                    <outlet property="textFiled" destination="qvv-dE-5cX" id="azY-9K-zyc"/>
+                                    <action selector="okBtnClick:" destination="FfJ-G2-Idm" eventType="touchUpInside" id="cfI-Q1-3sP"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="r9J-Yd-Yha" id="rmd-dm-zTp"/>
-                            <outlet property="delegate" destination="r9J-Yd-Yha" id="k0K-mk-uqQ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="添加用户信息" id="l7F-2j-GQ6"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6HA-97-z7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="sexBtn" destination="uQm-3T-PTr" id="0ho-Lj-h3n"/>
+                        <outlet property="userNameTF" destination="o9j-Be-wGf" id="grl-wy-sbZ"/>
+                        <outlet property="userPawdRepTF" destination="fSE-Lm-dah" id="EUi-Pv-Ip4"/>
+                        <outlet property="userPawdTF" destination="Rgc-RX-GUP" id="Sb4-w5-FOD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ub-o8-oCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="-1039"/>
+            <point key="canvasLocation" x="-66" y="-812"/>
         </scene>
         <!--XAIDevAddVC - 设备添加-->
         <scene sceneID="8SL-ci-gom">
@@ -233,12 +307,22 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg.png" width="320" height="568"/>
-        <image name="chat_input_bg.png" width="321" height="48"/>
-        <image name="chat_send_nor.png" width="67" height="30"/>
-        <image name="chat_send_sel.png" width="67" height="30"/>
+        <image name="Head-admin.png" width="104" height="105"/>
+        <image name="bg.png" width="356" height="633"/>
+        <image name="chat_input_bg.png" width="356" height="42"/>
+        <image name="chat_send_nor.png" width="97" height="27"/>
+        <image name="chat_send_sel.png" width="97" height="27"/>
+        <image name="chat_tbg.png" width="356" height="156"/>
+        <image name="headImg.png" width="28" height="28"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>
+        <image name="sex_man.png" width="78" height="28"/>
+        <image name="sex_woman.png" width="78" height="28"/>
+        <image name="useradd_cbg.png" width="356" height="174"/>
+        <image name="useradd_ok_nor.png" width="206" height="38"/>
+        <image name="useradd_ok_sel.png" width="206" height="38"/>
+        <image name="useradd_tbg.png" width="356" height="206"/>
+        <image name="useradd_tbg_t.png" width="144" height="23"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

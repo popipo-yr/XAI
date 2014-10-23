@@ -42,6 +42,15 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     
+    
+    if ([self.visibleViewController respondsToSelector:@selector(statusDefault)]) {
+        
+        id<XAINavigationControllerStatus> obj = (id<XAINavigationControllerStatus>)self.visibleViewController;
+        if ([obj statusDefault]) {
+           return UIStatusBarStyleDefault;
+        }
+    }
+    
     return UIStatusBarStyleLightContent;
 }
 

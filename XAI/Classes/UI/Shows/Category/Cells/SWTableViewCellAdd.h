@@ -14,4 +14,6 @@
 - (void) setEditBtn;
 - (void) setSaveBtn;
 
+- (void) removeDelBtn;
+
 @end

@@ -34,6 +34,8 @@
     
 }
 
+@property (strong, nonatomic) IBOutlet UIImageView *headImg;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 +(UIViewController*)create;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VLG-ZO-7am">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VLG-ZO-7am">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -16,6 +16,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="6R9-rX-pgN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatTip.png" id="mBj-Zi-Isb">
+                                <rect key="frame" x="0.0" y="397" width="320" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cg_center_spe.png" id="ZGD-Vr-GHF">
                                 <rect key="frame" x="0.0" y="75" width="315" height="313"/>
@@ -67,10 +71,6 @@
                                     <action selector="userBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ulT-B2-Gn2"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatTip.png" id="mBj-Zi-Isb">
-                                <rect key="frame" x="111" y="422" width="98" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
                                 <rect key="frame" x="194" y="421" width="27" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -486,34 +486,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="gP4-7v-jmd">
+                                <rect key="frame" x="0.0" y="-64" width="320" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiaohu_tbg.png" id="kZ1-Gb-OI2">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-admin.png" id="lPW-qc-2CE">
+                                        <rect key="frame" x="125" y="98" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADMIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U28-dz-NRd">
+                                        <rect key="frame" x="0.0" y="168" width="320" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vt9-um-Kx3">
-                                <rect key="frame" x="15" y="0.0" width="292" height="568"/>
+                                <rect key="frame" x="0.0" y="137" width="320" height="424"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIUserServerListCellID" rowHeight="63" id="Ceh-8b-YYS" userLabel="light Cell" customClass="XAIUserServerListCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIUserServerListCellID" rowHeight="78" id="Ceh-8b-YYS" userLabel="light Cell" customClass="XAIUserServerListCell">
                                         <rect key="frame" x="0.0" y="86" width="292" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ceh-8b-YYS" id="3n4-cS-0H9">
                                             <rect key="frame" x="0.0" y="0.0" width="292" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_close.png" id="SEo-ds-SZn">
-                                                    <rect key="frame" x="0.0" y="5" width="292" height="51"/>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_close.png" id="SEo-ds-SZn">
+                                                    <rect key="frame" x="0.0" y="5" width="320" height="66"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pcb-n6-XdW">
-                                                    <rect key="frame" x="48" y="19" width="200" height="24"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pcb-n6-XdW">
+                                                    <rect key="frame" x="68" y="24" width="200" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last operation time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e96-0x-ZU1">
-                                                    <rect key="frame" x="38" y="33" width="220" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last operation time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e96-0x-ZU1">
+                                                    <rect key="frame" x="68" y="45" width="220" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -534,6 +556,18 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xm8-Sj-sPB">
+                                                    <rect key="frame" x="0.0" y="77" width="500" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-xai.png" id="oXD-hH-Dxb">
+                                                    <rect key="frame" x="10" y="15" width="46" height="46"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -550,8 +584,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="用户列表" id="kuq-qx-ye6"/>
+                    <navigationItem key="navigationItem" id="kuq-qx-ye6"/>
                     <connections>
+                        <outlet property="headImg" destination="lPW-qc-2CE" id="fmP-qH-9cw"/>
+                        <outlet property="nameLabel" destination="U28-dz-NRd" id="f4X-dQ-ecT"/>
                         <outlet property="tableView" destination="vt9-um-Kx3" id="Hy9-Su-Je2"/>
                     </connections>
                 </viewController>
@@ -581,19 +617,22 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Head-admin.png" width="104" height="105"/>
+        <image name="Head-xai.png" width="46" height="46"/>
         <image name="add_nor.png" width="29" height="28"/>
-        <image name="add_sel.png" width="28" height="27"/>
-        <image name="bg.png" width="320" height="568"/>
+        <image name="add_sel.png" width="30" height="28"/>
+        <image name="bg.png" width="356" height="633"/>
         <image name="cell_close.png" width="359" height="65"/>
-        <image name="cg_center_spe.png" width="262" height="262"/>
-        <image name="cg_spe.png" width="297" height="1"/>
-        <image name="cg_usr_nor.png" width="78" height="79"/>
-        <image name="cg_usr_sel.png" width="78" height="79"/>
-        <image name="chatTip.png" width="91" height="91"/>
+        <image name="cg_center_spe.png" width="291" height="292"/>
+        <image name="cg_spe.png" width="314" height="1"/>
+        <image name="cg_usr_nor.png" width="86" height="87"/>
+        <image name="cg_usr_sel.png" width="86" height="87"/>
+        <image name="chatTip.png" width="356" height="171"/>
         <image name="dw-no.png" width="320" height="145"/>
-        <image name="font_jiaohu.png" width="76" height="19"/>
+        <image name="font_jiaohu.png" width="84" height="21"/>
         <image name="inf-no.png" width="320" height="146"/>
-        <image name="msgNum1.png" width="27" height="22"/>
+        <image name="jiaohu_tbg.png" width="356" height="206"/>
+        <image name="msgNum1.png" width="29" height="24"/>
         <image name="switch-no.png" width="320" height="146"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

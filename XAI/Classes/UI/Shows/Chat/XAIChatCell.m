@@ -180,10 +180,11 @@
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:image];
     
     
+    float perNor = 12.0f; //前方不平整的
     
     //添加文本信息
-    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(22.0f, 20.0f, size.width+10, size.height+10)];
-    bubbleText.backgroundColor = [UIColor clearColor];
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(perNor+10, 20.0f, size.width+10, size.height+10)];
+    bubbleText.backgroundColor = [UIColor yellowColor];
     bubbleText.font = font;
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
@@ -192,15 +193,13 @@
     
     //按钮的摆放,居中摆放
     float btnInvert = 2; //间隔
-    float btnWidth = 50;
-    float btnHeight = 30;
+    float btnWidth = 56;
+    float btnHeight = 24;
     
     int btnCount = [aMsg.ctrlInfo count];
-    btnCount  = 3;
     
-    float totalWidth = bubbleText.frame.size.width+30.0f;
-    float perNor = 0;
-    float needWidth = btnWidth*btnCount + btnInvert*(btnCount - 1) + 20*2;
+    float totalWidth = bubbleText.frame.size.width+perNor;
+    float needWidth = btnWidth*btnCount + btnInvert*(btnCount - 1) + perNor + 20;
     
     if (totalWidth < needWidth) {
         //totalWidth = 170 + perNor; //需要放下2个按钮
@@ -208,7 +207,7 @@
     }
     
 
-    float btnStartX = (totalWidth - btnWidth*btnCount - btnInvert*(btnCount-1))*0.5 +perNor;
+    float btnStartX = (totalWidth - btnWidth*btnCount - btnInvert*(btnCount-1))*0.5 +perNor*0.5;
     float btnStartY = bubbleText.frame.origin.y + bubbleText.frame.size.height+10.0f;
     
     float totalHeight = btnStartY + btnHeight + 5;
@@ -223,8 +222,8 @@
     
     
     for (int i = 0; i < btnCount; i++) {
-    
         
+    
         XAIMegCtrlInfo* ctrlInfo = [aMsg.ctrlInfo objectAtIndex:i];
         if ([ctrlInfo isKindOfClass:[XAIMegCtrlInfo class]]) {
             
@@ -238,8 +237,32 @@
             forControlEvents:UIControlEventTouchUpInside];
             
             aBtn.tag = i;
+            
+            if (btnCount == 1) {
+                
+                [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_center.png"]
+                                forState:UIControlStateNormal];
+                
+            }else{
+                
+                if (i == 0) {
+                    
+                    [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_left.png"]
+                                    forState:UIControlStateNormal];
+                }else if(i == btnCount){
+                    [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_ringt.png"]
+                                    forState:UIControlStateNormal];
+
+                }else{
+                    [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_center.png"]
+                                    forState:UIControlStateNormal];
+                }
+            
+            }
 
             [returnView addSubview:aBtn];
+            
+            
         }
     }
     

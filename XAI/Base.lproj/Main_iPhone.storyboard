@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -93,11 +93,6 @@
                                 <rect key="frame" x="87" y="48" width="147" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xai_icon.png" highlightedImage="xai_icon.png" id="rYV-vu-FMO">
-                                        <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lJA-Ss-RGZ">
                                         <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -171,10 +166,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hoodo.png" id="vhr-2j-Bvr">
-                                <rect key="frame" x="107" y="518" width="107" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -193,16 +184,14 @@
     </scenes>
     <resources>
         <image name="bg.png" width="320" height="568"/>
-        <image name="hoodo.png" width="107" height="31"/>
-        <image name="login_btn_nor.png" width="199" height="34"/>
-        <image name="login_btn_sel.png" width="398" height="67"/>
-        <image name="login_ip.png" width="231" height="29"/>
-        <image name="login_other_bg.png" width="231" height="154"/>
+        <image name="login_btn_nor.png" width="221" height="36"/>
+        <image name="login_btn_sel.png" width="221" height="36"/>
+        <image name="login_ip.png" width="258" height="36"/>
+        <image name="login_other_bg.png" width="257" height="171"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>
-        <image name="xai_icon.png" width="151" height="151"/>
-        <image name="xai_icon_nor.png" width="151" height="151"/>
-        <image name="xai_icon_sel.png" width="151" height="151"/>
+        <image name="xai_icon_nor.png" width="167" height="167"/>
+        <image name="xai_icon_sel.png" width="167" height="167"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
