@@ -34,15 +34,28 @@
     return vc;
 }
 
+- (IBAction)changePasw:(id)sender {
+    
+    
+    XAIChangePasswordVC* pawVC = [self.storyboard
+                                  instantiateViewControllerWithIdentifier:@"XAIChangePasswordVCID"];
+    
+    [pawVC setOldPwd:_userInfo.pawd];
+    [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
+    [pawVC setBarTitle:NSLocalizedString(@"UserPawdChange", nil)];
+    
+    _pawVC = pawVC;
+    
+    [self.navigationController pushViewController:pawVC animated:YES];
+
+}
+
 
 - (id) initWithCoder:(NSCoder *) coder{
 
     self = [super initWithCoder:coder];
     
     if (self) {
-        
-        _userItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"LabelUserName", nil),
-                      NSLocalizedString(@"LabelPawd", nil),nil];
         
         _userInfo = [MQTT shareMQTT].curUser;
         
@@ -62,26 +75,12 @@
     _userService = nil;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        
-        _userItems = [[NSArray alloc] initWithObjects:NSLocalizedString(@"LabelUserName", nil),
-                      NSLocalizedString(@"LabelPawd", nil),nil];
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     _userInfo = [MQTT shareMQTT].curUser;
-
-    
-    [self.tableView reloadData];
     
 }
 
@@ -91,6 +90,9 @@
     [super viewWillAppear:animated];
     
     _swipes = [[NSArray alloc] initWithArray:[self openSwipe]];
+    
+    _nameLab.text = _userInfo.name;
+    _pawdLab.text = _userInfo.pawd;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -140,61 +142,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) changeHomeName:(NSString*)newName{
-    
-    _homeName = newName;
-}
 
-- (void) changeUserName:(NSString*)newName{
-    
-    BOOL hasErr = true;
-    
-    NSString* errTip = nil;
-    
-    do {
-        
-        if (nil == newName ||[newName isEqualToString:@""]) {
-            
-            errTip = NSLocalizedString(@"UserChangeNameNULL", nil);
-            break;
-        }
-        
-        if (![newName onlyHasNumberAndChar]) {
-            
-            errTip = NSLocalizedString(@"UserChangeNameErr", @"username string is not  require style");
-            break;
-        }
-        
-        if (![newName isNameOrPawdLength]) {
-            
-            errTip = NSLocalizedString(@"UserChangeNameLengthErr", @"username string leangth is not require length");
-            break;
-        }
-        
-        hasErr = false;
-        
-    } while (0);
-    
-    
-    if (hasErr) {
-        
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:errTip
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
-                                              otherButtonTitles:nil];
-        
-        [alert show];
-        return;
-        
-        
-    }
-    
 
-    _newName = newName;
-    [_userService changeUser:_userInfo.luid withName:newName];
-    [_nameVC starAnimal];
-}
 
 - (void) changePassword:(NSString*)newPwd{
     
@@ -217,146 +166,8 @@
 }
 
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
-    return 3;
-}
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSString* cellID = @"XAISetVCCellID";
-    
-    XAIChangeCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (cell == nil || ![cell isKindOfClass:[XAIChangeCell class]]) {
-        cell = [[XAIChangeCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:cellID];
-    }
-    
-    
-    
-    if ([indexPath row] == _key_home_index) {
-        
-        cell.lable.text = NSLocalizedString(@"Home", nil);
-        
-        [cell setTextFiledWithLable:@"XAI智能的家"];
-        
-    }else if ([indexPath row] == _key_name_index) {
-        
-        cell.lable.text = NSLocalizedString(@"UserName", nil);
-        
-        [cell setTextFiledWithLable:_userInfo.name];
-        
-    }else if([indexPath row] == _key_pawd_index){
-        
-        cell.lable.text = NSLocalizedString(@"UserPawd", nil);
-        
-        [cell setTextFiledWithLable:_userInfo.pawd];
-        [cell.textFiled setSecureTextEntry:YES];
-        
-        
-    }
-    
-    cell.textFiled.enabled = false;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if ([indexPath row] == _key_home_index) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }else{
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if ([indexPath row] == _key_home_index) {
-        
-        return;
-        
-        XAIChangeNameVC* nameVC = [self.storyboard
-                                   instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
-        
-        [nameVC setOneLabName:NSLocalizedString(@"Home", nil)
-                   OneTexName:_userInfo.name
-                   TwoLabName:NSLocalizedString(@"HomeNewName", nil)];
-        [nameVC setOKClickTarget:self Selector:@selector(changeHomeName:)];
-        [nameVC setBarTitle:NSLocalizedString(@"HomeNameChange", nil)];
-        
-        _homeVC = nameVC;
-        
-        [self.navigationController pushViewController:nameVC animated:YES];
-        
-    }else if ([indexPath row] == _key_name_index) {
-        
-        XAIChangeNameVC* nameVC = [self.storyboard
-                                   instantiateViewControllerWithIdentifier:@"XAIChangeNameVCID"];
-        
-        [nameVC setOneLabName:NSLocalizedString(@"UserName", nil)
-                   OneTexName:_userInfo.name
-                   TwoLabName:NSLocalizedString(@"UserNewName", nil)];
-        [nameVC setOKClickTarget:self Selector:@selector(changeUserName:)];
-        [nameVC setBarTitle:NSLocalizedString(@"UserNameChange", nil)];
-        
-        _nameVC = nameVC;
-        
-        [self.navigationController pushViewController:nameVC animated:YES];
-        
-    }else if ([indexPath row] == _key_pawd_index){
-        
-        
-        XAIChangePasswordVC* pawVC = [self.storyboard
-                                      instantiateViewControllerWithIdentifier:@"XAIChangePasswordVCID"];
-        
-        [pawVC setOldPwd:_userInfo.pawd];
-        [pawVC setOKClickTarget:self Selector:@selector(changePassword:)];
-        [pawVC setBarTitle:NSLocalizedString(@"UserPawdChange", nil)];
-        
-        _pawVC = pawVC;
-        
-        [self.navigationController pushViewController:pawVC animated:YES];
-    }
-    
-    
-}
-
-
--(void)userService:(XAIUserService *)userService changeUserName:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
-    
-    if (isSuccess) {
-        
-        [_nameVC endOkEvent];
-        _userInfo.name = _newName;
-        
-        [self.tableView reloadData];
-        
-    }else{
-        
-        if (errcode == XAI_ERROR_NAME_EXISTED) {
-            
-            [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeExist", nil)];
-        }else{
-        
-            [_nameVC endFailEvent:NSLocalizedString(@"UserNameChangeFaild", nil)];
-        }
-    }
-    
-    [_nameVC stopAnimal];
-}
 
 -(void)userService:(XAIUserService *)userService changeUserPassword:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
     
@@ -365,7 +176,7 @@
         [_pawVC endOkEvent];
         _userInfo.pawd = _newPwd;
         
-        [self.tableView reloadData];
+        _pawdLab.text = _newPwd;
         
     }else{
         

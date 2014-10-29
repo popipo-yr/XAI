@@ -129,6 +129,9 @@
     [XAIAlert shareAlert];
     
     _datePicker = [[UIDatePicker alloc] init];
+    
+    
+    [KeyboardStateListener sharedInstance];
 
     return YES;
 }

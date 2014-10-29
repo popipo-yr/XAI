@@ -15,26 +15,24 @@
 
 #define _SI_SetVC @"show_set"
 
-@interface XAISetVC : XAITableViewController
-<UITableViewDataSource,UITableViewDelegate,XAIUserServiceDelegate>{
+@interface XAISetVC : UIViewController
+<XAIUserServiceDelegate>{
 
-
-    NSArray*  _userItems;
     
     XAIUserService* _userService;
     
     XAIUser* _userInfo;
     
-    NSString* _newName;
     NSString* _newPwd;
-    NSString* _homeName;
     
-    XAIChangeNameVC* _nameVC;
-    XAIChangeNameVC* _homeVC;
+
     XAIChangePasswordVC* _pawVC;
     NSArray* _swipes;
 }
+@property (strong, nonatomic) IBOutlet UILabel *nameLab;
+@property (strong, nonatomic) IBOutlet UITextField *pawdLab;
 
 + (UIViewController*) create;
+- (IBAction)changePasw:(id)sender;
 
 @end

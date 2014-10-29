@@ -19,29 +19,43 @@
 {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
-    self.clearsSelectionOnViewWillAppear = YES;
     
     
-    UIBarButtonItem* okItem = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"BarItemOK", nil)
-                               style:UIBarButtonItemStyleDone
-                               target:self
-                               action:@selector(okClick:)];
+    self.navigationItem.title = @"";
     
-    [okItem ios6cleanBackgroud];
-    
-    self.navigationItem.rightBarButtonItem = okItem;
-    
-    self.navigationItem.title = _barItemTitle;
-    
+    _activityView = [[UIActivityIndicatorView alloc] init];
     [self.view addSubview:_activityView];
     _activityView.frame = CGRectMake(_activityView.frame.origin.x,
                                      _activityView.frame.origin.y - 130,
                                      _activityView.frame.size.width,
                                      _activityView.frame.size.height);
+    
+    
+    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(back)];
+    
+    [backItem ios6cleanBackgroud];
+    
+    [self.navigationItem setLeftBarButtonItem:backItem];
+    
+
+    _nePwdRepTextField.delegate = self;
+    _nePwdTextField.delegate = self;
+    _oldPwdTextField.delegate = self;
+    
+    
+    [_nePwdRepTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_nePwdTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_oldPwdTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,95 +64,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) back{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
-    return 3;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSString* cellID = @"XAIChangePasswordVCCellID";
-    
-    XAIChangeCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if (cell == nil || ![cell isKindOfClass:[XAIChangeCell class]]) {
-        cell = [[XAIChangeCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:cellID];
-    }
-    
-    
-    
-    if ([indexPath row] == 0) {
-        
-        cell.lable.text = NSLocalizedString(@"TipOldPawd", nil);
-        
-//        [cell setTextFiledWithLable:_oldPwd];
-//        
-//        NSMutableString* dottedPassword = [[NSMutableString alloc] init];
-//        
-//        if (_oldPwd != nil) {
-//            
-//            for (int i = 0; i < [_oldPwd length] -1 ; i++)
-//            {
-//                [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
-//            }
-//            
-//            NSRange range;
-//            range.length = 1;
-//            range.location = [_oldPwd length] - 1;
-//            
-//            [dottedPassword appendString:[_oldPwd substringWithRange:range]];
-//        }
-//        
-//
-//        
-//        [cell setTextFiledWithLable:dottedPassword];
-        
-        
-        _oldPwdTextField = cell.textFiled;
-        [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
-        
-        cell.textFiled.secureTextEntry = YES;
-        
-        
-    }else if([indexPath row] == 1){
-        
-        cell.lable.text = NSLocalizedString(@"TipNewPawd", nil);
-        
-        _newPwdTextField = cell.textFiled;
-        [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
-        
-        cell.textFiled.secureTextEntry = YES;
-        
-    }else if([indexPath row] == 2){
-        
-        cell.lable.text = NSLocalizedString(@"TipRepPawd", nil);
-        
-        _newPwdRepTextField = cell.textFiled;
-        [cell.textFiled addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
-        
-        cell.textFiled.secureTextEntry = YES;
-        
-    }
-    
-   // cell.textFiled.secureTextEntry = YES;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
-}
-
+int tag = 0;
+int moveUp = 0;
+_M_KeyboardMoveView(self.view, self.moveView, tag,moveUp);
 
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -189,24 +124,24 @@
     
     if (sender == _oldPwdTextField) {
         
-        [_oldPwdTextField resignFirstResponder];
-        [_newPwdTextField becomeFirstResponder];
+        //[_oldPwdTextField resignFirstResponder];
+        [_nePwdTextField becomeFirstResponder];
         
-    }if (sender == _newPwdTextField) {
+    }if (sender == _nePwdTextField) {
         
-        [_newPwdTextField resignFirstResponder];
-        [_newPwdRepTextField becomeFirstResponder];
+        //[_nePwdTextField resignFirstResponder];
+        [_nePwdRepTextField becomeFirstResponder];
         
-    }else if(sender == _newPwdRepTextField){
+    }else if(sender == _nePwdRepTextField){
     
-        [_newPwdRepTextField resignFirstResponder];
+        [_nePwdRepTextField resignFirstResponder];
     
     }
     
 }
 
 
-- (void) okClick:(id)sender{
+-(void)okClick:(id)sender{
     
     
     BOOL hasErr = true;
@@ -221,13 +156,13 @@
             break;
         }
         
-        if (nil == _newPwdTextField.text ||[_newPwdTextField.text isEqualToString:@""]) {
+        if (nil == _nePwdTextField.text ||[_nePwdTextField.text isEqualToString:@""]) {
             
             errTip = NSLocalizedString(@"新密码不能为空", nil);
             break;
         }
         
-        if (nil == _newPwdRepTextField.text ||[_newPwdRepTextField.text isEqualToString:@""]) {
+        if (nil == _nePwdRepTextField.text ||[_nePwdRepTextField.text isEqualToString:@""]) {
             
             errTip = NSLocalizedString(@"重复密码不能为空", nil);
             break;
@@ -239,20 +174,20 @@
             break;
         }
         
-        if (![_newPwdTextField.text onlyHasNumberAndChar]) {
+        if (![_nePwdTextField.text onlyHasNumberAndChar]) {
             
             errTip = NSLocalizedString(@"UserChangePawdErr", @"password string is not  require style");
             break;
         }
         
-        if (![_newPwdTextField.text isNameOrPawdLength]) {
+        if (![_nePwdTextField.text isNameOrPawdLength]) {
             
             errTip = NSLocalizedString(@"UserChangePawdLengthErr", @"username string leangth is not require length");
             break;
         }
         
      
-        if (![_newPwdTextField.text isEqualToString:_newPwdRepTextField.text]) {
+        if (![_nePwdTextField.text isEqualToString:_nePwdRepTextField.text]) {
             
             errTip = NSLocalizedString(@"UserChangePawdNotSame", nil);
             break;
@@ -283,7 +218,7 @@
     if (_okTarget != nil && _okSelector != nil
         && [_okTarget respondsToSelector:_okSelector]) {
         
-        [_okTarget performSelector:_okSelector withObject:_newPwdTextField.text afterDelay:0];
+        [_okTarget performSelector:_okSelector withObject:_nePwdTextField.text afterDelay:0];
     }
     
     

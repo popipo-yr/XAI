@@ -26,6 +26,7 @@
 @property (nonatomic,strong) IBOutlet UITextField* userPawdTF;
 @property (nonatomic,strong) IBOutlet UITextField* userPawdRepTF;
 @property (nonatomic,strong) IBOutlet UIButton*  sexBtn;
+@property (nonatomic,strong) IBOutlet UIView* moveView;
 
 +(XAIUserAddVC*)create;
 - (IBAction)sexClick:(id)sender;

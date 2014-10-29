@@ -319,7 +319,7 @@
     
     for (int i = 0; i < [delegeteAry count]; i++) {
         
-        XSLog(@"innnnnnnnnnn");
+        //XSLog(@"innnnnnnnnnn");
         
         MQTTPacketManagerDelgInfo* delgInfo = [delegeteAry objectAtIndex:i];
         if (delgInfo != NULL
