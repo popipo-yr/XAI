@@ -109,5 +109,6 @@ typedef enum {
 
 -(void) lightCell:(XAILightListVCCellNew*)cell lightBtnDelClick:(XAISwitchBtn*)btn;
 -(void) lightCell:(XAILightListVCCellNew*)cell lightBtnEditClick:(XAISwitchBtn*)btn;
+-(void) lightCell:(XAILightListVCCellNew*)cell lightBtnEditEnd:(XAISwitchBtn*)btn;
 
 @end

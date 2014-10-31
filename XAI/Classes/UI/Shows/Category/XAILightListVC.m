@@ -248,6 +248,8 @@
                    forState:UIControlStateNormal];
         [_gEditBtn setImage:[UIImage imageWithFile:@"edit_sel.png"]
                    forState:UIControlStateHighlighted];
+        
+        [self bgGetClick:nil]; //如果有 关闭不需要的
     }else{
     
         [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_nor.png"]
@@ -264,6 +266,18 @@
     }
 }
 
+-(void)bgGetClick:(id)sender{
+
+    [self endEditOne:_curEditBtn];
+    
+}
+
+
+-(void)endEditOne:(XAISwitchBtn*)btn{
+
+    [_curEditBtn.nameTF resignFirstResponder];
+    _curEditBtn = nil;
+}
 
 #pragma mark Table Data Source Methods
 
@@ -666,8 +680,66 @@ static SWTableViewCell* curSWCell;
 
 }
 
+
+NSInteger  prewTag ;  //编辑上一个UITextField的TAG,需要在XIB文件中定义或者程序中添加，不能让两个控件的TAG相同
+float prewMoveY;
 -(void)lightCell:(XAILightListVCCellNew *)cell lightBtnEditClick:(XAISwitchBtn *)btn{
 
+    self.tableView.userInteractionEnabled = false;
+    _curEditBtn = btn;
+    
+    
+    CGPoint Point =  [btn convertPoint:btn.nameTF.frame.origin toView:self.view];
+    
+    float textY = Point.y;
+    float bottomY = self.view.frame.size.height-textY;
+    float keyboardHeight = 240 + 64;
+    if(bottomY>=keyboardHeight)  //判断当前的高度是否已经有216，如果超过了就不需要再移动主界面的View高度
+    {
+
+        return;
+    }
+    prewTag = btn.tag;
+    float moveY = keyboardHeight-bottomY;
+    prewMoveY = moveY + prewMoveY;
+    
+    NSTimeInterval animationDuration = 1.0f;
+    CGRect frame = self.tableView.frame;
+    frame.origin.y -=moveY;//view的Y轴上移
+    self.tableView.frame = frame;
+    [UIView beginAnimations:@"ResizeView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.tableView.frame = frame;
+    [UIView commitAnimations];//设置调整界面的动画效果
+
+}
+
+-(void)lightCell:(XAILightListVCCellNew *)cell lightBtnEditEnd:(XAISwitchBtn *)btn{
+
+    self.tableView.userInteractionEnabled = true;
+    _curEditBtn = nil;
+    
+    
+    if(prewTag == -1) //当编辑的View不是需要移动的View
+    {
+        return;
+    }
+    float moveY ;
+    NSTimeInterval animationDuration = 1.0f;
+    CGRect frame = self.tableView.frame;
+    if(prewTag == btn.tag) //当结束编辑的View的TAG是上次的就移动
+    {   //还原界面
+        moveY =  prewMoveY;
+        frame.origin.y +=moveY;
+        self.tableView.frame = frame;
+        
+        prewMoveY = 0;
+    }
+    //self.view移回原位置
+    [UIView beginAnimations:@"ResizeView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.tableView.frame = frame;
+    [UIView commitAnimations];
 }
 
 - (void) willShowLeft:(UITableViewCell*)cell{

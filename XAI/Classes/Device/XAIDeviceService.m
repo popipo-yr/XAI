@@ -93,12 +93,12 @@
 - (int) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
     
     
-    curDelIDs += 1;
-    NSNumber* _delIDNum = [NSNumber numberWithInt:curDelIDs];
-    [_delIDs addObject:_delIDNum];
-    [self performSelector:@selector(delSuc:) withObject:_delIDNum afterDelay:3.0];
-    
-    return curDelIDs;
+//    curDelIDs += 1;
+//    NSNumber* _delIDNum = [NSNumber numberWithInt:curDelIDs];
+//    [_delIDs addObject:_delIDNum];
+//    [self performSelector:@selector(delSuc:) withObject:_delIDNum afterDelay:3.0];
+//    
+//    return curDelIDs;
     
 
     

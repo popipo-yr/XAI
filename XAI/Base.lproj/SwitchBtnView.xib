@@ -31,7 +31,7 @@
                         </button>
                         <view contentMode="scaleToFill" id="epd-5j-m98">
                             <rect key="frame" x="25" y="10" width="95" height="95"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="faF-Qv-POV">
                                     <rect key="frame" x="5" y="5" width="85" height="85"/>
@@ -87,6 +87,12 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入备注" textAlignment="center" minimumFontSize="17" id="rv5-kG-u2h">
+                    <rect key="frame" x="0.0" y="0.0" width="180" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b2b-hr-ME7">
                     <rect key="frame" x="0.0" y="139" width="180" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -106,6 +112,7 @@
                 <outlet property="bgImgView" destination="Bdx-ul-tlO" id="0G4-2x-Vku"/>
                 <outlet property="delBtn" destination="ZDD-dn-Kpg" id="cPh-kB-zfY"/>
                 <outlet property="editBtn" destination="g1l-7p-99W" id="OkB-Uw-A88"/>
+                <outlet property="nameTF" destination="rv5-kG-u2h" id="3Qs-UV-LAd"/>
                 <outlet property="nameTipLab" destination="q5w-nt-9Lo" id="B8p-3d-Jdf"/>
                 <outlet property="oprTipLab" destination="b2b-hr-ME7" id="l9f-vk-ccP"/>
                 <outlet property="statusTextImgView" destination="kY1-Dy-R0c" id="Qmc-Y2-i6I"/>

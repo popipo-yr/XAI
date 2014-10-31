@@ -44,6 +44,8 @@ typedef enum{
 @property (strong, nonatomic) IBOutlet UIButton *delBtn;
 @property (strong, nonatomic) IBOutlet UIButton *bgBtn;
 
+@property (nonatomic,strong) IBOutlet UITextField*  nameTF;
+
 -(void) startEdit;
 -(void) endEdit;
 
@@ -65,6 +67,9 @@ typedef enum{
 
 -(void)btnDelClick:(XAIDevBtn*)btn;
 -(void)btnEditClick:(XAIDevBtn*)btn;
+-(void)btnEditEnd:(XAIDevBtn*)btn;
+-(void)btnEditOk:(XAIDevBtn*)btn;
+
 
 @end
 

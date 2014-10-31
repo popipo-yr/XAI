@@ -41,6 +41,8 @@
     
     SWTableViewCell* _curInputCell;
     UITextField*  _curInputTF;
+    
+    XAISwitchBtn* _curEditBtn;
     NSMutableArray* _delAnimalIDs;  /*删除动画onebyone 需要记录cell的row*/
     BOOL _canDel;
     
@@ -52,6 +54,7 @@
 @property (nonatomic,strong) IBOutlet UIImageView* gStatusImgView;
 
 -(IBAction)globalEditClick:(id)sender;
+-(IBAction)bgGetClick:(id)sender;
 
 +(UIViewController*)create;
 

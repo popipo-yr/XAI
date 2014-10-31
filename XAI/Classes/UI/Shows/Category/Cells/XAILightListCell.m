@@ -664,4 +664,32 @@ static SWTableViewCell* _curSWCell;
     }
 }
 
+-(void)btnEditEnd:(XAIDevBtn *)btn{
+
+    XAISwitchBtn* sBtn = (XAISwitchBtn*)btn;
+    if (nil != _delegate
+        && [_delegate respondsToSelector:@selector(lightCell:lightBtnEditEnd:)]
+        && [sBtn isKindOfClass:[XAISwitchBtn class]]) {
+        
+        [_delegate lightCell:self lightBtnEditEnd:sBtn];
+    }
+
+
+}
+
+
+-(void)btnEditOk:(XAIDevBtn *)btn{
+
+
+    XAISwitchBtn* sBtn = (XAISwitchBtn*)btn;
+    if (sBtn != nil
+        && sBtn.weakLight != nil) {
+    
+        sBtn.weakLight.nickName = sBtn.nameTipLab.text;
+        
+        [[XAIData shareData] upDateObj:sBtn.weakLight];
+    }
+        
+  }
+
 @end
