@@ -42,6 +42,12 @@
     BOOL _canDel;
     
     BOOL _gEditing;
+    
+    
+    //fade 动画
+    float _fade;
+    BOOL _bFade;
+    BOOL _bDelFade;
 }
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;

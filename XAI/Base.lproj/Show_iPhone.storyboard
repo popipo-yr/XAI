@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VLG-ZO-7am">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -154,8 +153,12 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_global_off.png" id="WS4-yf-ffN">
-                                        <rect key="frame" x="53" y="-12" width="215" height="192"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="64" y="34" width="192" height="137"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_gloabl_on.png" id="mDV-vh-tnt">
+                                        <rect key="frame" x="64" y="35" width="192" height="137"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -176,7 +179,7 @@
                     </view>
                     <connections>
                         <outlet property="gEditBtn" destination="1oS-04-AaR" id="dEE-Kg-FIz"/>
-                        <outlet property="gStatusImgView" destination="WS4-yf-ffN" id="zrD-FW-9Op"/>
+                        <outlet property="gStatusImgView" destination="mDV-vh-tnt" id="ffU-cA-5AP"/>
                         <outlet property="tableView" destination="EWA-U5-er6" id="15S-rE-6C0"/>
                         <outlet property="theNavigationItem" destination="u6F-7I-WkY" id="oXM-cF-Dc9"/>
                         <outlet property="tipImgView" destination="NH3-q3-GN0" id="KpB-TH-drL"/>
@@ -538,7 +541,8 @@
         <image name="jiaohu_tbg.png" width="356" height="206"/>
         <image name="msgNum1.png" width="29" height="24"/>
         <image name="switch-no.png" width="320" height="146"/>
-        <image name="switch_global_off.png" width="215" height="192"/>
+        <image name="switch_gloabl_on.png" width="128" height="91"/>
+        <image name="switch_global_off.png" width="192" height="137"/>
         <image name="switch_tbg.png" width="356" height="206"/>
         <image name="switch_title.png" width="185" height="30"/>
     </resources>

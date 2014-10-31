@@ -150,6 +150,18 @@
         [[XAIData shareData] upDateObj:sBtn.weakLight];
     }
         
-  }
+}
+
+-(void)btnStatusChange:(XAIDevBtn *)btn{
+
+    XAISwitchBtn* sBtn = (XAISwitchBtn*)btn;
+    if (nil != _delegate
+        && [_delegate respondsToSelector:@selector(lightCell:lightBtnStatusChange:)]
+        && [sBtn isKindOfClass:[XAISwitchBtn class]]) {
+        
+        [_delegate lightCell:self lightBtnStatusChange:btn];
+    }
+}
+
 
 @end

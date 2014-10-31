@@ -320,6 +320,12 @@
         
         [self setStatus:XAIOCST_Unkown];
     }
+    
+    
+    if (nil != self.delegate && [self.delegate respondsToSelector:@selector(btnStatusChange:)] ) {
+        [self.delegate btnStatusChange:self];
+    }
+
 }
 
 

@@ -48,7 +48,7 @@
         _delAnimalIDs = [[NSMutableArray alloc] init];
         _canDel = true;
         _gEditing = false;
-        
+        _bFade = false;
     }
     return self;
 }
@@ -139,6 +139,8 @@
     [self manageShowDatas];
     
     self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
+    
+    [self lightFireCount];
 
 }
 
@@ -227,6 +229,39 @@
 
 }
 
+-(void) lightFireCount{
+
+    int count = 0;
+    
+    for (XAILight* aLight in _deviceDatasNoManage) {
+    
+        if (aLight.curDevStatus == XAILightStatus_Open) {
+            
+            count += 1;
+        }
+    }
+   
+    if (count > 0) {
+        
+        if (_bFade == true) return;
+        
+        //_gStatusImgView.image = [UIImage imageWithFile:@"switch_gloabl_on.png"];
+        _gStatusImgView.alpha = 0;
+        _gStatusImgView.hidden = false;
+        _bFade = true;
+        [self startFadeAnimation];
+    }else{
+    
+        if (_bFade == false) return;
+        
+        //_gStatusImgView.image = [UIImage imageWithFile:@"switch_global_off.png"];
+        _gStatusImgView.hidden = true;
+        _bFade = false;
+        [self endFadeAnimation];
+    }
+    
+}
+
 #pragma mark - actions
 -(IBAction)globalEditClick:(id)sender{
 
@@ -268,6 +303,48 @@
     [_curEditBtn.nameTF resignFirstResponder];
     _curEditBtn = nil;
 }
+
+
+#pragma mark  light 
+
+-(void) startFadeAnimation
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(endFadeAnimation)];
+    self.gStatusImgView.alpha = _fade;
+    [UIView commitAnimations];
+}
+
+-(void)endFadeAnimation{
+    
+    if (_bFade) {
+        
+        if (_fade < 0) {
+            _fade  = 0;
+            _bDelFade = false;
+        }else if(_fade > 1){
+            _fade = 1;
+            _bDelFade = true;
+        }
+        
+        if (_bDelFade) {
+            _fade -= 0.1;
+        }else{
+            _fade += 0.2;
+        }
+        
+        [self startFadeAnimation];
+        
+    }else{
+        
+        _fade = 1;
+        _bDelFade = true;
+    }
+}
+
+
 
 #pragma mark Table Data Source Methods
 
@@ -453,7 +530,10 @@ float prewMoveY;
     [UIView commitAnimations];
 }
 
+-(void)lightCell:(XAILightListVCCellNew *)cell lightBtnStatusChange:(XAISwitchBtn *)btn{
 
+    [self lightFireCount];
+}
 
 -(void)devService:(XAIDeviceService *)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
     
