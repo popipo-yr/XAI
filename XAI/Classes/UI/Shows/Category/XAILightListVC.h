@@ -18,7 +18,7 @@
 #define _ST_LightListVCID @"XAILightListVCID"
 
 @interface XAILightListVC : XAIHasTableViewVC
-<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate
+<XAIDeviceServiceDelegate,XAIDataRefreshDelegate
 ,XAIReLoginRefresh,XAILightListVCCellNewDelegate>{
 
     XAIDeviceService* _deviceService;
@@ -37,11 +37,6 @@
     NSMutableArray* _deviceDatasNoManage; /*没有分类的数据*/
     
     
-//    XAILightListVCCell* _curInputCell;
-    
-    SWTableViewCell* _curInputCell;
-    UITextField*  _curInputTF;
-    
     XAISwitchBtn* _curEditBtn;
     NSMutableArray* _delAnimalIDs;  /*删除动画onebyone 需要记录cell的row*/
     BOOL _canDel;
@@ -57,13 +52,6 @@
 -(IBAction)bgGetClick:(id)sender;
 
 +(UIViewController*)create;
-
-
-- (void) willShowLeft:(UITableViewCell*)cell;
-- (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input;
-- (BOOL) hasInput;
-- (BOOL) isSame:(SWTableViewCell*)cell;
-- (void) hiddenOldInput;
 
 @end
 

@@ -25,17 +25,17 @@
     _opr = XAIOCOT_Start;
     
     
-    [self oneloop];
+    if (_bRoll == false) {
+      
+        _bRoll = true;
+        [self startAnimation];
+    }
+
 
     [self showTipLable:true];
 }
 
 
-- (void) oneloop{
-    
-    _bRoll = true;
-    [self startAnimation];
-}
 
 -(void) startAnimation
 {
@@ -118,6 +118,8 @@
 - (void) showOprEnd{
     
     _opr = XAIOCOT_None;
+    
+    _bRoll = false;
     
     [self showTipLable:false];
     
@@ -248,11 +250,11 @@
 
 -(void)bgBtnClick{
     
-    if (_bRoll) {
-        
-        _bRoll = false;
-        return;
-    }
+//    if (_bRoll) {
+//        
+//        _bRoll = false;
+//        return;
+//    }
 
     if (self.weakLight == nil || ![self.weakLight isKindOfClass:[XAILight class]]) return;
     
