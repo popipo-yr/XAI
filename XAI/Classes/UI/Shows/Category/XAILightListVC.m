@@ -7,6 +7,7 @@
 //
 
 #import "XAILightListVC.h"
+#import "XAISwitchBtn.h"
 
 #import "XAIObjectGenerate.h"
 
@@ -40,6 +41,7 @@
         
         _types = @[@(XAIObjectType_light),@(XAIObjectType_light2_1),@(XAIObjectType_light2_2)];
         _deviceDatas = [[NSMutableArray alloc] init];
+        _deviceDatasNoManage = [[NSMutableArray alloc] init];
         
         _delInfo = [[NSMutableDictionary alloc] init];
         _cell2Infos = [[NSMutableDictionary alloc] init];
@@ -55,6 +57,8 @@
     [super viewDidLoad];
     _curInputCell = nil;
     // Do any additional setup after loading the view.
+    
+    _gEditing = false;
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,6 +74,11 @@
     [self updateShowDatas];
     [self.tableView reloadData];
     [[XAIData shareData] addRefreshDelegate:self];
+    
+    
+
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -116,19 +125,50 @@
 - (void) updateShowDatas{
     
     _curInputCell = nil;
+
     
+    NSMutableArray* allLights =  [[NSMutableArray alloc] initWithArray:
+                           [[XAIData shareData] listenObjsWithType:_types]];
+    
+//    for (int i = 0; i < 10; i++) {
+//        XAILight2_CirculeOne* one1 = [[XAILight2_CirculeOne alloc] init];
+//    
+//        one1.name  = [NSString stringWithFormat:@"name%d",i];
+//
+//        [allLights addObject:one1];
+//    }
+    
+
+    
+
+    
+    [_deviceDatasNoManage removeAllObjects];
+    [_deviceDatasNoManage addObjectsFromArray:allLights];
+    
+
+    [self manageShowDatas];
+    
+    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
+
+}
+
+-(void)manageShowDatas{
+
     NSMutableArray* newDatas = [[NSMutableArray alloc] init];
     
     NSMutableArray* circleOnes = [[NSMutableArray alloc] init];
     NSMutableArray* circleTwos = [[NSMutableArray alloc] init];
     
     
-    NSArray* allLights =  [[NSArray alloc] initWithArray:
-                           [[XAIData shareData] listenObjsWithType:_types]];
+    NSMutableArray* allLights =  [[NSMutableArray alloc] initWithArray:
+                                  _deviceDatasNoManage];
     
+    
+    
+    NSMutableArray* onlyOne = [[NSMutableArray alloc] init];
     //分类并添加单控开关
     for (XAIObject* obj in allLights) {
-
+        
         if (![obj isKindOfClass:[XAILight class]]) continue;
         
         if ([obj isKindOfClass:[XAILight2_CirculeOne class]]) {
@@ -137,16 +177,17 @@
             
             
         }else if ([obj isKindOfClass:[XAILight2_CirculeTwo class]]){
-        
+            
             [circleTwos addObject:obj];
-        
+            
         }else{
-        
-            [newDatas addObject:obj];
+            
+            [onlyOne addObject:obj];
         }
     }
     
-    //找到配皮的双控加入,并加入未匹配的单控一
+    NSMutableArray* noMatchOne = [[NSMutableArray alloc] init];
+    //找到配皮的双控加入,并找出未匹配的单控一
     for (XAILight2_CirculeOne* aOne in circleOnes) {
         
         BOOL hasTogether = false;
@@ -154,8 +195,9 @@
         for (XAILight2_CirculeTwo* aTwo in circleTwos) {
             if (aOne.luid == aTwo.luid) {
                 
-                NSArray* together = [[NSArray alloc] initWithObjects:aOne,aTwo,nil];
-                [newDatas addObject:together];
+                XAILightCellData* cellData = [[XAILightCellData alloc] init];
+                [cellData setOne:aOne two:aTwo hasCon:true];
+                [newDatas addObject:cellData];
                 
                 [circleTwos removeObject:aTwo];
                 hasTogether = true;
@@ -163,36 +205,63 @@
             }
         }
         
-        if (hasTogether == false) {
-            [newDatas addObject:aOne];
+        if (hasTogether == false) {//加入未匹配的单控一
+            [noMatchOne addObject:aOne];
         }
     }
     
-    //加入未匹配的单控二
-    [newDatas addObjectsFromArray:circleTwos];
-
-
-    ////////////////
-//    [newDatas addObject:[[XAILight alloc] init]];
-//    
-//    NSArray* ary = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
-//                    [[XAILight2_CirculeTwo alloc] init],nil];
-//    [newDatas addObject:ary];
-//
-//    [newDatas addObject:[[XAILight alloc] init]];
-//    
-//    
-//    NSArray* ary2 = [[NSArray alloc] initWithObjects:[[XAILight2_CirculeOne alloc]init],
-//                    [[XAILight2_CirculeTwo alloc] init],nil];
-//    [newDatas addObject:ary2];
-//    [newDatas addObject:[[XAILight alloc] init]];
-//    [newDatas addObject:[[XAILight alloc] init]];
-//    [newDatas addObject:[[XAILight alloc] init]];
+    //所有单控和未匹配的添加在一起
+    NSMutableArray*  allOnlyOne = [[NSMutableArray alloc] init];
+    [allOnlyOne addObjectsFromArray:onlyOne];
+    [allOnlyOne addObjectsFromArray:noMatchOne];
+    [allOnlyOne addObjectsFromArray:circleTwos];
+    
+    for (int i = 0; i < (int)[allOnlyOne count] - 1; i = i+2) {
+        
+        XAILight* one = [allOnlyOne objectAtIndex:i];
+        XAILight* two = [allOnlyOne objectAtIndex:i+1];
+        XAILightCellData* cellData = [[XAILightCellData alloc] init];
+        [cellData setOne:one two:two hasCon:false];
+        
+        [newDatas addObject:cellData];
+    }
+    
+    if ([allOnlyOne count] % 2 == 1) {
+        XAILight* one = [allOnlyOne objectAtIndex:[allOnlyOne count] - 1];
+        XAILightCellData* cellData = [[XAILightCellData alloc] init];
+        [cellData setOne:one two:nil hasCon:false];
+        [newDatas addObject:cellData];
+    }
     
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
-    
-    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
 
+}
+
+#pragma mark - actions
+-(IBAction)globalEditClick:(id)sender{
+
+    _gEditing = !_gEditing;
+    
+    if (_gEditing == false) {
+    
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_sel.png"]
+                   forState:UIControlStateHighlighted];
+    }else{
+    
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_sel.png"]
+                   forState:UIControlStateHighlighted];
+    }
+    
+    NSArray*  cells = [self.tableView visibleCells];
+    
+    for (XAILightListVCCellNew* aCell in cells) {
+        if (![aCell isKindOfClass:[XAILightListVCCellNew class]]) continue;
+        [aCell isEdit:_gEditing];
+    }
 }
 
 
@@ -222,72 +291,36 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier1 = XAILightListCell2ID;
-    static NSString *CellIdentifier2 = XAILightListCellID;
+    static NSString *CellIdentifier1 = XAILightListCellID;
     
-    NSArray* objs = [_deviceDatas objectAtIndex:[indexPath row]];
+    XAILightListVCCellNew* cell = [tableView
+                                   dequeueReusableCellWithIdentifier:CellIdentifier1];
     
-    if ([objs isKindOfClass:[NSArray class]]) {
+    if (cell == nil) {
+        cell = [XAILightListVCCellNew create:CellIdentifier1];
+    }
+    
+    XAILightCellData* cellData = [_deviceDatas objectAtIndex:[indexPath row]];
+    
+    if ([cellData isKindOfClass:[XAILightCellData class]]) {
         
-        XAILightListVCCell2 *cell = [tableView
-                                    dequeueReusableCellWithIdentifier:CellIdentifier1];
-        if (cell == nil) {
-            cell = [[XAILightListVCCell2 alloc]
-                    initWithStyle:UITableViewCellStyleDefault
-                    reuseIdentifier:CellIdentifier1];
-        }
+        [cell setInfoOne:cellData.oneLight two:cellData.twoLight hasCon:cellData.hasCon];
         
-        
-        [cell setDatas:objs];
-        
-        if ([[MQTT shareMQTT].curUser isAdmin]) {
-            [cell setDelBtn];
-        }
-
-        
+        [cell isEdit:_gEditing];
         cell.delegate = self;
-        
-        cell.topVC = self;
         
         if (cell.hasMe != nil) {
             
             [_cell2Infos removeObjectForKey:cell.hasMe];
         }
         
-        cell.hasMe = objs;
-        [_cell2Infos setObject:cell forKey:objs];
-        
-        return cell;
-        
+        cell.hasMe = cellData;
+        [_cell2Infos setObject:cell forKey:indexPath];
     }
-    
-    XAILightListVCCell *cell = [tableView
-                                dequeueReusableCellWithIdentifier:CellIdentifier2];
-    if (cell == nil) {
-        cell = [[XAILightListVCCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:CellIdentifier2];
-    }
-    
-    XAILight* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
-    
-    if (aObj != nil && [aObj isKindOfClass:[XAILight class]]) {
-        
-        [cell setInfo:aObj];
-    
-    }
-    
-    if ([[MQTT shareMQTT].curUser isAdmin]) {
-        [cell setDelBtn];
-    }
-    
-    [cell setEditBtn];
-    cell.delegate = self;
     
     return cell;
-
     
-  }
+}
 
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
@@ -532,11 +565,11 @@ static SWTableViewCell* curSWCell;
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([[_deviceDatas objectAtIndex:[indexPath row]] isKindOfClass:[NSArray class]]) {
-        return  63.0*2;
-    };
+//    if ([[_deviceDatas objectAtIndex:[indexPath row]] isKindOfClass:[NSArray class]]) {
+//        return  63.0*2;
+//    };
 
-    return 63.0;
+    return 160.0;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
@@ -581,6 +614,61 @@ static SWTableViewCell* curSWCell;
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+
+#pragma mark  swith btn delegate
+-(void)lightCell:(XAILightListVCCellNew *)cell lightBtnDelClick:(XAISwitchBtn *)btn{
+
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    if ([indexPath row] < 0 || [indexPath row] >= [_deviceDatas count]) return;
+    
+    XAILightCellData* cellData = [_deviceDatas objectAtIndex:[indexPath row]];
+    if (![cellData isKindOfClass:[XAILightCellData class]]) return;
+    
+    if (cellData.hasCon == false) {//没有关联的
+       
+        XAIObject* obj = btn.weakLight;
+        [obj startOpr];
+        obj.curOprtip = @"正在删除";
+        [btn showOprStart];
+        
+        int delID = [_deviceService delDev:obj.luid];
+        
+        
+        XAILightListDelInfo* delInfo = [[XAILightListDelInfo alloc] init];
+        delInfo.corObjs = [NSArray arrayWithObject:obj];
+        delInfo.cellData = cellData;
+        [_delInfo setObject:delInfo
+                     forKey:[NSNumber numberWithInt:delID]];
+        
+    }else{
+    
+        
+
+        [cellData.oneLight startOpr];
+        cellData.oneLight.curOprtip = @"正在删除";
+        [cellData.twoLight startOpr];
+        cellData.twoLight.curOprtip = @"正在删除";
+        
+        [cell.oneBtn showOprStart];
+        [cell.twoBtn showOprStart];
+        
+        
+        int delID = [_deviceService delDev:cellData.oneLight.luid];
+        XAILightListDelInfo* delInfo = [[XAILightListDelInfo alloc] init];
+        delInfo.corObjs = [NSArray arrayWithObjects:cellData.oneLight,cellData.twoLight,nil];
+        delInfo.cellData = cellData;
+        [_delInfo setObject:delInfo
+                     forKey:[NSNumber numberWithInt:delID]];
+    }
+    
+    
+    
+
+}
+
+-(void)lightCell:(XAILightListVCCellNew *)cell lightBtnEditClick:(XAISwitchBtn *)btn{
+
+}
 
 - (void) willShowLeft:(UITableViewCell*)cell{
     
@@ -673,111 +761,26 @@ static SWTableViewCell* curSWCell;
     }
     
     
-    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
-    if (obj != nil ) {
+    XAILightListDelInfo* delInfo = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (delInfo != nil ) {
         
         [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
         
-        
-        if ([obj isKindOfClass:[XAILight class]]) {
+        for (XAIObject* obj in delInfo.corObjs) {
             
+            if (![obj isKindOfClass:[XAILight class]]) continue;
             
-            if (isSuccess) {
-                [obj endOpr];
-            }else{
-                [obj showMsg];
-                obj.curOprtip = @"删除失败";
+            [obj showMsg];
+            obj.curOprtip = @"删除失败";
+            
+            XAISwitchBtn* btn = (XAISwitchBtn*)((XAILight*)obj).delegate;
+            
+            if ((btn != nil)
+                && [btn isKindOfClass:[XAISwitchBtn class]]) {
+                
+                [btn showMsg];
             }
-
-            
-            do {
-                
-                XAILightListVCCell* cell = (XAILightListVCCell*)((XAILight*)obj).delegate;
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAILightListVCCell class]])break;
-                
-                if (!isSuccess) {
-                    
-                    [cell showMsg:obj.curOprtip];
-                }else{
-                    [cell showOprEnd];
-                    
-                    [_deviceDatas removeObject:obj];
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
-                }
-                
-                
-            } while (0);
-            
-        }else if([obj isKindOfClass:[NSArray class]]){
-            
-            do {
-                
-                NSArray* objs = (NSArray*)obj;
-                
-                if (isSuccess) {
-                    
-                    for (XAIObject* oneObj in objs) {
-                        
-                        [oneObj endOpr];
-                    }
-
-                }else{
-                    
-                    
-                    for (XAIObject* oneObj in objs) {
-                        
-                        [oneObj showMsg];
-                        oneObj.curOprtip = @"删除失败";
-                        
-                    }
-                }
-
-                
-                XAILightListVCCell2* cell = (XAILightListVCCell2*)[_cell2Infos objectForKey:objs];
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAILightListVCCell2 class]])break;
-                
-                
-                
-                if (!isSuccess) {
-                    
-                    [cell refreshOpr];
-                }else{
-                    [cell refreshOpr];
-                    
-                    [_deviceDatas removeObject:objs];
-                    
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
-                }
-                
-                
-            } while (0);
-
         }
-        
         
     }
     
@@ -793,118 +796,71 @@ static SWTableViewCell* curSWCell;
     _canDel = false;
     
     int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
-    BOOL isSuccess = true;
     
     [_delAnimalIDs removeObjectAtIndex:0];
     
-    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
-    if (obj != nil ) {
+    XAILightListDelInfo* delInfo = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (delInfo != nil && [delInfo isKindOfClass:[XAILightListDelInfo class]]) {
         
         [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
         
-        
-        if ([obj isKindOfClass:[XAILight class]]) {
+        do {
             
+            for (XAIObject* oneObj in delInfo.corObjs) {
+                
+                [oneObj endOpr];
             
-            if (isSuccess) {
-                [obj endOpr];
-            }else{
-                [obj showMsg];
-                obj.curOprtip = @"删除失败";
+                XAISwitchBtn* btn = (XAISwitchBtn*)((XAILight*)oneObj).delegate;
+                
+                if ((btn != nil)
+                    && [btn isKindOfClass:[XAISwitchBtn class]]) {
+                    
+                    [btn showOprEnd];
+                }
             }
             
             
-            do {
+            NSUInteger row = [_deviceDatas indexOfObject:delInfo.cellData];
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row
+                                                        inSection:0];
+           ;
+            XAILightListVCCellNew* cell = (XAILightListVCCellNew*)[_cell2Infos objectForKey:indexPath];
+            
+            if (cell == nil) break;
+            if (![cell isKindOfClass:[XAILightListVCCellNew class]])break;
+            
+            
+            if (delInfo.cellData.hasCon) { 
+              
+                [_deviceDatas  removeObject:delInfo.cellData];
+                [_deviceDatasNoManage removeObject:delInfo.cellData.oneLight];
+                [_deviceDatasNoManage removeObject:delInfo.cellData.twoLight];
                 
-                XAILightListVCCell* cell = (XAILightListVCCell*)((XAILight*)obj).delegate;
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAILightListVCCell class]])break;
-                
-                if (!isSuccess) {
+                if (indexPath != nil) {
                     
-                    [cell showMsg:obj.curOprtip];
-                }else{
-                    [cell showOprEnd];
+                    NSArray* ary = [NSArray arrayWithObject:indexPath];
                     
-                    [_deviceDatas removeObject:obj];
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
+                    [self.tableView  deleteRowsAtIndexPaths:ary
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
                 
-                
-            } while (0);
+
+            }else{
+
+                [_deviceDatasNoManage removeObjectsInArray:delInfo.corObjs];
+                [self manageShowDatas];
+                [self.tableView reloadData];
+
+            }
             
-        }else if([obj isKindOfClass:[NSArray class]]){
             
-            do {
-                
-                NSArray* objs = (NSArray*)obj;
-                
-                if (isSuccess) {
-                    
-                    for (XAIObject* oneObj in objs) {
-                        
-                        [oneObj endOpr];
-                    }
-                    
-                }else{
-                    
-                    
-                    for (XAIObject* oneObj in objs) {
-                        
-                        [oneObj showMsg];
-                        oneObj.curOprtip = @"删除失败";
-                        
-                    }
-                }
-                
-                
-                XAILightListVCCell2* cell = (XAILightListVCCell2*)[_cell2Infos objectForKey:objs];
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAILightListVCCell2 class]])break;
-                
-                
-                
-                if (!isSuccess) {
-                    
-                    [cell refreshOpr];
-                }else{
-                    [cell refreshOpr];
-                    
-                    [_deviceDatas removeObject:objs];
-                    
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
-                }
-                
-                
-            } while (0);
             
-        }
+            
+        } while (0);
         
         
     }
-
+    
     [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
     
 }
@@ -924,3 +880,16 @@ static SWTableViewCell* curSWCell;
 @end
 
 
+@implementation XAILightCellData
+-(void)setOne:(XAILight *)oneLight two:(XAILight*)twoLight hasCon:(BOOL)hasCon{
+
+    _oneLight = oneLight;
+    _twoLight = twoLight;
+    _hasCon = hasCon;
+}
+
+@end
+
+@implementation XAILightListDelInfo
+
+@end

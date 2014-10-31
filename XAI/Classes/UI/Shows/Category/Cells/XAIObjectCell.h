@@ -9,24 +9,25 @@
 #import "SWTableViewCell.h"
 #import "SWTableViewCellAdd.h"
 #import "XAIObject.h"
+#import "XAIDevBtn.h"
 
-typedef enum{
-    
-    XAIOCST_Open,
-    XAIOCST_Close,
-    XAIOCST_Unkown,
-    
-}XAIOCST;
-
-
-typedef enum{
-    
-    XAIOCOT_None,
-    XAIOCOT_Start,
-    XAIOCOT_Msg,
-    
-    
-}XAIOCOT;
+//typedef enum{
+//    
+//    XAIOCST_Open,
+//    XAIOCST_Close,
+//    XAIOCST_Unkown,
+//    
+//}XAIOCST;
+//
+//
+//typedef enum{
+//    
+//    XAIOCOT_None,
+//    XAIOCOT_Start,
+//    XAIOCOT_Msg,
+//    
+//    
+//}XAIOCOT;
 
 @interface XAIObjectCell : SWTableViewCell{
 

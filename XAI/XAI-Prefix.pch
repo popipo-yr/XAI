@@ -18,9 +18,10 @@
     #import "ZBarSDK.h"
     #import "UIKitADD.h"
 
-#define XSLog(...) NSLog(__VA_ARGS__)
-//#define XSLog(...)
-#define XSLog_(...) NSLog(__VA_ARGS__)
+//#define XSLog(...) NSLog(__VA_ARGS__)
+#define XSLog(...)
+//#define XSLog_(...) NSLog(__VA_ARGS__)
+#define XSLog_(...)
 #define  isIOS7  ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
 
 #endif

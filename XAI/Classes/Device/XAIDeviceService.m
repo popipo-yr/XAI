@@ -70,7 +70,37 @@
     _DEF_XTO_TIME_Start
 
 }
+
+-(void) delSuc:(NSNumber*)number{
+
+    
+        
+        [_delIDs removeObject:number];
+        
+        if((nil != _deviceServiceDelegate) &&
+           [_deviceServiceDelegate respondsToSelector:@selector(devService:delDevice:errcode:otherID:)]) {
+            
+            [_deviceServiceDelegate devService:self
+                                     delDevice:true
+                                       errcode:0
+                                       otherID:[number intValue]];
+            
+        }
+    
+
+}
+
 - (int) delDev:(XAITYPELUID)dluid apsn:(XAITYPEAPSN)apsn luid:(XAITYPELUID)luid{
+    
+    
+    curDelIDs += 1;
+    NSNumber* _delIDNum = [NSNumber numberWithInt:curDelIDs];
+    [_delIDs addObject:_delIDNum];
+    [self performSelector:@selector(delSuc:) withObject:_delIDNum afterDelay:3.0];
+    
+    return curDelIDs;
+    
+
     
     curDelIDs += 1;
     
