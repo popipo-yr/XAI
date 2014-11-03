@@ -51,30 +51,9 @@
     NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     _label.text = [NSString stringWithFormat:@"v.%@",version];
     
-    
-//    CABasicAnimation *animation = [ CABasicAnimation
-//                                   animationWithKeyPath: @"transform" ];
-//    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-//    
-//    //围绕Z轴旋转，垂直与屏幕
-//    animation.toValue = [ NSValue valueWithCATransform3D:
-//                         
-//                         
-//                         CATransform3DMakeRotation(-M_PI, 0, 0, 1.0) ];
-//    animation.duration = 1;
-//    //旋转效果累计，先转180度，接着再旋转180度，从而实现360旋转
-//    animation.cumulative = YES;
-//    animation.repeatCount = 6;
-//    
-//    //在图片边缘添加一个像素的透明区域，去图片锯齿
-//    CGRect imageRrect = CGRectMake(0, 0,_lightImgView.frame.size.width, _lightImgView.frame.size.height);
-//    UIGraphicsBeginImageContext(imageRrect.size);
-//    [_lightImgView.image drawInRect:CGRectMake(1,1,_lightImgView.frame.size.width-2,_lightImgView.frame.size.height-2)];
-//    _lightImgView.image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    [_lightImgView.layer addAnimation:animation forKey:nil];
-
+    //添加为了截屏
+    //_lightImgView.hidden = true;
+    //_label.hidden = true;
 
 
 }
