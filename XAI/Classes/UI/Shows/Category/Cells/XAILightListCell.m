@@ -159,7 +159,7 @@
         && [_delegate respondsToSelector:@selector(lightCell:lightBtnStatusChange:)]
         && [sBtn isKindOfClass:[XAISwitchBtn class]]) {
         
-        [_delegate lightCell:self lightBtnStatusChange:btn];
+        [_delegate lightCell:self lightBtnStatusChange:sBtn];
     }
 }
 

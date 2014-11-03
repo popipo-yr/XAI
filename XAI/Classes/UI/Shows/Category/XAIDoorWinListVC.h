@@ -10,31 +10,59 @@
 #import "XAIDeviceService.h"
 #import "XAIData.h"
 #import "XAIReLoginRefresh.h"
+#import "XAIDoorWinCell.h"
 
 #define _ST_DoorWinListVCID @"XAIDoorWinListVCID"
 
 @interface XAIDoorWinListVC : XAIHasTableViewVC
-<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,SWTableViewCellDelegate,XAIReLoginRefresh>{
+<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,XAIReLoginRefresh
+,XAIDCListVCCellNewDelegate>{
     
     XAIDeviceService* _deviceService;
+    
     
     NSArray* _types;
     
     NSMutableArray*  _deviceDatas; /*XAIObject数组*/
+    NSMutableArray* _deviceDatasNoManage; /*没有分类的数据*/
     
-    
-    SWTableViewCell* _curInputCell;
-    UITextField*  _curInputTF;
     
     NSMutableDictionary* _delInfo;
     NSMutableArray* _delAnimalIDs;
+    NSMutableDictionary* _cell2Infos;
     BOOL _canDel;
     
+    XAIDCBtn* _curEditBtn;
+    BOOL _gEditing;
 }
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;
+@property (nonatomic,strong) IBOutlet UIButton*  gEditBtn;
+
+-(IBAction)globalEditClick:(id)sender;
+-(IBAction)bgGetClick:(id)sender;
+
 
 +(UIViewController*)create;
     
     
 @end
+
+
+@interface XAIDCCellData : NSObject
+@property (readonly,strong) XAIObject* oneObj;
+@property (readonly,strong) XAIObject* twoObj;
+@property (readonly,assign) BOOL hasCon;
+
+-(void)setOne:(XAIObject *)one two:(XAIObject*)two;
+
+@end
+
+
+@interface XAIDCListDelInfo : NSObject
+@property (nonatomic,strong) NSArray* corObjs;
+@property (nonatomic,strong) XAIDCCellData* cellData;
+
+@end
+
+

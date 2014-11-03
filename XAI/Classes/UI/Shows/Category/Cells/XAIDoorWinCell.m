@@ -7,185 +7,161 @@
 //
 
 #import "XAIDoorWinCell.h"
-#import "XAIObjectGenerate.h"
+#import "XAIData.h"
 
-@implementation XAIDoorWinCell
+@implementation XAIDCListVCCellNew
 
-- (void) window:(XAIWindow*)window curStatus:(XAIWindowStatus) status getIsSuccess:(BOOL)isSuccess{
-
-    if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIWindow class]]) return;
++ (XAIDCListVCCellNew*)create:(NSString*)useId{
     
-    if (window.isOnline == false) {
-        
-        [self setStatus:XAIOCST_Unkown];
-        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
-        return;
-    }
     
-    if (status == XAIWindowStatus_Open) {
-        [self setStatus:XAIOCST_Open];
-        [self.contextLable setText:[window.lastOpr allStr]];
-    }else if(status == XAIWindowStatus_Close){
-        [self.contextLable setText:[window.lastOpr allStr]];
-        [self setStatus:XAIOCST_Close];
+    XAIDCListVCCellNew* new = [[XAIDCListVCCellNew alloc] init];
+    
+    
+    [new _init];
+    [new setValue:useId forKey:@"reuseIdentifier"];
+    
+    return new;
+}
+
+-(void)_init{
+    
+    float width = [UIScreen mainScreen].bounds.size.width;
+    
+    self.frame = CGRectMake(0, 0, width, 160);
+    
+    
+    
+    _oneBtn = [XAIDCBtn create];
+    _twoBtn = [XAIDCBtn create];
+    
+    
+    CGSize btnSize = _oneBtn.frame.size;
+    float inv = (width - btnSize.width*2) / 3.0f;
+    
+    
+    
+    
+    _oneBtn.frame = CGRectMake(inv, 0,btnSize.width, btnSize.height);
+    _twoBtn.frame = CGRectMake(inv*2 + btnSize.width ,0,btnSize.width, btnSize.height);
+    
+    [self addSubview:_oneBtn];
+    [self addSubview:_twoBtn];
+    
+    
+    
+    [self setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel* sep = [[UILabel alloc] initWithFrame:CGRectMake(0, 159, width, 1)];
+    [sep setBackgroundColor:[UIColor grayColor]];
+    sep.alpha = 0.4F;
+    
+    
+    [self addSubview:sep];
+    
+    
+    _oneBtn.delegate = self;
+    _twoBtn.delegate = self;
+    
+    
+}
+
+-(void) setInfoOne:(XAIObject*)one two:(XAIObject*)two{
+    
+    [_oneBtn setInfo:one];
+    [_twoBtn setInfo:two];
+    
+    _oneBtn.hidden = (one == nil);
+    _twoBtn.hidden = (two == nil);
+    
+}
+
+- (void) isEdit:(BOOL)isEdit{
+    
+    if (isEdit) {
+        [self.oneBtn startEdit];
+        [self.twoBtn startEdit];
     }else{
-    
-        [self setStatus:XAIOCST_Unkown];
-    }
-    
-    [self changeHead:XAIObjectType_window status:status];
-}
-
--(void)door:(XAIDoor *)door curStatus:(XAIDoorStatus)status getIsSuccess:(BOOL)isSuccess{
-
-    if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIDoor class]]) return;
-    
-    if (door.isOnline == false) {
-        
-        [self setStatus:XAIOCST_Unkown];
-        [self changeHead:XAIObjectType_light status:XAIOCST_Unkown];
-        return;
-    }
-    
-    if (status == XAIDoorStatus_Open) {
-        [self setStatus:XAIOCST_Open];
-        [self.contextLable setText:[door.lastOpr allStr]];
-    }else if(status == XAIDoorStatus_Close){
-        
-        [self setStatus:XAIOCST_Close];
-        [self.contextLable setText:[door.lastOpr allStr]];
-    }else{
-        
-        [self setStatus:XAIOCST_Unkown];
-    }
-    
-    [self changeHead:XAIObjectType_door status:status];
-}
-
--(void)window:(XAIWindow *)window curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
--(void)door:(XAIDoor *)door curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
-
-- (void) setInfo:(XAIObject*)aObj{
-    
-    [self _removeWeakObj];
-    
-    if (aObj == nil) return;
-    if (![aObj isKindOfClass:[XAIDoor class]] && ![aObj isKindOfClass:[XAIWindow class]]){
-    
-        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
-        [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-        [self.tipImageView setImage:nil];
-        [self.nameLable setText:nil];
-        [self.contextLable setText:nil];
-        [self.tipLabel setText:nil];
-    
-        return;
-    }
-    
-    
-    
-    [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-    
-    if (aObj.nickName != NULL && ![aObj.nickName isEqualToString:@""]) {
-        
-        [self.nameLable setText:aObj.nickName];
-    }else{
-        
-        [self.nameLable setText:aObj.name];
-    }
-    
-    [self.contextLable setText:[aObj.lastOpr allStr]];
-    
-    
-    
-        
-    XAIOCST status = XAIOCST_Unkown;
-    
-    if (aObj.isOnline){
-        
-        if (aObj.curDevStatus == XAIDoorStatus_Open ||
-            aObj.curDevStatus == XAIWindowStatus_Open) {
-            
-            status = XAIOCST_Open;
-            
-        }else if(aObj.curDevStatus == XAIDoorStatus_Close ||
-                 aObj.curDevStatus == XAIWindowStatus_Close){
-            status = XAIOCST_Close;
-        }
-        
-        [self changeHead:aObj.type status:aObj.curDevStatus];
-        
-    }else{
-        
-        [self changeHead:aObj.type status:XAIObjStatusUnkown];
-    }
-
-    
-    
-    
-    
-    [self firstStatus:status opr:[self coverForm:aObj.curOprStatus] tip:aObj.curOprtip];
-    
-    
-    [self _changeWeakObj:aObj];
-    
-    
-
-}
-
-- (void) _removeWeakObj{
-    
-    if (self.weakObj != nil && [self.weakObj isKindOfClass:[XAIDoor class]]) {
-        ((XAIDoor*)self.weakObj).delegate = nil;
-        self.weakObj = nil;
-        
-    }else if (self.weakObj != nil && [self.weakObj isKindOfClass:[XAIWindow class]]) {
-        ((XAIWindow*)self.weakObj).delegate = nil;
-        self.weakObj = nil;
-    }
-}
-
-- (void) _changeWeakObj:(XAIObject*)aObj{
-
-    [self _removeWeakObj];
-    
-    
-    if ([aObj isKindOfClass:[XAIDoor class]]) {
-        
-        self.weakObj = aObj;
-        ((XAIDoor*)self.weakObj).delegate = self;
-        
-    }else if([aObj isKindOfClass:[XAIWindow class]]) {
-        
-        self.weakObj = aObj;
-        ((XAIWindow*)self.weakObj).delegate = self;
-        
+        [self.oneBtn endEdit];
+        [self.twoBtn  endEdit];
     }
     
 }
 
-- (void)changeHead:(XAIObjectType)type status:(int)status{
+#pragma mark - delegate
+
+-(void)btnBgClick:(XAIDevBtn *)btn{
+
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
     
-    if (_headView == nil) {
-        
-        float height = 46;
-        float y = (self.frame.size.height-height)*0.5f;
-        _headView = [[UIImageView alloc] initWithFrame:CGRectMake(15
-                                                                  ,y
-                                                                  ,46
-                                                                  ,height)];
-        
-        [self.contentView addSubview:_headView];
+    if ( nil != _delegate
+        && [_delegate respondsToSelector:@selector(dcCell:btnBgClick:)]
+        && [sBtn isKindOfClass:[XAIDCBtn class]]) {
+        [_delegate dcCell:self btnBgClick:sBtn];
     }
-    
-    UIImage* head = [UIImage imageWithFile:[XAIObjectGenerate typeImageName:type]];
-    
-    if (status == XAIDoorStatus_Open || status == XAIWindowStatus_Open) {
-        head = [UIImage imageWithFile:[XAIObjectGenerate typeImageOpenName:type]];
-    }
-    
-    [_headView setImage:head];
 }
+
+-(void)btnEditClick:(XAIDevBtn *)btn{
+    
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
+    
+    if ( nil != _delegate
+        && [_delegate respondsToSelector:@selector(dcCell:btnEditClick:)]
+        && [sBtn isKindOfClass:[XAIDCBtn class]]) {
+        [_delegate dcCell:self btnEditClick:sBtn];
+    }
+}
+
+-(void)btnDelClick:(XAIDevBtn *)btn{
+    
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
+    
+    if ( nil != _delegate
+        && [_delegate respondsToSelector:@selector(dcCell:btnDelClick:)]
+        && [sBtn isKindOfClass:[XAIDCBtn class]]) {
+        
+        [_delegate dcCell:self btnDelClick:sBtn];
+    }
+}
+
+-(void)btnEditEnd:(XAIDevBtn *)btn{
+    
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
+    
+    if ( nil != _delegate
+        && [_delegate respondsToSelector:@selector(dcCell:btnEditEnd:)]
+        && [sBtn isKindOfClass:[XAIDCBtn class]]) {
+        
+        [_delegate dcCell:self btnEditEnd:sBtn];
+    }
+    
+    
+}
+
+
+-(void)btnEditOk:(XAIDevBtn *)btn{
+    
+    
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
+    if (sBtn != nil
+        && sBtn.weakObj != nil) {
+        
+        sBtn.weakObj.nickName = sBtn.nameTipLab.text;
+        
+        [[XAIData shareData] upDateObj:sBtn.weakObj];
+    }
+    
+}
+
+-(void)btnStatusChange:(XAIDevBtn *)btn{
+    
+    XAIDCBtn* sBtn = (XAIDCBtn*)btn;
+    
+    if ( nil != _delegate
+        && [_delegate respondsToSelector:@selector(dcCell:btnStatusChange:)]
+        && [sBtn isKindOfClass:[XAIDCBtn class]]) {
+        
+        [_delegate dcCell:self btnStatusChange:sBtn];
+    }}
 
 
 @end

@@ -8,7 +8,6 @@
 
 #import "XAIDevBtn.h"
 #import "XAILight.h"
-//#import "XAILightListVC.h"
 
 @interface XAISwitchBtn : XAIDevBtn<XAILigthtDelegate>{
 

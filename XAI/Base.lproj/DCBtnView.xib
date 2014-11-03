@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="YRA-PT-2AO" customClass="XAISwitchBtn">
+        <view contentMode="scaleToFill" id="YRA-PT-2AO" customClass="XAIDCBtn">
             <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -42,32 +42,24 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_nor.png" id="Bdx-ul-tlO">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dc_unk.png" id="Bdx-ul-tlO">
                                     <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_off_text.png" id="kY1-Dy-R0c">
-                                    <rect key="frame" x="26" y="39" width="42" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_off_tip.png" id="Wbk-Td-vdi">
-                                    <rect key="frame" x="45" y="18" width="5" height="5"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_unk.png" id="tGr-XI-gc1">
-                                    <rect key="frame" x="33" y="34" width="28" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="cjI-TI-acx">
-                                    <rect key="frame" x="33" y="34" width="28" height="28"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dc_opr.png" id="cnG-Js-UyM">
+                                            <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_wait_tip.png" id="FBE-GV-Cyk">
-                                            <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                            <rect key="frame" x="33" y="34" width="28" height="28"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_wait_rol.png" id="dzK-Hu-tPw">
-                                            <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                            <rect key="frame" x="33" y="34" width="28" height="28"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -79,7 +71,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主卧开关" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q5w-nt-9Lo">
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主卧门" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q5w-nt-9Lo">
                     <rect key="frame" x="0.0" y="2" width="160" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -108,30 +100,25 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bgBtn" destination="faF-Qv-POV" id="oD7-aR-tyb"/>
-                <outlet property="bgImgView" destination="Bdx-ul-tlO" id="0G4-2x-Vku"/>
-                <outlet property="bgView" destination="epd-5j-m98" id="hRs-Sg-RdU"/>
-                <outlet property="delBtn" destination="ZDD-dn-Kpg" id="cPh-kB-zfY"/>
-                <outlet property="editBtn" destination="g1l-7p-99W" id="OkB-Uw-A88"/>
-                <outlet property="nameTF" destination="rv5-kG-u2h" id="3Qs-UV-LAd"/>
-                <outlet property="nameTipLab" destination="q5w-nt-9Lo" id="B8p-3d-Jdf"/>
-                <outlet property="oprTipLab" destination="b2b-hr-ME7" id="l9f-vk-ccP"/>
-                <outlet property="statusTextImgView" destination="kY1-Dy-R0c" id="Qmc-Y2-i6I"/>
-                <outlet property="statusTipImgView" destination="Wbk-Td-vdi" id="Ot2-eY-iu6"/>
-                <outlet property="unkownImgView" destination="tGr-XI-gc1" id="8ix-LB-VNb"/>
-                <outlet property="waitRollImageView" destination="dzK-Hu-tPw" id="yY1-2x-1x4"/>
-                <outlet property="waitView" destination="cjI-TI-acx" id="hFv-du-DKx"/>
+                <outlet property="bgBtn" destination="faF-Qv-POV" id="0Ux-8N-i9i"/>
+                <outlet property="bgView" destination="epd-5j-m98" id="cPf-xz-YPN"/>
+                <outlet property="delBtn" destination="ZDD-dn-Kpg" id="RnX-59-5rP"/>
+                <outlet property="editBtn" destination="g1l-7p-99W" id="ck5-gB-rTh"/>
+                <outlet property="nameTF" destination="rv5-kG-u2h" id="wVy-c3-pk6"/>
+                <outlet property="nameTipLab" destination="q5w-nt-9Lo" id="qZI-fF-uzn"/>
+                <outlet property="oprTipLab" destination="b2b-hr-ME7" id="QP9-3N-f2A"/>
+                <outlet property="statusTipImgView" destination="Bdx-ul-tlO" id="3U8-aq-tfq"/>
+                <outlet property="waitRollImageView" destination="dzK-Hu-tPw" id="E8l-Ln-Ycs"/>
+                <outlet property="waitView" destination="cjI-TI-acx" id="y6d-7P-NeJ"/>
             </connections>
             <point key="canvasLocation" x="233" y="564"/>
         </view>
     </objects>
     <resources>
+        <image name="dc_opr.png" width="94" height="95"/>
+        <image name="dc_unk.png" width="117" height="117"/>
         <image name="dev_change.png" width="23" height="23"/>
         <image name="dev_del_nor.png" width="23" height="23"/>
-        <image name="switch_nor.png" width="94" height="95"/>
-        <image name="switch_off_text.png" width="42" height="17"/>
-        <image name="switch_off_tip.png" width="5" height="5"/>
-        <image name="switch_unk.png" width="28" height="28"/>
         <image name="switch_wait_rol.png" width="28" height="28"/>
         <image name="switch_wait_tip.png" width="28" height="28"/>
     </resources>

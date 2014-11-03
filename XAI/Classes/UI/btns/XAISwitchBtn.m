@@ -269,6 +269,12 @@
         [self.weakLight openLight];
         [self showOprStart];
     }
+    
+    
+    if (self.delegate != nil
+        && [self.delegate respondsToSelector:@selector(btnBgClick:)]) {
+        [self.delegate btnBgClick:self];
+    }
 
     
 }

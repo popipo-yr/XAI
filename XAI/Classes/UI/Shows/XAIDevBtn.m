@@ -140,6 +140,7 @@
     _delBtn.enabled = false;
     _delBtn.hidden = true;
     _bgBtn.enabled = true;
+    _bgView.userInteractionEnabled = true;
 
 }
 -(void) startEdit{
@@ -149,6 +150,7 @@
     _delBtn.enabled = true;
     _delBtn.hidden = false;
     _bgBtn.enabled = false;
+    _bgView.userInteractionEnabled = false;
 }
 
 -(void)dealloc{

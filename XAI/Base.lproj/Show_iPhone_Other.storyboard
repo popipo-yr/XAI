@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hsi-Ff-krP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hsi-Ff-krP">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--ScanVC-->
@@ -306,6 +306,84 @@
             </objects>
             <point key="canvasLocation" x="1675" y="-990"/>
         </scene>
+        <!--Dev HistoryVC-->
+        <scene sceneID="LhM-6D-qdL">
+            <objects>
+                <viewController storyboardIdentifier="XAIDevHistoryVCID" id="wK8-Ri-n7g" customClass="XAIDevHistoryVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zkA-x4-F9v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devHis_tbg.png" id="7bM-WZ-OZZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lUd-e3-2Yx">
+                                <rect key="frame" x="283" y="42" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="edit_close_nor.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="edit_close_sel.png"/>
+                                <connections>
+                                    <action selector="closeClick:" destination="wK8-Ri-n7g" eventType="touchUpInside" id="nAR-uu-yAl"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HLF-aT-b4f">
+                                <rect key="frame" x="0.0" y="75" width="320" height="349"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAIDevHistoryVCCellID" id="0hP-V3-HZY" customClass="XAIDevHistoryVCCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0hP-V3-HZY" id="wLm-ib-ADU">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devHis_not.png" id="jnx-D8-SDq">
+                                                    <rect key="frame" x="10" y="19" width="6" height="6"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nsI-3D-1h5">
+                                                    <rect key="frame" x="33" y="11" width="234" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.69576719580000002" green="0.69576719580000002" blue="0.69576719580000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLab" destination="nsI-3D-1h5" id="7kz-mN-JGS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wK8-Ri-n7g" id="OEe-d9-6GG"/>
+                                    <outlet property="delegate" destination="wK8-Ri-n7g" id="Zah-11-xWM"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ry1-sB-C7k">
+                                <rect key="frame" x="-18" y="426" width="356" height="54"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="devHis_clear_nor.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="devHis_clear_sel.png"/>
+                                <connections>
+                                    <action selector="clearClick:" destination="wK8-Ri-n7g" eventType="touchUpInside" id="5sR-ci-Ejz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="HLF-aT-b4f" id="GTH-FI-4c3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="REp-tf-BFz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="Head-admin.png" width="104" height="105"/>
@@ -314,6 +392,12 @@
         <image name="chat_send_nor.png" width="97" height="27"/>
         <image name="chat_send_sel.png" width="97" height="27"/>
         <image name="chat_tbg.png" width="356" height="156"/>
+        <image name="devHis_clear_nor.png" width="356" height="54"/>
+        <image name="devHis_clear_sel.png" width="356" height="54"/>
+        <image name="devHis_not.png" width="6" height="6"/>
+        <image name="devHis_tbg.png" width="356" height="83"/>
+        <image name="edit_close_nor.png" width="25" height="25"/>
+        <image name="edit_close_sel.png" width="25" height="25"/>
         <image name="headImg.png" width="28" height="28"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>

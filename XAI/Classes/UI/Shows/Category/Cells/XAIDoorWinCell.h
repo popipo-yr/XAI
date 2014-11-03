@@ -6,14 +6,43 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAIObjectCell.h"
-#import "XAIWindow.h"
-#import "XAIDoor.h"
+#import "XAIDCBtn.h"
 
-#define  XAIDoorWinCellID @"XAIDoorWinCellID"
-@interface XAIDoorWinCell : XAIObjectCell<XAIWindownDelegate,XAIDoorDelegate>
+@protocol XAIDCListVCCellNewDelegate;
 
-@property (nonatomic,weak) XAIObject* weakObj;
+@interface XAIDCListVCCellNew : UITableViewCell<XAIDevBtnDelegate>{
+    
 
-- (void) setInfo:(XAIObject*)object;
+    
+}
+
+@property (nonatomic,weak) id<XAIDCListVCCellNewDelegate> delegate;
+
+
+@property (nonatomic,strong)  XAIDCBtn* oneBtn;
+@property (nonatomic,strong)  XAIDCBtn* twoBtn;
+
+@property (nonatomic, weak)  NSObject*  hasMe;  //当前持有
+
+
++ (XAIDCListVCCellNew*)create:(NSString*)useId;
+
+-(void) setInfoOne:(XAIObject*)one two:(XAIObject*)two;
+
+-(void) isEdit:(BOOL)isEdit;
+
+
 @end
+
+
+@protocol XAIDCListVCCellNewDelegate <NSObject>
+
+-(void) dcCell:(XAIDCListVCCellNew*)cell btnDelClick:(XAIDCBtn*)btn;
+-(void) dcCell:(XAIDCListVCCellNew*)cell btnEditClick:(XAIDCBtn*)btn;
+-(void) dcCell:(XAIDCListVCCellNew*)cell btnEditEnd:(XAIDCBtn*)btn;
+@optional
+-(void) dcCell:(XAIDCListVCCellNew*)cell btnBgClick:(XAIDCBtn*)btn;
+-(void) dcCell:(XAIDCListVCCellNew*)cell btnStatusChange:(XAIDCBtn*)btn;
+
+@end
+
