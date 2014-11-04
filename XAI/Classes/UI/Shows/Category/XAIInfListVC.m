@@ -10,6 +10,7 @@
 
 #import "XAIInfListCell.h"
 #import "XAIObjectGenerate.h"
+#import "XAIDevHistoryVC.h"
 
 #define _ST_InfListVCID @"XAIInfListVCID"
 
@@ -42,6 +43,7 @@
         _delInfo = [[NSMutableDictionary alloc] init];
         _delAnimalIDs = [[NSMutableArray alloc] init];
         _canDel = true;
+        _gEditBtn = false;
         
     }
     return self;
@@ -50,10 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _curInputCell = nil;
-    
-    
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,15 +114,12 @@
 
 - (void) updateShowDatas{
     
-    _curInputCell = nil;
     
-    
-    
-    _deviceDatas =  [[NSMutableArray alloc] initWithArray:
+    _deviceDatasNoManage =  [[NSMutableArray alloc] initWithArray:
                      [[XAIData shareData] listenObjsWithType:_types]];
     
     
-    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
+    
     
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
@@ -131,14 +127,76 @@
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
 //    [_deviceDatas addObject:[[XAIIR alloc] init]];
+    
+    
+    [self manageShowDatas];
+    self.tipImgView.hidden = [_deviceDatas count] == 0 ? false : true;
+    
+}
+
+-(void)manageShowDatas{
+    
+    NSMutableArray* newDatas = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [_deviceDatasNoManage count]; i++) {
+        XAILight* one = [_deviceDatasNoManage objectAtIndex:i];
+        XAIInfListCellData* cellData = [[XAIInfListCellData alloc] init];
+        [cellData setOne:one];
+        [newDatas addObject:cellData];
+    }
+
+    _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
     
 }
 
 
+#pragma mark - actions
+-(IBAction)globalEditClick:(id)sender{
+    
+    _gEditing = !_gEditing;
+    
+    if (_gEditing == false) {
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_sel.png"]
+                   forState:UIControlStateHighlighted];
+        
+        [self bgGetClick:nil]; //如果有 关闭不需要的
+    }else{
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_sel.png"]
+                   forState:UIControlStateHighlighted];
+    }
+    
+    NSArray*  cells = [self.tableView visibleCells];
+    
+    for (XAIInfListCell* aCell in cells) {
+        if (![aCell isKindOfClass:[XAIInfListCell class]]) continue;
+        [aCell isEdit:_gEditing];
+    }
+}
+
+-(void)bgGetClick:(id)sender{
+    
+    [self endEditOne:_curEditBtn];
+    
+}
+
+
+-(void)endEditOne:(XAIInfBtn*)btn{
+    
+    [_curEditBtn.nameTF resignFirstResponder];
+    _curEditBtn = nil;
+}
+
+
+
+
+
 #pragma mark Table Data Source Methods
-
-
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -165,232 +223,43 @@
     
     XAIInfListCell *cell = [tableView
                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
-        cell = [[XAIInfListCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:CellIdentifier];
+        cell = [XAIInfListCell create:CellIdentifier];
     }
     
-    XAIObject* aObj = [_deviceDatas objectAtIndex:[indexPath row]];
+    XAIInfListCellData* cellData = [_deviceDatas objectAtIndex:[indexPath row]];
     
-    if (aObj != nil &&
-        [aObj isKindOfClass:[XAIIR class]]) {
+    if ([cellData isKindOfClass:[XAIInfListCellData class]]) {
         
-        [cell setInfo:aObj];
+        [cell setInfo:cellData.oneObj];
+        
+        [cell isEdit:_gEditing];
+        cell.delegate = self;
+        
+        if (cell.hasMe != nil) {
+            
+            [_cell2Infos removeObjectForKey:cell.hasMe];
+        }
+        
+        cell.hasMe = cellData;
+        [_cell2Infos setObject:cell forKey:indexPath];
     }
-    
-    if ([[MQTT shareMQTT].curUser isAdmin]) {
-        [cell setDelBtn];
-    }
-    
-    
-    [cell setEditBtn];
+
     
     cell.delegate = self;
     
+    
     return cell;
     
-    
 }
 
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
-    
-    //NSLog(@"%d",state);
-    return;
-}
-
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
-    
-    switch (index) {
-        case 0:
-        {
-            
-            XAIInfListCell* listCell = (XAIInfListCell*)cell;
-            if ([listCell isKindOfClass:[XAIInfListCell class]]) {
-                
-                
-                if ([self isSame:listCell]) {
-                    if (_curInputTF.text == nil || [_curInputTF.text isEqualToString:@""]) {
-                        
-                        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                        message:NSLocalizedString(@"DevNickNameNull", nil)
-                                                                       delegate:self
-                                                              cancelButtonTitle:NSLocalizedString(@"AlertOK", nil)
-                                                              otherButtonTitles:nil];
-                        
-                        
-                        [alert show];
-                        return;
-                        
-                    }
-                    
-                    int index = [[self.tableView indexPathForCell:cell] row];
-                    if (index >= [_deviceDatas count]) {
-                        return;
-                    }
-                    XAIObject* obj = [_deviceDatas objectAtIndex:index];
-                    
-                    obj.nickName = _curInputTF.text;
-                    
-                    [[XAIData shareData] upDateObj:obj];
-                    
-                    listCell.nameLable.text = _curInputTF.text;
-                    
-                    
-                    [self hiddenOldInput];
-                    return;
-                }
-                
-                
-                
-                [self changeInputCell:listCell input:listCell.input];
-                
-                listCell.input.enabled = true;
-                listCell.input.hidden = false;
-                [listCell.input becomeFirstResponder];
-                
-                
-                [listCell setSaveBtn];
-                
-                _curInputCell = listCell;
-                _curInputTF = listCell.input;
-                
-                
-                float least = self.view.frame.size.height - (self.tableView.frame.origin.y + cell.frame.origin.y - self.tableView.contentOffset.y + 60);
-                float keyboardHeight =  250;
-                float move = keyboardHeight - least;
-                if (move > 0) {
-                    
-                    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
-                                                      self.tableView.frame.origin.y - move,
-                                                      self.tableView.frame.size.width,
-                                                      self.tableView.frame.size.height);
-                }
-            }
-            
-            
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            do {
-                NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                if ([indexPath row] < 0 || [indexPath row] >= [_deviceDatas count]) break;
-                
-                XAIObject* obj = [_deviceDatas objectAtIndex:[indexPath row]];
-                if (![obj isKindOfClass:[XAIObject class]]) break;
-                
-                
-                [obj startOpr];
-                obj.curOprtip = @"正在删除";
-                [((XAIInfListCell*)cell) showOprStart:obj.curOprtip];
-                
-                int delID = [_deviceService delDev:obj.luid];
-                [_delInfo setObject:obj forKey:[NSNumber numberWithInt:delID]];
-                
-                [cell hideUtilityButtonsAnimated:true];
-                
-                
-            } while (0);
-            
-            
-            
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-
-static bool delShow = false;
-static bool changeShow = false;
-static SWTableViewCell* curSWCell;
--(void)swipeableTableViewCellDidEndScrolling:(SWTableViewCell *)cell{
-    
-    curSWCell = cell;
-    if ( cell.cellState == kCellStateLeft) {
-        delShow = false;
-        changeShow = true;
-        
-    }else if( cell.cellState == kCellStateRight){
-        
-        delShow = true;
-        changeShow = false;
-        
-    }else{
-        
-        delShow = false;
-        changeShow = false;
-    }
-    
-}
-
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
-    
-    
-    if ([self hasInput] == true) {
-        
-        if (cell.cellState == state) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    
-    if (cell != curSWCell) {
-        return true;
-    }
-    switch (state) {
-        case kCellStateLeft:
-            // set to NO to disable all left utility buttons appearing
-            return delShow == false ? true : false;
-            break;
-        case kCellStateRight:
-            // set to NO to disable all right utility buttons appearing
-            return changeShow == false ? true : false;
-            break;
-        default:
-            break;
-    }
-    
-    return YES;
-}
-
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    [self hiddenOldInput];
-    
-    return YES;
-}
-
--(void)swipeableTableViewCellCancelEdit:(SWTableViewCell *)cell{
-    
-    [self hiddenOldInput];
-}
 
 
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([[_deviceDatas objectAtIndex:[indexPath row]] isKindOfClass:[NSArray class]]) {
-        return  63.0*2;
-    };
-    
-    return 63.0;
+    return 163.0;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
@@ -407,68 +276,106 @@ static SWTableViewCell* curSWCell;
 
 
 
-- (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input{
+
+#pragma mark  swith btn delegate
+-(void)infCell:(XAIInfListCell *)cell btnDelClick:(XAIInfBtn *)btn{
     
-    [self hiddenOldInput];
-    _curInputCell = cell;
-    _curInputTF = input;
-    //_curInputCell.stop = false;
-    [_curInputCell setEnable:false];
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    if ([indexPath row] < 0 || [indexPath row] >= [_deviceDatas count]) return;
     
-    [self.tableView setScrollEnabled:false];
-    //[cell setEnable:false];
+    XAIInfListCellData* cellData = [_deviceDatas objectAtIndex:[indexPath row]];
+    if (![cellData isKindOfClass:[XAIInfListCellData class]]) return;
+    
+    
+    
+    XAIObject* obj = btn.weakObj;
+    [obj startOpr];
+    obj.curOprtip = @"正在删除";
+    [btn showOprStart];
+    
+    int delID = [_deviceService delDev:obj.luid];
+    
+    
+    XAIInfoListDelInfo* delInfo = [[XAIInfoListDelInfo alloc] init];
+    delInfo.corObjs = [NSArray arrayWithObject:obj];
+    delInfo.cellData = cellData;
+    [_delInfo setObject:delInfo
+                 forKey:[NSNumber numberWithInt:delID]];
+    
+
+    
 }
 
 
-- (void) hiddenOldInput{
+NSInteger  prewTag ;  //编辑上一个UITextField的TAG,需要在XIB文件中定义或者程序中添加，不能让两个控件的TAG相同
+float prewMoveY;
+-(void)infCell:(XAIInfListCell *)cell btnEditClick:(XAIInfBtn *)btn{
     
-    if (_curInputCell != nil) {
+    self.tableView.userInteractionEnabled = false;
+    _curEditBtn = btn;
+    
+    
+    CGPoint Point =  [btn convertPoint:btn.nameTF.frame.origin toView:self.view];
+    
+    float textY = Point.y;
+    float bottomY = self.view.frame.size.height-textY;
+    float keyboardHeight = 240 + 64;
+    if(bottomY>=keyboardHeight)  //判断当前的高度是否已经有216，如果超过了就不需要再移动主界面的View高度
+    {
         
-        
-        [_curInputCell hideUtilityButtonsAnimated:true];
-        
-        
-        [_curInputCell setEditBtn];
+        return;
     }
+    prewTag = btn.tag;
+    float moveY = keyboardHeight-bottomY;
+    prewMoveY = moveY + prewMoveY;
     
-    if (_curInputTF != nil) {
-        
-        _curInputTF.enabled = false;
-        _curInputTF.hidden = true;
-        [_curInputTF resignFirstResponder];
+    NSTimeInterval animationDuration = 1.0f;
+    CGRect frame = self.tableView.frame;
+    frame.origin.y -=moveY;//view的Y轴上移
+    self.tableView.frame = frame;
+    [UIView beginAnimations:@"ResizeView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.tableView.frame = frame;
+    [UIView commitAnimations];//设置调整界面的动画效果
+    
+}
+
+-(void)infCell:(XAIInfListCell *)cell btnEditEnd:(XAIInfBtn *)btn{
+    
+    self.tableView.userInteractionEnabled = true;
+    _curEditBtn = nil;
+    
+    
+    if(prewTag == -1) //当编辑的View不是需要移动的View
+    {
+        return;
     }
-    
-    //_curInputCell.stop = true;
-    [_curInputCell setEnable:true];
-    _curInputCell = nil;
-    _curInputTF = nil;
-    
-    [self moveTableViewToOld];
-    [self.tableView setScrollEnabled:true];
-}
-
-- (BOOL) hasInput{
-    
-    return _curInputCell != nil;
-}
-
-- (BOOL) isSame:(SWTableViewCell*)cell{
-    
-    return _curInputCell == cell;
-}
-
-- (void) enableAllCtrl:(BOOL)status{
-    
-    [self.tableView setScrollEnabled:status];
-    
-    NSArray* cells = [self.tableView visibleCells];
-    for (XAIInfListCell* aCell in cells) {
-        if (![aCell isKindOfClass:[XAIInfListCell class]]) continue;
+    float moveY ;
+    NSTimeInterval animationDuration = 1.0f;
+    CGRect frame = self.tableView.frame;
+    if(prewTag == btn.tag) //当结束编辑的View的TAG是上次的就移动
+    {   //还原界面
+        moveY =  prewMoveY;
+        frame.origin.y +=moveY;
+        self.tableView.frame = frame;
         
-        [aCell setEnable:status];
-        
+        prewMoveY = 0;
     }
+    //self.view移回原位置
+    [UIView beginAnimations:@"ResizeView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.tableView.frame = frame;
+    [UIView commitAnimations];
+}
+
+
+-(void)infCell:(XAIInfListCell *)cell btnBgClick:(XAIInfBtn *)btn{
     
+    XAIDevHistoryVC* hisVC = [XAIDevHistoryVC create];
+    hisVC.retVC = self;
+    hisVC.corObj = btn.weakObj;
+    
+    [self  animalVC_R2L:hisVC];
     
 }
 
@@ -487,54 +394,33 @@ static SWTableViewCell* curSWCell;
     }
     
     
-    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
-    if (obj != nil && [obj isKindOfClass:[XAIObject class]]) {
+    XAIInfoListDelInfo* delInfo = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (delInfo != nil ) {
         
         [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
         
-        if (isSuccess) {
-            [obj endOpr];
-        }else{
+        for (XAIObject* obj in delInfo.corObjs) {
+            
+            
             [obj showMsg];
             obj.curOprtip = @"删除失败";
+            
+            
+            XAIInfBtn* btn =  nil;
+            
+            if ([obj isKindOfClass:[XAIIR class]]) {
+                
+                btn =  (XAIInfBtn*)((XAIIR*)obj).delegate;
+            }
+            
+            if ((btn != nil)
+                && [btn isKindOfClass:[XAIInfBtn class]]) {
+                
+                [btn showMsg];
+            }
         }
-        
-        if ([obj isKindOfClass:[XAIIR class]]) {
-            
-            
-            do {
-                
-                XAIInfListCell* cell = (XAIInfListCell*)((XAIIR*)obj).delegate;
-                
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAIInfListCell class]])break;
-                
-                if (!isSuccess) {
-                    
-                    [cell showMsg:obj.curOprtip];
-                }else{
-                    [cell showOprEnd];
-                    
-                    [_deviceDatas removeObject:obj];
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
-                }
-                
-                
-            } while (0);
-            
-        }
-        
-        
+    
+    
     }
     
 }
@@ -549,59 +435,58 @@ static SWTableViewCell* curSWCell;
     _canDel = false;
     
     int otherID = [[_delAnimalIDs objectAtIndex:0] intValue];
-    BOOL isSuccess = true;
     
     [_delAnimalIDs removeObjectAtIndex:0];
-    XAIObject* obj = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
-    if (obj != nil && [obj isKindOfClass:[XAIObject class]]) {
+    
+    XAIInfoListDelInfo* delInfo = [_delInfo objectForKey:[NSNumber numberWithInt:otherID]];
+    if (delInfo != nil && [delInfo isKindOfClass:[XAIInfoListDelInfo class]]) {
         
         [_delInfo removeObjectForKey:[NSNumber numberWithInt:otherID]];
         
-        if (isSuccess) {
-            [obj endOpr];
-        }else{
-            [obj showMsg];
-            obj.curOprtip = @"删除失败";
-        }
-        
-        if ([obj isKindOfClass:[XAIIR class]]) {
+        do {
             
-            
-            do {
+            for (XAIObject* oneObj in delInfo.corObjs) {
                 
-                XAIInfListCell* cell = (XAIInfListCell*)((XAIIR*)obj).delegate;
+                [oneObj endOpr];
                 
-                if (cell == nil) break;
-                if (![cell isKindOfClass:[XAIInfListCell class]])break;
+                XAIInfBtn* btn =  nil;
                 
-                if (!isSuccess) {
+                if ([oneObj isKindOfClass:[XAIIR class]]) {
                     
-                    [cell showMsg:obj.curOprtip];
-                }else{
-                    [cell showOprEnd];
-                    
-                    [_deviceDatas removeObject:obj];
-                    
-                    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                    
-                    if (indexPath != nil) {
-                        
-                        NSArray* ary = [NSArray arrayWithObject:indexPath];
-                        
-                        [self.tableView  deleteRowsAtIndexPaths:ary
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                    }
-                    
+                    btn =  (XAIInfBtn*)((XAIIR*)oneObj).delegate;
                 }
+
                 
-                
-            } while (0);
+                if ((btn != nil)
+                    && [btn isKindOfClass:[XAIInfBtn class]]) {
+                    
+                    [btn showOprEnd];
+                }
+            }
             
-        }
+            
+            NSUInteger row = [_deviceDatas indexOfObject:delInfo.cellData];
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row
+                                                        inSection:0];
+            ;
+            XAIInfListCell* cell = (XAIInfListCell*)[_cell2Infos objectForKey:indexPath];
+            
+            if (cell == nil) break;
+            if (![cell isKindOfClass:[XAIInfListCell class]])break;
+            
+            
+            
+            [_deviceDatasNoManage removeObjectsInArray:delInfo.corObjs];
+            [self manageShowDatas];
+            [self.tableView reloadData];
+            
+            
+        } while (0);
+        
+        
     }
     
     [self performSelector:@selector(changeCanMove) withObject:nil afterDelay:1.5f];
-    
 }
 
 - (void) changeCanMove{
@@ -617,3 +502,19 @@ static SWTableViewCell* curSWCell;
 
 
 @end
+
+
+@implementation XAIInfListCellData
+-(void)setOne:(XAIObject *)one{
+    
+    _oneObj = one;
+    
+}
+
+@end
+
+@implementation XAIInfoListDelInfo
+
+@end
+
+

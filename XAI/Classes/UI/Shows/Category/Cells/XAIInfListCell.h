@@ -7,16 +7,41 @@
 //
 
 #import "XAIObjectCell.h"
-#import "XAIIR.h"
+#import "XAIInfBtn.h"
 
 #define  XAIInfListCellID @"XAIInfListCellID"
 
-@interface XAIInfListCell : XAIObjectCell<XAIIRDelegate>{
+@protocol XAIInfListCellDelegate;
+@interface XAIInfListCell : UITableViewCell<XAIDevBtnDelegate>
 
-    NSTimer* timer;
-}
+    
 
-@property (nonatomic,weak) XAIObject* weakObj;
-- (void) setInfo:(XAIObject*)object;
+@property (nonatomic,weak) id<XAIInfListCellDelegate> delegate;
+
+
+@property (nonatomic,strong)  XAIInfBtn* oneBtn;
+
+@property (nonatomic, weak)  NSObject*  hasMe;  //当前持有
+
+
++ (XAIInfListCell*)create:(NSString*)useId;
+
+-(void) setInfo:(XAIObject*)one;
+
+-(void) isEdit:(BOOL)isEdit;
+
 
 @end
+
+
+@protocol XAIInfListCellDelegate <NSObject>
+
+-(void) infCell:(XAIInfListCell*)cell btnDelClick:(XAIInfBtn*)btn;
+-(void) infCell:(XAIInfListCell*)cell btnEditClick:(XAIInfBtn*)btn;
+-(void) infCell:(XAIInfListCell*)cell btnEditEnd:(XAIInfBtn*)btn;
+@optional
+-(void) infCell:(XAIInfListCell*)cell btnBgClick:(XAIInfBtn*)btn;
+-(void) infCell:(XAIInfListCell*)cell btnStatusChange:(XAIInfBtn*)btn;
+
+@end
+

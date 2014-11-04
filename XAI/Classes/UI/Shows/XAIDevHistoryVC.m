@@ -95,7 +95,7 @@
     
     if (aOpr != nil && [aOpr isKindOfClass:[XAIObjectOpr class]]) {
         
-        cell.textLabel.text = [aOpr allStr];
+        cell.contentLab.text = [aOpr allStr];
     }
     
     return cell;

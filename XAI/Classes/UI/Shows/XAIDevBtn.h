@@ -71,6 +71,7 @@ typedef enum{
 -(void)btnEditEnd:(XAIDevBtn*)btn;
 -(void)btnEditOk:(XAIDevBtn*)btn;
 -(void)btnStatusChange:(XAIDevBtn*)btn;
+@optional
 -(void)btnBgClick:(XAIDevBtn*)btn;
 
 
