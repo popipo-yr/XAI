@@ -123,19 +123,26 @@ bool _is = false;
     
     if (bl) {
         
-//        if (_warnTimer != nil) return;
-//        
-//        
-//        _warnTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f
-//                                                      target:self
-//                                                    selector:@selector(showArrow)
-//                                                    userInfo:nil
-//                                                     repeats:YES];
+        if (_warnTimer != nil) return;
+        
+        
+        _showWarnAlpha = 1.0;
+        _showWarnIsDel = true;
+        _warnTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f
+                                                      target:self
+                                                    selector:@selector(showArrow)
+                                                    userInfo:nil
+                                                     repeats:YES];
 
         
         [self showArrow];
         
     }else{
+        
+        if (_warnTimer != nil) {
+            [_warnTimer invalidate];
+            _warnTimer = nil;
+        }
         
         self.statusTipImgView.alpha = 1;
         [self.statusTipImgView.layer removeAllAnimations];
@@ -178,6 +185,27 @@ bool _is = false;
 }
 
 -(void)showArrow{
+    
+    
+    if (_showWarnAlpha > 1) {
+        _showWarnAlpha = 1;
+        _showWarnIsDel = true;
+    }else if(_showWarnAlpha < 0.3){
+    
+        _showWarnAlpha = 0;
+        _showWarnIsDel = false;
+    }
+    
+    if (_showWarnIsDel) {
+        _showWarnAlpha -= 0.1;
+    }else{
+        _showWarnAlpha += 0.3;
+    }
+    
+    _statusTipImgView.alpha = _showWarnAlpha;
+    
+    
+    return;
     
     [UIView beginAnimations:@"ShowArrow" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];

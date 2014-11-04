@@ -19,6 +19,8 @@
     NSTimer* _workTimer;
     
     int _showWorkIndex;
+    float _showWarnAlpha;
+    BOOL _showWarnIsDel;
 
 }
 
