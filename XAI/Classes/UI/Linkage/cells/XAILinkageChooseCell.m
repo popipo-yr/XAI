@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILinkageInfoAddCell.h"
+#import "XAILinkageChooseCell.h"
 
-@implementation XAILinkageInfoAddCell
+@implementation XAILinkageChooseCell
 
 - (void) setTip:(NSString*)tip{
 

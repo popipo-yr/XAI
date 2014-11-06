@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "XAIObjectCell.h"
 #import "XAILinkageService.h"
-#import "XAILinkageInfoCell.h"
+#import "XAILinkageEditCell.h"
 
 
-@interface XAILinkageInfoVC : UIViewController
+@interface XAILinkageEditVC : UIViewController
 <UITableViewDataSource,UITabBarDelegate,XAILinkageServiceDelegate,XAILinkageInfoCellDelegate>{
 
     XAILinkageService* _linkageService;

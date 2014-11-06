@@ -6,25 +6,25 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILinkageInfoVC.h"
+#import "XAILinkageEditVC.h"
 #import "XAILinkage.h"
-#import "XAILinkageInfoCell.h"
-#import "XAILinkageAddInfoVC.h"
+#import "XAILinkageEditCell.h"
+#import "XAILinkageChooseVC.h"
 #import "XAILinkageListVC.h"
 #import "XAILinkageUseInfo+ADD.h"
 
 #import "XAIData.h"
 #import "XAIObjectGenerate.h"
 
-#define XAILinkageInfoVCID @"XAILinkageInfoVCID"
-@implementation XAILinkageInfoVC
+#define _ST_XAILinkageEditVCID @"XAILinkageEditVCID"
+@implementation XAILinkageEditVC
 
-+ (XAILinkageInfoVC*)create:(NSString*)name;{
++ (XAILinkageEditVC*)create:(NSString*)name;{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    XAILinkageInfoVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageInfoVCID];
+    XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
     
-    if (![vc isKindOfClass:[XAILinkageInfoVC class]]) return nil;
+    if (![vc isKindOfClass:[XAILinkageEditVC class]]) return nil;
     
      [vc changeIphoneStatus];
     
@@ -35,14 +35,14 @@
     
 }
 
-+ (XAILinkageInfoVC*)create:(NSString*)name linkage:(XAILinkage *)linkage{
++ (XAILinkageEditVC*)create:(NSString*)name linkage:(XAILinkage *)linkage{
 
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    XAILinkageInfoVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageInfoVCID];
+    XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
     
     [vc changeIphoneStatus];
     
-    if (![vc isKindOfClass:[XAILinkageInfoVC class]]) return nil;
+    if (![vc isKindOfClass:[XAILinkageEditVC class]]) return nil;
     
     [vc setName:name];
     [vc setLinkage:linkage];
@@ -136,8 +136,8 @@
     
     NSArray*  cells = [self.cTableView visibleCells];
     
-    for (XAILinkageInfoCell* aCell in cells) {
-        if (![aCell isKindOfClass:[XAILinkageInfoCell class]]) continue;
+    for (XAILinkageEditCell* aCell in cells) {
+        if (![aCell isKindOfClass:[XAILinkageEditCell class]]) continue;
         if (aCell == [cells lastObject]) continue;
         
         [aCell isEidt:_gEditing];
@@ -248,12 +248,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* cellID = XAILinkageInfoCellID;
+    NSString* cellID = _C_XAILinkageEditCellID;
     
-    XAILinkageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    XAILinkageEditCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (cell == nil || ![cell isKindOfClass:[UITableViewCell class]]) {
-        cell = [[XAILinkageInfoCell alloc]
+        cell = [[XAILinkageEditCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:cellID];
     }
@@ -292,7 +292,7 @@
 
 -(void)gotoLinkageAddInfoVC:(BOOL)isCond{
 
-    XAILinkageAddInfoVC* vc = [XAILinkageAddInfoVC create];
+    XAILinkageChooseVC* vc = [XAILinkageChooseVC create];
     vc.infoVC = self;
     
     if (isCond) {
@@ -310,7 +310,7 @@
 
 
 #pragma mark - delgate
--(void)linkageInfoCellDelClick:(XAILinkageInfoCell *)cell{
+-(void)linkageInfoCellDelClick:(XAILinkageEditCell *)cell{
 
     NSIndexPath* indexPatn = [self.cTableView indexPathForCell:cell];
     [_datas removeObjectAtIndex:[indexPatn row]];
@@ -320,9 +320,9 @@
 
 }
 
--(void)linkageInfoCellResultClick:(XAILinkageInfoCell *)cell{
+-(void)linkageInfoCellResultClick:(XAILinkageEditCell *)cell{
     
-    XAILinkageAddInfoVC* vc = [XAILinkageAddInfoVC create];
+    XAILinkageChooseVC* vc = [XAILinkageChooseVC create];
     vc.infoVC = self;
     
     NSIndexPath* indexPath = [self.cTableView indexPathForCell:cell];

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-#define XAILinkageInfoAddCellID @"XAILinkageInfoAddCellID"
+#define _C_XAILinkageChooseCellID @"XAILinkageChooseCellID"
 
-@interface XAILinkageInfoAddCell : UITableViewCell
+@interface XAILinkageChooseCell : UITableViewCell
 
 @property (nonatomic,strong) IBOutlet UILabel* label;
 

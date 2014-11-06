@@ -8,8 +8,7 @@
 
 #import "XAILinkageListVC.h"
 #import "XAILinkageListCell.h"
-#import "XAILinkageAddNameVC.h"
-#import "XAILinkageInfoVC.h"
+#import "XAILinkageEditVC.h"
 
 #import "XAIShowVC.h"
 
@@ -332,7 +331,7 @@
     
     XAILinkage* linkage = [_Datas objectAtIndex:[indexPath row]];
     
-    UIViewController* vc = [XAILinkageInfoVC create:linkage.name linkage:linkage];
+    UIViewController* vc = [XAILinkageEditVC create:linkage.name linkage:linkage];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

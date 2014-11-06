@@ -8,11 +8,11 @@
 
 #import "XAIObjectCell.h"
 
-#define XAILinkageInfoCellID @"XAILinkageInfoCellID"
+#define _C_XAILinkageEditCellID @"XAILinkageEditCellID"
 
 
 @protocol XAILinkageInfoCellDelegate;
-@interface XAILinkageInfoCell : UITableViewCell
+@interface XAILinkageEditCell : UITableViewCell
 
 
 @property (nonatomic,weak) id<XAILinkageInfoCellDelegate>  delegate;
@@ -34,7 +34,7 @@
 
 @protocol XAILinkageInfoCellDelegate  <NSObject>
 
--(void)linkageInfoCellResultClick:(XAILinkageInfoCell*)cell;
--(void)linkageInfoCellDelClick:(XAILinkageInfoCell*)cell;
+-(void)linkageInfoCellResultClick:(XAILinkageEditCell*)cell;
+-(void)linkageInfoCellDelClick:(XAILinkageEditCell*)cell;
 
 @end

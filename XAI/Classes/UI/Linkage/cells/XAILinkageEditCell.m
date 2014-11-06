@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILinkageInfoCell.h"
+#import "XAILinkageEditCell.h"
 
-@implementation XAILinkageInfoCell
+@implementation XAILinkageEditCell
 
 
 - (void) setJieGuo:(NSString*)str{

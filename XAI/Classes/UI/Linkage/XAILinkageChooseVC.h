@@ -11,7 +11,7 @@
 #import "XAIObject.h"
 #import "XAILinkageAlert.h"
 #import "XAILinkageTime.h"
-#import "XAILinkageInfoVC.h"
+#import "XAILinkageEditVC.h"
 
 typedef enum {
     
@@ -20,7 +20,7 @@ typedef enum {
 
 }XAILinkageOneType;
 
-@interface XAILinkageAddInfoVC : XAIHasTableViewVC
+@interface XAILinkageChooseVC : XAIHasTableViewVC
 <UITableViewDataSource,UITableViewDelegate>{
 
     NSArray* _datas;
@@ -35,10 +35,10 @@ typedef enum {
 }
 
 
-@property (nonatomic,retain) XAILinkageInfoVC* infoVC;
+@property (nonatomic,retain) XAILinkageEditVC* infoVC;
 
 
-+(XAILinkageAddInfoVC*)create;
++(XAILinkageChooseVC*)create;
 - (void) setLinkageOneChoosetype:(XAILinkageOneType)type;
 
 @end

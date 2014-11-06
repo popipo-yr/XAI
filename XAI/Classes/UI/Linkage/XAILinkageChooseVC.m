@@ -6,20 +6,20 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILinkageAddInfoVC.h"
+#import "XAILinkageChooseVC.h"
 #import "XAIData.h"
 #import "XAIObjectGenerate.h"
-#import "XAILinkageInfoAddCell.h"
+#import "XAILinkageChooseCell.h"
 
 
-#define XAILinkageAddInfoVCID @"XAILinkageAddInfoVCID"
+#define _ST_XAILinkageChooseVCID @"XAILinkageChooseVCID"
 
-@implementation XAILinkageAddInfoVC
+@implementation XAILinkageChooseVC
 
-+(XAILinkageAddInfoVC*)create{
++(XAILinkageChooseVC*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    XAILinkageAddInfoVC* vc = (XAILinkageAddInfoVC*)[show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageAddInfoVCID];
+    XAILinkageChooseVC* vc = (XAILinkageChooseVC*)[show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageChooseVCID];
     //[vc changeIphoneStatusClear];
     return vc;
     
@@ -108,12 +108,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* cellID = XAILinkageInfoAddCellID;
+    NSString* cellID = _C_XAILinkageChooseCellID;
     
-    XAILinkageInfoAddCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    XAILinkageChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
     if (cell == nil || ![cell isKindOfClass:[UITableViewCell class]]) {
-        cell = [[XAILinkageInfoAddCell alloc]
+        cell = [[XAILinkageChooseCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:cellID];
     }
