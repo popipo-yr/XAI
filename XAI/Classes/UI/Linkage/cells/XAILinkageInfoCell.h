@@ -9,17 +9,32 @@
 #import "XAIObjectCell.h"
 
 #define XAILinkageInfoCellID @"XAILinkageInfoCellID"
-//@interface XAILinkageInfoCell : XAIObjectCell
-@interface XAILinkageInfoCell : SWTableViewCell
 
-@property (nonatomic,strong) IBOutlet UILabel* label;
+
+@protocol XAILinkageInfoCellDelegate;
+@interface XAILinkageInfoCell : UITableViewCell
+
+
+@property (nonatomic,weak) id<XAILinkageInfoCellDelegate>  delegate;
+
+@property (nonatomic,strong) IBOutlet UITextField* tipTF;
 @property (nonatomic,strong) IBOutlet UIImageView* tipView;
+@property (nonatomic,strong) IBOutlet UIButton*  delBtn;
 
+- (IBAction)resultClick:(id)sender;
+- (IBAction)delClick:(id)sender;
 
 - (void) setTiaojian:(NSString*)str;
 - (void) setJieGuo:(NSString*)str;
 
-- (void) setTiaojianTip:(NSString*)str;
-- (void) setJieGuoTip:(NSString*)str;
+
+-(void) isEidt:(BOOL)isEdit;
+
+@end
+
+@protocol XAILinkageInfoCellDelegate  <NSObject>
+
+-(void)linkageInfoCellResultClick:(XAILinkageInfoCell*)cell;
+-(void)linkageInfoCellDelClick:(XAILinkageInfoCell*)cell;
 
 @end

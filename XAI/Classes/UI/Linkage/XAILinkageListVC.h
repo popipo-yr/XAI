@@ -8,9 +8,10 @@
 
 #import "XAIHasTableViewVC.h"
 #import "XAILinkageService.h"
+#import "XAILinkageListCell.h"
 
 @interface XAILinkageListVC : XAIHasTableViewVC
-<XAILinkageServiceDelegate,SWTableViewCellDelegate>{
+<XAILinkageServiceDelegate,XAILinkageListCellDelegate>{
     
     XAILinkageService* _linkageService;
     NSMutableArray*  _Datas;
@@ -22,13 +23,16 @@
     
     NSMutableArray* _delAnimalIDs;
     BOOL _canDel;
+    BOOL _gEditing;
     
 }
 
 @property (nonatomic,strong) IBOutlet UIView* retView;
+@property (nonatomic,strong) IBOutlet UIButton* gEditBtn;
 
+-(IBAction)globalEditClick:(id)sender;
 
-
-+(UIViewController*)create;
++(XAILinkageListVC*)create;
++(XAILinkageListVC*)createWithNav;
 
 @end

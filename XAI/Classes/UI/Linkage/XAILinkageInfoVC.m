@@ -11,38 +11,41 @@
 #import "XAILinkageInfoCell.h"
 #import "XAILinkageAddInfoVC.h"
 #import "XAILinkageListVC.h"
+#import "XAILinkageUseInfo+ADD.h"
 
 #import "XAIData.h"
 #import "XAIObjectGenerate.h"
 
 #define XAILinkageInfoVCID @"XAILinkageInfoVCID"
-#define _ST_ShowLinkageInfo @"_ST_ShowLinkageInfo"
 @implementation XAILinkageInfoVC
 
-+ (UIViewController*)create:(NSString*)name;{
++ (XAILinkageInfoVC*)create:(NSString*)name;{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    UINavigationController* vc = (UINavigationController*)[show_Storyboard instantiateViewControllerWithIdentifier:_ST_ShowLinkageInfo];
+    XAILinkageInfoVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageInfoVCID];
+    
+    if (![vc isKindOfClass:[XAILinkageInfoVC class]]) return nil;
     
      [vc changeIphoneStatus];
     
     
-    [(XAILinkageInfoVC*)(vc.topViewController) setName:name];
+    [vc setName:name];
     
     return vc;
     
 }
 
-+ (UIViewController*)create:(NSString*)name linkage:(XAILinkage *)linkage{
++ (XAILinkageInfoVC*)create:(NSString*)name linkage:(XAILinkage *)linkage{
 
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    UINavigationController* vc = (UINavigationController*)[show_Storyboard instantiateViewControllerWithIdentifier:_ST_ShowLinkageInfo];
+    XAILinkageInfoVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAILinkageInfoVCID];
     
     [vc changeIphoneStatus];
     
+    if (![vc isKindOfClass:[XAILinkageInfoVC class]]) return nil;
     
-    [(XAILinkageInfoVC*)(vc.topViewController) setName:name];
-    [(XAILinkageInfoVC*)(vc.topViewController) setLinkage:linkage];
+    [vc setName:name];
+    [vc setLinkage:linkage];
     
     return vc;
 
@@ -106,8 +109,47 @@
 
 - (IBAction)backClick:(id)sender{
     
-    [self animalVC_L2R:[XAILinkageListVC create]];
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self animalVC_L2R:[XAILinkageListVC create]];
     
+}
+
+#pragma mark - action
+-(IBAction)globalEditClick:(id)sender{
+
+    _gEditing = !_gEditing;
+    
+    if (_gEditing == false) {
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_sel.png"]
+                   forState:UIControlStateHighlighted];
+        
+    }else{
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_sel.png"]
+                   forState:UIControlStateHighlighted];
+    }
+    
+    NSArray*  cells = [self.cTableView visibleCells];
+    
+    for (XAILinkageInfoCell* aCell in cells) {
+        if (![aCell isKindOfClass:[XAILinkageInfoCell class]]) continue;
+        if (aCell == [cells lastObject]) continue;
+        
+        [aCell isEidt:_gEditing];
+        
+    }
+
+}
+
+- (IBAction)condClick:(id)sender{
+
+    _selIndex = false;
+    [self gotoLinkageAddInfoVC:true];
 }
 
 - (IBAction)okClick:(id)sender{
@@ -158,7 +200,7 @@
     
     
     _name = name;
-    self.navigationItem.title = name;
+    self.nameTF.text = name;
     
 }
 
@@ -220,118 +262,20 @@
         
         XAILinkageUseInfo * aUseInfo = [_datas objectAtIndex:[indexPath row]];
         
-        if (aUseInfo != nil && [aUseInfo isKindOfClass:[XAILinkageUseInfo class]]) {
-            
-            if (aUseInfo.dev_apsn == 0x0 && aUseInfo.dev_luid == 0x0) {
-                //时间
-                XAITYPETime time = 0;
-                XAILinkageUseInfoTime* timeUseInfo = (XAILinkageUseInfoTime*)aUseInfo;
-                if (![timeUseInfo isKindOfClass:[XAILinkageUseInfoTime class]]) {
-    
-                
-                    timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
-                    [timeUseInfo setApsn:0 Luid:0 ID:0 Datas:aUseInfo.datas];
-                    
-                    [_datas replaceObjectAtIndex:[indexPath row] withObject:timeUseInfo];
-                }
-                
-                time = timeUseInfo.time;
-                int hour = time/(60*60);
-                int minu = (time - (hour*60*60))/60;
-                
-                if ([indexPath row] == 0) {//条件 定时
-                    [cell setTiaojian:[NSString stringWithFormat:@"当%d点%d分时",hour,minu]];
-                    
-                }else{
-                
-                    [cell setJieGuo:[NSString stringWithFormat:@"延时%d小时%d分",hour,minu]];
-
-                }
-            
-                
-                
-            }else{
-                
-                XAIObject* obj = [[XAIData shareData] findListenObj:aUseInfo.dev_apsn luid:aUseInfo.dev_luid];
-                
-                if ([obj isKindOfClass:[XAILight class]]) {
-                    
-                    if (aUseInfo.some_id == 2) { /*通道二*/
-                        obj = [[XAIData shareData] findListenObj:aUseInfo.dev_apsn
-                                                            luid:aUseInfo.dev_luid
-                                                            type:XAIObjectType_light2_2];
-                    }
-                }
-                
-                if (obj == nil) {
-                    
-                    if ([indexPath row] == 0) {//条件 定时
-                        [cell setTiaojian:@"未知信息"];
-                        
-                    }else{
-                        
-                        [cell setJieGuo:@"未知控制"];
-                        
-                    }
-                }else{
-                    
-                    NSString* miaoshu =  [obj linkageInfoMiaoShu:aUseInfo];
-                    
-                    NSString* name = obj.name;
-                    
-                    if (obj.nickName != nil && ![obj.nickName isEqualToString:@""]) {
-                        name = obj.nickName;
-                    }
-                    
-                    NSString* tip = nil;
-                    
-                    if ([indexPath row] == 0) {
-                        // tiaojian
-                        if (miaoshu == nil || ![obj  hasLinkageTiaojian]) {
-                            tip = [NSString stringWithFormat:@"%@未知条件",name];
-                        }else{
-                            tip = [NSString stringWithFormat:@"当%@%@时",name,miaoshu];
-                        }
-                        
-                        [cell setTiaojian:tip];
-
-                        
-                    }else{
-                        //结果
-                        if (miaoshu == nil || ![obj hasLinkageJieGuo]) {
-                            tip = [NSString stringWithFormat:@"%@未知控制",name];
-                        }else{
-                            tip = [NSString stringWithFormat:@"%@%@",miaoshu,name];
-                        }
-                        
-                        [cell setJieGuo:tip];
-                    }
-                    
-                    
-                }
-            }
-            
-        }
+        
+        [cell setJieGuo:[aUseInfo toStrIsCond:false]];
+        
         
         cell.delegate = self;
-        [cell setDelBtn];
+        
+        [cell isEidt:_gEditing];
         
     }else{
         
-        if ([_datas count] == 0) {
-            
-            [cell  setTiaojianTip:@"添加条件"];
-        }else{
-            
-            [cell setJieGuoTip:@"添加结果"];
-        }
         
+        [cell setJieGuo:nil];
         
-        
-        //        cell.leftUtilityButtons = nil;
-        //        cell.rightUtilityButtons = nil;
-        //        [cell setAdd];
-        
+        [cell isEidt:false];
         
     }
 
@@ -344,39 +288,53 @@
     
      [tableView deselectRowAtIndexPath:indexPath animated:false];
     
+}
+
+-(void)gotoLinkageAddInfoVC:(BOOL)isCond{
+
     XAILinkageAddInfoVC* vc = [XAILinkageAddInfoVC create];
     vc.infoVC = self;
     
-    if (0 == [indexPath row]) {
-        
+    if (isCond) {
         
         [vc setLinkageOneChoosetype:XAILinkageOneType_yuanyin];
-
         
     }else{
-    
         
         [vc setLinkageOneChoosetype:XAILinkageOneType_jieguo];
     }
     
     
-    
-    
-    _selIndex = indexPath;
-    
     [self.navigationController pushViewController:vc animated:true];
-    
-
-    
 }
 
--(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+
+#pragma mark - delgate
+-(void)linkageInfoCellDelClick:(XAILinkageInfoCell *)cell{
 
     NSIndexPath* indexPatn = [self.cTableView indexPathForCell:cell];
     [_datas removeObjectAtIndex:[indexPatn row]];
     
     [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPatn]
-                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                            withRowAnimation:UITableViewRowAnimationAutomatic];
+
+}
+
+-(void)linkageInfoCellResultClick:(XAILinkageInfoCell *)cell{
+    
+    XAILinkageAddInfoVC* vc = [XAILinkageAddInfoVC create];
+    vc.infoVC = self;
+    
+    NSIndexPath* indexPath = [self.cTableView indexPathForCell:cell];
+    
+
+    _selIndex = indexPath;
+    
+    [self gotoLinkageAddInfoVC:false];
+    
+    
+
+
 }
 
 -(void)linkageService:(XAILinkageService *)service addStatusCode:(XAI_ERROR)errcode{
@@ -413,7 +371,11 @@
     if (errcode == XAI_ERROR_NONE) {
         
         _datas = [[NSMutableArray alloc]init];
-        [_datas addObject:linkage.effeInfo];
+        //[_datas addObject:linkage.effeInfo];
+        
+        _nameTF.text = linkage.name;
+        _condTF.text = [linkage.effeInfo toStrIsCond:true];
+        
         [_datas addObjectsFromArray:linkage.condInfos];
         
         [self.cTableView reloadData];

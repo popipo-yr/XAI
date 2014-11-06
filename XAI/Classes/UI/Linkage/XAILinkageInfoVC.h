@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "XAIObjectCell.h"
 #import "XAILinkageService.h"
+#import "XAILinkageInfoCell.h"
 
 
 @interface XAILinkageInfoVC : UIViewController
-<UITableViewDataSource,UITabBarDelegate,XAILinkageServiceDelegate,SWTableViewCellDelegate>{
+<UITableViewDataSource,UITabBarDelegate,XAILinkageServiceDelegate,XAILinkageInfoCellDelegate>{
 
     XAILinkageService* _linkageService;
     
@@ -24,11 +25,18 @@
     XAILinkage* _linkage;
     
     UIActivityIndicatorView* _activityView;
+    
+    BOOL _gEditing;
 }
 
 
 @property (nonatomic,strong) IBOutlet UITableView* cTableView;
+@property (nonatomic,strong) IBOutlet UITextField* nameTF;
+@property (nonatomic,strong) IBOutlet UITextField* condTF;
+@property (nonatomic,strong) IBOutlet UIButton* gEditBtn;
 
+-(IBAction)globalEditClick:(id)sender;
+- (IBAction)condClick:(id)sender;
 - (IBAction)okClick:(id)sender;
 
 + (UIViewController*)create:(NSString*)name;

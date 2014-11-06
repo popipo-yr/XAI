@@ -16,23 +16,16 @@
     if (![linkage isKindOfClass:[XAILinkage  class]]){
         
         [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
-        [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-        [self.tipImageView setImage:nil];
+        [self.statusImgV setBackgroundColor:[UIColor clearColor]];
+        [self.statusImgV setImage:nil];
         [self.nameLable setText:nil];
-        [self.contextLable setText:nil];
-        [self.tipLabel setText:nil];
         
         return;
     }
     
     
     
-    [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-    
     [self.nameLable setText:linkage.name];
-    
-    
-    
     
     
     
@@ -50,17 +43,240 @@
 
 }
 
--  (void) setAdd{
-    
-    
-    [self firstStatus:XAIOCST_Open opr:XAIOCOT_None tip:nil];
-    [self.tipImageView setBackgroundColor:[UIColor clearColor]];
-    [self.tipImageView setImage:nil];
-    [self.nameLable setText:@"添加联动"];
-    [self.contextLable setText:nil];
-    [self.tipLabel setText:nil];
+-(void) isEidt:(BOOL)isEdit{
 
+    if (isEdit) {
+        [self startEdit];
+    }else{
+        [self endEdit];
+    }
+}
+
+-(IBAction)statusClick:(id)sender{
+
+    if (nil != _delegate &&
+        [_delegate respondsToSelector:@selector(linkListCellClickStatusClick:)] ) {
+        
+        [_delegate linkListCellClickStatusClick:self];
+    }
+}
+-(IBAction)delClick:(id)sender{
+
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(linkListCellClickDel:)] ) {
+        [_delegate linkListCellClickDel:self];
+    }
 
 }
+
+
+//----------------------
+
+- (void)showTipLable:(BOOL)bl{
+    
+}
+
+- (void) showOprStart{
+    _opr = XAIOCOT_Start;
+    
+    [self showTipLable:true];
+}
+
+
+- (void) showMsg{
+    
+    
+    _opr = XAIOCOT_Msg;
+    [self showTipLable:true];
+    
+    [self performSelector:@selector(showErrEnd) withObject:nil afterDelay:3.0f];
+}
+
+- (void) showErrEnd{
+    
+    if (_opr != XAIOCOT_Msg) {
+        return;
+    }
+    
+    [self showOprEnd];
+}
+
+
+- (void) showOprEnd{
+    
+    _opr = XAIOCOT_None;
+    [self setStatus:_status];
+}
+
+
+- (void) setStatus:(XAIOCST)type{
+    
+    _status = type;
+    
+    if (_opr != XAIOCOT_None) {
+        return;
+    }
+    
+    switch (type) {
+        case XAIOCST_Open:
+            [self showOpen];
+            break;
+        case XAIOCST_Close:
+            [self showClose];
+            break;
+        case XAIOCST_Unkown:
+            [self showUnkonw];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+- (void) firstStatus:(XAIOCST)staus opr:(XAIOCOT)opr tip:(NSString *)tip{
+    
+    _opr = opr;
+    _status = staus;
+    
+    [self endEdit];
+    
+    switch (opr) {
+        case XAIOCOT_None:
+            [self showOprEnd];
+            break;
+        case XAIOCOT_Start:
+            [self showOprStart];
+            break;
+        case XAIOCOT_Msg:
+            [self showMsg];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+-(void) startAnimation
+{
+    if (_roleTimer != nil) return;
+    _roleTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                                  target:self
+                                                selector:@selector(roleProc)
+                                                userInfo:nil repeats:YES];
+    
+     
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:0.01];
+//        [UIView setAnimationDelegate:self];
+//        [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+//        [UIView commitAnimations];
+}
+
+-(void)endAnimation
+{
+//    if (_bRoll) {
+//        _angle += 10;
+//        [self startAnimation];
+//    }
+    
+    if (_roleTimer != nil) {
+        [_roleTimer invalidate];
+        _roleTimer = nil;
+    }
+    
+}
+
+-(void)roleProc{
+
+    if (self.superview != nil) {
+        self.statusImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
+        _angle += 10;
+    }
+}
+
+- (void) showClose{
+    
+    [self endAnimation];
+    
+    //[self.statusImgV setBackgroundColor:[UIColor blackColor]];
+    self.statusImgV.image = [UIImage imageWithFile:@"link_s_stop.png"];
+    [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_off.png"]
+                    forState:UIControlStateNormal];
+    
+    [self showTipLable:false];
+}
+- (void) showOpen{
+    
+
+    //[self.statusImgV setBackgroundColor:[UIColor blackColor]];
+    self.statusImgV.image = [UIImage imageWithFile:@"link_s_run.png"];
+    [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_on.png"]
+                    forState:UIControlStateNormal];
+    
+    [self showTipLable:false];
+    
+    [self startAnimation];
+
+}
+
+
+- (void) showUnkonw{
+    
+    [self showTipLable:false];
+}
+
+
+
+
+
+-(XAIOCOT)coverForm:(XAIObjectOprStatus)objOprStatus{
+    
+    XAIOCOT opr = XAIOCOT_None;
+    
+    if(objOprStatus == XAIObjectOprStatus_showMsg){
+        opr = XAIOCOT_Msg;
+        
+    }else if (objOprStatus == XAIObjectOprStatus_start) {
+        opr = XAIOCOT_Start;
+    }
+    
+    return opr;
+    
+}
+
+
+-(void) endEdit{
+    
+
+    _delBtn.hidden = true;
+    _delBtn.enabled = false;
+    
+}
+-(void) startEdit{
+    
+
+    _delBtn.hidden = false;
+    _delBtn.enabled = true;
+}
+
+-(void)willMoveToSuperview:(UIView *)newWindow{
+    
+    [super willMoveToSuperview:newWindow];
+    
+    
+    if (newWindow == (id)[NSNull null] || newWindow == nil){
+        
+        if (_roleTimer != nil) {
+            [_roleTimer invalidate];
+            _roleTimer = nil;
+        }
+        
+    }
+    
+}
+
+-(void)dealloc{
+    
+}
+
 
 @end

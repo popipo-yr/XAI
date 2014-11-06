@@ -15,6 +15,8 @@
 
 #define  XAILinkageListVCID @"XAILinkageListVCID"
 #define  _ST_show_linkage @"show_linkage"
+
+#define _ST_XAILinkageListVCNavID @"XAILinkageListVCNavID"
 @implementation XAILinkageListVC
 
 +(UIViewController*)create{
@@ -24,6 +26,19 @@
     //[vc changeIphoneStatusClear];
     return vc;
 
+}
+
++(UINavigationController*)createWithNav{
+    
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
+    UINavigationController* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageListVCNavID];
+    //[vc changeIphoneStatusClear];
+    [vc changeIphoneStatus];
+    if (![vc isKindOfClass:[UINavigationController class]]) {
+        return nil;
+    }
+    return vc;
+    
 }
 
 
@@ -78,8 +93,46 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(returnClick:)];
+    
+    [backItem ios6cleanBackgroud];
+    
+    [self.navigationItem setLeftBarButtonItem:backItem];
+    
+    
+    if ([[MQTT shareMQTT].curUser isAdmin]) {
+        
+        UIImage* addImg = [UIImage imageWithFile:@"add_nor.png"] ;
+        
+        if ([addImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+            
+            addImg = [addImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
+        
+        
+        UIBarButtonItem* addItem = [[UIBarButtonItem alloc] initWithImage:addImg
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(addOneLink:)];
+        
+        [addItem ios6cleanBackgroud];
+        
+        [self.navigationItem setRightBarButtonItem:addItem];
+    }
+    
     [_linkageService findAllLinkages];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +167,15 @@
 }
 
 
+-(void)returnClick:(id)sender{
+
+    [self animalVC_R2L:[XAIShowVC create]];
+}
+
+-(void)addOneLink:(id)sender{
+
+    //[self.navigationController ]
+}
 
 
 - (void) updateShowDatas{
@@ -160,6 +222,35 @@
     [self animalVC_R2L:[XAIShowVC create]];
 }
 
+
+#pragma mark - actions
+-(IBAction)globalEditClick:(id)sender{
+    
+    _gEditing = !_gEditing;
+    
+    if (_gEditing == false) {
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_sel.png"]
+                   forState:UIControlStateHighlighted];
+        
+    }else{
+        
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_nor.png"]
+                   forState:UIControlStateNormal];
+        [_gEditBtn setImage:[UIImage imageWithFile:@"edit_close_sel.png"]
+                   forState:UIControlStateHighlighted];
+    }
+    
+    NSArray*  cells = [self.tableView visibleCells];
+    
+    for (XAILinkageListCell* aCell in cells) {
+        if (![aCell isKindOfClass:[XAILinkageListCell class]]) continue;
+        [aCell isEidt:_gEditing];
+    }
+}
+
 #pragma mark Table Data Source Methods
 
 
@@ -177,7 +268,7 @@
     
     [self setSeparatorStyle:[_Datas count]];
     
-    return [_Datas count] + 1;
+    return [_Datas count];
     
     
 }
@@ -206,8 +297,6 @@
         }
         
         
-        [cell setDelBtn];
-        [cell setEditBtn];
         cell.delegate = self;
         
         
@@ -221,17 +310,7 @@
         [_cellInfos setObject:cell forKey:unique];
         
 
-    }else{
-    
-
-        
-        cell.leftUtilityButtons = nil;
-        cell.rightUtilityButtons = nil;
-        [cell setAdd];
-        
-    
     }
-    
     
     return cell;
     
@@ -239,245 +318,89 @@
 }
 
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state{
-    
-    //NSLog(@"%d",state);
-    return;
-}
-
-
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            do {
-                NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-                if ([indexPath row] < 0 || [indexPath row] >= [_Datas count]) break;
-                
-                XAILinkage* aLinkage = [_Datas objectAtIndex:[indexPath row]];
-                if (![aLinkage isKindOfClass:[XAILinkage class]]) break;
-                
-                
-                [aLinkage startOpr];
-                aLinkage.curOprtip = @"正在删除";
-                [((XAILinkageListCell*)cell) showOprStart:aLinkage.curOprtip];
-                
-                int delID = [_linkageService delLinkage:aLinkage.num];
-                
-                [_delInfo setObject:aLinkage forKey:[NSNumber numberWithInt:delID]];
-                
-                [cell hideUtilityButtonsAnimated:true];
-                
-                
-            } while (0);
-            
-            
-            
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index{
-    switch (index) {
-        case 0:
-        {
-            do {
-                
-                XAILinkage* linkage = [_Datas objectAtIndex:
-                                       [[self.tableView indexPathForCell:cell] row]];
-                
-                self.view.window.rootViewController = [XAILinkageInfoVC create:linkage.name linkage:linkage];
-                
-                
-            } while (0);
-            
-            
-            
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-
-static bool delShow = false;
-static bool changeShow = false;
-static SWTableViewCell* curSWCell;
--(void)swipeableTableViewCellDidEndScrolling:(SWTableViewCell *)cell{
-    
-    curSWCell = cell;
-    if ( cell.cellState == kCellStateLeft) {
-        delShow = false;
-        changeShow = true;
-        
-    }else if( cell.cellState == kCellStateRight){
-        
-        delShow = true;
-        changeShow = false;
-        
-    }else{
-        
-        delShow = false;
-        changeShow = false;
-    }
-    
-}
-
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
-    
-    
-    if ([self hasInput] == true) {
-        
-        if (cell.cellState == state) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    
-    if (cell != curSWCell) {
-        return true;
-    }
-    switch (state) {
-        case kCellStateLeft:
-            // set to NO to disable all left utility buttons appearing
-            return delShow == false ? true : false;
-            break;
-        case kCellStateRight:
-            // set to NO to disable all right utility buttons appearing
-            return changeShow == false ? true : false;
-            break;
-        default:
-            break;
-    }
-    
-    return YES;
-}
-
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    [self hiddenOldInput];
-    
-    return YES;
-}
-
--(void)swipeableTableViewCellCancelEdit:(SWTableViewCell *)cell{
-    
-    [self hiddenOldInput];
-}
-
 
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 63.0;
+    return _C_LinkageListCellHeight;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView
-  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if ([indexPath row] >= [_Datas count]) {
-    /*添加联动*/
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    XAILinkage* linkage = [_Datas objectAtIndex:[indexPath row]];
+    
+    UIViewController* vc = [XAILinkageInfoVC create:linkage.name linkage:linkage];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+#pragma mark -  cell Delegate
+-(void)linkListCellClickStatusClick:(XAILinkageListCell *)cell{
+    
+    
+    do {
         
-        self.view.window.rootViewController = [XAILinkageAddNameVC create];
         
-    }else{
-    /*更改联动状态*/
-    
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+         if ([indexPath row] < 0 || [indexPath row] >= [_Datas count]) break;
         
-        do {
-
-            
-            XAILinkage * aLinkage= [_Datas objectAtIndex:[indexPath row]];
-            if (![aLinkage isKindOfClass:[XAILinkage class]]) break;
-            
-            XAILinkageListCell* cell = (XAILinkageListCell*)[tableView cellForRowAtIndexPath:indexPath];
-            if (![cell isKindOfClass:[XAILinkageListCell class]]) break;
-            
-            int unique = 0;
-            
-            if(aLinkage.status == XAILinkageStatus_Active){
-                
-                unique = [_linkageService setLinkage:aLinkage.num status:XAILinkageStatus_DisActive];
-                
-                aLinkage.curOprtip = @"正在修改为失效";
-                [aLinkage startOpr];
-                [cell showOprStart:aLinkage.curOprtip];
-                
-                
-            }else if(aLinkage.status == XAILinkageStatus_DisActive){
-                
-                unique = [_linkageService setLinkage:aLinkage.num status:XAILinkageStatus_Active];
-                
-                aLinkage.curOprtip = @"正在修改为生效";
-                [aLinkage startOpr];
-                [cell showOprStart:aLinkage.curOprtip];
-            }
-            
-            [_changeInfo setObject:aLinkage forKey:[NSNumber numberWithInt:unique]];
-            
-            
-            
-        } while (0);
-
-    
-    }
-    
-    
-    return nil;
-}
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-
-
-- (void) changeInputCell:(SWTableViewCell*)cell input:(UITextField*)input{
-    
-    [self hiddenOldInput];
-
-}
-
-
-- (void) hiddenOldInput{
-    
-}
-
-- (BOOL) hasInput{
-    
-    return false;
-}
-
-- (BOOL) isSame:(SWTableViewCell*)cell{
-    
-    return false;
-}
-
-- (void) enableAllCtrl:(BOOL)status{
-    
-    [self.tableView setScrollEnabled:status];
-    
-    NSArray* cells = [self.tableView visibleCells];
-    for (XAILinkageListCell* aCell in cells) {
-        if (![aCell isKindOfClass:[XAILinkageListCell class]]) continue;
+        XAILinkage * aLinkage= [_Datas objectAtIndex:[indexPath row]];
+        if (![aLinkage isKindOfClass:[XAILinkage class]]) break;
         
-        [aCell setEnable:status];
         
-    }
-    
+        int unique = 0;
+        
+        if(aLinkage.status == XAILinkageStatus_Active){
+            
+            unique = [_linkageService setLinkage:aLinkage.num status:XAILinkageStatus_DisActive];
+            
+            aLinkage.curOprtip = @"正在修改为失效";
+            [aLinkage startOpr];
+            [cell showOprStart];
+            
+            
+        }else if(aLinkage.status == XAILinkageStatus_DisActive){
+            
+            unique = [_linkageService setLinkage:aLinkage.num status:XAILinkageStatus_Active];
+            
+            aLinkage.curOprtip = @"正在修改为生效";
+            [aLinkage startOpr];
+            [cell showOprStart];
+        }
+        
+        [_changeInfo setObject:aLinkage forKey:[NSNumber numberWithInt:unique]];
+        
+    } while (0);
     
 }
+
+-(void)linkListCellClickDel:(XAILinkageListCell *)cell{
+
+    do {
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    
+        if ([indexPath row] < 0 || [indexPath row] >= [_Datas count]) break;
+        
+        XAILinkage* aLinkage = [_Datas objectAtIndex:[indexPath row]];
+        if (![aLinkage isKindOfClass:[XAILinkage class]]) break;
+        
+        
+        [aLinkage startOpr];
+        aLinkage.curOprtip = @"正在删除";
+        [cell showOprStart];
+        
+        int delID = [_linkageService delLinkage:aLinkage.num];
+        
+        [_delInfo setObject:aLinkage forKey:[NSNumber numberWithInt:delID]];
+        
+    } while (0);
+        
+}
+
+
 
 -(void)linkageService:(XAILinkageService *)service changeStatusStatusCode:(XAI_ERROR)errcode otherID:(int)otherID{
 
@@ -509,7 +432,7 @@ static SWTableViewCell* curSWCell;
             
             if (errcode != XAI_ERROR_NONE) {
                 
-                [cell showMsg:aLinkage.curOprtip];
+                [cell showMsg];
             }else{
                 [cell showOprEnd];
                 
@@ -565,9 +488,9 @@ static SWTableViewCell* curSWCell;
                 
                 if (errcode != XAI_ERROR_NONE) {
                     
-                    [cell showMsg:aLinkage.curOprtip];
+                    //[cell showMsg:aLinkage.curOprtip];
                 }else{
-                    [cell showOprEnd];
+                    //[cell showOprEnd];
                     
                     [_Datas removeObject:aLinkage];
                     
@@ -650,9 +573,9 @@ static SWTableViewCell* curSWCell;
             
             if (errcode != XAI_ERROR_NONE) {
                 
-                [cell showMsg:aLinkage.curOprtip];
+                //[cell showMsg:aLinkage.curOprtip];
             }else{
-                [cell showOprEnd];
+                //[cell showOprEnd];
                 
                 [_Datas removeObject:aLinkage];
                 

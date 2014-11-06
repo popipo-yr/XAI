@@ -129,8 +129,8 @@
     
 
     
-    [_deviceDatasNoManage addObject:[[XAIDoor alloc] init]];
-    [_deviceDatasNoManage addObject:[[XAIDoor alloc] init]];
+    //[_deviceDatasNoManage addObject:[[XAIDoor alloc] init]];
+    //[_deviceDatasNoManage addObject:[[XAIDoor alloc] init]];
 
     
     [self manageShowDatas];

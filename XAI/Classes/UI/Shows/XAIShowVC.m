@@ -127,7 +127,7 @@
 -(void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer{
 
     if ([[MQTT shareMQTT].curUser isAdmin]) {
-        [self animalVC_L2R:[XAILinkageListVC create]];
+        [self animalVC_L2R:[XAILinkageListVC createWithNav]];
     }
 }
 
