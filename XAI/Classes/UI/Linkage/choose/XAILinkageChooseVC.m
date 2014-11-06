@@ -72,6 +72,9 @@
 
     [super viewDidLoad];
     
+    _oneview.frame = CGRectMake(0, 0,
+                                self.view.frame.size.width,
+                                self.view.frame.size.height);
     [self.view addSubview:_oneview];
     
     _lTableViewDatas = [self getLeftDatas];
