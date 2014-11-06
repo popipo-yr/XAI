@@ -70,7 +70,6 @@
 		9612B04B19A0ACDF004CA9F5 /* XAINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B04A19A0ACDF004CA9F5 /* XAINavigationController.m */; };
 		9612B04E19A190CA004CA9F5 /* Linkage_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9612B04C19A190CA004CA9F5 /* Linkage_iPhone.storyboard */; };
 		9612B05219A191C2004CA9F5 /* XAILinkageListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */; };
-		9612B05B19A1CA53004CA9F5 /* XAILinkageChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B05A19A1CA53004CA9F5 /* XAILinkageChooseVC.m */; };
 		9612B06519A1CFA1004CA9F5 /* linkage_add_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612B05F19A1CFA1004CA9F5 /* linkage_add_nor@2x.png */; };
 		9612B06619A1CFA1004CA9F5 /* linkage_add_rect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612B06019A1CFA1004CA9F5 /* linkage_add_rect@2x.png */; };
 		9612B06719A1CFA1004CA9F5 /* linkage_add_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612B06119A1CFA1004CA9F5 /* linkage_add_sel@2x.png */; };
@@ -196,6 +195,12 @@
 		962272981A0B169900FCE9EE /* link_inf_bg_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272681A0B169900FCE9EE /* link_inf_bg_sel.png */; };
 		962272991A0B169900FCE9EE /* link_sw_bg_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272691A0B169900FCE9EE /* link_sw_bg_nor.png */; };
 		9622729A1A0B169900FCE9EE /* link_sw_bg_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9622726A1A0B169900FCE9EE /* link_sw_bg_sel.png */; };
+		9622729D1A0B210100FCE9EE /* Link_Choose.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9622729B1A0B210100FCE9EE /* Link_Choose.xib */; };
+		962272A11A0B273D00FCE9EE /* XAILinkageChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962272A01A0B273D00FCE9EE /* XAILinkageChooseVC.m */; };
+		962272A41A0B298300FCE9EE /* XAILinkageCondChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962272A31A0B298300FCE9EE /* XAILinkageCondChooseVC.m */; };
+		962272A71A0B299900FCE9EE /* XAILinkageResultChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962272A61A0B299900FCE9EE /* XAILinkageResultChooseVC.m */; };
+		962272AA1A0B4A1800FCE9EE /* XAILinkageChooseVCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 962272A91A0B4A1800FCE9EE /* XAILinkageChooseVCTool.m */; };
+		962272AD1A0B56FC00FCE9EE /* Link_Choose_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 962272AB1A0B56FC00FCE9EE /* Link_Choose_Cell.xib */; };
 		962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */; };
 		962A0070199DA7950039E4EE /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006D199DA7950039E4EE /* XAILightListCell.m */; };
 		962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006F199DA7950039E4EE /* XAIObjectCell.m */; };
@@ -742,8 +747,6 @@
 		9612B04D19A190CA004CA9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Linkage_iPhone.storyboard; sourceTree = "<group>"; };
 		9612B05019A191C2004CA9F5 /* XAILinkageListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageListVC.h; sourceTree = "<group>"; };
 		9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageListVC.m; sourceTree = "<group>"; };
-		9612B05919A1CA53004CA9F5 /* XAILinkageChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageChooseVC.h; sourceTree = "<group>"; };
-		9612B05A19A1CA53004CA9F5 /* XAILinkageChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageChooseVC.m; sourceTree = "<group>"; };
 		9612B05F19A1CFA1004CA9F5 /* linkage_add_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkage_add_nor@2x.png"; sourceTree = "<group>"; };
 		9612B06019A1CFA1004CA9F5 /* linkage_add_rect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkage_add_rect@2x.png"; sourceTree = "<group>"; };
 		9612B06119A1CFA1004CA9F5 /* linkage_add_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkage_add_sel@2x.png"; sourceTree = "<group>"; };
@@ -882,6 +885,16 @@
 		962272681A0B169900FCE9EE /* link_inf_bg_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_inf_bg_sel.png; sourceTree = "<group>"; };
 		962272691A0B169900FCE9EE /* link_sw_bg_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_sw_bg_nor.png; sourceTree = "<group>"; };
 		9622726A1A0B169900FCE9EE /* link_sw_bg_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_sw_bg_sel.png; sourceTree = "<group>"; };
+		9622729C1A0B210100FCE9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Link_Choose.xib; sourceTree = "<group>"; };
+		9622729F1A0B273D00FCE9EE /* XAILinkageChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageChooseVC.h; sourceTree = "<group>"; };
+		962272A01A0B273D00FCE9EE /* XAILinkageChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageChooseVC.m; sourceTree = "<group>"; };
+		962272A21A0B298300FCE9EE /* XAILinkageCondChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageCondChooseVC.h; sourceTree = "<group>"; };
+		962272A31A0B298300FCE9EE /* XAILinkageCondChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageCondChooseVC.m; sourceTree = "<group>"; };
+		962272A51A0B299900FCE9EE /* XAILinkageResultChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageResultChooseVC.h; sourceTree = "<group>"; };
+		962272A61A0B299900FCE9EE /* XAILinkageResultChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageResultChooseVC.m; sourceTree = "<group>"; };
+		962272A81A0B4A1800FCE9EE /* XAILinkageChooseVCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageChooseVCTool.h; sourceTree = "<group>"; };
+		962272A91A0B4A1800FCE9EE /* XAILinkageChooseVCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageChooseVCTool.m; sourceTree = "<group>"; };
+		962272AC1A0B56FC00FCE9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Link_Choose_Cell.xib; sourceTree = "<group>"; };
 		962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoorWinListVC.h; sourceTree = "<group>"; };
 		962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoorWinListVC.m; sourceTree = "<group>"; };
 		962A006C199DA7950039E4EE /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
@@ -1690,8 +1703,6 @@
 				961B61F919A3483900085411 /* cells */,
 				9612B05019A191C2004CA9F5 /* XAILinkageListVC.h */,
 				9612B05119A191C2004CA9F5 /* XAILinkageListVC.m */,
-				9612B05919A1CA53004CA9F5 /* XAILinkageChooseVC.h */,
-				9612B05A19A1CA53004CA9F5 /* XAILinkageChooseVC.m */,
 				9612B0A019A1E8A3004CA9F5 /* XAILinkageAlert.h */,
 				9612B0A119A1E8A3004CA9F5 /* XAILinkageAlert.m */,
 				9612B0AC19A2FAA4004CA9F5 /* XAILinkageTime.h */,
@@ -1932,6 +1943,22 @@
 				9622725A1A0B169900FCE9EE /* link_sw_bg_sel@3x.png */,
 			);
 			path = 3x;
+			sourceTree = "<group>";
+		};
+		9622729E1A0B273D00FCE9EE /* choose */ = {
+			isa = PBXGroup;
+			children = (
+				9622729F1A0B273D00FCE9EE /* XAILinkageChooseVC.h */,
+				962272A01A0B273D00FCE9EE /* XAILinkageChooseVC.m */,
+				962272A21A0B298300FCE9EE /* XAILinkageCondChooseVC.h */,
+				962272A31A0B298300FCE9EE /* XAILinkageCondChooseVC.m */,
+				962272A51A0B299900FCE9EE /* XAILinkageResultChooseVC.h */,
+				962272A61A0B299900FCE9EE /* XAILinkageResultChooseVC.m */,
+				962272A81A0B4A1800FCE9EE /* XAILinkageChooseVCTool.h */,
+				962272A91A0B4A1800FCE9EE /* XAILinkageChooseVCTool.m */,
+			);
+			name = choose;
+			path = Linkage/choose;
 			sourceTree = "<group>";
 		};
 		962A006B199DA7950039E4EE /* Cells */ = {
@@ -2821,6 +2848,7 @@
 		96E9D95F19010561000BB595 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9622729E1A0B273D00FCE9EE /* choose */,
 				96EB61731A0720360083455B /* btns */,
 				9612B04F19A19190004CA9F5 /* Linkage */,
 				96C6BD631998788000D61111 /* Shows */,
@@ -2888,6 +2916,8 @@
 				9631E1581A00BCD70040FC82 /* SwitchBtnView.xib */,
 				96CAE6F01A0725F20030075C /* DCBtnView.xib */,
 				96CAE7531A086A490030075C /* InfBtnView.xib */,
+				9622729B1A0B210100FCE9EE /* Link_Choose.xib */,
+				962272AB1A0B56FC00FCE9EE /* Link_Choose_Cell.xib */,
 			);
 			name = storyboard;
 			path = Base.lproj;
@@ -3500,6 +3530,7 @@
 				962272841A0B169900FCE9EE /* link_cond_time_sel@3x.png in Resources */,
 				9622726C1A0B169900FCE9EE /* link_cond_dc_sel@2x.png in Resources */,
 				96E49DD119F8ECAC003920EE /* useradd_tbg_t.png in Resources */,
+				962272AD1A0B56FC00FCE9EE /* Link_Choose_Cell.xib in Resources */,
 				962272231A09F94000FCE9EE /* link_edit_save_bg@2x.png in Resources */,
 				9656792519B5A7580094F638 /* font_jiaohu.png in Resources */,
 				96CAE7871A08C4CB0030075C /* link_s_stop@3x.png in Resources */,
@@ -3690,6 +3721,7 @@
 				9631E13E1A00BB460040FC82 /* switch_nor@3x.png in Resources */,
 				96CAE6E61A07217E0030075C /* dc_title@3x.png in Resources */,
 				96CAE7101A075FE80030075C /* devHis_sc@3x.png in Resources */,
+				9622729D1A0B210100FCE9EE /* Link_Choose.xib in Resources */,
 				96E49DC919F8ECAC003920EE /* useradd_tbg@3x.png in Resources */,
 				96863A8B19C14C15000B9FC9 /* msgNum2@2x.png in Resources */,
 				9631E1331A00BB460040FC82 /* switch_tbg@2x.png in Resources */,
@@ -3768,7 +3800,9 @@
 				C341A66B18EBB2C400034649 /* messages_mosq.c in Sources */,
 				961071DE192B3EFA00D5F75A /* XAIDeviceType.m in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
+				962272A41A0B298300FCE9EE /* XAILinkageCondChooseVC.m in Sources */,
 				964525A419CABB520037129C /* XAICloudService.m in Sources */,
+				962272A71A0B299900FCE9EE /* XAILinkageResultChooseVC.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
 				962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */,
 				962A0074199DA7DC0039E4EE /* XAIDoorWinCell.m in Sources */,
@@ -3842,8 +3876,8 @@
 				C341A66918EBB2C400034649 /* logging_mosq.c in Sources */,
 				967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */,
 				C33E77F718F38DF000808391 /* XAIPacketStatus.c in Sources */,
-				9612B05B19A1CA53004CA9F5 /* XAILinkageChooseVC.m in Sources */,
 				96E44802191C6B22008A424B /* Reachability.m in Sources */,
+				962272A11A0B273D00FCE9EE /* XAILinkageChooseVC.m in Sources */,
 				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9697918519F4ECC000153CF5 /* XAIPacketIMCtrl.c in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
@@ -3854,6 +3888,7 @@
 				962272371A0A00BD00FCE9EE /* XAILinkageUseInfo+ADD.m in Sources */,
 				96C882241985F60A00571F21 /* XAIObjectOpr.m in Sources */,
 				96659E3E192C6B200045E66F /* XAILight2_CirculeOne.m in Sources */,
+				962272AA1A0B4A1800FCE9EE /* XAILinkageChooseVCTool.m in Sources */,
 				C38D91E518ED3490006F22D3 /* MosquittoMessage.m in Sources */,
 				9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */,
 				962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */,
@@ -3947,6 +3982,22 @@
 				9612B0AA19A2F98E004CA9F5 /* Base */,
 			);
 			name = LinkageTime.xib;
+			sourceTree = "<group>";
+		};
+		9622729B1A0B210100FCE9EE /* Link_Choose.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9622729C1A0B210100FCE9EE /* Base */,
+			);
+			name = Link_Choose.xib;
+			sourceTree = "<group>";
+		};
+		962272AB1A0B56FC00FCE9EE /* Link_Choose_Cell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				962272AC1A0B56FC00FCE9EE /* Base */,
+			);
+			name = Link_Choose_Cell.xib;
 			sourceTree = "<group>";
 		};
 		9631E1581A00BCD70040FC82 /* SwitchBtnView.xib */ = {

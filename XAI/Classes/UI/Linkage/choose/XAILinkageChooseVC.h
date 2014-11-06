@@ -12,6 +12,7 @@
 #import "XAILinkageAlert.h"
 #import "XAILinkageTime.h"
 #import "XAILinkageEditVC.h"
+#import "XAILinkageChooseCell.h"
 
 typedef enum {
     
@@ -21,19 +22,14 @@ typedef enum {
 }XAILinkageOneType;
 
 @interface XAILinkageChooseVC : UIViewController
-<UITableViewDataSource,UITableViewDelegate>{
-
-    NSArray* _datas;
-    
-    
-    XAIObject* _curObj;
-    
-    XAILinkageOneType _type;
+<UITableViewDataSource,UITableViewDelegate,XAILinkageChooseCellDelegate>{
     
     UIView*  _oneview;
     //------------
     NSArray* _lTableViewDatas;
     NSArray* _rTableViewDatas;
+    
+    BOOL _isChooseAttr1;
     
 }
 
@@ -55,6 +51,7 @@ typedef enum {
 
 
 +(XAILinkageChooseVC*)create;
+
 - (void) setLinkageOneChoosetype:(XAILinkageOneType)type;
 
 @end

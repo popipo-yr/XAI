@@ -9,7 +9,7 @@
 #import "XAILinkageEditVC.h"
 #import "XAILinkage.h"
 #import "XAILinkageEditCell.h"
-#import "XAILinkageChooseVC.h"
+#import "XAILinkageChooseVCTool.h"
 #import "XAILinkageListVC.h"
 #import "XAILinkageUseInfo+ADD.h"
 
@@ -213,7 +213,13 @@
 
 - (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo{
 
-    if (_selIndex == nil) return;
+    if (_selIndex == nil){
+    
+        _linkage.effeInfo = useInfo;
+        _condTF.text = [useInfo toStrIsCond:true];
+        
+        return;
+    }
     if ([_selIndex row] < [_datas count]) {
     
         [_datas replaceObjectAtIndex:[_selIndex row] withObject:useInfo];
@@ -265,9 +271,6 @@
         
         [cell setJieGuo:[aUseInfo toStrIsCond:false]];
         
-        
-        cell.delegate = self;
-        
         [cell isEidt:_gEditing];
         
     }else{
@@ -279,6 +282,7 @@
         
     }
 
+    cell.delegate = self;
     
     
     return cell;
@@ -292,18 +296,19 @@
 
 -(void)gotoLinkageAddInfoVC:(BOOL)isCond{
 
-    XAILinkageChooseVC* vc = [XAILinkageChooseVC create];
-    vc.infoVC = self;
+    XAILinkageChooseVC* vc = nil;
+   
     
     if (isCond) {
         
-        [vc setLinkageOneChoosetype:XAILinkageOneType_yuanyin];
-        
+      vc = [XAILinkageChooseVCTool create:XAILinkageOneType_yuanyin];
+
     }else{
         
-        [vc setLinkageOneChoosetype:XAILinkageOneType_jieguo];
+      vc = [XAILinkageChooseVCTool create:XAILinkageOneType_jieguo];
     }
     
+     vc.infoVC = self;
     
     [self.navigationController pushViewController:vc animated:true];
 }
@@ -322,7 +327,7 @@
 
 -(void)linkageInfoCellResultClick:(XAILinkageEditCell *)cell{
     
-    XAILinkageChooseVC* vc = [XAILinkageChooseVC create];
+    XAILinkageChooseVC* vc = [XAILinkageChooseVCTool create:XAILinkageOneType_jieguo];
     vc.infoVC = self;
     
     NSIndexPath* indexPath = [self.cTableView indexPathForCell:cell];
