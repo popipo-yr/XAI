@@ -79,6 +79,16 @@
     _opr = XAIOCOT_Start;
     
     [self showTipLable:true];
+    
+    _rollImgV.hidden = false;
+    
+    [self endAnimation];
+    
+    if (_oprTimer != nil) return;
+    _oprTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                                  target:self
+                                                selector:@selector(oprProc)
+                                                userInfo:nil repeats:YES];
 }
 
 
@@ -98,12 +108,21 @@
     }
     
     [self showOprEnd];
+    
+    
 }
 
 
 - (void) showOprEnd{
     
     _opr = XAIOCOT_None;
+    
+    _rollImgV.hidden = true;
+    if (_oprTimer != nil) {
+        [_oprTimer invalidate];
+        _oprTimer = nil;
+    }
+    
     [self setStatus:_status];
 }
 
@@ -183,12 +202,22 @@
         _roleTimer = nil;
     }
     
+    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
+    
 }
 
 -(void)roleProc{
 
     if (self.superview != nil) {
         self.statusImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
+        _angle += 10;
+    }
+}
+
+-(void)oprProc{
+
+    if (self.superview != nil) {
+        self.rollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
         _angle += 10;
     }
 }
@@ -202,6 +231,8 @@
     [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_off.png"]
                     forState:UIControlStateNormal];
     
+    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
+    
     [self showTipLable:false];
 }
 - (void) showOpen{
@@ -211,6 +242,8 @@
     self.statusImgV.image = [UIImage imageWithFile:@"link_s_run.png"];
     [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_on.png"]
                     forState:UIControlStateNormal];
+    
+    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
     
     [self showTipLable:false];
     
@@ -270,6 +303,10 @@
             _roleTimer = nil;
         }
         
+        if (_oprTimer != nil) {
+            [_oprTimer invalidate];
+            _oprTimer = nil;
+        }
     }
     
 }

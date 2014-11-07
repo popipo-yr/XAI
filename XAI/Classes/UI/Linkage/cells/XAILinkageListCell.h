@@ -24,6 +24,8 @@
     BOOL _bRoll;
     BOOL _angle;
     NSTimer* _roleTimer;
+    
+    NSTimer* _oprTimer;
 }
 
 @property (nonatomic, weak)  NSObject*  hasMe;
@@ -33,6 +35,8 @@
 @property (nonatomic,strong) IBOutlet UIImageView* invalidImgV;
 @property (nonatomic,strong) IBOutlet UILabel* nameLable;
 @property (nonatomic,strong) IBOutlet UIButton* delBtn;
+
+@property (nonatomic,strong) IBOutlet UIImageView* rollImgV;
 
 @property (nonatomic,weak) id<XAILinkageListCellDelegate> delegate;
 

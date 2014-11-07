@@ -211,6 +211,7 @@
 		962272C61A0C714700FCE9EE /* link_result_sw_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272BA1A0C714700FCE9EE /* link_result_sw_sel.png */; };
 		962272C71A0C714700FCE9EE /* link_result_time_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272BB1A0C714700FCE9EE /* link_result_time_nor.png */; };
 		962272C81A0C714700FCE9EE /* link_result_time_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272BC1A0C714700FCE9EE /* link_result_time_sel.png */; };
+		962272CA1A0CA83600FCE9EE /* link_opr_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272C91A0CA83600FCE9EE /* link_opr_roll.png */; };
 		962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */; };
 		962A0070199DA7950039E4EE /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006D199DA7950039E4EE /* XAILightListCell.m */; };
 		962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006F199DA7950039E4EE /* XAIObjectCell.m */; };
@@ -914,6 +915,7 @@
 		962272BA1A0C714700FCE9EE /* link_result_sw_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_result_sw_sel.png; sourceTree = "<group>"; };
 		962272BB1A0C714700FCE9EE /* link_result_time_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_result_time_nor.png; sourceTree = "<group>"; };
 		962272BC1A0C714700FCE9EE /* link_result_time_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_result_time_sel.png; sourceTree = "<group>"; };
+		962272C91A0CA83600FCE9EE /* link_opr_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_opr_roll.png; sourceTree = "<group>"; };
 		962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoorWinListVC.h; sourceTree = "<group>"; };
 		962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoorWinListVC.m; sourceTree = "<group>"; };
 		962A006C199DA7950039E4EE /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
@@ -2790,6 +2792,7 @@
 				96CAE77C1A08C4CB0030075C /* link_s_time_invalid.png */,
 				96CAE77D1A08C4CB0030075C /* link_s_time_valid.png */,
 				96CAE7901A08C7280030075C /* link_del_nor.png */,
+				962272C91A0CA83600FCE9EE /* link_opr_roll.png */,
 			);
 			path = root;
 			sourceTree = "<group>";
@@ -3435,6 +3438,7 @@
 				962272271A09F94000FCE9EE /* link_edit_add_bg@3x.png in Resources */,
 				9622726F1A0B169900FCE9EE /* link_cond_inf_sel@2x.png in Resources */,
 				C38AC20618EBF116002F20C1 /* Main_iPhone.storyboard in Resources */,
+				962272CA1A0CA83600FCE9EE /* link_opr_roll.png in Resources */,
 				96AD3D7A19A58EE500DB6AF3 /* add_nor@2x.png in Resources */,
 				96CAE7661A08BA130030075C /* link_title_top.png in Resources */,
 				96CAE74F1A086A260030075C /* inf_tbg.png in Resources */,
