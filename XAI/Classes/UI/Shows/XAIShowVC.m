@@ -282,6 +282,10 @@
         XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
                                   CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
         
+        if ([UIScreen is_35_Size]) {
+            [catbtn setScale:0.8];
+        }
+        
         XAICategoryType type = [[devCategorys objectAtIndex:i] intValue];
         
         [catbtn setType:type];

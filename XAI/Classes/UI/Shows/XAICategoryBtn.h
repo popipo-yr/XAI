@@ -32,6 +32,8 @@
 - (void) setSelect:(BOOL)bsel;
 - (void) setNumber:(int)number;
 
+-(void) setScale:(float)scale;
+
 - (UIView*) view;
 
 @end

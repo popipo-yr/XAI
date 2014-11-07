@@ -103,7 +103,7 @@
     float moveN = 0;
     if ([UIScreen is_35_Size]) {
         moveB = -10;
-        moveI = -30;
+        moveI = -20;
         moveN = 10;
     }
     
@@ -136,6 +136,11 @@
     
     
     _type = type;
+}
+
+-(void)setScale:(float)scale{
+    
+    _showView.transform = CGAffineTransformMakeScale(scale, scale);
 }
 
 - (void) setSelect:(BOOL)bsel{

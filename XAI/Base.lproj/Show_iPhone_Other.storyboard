@@ -75,11 +75,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="WGj-Oo-5QH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <view contentMode="scaleToFill" id="Hgf-uQ-Whh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +134,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="moveView" destination="Hgf-uQ-Whh" id="2pB-lf-ZoT"/>
@@ -387,7 +382,6 @@
     </scenes>
     <resources>
         <image name="Head-admin.png" width="104" height="105"/>
-        <image name="bg.png" width="356" height="633"/>
         <image name="chat_input_bg.png" width="356" height="42"/>
         <image name="chat_send_nor.png" width="97" height="27"/>
         <image name="chat_send_sel.png" width="97" height="27"/>
