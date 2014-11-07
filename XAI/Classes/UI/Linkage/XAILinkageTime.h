@@ -11,13 +11,20 @@
 @interface XAILinkageTime : UIView
 
 
-@property (nonatomic,strong) IBOutlet UIButton* rightBtn;
-@property (nonatomic,strong) IBOutlet UIButton* closeBtn;
-@property (nonatomic,strong) IBOutlet UIButton* bgBtn;
+@property (nonatomic,strong) IBOutlet UIButton* okBtn;
 @property (nonatomic,strong) IBOutlet UIDatePicker* dataPicker;
 
 
 - (void) setDingShi;
 - (void) setYanShi;
+
++ (XAILinkageTime*)share;
+- (IBAction)closeView:(id)sender;
+
+-(void) addTo:(UIView*)view;
+-(void) addTo:(UIView*)view point:(CGPoint)point;
+-(void) addToCenter:(UIView*)view;
+
+-(void)removeFromSuperview;
 
 @end

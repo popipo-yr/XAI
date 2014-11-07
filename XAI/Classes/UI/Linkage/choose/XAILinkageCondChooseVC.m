@@ -107,7 +107,6 @@
     imageSel.image = [self imgCond:type isSel:true];
     cell.selectedBackgroundView = imageSel;
     
-    
     return cell;
 }
 
@@ -115,9 +114,29 @@
 - (void)tableView_l:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
-
+    
+    
     _rTableViewDatas = [self  getTiaojian:type];
     [self.rightTableView reloadData];
+    
+    
+    if (type == _L_Timer) {
+        
+        [[XAILinkageTime share] addToCenter:self.rightView];
+        [[XAILinkageTime share].okBtn addTarget:self
+                                         action:@selector(dateChoose:)
+                               forControlEvents:UIControlEventTouchUpInside];
+        
+        [[XAILinkageTime share]  setDingShi];
+        
+        self.rightTableView.hidden = true;
+        
+    }else{
+        
+        [[XAILinkageTime share] removeFromSuperview];
+    
+        self.rightTableView.hidden = false;
+    }
     
     [self attrShow:type];
 }
@@ -160,6 +179,38 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+
+- (void)dateChoose:(id)sender{
+    
+    NSDate* date= [[XAILinkageTime share].dataPicker date];
+    
+    NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
+    [hourFormat setDateFormat:@"HH"];
+    
+    NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
+    [minuFormat setDateFormat:@"mm"];
+    
+    int hour =[[hourFormat stringFromDate:date] intValue];
+    int min = [[minuFormat stringFromDate:date] intValue];
+    
+    
+    if ([XAILinkageTime share].dataPicker.datePickerMode == UIDatePickerModeCountDownTimer) {
+        float couteDown = [XAILinkageTime share].dataPicker.countDownDuration;
+        hour = couteDown / 60 / 60;
+        min  = (couteDown - hour*60*60)/ 60;
+    }
+    
+    
+    
+    XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
+    timeUseInfo.time = hour*60*60 + min*60;
+    [timeUseInfo change];
+    
+    [self.infoVC setLinkageUseInfo:timeUseInfo];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma  mark - helper
 -(void)attrShow:(_L_Type)type{

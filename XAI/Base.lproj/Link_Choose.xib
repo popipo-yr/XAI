@@ -12,6 +12,7 @@
                 <outlet property="headImgV" destination="s0D-Mw-5db" id="tR4-iV-X28"/>
                 <outlet property="leftTableView" destination="QSF-z2-rcF" id="SXm-ja-jLN"/>
                 <outlet property="rightTableView" destination="8cx-7h-0UP" id="NQi-Or-Uct"/>
+                <outlet property="rightView" destination="Nri-TT-69m" id="wIp-UK-TCZ"/>
                 <outlet property="titleImgV" destination="uKR-CF-ccs" id="Xj5-fS-OpR"/>
             </connections>
         </placeholder>

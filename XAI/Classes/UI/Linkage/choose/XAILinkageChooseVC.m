@@ -72,6 +72,25 @@
 
     [super viewDidLoad];
     
+    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
+    
+    if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        backImg = [backImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* backItem = [[UIBarButtonItem alloc] initWithImage:backImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(backClick:)];
+    
+    [backItem ios6cleanBackgroud];
+    
+    
+    [self.navigationItem setLeftBarButtonItem:backItem];
+    
+
+    
     _oneview.frame = CGRectMake(0, 0,
                                 self.view.frame.size.width,
                                 self.view.frame.size.height);
@@ -93,6 +112,11 @@
 
     [self attr1BtnClick:nil];
     
+}
+
+-(void)backClick:(id)sender{
+
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 #pragma mark -  replace

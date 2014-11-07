@@ -311,6 +311,8 @@
 
     }
     
+    cell.selectedBackgroundView = [UIView new];
+    
     return cell;
     
     

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XAIHasTableViewVC.h"
 #import "XAIObject.h"
-#import "XAILinkageAlert.h"
 #import "XAILinkageTime.h"
 #import "XAILinkageEditVC.h"
 #import "XAILinkageChooseCell.h"
@@ -44,6 +43,8 @@ typedef enum {
 
 @property (nonatomic,retain) IBOutlet UIImageView* titleImgV;
 @property (nonatomic,retain) IBOutlet UIImageView* headImgV;
+
+@property (nonatomic,retain) IBOutlet UIView* rightView;
 
 
 -(IBAction)attr1BtnClick:(id)sender;

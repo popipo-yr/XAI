@@ -12,6 +12,8 @@
 #import "XAIReLoginRefresh.h"
 #include "XAIToken.h"
 
+#import "XAILinkageTime.h"
+
 
 #include "mosquitto.h"
 
@@ -132,6 +134,8 @@
     
     
     [KeyboardStateListener sharedInstance];
+    
+    [XAILinkageTime share];
 
     return YES;
 }
