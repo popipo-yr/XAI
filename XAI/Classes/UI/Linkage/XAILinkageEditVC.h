@@ -18,11 +18,11 @@
     XAILinkageService* _linkageService;
     
     NSString* _name;
-    NSMutableArray* _datas;
     
     NSIndexPath* _selIndex;
     
     XAILinkage* _linkage;
+    XAILinkage* _oldLinkage;
     
     UIActivityIndicatorView* _activityView;
     
@@ -31,16 +31,13 @@
 
 
 @property (nonatomic,strong) IBOutlet UITableView* cTableView;
-@property (nonatomic,strong) IBOutlet UITextField* nameTF;
-@property (nonatomic,strong) IBOutlet UITextField* condTF;
 @property (nonatomic,strong) IBOutlet UIButton* gEditBtn;
 
 -(IBAction)globalEditClick:(id)sender;
-- (IBAction)condClick:(id)sender;
 - (IBAction)okClick:(id)sender;
 
-+ (UIViewController*)create:(NSString*)name;
-+ (UIViewController*)create:(NSString*)name linkage:(XAILinkage*)linkage;
++ (UIViewController*)create;
++ (UIViewController*)create:(XAILinkage*)linkage;
 
 
 - (void) setName:(NSString*)name;

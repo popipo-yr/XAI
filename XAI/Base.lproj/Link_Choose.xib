@@ -22,9 +22,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="pXm-K0-GMb">
-                    <rect key="frame" x="90" y="0.0" width="2" height="568"/>
+                    <rect key="frame" x="91" y="0.0" width="1" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="sRr-vg-Hwi">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>

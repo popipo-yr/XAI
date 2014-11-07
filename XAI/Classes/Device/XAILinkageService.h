@@ -27,7 +27,7 @@
 @property (weak,nonatomic) id<XAILinkageServiceDelegate> linkageServiceDelegate;
 
 
-- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfoCtrl *)ctrlInfo
+- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfo*)ctrlInfo
                     status:(XAILinkageStatus)status name:(NSString*)name;
 
 - (int) delLinkage:(XAILinkageNum)linkNum;

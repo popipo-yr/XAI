@@ -30,7 +30,7 @@ typedef enum : uint8_t{
     
     
     XAILinkageUseInfo* _effeInfo;
-    NSArray*  _condInfos;
+    NSMutableArray*  _condInfos;
 }
 
 
@@ -40,7 +40,7 @@ typedef enum : uint8_t{
 
 
 @property (nonatomic,strong) XAILinkageUseInfo* effeInfo;
-@property (nonatomic,strong) NSArray* condInfos;
+@property (nonatomic,strong) NSMutableArray* condInfos;
 
 
 //- (void) getDetailInfo;

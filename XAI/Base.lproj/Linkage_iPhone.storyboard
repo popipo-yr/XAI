@@ -47,52 +47,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="xWr-9q-8MW">
-                                <rect key="frame" x="0.0" y="196" width="320" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_name_bg.png" id="sbF-Ma-6PC">
-                                        <rect key="frame" x="50" y="0.0" width="220" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入联动名称" minimumFontSize="17" id="uzn-5T-NoE">
-                                        <rect key="frame" x="92" y="3" width="137" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="gGR-Dl-vqI">
-                                <rect key="frame" x="0.0" y="241" width="320" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Mbw-RM-1WS">
-                                        <rect key="frame" x="50" y="0.0" width="221" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="link_edit_add_bg.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="condClick:" destination="a60-cG-E4a" eventType="touchUpInside" id="fIx-Xu-Jug"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加触发条件" minimumFontSize="17" id="ud1-S0-b0Z">
-                                        <rect key="frame" x="92" y="3" width="137" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="POv-IX-R1o">
-                                <rect key="frame" x="0.0" y="296" width="320" height="202"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="POv-IX-R1o">
+                                <rect key="frame" x="0.0" y="176" width="320" height="339"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -110,7 +66,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lVO-Rq-F73">
                                                             <rect key="frame" x="50" y="0.0" width="221" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" image="link_edit_add_bg.png">
+                                                            <state key="normal" image="link_edit_save_bg.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -127,7 +83,7 @@
                                                                 <action selector="delClick:" destination="hze-dG-tJ6" eventType="touchUpInside" id="7XS-Sz-voe"/>
                                                             </connections>
                                                         </button>
-                                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加触发动作" minimumFontSize="17" id="w56-6S-ceN">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加触发动作" minimumFontSize="17" id="w56-6S-ceN">
                                                             <rect key="frame" x="92" y="3" width="137" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -135,6 +91,12 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EjH-dh-wC9">
+                                                            <rect key="frame" x="61" y="8" width="20" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -143,7 +105,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="centerBtn" destination="lVO-Rq-F73" id="4TD-v1-3xe"/>
                                             <outlet property="delBtn" destination="uD5-zO-Jdb" id="NBP-xA-9c1"/>
+                                            <outlet property="numberLab" destination="EjH-dh-wC9" id="CSg-Fa-6nT"/>
                                             <outlet property="tipTF" destination="w56-6S-ceN" id="wHv-ZB-vfY"/>
                                         </connections>
                                     </tableViewCell>
@@ -154,8 +118,8 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KgP-gO-Wrr">
-                                <rect key="frame" x="22" y="513" width="277" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="22" y="523" width="277" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="link_edit_save_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -170,9 +134,7 @@
                     <navigationItem key="navigationItem" id="ao8-Bk-dhg"/>
                     <connections>
                         <outlet property="cTableView" destination="POv-IX-R1o" id="EIE-e0-Q2g"/>
-                        <outlet property="condTF" destination="ud1-S0-b0Z" id="Nte-g8-Lnh"/>
                         <outlet property="gEditBtn" destination="pWZ-6V-i4O" id="8ba-1m-kbb"/>
-                        <outlet property="nameTF" destination="uzn-5T-NoE" id="13Q-ep-PXE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gX-0W-34T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -353,9 +315,8 @@
         <image name="edit_nor.png" width="25" height="25"/>
         <image name="edit_sel.png" width="25" height="25"/>
         <image name="link_del_nor.png" width="32" height="31"/>
-        <image name="link_edit_add_bg.png" width="221" height="36"/>
         <image name="link_edit_head.png" width="91" height="91"/>
-        <image name="link_edit_name_bg.png" width="221" height="36"/>
+        <image name="link_edit_save_bg.png" width="221" height="36"/>
         <image name="link_edit_save_nor.png" width="206" height="38"/>
         <image name="link_edit_save_sel.png" width="206" height="38"/>
         <image name="link_edit_title.png" width="123" height="30"/>

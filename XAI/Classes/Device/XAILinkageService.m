@@ -25,7 +25,7 @@
 @implementation XAILinkageService
 
 
-- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfoCtrl *)ctrlInfo
+- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfo*)ctrlInfo
                     status:(XAILinkageStatus)status name:(NSString*)name{    
     
     

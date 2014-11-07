@@ -19,7 +19,7 @@
 #define _ST_XAILinkageEditVCID @"XAILinkageEditVCID"
 @implementation XAILinkageEditVC
 
-+ (XAILinkageEditVC*)create:(NSString*)name;{
++ (XAILinkageEditVC*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
     XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
@@ -28,14 +28,11 @@
     
      [vc changeIphoneStatus];
     
-    
-    [vc setName:name];
-    
     return vc;
     
 }
 
-+ (XAILinkageEditVC*)create:(NSString*)name linkage:(XAILinkage *)linkage{
++ (XAILinkageEditVC*)create:(XAILinkage *)linkage{
 
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
     XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
@@ -44,7 +41,6 @@
     
     if (![vc isKindOfClass:[XAILinkageEditVC class]]) return nil;
     
-    [vc setName:name];
     [vc setLinkage:linkage];
     
     return vc;
@@ -64,8 +60,6 @@
         _linkageService.apsn = [MQTT shareMQTT].apsn;
         _linkageService.luid = MQTTCover_LUID_Server_03;
         _linkageService.linkageServiceDelegate = self;
-        
-        _datas = [[NSMutableArray alloc] init];
         
         
         UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
@@ -102,10 +96,19 @@
     _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
     _activityView.hidesWhenStopped = YES;
     
-    //[_activityView startAnimating];
-    
     [self.view addSubview:_activityView];
+    
+    if (_oldLinkage != nil) {
+        [_linkageService getLinkageDetail:_oldLinkage];
+        [_activityView startAnimating];
+    }else{
+    
+        _linkage = [[XAILinkage alloc] init];
+    }
+    
 }
+
+
 
 - (IBAction)backClick:(id)sender{
     
@@ -138,7 +141,10 @@
     
     for (XAILinkageEditCell* aCell in cells) {
         if (![aCell isKindOfClass:[XAILinkageEditCell class]]) continue;
+        
+        NSUInteger index = [cells indexOfObject:aCell];
         if (aCell == [cells lastObject]) continue;
+        if (index == 0 || index ==  1) continue;
         
         [aCell isEidt:_gEditing];
         
@@ -146,19 +152,17 @@
 
 }
 
-- (IBAction)condClick:(id)sender{
 
-    _selIndex = false;
-    [self gotoLinkageAddInfoVC:true];
-}
 
 - (IBAction)okClick:(id)sender{
     
     NSString* tiperr = nil;
     
-    if (_datas == nil || [_datas count] == 0) {
+    if (_linkage.name == nil || [_linkage.name isEqualToString:@""]) {
+        tiperr = @"请添加联动名称";
+    }else if (_linkage.effeInfo == nil) {
         tiperr = @"请添加联动条件";
-    }else if([_datas count] == 1){
+    }else if([_linkage.condInfos count] == 0){
         tiperr = @"请添加联动控制";
     }
     
@@ -173,8 +177,8 @@
         return;
     }
     
-    if (_linkage != nil) {/*先删除后设置*/
-        [_linkageService delLinkage:_linkage.num];
+    if (_oldLinkage != nil) {/*先删除后设置*/
+        [_linkageService delLinkage:_oldLinkage.num];
         
     }else{
     
@@ -189,10 +193,11 @@
 
 -(void)addLinkage{
 
-    NSMutableArray* jieguos = [NSMutableArray arrayWithArray:_datas];
-    [jieguos removeObjectAtIndex:0];
     
-    [_linkageService addLinkageParams:jieguos ctrlInfo:[_datas objectAtIndex:0] status:XAILinkageStatus_Active name:_name];
+    [_linkageService addLinkageParams:_linkage.condInfos
+                             ctrlInfo:_linkage.effeInfo
+                               status:XAILinkageStatus_Active
+                                 name:_linkage.name];
 }
 
 
@@ -200,36 +205,40 @@
     
     
     _name = name;
-    self.nameTF.text = name;
+    //self.nameTF.text = name;
     
 }
 
 - (void) setLinkage:(XAILinkage*)linkage{
 
-    _linkage = linkage;
-    [_linkageService getLinkageDetail:linkage];
+    _oldLinkage = linkage;
     
 }
 
 - (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo{
 
-    if (_selIndex == nil){
+    if ([_selIndex row] == 1){
     
         _linkage.effeInfo = useInfo;
-        _condTF.text = [useInfo toStrIsCond:true];
+
+    }else{
         
-        return;
-    }
-    if ([_selIndex row] < [_datas count]) {
+        NSUInteger resIndex = [_selIndex row] - 2;
     
-        [_datas replaceObjectAtIndex:[_selIndex row] withObject:useInfo];
-        [self.cTableView reloadData];
-        
-    }else if([_selIndex row] == [_datas count]){
-        [_datas addObject:useInfo];
-        
-        [self.cTableView reloadData];
+        if (resIndex < [_linkage.condInfos count]) {
+            
+            [_linkage.condInfos replaceObjectAtIndex:resIndex withObject:useInfo];
+            
+        }else if(resIndex == [_linkage.condInfos count]){
+            [_linkage.condInfos addObject:useInfo];
+            
+           
+        }
+    
     }
+    
+     [self.cTableView reloadData];
+
 }
 
 
@@ -243,7 +252,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    return [_datas count] + 1;
+    return [_linkage.condInfos count]+ 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -264,24 +273,48 @@
                 reuseIdentifier:cellID];
     }
     
-    if ([indexPath row ] < [_datas count]) {
+    if ([indexPath row] == 0) { //名字
         
-        XAILinkageUseInfo * aUseInfo = [_datas objectAtIndex:[indexPath row]];
+        [cell setName:_linkage.name];
+        
+        [cell isEidt:false];
+
+        
+    }else if ([indexPath row ] == 1) { //条件
+        
+        XAILinkageUseInfo * aUseInfo = _linkage.effeInfo;
         
         
-        [cell setJieGuo:[aUseInfo toStrIsCond:false]];
-        
-        [cell isEidt:_gEditing];
-        
-    }else{
-        
-        
-        [cell setJieGuo:nil];
+        [cell setCondInfo:[aUseInfo toStrIsCond:true]];
         
         [cell isEidt:false];
         
-    }
+    }else{ //结果
+    
+        NSUInteger condIndex = [indexPath row] - 2;
+        
+        if (condIndex < [_linkage.condInfos count]) {
+            
+            XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex];
+            
+            
+            [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex];
+            
+            [cell isEidt:_gEditing];
+            
+        }else{
+            
+            
+            [cell setInfo:nil index:condIndex];
+            
+            [cell isEidt:false];
+            
+        }
 
+    
+    }
+    
+    
     cell.delegate = self;
     
     
@@ -318,10 +351,17 @@
 -(void)linkageInfoCellDelClick:(XAILinkageEditCell *)cell{
 
     NSIndexPath* indexPatn = [self.cTableView indexPathForCell:cell];
-    [_datas removeObjectAtIndex:[indexPatn row]];
     
-    [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPatn]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    NSUInteger condIndex = [indexPatn row] - 2;
+    if (condIndex < [_linkage.condInfos count]) {
+        
+        [_linkage.condInfos removeObjectAtIndex:condIndex];
+        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPatn]
+                                withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+
 
 }
 
@@ -335,11 +375,33 @@
 
     _selIndex = indexPath;
     
-    [self gotoLinkageAddInfoVC:false];
     
+    if ([indexPath row] == 0) { //名字
+        
+        return;
+        
+    }else if ([indexPath row ] == 1) { //条件
+        
+        [self gotoLinkageAddInfoVC:true];
+    }else{
+        [self gotoLinkageAddInfoVC:false];
+    }
+
+}
+
+-(void)linkageInfoCell:(XAILinkageEditCell *)cell tipEditEnd:(NSString *)str{
+
+    if (str != nil && ![str isEqualToString:@""]) {
+        _linkage.name = str;
+    }
+}
+
+-(void)linkageInfoCellEditStart:(XAILinkageEditCell *)cell{
+
     
-
-
+    [self.cTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                 animated:YES
+                           scrollPosition:UITableViewScrollPositionTop];
 }
 
 -(void)linkageService:(XAILinkageService *)service addStatusCode:(XAI_ERROR)errcode{
@@ -348,6 +410,7 @@
     
     if (errcode == XAI_ERROR_NONE) {
         
+        _oldLinkage = _linkage;
         tip = @"添加联动成功";
     }else if (errcode == XAI_ERROR_TIMEOUT){
         tip = @"添加联动超时";
@@ -373,15 +436,12 @@
 
 -(void)linkageService:(XAILinkageService *)service getLinkageDetail:(XAILinkage *)linkage statusCode:(XAI_ERROR)errcode{
 
+    [_activityView stopAnimating];
+    
     if (errcode == XAI_ERROR_NONE) {
         
-        _datas = [[NSMutableArray alloc]init];
-        //[_datas addObject:linkage.effeInfo];
         
-        _nameTF.text = linkage.name;
-        _condTF.text = [linkage.effeInfo toStrIsCond:true];
-        
-        [_datas addObjectsFromArray:linkage.condInfos];
+        _linkage = linkage;
         
         [self.cTableView reloadData];
     }

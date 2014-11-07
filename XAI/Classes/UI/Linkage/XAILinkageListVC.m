@@ -130,6 +130,17 @@
         [self.navigationItem setRightBarButtonItem:addItem];
     }
     
+    _activityView = [[UIActivityIndicatorView alloc] init];
+    
+    CGRect rx = [ UIScreen mainScreen ].bounds;
+    _activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake(rx.size.width * 0.5f, rx.size.height * 0.5f, 0, 0);
+    _activityView.hidesWhenStopped = YES;
+    
+    [_activityView startAnimating];
+
+    
     [_linkageService findAllLinkages];
     
 }
@@ -173,7 +184,7 @@
 
 -(void)addOneLink:(id)sender{
 
-    //[self.navigationController ]
+    [self.navigationController pushViewController:[XAILinkageEditVC create] animated:YES];
 }
 
 
@@ -333,7 +344,7 @@
     
     XAILinkage* linkage = [_Datas objectAtIndex:[indexPath row]];
     
-    UIViewController* vc = [XAILinkageEditVC create:linkage.name linkage:linkage];
+    UIViewController* vc = [XAILinkageEditVC create:linkage];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -376,6 +387,8 @@
         
     } while (0);
     
+    [_activityView startAnimating];
+    
 }
 
 -(void)linkListCellClickDel:(XAILinkageListCell *)cell{
@@ -398,6 +411,8 @@
         [_delInfo setObject:aLinkage forKey:[NSNumber numberWithInt:delID]];
         
     } while (0);
+    
+    [_activityView startAnimating];
         
 }
 
@@ -407,6 +422,7 @@
 
     if (service != _linkageService) return;
     
+    [_activityView stopAnimating];
     
     XAILinkage * aLinkage = [_changeInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {
@@ -451,8 +467,8 @@
 -(void)linkageService:(XAILinkageService *)service delStatusCode:(XAI_ERROR)errcode
               otherID:(int)otherID{
     
-    if (service != _linkageService) return;
     
+    if (service != _linkageService) return;
     
     if (errcode == XAI_ERROR_NONE) {
         
@@ -522,6 +538,9 @@
 }
 
 -(void)linkageService:(XAILinkageService *)service findedAllLinkage:(NSArray *)linkageAry errcode:(XAI_ERROR)errcode{
+    
+    
+    [_activityView stopAnimating];
     
     if ([_delInfo count] > 0) { //还有删除的不进行炒作
         return;
@@ -613,6 +632,9 @@
     if ([_delAnimalIDs count] > 0 ) {
         
         [self realMove];
+    }else{
+    
+        [_activityView stopAnimating];
     }
 }
 

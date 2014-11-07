@@ -13,6 +13,15 @@
 
 @implementation XAILinkage
 
+-(instancetype)init{
+
+    if (self = [super init]) {
+        _condInfos = [[NSMutableArray alloc]init];
+    }
+    
+    return self;
+}
+
 
 //- (void) getDetailInfo{
 //    

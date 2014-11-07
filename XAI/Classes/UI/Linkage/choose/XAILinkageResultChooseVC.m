@@ -45,7 +45,7 @@
 
 -(float)tableViewCellHight_l{
     
-    return 100;
+    return 200;
 }
 
 - (UITableViewCell *)tableView_r:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -124,6 +124,9 @@
 
     
     [self attrShow:type];
+    
+    
+    [self.leftTableView selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionBottom];
 }
 
 
@@ -225,11 +228,11 @@
     
     switch (type) {
         case _L_Switch:{
-            imgStr = @"link_cond_sw";
+            imgStr = @"link_result_sw";
             break;
         }
         case _L_Timer:{
-            imgStr = @"link_cond_time";
+            imgStr = @"link_result_time";
             break;
         }
             

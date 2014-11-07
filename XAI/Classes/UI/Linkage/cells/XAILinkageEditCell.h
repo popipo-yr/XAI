@@ -18,14 +18,16 @@
 @property (nonatomic,weak) id<XAILinkageInfoCellDelegate>  delegate;
 
 @property (nonatomic,strong) IBOutlet UITextField* tipTF;
-@property (nonatomic,strong) IBOutlet UIImageView* tipView;
 @property (nonatomic,strong) IBOutlet UIButton*  delBtn;
+@property (nonatomic,strong) IBOutlet UIButton*  centerBtn;
+@property (nonatomic,strong) IBOutlet UILabel* numberLab;
 
 - (IBAction)resultClick:(id)sender;
 - (IBAction)delClick:(id)sender;
 
-- (void) setTiaojian:(NSString*)str;
-- (void) setJieGuo:(NSString*)str;
+- (void) setName:(NSString*)name;
+- (void) setCondInfo:(NSString*)str;
+- (void) setInfo:(NSString*)str index:(int)index;
 
 
 -(void) isEidt:(BOOL)isEdit;
@@ -36,5 +38,7 @@
 
 -(void)linkageInfoCellResultClick:(XAILinkageEditCell*)cell;
 -(void)linkageInfoCellDelClick:(XAILinkageEditCell*)cell;
+-(void)linkageInfoCell:(XAILinkageEditCell*)cell tipEditEnd:(NSString*)str;
+-(void)linkageInfoCellEditStart:(XAILinkageEditCell*)cell;
 
 @end
