@@ -123,11 +123,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="yPZ-CC-sNF">
-                                <rect key="frame" x="0.0" y="-64" width="320" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_tbg.png" id="7zB-21-5Ua">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>

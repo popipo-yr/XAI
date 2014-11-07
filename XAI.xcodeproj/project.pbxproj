@@ -212,6 +212,7 @@
 		962272C71A0C714700FCE9EE /* link_result_time_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272BB1A0C714700FCE9EE /* link_result_time_nor.png */; };
 		962272C81A0C714700FCE9EE /* link_result_time_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272BC1A0C714700FCE9EE /* link_result_time_sel.png */; };
 		962272CA1A0CA83600FCE9EE /* link_opr_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272C91A0CA83600FCE9EE /* link_opr_roll.png */; };
+		962272CC1A0CBFA100FCE9EE /* chat_tbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 962272CB1A0CBFA100FCE9EE /* chat_tbg@2x.png */; };
 		962A0067199DA5140039E4EE /* XAIDoorWinListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */; };
 		962A0070199DA7950039E4EE /* XAILightListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006D199DA7950039E4EE /* XAILightListCell.m */; };
 		962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962A006F199DA7950039E4EE /* XAIObjectCell.m */; };
@@ -916,6 +917,7 @@
 		962272BB1A0C714700FCE9EE /* link_result_time_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_result_time_nor.png; sourceTree = "<group>"; };
 		962272BC1A0C714700FCE9EE /* link_result_time_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_result_time_sel.png; sourceTree = "<group>"; };
 		962272C91A0CA83600FCE9EE /* link_opr_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_opr_roll.png; sourceTree = "<group>"; };
+		962272CB1A0CBFA100FCE9EE /* chat_tbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_tbg@2x.png"; sourceTree = "<group>"; };
 		962A0065199DA5140039E4EE /* XAIDoorWinListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoorWinListVC.h; sourceTree = "<group>"; };
 		962A0066199DA5140039E4EE /* XAIDoorWinListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoorWinListVC.m; sourceTree = "<group>"; };
 		962A006C199DA7950039E4EE /* XAILightListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILightListCell.h; sourceTree = "<group>"; };
@@ -2936,6 +2938,7 @@
 		96F93A0019A4384D0057C0FC /* 2x */ = {
 			isa = PBXGroup;
 			children = (
+				962272CB1A0CBFA100FCE9EE /* chat_tbg@2x.png */,
 				96F93A1819A446CE0057C0FC /* chat_input_bg@2x.png */,
 				96F93A1919A446CE0057C0FC /* chat_input_text@2x.png */,
 				96F93A1A19A446CE0057C0FC /* chat_send_nor@2x.png */,
@@ -3609,6 +3612,7 @@
 				969D6E8619188422002076A0 /* qrcode_scan_rec.png in Resources */,
 				960CB18219FF7AD000D5B4FD /* set_titile@3x.png in Resources */,
 				968A9B82199E105400D357BC /* cg_dw_sel.png in Resources */,
+				962272CC1A0CBFA100FCE9EE /* chat_tbg@2x.png in Resources */,
 				962DDB5D1990DBFD009EB456 /* icon120*120.png in Resources */,
 				96E49D9E19F8B430003920EE /* chat_crl_btn_ringt.png in Resources */,
 				9622722D1A09F94000FCE9EE /* link_edit_title@3x.png in Resources */,

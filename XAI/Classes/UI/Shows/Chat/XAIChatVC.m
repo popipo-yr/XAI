@@ -106,6 +106,10 @@
     
     
     self.navigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
+    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [UIColor blueColor],NSForegroundColorAttributeName,
+                         [UIFont systemFontOfSize:25], NSFontAttributeName, nil];
+    self.navigationController.navigationBar.titleTextAttributes = dic;
     //_cNavigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
     XAIUser* curUser = [MQTT shareMQTT].curUser;
     _msgs = [[NSMutableArray alloc] initWithArray:
