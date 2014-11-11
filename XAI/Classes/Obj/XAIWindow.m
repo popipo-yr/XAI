@@ -61,6 +61,11 @@
     return true;
 }
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    return [_doorContact linkageInfoIsEqual:useInfo index:index];
+}
+
 -(NSArray *)getLinkageTiaojian{
     return [_doorContact getLinkageUseStatusInfos];
 }

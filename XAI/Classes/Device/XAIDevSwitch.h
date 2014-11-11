@@ -63,6 +63,9 @@ typedef enum XAIDevCircuitStatus{
 -(XAIDevCircuitStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo;
 
 
+- (BOOL) circuleOneLinkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index;
+- (BOOL) circuleTwoLinkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index;
+
 @end
 
 

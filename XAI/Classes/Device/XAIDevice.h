@@ -72,6 +72,8 @@ typedef NS_ENUM(NSUInteger, XAIDevPowerStatus){
 
 - (id) initWithApsn:(XAITYPEAPSN)apsn Luid:(XAITYPELUID)luid;
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index;
+
 @end
 
 

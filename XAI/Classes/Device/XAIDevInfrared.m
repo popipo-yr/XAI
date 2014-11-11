@@ -231,7 +231,26 @@
     [super timeout];
 }
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    
+    if (useInfo.dev_apsn == self.apsn
+        && useInfo.dev_luid == self.luid) {
+        
+        XAIDevInfraredStatus status = [self linkageInfoStatus:useInfo];
+        
+        if ((index == 0 && status == XAIDevInfraredStatusDetectorThing)
+            || (index == 1 && status == XAIDevInfraredStatusDetectorNothing)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 - (NSArray*) getLinkageStatusInfos{
+    
+    //true 探测到东西
     
     XAILinkageUseInfoStatus* open = [[XAILinkageUseInfoStatus alloc] init];
     

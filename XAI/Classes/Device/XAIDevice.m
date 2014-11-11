@@ -320,6 +320,11 @@
 - (void) startFocusStatus{}
 - (void) endFocusStatus{}
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+
+    return false;
+}
+
 @end
 
 

@@ -215,6 +215,11 @@
     
 }
 
+-(XAILinkage *)getLinkage{
+
+    return _linkage;
+}
+
 - (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo{
 
     if ([_selIndex row] == 1){

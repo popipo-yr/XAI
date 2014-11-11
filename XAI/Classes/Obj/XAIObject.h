@@ -110,6 +110,7 @@ typedef enum XAIObjectType{
 - (NSArray*) getLinkageTiaojian; /*获取联动使用信息*/
 - (NSArray*) getLinkageJieGuo;
 - (NSString*) linkageInfoMiaoShu:(XAILinkageUseInfo*)useInfo;
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index;
 
 @end
 

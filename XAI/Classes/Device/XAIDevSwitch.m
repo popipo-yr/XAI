@@ -415,6 +415,43 @@
 }
 
 #pragma mark Linkage
+
+- (BOOL) circuleOneLinkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    
+    if (useInfo.dev_apsn == self.apsn
+        && useInfo.dev_luid == self.luid
+        && useInfo.some_id == Key_CircuitOneCtrlID) {
+        
+        XAIDevCircuitStatus status = [self linkageInfoStatus:useInfo];
+        
+        if ((index == 0 && status == XAIDevCircuitStatusOpen)
+            || (index == 1 && status == XAIDevCircuitStatusClose)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+- (BOOL) circuleTwoLinkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    
+    if (useInfo.dev_apsn == self.apsn
+        && useInfo.dev_luid == self.luid
+        && useInfo.some_id == Key_CircuitTwoCtrlID) {
+        
+        XAIDevCircuitStatus status = [self linkageInfoStatus:useInfo];
+        
+        if ((index == 0 && status == XAIDevCircuitStatusOpen)
+            || (index == 1 && status == XAIDevCircuitStatusClose)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 -(NSArray *)getCirculeOneLinkageUseInfos{
     
     

@@ -13,12 +13,7 @@
 #import "XAILinkageEditVC.h"
 #import "XAILinkageChooseCell.h"
 
-typedef enum {
-    
-    XAILinkageOneType_yuanyin,
-    XAILinkageOneType_jieguo,
 
-}XAILinkageOneType;
 
 @interface XAILinkageChooseVC : UIViewController
 <UITableViewDataSource,UITableViewDelegate,XAILinkageChooseCellDelegate>{
@@ -49,11 +44,9 @@ typedef enum {
 
 -(IBAction)attr1BtnClick:(id)sender;
 -(IBAction)attr2BtnClick:(id)sender;
-
+- (void) reloadRight;
 
 +(XAILinkageChooseVC*)create;
-
-- (void) setLinkageOneChoosetype:(XAILinkageOneType)type;
 
 @end
 

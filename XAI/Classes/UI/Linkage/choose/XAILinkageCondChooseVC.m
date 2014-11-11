@@ -43,17 +43,6 @@
     
 }
 
--(NSArray*)getRigthDatas:(int)row{
-    
-    if (row < [_lTableViewDatas count]) {
-        
-        _L_Type type = [[_lTableViewDatas objectAtIndex:row] intValue];
-        
-        return [[NSArray alloc] initWithArray:[self getTiaojian:type]];
-
-    }
-    return nil;
-}
 
 -(float)tableViewCellHight_r{
     
@@ -113,11 +102,8 @@
 
 - (void)tableView_l:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
-    
-    
-    _rTableViewDatas = [self  getTiaojian:type];
-    [self.rightTableView reloadData];
+  
+     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
     
     if (type == _L_Timer) {
@@ -139,6 +125,9 @@
     }
     
     [self attrShow:type];
+    
+    _selLeftType = type;
+    [self reloadRight];
 }
 
 
@@ -146,6 +135,19 @@
     
 }
 
+
+-(void)reloadRight{
+
+    
+    int index  = 0;
+    if (_isChooseAttr1 == false) {
+        index  = 1;
+    }
+    
+    _rTableViewDatas = [self  getTiaojian:_selLeftType index:index];
+    [self.rightTableView reloadData];
+
+}
 
 
 #pragma  mark - choose delegate
@@ -173,8 +175,10 @@
     
     }
 
-    
-    [self.infoVC setLinkageUseInfo:use];
+    if (use != nil) {
+     
+        [self.infoVC setLinkageUseInfo:use];
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -310,7 +314,7 @@
 
 }
 
-- (NSArray*) getTiaojian:(_L_Type)type{
+- (NSArray*) getTiaojian:(_L_Type)type index:(int)index{
     
     NSArray* objs = [[XAIData shareData] listenObjs];
     
@@ -327,6 +331,24 @@
         if ([obj hasLinkageTiaojian] && [obj isKindOfClass:aClass]) {
             
             [tiaojianObjs addObject:obj];
+        }
+    }
+    
+    //找出使用的结果,不能使用
+    XAILinkage* linkage = [self.infoVC getLinkage];
+    NSArray* results = linkage.condInfos;
+    
+    for (XAILinkageUseInfo* useInfo in results) {
+        
+        //时间进行下一个
+        if (useInfo.dev_apsn == 0 && useInfo.dev_luid == 0) continue;
+
+        for (XAIObject* obj in tiaojianObjs) {
+        
+            if ([obj linkageInfoIsEqual:useInfo index:index]) {
+                [tiaojianObjs removeObject:obj];
+                break;
+            }
         }
     }
     

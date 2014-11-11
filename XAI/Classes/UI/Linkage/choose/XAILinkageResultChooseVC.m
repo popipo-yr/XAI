@@ -26,17 +26,6 @@
     
 }
 
--(NSArray*)getRigthDatas:(int)row{
-    
-    if (row < [_lTableViewDatas count]) {
-        
-        _L_Type type = [[_lTableViewDatas objectAtIndex:row] intValue];
-        
-        return [[NSArray alloc] initWithArray:[self getJieGuo:type]];
-        
-    }
-    return nil;
-}
 
 -(float)tableViewCellHight_r{
     
@@ -99,10 +88,6 @@
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
-    _rTableViewDatas = [self  getJieGuo:type];
-    [self.rightTableView reloadData];
-    
-    
     if (type == _L_Timer) {
         
         [[XAILinkageTime share] addToCenter:self.rightView];
@@ -125,12 +110,28 @@
     
     [self attrShow:type];
     
+    _selLeftType = type;
+    [self reloadRight];
     
     [self.leftTableView selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionBottom];
 }
 
 
 - (void)tableView_r:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
+
+-(void)reloadRight{
+    
+    
+    int index  = 0;
+    if (_isChooseAttr1 == false) {
+        index  = 1;
+    }
+    
+    _rTableViewDatas = [self  getJieGuo:_selLeftType index:index];
+    [self.rightTableView reloadData];
     
 }
 
@@ -162,7 +163,11 @@
     }
     
     
-    [self.infoVC setLinkageUseInfo:use];
+    if (use != nil) {
+        
+        [self.infoVC setLinkageUseInfo:use];
+    }
+
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -272,7 +277,7 @@
     
 }
 
-- (NSArray*) getJieGuo:(_L_Type)type{
+- (NSArray*) getJieGuo:(_L_Type)type index:(int)index{
     
     NSArray* objs = [[XAIData shareData] listenObjs];
     
@@ -293,6 +298,23 @@
         }
     }
     
+    //找出使用的结果,不能使用
+    XAILinkage* linkage = [self.infoVC getLinkage];
+    XAILinkageUseInfo* useInfo = linkage.effeInfo;
+    
+        
+        //时间进行下一个
+    if (useInfo.dev_apsn != 0 && useInfo.dev_luid != 0){
+    
+        for (XAIObject* obj in jieGuoObjs) {
+            if ([obj linkageInfoIsEqual:useInfo index:index]) {
+                [jieGuoObjs removeObject:obj];
+                break;
+            }
+        }
+    
+    }
+
     
     return jieGuoObjs;
     

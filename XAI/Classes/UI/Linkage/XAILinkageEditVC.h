@@ -42,6 +42,7 @@
 
 - (void) setName:(NSString*)name;
 - (void) setLinkage:(XAILinkage*)linkage;
+- (XAILinkage*) getLinkage;
 
 
 - (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo;

@@ -8,7 +8,10 @@
 
 #import "XAILinkageChooseVC.h"
 
-@interface XAILinkageCondChooseVC : XAILinkageChooseVC
+@interface XAILinkageCondChooseVC : XAILinkageChooseVC{
+
+    int _selLeftType;
+}
 
 @end
 

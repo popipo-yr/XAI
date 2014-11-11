@@ -8,13 +8,12 @@
 
 #import "XAILinkageChooseVC.h"
 
-
-//typedef enum {
-//    
-//    XAILinkageOneType_yuanyin,
-//    XAILinkageOneType_jieguo,
-//    
-//}XAILinkageOneType;
+typedef enum {
+    
+    XAILinkageOneType_yuanyin,
+    XAILinkageOneType_jieguo,
+    
+}XAILinkageOneType;
 
 @interface XAILinkageChooseVCTool : NSObject
 

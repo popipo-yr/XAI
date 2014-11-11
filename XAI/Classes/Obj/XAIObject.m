@@ -302,6 +302,11 @@
     return false;
 }
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+
+    return false;
+}
+
 
 @end
 

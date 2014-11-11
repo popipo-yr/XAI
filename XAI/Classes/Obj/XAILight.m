@@ -208,6 +208,11 @@
     return true;
 }
 
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    return [_devSwitch circuleOneLinkageInfoIsEqual:useInfo index:index];
+}
+
 -(NSArray *)getLinkageTiaojian{
     
     

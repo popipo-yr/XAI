@@ -161,70 +161,6 @@
 }
 
 
-- (void) setLinkageOneChoosetype:(XAILinkageOneType)type{
-
-//    _type = type;
-//    
-//    if (type == XAILinkageOneType_jieguo) {
-//        _datas = [[NSArray alloc] initWithArray:[self getJieGuo]];
-//    }else{
-//        _datas = [[NSArray alloc] initWithArray:[self getTiaojian:[XAILight class]]];
-//    }
-    
-    
-    
-    _lTableViewDatas = [self getLeftDatas];
-    _rTableViewDatas = [self getRigthDatas:0];
-    
-    if ([_lTableViewDatas count] > 0) {
-
-        [_leftTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                    animated:false
-                              scrollPosition:UITableViewScrollPositionTop];
-    }
-
-}
-
-- (NSArray*) getTiaojian:(Class)type{
-
-    NSArray* objs = [[XAIData shareData] listenObjs];
-    
-    NSMutableArray* tiaojianObjs = [[NSMutableArray alloc] init];
-    
-    for (XAIObject* obj in objs) {
-        
-        if ([obj hasLinkageTiaojian] && [obj isKindOfClass:type]) {
-            
-            [tiaojianObjs addObject:obj];
-        }
-    }
-    
-    
-    return tiaojianObjs;
-
-}
-
-
-- (NSArray*) getJieGuo{
-    
-    NSArray* objs = [[XAIData shareData] listenObjs];
-    
-    NSMutableArray* tiaojianObjs = [[NSMutableArray alloc] init];
-    
-    for (XAIObject* obj in objs) {
-        
-        if ([obj hasLinkageJieGuo]) {
-            
-            [tiaojianObjs addObject:obj];
-        }
-    }
-    
-    
-    return tiaojianObjs;
-    
-}
-
-
 
 #pragma mark - Table view data source
 
@@ -301,85 +237,10 @@
 }
 
 
-#pragma mark - normal alert 
-- (void) closeClick:(id)sender{
-    
-//    if (_linkageAlert.superview != nil) {
-//        [_linkageAlert removeFromSuperview];
-//    }
-//    
-//    if (_linkageTime.subviews != nil) {
-//        [_linkageTime removeFromSuperview];
-//    }
-    
-     //self.tableView.scrollEnabled = true;
-    
-}
+#pragma mark -
 
-- (void)rightClick:(id)sender{
-    
-//    NSArray* ary =  [_curObj getLinkageTiaojian];
-//    
-//    XAILinkageUseInfo*  use = nil;
-//    
-//    if (ary != nil && [ary count] > 1) {
-//       use =  [ary objectAtIndex:1];
-//    }
-//    
-//    [self.infoVC setLinkageUseInfo:use];
-//    
-//    [self.navigationController popViewControllerAnimated:YES];
+- (void) reloadRight{
 
-}
-
-- (void)leftClick:(id)sender{
-    
-//    
-//    NSArray* ary =  [_curObj getLinkageTiaojian];
-//    
-//    XAILinkageUseInfo*  use = nil;
-//    
-//    if (ary != nil && [ary count] > 0) {
-//        use =  [ary objectAtIndex:0];
-//    }
-//    
-//    [self.infoVC setLinkageUseInfo:use];
-//    
-//    [self.navigationController popViewControllerAnimated:YES];
-
-    
-}
-
-- (void)dateChoose:(id)sender{
-    
-//    NSDate* date= [_linkageTime.dataPicker date];
-//    
-//    NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
-//    [hourFormat setDateFormat:@"HH"];
-//    
-//    NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
-//    [minuFormat setDateFormat:@"mm"];
-//    
-//    int hour =[[hourFormat stringFromDate:date] intValue];
-//    int min = [[minuFormat stringFromDate:date] intValue];
-//    
-//    
-//    if (_linkageTime.dataPicker.datePickerMode == UIDatePickerModeCountDownTimer) {
-//        float couteDown = _linkageTime.dataPicker.countDownDuration;
-//        hour = couteDown / 60 / 60;
-//        min  = (couteDown - hour*60*60)/ 60;
-//    }
-//    
-//    
-//    
-//    XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
-//    timeUseInfo.time = hour*60*60 + min*60;
-//    [timeUseInfo change];
-//    
-//    [self.infoVC setLinkageUseInfo:timeUseInfo];
-//
-//    [self.navigationController popViewControllerAnimated:YES];
-//
 }
 
 
@@ -388,6 +249,8 @@
     _attr1Btn.selected = true;
     _attr2Btn.selected = false;
     _isChooseAttr1 = true;
+    
+    [self reloadRight];
 }
 
 -(void)attr2BtnClick:(id)sender{
@@ -396,6 +259,8 @@
     _attr2Btn.selected = true;
     
     _isChooseAttr1 = false;
+    
+    [self reloadRight];
 }
 
 

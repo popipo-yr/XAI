@@ -27,6 +27,8 @@ typedef enum XAIDevInfraredStatus{
 - (void) getPower;
 - (NSArray*) getLinkageStatusInfos;
 -(XAIDevInfraredStatus) linkageInfoStatus:(XAILinkageUseInfo*)useInfo;
+
+
 @end
 
 

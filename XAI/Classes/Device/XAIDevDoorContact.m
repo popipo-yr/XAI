@@ -222,6 +222,24 @@
 }
 
 #pragma mark Linkage
+
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+
+    if (useInfo.dev_apsn == self.apsn
+        && useInfo.dev_luid == self.luid) {
+        
+        XAIDevDoorContactStatus status = [self linkageInfoStatus:useInfo];
+        
+        if ((index == 0 && status == XAIDevDoorContactStatusOpen)
+            || (index == 1 && status == XAIDevDoorContactStatusClose)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 -(NSArray *)getLinkageUseStatusInfos{
     
     

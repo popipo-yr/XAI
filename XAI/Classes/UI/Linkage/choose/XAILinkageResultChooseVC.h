@@ -9,6 +9,8 @@
 #import "XAILinkageChooseVC.h"
 #import "XAIObjectGenerate.h"
 
-@interface XAILinkageResultChooseVC : XAILinkageChooseVC
+@interface XAILinkageResultChooseVC : XAILinkageChooseVC{
+    int _selLeftType;
+}
 
 @end

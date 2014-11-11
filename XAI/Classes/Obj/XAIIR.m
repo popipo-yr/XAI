@@ -53,8 +53,9 @@
     [_infrared getPower];
 }
 
--(BOOL)hasLinkageTiaojian{
-    return true;
+- (BOOL) linkageInfoIsEqual:(XAILinkageUseInfo*)useInfo index:(int)index{
+    
+    return [_infrared linkageInfoIsEqual:useInfo index:index];
 }
 
 
