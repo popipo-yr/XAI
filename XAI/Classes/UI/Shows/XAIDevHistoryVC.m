@@ -39,6 +39,8 @@
 }
 -(IBAction)clearClick:(id)sender{
 
+    [_corObj clearOpr];
+    self.tableView.hidden = true;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

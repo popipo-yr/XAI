@@ -141,6 +141,11 @@
 -(void)setScale:(float)scale{
     
     _showView.transform = CGAffineTransformMakeScale(scale, scale);
+    
+    CGRect oldFrame = _showView.frame;
+    oldFrame.size.width += _showView.frame.size.width*(1.0 - scale)*0.5f;
+    _showView.frame = oldFrame;
+    
 }
 
 - (void) setSelect:(BOOL)bsel{

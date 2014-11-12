@@ -17,7 +17,7 @@
 
 - (BOOL) isAdmin{
 
-    return true;
+    //return true;
    return  _luid == XAIUSERADMIN;
 }
 

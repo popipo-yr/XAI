@@ -217,7 +217,7 @@
         }
         
         
-       // [oprAry writeToFile:localFile atomically:YES];
+        [oprAry writeToFile:localFile atomically:YES];
         
     } while (0);
     
@@ -226,6 +226,19 @@
     
 }
 
+- (void) clearOpr{
+
+    [_objOprList removeAllObjects];
+    NSString* localFile = [XAIData getSavePathFile:
+                           [NSString stringWithFormat:@"%u-%llu-%d.plist",_apsn,_luid,_type]];
+    
+    if (localFile != nil && ![localFile isEqualToString:@""]){
+        NSArray* clearAry = [[NSArray alloc] init];
+        
+        [clearAry writeToFile:localFile atomically:YES];
+    }
+    
+}
 
 /*添加一个操作记录 更新最后一次操作和操作列表*/
 - (BOOL) addOpr:(XAIObjectOpr*)aOpr{

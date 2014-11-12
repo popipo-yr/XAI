@@ -118,7 +118,7 @@
 
 -(void)handleSwipeLeft:(UISwipeGestureRecognizer *)gestureRecognizer{
     
-//    [self animalView_R2L:[XAISetVC create].view];
+    
     [self animalVC_R2L:[XAISetVC create]];
 
     
@@ -126,21 +126,8 @@
 
 -(void)handleSwipeRight:(UISwipeGestureRecognizer *)gestureRecognizer{
 
-    if ([[MQTT shareMQTT].curUser isAdmin]) {
         [self animalVC_L2R:[XAILinkageListVC createWithNav]];
-    }
 }
-
-//-(void)finish_R2L{
-//
-//    [[UIApplication sharedApplication].delegate.window setRootViewController:[XAISetVC create]];
-//    [self changeIphoneStatus];
-//}
-//
-//-(void)finish_L2R{
-//}
-
-
 
 
 
@@ -282,9 +269,6 @@
         XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
                                   CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
         
-        if ([UIScreen is_35_Size]) {
-            [catbtn setScale:0.8];
-        }
         
         XAICategoryType type = [[devCategorys objectAtIndex:i] intValue];
         
@@ -297,6 +281,10 @@
         [self.scrollView addSubview:[catbtn view]];
         
         [_categorys addObject:catbtn];
+        
+        if ([UIScreen is_35_Size]) {//设置缩放 调整位置
+            [catbtn setScale:0.8];
+        }
         
         if (type == XAICategoryType_bufang) {
             if ([MQTT shareMQTT].isBufang == true) {
@@ -410,7 +398,7 @@
             case XAIObjectType_light2_1:
             case XAIObjectType_light2_2:{
             
-                if (aObj.curDevStatus == XAILightStatus_Open) {
+                if (aObj.isOnline && aObj.curDevStatus == XAILightStatus_Open) {
                     
                     openLightCount += 1;
                 }
@@ -420,7 +408,7 @@
             
             case XAIObjectType_door:{
             
-                if (aObj.curDevStatus == XAIDoorStatus_Open) {
+                if (aObj.isOnline && aObj.curDevStatus == XAIDoorStatus_Open) {
                     
                     openDWCount += 1;
                 }
@@ -430,7 +418,7 @@
             
             case XAIObjectType_window:{
             
-                if (aObj.curDevStatus == XAIWindowStatus_Open) {
+                if (aObj.isOnline && aObj.curDevStatus == XAIWindowStatus_Open) {
                     
                     openDWCount += 1;
                 }
@@ -440,7 +428,7 @@
             
             case XAIObjectType_IR:{
             
-                if (aObj.curDevStatus == XAIIRStatus_warning) {
+                if (aObj.isOnline && aObj.curDevStatus == XAIIRStatus_warning) {
                     
                     openInfCount += 1;
                 }

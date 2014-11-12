@@ -236,7 +236,7 @@
                                                     <rect key="frame" x="97" y="109" width="127" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I8V-4s-L2L">
@@ -318,7 +318,7 @@
         <image name="link_edit_save_nor.png" width="206" height="38"/>
         <image name="link_edit_save_sel.png" width="206" height="38"/>
         <image name="link_edit_title.png" width="123" height="30"/>
-        <image name="link_head_top.png" width="118" height="118"/>
+        <image name="link_head_top.png" width="91" height="91"/>
         <image name="link_opr_roll.png" width="99" height="100"/>
         <image name="link_s_btn_on.png" width="78" height="28"/>
         <image name="link_s_stop.png" width="99" height="100"/>
