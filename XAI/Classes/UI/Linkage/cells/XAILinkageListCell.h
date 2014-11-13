@@ -22,7 +22,7 @@
     
     
     BOOL _bRoll;
-    BOOL _angle;
+    float _angle;
     NSTimer* _roleTimer;
     
     NSTimer* _oprTimer;
@@ -36,7 +36,8 @@
 @property (nonatomic,strong) IBOutlet UILabel* nameLable;
 @property (nonatomic,strong) IBOutlet UIButton* delBtn;
 
-@property (nonatomic,strong) IBOutlet UIImageView* rollImgV;
+@property (nonatomic,strong) IBOutlet UIImageView* statusRollImgV;
+@property (nonatomic,strong) IBOutlet UIImageView* oprRollImgV;
 
 @property (nonatomic,weak) id<XAILinkageListCellDelegate> delegate;
 

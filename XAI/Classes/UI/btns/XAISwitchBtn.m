@@ -258,6 +258,8 @@
 
     if (self.weakLight == nil || ![self.weakLight isKindOfClass:[XAILight class]]) return;
     
+    if (self.weakLight.isOnline == false)  return;
+    
     if(self.weakLight.curDevStatus == XAILightStatus_Open){
         
         [self.weakLight closeLight];

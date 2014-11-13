@@ -29,6 +29,7 @@
 
 @property (nonatomic,strong) IBOutlet UIView* retView;
 @property (nonatomic,strong) IBOutlet UIButton* gEditBtn;
+@property (nonatomic,strong) IBOutlet UIImageView* tipImgView;
 
 -(IBAction)globalEditClick:(id)sender;
 

@@ -240,7 +240,7 @@
     
     for (XAILight* aLight in _deviceDatasNoManage) {
     
-        if (aLight.curDevStatus == XAILightStatus_Open) {
+        if (aLight.isOnline && aLight.curDevStatus == XAILightStatus_Open) {
             
             count += 1;
         }

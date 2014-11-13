@@ -50,11 +50,12 @@
                 obj = [[XAIData shareData] findListenObj:self.dev_apsn
                                                     luid:self.dev_luid
                                                     type:XAIObjectType_light2_2];
-            }else{
-                obj = [[XAIData shareData] findListenObj:self.dev_apsn
-                                                    luid:self.dev_luid
-                                                    type:XAIObjectType_light2_1];
             }
+//            else{
+//                obj = [[XAIData shareData] findListenObj:self.dev_apsn
+//                                                    luid:self.dev_luid
+//                                                    type:XAIObjectType_light2_1];
+//            }
         }
         
         if (obj == nil) {

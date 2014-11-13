@@ -110,8 +110,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch-no.png" id="NH3-q3-GN0">
-                                <rect key="frame" x="0.0" y="200" width="320" height="141"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="94" y="227" width="133" height="113"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6NY-lz-xBW">
@@ -154,11 +154,11 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_global_off.png" id="WS4-yf-ffN">
-                                        <rect key="frame" x="64" y="34" width="192" height="137"/>
+                                        <rect key="frame" x="64" y="38" width="192" height="137"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_gloabl_on.png" id="mDV-vh-tnt">
-                                        <rect key="frame" x="64" y="35" width="192" height="137"/>
+                                        <rect key="frame" x="64" y="38" width="192" height="137"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -199,8 +199,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dw-no.png" id="AtZ-XO-hs9">
-                                <rect key="frame" x="0.0" y="192" width="320" height="142"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="68" y="200" width="185" height="171"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5jm-av-Kla">
@@ -283,8 +283,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inf-no.png" id="s4y-Eb-Vsm">
-                                <rect key="frame" x="0.0" y="200" width="320" height="141"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="60" y="206" width="201" height="176"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hp5-J7-buI">
@@ -402,7 +402,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_close.png" id="SEo-ds-SZn">
-                                                    <rect key="frame" x="0.0" y="5" width="404" height="111"/>
+                                                    <rect key="frame" x="0.0" y="5" width="432" height="126"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 </imageView>
@@ -509,17 +509,17 @@
         <image name="chatTip.png" width="356" height="171"/>
         <image name="dc_tip_img.png" width="78" height="79"/>
         <image name="dc_title.png" width="183" height="30"/>
-        <image name="dw-no.png" width="320" height="145"/>
+        <image name="dw-no.png" width="185" height="171"/>
         <image name="edit_nor.png" width="25" height="25"/>
         <image name="edit_sel.png" width="25" height="25"/>
         <image name="font_jiaohu.png" width="84" height="21"/>
-        <image name="inf-no.png" width="320" height="146"/>
+        <image name="inf-no.png" width="201" height="176"/>
         <image name="inf_head.png" width="78" height="79"/>
         <image name="inf_tbg.png" width="356" height="206"/>
         <image name="inf_title.png" width="186" height="30"/>
         <image name="jiaohu_tbg.png" width="356" height="206"/>
         <image name="msgNum1.png" width="29" height="24"/>
-        <image name="switch-no.png" width="320" height="146"/>
+        <image name="switch-no.png" width="133" height="113"/>
         <image name="switch_gloabl_on.png" width="128" height="91"/>
         <image name="switch_global_off.png" width="192" height="137"/>
         <image name="switch_tbg.png" width="356" height="206"/>

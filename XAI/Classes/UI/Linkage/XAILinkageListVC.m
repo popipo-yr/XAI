@@ -554,6 +554,8 @@
     if (errcode == XAI_ERROR_NONE) {
         _Datas = [[NSMutableArray alloc] initWithArray:linkageAry];
         [self.tableView reloadData];
+        
+        self.tipImgView.hidden = [_Datas count] == 0 ? false : true;
     }
     
     

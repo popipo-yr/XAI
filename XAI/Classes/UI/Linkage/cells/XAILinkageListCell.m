@@ -80,7 +80,8 @@
     
     [self showTipLable:true];
     
-    _rollImgV.hidden = false;
+    _oprRollImgV.hidden = false;
+    _statusImgV.hidden = true;
     
     [self endAnimation];
     
@@ -117,7 +118,9 @@
     
     _opr = XAIOCOT_None;
     
-    _rollImgV.hidden = true;
+    _oprRollImgV.hidden = true;
+    _statusImgV.hidden = false;
+    
     if (_oprTimer != nil) {
         [_oprTimer invalidate];
         _oprTimer = nil;
@@ -177,7 +180,7 @@
 -(void) startAnimation
 {
     if (_roleTimer != nil) return;
-    _roleTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+    _roleTimer = [NSTimer scheduledTimerWithTimeInterval:0.02f
                                                   target:self
                                                 selector:@selector(roleProc)
                                                 userInfo:nil repeats:YES];
@@ -202,22 +205,24 @@
         _roleTimer = nil;
     }
     
-    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
-    
+    self.statusRollImgV.transform = CGAffineTransformMakeRotation(0);
 }
 
 -(void)roleProc{
 
     if (self.superview != nil) {
-        self.statusImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
+        
+        
+        self.statusRollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
         _angle += 10;
+    
     }
 }
 
 -(void)oprProc{
 
     if (self.superview != nil) {
-        self.rollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
+        self.oprRollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
         _angle += 10;
     }
 }
@@ -227,11 +232,11 @@
     [self endAnimation];
     
     //[self.statusImgV setBackgroundColor:[UIColor blackColor]];
-    self.statusImgV.image = [UIImage imageWithFile:@"link_s_stop.png"];
+    //self.statusImgV.image = [UIImage imageWithFile:@"link_s_stop.png"];
     [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_off.png"]
                     forState:UIControlStateNormal];
     
-    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
+    self.statusRollImgV.transform = CGAffineTransformMakeRotation(0);
     
     [self showTipLable:false];
 }
@@ -239,11 +244,11 @@
     
 
     //[self.statusImgV setBackgroundColor:[UIColor blackColor]];
-    self.statusImgV.image = [UIImage imageWithFile:@"link_s_run.png"];
+    //self.statusImgV.image = [UIImage imageWithFile:@"link_s_run.png"];
     [self.statusBtn setImage:[UIImage imageWithFile:@"link_s_btn_on.png"]
                     forState:UIControlStateNormal];
     
-    self.statusImgV.transform = CGAffineTransformMakeRotation(0);
+    self.statusRollImgV.transform = CGAffineTransformMakeRotation(0);
     
     [self showTipLable:false];
     

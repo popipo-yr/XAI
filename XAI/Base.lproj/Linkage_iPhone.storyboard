@@ -196,6 +196,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link-no.png" id="dG6-XH-yZb">
+                                <rect key="frame" x="60" y="233" width="200" height="155"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iAp-Ki-5UZ">
                                 <rect key="frame" x="0.0" y="188" width="320" height="380"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,7 +226,12 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_s_stop.png" id="Ebu-Vk-das">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_s.png" id="Ebu-Vk-das">
+                                                    <rect key="frame" x="110" y="10" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_s_roll.png" id="Lqp-TR-hZL">
                                                     <rect key="frame" x="110" y="10" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -267,9 +276,10 @@
                                             <outlet property="delBtn" destination="bOG-p9-3pX" id="wOx-gS-omT"/>
                                             <outlet property="invalidImgV" destination="uWE-1t-MmT" id="W6w-iD-78u"/>
                                             <outlet property="nameLable" destination="6yq-bk-ebh" id="Hip-Dm-1fn"/>
-                                            <outlet property="rollImgV" destination="a2I-5Z-Lp2" id="1Hp-ar-tXP"/>
+                                            <outlet property="oprRollImgV" destination="a2I-5Z-Lp2" id="6yU-sX-wWE"/>
                                             <outlet property="statusBtn" destination="I8V-4s-L2L" id="yty-Zo-HTc"/>
                                             <outlet property="statusImgV" destination="Ebu-Vk-das" id="77Q-8S-pxZ"/>
+                                            <outlet property="statusRollImgV" destination="Lqp-TR-hZL" id="9hP-RX-qYr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -282,6 +292,7 @@
                         <outlet property="gEditBtn" destination="n5j-Be-Ggm" id="vmp-q3-Xm3"/>
                         <outlet property="retView" destination="E8L-Ic-wmz" id="t8f-N8-Z8D"/>
                         <outlet property="tableView" destination="iAp-Ki-5UZ" id="qIS-Pn-UAw"/>
+                        <outlet property="tipImgView" destination="dG6-XH-yZb" id="1iv-yL-NT8"/>
                         <segue destination="a60-cG-E4a" kind="push" identifier="nouse1" id="0xr-oa-DIi"/>
                     </connections>
                 </viewController>
@@ -312,6 +323,7 @@
     <resources>
         <image name="edit_nor.png" width="25" height="25"/>
         <image name="edit_sel.png" width="25" height="25"/>
+        <image name="link-no.png" width="200" height="155"/>
         <image name="link_del_nor.png" width="32" height="31"/>
         <image name="link_edit_head.png" width="91" height="91"/>
         <image name="link_edit_save_bg.png" width="221" height="36"/>
@@ -319,9 +331,10 @@
         <image name="link_edit_save_sel.png" width="206" height="38"/>
         <image name="link_edit_title.png" width="123" height="30"/>
         <image name="link_head_top.png" width="91" height="91"/>
-        <image name="link_opr_roll.png" width="99" height="100"/>
+        <image name="link_opr_roll.png" width="94" height="94"/>
+        <image name="link_s.png" width="94" height="94"/>
         <image name="link_s_btn_on.png" width="78" height="28"/>
-        <image name="link_s_stop.png" width="99" height="100"/>
+        <image name="link_s_roll.png" width="94" height="94"/>
         <image name="link_s_time_valid.png" width="78" height="28"/>
         <image name="link_tbg.png" width="356" height="207"/>
         <image name="link_title_top.png" width="122" height="30"/>
