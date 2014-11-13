@@ -32,7 +32,7 @@
 
 -(void) setInfoOne:(XAILight*)one two:(XAILight*)two hasCon:(BOOL)hasCon;
 -(void) isEdit:(BOOL)isEdit;
-
+-(void) setOnlyNeedCenter:(BOOL)isNeed;
 
 @end
 

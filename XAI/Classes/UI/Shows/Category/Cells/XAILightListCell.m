@@ -84,6 +84,8 @@
     
     _oneBtn.hidden = (one == nil);
     _twoBtn.hidden = (two == nil);
+    _oneBtn.userInteractionEnabled = (one != nil);
+    _twoBtn.userInteractionEnabled = (two != nil);
 
 }
 
@@ -98,6 +100,25 @@
     }
     
     _conImgView.hidden = (isEdit && _hasCon) ? false : true;
+}
+
+-(void) setOnlyNeedCenter:(BOOL)isNeed{
+    
+    if (_twoBtn.hidden == false) return;
+
+    CGSize btnSize = _oneBtn.frame.size;
+    
+    
+    if (isNeed) {
+        
+        float inv = (self.frame.size.width - btnSize.width) / 2.0f;
+        _oneBtn.frame = CGRectMake(inv, 0,btnSize.width, btnSize.height);
+        
+    }else{
+    
+        float inv = (self.frame.size.width - btnSize.width*2) / 3.0f;
+        _oneBtn.frame = CGRectMake(inv, 0,btnSize.width, btnSize.height);
+    }
 }
 
 #pragma mark - delegate

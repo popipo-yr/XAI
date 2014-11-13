@@ -274,6 +274,13 @@
         
         cell.hasMe = cellData;
         [_cell2Infos setObject:cell forKey:indexPath];
+        
+        
+        if ([_deviceDatas count] == 1) {
+            [cell setOnlyNeedCenter:YES];
+        }else{
+            [cell setOnlyNeedCenter:false];
+        }
     }
     
     

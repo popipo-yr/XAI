@@ -87,6 +87,25 @@
     
 }
 
+-(void) setOnlyNeedCenter:(BOOL)isNeed{
+    
+    if (_twoBtn.hidden == false) true;
+    
+    CGSize btnSize = _oneBtn.frame.size;
+    
+    
+    if (isNeed) {
+        
+        float inv = (self.frame.size.width - btnSize.width) / 2.0f;
+        _oneBtn.frame = CGRectMake(inv, 0,btnSize.width, btnSize.height);
+        
+    }else{
+        
+        float inv = (self.frame.size.width - btnSize.width*2) / 3.0f;
+        _oneBtn.frame = CGRectMake(inv, 0,btnSize.width, btnSize.height);
+    }
+}
+
 #pragma mark - delegate
 
 -(void)btnBgClick:(XAIDevBtn *)btn{

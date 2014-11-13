@@ -30,7 +30,7 @@
 -(void) setInfoOne:(XAIObject*)one two:(XAIObject*)two;
 
 -(void) isEdit:(BOOL)isEdit;
-
+-(void) setOnlyNeedCenter:(BOOL)isNeed;
 
 @end
 
