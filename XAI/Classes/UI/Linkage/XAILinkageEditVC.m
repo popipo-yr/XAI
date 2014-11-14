@@ -142,8 +142,8 @@
     for (XAILinkageEditCell* aCell in cells) {
         if (![aCell isKindOfClass:[XAILinkageEditCell class]]) continue;
         
-        NSUInteger index = [cells indexOfObject:aCell];
-        if (aCell == [cells lastObject]) continue;
+        NSUInteger index = [[self.cTableView indexPathForCell:aCell] row];
+        if (index == [_linkage.condInfos count] + 2) continue;
         if (index == 0 || index ==  1) continue;
         
         [aCell isEidt:_gEditing];
@@ -222,6 +222,8 @@
 
 - (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo{
 
+    NSIndexPath* next = nil;
+    
     if ([_selIndex row] == 1){
     
         _linkage.effeInfo = useInfo;
@@ -236,13 +238,20 @@
             
         }else if(resIndex == [_linkage.condInfos count]){
             [_linkage.condInfos addObject:useInfo];
-            
            
+            next = [NSIndexPath indexPathForRow:_selIndex.row+1
+                                      inSection:_selIndex.section];
         }
     
     }
     
      [self.cTableView reloadData];
+
+    if (next != nil) {
+        [self.cTableView scrollToRowAtIndexPath:next
+                               atScrollPosition:UITableViewScrollPositionBottom
+                                       animated:YES];
+    }
 
 }
 

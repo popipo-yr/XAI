@@ -110,7 +110,7 @@
     [self.navigationItem setLeftBarButtonItem:backItem];
     
     
-    if ([[MQTT shareMQTT].curUser isAdmin]) {
+    //if ([[MQTT shareMQTT].curUser isAdmin]) {
         
         UIImage* addImg = [UIImage imageWithFile:@"add_nor.png"] ;
         
@@ -128,7 +128,7 @@
         [addItem ios6cleanBackgroud];
         
         [self.navigationItem setRightBarButtonItem:addItem];
-    }
+    //}
     
     _activityView = [[UIActivityIndicatorView alloc] init];
     

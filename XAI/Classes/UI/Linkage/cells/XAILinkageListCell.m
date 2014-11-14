@@ -180,7 +180,7 @@
 -(void) startAnimation
 {
     if (_roleTimer != nil) return;
-    _roleTimer = [NSTimer scheduledTimerWithTimeInterval:0.02f
+    _roleTimer = [NSTimer scheduledTimerWithTimeInterval:0.04f
                                                   target:self
                                                 selector:@selector(roleProc)
                                                 userInfo:nil repeats:YES];
@@ -223,7 +223,7 @@
 
     if (self.superview != nil) {
         self.oprRollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
-        _angle += 10;
+        _angle += 20;
     }
 }
 
