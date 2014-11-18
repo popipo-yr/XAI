@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SEA-ew-ci2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SEA-ew-ci2">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--LauchVC-->
@@ -18,15 +18,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="wOK-i5-Q8W">
-                                <rect key="frame" x="81" y="100" width="158" height="158"/>
+                                <rect key="frame" x="86" y="100" width="148" height="148"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-log.png" id="iDU-Rr-UDw">
-                                        <rect key="frame" x="0.0" y="0.0" width="158" height="158"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-light.png" id="qB3-1Z-iPM">
-                                        <rect key="frame" x="0.0" y="0.0" width="158" height="158"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -55,9 +55,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-back.png" width="272" height="480"/>
-        <image name="launch-light.png" width="158" height="158"/>
-        <image name="launch-log.png" width="158" height="158"/>
+        <image name="launch-back.png" width="356" height="633"/>
+        <image name="launch-light.png" width="148" height="148"/>
+        <image name="launch-log.png" width="148" height="148"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

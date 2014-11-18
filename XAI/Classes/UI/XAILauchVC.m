@@ -27,24 +27,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0){
-     
-        if ([UIScreen is_35_Size]) {
-            _logView.frame = CGRectMake(_logView.frame.origin.x,
-                                        140*0.5f,
-                                        _logView.frame.size.width,
-                                        _logView.frame.size.height);
-            [_bgImgView setImage:[UIImage imageWithFile:@"lauchnew-3.5.png"]];
-        }else{
-        
-            _logView.frame = CGRectMake(_logView.frame.origin.x,
-                                        168*0.5f,
-                                        _logView.frame.size.width,
-                                        _logView.frame.size.height);
-            [_bgImgView setImage:[UIImage imageWithFile:@"lauchnew-4.png"]];
-        }
-        
-    //}
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0){
+//     
+//        if ([UIScreen is_35_Size]) {
+//            _logView.frame = CGRectMake(_logView.frame.origin.x,
+//                                        140*0.5f,
+//                                        _logView.frame.size.width,
+//                                        _logView.frame.size.height);
+//            [_bgImgView setImage:[UIImage imageWithFile:@"lauchnew-3.5.png"]];
+//        }else{
+//        
+//            _logView.frame = CGRectMake(_logView.frame.origin.x,
+//                                        168*0.5f,
+//                                        _logView.frame.size.width,
+//                                        _logView.frame.size.height);
+//            [_bgImgView setImage:[UIImage imageWithFile:@"lauchnew-4.png"]];
+//        }
+//        
+//    }
     
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
