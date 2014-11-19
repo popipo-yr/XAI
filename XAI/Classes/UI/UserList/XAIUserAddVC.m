@@ -60,8 +60,9 @@
 {
     [super viewDidLoad];
     
-    _activityView.frame = CGRectMake(_activityView.frame.origin.x,
-                                     _activityView.frame.origin.y - 130,
+    CGSize winSize = [UIScreen mainScreen].bounds.size;
+    _activityView.frame = CGRectMake((winSize.width - _activityView.frame.size.width)*0.5,
+                                     (winSize.height - _activityView.frame.size.height)*0.5,
                                      _activityView.frame.size.width,
                                      _activityView.frame.size.height);
     

@@ -23,10 +23,11 @@
     
     self.navigationItem.title = @"";
     
+    CGSize winSize = [UIScreen mainScreen].bounds.size;
     _activityView = [[UIActivityIndicatorView alloc] init];
-    [self.view addSubview:_activityView];
-    _activityView.frame = CGRectMake(_activityView.frame.origin.x,
-                                     _activityView.frame.origin.y - 130,
+    _activityView.color = [UIColor redColor];
+    _activityView.frame = CGRectMake((winSize.width - _activityView.frame.size.width)*0.5,
+                                     (winSize.height - _activityView.frame.size.height)*0.5,
                                      _activityView.frame.size.width,
                                      _activityView.frame.size.height);
     
@@ -56,6 +57,12 @@
     [_nePwdRepTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_nePwdTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_oldPwdTextField addTarget:self action:@selector(editEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    [self.view addSubview:_activityView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,7 +113,7 @@ _M_KeyboardMoveView(self.view, self.moveView, tag,moveUp);
     
     [alert show];
     
-    
+    [self stopAnimal];
 }
 
 - (void) endFailEvent:(NSString*)str{
@@ -118,6 +125,8 @@ _M_KeyboardMoveView(self.view, self.moveView, tag,moveUp);
                                           otherButtonTitles:nil];
     
     [alert show];
+    
+    [self stopAnimal];
 }
 
 - (void) editEnd:(id)sender{
@@ -221,6 +230,7 @@ _M_KeyboardMoveView(self.view, self.moveView, tag,moveUp);
         [_okTarget performSelector:_okSelector withObject:_nePwdTextField.text afterDelay:0];
     }
     
+    [self starAnimal];
     
 }
 

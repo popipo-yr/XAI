@@ -439,7 +439,7 @@
     [alert show];
     
     
-    _activityView.hidden = true;
+    [_activityView stopAnimating];
 
 }
 
