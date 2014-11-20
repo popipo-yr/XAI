@@ -50,6 +50,9 @@
         _canDel = true;
         _gEditBtn = false;
         
+        
+        _cell2Purge = [[NSMutableDictionary alloc] init];
+        _linkageHelps = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -315,6 +318,120 @@
 
 
 #pragma mark  swith btn delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    NSNumber* key = [NSNumber numberWithUnsignedLong:alertView.tag];
+    XAIDCListDelInfo* info = [_cell2Purge objectForKey:key];
+
+    
+    if (buttonIndex != [alertView cancelButtonIndex]) {
+        
+        if (info != nil && [info.corObjs count] > 0) {
+            
+            XAIObject* obj = [info.corObjs objectAtIndex:0];
+            int delID = [_deviceService delDev:obj.luid];
+            
+            [_delInfo setObject:info
+                         forKey:[NSNumber numberWithInt:delID]];
+            
+            [_cell2Purge removeObjectForKey:key];
+        }
+
+    }else{
+        
+        
+        for (XAIObject* obj in info.corObjs) {
+            
+            [obj endOpr];
+            
+            XAIDCBtn* btn =  nil;
+            if ([obj isKindOfClass:[XAIDoor class]]) {
+                
+                btn =  (XAIDCBtn*)((XAIDoor*)obj).delegate;
+            }else if([obj isKindOfClass:[XAIWindow class]]) {
+                
+                btn = (XAIDCBtn*)((XAIWindow*)obj).delegate;
+            }
+            
+            
+            if ((btn != nil)
+                && [btn isKindOfClass:[XAIDCBtn class]]) {
+                
+                [btn showOprEnd];
+            }
+            
+        }
+        
+    }
+
+    
+}
+
+-(void)linkageServiceHelp:(XAILinkageServiceHelp *)service purgeDev:(XAIDevice *)aDev beHas:(BOOL)bHas err:(XAI_ERROR)errcode{
+    
+    NSNumber* key = [NSNumber numberWithUnsignedLong:aDev.luid];
+    
+    XAIDCListDelInfo* info = [_cell2Purge objectForKey:key];
+
+    if (errcode == XAI_ERROR_NONE) {
+        
+        if (bHas == false) {
+            
+            if (info != nil && [info.corObjs count] > 0) {
+                
+                XAIObject* obj = [info.corObjs objectAtIndex:0];
+                int delID = [_deviceService delDev:obj.luid];
+                
+                [_delInfo setObject:info
+                             forKey:[NSNumber numberWithInt:delID]];
+                
+                [_cell2Purge removeObjectForKey:key];
+            }
+        }else{
+        
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"设备关联了联动信息,如果删除联动会失效"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消删除"
+                                                  otherButtonTitles:@"确认删除", nil];
+            alert.tag = aDev.luid;
+        
+            [alert show];
+        }
+        
+       
+    }else{
+        
+        for (XAIObject* obj in info.corObjs) {
+            
+            [obj endOpr];
+            
+            XAIDCBtn* btn =  nil;
+            
+            if ([obj isKindOfClass:[XAIDoor class]]) {
+                
+                btn =  (XAIDCBtn*)((XAIDoor*)obj).delegate;
+            }else if([obj isKindOfClass:[XAIWindow class]]) {
+                
+                btn = (XAIDCBtn*)((XAIWindow*)obj).delegate;
+            }
+            
+            
+            if ((btn != nil)
+                && [btn isKindOfClass:[XAIDCBtn class]]) {
+                
+                [btn showOprEnd];
+            }
+            
+        }
+    }
+
+    
+    [_linkageHelps removeObject:service];
+}
+
+
 -(void)dcCell:(XAIDCListVCCellNew *)cell btnDelClick:(XAIDCBtn *)btn{
     
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
@@ -330,15 +447,28 @@
     obj.curOprtip = @"正在删除";
     [btn showOprStart];
     
-    int delID = [_deviceService delDev:obj.luid];
-    
+    XAILinkageServiceHelp* aHelp = [[XAILinkageServiceHelp alloc] init];
+    aHelp.delegate = self;
     
     XAIDCListDelInfo* delInfo = [[XAIDCListDelInfo alloc] init];
     delInfo.corObjs = [NSArray arrayWithObject:obj];
     delInfo.cellData = cellData;
-    [_delInfo setObject:delInfo
-                 forKey:[NSNumber numberWithInt:delID]];
     
+    [_cell2Purge setObject:delInfo
+                    forKey:[NSNumber numberWithUnsignedLong:obj.curDevice.luid]];
+    
+    [_linkageHelps addObject:aHelp];
+    [aHelp  purgeHasDev:obj.curDevice];
+    
+    
+//    int delID = [_deviceService delDev:obj.luid];
+//    
+//    
+//    XAIDCListDelInfo* delInfo = [[XAIDCListDelInfo alloc] init];
+//    delInfo.corObjs = [NSArray arrayWithObject:obj];
+//    delInfo.cellData = cellData;
+//    [_delInfo setObject:delInfo
+//                 forKey:[NSNumber numberWithInt:delID]];
 }
 
 

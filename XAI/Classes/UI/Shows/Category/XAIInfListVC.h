@@ -12,11 +12,13 @@
 #import "XAIReLoginRefresh.h"
 #import "XAIInfListCell.h"
 
+#import "XAILinkageServiceHelp.h"
+
 #include "XAIData.h"
 
 @interface XAIInfListVC : XAIHasTableViewVC
 <XAIDeviceServiceDelegate,XAIDataRefreshDelegate,XAIReLoginRefresh
-,XAIInfListCellDelegate>
+,XAIInfListCellDelegate,XAILinkageServiceHelpDelegate,UIAlertViewDelegate>
 {
     
     XAIDeviceService* _deviceService;
@@ -35,6 +37,9 @@
     
     XAIInfBtn* _curEditBtn;
     BOOL _gEditing;
+    
+    NSMutableDictionary* _cell2Purge;
+    NSMutableArray* _linkageHelps;
     
 }
 

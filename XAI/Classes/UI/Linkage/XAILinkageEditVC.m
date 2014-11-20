@@ -420,14 +420,16 @@
 
 -(void)linkageService:(XAILinkageService *)service addStatusCode:(XAI_ERROR)errcode{
 
-    NSString* tip = @"添加联动错误";
+    NSString* tipPre  = _oldLinkage == nil ? @"添加联动" : @"修改联动";
+    
+    NSString* tip = [NSString stringWithFormat:@"%@%@",tipPre,@"发生错误"];
     
     if (errcode == XAI_ERROR_NONE) {
         
         _oldLinkage = _linkage;
-        tip = @"添加联动成功";
+        tip = [NSString stringWithFormat:@"%@%@",tipPre,@"成功"];
     }else if (errcode == XAI_ERROR_TIMEOUT){
-        tip = @"添加联动超时";
+         tip = [NSString stringWithFormat:@"%@%@",tipPre,@"超时"];
     }
 
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil

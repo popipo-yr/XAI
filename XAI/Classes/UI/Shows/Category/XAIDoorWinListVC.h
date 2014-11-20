@@ -12,11 +12,13 @@
 #import "XAIReLoginRefresh.h"
 #import "XAIDoorWinCell.h"
 
+#import "XAILinkageServiceHelp.h"
+
 #define _ST_DoorWinListVCID @"XAIDoorWinListVCID"
 
 @interface XAIDoorWinListVC : XAIHasTableViewVC
 <XAIDeviceServiceDelegate,XAIDataRefreshDelegate,XAIReLoginRefresh
-,XAIDCListVCCellNewDelegate>{
+,XAIDCListVCCellNewDelegate,XAILinkageServiceHelpDelegate,UIAlertViewDelegate>{
     
     XAIDeviceService* _deviceService;
     
@@ -34,6 +36,9 @@
     
     XAIDCBtn* _curEditBtn;
     BOOL _gEditing;
+    
+    NSMutableDictionary* _cell2Purge;
+    NSMutableArray* _linkageHelps;
 }
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;

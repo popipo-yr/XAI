@@ -13,13 +13,15 @@
 
 #import "XAILightListCell.h"
 #import "XAIReLoginRefresh.h"
+#import "XAILinkageServiceHelp.h"
 
 
 #define _ST_LightListVCID @"XAILightListVCID"
 
 @interface XAILightListVC : XAIHasTableViewVC
 <XAIDeviceServiceDelegate,XAIDataRefreshDelegate
-,XAIReLoginRefresh,XAILightListVCCellNewDelegate>{
+,XAIReLoginRefresh,XAILightListVCCellNewDelegate
+,XAILinkageServiceHelpDelegate,UIAlertViewDelegate>{
 
     XAIDeviceService* _deviceService;
     
@@ -48,6 +50,9 @@
     float _fade;
     BOOL _bFade;
     BOOL _bDelFade;
+    
+    NSMutableDictionary* _cell2Purge;
+    NSMutableArray* _linkageHelps;
 }
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;

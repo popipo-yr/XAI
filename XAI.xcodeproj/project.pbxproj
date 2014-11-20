@@ -10,6 +10,7 @@
 		1A1C542E18F1417E00C9FA8B /* XAIPacketCtrl.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C542C18F1417E00C9FA8B /* XAIPacketCtrl.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1AAE876518F8F708001B2ECD /* XAIPacketNormal.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE876418F8F708001B2ECD /* XAIPacketNormal.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1AF7605218F257C600520EAD /* MQTTPacketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7605118F257C600520EAD /* MQTTPacketManager.m */; };
+		960268991A1D817F0006EB80 /* XAILinkageServiceHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 960268981A1D817F0006EB80 /* XAILinkageServiceHelp.m */; };
 		96081AAF190E460900E281F9 /* XAIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081AAE190E460900E281F9 /* XAIData.m */; };
 		9608ADDF1960FB5C00E1CE75 /* XAIAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608ADDE1960FB5C00E1CE75 /* XAIAlert.m */; };
 		9608ADE21960FBFE00E1CE75 /* XAIMobileControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9608ADE11960FBFE00E1CE75 /* XAIMobileControl.m */; };
@@ -708,6 +709,8 @@
 		1AAE876618F8F71A001B2ECD /* XAIPacketNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XAIPacketNormal.h; sourceTree = "<group>"; };
 		1AF7605018F257C600520EAD /* MQTTPacketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTPacketManager.h; sourceTree = "<group>"; };
 		1AF7605118F257C600520EAD /* MQTTPacketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTPacketManager.m; sourceTree = "<group>"; };
+		960268971A1D817F0006EB80 /* XAILinkageServiceHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageServiceHelp.h; sourceTree = "<group>"; };
+		960268981A1D817F0006EB80 /* XAILinkageServiceHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageServiceHelp.m; sourceTree = "<group>"; };
 		96081AAD190E460900E281F9 /* XAIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIData.h; sourceTree = "<group>"; };
 		96081AAE190E460900E281F9 /* XAIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIData.m; sourceTree = "<group>"; };
 		9608ADDD1960FB5C00E1CE75 /* XAIAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIAlert.h; sourceTree = "<group>"; };
@@ -1638,6 +1641,8 @@
 				96569B4619403FD600A96F45 /* XAILinkageUseInfo.m */,
 				963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */,
 				963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */,
+				960268971A1D817F0006EB80 /* XAILinkageServiceHelp.h */,
+				960268981A1D817F0006EB80 /* XAILinkageServiceHelp.m */,
 				C33E77FC18F3B28500808391 /* XAILogin.h */,
 				C33E77FD18F3B28500808391 /* XAILogin.m */,
 				9683DA6E1900F5E600518FEB /* XAIUser.h */,
@@ -4052,6 +4057,7 @@
 				9696856519D91D0A009B1DFD /* XAILauchVC.m in Sources */,
 				963BDBAE199B426B0025B304 /* SWTableViewCell.m in Sources */,
 				969D6E6219187BA8002076A0 /* XAIScanVC.m in Sources */,
+				960268991A1D817F0006EB80 /* XAILinkageServiceHelp.m in Sources */,
 				963BDB93199B05D80025B304 /* XAICategoryBtn.m in Sources */,
 				9612B0AE19A2FAA4004CA9F5 /* XAILinkageTime.m in Sources */,
 				961F95D018F780AE002D4F74 /* XAIUserService.m in Sources */,
