@@ -266,6 +266,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    if ([_linkage.condInfos count] == 16) { //16个不能进行添加
+        return 16+2;
+    }
     return [_linkage.condInfos count]+ 3;
 }
 

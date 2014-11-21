@@ -254,6 +254,10 @@
         return false;
     }
     
+    if (saveLast != nil && [aOpr.time timeIntervalSinceDate:saveLast.time] < 0) {
+        return false; //时间比最后的小
+    }
+    
     _lastOpr = aOpr;
     
     [_objOprList addObject:aOpr];
