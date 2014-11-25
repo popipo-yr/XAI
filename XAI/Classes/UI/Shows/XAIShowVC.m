@@ -63,6 +63,7 @@
     }
     
     [self addDevCategory];
+    [self changeBufangStatus];
     
 }
 
@@ -77,8 +78,8 @@
     
     _alphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(alphaChange) userInfo:nil repeats:true];
     
-    
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     
@@ -112,6 +113,7 @@
         [self setNeedsStatusBarAppearanceUpdate];
         
     }
+    
 }
 
 
@@ -242,30 +244,54 @@
     
     CGSize scViewSize = self.scrollView.frame.size;
     
-    float sideSpaceLR = 8.0f;
-    float sideSpaceUD = 8.0f;
-    float udSpace = 15.0f;
-    float midSpace =  15.0f;
-    float buttonHeight = 142.0f;
-    float buttonWidth = (scViewSize.width - 2*sideSpaceLR - (rowButtons - 1)*midSpace) / rowButtons;
-    buttonWidth =  142.f;
+   float buttonHeight = scViewSize.height / 3.0f;
+   float buttonWidth = scViewSize.width / 2.0f;
+    
+    UIImageView*  sepImgV = [[UIImageView alloc] initWithFrame:self.scrollView.frame];
+    sepImgV.image = [UIImage imageWithFile:@"cg_center_spe.png"];
+    [self.scrollView addSubview:sepImgV];
+    
+    
+
     
     if ([UIScreen is_35_Size]) {
         
-        buttonHeight = 100.0f;
+        //buttonHeight = 100.0f;
+        CGRect frame = self.centerView.frame;
+        frame.size.height = frame.size.height / 3.0f * 2.0f; //3.5寸只显示2个
+        frame.origin.y += 20;
+        self.centerView.frame = frame;
+        
+        CGRect childFrame = self.centerBgImgV.frame;
+        childFrame.size.height = frame.size.height;
+        
+        self.centerBgImgV.frame = childFrame;
+        self.scrollView.frame = childFrame;
+        
     }
     
-    float height = rows*buttonHeight + (rows - 1)*udSpace + 2*sideSpaceUD;
+
+    float totalH = self.bufangBtn.frame.origin.y - 64;
+    float inverlTop = (totalH - self.centerView.frame.size.height) *0.5f;
+    
+    CGRect frame = self.centerView.frame;
+    frame.origin.y = 64 + inverlTop;
+    self.centerView.frame = frame;
+   
+    
+    float height = rows*buttonHeight;
     
     [self.scrollView setContentSize:CGSizeMake(scViewSize.width, height)];
     
     for (int i = 0; i < buttonCount; i++) {
         
-        float rowIn = (i + 2) / rowButtons;
-        float colIn = i % rowButtons + 1;
+        int rowIn = (i + 2) / rowButtons;
+        int colIn = i % rowButtons + 1;
+
         
-        float orignX = (colIn - 1) * (midSpace + buttonWidth) + sideSpaceLR;
-        float orignY = (rowIn - 1) * (udSpace + buttonHeight) + sideSpaceUD;
+        float orignX = (colIn - 1) * buttonWidth;
+        float orignY = (rowIn - 1) * buttonHeight;
+        
         XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
                                   CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
         
@@ -282,25 +308,18 @@
         
         [_categorys addObject:catbtn];
         
-        if ([UIScreen is_35_Size]) {//设置缩放 调整位置
-            [catbtn setScale:0.8];
-        }
+//        if ([UIScreen is_35_Size]) {//设置缩放 调整位置
+//            [catbtn setScale:0.8];
+//        }
         
-        if (type == XAICategoryType_bufang) {
-            if ([MQTT shareMQTT].isBufang == true) {
-                catbtn.imgView.image = [UIImage imageWithFile:@"font_chefang.png"];
-//                catbtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2f, 1.2f);
-            }
-            
-            [catbtn setSelect:[MQTT shareMQTT].isBufang];
-            _bufangBtn = catbtn;
-        }
+
         
     }
     
+     
     
-    if (self.scrollView.contentSize.height > scViewSize.height) {
-        self.scrollView.scrollEnabled = false;
+    if (self.scrollView.contentSize.height > self.scrollView.frame.size.height) {
+        self.scrollView.scrollEnabled = true;
     }else{
         self.scrollView.scrollEnabled = false;
     }
@@ -310,7 +329,17 @@
 }
 
 
+-(void) changeBufangStatus{
 
+
+    _bufangBtn.selected = [MQTT shareMQTT].isBufang;
+
+}
+
+-(void)bufangBtnClick:(id)sender{
+
+    [self changeBufang];
+}
 
 -(IBAction)userBtnClick:(id)sender{
 
@@ -365,19 +394,10 @@
     
     if (_bufangBtn != nil) {
         
-        if ([MQTT shareMQTT].isBufang) {
-            _bufangBtn.imgView.image = [UIImage imageWithFile:@"font_chefang.png"];
-//            _bufangBtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2f, 1.2f);
-        }else{
-            _bufangBtn.imgView.image = [UIImage imageWithFile:@"font_bufang.png"];
-//            _bufangBtn.showBtn.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
-        }
-    }
-    
+        [self changeBufangStatus];
 
-    [_bufangBtn setSelect:[MQTT shareMQTT].isBufang];
-    _isChangeBufang = false;
-    
+        _isChangeBufang = false;
+    }
 }
 
 //显示提示数字

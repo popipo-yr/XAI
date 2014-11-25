@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VLG-ZO-7am">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="VLG-ZO-7am">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -11,86 +11,104 @@
                 <viewController storyboardIdentifier="show_main" id="Vti-oI-JhL" customClass="XAIShowVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kfr-Dg-VY3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="6R9-rX-pgN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="show_bg.png" id="6R9-rX-pgN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" id="vVz-TR-7mW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatTip.png" id="mBj-Zi-Isb">
-                                <rect key="frame" x="0.0" y="397" width="320" height="171"/>
+                                <rect key="frame" x="0.0" y="484" width="320" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cg_center_spe.png" id="ZGD-Vr-GHF">
-                                <rect key="frame" x="0.0" y="75" width="315" height="313"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2ny-Sg-Lm1">
-                                <rect key="frame" x="3" y="75" width="315" height="313"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qQO-ql-pNG" userLabel="add">
-                                <rect key="frame" x="274" y="31" width="25" height="25"/>
+                                <rect key="frame" x="274" y="24" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="add_nor.png">
+                                <state key="normal" image="show_add_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="add_sel.png"/>
+                                <state key="highlighted" image="show_add_sel.png"/>
                                 <connections>
                                     <action selector="devAddBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="fCi-Vd-yRv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="功能设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5bG-wo-Prk">
-                                <rect key="frame" x="113" y="33" width="95" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cg_spe.png" id="7Dg-oF-mYl">
-                                <rect key="frame" x="10" y="64" width="300" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="show_title.png" id="nly-R9-2tc">
+                                <rect key="frame" x="111" y="25" width="98" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cg_spe.png" id="1ah-Fy-0uf">
-                                <rect key="frame" x="10" y="400" width="300" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="NdQ-3x-r9a">
+                                <rect key="frame" x="10" y="76" width="300" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="show_bg_cent.png" id="7Dg-oF-mYl">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="2ny-Sg-Lm1">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </scrollView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rFx-bj-MCd">
-                                <rect key="frame" x="108" y="418" width="104" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="cg_usr_nor.png">
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="95G-kI-ptj">
+                                <rect key="frame" x="11" y="425" width="298" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="cg_bufang_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="cg_usr_sel.png"/>
-                                <state key="highlighted" image="cg_usr_sel.png"/>
+                                <state key="selected" image="cg_bufang_sel.png"/>
+                                <state key="highlighted" image="cg_bufang_sel.png"/>
                                 <connections>
-                                    <action selector="userBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ulT-B2-Gn2"/>
+                                    <action selector="bufangBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ARF-8D-eCG"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
-                                <rect key="frame" x="194" y="421" width="27" height="22"/>
+                            <view contentMode="scaleToFill" id="Bda-5W-IYg" userLabel="user-view">
+                                <rect key="frame" x="103" y="467" width="114" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Env-aE-P8r">
-                                <rect key="frame" x="194" y="419" width="27" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="font_jiaohu.png" id="Li0-Z4-87J">
-                                <rect key="frame" x="119" y="524" width="76" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
+                                        <rect key="frame" x="85" y="0.0" width="27" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rFx-bj-MCd">
+                                        <rect key="frame" x="5" y="0.0" width="104" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="cg_usr_nor.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="cg_usr_sel.png"/>
+                                        <state key="highlighted" image="cg_usr_sel.png"/>
+                                        <connections>
+                                            <action selector="userBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ulT-B2-Gn2"/>
+                                        </connections>
+                                    </button>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Env-aE-P8r">
+                                        <rect key="frame" x="85" y="-1" width="27" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="addBtn" destination="qQO-ql-pNG" id="Hhr-hi-w8e"/>
+                        <outlet property="bufangBtn" destination="95G-kI-ptj" id="gg7-4L-fFK"/>
+                        <outlet property="centerBgImgV" destination="7Dg-oF-mYl" id="VS5-T7-sMw"/>
+                        <outlet property="centerView" destination="NdQ-3x-r9a" id="N3j-vf-NMM"/>
                         <outlet property="chatTipV" destination="mBj-Zi-Isb" id="bsu-YZ-RNy"/>
                         <outlet property="label" destination="Env-aE-P8r" id="RAK-12-NFu"/>
                         <outlet property="labelIV" destination="k50-KG-IHs" id="gCb-yb-XU1"/>
@@ -498,27 +516,28 @@
     <resources>
         <image name="Head-admin.png" width="104" height="105"/>
         <image name="Head-xai.png" width="46" height="46"/>
-        <image name="add_nor.png" width="29" height="28"/>
-        <image name="add_sel.png" width="30" height="28"/>
-        <image name="bg.png" width="356" height="633"/>
         <image name="cell_close.png" width="359" height="65"/>
-        <image name="cg_center_spe.png" width="291" height="292"/>
-        <image name="cg_spe.png" width="314" height="1"/>
-        <image name="cg_usr_nor.png" width="86" height="87"/>
-        <image name="cg_usr_sel.png" width="86" height="87"/>
-        <image name="chatTip.png" width="356" height="171"/>
+        <image name="cg_bufang_nor.png" width="298" height="40"/>
+        <image name="cg_bufang_sel.png" width="298" height="40"/>
+        <image name="cg_usr_nor.png" width="79" height="79"/>
+        <image name="cg_usr_sel.png" width="79" height="79"/>
+        <image name="chatTip.png" width="356" height="84"/>
         <image name="dc_tip_img.png" width="78" height="79"/>
         <image name="dc_title.png" width="183" height="30"/>
         <image name="dw-no.png" width="185" height="171"/>
         <image name="edit_nor.png" width="25" height="25"/>
         <image name="edit_sel.png" width="25" height="25"/>
-        <image name="font_jiaohu.png" width="84" height="21"/>
         <image name="inf-no.png" width="201" height="176"/>
         <image name="inf_head.png" width="78" height="79"/>
         <image name="inf_tbg.png" width="356" height="206"/>
         <image name="inf_title.png" width="186" height="30"/>
         <image name="jiaohu_tbg.png" width="356" height="206"/>
         <image name="msgNum1.png" width="29" height="24"/>
+        <image name="show_add_nor.png" width="23" height="23"/>
+        <image name="show_add_sel.png" width="23" height="23"/>
+        <image name="show_bg.png" width="356" height="633"/>
+        <image name="show_bg_cent.png" width="299" height="347"/>
+        <image name="show_title.png" width="98" height="23"/>
         <image name="switch-no.png" width="133" height="113"/>
         <image name="switch_gloabl_on.png" width="128" height="91"/>
         <image name="switch_global_off.png" width="192" height="137"/>

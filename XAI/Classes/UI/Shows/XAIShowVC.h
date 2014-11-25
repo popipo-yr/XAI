@@ -26,7 +26,7 @@
     XAIUserService* _userService;
     BOOL _isChangeBufang;
     
-    XAICategoryBtn* _bufangBtn;
+    //XAICategoryBtn* _bufangBtn;
     
     NSTimer* _refreshTimer;
     NSTimer* _alphaTimer;
@@ -44,9 +44,14 @@
 @property (nonatomic,strong) IBOutlet UILabel* label;
 @property (nonatomic,strong) IBOutlet UIImageView* labelIV;
 @property (nonatomic,strong) IBOutlet UIImageView* chatTipV;
+@property (nonatomic,strong) IBOutlet UIImageView* centerBgImgV;
+@property (nonatomic,strong) IBOutlet UIView* centerView;
+
+@property (nonatomic,strong) IBOutlet UIButton* bufangBtn;
 
 
 -(IBAction)userBtnClick:(id)sender;
+-(IBAction)bufangBtnClick:(id)sender;
 -(void)devAddBtnClick:(id)sender;
 
 @end

@@ -28,11 +28,13 @@
         _labelIV = [[UIImageView alloc] init];
         [_labelIV setBackgroundColor:[UIColor clearColor]];
         [_labelIV setHidden:true];
-        [_labelIV addSubview:_label];
+        //[_labelIV addSubview:_label];
+        
+        [_showView addSubview:_label];
         
         [_showView addSubview:_showBtn];
         [_showView addSubview:_imgView];
-        [_showView addSubview:_labelIV];
+        //[_showView addSubview:_labelIV];
         
     }
     
@@ -98,14 +100,14 @@
     CGRect topFrame = _showView.frame;
     float centerx = topFrame.size.width*0.5f;
     
-    float moveB = 0;
-    float moveI = 0;
-    float moveN = 0;
-    if ([UIScreen is_35_Size]) {
-        moveB = -10;
-        moveI = -20;
-        moveN = 10;
-    }
+    float moveB = 5;  //大图标
+    float moveI = -5;  //文字
+    float moveN = 5;  //消息数字
+//    if ([UIScreen is_35_Size]) {
+//        moveB = -10;
+//        moveI = -20;
+//        moveN = 10;
+//    }
     
     _showBtn.frame = CGRectMake(centerx - btnSize.width*0.5f,
                                 5 + moveB,
@@ -132,7 +134,13 @@
     
     _label.frame = CGRectMake(0, -2, numSize.width, numSize.height);
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.textColor = [UIColor whiteColor];
+    _label.textColor = [UIColor redColor];
+    
+    _label.frame = CGRectMake(_showBtn.frame.origin.x + btnSize.width + 10,
+                              _showBtn.frame.origin.y - 10 + moveN,
+                              numSize.width,
+                              numSize.height);
+    
     
     
     _type = type;
@@ -161,6 +169,7 @@
     
     [_label setText:[NSString stringWithFormat:@"%d",number]];
     [_labelIV setHidden: number <=0 ? true : false];
+    [_label setHidden: number <=0 ? true : false];
     
 }
 

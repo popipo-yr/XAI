@@ -19,6 +19,10 @@ typedef enum XAICategoryType{
     XAICategoryType_bufang = 6,
     XAICategoryType_UnKown = -1,
     
+    XAICategoryType_swOne = 7,
+    XAICategoryType_dwCtr = 8,
+    XAICategoryType_safe = 9,
+    
 }XAICategoryType;
 
 

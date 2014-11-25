@@ -32,10 +32,13 @@
 #define __CT_server @"font_jiaohu.png"
 #define __CT_user @"font_jiaohu.png"
 #define __CT_bufang @"font_bufang.png"
+#define __CT_swOne @"font_swOne.png"
+#define __CT_dwCtr @"font_dwCtr.png"
+#define __CT_safe @"font_safe.png"
 
 + (NSArray*) devCategorys{
 
-    return @[@(XAICategoryType_light),@(XAICategoryType_doorwin),@(XAICategoryType_Inf),@(XAICategoryType_bufang)];
+    return @[@(XAICategoryType_swOne),@(XAICategoryType_light),@(XAICategoryType_dwCtr), @(XAICategoryType_doorwin),@(XAICategoryType_Inf),@(XAICategoryType_safe)];
 }
 
 + (NSString*) typeToName:(XAICategoryType)type{
@@ -69,6 +72,21 @@
         case XAICategoryType_bufang:
         {
             return __CT_bufang;
+        }
+            break;
+        case XAICategoryType_dwCtr:
+        {
+            return __CT_dwCtr;
+        }
+            break;
+        case XAICategoryType_swOne:
+        {
+            return __CT_swOne;
+        }
+            break;
+        case XAICategoryType_safe:
+        {
+            return __CT_safe;
         }
             break;
         default:
@@ -150,6 +168,21 @@
             name = @"cg_bufang_sel";
         }
             break;
+        case XAICategoryType_swOne:
+        {
+            name = @"cg_swOne_sel";
+        }
+            break;
+        case XAICategoryType_dwCtr:
+        {
+            name = @"cg_dwCtr_sel";
+        }
+            break;
+        case XAICategoryType_safe:
+        {
+            name = @"cg_safe_sel";
+        }
+            break;
         default:
             break;
     }
@@ -199,6 +232,21 @@
         case XAICategoryType_bufang:
         {
             name = @"cg_bufang_nor";
+        }
+            break;
+        case XAICategoryType_swOne:
+        {
+            name = @"cg_swOne_nor";
+        }
+            break;
+        case XAICategoryType_dwCtr:
+        {
+            name = @"cg_dwCtr_nor";
+        }
+            break;
+        case XAICategoryType_safe:
+        {
+            name = @"cg_safe_nor";
         }
             break;
         default:
