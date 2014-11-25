@@ -107,7 +107,7 @@
     _userService.apsn = _apsn;
     _cloud.apsn = _apsn;
     
-    if (_needCheckCloud == false) {
+    if (_needCheckCloud) {
         [_cloud bridgeStatus];
     }else{
         [_userService finderUserLuidHelper:_name];
