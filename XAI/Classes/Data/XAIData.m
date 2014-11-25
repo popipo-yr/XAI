@@ -68,7 +68,7 @@ static XAIData*  _s_XAIData_ = NULL;
             
             aObj.nickName = aLocalObj.nickName;
             aObj.lastOpr = aLocalObj.lastOpr;
-        
+            [aObj readOprList];
             
         }else{
         

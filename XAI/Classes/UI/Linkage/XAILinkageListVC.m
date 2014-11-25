@@ -143,10 +143,12 @@
     
     [_linkageService findAllLinkages];
     
-    if (![[MQTT shareMQTT].curUser isAdmin]) {
-        _gEditBtn.hidden = true;
-        _gEditBtn.enabled = false;
-    }
+//    if (![[MQTT shareMQTT].curUser isAdmin]) {
+//        _gEditBtn.hidden = true;
+//        _gEditBtn.enabled = false;
+//    }
+    
+    _gEditBtn.hidden = true;
     
 }
 
@@ -556,6 +558,7 @@
         [self.tableView reloadData];
         
         self.tipImgView.hidden = [_Datas count] == 0 ? false : true;
+        _gEditBtn.hidden = [_Datas count] == 0 ? true : false;
     }
     
     
