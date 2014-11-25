@@ -137,6 +137,10 @@
     _statusTextImgView.hidden = false;
     _unkownImgView.hidden = true;
     
+    if (_weakLight != nil) {
+        [self.oprTipLab setText:[_weakLight.lastOpr allStr]];
+    }
+    
     if (_bFade == true) {
         _bFade = false;
         [self endFadeAnimation];
@@ -149,6 +153,10 @@
     _statusTipImgView.image = [UIImage imageWithFile:@"switch_on_tip.png"];
     _statusTextImgView.hidden = false;
     _unkownImgView.hidden = true;
+    
+    if (_weakLight != nil) {
+        [self.oprTipLab setText:[_weakLight.lastOpr allStr]];
+    }
     
     if (_bFade == false) {
         _bFade = true;

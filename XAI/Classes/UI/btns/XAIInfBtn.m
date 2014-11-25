@@ -93,6 +93,10 @@
     
     [self showWarning:false];
     [self showWorking:true];
+    
+    if (_weakObj != nil) {
+        [self.oprTipLab setText:[_weakObj.lastOpr allStr]];
+    }
 }
 
 bool _is = false;
@@ -101,6 +105,11 @@ bool _is = false;
     
     _statusTipImgView.image = [UIImage imageWithFile:@"inf_warn.png"];
     _statusTipImgView.hidden = false;
+
+    if (_weakObj != nil) {
+        [self.oprTipLab setText:[_weakObj.lastOpr allStr]];
+    }
+    
     
     [self showWarning:true];
     [self showWorking:false];
@@ -128,7 +137,7 @@ bool _is = false;
         
         _showWarnAlpha = 1.0;
         _showWarnIsDel = true;
-        _warnTimer = [NSTimer scheduledTimerWithTimeInterval:0.25f
+        _warnTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f
                                                       target:self
                                                     selector:@selector(showArrow)
                                                     userInfo:nil

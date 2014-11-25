@@ -92,12 +92,20 @@
     
     _statusTipImgView.image = [UIImage imageWithFile:@"dc_close.png"];
     _statusTipImgView.hidden = false;
+    
+    if (_weakObj != nil) {
+        [self.oprTipLab setText:[_weakObj.lastOpr allStr]];
+    }
 }
 
 - (void) showOpen{
     
     _statusTipImgView.image = [UIImage imageWithFile:@"dc_open.png"];
     _statusTipImgView.hidden = false;
+    
+    if (_weakObj != nil) {
+        [self.oprTipLab setText:[_weakObj.lastOpr allStr]];
+    }
     
 }
 
