@@ -146,6 +146,13 @@ bool _is = false;
         
         [self showArrow];
         
+        if (_fuckImgView == nil) {
+            
+            _fuckImgView = [[UIImageView alloc] initWithFrame:_statusTipImgView.frame];
+            _fuckImgView.image = [UIImage imageWithFile:@"inf_unk.png"];
+            [_statusTipImgView.superview insertSubview:_fuckImgView belowSubview:_statusTipImgView];
+        }
+        
     }else{
         
         if (_warnTimer != nil) {
@@ -155,6 +162,12 @@ bool _is = false;
         
         self.statusTipImgView.alpha = 1;
         [self.statusTipImgView.layer removeAllAnimations];
+        
+        if (_fuckImgView == nil) {
+            
+            [_fuckImgView removeFromSuperview];
+            
+        }
         
     }
     
@@ -199,16 +212,16 @@ bool _is = false;
     if (_showWarnAlpha > 1) {
         _showWarnAlpha = 1;
         _showWarnIsDel = true;
-    }else if(_showWarnAlpha < 0.3){
+    }else if(_showWarnAlpha < 0){
     
         _showWarnAlpha = 0;
         _showWarnIsDel = false;
     }
     
     if (_showWarnIsDel) {
-        _showWarnAlpha -= 0.1;
+        _showWarnAlpha -= 0.2;
     }else{
-        _showWarnAlpha += 0.3;
+        _showWarnAlpha += 0.6;
     }
     
     _statusTipImgView.alpha = _showWarnAlpha;

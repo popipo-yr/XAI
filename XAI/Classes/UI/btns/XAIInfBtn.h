@@ -21,6 +21,8 @@
     int _showWorkIndex;
     float _showWarnAlpha;
     BOOL _showWarnIsDel;
+    
+    UIImageView* _fuckImgView;
 
 }
 

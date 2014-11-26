@@ -76,7 +76,7 @@
     
     _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTipNum) userInfo:nil repeats:true];
     
-    _alphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(alphaChange) userInfo:nil repeats:true];
+    _alphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(alphaChange) userInfo:nil repeats:true];
     
 }
 
@@ -234,6 +234,60 @@
 //}
 
 
+-(void) addMaoBoLi{
+
+    self.centerView.hidden = true;
+    
+    UIImage *image = nil;
+    
+    CGRect frame = self.centerView.frame;
+    frame.origin = CGPointZero;
+
+    
+//    if(UIGraphicsBeginImageContextWithOptions != NULL)
+//    {
+//        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
+//    } else {
+        UIGraphicsBeginImageContext(self.view.frame.size);
+//    }
+    
+    //获取图像
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(image.CGImage, self.centerView.frame)];
+    
+    
+
+    
+    CIImage *inputImage = [[CIImage alloc] initWithImage:image];
+    // create gaussian blur filter
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[NSNumber numberWithFloat:3] forKey:@"inputRadius"];
+    // blur image
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    
+    CGRect rect             = [result extent];
+    rect.origin.x          += (rect.size.width  - image.size.width ) / 2;
+    rect.origin.y          += (rect.size.height - image.size.height) / 2;
+    rect.size               = image.size;
+    
+    CIContext *othercontext      = [CIContext contextWithOptions:nil];
+    CGImageRef cgimg        = [othercontext createCGImage:result fromRect:rect];
+    image = [UIImage imageWithCGImage:cgimg];
+    CGImageRelease(cgimg);
+
+    
+
+    UIImageView* view  = [[UIImageView alloc]initWithImage:image];
+    view.backgroundColor = [UIColor clearColor];
+    
+    //[self.centerView addSubview:view];
+    [self.centerView insertSubview:view atIndex:0];
+    self.centerView.hidden = false;
+}
 
 - (void) addDevCategory{
     
@@ -277,6 +331,8 @@
     CGRect frame = self.centerView.frame;
     frame.origin.y = 64 + inverlTop;
     self.centerView.frame = frame;
+    
+    [self addMaoBoLi];
    
     
     float height = rows*buttonHeight;
@@ -503,6 +559,26 @@
     [_labelIV setHidden:notReadImCount <=0 ? true : false];
     [_label setHidden:notReadImCount <=0 ? true : false];
     [_chatTipV setHidden:notReadImCount <=0 ? true : false];
+    
+    if ([MQTT shareMQTT].isBufang) {
+        
+        [_chatTipV setImage:[UIImage imageWithFile:@"bufangTip.png"]];
+        BOOL hasTip = (openLightCount > 0) || openDWCount > 0 || openInfCount > 0;
+        [_chatTipV setHidden:!hasTip];
+        
+        if (hasTip) {
+            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateHighlighted];
+            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateSelected];
+        }else{
+            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufang_sel.png"] forState:UIControlStateHighlighted];
+            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufang_sel.png"] forState:UIControlStateSelected];
+        }
+        
+    }else{
+         [_chatTipV setImage:[UIImage imageWithFile:@"chatTip.png"]];
+        [_chatTipV setHidden:notReadImCount <=0 ? true : false];
+    }
+    
     
 }
 
