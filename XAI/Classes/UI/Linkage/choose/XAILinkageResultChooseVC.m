@@ -19,6 +19,13 @@
 
 @implementation XAILinkageResultChooseVC
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    self.titleImgV.image = [UIImage imageWithFile:@"link_result_title.png"];
+    self.headImgV.image = [UIImage imageWithFile:@"link_result_head.png"];
+}
+
 -(NSArray*)getLeftDatas{
     
     return  [NSArray arrayWithObjects:[NSNumber numberWithInt:_L_Switch],
