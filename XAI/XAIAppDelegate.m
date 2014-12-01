@@ -149,6 +149,7 @@
     [_mosquittoClient disconnect];
     [_mosquittoClient endwork];
 
+    _needKeepTip = false;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -160,7 +161,7 @@
     [[XAIData shareData] save];
     [[XAIAlert shareAlert] stop];
 
-    _needKeepTip = false;
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
