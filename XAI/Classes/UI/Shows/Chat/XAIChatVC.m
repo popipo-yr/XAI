@@ -513,6 +513,9 @@
     
         aObj.type = XAIMegType_Normal;
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        XAIUser* curUser = [MQTT shareMQTT].curUser;
+        [curUser saveIM:_msgs withLuid:_user.luid apsn:_user.apsn];
     }
 
 
