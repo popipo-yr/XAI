@@ -511,6 +511,8 @@
                                       retain:false];
         }
     
+        aObj.type = XAIMegType_Normal;
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 
 

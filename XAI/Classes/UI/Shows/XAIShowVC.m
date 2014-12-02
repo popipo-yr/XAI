@@ -81,16 +81,17 @@
 }
 
 
--(void)viewDidDisappear:(BOOL)animated{
-    
+-(void)viewWillDisappear:(BOOL)animated{
+
     [self stopSwipte:_swipes];
-    
-    [super viewDidDisappear:animated];
+    _swipes = nil;
     
     [_refreshTimer invalidate];
     [_alphaTimer invalidate];
     _refreshTimer = nil;
     _alphaTimer = nil;
+    
+    [super viewWillDisappear:animated];
 }
 
 
@@ -179,59 +180,6 @@
 }
 
 #pragma mark - Helper
-//- (void) addDevCategory{
-//
-//    NSArray* devCategorys =  [XAICategoryTool devCategorys];
-//    int buttonCount  = [devCategorys count];
-//    int rowButtons = 2;
-//    int rows = (buttonCount + 1)/rowButtons;
-//    
-//    CGSize scViewSize = self.scrollView.frame.size;
-//    
-//    float sideSpaceLR = 8.0f;
-//    float sideSpaceUD = 8.0f;
-//    float udSpace = 15.0f;
-//    float midSpace =  15.0f;
-//    float buttonHeight = 142.0f;
-//    float buttonWidth = (scViewSize.width - 2*sideSpaceLR - (rowButtons - 1)*midSpace) / rowButtons;
-//    buttonWidth =  142.f;
-//    
-//    float height = rows*buttonHeight + (rows - 1)*udSpace + 2*sideSpaceUD;
-//    
-//    [self.scrollView setContentSize:CGSizeMake(scViewSize.width, height)];
-//    
-//    for (int i = 0; i < buttonCount; i++) {
-//        
-//        float rowIn = (i + 2) / rowButtons;
-//        float colIn = i % rowButtons + 1;
-//        
-//        float orignX = (colIn - 1) * (midSpace + buttonWidth) + sideSpaceLR;
-//        float orignY = (rowIn - 1) * (udSpace + buttonHeight) + sideSpaceUD;
-//        XAICategoryBtn* catbtn = [[XAICategoryBtn alloc] initWithFrame:
-//                               CGRectMake(orignX, orignY,buttonWidth, buttonHeight)];
-//        
-//        [catbtn setType:[[devCategorys objectAtIndex:i] intValue]];
-//        
-//        [catbtn addTarget:self
-//                   action:@selector(categoryClick:)
-//         forControlEvents:UIControlEventTouchUpInside];
-//        
-//        [self.scrollView addSubview:[catbtn view]];
-//        
-//        [_categorys addObject:catbtn];
-//        
-//    }
-//    
-//    
-//    if (self.scrollView.contentSize.height > scViewSize.height) {
-//        self.scrollView.scrollEnabled = true;
-//    }else{
-//        self.scrollView.scrollEnabled = false;
-//    }
-//    
-//    
-//
-//}
 
 
 -(void) addMaoBoLi{
@@ -256,10 +204,10 @@
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(image.CGImage, self.centerView.frame)];
+    CGImageRef  useImg = CGImageCreateWithImageInRect(image.CGImage, self.centerView.frame);
+    image = [UIImage imageWithCGImage:useImg];
+    CGImageRelease(useImg);
     
-    
-
     
     CIImage *inputImage = [[CIImage alloc] initWithImage:image];
     // create gaussian blur filter

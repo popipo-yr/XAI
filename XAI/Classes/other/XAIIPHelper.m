@@ -63,6 +63,7 @@ void cleanup(void *arg){
         _p_helper->ip_char = malloc(_IP_SIZE_MAX);
         _p_helper->isGetSuc = false;
         _p_helper->getApserverIpResult = getApserverIpResult;
+        _p_helper->sock = _Sock_None;
         
         
         _create_p = false;

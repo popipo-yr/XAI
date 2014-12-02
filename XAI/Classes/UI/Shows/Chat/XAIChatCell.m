@@ -184,7 +184,7 @@
     
     //添加文本信息
     UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(perNor+10, 20.0f, size.width+10, size.height+10)];
-    bubbleText.backgroundColor = [UIColor yellowColor];
+    bubbleText.backgroundColor = [UIColor clearColor];
     bubbleText.font = font;
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
@@ -249,7 +249,7 @@
                     
                     [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_left.png"]
                                     forState:UIControlStateNormal];
-                }else if(i == btnCount){
+                }else if(i == btnCount - 1){
                     [aBtn setBackgroundImage:[UIImage imageWithFile:@"chat_crl_btn_ringt.png"]
                                     forState:UIControlStateNormal];
 

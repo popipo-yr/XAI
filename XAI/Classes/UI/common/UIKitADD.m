@@ -174,7 +174,7 @@
          if (finished)
          {
              // Remove the old view from its parent.
-             [fromView removeFromSuperview];
+             [toView removeFromSuperview];
              [[UIApplication sharedApplication].delegate.window setRootViewController:vc];
 
          }
@@ -214,7 +214,7 @@
          if (finished)
          {
              // Remove the old view from the tabbar view.
-             [fromView removeFromSuperview];
+             [toView removeFromSuperview];
              [[UIApplication sharedApplication].delegate.window setRootViewController:vc];
          }
      }];
