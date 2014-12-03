@@ -10,7 +10,7 @@
 
 
 #define Key_CloudStatusID 0x4
-#define Key_CloudOtherId  0x7F
+#define Key_CloudOtherId  0xFF
 
 #define _Key_Status  100
 

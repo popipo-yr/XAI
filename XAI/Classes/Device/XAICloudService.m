@@ -11,7 +11,7 @@
 #import "XAIPacketStatus.h"
 
 #define _K_CloudLuId 0x4
-#define _K_CloudStatusId 0x7F
+#define _K_CloudStatusId 0xFF
 
 @implementation XAICloudService
 

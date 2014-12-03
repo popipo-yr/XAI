@@ -140,6 +140,7 @@
     
     [_activityView startAnimating];
 
+    [self.view addSubview:_activityView];
     
     [_linkageService findAllLinkages];
     
@@ -559,6 +560,10 @@
         
         self.tipImgView.hidden = [_Datas count] == 0 ? false : true;
         _gEditBtn.hidden = [_Datas count] == 0 ? true : false;
+    }else{
+    
+        self.tipImgView.hidden = false;
+        _gEditBtn.hidden = true;
     }
     
     
