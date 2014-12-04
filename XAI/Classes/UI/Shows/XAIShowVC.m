@@ -180,22 +180,13 @@
 }
 
 #pragma mark - Helper
--(UIImage*)procMaoBoLi:(UIView*)view inFrame:(CGRect)frame{
 
-    UIImage *image = nil;
+
+
+-(UIImage*)procMaoBoLi:(UIImage*)oldImage inFrame:(CGRect)frame{
+
+    UIImage *image = oldImage;
     
-    
-    //    if(UIGraphicsBeginImageContextWithOptions != NULL)
-    //    {
-    //        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
-    //    } else {
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    //    }
-    
-    //获取图像
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     
     CGImageRef  useImg = CGImageCreateWithImageInRect(image.CGImage, frame);
     image = [UIImage imageWithCGImage:useImg];
@@ -223,28 +214,60 @@
     return image;
 }
 
--(void) addMaoBoLi{
+-(void) addMaoBoLiCenter:(UIImage*)image{
 
-    self.centerView.hidden = true;
-    
-    UIImage* image = [self procMaoBoLi:self.view inFrame:self.centerView.frame];
-  
     UIImageView* view  = [[UIImageView alloc]initWithImage:image];
     view.backgroundColor = [UIColor clearColor];
     
     [self.centerView insertSubview:view atIndex:0];
-    self.centerView.hidden = false;
+}
+
+-(void) addMaoBoLiBufang:(UIImage*)image{
     
-    //布防 按钮
-    
-    image = [self procMaoBoLi:self.view inFrame:self.bufangBtn.frame];
-    
-    view  = [[UIImageView alloc]initWithImage:image];
+    UIImageView* view  = [[UIImageView alloc]initWithImage:image];
     view.backgroundColor = [UIColor clearColor];
     view.frame = self.bufangBtn.frame;
     
     [self.view insertSubview:view belowSubview:self.bufangBtn];
 
+}
+
+-(void) addMaoBoLi{
+
+    self.centerView.hidden = true;
+    
+    UIImage *image = nil;
+    
+    
+    //    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    //    {
+    //        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
+    //    } else {
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    //    }
+    
+    //获取图像
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage* cenImg = [self procMaoBoLi:image inFrame:self.centerView.frame];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addMaoBoLiCenter:cenImg];
+        });
+    });
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage* bufangImg = [self procMaoBoLi:image inFrame:self.bufangBtn.frame];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addMaoBoLiBufang:bufangImg];
+        });
+    });
+    
+    self.centerView.hidden = false;
+    
 }
 
 - (void) addDevCategory{
