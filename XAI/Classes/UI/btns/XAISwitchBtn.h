@@ -9,7 +9,7 @@
 #import "XAIDevBtn.h"
 #import "XAILight.h"
 
-@interface XAISwitchBtn : XAIDevBtn<XAILigthtDelegate>{
+@interface XAISwitchBtn : XAIDevBtn<XAILigthtDelegate,UITextFieldDelegate>{
 
     float _angle;
     BOOL  _bRoll;
@@ -35,5 +35,8 @@
 
 
 - (void) setInfo:(XAILight*)aObj;
+
+-(void) editNickStart;
+-(void) editNickStop;
 
 @end

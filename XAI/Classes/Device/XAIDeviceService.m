@@ -334,19 +334,6 @@
                 
             aDevice.devStatus = (XAIDeviceStatus)devStatus_mem;
         
-
-
-            
-            //device type
-            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
-            
-            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
-            
-            
-            uint8_t _type = *((uint8_t*)type_data->data);
-            
-            XAIDeviceType type = _type;
-            aDevice.devType = type;
             
 
             _xai_packet_param_data* data = getParamDataFromParamStatus(param, i*devParamCout + 2);
@@ -381,6 +368,37 @@
             
             
             aDevice.apsn = apsn;
+            
+            
+            //device type
+            
+            
+            _xai_packet_param_data* type_data = getParamDataFromParamStatus(param, i*devParamCout + 3);
+            
+            if (type_data == NULL || (type_data->data_type != XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN) || type_data->data_len <= 0) break;
+            
+            
+            uint8_t _type = *((uint8_t*)type_data->data);
+            
+            XAIDeviceType type = _type;
+            aDevice.devType = type;
+            
+            
+            
+            NSString* luidStr = [MQTTCover luidToString:aDevice.luid];
+            if ([luidStr hasPrefix:@"0x0005"]) {
+                aDevice.devType = XAIDeviceType_door;
+            }else if ([luidStr hasPrefix:@"0x0002"]) {
+                aDevice.devType = XAIDeviceType_light;
+            }else if ([luidStr hasPrefix:@"0x0003"]) {
+                aDevice.devType = XAIDeviceType_light_2;
+            }else if ([luidStr hasPrefix:@"0x0004"]) {
+                aDevice.devType = XAIDeviceType_Inf;
+            }else{
+                aDevice.devType = XAIDeviceType_UnKown;
+            }
+            
+            
             
             
             if ([self converToObjType:aDevice] == false) break;

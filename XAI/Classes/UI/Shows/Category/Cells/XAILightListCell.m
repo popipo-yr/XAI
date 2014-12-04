@@ -25,10 +25,12 @@
 }
 
 -(void)_init{
+    
+    float height = 140;
 
     float width = [UIScreen mainScreen].bounds.size.width;
     
-     self.frame = CGRectMake(0, 0, width, 160);
+     self.frame = CGRectMake(0, 0, width, height);
     
     
     
@@ -52,7 +54,7 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     
-    UILabel* sep = [[UILabel alloc] initWithFrame:CGRectMake(0, 159, width, 1)];
+    UILabel* sep = [[UILabel alloc] initWithFrame:CGRectMake(0, height -1 , width, 1)];
     [sep setBackgroundColor:[UIColor grayColor]];
     sep.alpha = 0.4F;
     
@@ -64,14 +66,50 @@
                                    _conImgView.frame.size.height);
     
     [self addSubview:_conImgView];
-    _conImgView.hidden = true;
+    //_conImgView.hidden = true;
+    
     
     [self addSubview:sep];
     
 
     _oneBtn.delegate = self;
     _twoBtn.delegate = self;
+    
+    _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_editBtn setImage:[UIImage imageWithFile:@"dev_change.png"] forState:UIControlStateNormal];
+    [_editBtn addTarget:self action:@selector(editClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    _delBtn    = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_delBtn setImage:[UIImage imageWithFile:@"dev_del_nor.png"] forState:UIControlStateNormal];
+    [_delBtn addTarget:self action:@selector(delClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    _editBtn.frame = CGRectMake(10, (height - 23)*0.5f, 23, 23);
+    _delBtn.frame = CGRectMake(width - 10 - 23, (height - 23)*0.5f , 23, 23);
+    
+    [self addSubview:_editBtn];
+    [self addSubview:_delBtn];
+    
+    _editBtn.hidden = true;
+    _delBtn.hidden = true;
 
+
+}
+
+-(void)editClick{
+
+    [self.oneBtn editNickStart];
+    [self.twoBtn editNickStart];
+    
+}
+
+-(void)delClick{
+
+    if (nil != _delegate
+        && [_delegate respondsToSelector:@selector(lightCell:lightBtnDelClick:)]) {
+        
+        [_delegate lightCell:self lightBtnDelClick:nil];
+    }
 
 }
 
@@ -86,6 +124,8 @@
     _twoBtn.hidden = (two == nil);
     _oneBtn.userInteractionEnabled = (one != nil);
     _twoBtn.userInteractionEnabled = (two != nil);
+    
+    _conImgView.hidden = !_hasCon;
 
 }
 
@@ -97,14 +137,20 @@
     }else{
         [self.oneBtn endEdit];
         [self.twoBtn  endEdit];
+        
+        [self.oneBtn editNickStop];
+        [self.twoBtn editNickStop];
     }
     
-    _conImgView.hidden = (isEdit && _hasCon) ? false : true;
+    //_conImgView.hidden = (isEdit && _hasCon) ? false : true;
+    
+    _editBtn.hidden = !isEdit;
+    _delBtn.hidden = !isEdit;
 }
 
 -(void) setOnlyNeedCenter:(BOOL)isNeed{
     
-    if (_twoBtn.hidden == false) return;
+    //if (_twoBtn.hidden == false) return;
 
     CGSize btnSize = _oneBtn.frame.size;
     
@@ -132,6 +178,14 @@
         && [sBtn isKindOfClass:[XAISwitchBtn class]]) {
         [_delegate lightCell:self lightBtnEditClick:sBtn];
     }
+    
+    if (btn != self.oneBtn) {
+        [self.oneBtn editNickStop];
+    }
+    
+    if (btn != self.twoBtn) {
+        [self.twoBtn editNickStop];
+    }
 }
 
 -(void)btnDelClick:(XAIDevBtn *)btn{
@@ -155,7 +209,8 @@
         [_delegate lightCell:self lightBtnEditEnd:sBtn];
     }
 
-
+    [self.oneBtn editNickStop];
+    [self.twoBtn editNickStop];
 }
 
 

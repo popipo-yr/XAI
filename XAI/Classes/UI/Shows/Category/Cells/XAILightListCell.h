@@ -17,6 +17,9 @@
     BOOL  _hasCon;
     UIImageView*  _conImgView;
     
+    UIButton* _delBtn;
+    UIButton* _editBtn;
+    
 }
 
 @property (nonatomic,weak) id<XAILightListVCCellNewDelegate> delegate;

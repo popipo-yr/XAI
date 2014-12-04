@@ -81,6 +81,12 @@
 		9612B0A519A1FFD8004CA9F5 /* XAILinkageEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B0A419A1FFD8004CA9F5 /* XAILinkageEditVC.m */; };
 		9612B0AB19A2F98E004CA9F5 /* LinkageTime.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9612B0A919A2F98E004CA9F5 /* LinkageTime.xib */; };
 		9612B0AE19A2FAA4004CA9F5 /* XAILinkageTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 9612B0AD19A2FAA4004CA9F5 /* XAILinkageTime.m */; };
+		9612DD981A2FF6F7002C3336 /* switch_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD961A2FF6F7002C3336 /* switch_head.png */; };
+		9612DD991A2FF6F7002C3336 /* switch_tbg_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD971A2FF6F7002C3336 /* switch_tbg_open.png */; };
+		9612DD9C1A2FF701002C3336 /* switch_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD9A1A2FF701002C3336 /* switch_head@3x.png */; };
+		9612DD9D1A2FF701002C3336 /* switch_tbg_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD9B1A2FF701002C3336 /* switch_tbg_open@3x.png */; };
+		9612DDA01A2FF70C002C3336 /* switch_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD9E1A2FF70C002C3336 /* switch_head@2x.png */; };
+		9612DDA11A2FF70C002C3336 /* switch_tbg_open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612DD9F1A2FF70C002C3336 /* switch_tbg_open@2x.png */; };
 		9614F94118FCD0D800CDF4A1 /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */; };
 		9616802E19206324000682A4 /* DoorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616802D19206324000682A4 /* DoorTest.m */; };
 		9616803119206979000682A4 /* XAITimeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616803019206979000682A4 /* XAITimeOut.m */; };
@@ -308,8 +314,6 @@
 		9636A53D1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9636A53C1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png */; };
 		96376ECF1A147F3C007F1264 /* switch-no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E951A147F3C007F1264 /* switch-no@2x.png */; };
 		96376ED01A147F3C007F1264 /* switch_2_con@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E961A147F3C007F1264 /* switch_2_con@2x.png */; };
-		96376ED11A147F3C007F1264 /* switch_gloabl_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E971A147F3C007F1264 /* switch_gloabl_on@2x.png */; };
-		96376ED21A147F3C007F1264 /* switch_global_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E981A147F3C007F1264 /* switch_global_off@2x.png */; };
 		96376ED31A147F3C007F1264 /* switch_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E991A147F3C007F1264 /* switch_nor@2x.png */; };
 		96376ED41A147F3C007F1264 /* switch_off_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E9A1A147F3C007F1264 /* switch_off_text@2x.png */; };
 		96376ED51A147F3C007F1264 /* switch_off_tip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E9B1A147F3C007F1264 /* switch_off_tip@2x.png */; };
@@ -323,8 +327,6 @@
 		96376EDD1A147F3C007F1264 /* switch_wait_tip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EA31A147F3C007F1264 /* switch_wait_tip@2x.png */; };
 		96376EE21A147F3C007F1264 /* switch-no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EA91A147F3C007F1264 /* switch-no@3x.png */; };
 		96376EE31A147F3C007F1264 /* switch_2_con@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAA1A147F3C007F1264 /* switch_2_con@3x.png */; };
-		96376EE41A147F3C007F1264 /* switch_gloabl_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAB1A147F3C007F1264 /* switch_gloabl_on@3x.png */; };
-		96376EE51A147F3C007F1264 /* switch_global_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAC1A147F3C007F1264 /* switch_global_off@3x.png */; };
 		96376EE61A147F3C007F1264 /* switch_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAD1A147F3C007F1264 /* switch_nor@3x.png */; };
 		96376EE71A147F3C007F1264 /* switch_off_text@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAE1A147F3C007F1264 /* switch_off_text@3x.png */; };
 		96376EE81A147F3C007F1264 /* switch_off_tip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EAF1A147F3C007F1264 /* switch_off_tip@3x.png */; };
@@ -337,8 +339,6 @@
 		96376EEF1A147F3C007F1264 /* switch_wait_rol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EB61A147F3C007F1264 /* switch_wait_rol@3x.png */; };
 		96376EF01A147F3C007F1264 /* switch_wait_tip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EB71A147F3C007F1264 /* switch_wait_tip@3x.png */; };
 		96376EF51A147F3C007F1264 /* switch_2_con.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EBC1A147F3C007F1264 /* switch_2_con.png */; };
-		96376EF61A147F3C007F1264 /* switch_gloabl_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EBD1A147F3C007F1264 /* switch_gloabl_on.png */; };
-		96376EF71A147F3C007F1264 /* switch_global_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EBE1A147F3C007F1264 /* switch_global_off.png */; };
 		96376EF81A147F3C007F1264 /* switch_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EBF1A147F3C007F1264 /* switch_nor.png */; };
 		96376EF91A147F3C007F1264 /* switch_off_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EC01A147F3C007F1264 /* switch_off_text.png */; };
 		96376EFA1A147F3C007F1264 /* switch_off_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376EC11A147F3C007F1264 /* switch_off_tip.png */; };
@@ -885,6 +885,12 @@
 		9612B0AA19A2F98E004CA9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LinkageTime.xib; sourceTree = "<group>"; };
 		9612B0AC19A2FAA4004CA9F5 /* XAILinkageTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageTime.h; sourceTree = "<group>"; };
 		9612B0AD19A2FAA4004CA9F5 /* XAILinkageTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageTime.m; sourceTree = "<group>"; };
+		9612DD961A2FF6F7002C3336 /* switch_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_head.png; sourceTree = "<group>"; };
+		9612DD971A2FF6F7002C3336 /* switch_tbg_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_tbg_open.png; sourceTree = "<group>"; };
+		9612DD9A1A2FF701002C3336 /* switch_head@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_head@3x.png"; sourceTree = "<group>"; };
+		9612DD9B1A2FF701002C3336 /* switch_tbg_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_tbg_open@3x.png"; sourceTree = "<group>"; };
+		9612DD9E1A2FF70C002C3336 /* switch_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_head@2x.png"; sourceTree = "<group>"; };
+		9612DD9F1A2FF70C002C3336 /* switch_tbg_open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_tbg_open@2x.png"; sourceTree = "<group>"; };
 		9614F94018FCD0D800CDF4A1 /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
 		9614F94218FCEBB400CDF4A1 /* LoginPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPlugin.h; sourceTree = "<group>"; };
 		9616802D19206324000682A4 /* DoorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoorTest.m; sourceTree = "<group>"; };
@@ -1131,8 +1137,6 @@
 		9636A53C1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@3x.png"; sourceTree = "<group>"; };
 		96376E951A147F3C007F1264 /* switch-no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-no@2x.png"; sourceTree = "<group>"; };
 		96376E961A147F3C007F1264 /* switch_2_con@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_2_con@2x.png"; sourceTree = "<group>"; };
-		96376E971A147F3C007F1264 /* switch_gloabl_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_gloabl_on@2x.png"; sourceTree = "<group>"; };
-		96376E981A147F3C007F1264 /* switch_global_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_global_off@2x.png"; sourceTree = "<group>"; };
 		96376E991A147F3C007F1264 /* switch_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_nor@2x.png"; sourceTree = "<group>"; };
 		96376E9A1A147F3C007F1264 /* switch_off_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_off_text@2x.png"; sourceTree = "<group>"; };
 		96376E9B1A147F3C007F1264 /* switch_off_tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_off_tip@2x.png"; sourceTree = "<group>"; };
@@ -1146,8 +1150,6 @@
 		96376EA31A147F3C007F1264 /* switch_wait_tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_wait_tip@2x.png"; sourceTree = "<group>"; };
 		96376EA91A147F3C007F1264 /* switch-no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-no@3x.png"; sourceTree = "<group>"; };
 		96376EAA1A147F3C007F1264 /* switch_2_con@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_2_con@3x.png"; sourceTree = "<group>"; };
-		96376EAB1A147F3C007F1264 /* switch_gloabl_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_gloabl_on@3x.png"; sourceTree = "<group>"; };
-		96376EAC1A147F3C007F1264 /* switch_global_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_global_off@3x.png"; sourceTree = "<group>"; };
 		96376EAD1A147F3C007F1264 /* switch_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_nor@3x.png"; sourceTree = "<group>"; };
 		96376EAE1A147F3C007F1264 /* switch_off_text@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_off_text@3x.png"; sourceTree = "<group>"; };
 		96376EAF1A147F3C007F1264 /* switch_off_tip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_off_tip@3x.png"; sourceTree = "<group>"; };
@@ -1160,8 +1162,6 @@
 		96376EB61A147F3C007F1264 /* switch_wait_rol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_wait_rol@3x.png"; sourceTree = "<group>"; };
 		96376EB71A147F3C007F1264 /* switch_wait_tip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_wait_tip@3x.png"; sourceTree = "<group>"; };
 		96376EBC1A147F3C007F1264 /* switch_2_con.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_2_con.png; sourceTree = "<group>"; };
-		96376EBD1A147F3C007F1264 /* switch_gloabl_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_gloabl_on.png; sourceTree = "<group>"; };
-		96376EBE1A147F3C007F1264 /* switch_global_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_global_off.png; sourceTree = "<group>"; };
 		96376EBF1A147F3C007F1264 /* switch_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_nor.png; sourceTree = "<group>"; };
 		96376EC01A147F3C007F1264 /* switch_off_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_off_text.png; sourceTree = "<group>"; };
 		96376EC11A147F3C007F1264 /* switch_off_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_off_tip.png; sourceTree = "<group>"; };
@@ -2378,8 +2378,6 @@
 				96376E901A147F3C007F1264 /* 2x */,
 				96376EA41A147F3C007F1264 /* 3x */,
 				96376EBC1A147F3C007F1264 /* switch_2_con.png */,
-				96376EBD1A147F3C007F1264 /* switch_gloabl_on.png */,
-				96376EBE1A147F3C007F1264 /* switch_global_off.png */,
 				96376EBF1A147F3C007F1264 /* switch_nor.png */,
 				96376EC01A147F3C007F1264 /* switch_off_text.png */,
 				96376EC11A147F3C007F1264 /* switch_off_tip.png */,
@@ -2392,6 +2390,8 @@
 				96376EC81A147F3C007F1264 /* switch_wait_rol.png */,
 				96376EC91A147F3C007F1264 /* switch_wait_tip.png */,
 				96376ECA1A147F3C007F1264 /* switch-no.png */,
+				9612DD961A2FF6F7002C3336 /* switch_head.png */,
+				9612DD971A2FF6F7002C3336 /* switch_tbg_open.png */,
 			);
 			path = switch;
 			sourceTree = "<group>";
@@ -2401,8 +2401,6 @@
 			children = (
 				96376E951A147F3C007F1264 /* switch-no@2x.png */,
 				96376E961A147F3C007F1264 /* switch_2_con@2x.png */,
-				96376E971A147F3C007F1264 /* switch_gloabl_on@2x.png */,
-				96376E981A147F3C007F1264 /* switch_global_off@2x.png */,
 				96376E991A147F3C007F1264 /* switch_nor@2x.png */,
 				96376E9A1A147F3C007F1264 /* switch_off_text@2x.png */,
 				96376E9B1A147F3C007F1264 /* switch_off_tip@2x.png */,
@@ -2414,6 +2412,8 @@
 				96376EA11A147F3C007F1264 /* switch_unk@2x.png */,
 				96376EA21A147F3C007F1264 /* switch_wait_rol@2x.png */,
 				96376EA31A147F3C007F1264 /* switch_wait_tip@2x.png */,
+				9612DD9E1A2FF70C002C3336 /* switch_head@2x.png */,
+				9612DD9F1A2FF70C002C3336 /* switch_tbg_open@2x.png */,
 			);
 			path = 2x;
 			sourceTree = "<group>";
@@ -2423,8 +2423,6 @@
 			children = (
 				96376EA91A147F3C007F1264 /* switch-no@3x.png */,
 				96376EAA1A147F3C007F1264 /* switch_2_con@3x.png */,
-				96376EAB1A147F3C007F1264 /* switch_gloabl_on@3x.png */,
-				96376EAC1A147F3C007F1264 /* switch_global_off@3x.png */,
 				96376EAD1A147F3C007F1264 /* switch_nor@3x.png */,
 				96376EAE1A147F3C007F1264 /* switch_off_text@3x.png */,
 				96376EAF1A147F3C007F1264 /* switch_off_tip@3x.png */,
@@ -2436,6 +2434,8 @@
 				96376EB51A147F3C007F1264 /* switch_unk@3x.png */,
 				96376EB61A147F3C007F1264 /* switch_wait_rol@3x.png */,
 				96376EB71A147F3C007F1264 /* switch_wait_tip@3x.png */,
+				9612DD9A1A2FF701002C3336 /* switch_head@3x.png */,
+				9612DD9B1A2FF701002C3336 /* switch_tbg_open@3x.png */,
 			);
 			path = 3x;
 			sourceTree = "<group>";
@@ -3717,6 +3717,7 @@
 				96E49DC319F8ECAC003920EE /* headImg@3x.png in Resources */,
 				96D583FA1A270E710056CF07 /* link_result_sw_sel.png in Resources */,
 				961F94071A24563400EA2AFD /* font_jiaohu.png in Resources */,
+				9612DD9D1A2FF701002C3336 /* switch_tbg_open@3x.png in Resources */,
 				961F93DA1A24563400EA2AFD /* cg_sw_nor@3x.png in Resources */,
 				96D583C11A257A420056CF07 /* goin_nor.png in Resources */,
 				96D583901A257A420056CF07 /* bg@2x.png in Resources */,
@@ -3914,6 +3915,7 @@
 				961F93E41A24563400EA2AFD /* font_dwCtr@3x.png in Resources */,
 				96F93A1E19A446CE0057C0FC /* chat_send_nor@2x.png in Resources */,
 				9612B04E19A190CA004CA9F5 /* Linkage_iPhone.storyboard in Resources */,
+				9612DDA01A2FF70C002C3336 /* switch_head@2x.png in Resources */,
 				96CAE70D1A075FE80030075C /* devHis_clear_nor@3x.png in Resources */,
 				9612B02A19A03F5A004CA9F5 /* cell_close@2x.png in Resources */,
 				96E49DBF19F8ECAC003920EE /* useradd_ok_nor@2x.png in Resources */,
@@ -3963,7 +3965,6 @@
 				96D583F21A270E710056CF07 /* link_result_head@3x.png in Resources */,
 				96B7B6151A145DC600BCAC74 /* link_s_roll@3x.png in Resources */,
 				96D583F41A270E710056CF07 /* link_result_sw_sel@3x.png in Resources */,
-				96376EE51A147F3C007F1264 /* switch_global_off@3x.png in Resources */,
 				96AD3DA419A6E05B00DB6AF3 /* cell_unkown@2x.png in Resources */,
 				96B7B60C1A145DC600BCAC74 /* link_s_btn_on@2x.png in Resources */,
 				9612B09819A1E6F1004CA9F5 /* linkage_ir_worn_nor.png in Resources */,
@@ -3977,7 +3978,6 @@
 				96CAE7151A075FE80030075C /* devHis_sc.png in Resources */,
 				966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */,
 				9622727A1A0B169900FCE9EE /* link_sw_bg_sel@2x.png in Resources */,
-				96376ED11A147F3C007F1264 /* switch_gloabl_on@2x.png in Resources */,
 				962272771A0B169900FCE9EE /* link_inf_bg_nor@2x.png in Resources */,
 				9696855D19D9085C009B1DFD /* launch-back.png in Resources */,
 				96D583A81A257A420056CF07 /* dev_change@3x.png in Resources */,
@@ -4011,7 +4011,6 @@
 				96376EFC1A147F3C007F1264 /* switch_on_text.png in Resources */,
 				96376ED71A147F3C007F1264 /* switch_on_text@2x.png in Resources */,
 				962272CC1A0CBFA100FCE9EE /* chat_tbg@2x.png in Resources */,
-				96376EF61A147F3C007F1264 /* switch_gloabl_on.png in Resources */,
 				962DDB5D1990DBFD009EB456 /* icon120*120.png in Resources */,
 				96E49D9E19F8B430003920EE /* chat_crl_btn_ringt.png in Resources */,
 				96B7B6931A147EF600BCAC74 /* dc_title.png in Resources */,
@@ -4023,6 +4022,7 @@
 				96E49D6119F7998A003920EE /* jiaohu_tbg.png in Resources */,
 				96CAE7551A086A490030075C /* InfBtnView.xib in Resources */,
 				96CAE6F21A0725F20030075C /* DCBtnView.xib in Resources */,
+				9612DD9C1A2FF701002C3336 /* switch_head@3x.png in Resources */,
 				962DDDFD191612E7008F370A /* obj_window_close@2x.png in Resources */,
 				962272821A0B169900FCE9EE /* link_cond_tiltle@3x.png in Resources */,
 				96D5839B1A257A420056CF07 /* msgNum2@2x.png in Resources */,
@@ -4077,11 +4077,14 @@
 				962272991A0B169900FCE9EE /* link_sw_bg_nor.png in Resources */,
 				961F93BF1A24563400EA2AFD /* chatTip@2x.png in Resources */,
 				961F93BA1A24563400EA2AFD /* cg_sw_sel@2x.png in Resources */,
+				9612DD981A2FF6F7002C3336 /* switch_head.png in Resources */,
 				962272811A0B169900FCE9EE /* link_cond_sw_sel@3x.png in Resources */,
 				C38AC1F618EBC8E3002F20C1 /* zbar-samples.png in Resources */,
 				9612B09619A1E6F1004CA9F5 /* linkage_ir_work_nor.png in Resources */,
 				961F93DF1A24563400EA2AFD /* cg_usr_sel@3x.png in Resources */,
 				96376F011A147F3C007F1264 /* switch_wait_rol.png in Resources */,
+				9612DD991A2FF6F7002C3336 /* switch_tbg_open.png in Resources */,
+				9612DDA11A2FF70C002C3336 /* switch_tbg_open@2x.png in Resources */,
 				96CAE7131A075FE80030075C /* devHis_clear_sel.png in Resources */,
 				96B7B65B1A147ECF00BCAC74 /* inf_nor_1.png in Resources */,
 				96B7B6471A147ECF00BCAC74 /* inf_head@2x.png in Resources */,
@@ -4148,7 +4151,6 @@
 				96376ED91A147F3C007F1264 /* switch_tbg@2x.png in Resources */,
 				961F94001A24563400EA2AFD /* cg_usr_sel.png in Resources */,
 				96376EEE1A147F3C007F1264 /* switch_unk@3x.png in Resources */,
-				96376ED21A147F3C007F1264 /* switch_global_off@2x.png in Resources */,
 				96376F161A1481E0007F1264 /* chPawd_title@3x.png in Resources */,
 				C38AC1F418EBC8E3002F20C1 /* zbar-help.html in Resources */,
 				960CB19719FF844A00D5B4FD /* chPawd_bbg.png in Resources */,
@@ -4220,7 +4222,6 @@
 				9612B09F19A1E6F1004CA9F5 /* linkage_tip_close_s.png in Resources */,
 				961F93CC1A24563400EA2AFD /* show_bg_cent@2x.png in Resources */,
 				962272981A0B169900FCE9EE /* link_inf_bg_sel.png in Resources */,
-				96376EE41A147F3C007F1264 /* switch_gloabl_on@3x.png in Resources */,
 				9622726B1A0B169900FCE9EE /* link_cond_dc_nor@2x.png in Resources */,
 				C38AC1F318EBC8E3002F20C1 /* zbar-back.png in Resources */,
 				96E49DD219F8ECAC003920EE /* useradd_tbg.png in Resources */,
@@ -4240,7 +4241,6 @@
 				96CAE70B1A075FE80030075C /* devHis_sc@2x.png in Resources */,
 				962272311A09F94000FCE9EE /* link_edit_save_bg.png in Resources */,
 				96F93A0719A4384D0057C0FC /* photoUsr.png in Resources */,
-				96376EF71A147F3C007F1264 /* switch_global_off.png in Resources */,
 				9639352D19E7AC9500D7EC44 /* login_other_bg.png in Resources */,
 				962DDB5F1990DBFD009EB456 /* icon80*80.png in Resources */,
 				96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */,

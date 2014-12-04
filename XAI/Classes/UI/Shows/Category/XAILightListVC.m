@@ -137,7 +137,20 @@
 //
 //        [allLights addObject:one1];
 //    }
-    
+//    
+//    for (int i = 0; i < 2; i++) {
+//        XAILight2_CirculeOne* one1 = [[XAILight2_CirculeOne alloc] init];
+//        XAILight2_CirculeTwo* one2 = [[XAILight2_CirculeTwo alloc] init];
+//        
+//        one1.name  = [NSString stringWithFormat:@"name%d",i];
+//        one2.name  = [NSString stringWithFormat:@"name%d",i];
+//        
+//        one1.luid = i+3;
+//        one2.luid = i+3;
+//        
+//        [allLights addObject:one1];
+//        [allLights addObject:one2];
+//    }
 
 
     [_deviceDatasNoManage removeAllObjects];
@@ -216,23 +229,33 @@
     [allOnlyOne addObjectsFromArray:noMatchOne];
     [allOnlyOne addObjectsFromArray:circleTwos];
     
-    for (int i = 0; i < (int)[allOnlyOne count] - 1; i = i+2) {
+//    for (int i = 0; i < (int)[allOnlyOne count] - 1; i = i+2) {
+//        
+//        XAILight* one = [allOnlyOne objectAtIndex:i];
+//        XAILight* two = [allOnlyOne objectAtIndex:i+1];
+//        XAILightCellData* cellData = [[XAILightCellData alloc] init];
+//        [cellData setOne:one two:two hasCon:false];
+//        
+//        [newDatas addObject:cellData];
+//    }
+//    
+//    if ([allOnlyOne count] % 2 == 1) {
+//        XAILight* one = [allOnlyOne objectAtIndex:[allOnlyOne count] - 1];
+//        XAILightCellData* cellData = [[XAILightCellData alloc] init];
+//        [cellData setOne:one two:nil hasCon:false];
+//        [newDatas addObject:cellData];
+//    }
+
+    
+    for (int i = 0; i < [allOnlyOne count]; i++) {
         
         XAILight* one = [allOnlyOne objectAtIndex:i];
-        XAILight* two = [allOnlyOne objectAtIndex:i+1];
         XAILightCellData* cellData = [[XAILightCellData alloc] init];
-        [cellData setOne:one two:two hasCon:false];
+        [cellData setOne:one two:nil hasCon:false];
         
         [newDatas addObject:cellData];
     }
-    
-    if ([allOnlyOne count] % 2 == 1) {
-        XAILight* one = [allOnlyOne objectAtIndex:[allOnlyOne count] - 1];
-        XAILightCellData* cellData = [[XAILightCellData alloc] init];
-        [cellData setOne:one two:nil hasCon:false];
-        [newDatas addObject:cellData];
-    }
-    
+
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
 
 }
@@ -251,21 +274,13 @@
    
     if (count > 0) {
         
-        if (_bFade == true) return;
         
-        //_gStatusImgView.image = [UIImage imageWithFile:@"switch_gloabl_on.png"];
-        _gStatusImgView.alpha = 0;
-        _gStatusImgView.hidden = false;
-        _bFade = true;
-        [self startFadeAnimation];
+        _gStatusImgView.image = [UIImage imageWithFile:@"switch_tbg_open.png"];
+
     }else{
-    
-        if (_bFade == false) return;
         
-        //_gStatusImgView.image = [UIImage imageWithFile:@"switch_global_off.png"];
-        _gStatusImgView.hidden = true;
-        _bFade = false;
-        [self endFadeAnimation];
+        _gStatusImgView.image = [UIImage imageWithFile:@"switch_tbg.png"];
+
     }
     
 }
@@ -406,13 +421,8 @@
         cell.hasMe = cellData;
         [_cell2Infos setObject:cell forKey:indexPath];
         
-        if ([_deviceDatas count] == 1) {
-            [cell setOnlyNeedCenter:YES];
-        }else{
-            [cell setOnlyNeedCenter:false];
-        }
-        
-        
+
+        [cell setOnlyNeedCenter:cellData.twoLight == nil];
     }
     
     return cell;
@@ -423,7 +433,7 @@
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 160.0;
+    return 140.0;
 }
 
 

@@ -180,31 +180,24 @@
 }
 
 #pragma mark - Helper
+-(UIImage*)procMaoBoLi:(UIView*)view inFrame:(CGRect)frame{
 
-
--(void) addMaoBoLi{
-
-    self.centerView.hidden = true;
-    
     UIImage *image = nil;
     
-    CGRect frame = self.centerView.frame;
-    frame.origin = CGPointZero;
-
     
-//    if(UIGraphicsBeginImageContextWithOptions != NULL)
-//    {
-//        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
-//    } else {
-        UIGraphicsBeginImageContext(self.view.frame.size);
-//    }
+    //    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    //    {
+    //        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
+    //    } else {
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    //    }
     
     //获取图像
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    CGImageRef  useImg = CGImageCreateWithImageInRect(image.CGImage, self.centerView.frame);
+    CGImageRef  useImg = CGImageCreateWithImageInRect(image.CGImage, frame);
     image = [UIImage imageWithCGImage:useImg];
     CGImageRelease(useImg);
     
@@ -213,7 +206,7 @@
     // create gaussian blur filter
     CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
     [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[NSNumber numberWithFloat:3] forKey:@"inputRadius"];
+    [filter setValue:[NSNumber numberWithFloat:5] forKey:@"inputRadius"];
     // blur image
     CIImage *result = [filter valueForKey:kCIOutputImageKey];
     
@@ -226,15 +219,32 @@
     CGImageRef cgimg        = [othercontext createCGImage:result fromRect:rect];
     image = [UIImage imageWithCGImage:cgimg];
     CGImageRelease(cgimg);
-
     
+    return image;
+}
 
+-(void) addMaoBoLi{
+
+    self.centerView.hidden = true;
+    
+    UIImage* image = [self procMaoBoLi:self.view inFrame:self.centerView.frame];
+  
     UIImageView* view  = [[UIImageView alloc]initWithImage:image];
     view.backgroundColor = [UIColor clearColor];
     
-    //[self.centerView addSubview:view];
     [self.centerView insertSubview:view atIndex:0];
     self.centerView.hidden = false;
+    
+    //布防 按钮
+    
+    image = [self procMaoBoLi:self.view inFrame:self.bufangBtn.frame];
+    
+    view  = [[UIImageView alloc]initWithImage:image];
+    view.backgroundColor = [UIColor clearColor];
+    view.frame = self.bufangBtn.frame;
+    
+    [self.view insertSubview:view belowSubview:self.bufangBtn];
+
 }
 
 - (void) addDevCategory{

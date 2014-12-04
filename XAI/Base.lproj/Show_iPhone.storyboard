@@ -17,11 +17,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" id="vVz-TR-7mW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.43137254901960786" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatTip.png" id="mBj-Zi-Isb">
                                 <rect key="frame" x="0.0" y="484" width="320" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -144,24 +139,24 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EWA-U5-er6">
-                                <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="151" width="320" height="417"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" id="ScD-Ha-9c6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_tbg.png" id="RMw-6y-zTk">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_title.png" id="2XE-b0-wGz">
-                                        <rect key="frame" x="85" y="28" width="150" height="25"/>
+                                        <rect key="frame" x="97" y="31" width="127" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1oS-04-AaR">
-                                        <rect key="frame" x="283" y="138" width="25" height="29"/>
+                                        <rect key="frame" x="283" y="113" width="25" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <state key="normal" image="edit_nor.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -171,12 +166,8 @@
                                             <action selector="globalEditClick:" destination="bJ9-Rj-pYR" eventType="touchUpInside" id="8O3-Jp-cGG"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_global_off.png" id="WS4-yf-ffN">
-                                        <rect key="frame" x="64" y="38" width="192" height="137"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_gloabl_on.png" id="mDV-vh-tnt">
-                                        <rect key="frame" x="64" y="38" width="192" height="137"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_head.png" id="mDV-vh-tnt">
+                                        <rect key="frame" x="129" y="68" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -194,11 +185,11 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.88235294117647056" green="0.96078431372549022" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="gEditBtn" destination="1oS-04-AaR" id="dEE-Kg-FIz"/>
-                        <outlet property="gStatusImgView" destination="mDV-vh-tnt" id="ffU-cA-5AP"/>
+                        <outlet property="gStatusImgView" destination="RMw-6y-zTk" id="sJX-EB-FjH"/>
                         <outlet property="tableView" destination="EWA-U5-er6" id="15S-rE-6C0"/>
                         <outlet property="theNavigationItem" destination="u6F-7I-WkY" id="oXM-cF-Dc9"/>
                         <outlet property="tipImgView" destination="NH3-q3-GN0" id="KpB-TH-drL"/>
@@ -525,8 +516,8 @@
         <image name="dc_tip_img.png" width="78" height="79"/>
         <image name="dc_title.png" width="183" height="30"/>
         <image name="dw-no.png" width="185" height="171"/>
-        <image name="edit_nor.png" width="25" height="25"/>
-        <image name="edit_sel.png" width="25" height="25"/>
+        <image name="edit_nor.png" width="17" height="17"/>
+        <image name="edit_sel.png" width="17" height="17"/>
         <image name="inf-no.png" width="201" height="176"/>
         <image name="inf_head.png" width="78" height="79"/>
         <image name="inf_tbg.png" width="356" height="206"/>
@@ -539,10 +530,9 @@
         <image name="show_bg_cent.png" width="299" height="347"/>
         <image name="show_title.png" width="98" height="23"/>
         <image name="switch-no.png" width="133" height="113"/>
-        <image name="switch_gloabl_on.png" width="128" height="91"/>
-        <image name="switch_global_off.png" width="192" height="137"/>
-        <image name="switch_tbg.png" width="356" height="206"/>
-        <image name="switch_title.png" width="185" height="30"/>
+        <image name="switch_head.png" width="63" height="63"/>
+        <image name="switch_tbg.png" width="356" height="170"/>
+        <image name="switch_title.png" width="127" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

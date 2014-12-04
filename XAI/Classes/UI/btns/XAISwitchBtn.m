@@ -344,6 +344,43 @@
 
 }
 
+#pragma  mark - Other
+
+- (void)registerEffectForView:(UIView *)aView depth:(CGFloat)depth;
+{
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"transform"];
+    shake.duration = 0.13;
+    shake.autoreverses = YES;
+    shake.repeatCount = MAXFLOAT;
+    shake.removedOnCompletion = NO;
+    CGFloat rotation = 0.03;
+    shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform,-rotation, 0.0 ,0.0 ,1.0)];
+    shake.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, rotation, 0.0 ,0.0 ,1.0)];
+    
+    [aView.layer addAnimation:shake forKey:@"shakeAnimation"];
+}
+
+-(void) editNickStart{
+
+    self.nameTF.hidden = false;
+    //[self registerEffectForView:self depth:20.0f];
+    
+}
+
+-(void) editNickStop{
+    
+    self.nameTF.hidden = true;
+
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+
+    if (nil != self.delegate && [self.delegate respondsToSelector:@selector(btnEditClick:)] ) {
+        [self.delegate btnEditClick:self];
+    }
+    return YES;
+}
+
 
 
 #pragma mark create
@@ -357,6 +394,8 @@
          forControlEvents:UIControlEventTouchUpInside];
     
     [self setBackgroundColor:[UIColor clearColor]];
+    
+    self.nameTF.delegate = self;
 
 }
 
