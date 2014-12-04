@@ -68,9 +68,11 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated{
     
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
+    
+    if (_swipes != nil) return;
     
     _swipes = [[NSArray alloc] initWithArray:[self openSwipe]];
     
@@ -78,10 +80,16 @@
     
     _alphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(alphaChange) userInfo:nil repeats:true];
     
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+    }
+    
 }
 
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
 
     [self stopSwipte:_swipes];
     _swipes = nil;
@@ -91,7 +99,7 @@
     _refreshTimer = nil;
     _alphaTimer = nil;
     
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 
@@ -105,17 +113,17 @@
     return UIStatusBarStyleLightContent;
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
-    
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        
-        [self setNeedsStatusBarAppearanceUpdate];
-        
-    }
-    
-}
+//-(void)viewDidAppear:(BOOL)animated{
+//    
+//    [super viewDidAppear:animated];
+//    
+//    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+//        
+//        [self setNeedsStatusBarAppearanceUpdate];
+//        
+//    }
+//    
+//}
 
 
 
@@ -539,15 +547,27 @@
     [_label setText:[NSString stringWithFormat:@"%d",notReadImCount]];
     [_labelIV setHidden:notReadImCount <=0 ? true : false];
     [_label setHidden:notReadImCount <=0 ? true : false];
-    [_chatTipV setHidden:notReadImCount <=0 ? true : false];
+   
+    BOOL hasRedTip = [MQTT shareMQTT].isBufang && (openLightCount > 0 || openDWCount > 0 || openInfCount > 0);
+    BOOL hasNorTip = notReadImCount > 0;
     
-    if ([MQTT shareMQTT].isBufang) {
+    [_chatTipV setHidden:!hasRedTip && !hasNorTip];
+    
+    if (hasRedTip) {
         
         [_chatTipV setImage:[UIImage imageWithFile:@"bufangTip.png"]];
-        BOOL hasTip = (openLightCount > 0) || openDWCount > 0 || openInfCount > 0;
-        [_chatTipV setHidden:!hasTip];
         
-        if (hasTip) {
+    }else if(hasNorTip){
+        
+        [_chatTipV setImage:[UIImage imageWithFile:@"chatTip.png"]];
+        
+    }
+    
+    
+    if ([MQTT shareMQTT].isBufang) {
+
+        
+        if (hasRedTip) {
             [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateHighlighted];
             [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateSelected];
         }else{
@@ -555,10 +575,9 @@
             [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufang_sel.png"] forState:UIControlStateSelected];
         }
         
-    }else{
-         [_chatTipV setImage:[UIImage imageWithFile:@"chatTip.png"]];
-        [_chatTipV setHidden:notReadImCount <=0 ? true : false];
     }
+    
+
     
     
 }

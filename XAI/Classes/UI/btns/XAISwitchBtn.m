@@ -353,9 +353,15 @@
     shake.autoreverses = YES;
     shake.repeatCount = MAXFLOAT;
     shake.removedOnCompletion = NO;
-    CGFloat rotation = 0.03;
-    shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform,-rotation, 0.0 ,0.0 ,1.0)];
-    shake.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, rotation, 0.0 ,0.0 ,1.0)];
+    CGFloat rotation = 0.1;
+    shake.fromValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform,-rotation, 1.0 ,1.0 ,1.0)];
+    shake.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(self.layer.transform, rotation, 1.0 ,1.0 ,1.0)];
+    
+    
+    CALayer *layer = [aView layer];
+    CGPoint oldAnchorPoint = layer.anchorPoint;
+    [layer setAnchorPoint:CGPointMake(0.5, 0.8)];
+    [layer setPosition:CGPointMake(layer.position.x + layer.bounds.size.width * (layer.anchorPoint.x - oldAnchorPoint.x), layer.position.y + layer.bounds.size.height * (layer.anchorPoint.y - oldAnchorPoint.y))];
     
     [aView.layer addAnimation:shake forKey:@"shakeAnimation"];
 }
@@ -363,7 +369,7 @@
 -(void) editNickStart{
 
     self.nameTF.hidden = false;
-    //[self registerEffectForView:self depth:20.0f];
+    [self registerEffectForView:self.bgView depth:20.0f];
     
 }
 
@@ -371,6 +377,7 @@
     
     self.nameTF.hidden = true;
 
+    [self.bgView.layer removeAllAnimations];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
