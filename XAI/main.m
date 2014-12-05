@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "XAIAppDelegate.h"
+#import "XAIApplication.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([XAIAppDelegate class]));
+        return UIApplicationMain(argc, argv, NSStringFromClass([XAIApplication class]), NSStringFromClass([XAIAppDelegate class]));
     }
 }
