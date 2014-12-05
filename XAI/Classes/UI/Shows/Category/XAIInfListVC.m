@@ -148,13 +148,40 @@
     NSMutableArray* newDatas = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < [_deviceDatasNoManage count]; i++) {
-        XAILight* one = [_deviceDatasNoManage objectAtIndex:i];
+        XAIIR* one = [_deviceDatasNoManage objectAtIndex:i];
         XAIInfListCellData* cellData = [[XAIInfListCellData alloc] init];
         [cellData setOne:one];
         [newDatas addObject:cellData];
     }
 
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
+    
+    [self fireCount];
+}
+
+-(void) fireCount{
+    
+    int count = 0;
+    
+    for (XAIIR * aIR in _deviceDatasNoManage) {
+        
+        if (aIR.isOnline && aIR.curDevStatus == XAIIRStatus_warning) {
+            
+            count += 1;
+            break;
+        }
+    }
+    
+    if (count > 0) {
+        
+        
+        _gStatusImgView.image = [UIImage imageWithFile:@"inf_tbg_open.png"];
+        
+    }else{
+        
+        _gStatusImgView.image = [UIImage imageWithFile:@"inf_tbg.png"];
+        
+    }
     
 }
 
@@ -509,6 +536,10 @@ float prewMoveY;
     
 }
 
+-(void)infCell:(XAIInfListCell *)cell btnStatusChange:(XAIInfBtn *)btn{
+    
+    [self fireCount];
+}
 
 -(void)devService:(XAIDeviceService *)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
     

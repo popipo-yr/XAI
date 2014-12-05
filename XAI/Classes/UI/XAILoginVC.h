@@ -50,5 +50,6 @@
 -(IBAction)qrcodeBtnClick:(id)sender;
 -(IBAction)closeKeyboard:(id)sender;
 
++(XAILoginVC*)create;
 
 @end

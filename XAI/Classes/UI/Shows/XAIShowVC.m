@@ -196,11 +196,13 @@
     UIImage *image = oldImage;
     
     
+    //剪切图片
     CGImageRef  useImg = CGImageCreateWithImageInRect(image.CGImage, frame);
     image = [UIImage imageWithCGImage:useImg];
     CGImageRelease(useImg);
     
-    
+
+    //滤镜
     CIImage *inputImage = [[CIImage alloc] initWithImage:image];
     // create gaussian blur filter
     CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
@@ -213,6 +215,7 @@
     rect.origin.x          += (rect.size.width  - image.size.width ) / 2;
     rect.origin.y          += (rect.size.height - image.size.height) / 2;
     rect.size               = image.size;
+    
     
     CIContext *othercontext      = [CIContext contextWithOptions:nil];
     CGImageRef cgimg        = [othercontext createCGImage:result fromRect:rect];
@@ -244,7 +247,8 @@
 
     self.centerView.hidden = true;
     
-    UIImage *image = nil;
+    __block UIImage *image = nil;
+    
     
     
     //    if(UIGraphicsBeginImageContextWithOptions != NULL)
@@ -259,16 +263,19 @@
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
+    __block  CGRect centerRect = self.centerView.frame;
+    __block  CGRect bufangBtnRect = self.bufangBtn.frame;
+    NSLog(@"kkkkkk====%p,%p",image , &centerRect);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage* cenImg = [self procMaoBoLi:image inFrame:self.centerView.frame];
+        UIImage* cenImg = [self procMaoBoLi:image inFrame:centerRect];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self addMaoBoLiCenter:cenImg];
         });
     });
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage* bufangImg = [self procMaoBoLi:image inFrame:self.bufangBtn.frame];
+        UIImage* bufangImg = [self procMaoBoLi:image inFrame:bufangBtnRect];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self addMaoBoLiBufang:bufangImg];
         });

@@ -36,6 +36,22 @@
 @synthesize nameLabel;
 @synthesize passwordLabel;
 
+
++(XAILoginVC*)create{
+
+    // Instantiate a new storyboard object using the storyboard file named Storyboard_iPhone35
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    // Instantiate the initial view controller object from the storyboard
+    XAILoginVC *vc = [storyboard instantiateInitialViewController];
+    
+    if ([vc isKindOfClass:[XAILoginVC class]]) {
+        return vc ;
+    }
+
+    return nil;
+}
+
 -(id)initWithCoder:(NSCoder *)aDecoder{
 
     if (self = [super initWithCoder:aDecoder]) {

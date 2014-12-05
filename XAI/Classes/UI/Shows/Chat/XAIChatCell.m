@@ -134,6 +134,10 @@
 	bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
 	bubbleText.text = text;
     bubbleText.font = font;
+    if (!fromSelf) {
+        bubbleText.textColor = [UIColor whiteColor];
+    }
+    
     
     if (fromSelf) {
         //bubbleText.textColor = [UIColor whiteColor];
@@ -190,6 +194,9 @@
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
     bubbleText.text = aMsg.context;
     bubbleText.font = font;
+    //if (!fromSelf) {
+        bubbleText.textColor = [UIColor whiteColor];
+    //}
     
     //按钮的摆放,居中摆放
     float btnInvert = 2; //间隔
@@ -353,7 +360,7 @@
     if (self) {
         // Initialization code
         UIView* view = [[UIView alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];
-        [view setBackgroundColor:[UIColor grayColor]];
+        [view setBackgroundColor:[UIColor clearColor]];
         view.alpha = 0.2;
         
         _label = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];

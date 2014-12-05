@@ -269,6 +269,7 @@
         if (aLight.isOnline && aLight.curDevStatus == XAILightStatus_Open) {
             
             count += 1;
+            break;
         }
     }
    

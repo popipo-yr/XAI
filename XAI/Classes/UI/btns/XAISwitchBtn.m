@@ -33,6 +33,8 @@
 
 
     [self showTipLable:true];
+    
+    _statusTipImgView.hidden = true;
 }
 
 
@@ -124,6 +126,8 @@
     [self showTipLable:false];
     
     [self setStatus:_status];
+    
+    _statusTipImgView.hidden = false;
 }
 
 

@@ -160,7 +160,7 @@
     for (int i = 0; i < (int)[_deviceDatasNoManage count] - 1; i = i+2) {
         
         XAIObject* one = [_deviceDatasNoManage objectAtIndex:i];
-        XAILight* two =     [_deviceDatasNoManage objectAtIndex:i+1];
+        XAIObject* two =     [_deviceDatasNoManage objectAtIndex:i+1];
         XAIDCCellData* cellData = [[XAIDCCellData alloc] init];
         [cellData setOne:one two:two];
         
@@ -170,7 +170,7 @@
     
 
     if ([_deviceDatasNoManage count] % 2 == 1) {
-        XAILight* one = [_deviceDatasNoManage objectAtIndex:[_deviceDatasNoManage count] - 1];
+        XAIObject* one = [_deviceDatasNoManage objectAtIndex:[_deviceDatasNoManage count] - 1];
         XAIDCCellData* cellData = [[XAIDCCellData alloc] init];
         [cellData setOne:one two:nil];
         [newDatas addObject:cellData];
@@ -178,8 +178,34 @@
     
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
     
+    [self fireCount];
 }
 
+-(void) fireCount{
+    
+    int count = 0;
+    
+    for (XAIObject* aObj in _deviceDatasNoManage) {
+        
+        if (aObj.isOnline && aObj.curDevStatus == XAIDoorStatus_Open) {
+            
+            count += 1;
+            break;
+        }
+    }
+    
+    if (count > 0) {
+        
+        
+        _gStatusImgView.image = [UIImage imageWithFile:@"dc_tbg_open.png"];
+        
+    }else{
+        
+        _gStatusImgView.image = [UIImage imageWithFile:@"dc_tbg.png"];
+        
+    }
+    
+}
 
 
 #pragma mark - actions
@@ -542,6 +568,10 @@ float prewMoveY;
 
     [self  animalVC_R2L:hisVC];
 
+}
+
+-(void)dcCell:(XAIDCListVCCellNew *)cell btnStatusChange:(XAIDCBtn *)btn{
+    [self fireCount];
 }
 
 

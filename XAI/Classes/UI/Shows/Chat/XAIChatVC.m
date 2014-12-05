@@ -63,7 +63,7 @@
 
 -(BOOL)statusDefault{
 
-    return YES;
+    return false;
 }
 
 
@@ -71,7 +71,7 @@
 {
     [super viewDidLoad];
     
-    UIImage* backImg = [UIImage imageWithFile:@"back_sel.png"] ;
+    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
     
     if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
         
@@ -107,8 +107,8 @@
     
     self.navigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [UIColor blueColor],NSForegroundColorAttributeName,
-                         [UIFont systemFontOfSize:25], NSFontAttributeName, nil];
+                         [UIColor whiteColor],NSForegroundColorAttributeName,
+                         [UIFont systemFontOfSize:22], NSFontAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = dic;
     //_cNavigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];
     XAIUser* curUser = [MQTT shareMQTT].curUser;

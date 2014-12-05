@@ -314,6 +314,10 @@ bool _is = false;
     }
     
     //[self showWorning:XAIIRStatus_warning == status];
+    
+    if (nil != self.delegate && [self.delegate respondsToSelector:@selector(btnStatusChange:)] ) {
+        [self.delegate btnStatusChange:self];
+    }
 }
 
 -(void)ir:(XAIIR *)ir curPower:(float)power getIsSuccess:(BOOL)isSuccess{}

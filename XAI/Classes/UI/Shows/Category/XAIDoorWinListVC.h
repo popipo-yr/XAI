@@ -43,6 +43,7 @@
 
 @property (nonatomic,strong) IBOutlet UIImageView* tipImgView;
 @property (nonatomic,strong) IBOutlet UIButton*  gEditBtn;
+@property (nonatomic,strong) IBOutlet UIImageView* gStatusImgView;
 
 -(IBAction)globalEditClick:(id)sender;
 -(IBAction)bgGetClick:(id)sender;
