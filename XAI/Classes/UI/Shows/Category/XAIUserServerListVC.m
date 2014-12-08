@@ -400,7 +400,7 @@ static SWTableViewCell* curSWCell;
 #pragma mark Table Delegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 78.0;
+    return 50.0;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView

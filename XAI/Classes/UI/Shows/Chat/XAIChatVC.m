@@ -102,7 +102,10 @@
     _textField.returnKeyType =  UIReturnKeyDone;
     
     
-     [_textField addTarget:self action:@selector(chatInputReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_textField addTarget:self action:@selector(chatInputReturn:)
+          forControlEvents:UIControlEventEditingDidEnd];
+    [_textField addTarget:self action:@selector(chatInputReturn:)
+              forControlEvents:UIControlEventEditingDidEndOnExit];
     
     
     self.navigationItem.title =  [NSString stringWithFormat:@"正在与%@对话",_user.name];

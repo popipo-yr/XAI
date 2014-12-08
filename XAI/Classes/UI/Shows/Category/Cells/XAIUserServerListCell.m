@@ -15,6 +15,7 @@
     if (aUser == nil) return;
     if (![aUser isKindOfClass:[XAIUser class]]){
         
+        
         [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
         [self.tipImageView setBackgroundColor:[UIColor clearColor]];
         [self.tipImageView setImage:nil];
@@ -45,6 +46,19 @@
     [self firstStatus:status opr:[self coverForm:aUser.curOprStatus] tip:aUser.curOprtip];
     
     [self changeHead:aUser];
+    
+    
+    XAIUser* curUser = [MQTT shareMQTT].curUser;
+    XAIMeg* msg = [[curUser readIMWithLuid:aUser.luid apsn:aUser.apsn] lastObject];
+    
+    if (msg != nil) {
+        
+        NSDateFormatter* format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+        self.contextLable.text = [format stringFromDate:msg.date];
+        self.contextLable.hidden = false;
+    }
 }
 
 -(void)dealloc{
@@ -64,13 +78,15 @@
         UIImage* msgNumImg = [UIImage imageWithFile:@"msgNum2.png"];
         CGSize numSize = msgNumImg.size;
         
-        float y = (self.contentView.frame.size.height - numSize.height)*0.5f + 5.0f;
+        float y = (self.contentView.frame.size.height - numSize.height)*0.5f;
+        y = (50 - numSize.height)*0.5f;
         float x = [UIScreen mainScreen].bounds.size.width - 15 - numSize.width;
         _headView = [[UIImageView alloc] initWithFrame:CGRectMake(x
                                                                   ,y
                                                                   ,numSize.width
                                                                   ,numSize.height)];
         
+
         
         [_headView setImage:msgNumImg];
         

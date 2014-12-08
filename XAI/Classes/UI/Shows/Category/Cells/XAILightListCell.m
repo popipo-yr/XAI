@@ -84,8 +84,8 @@
     [_delBtn addTarget:self action:@selector(delClick) forControlEvents:UIControlEventTouchUpInside];
     
     
-    _editBtn.frame = CGRectMake(10, (height - 23)*0.5f, 23, 23);
-    _delBtn.frame = CGRectMake(width - 10 - 23, (height - 23)*0.5f , 23, 23);
+    _editBtn.frame = CGRectMake(10, (height - 40)*0.5f, 40, 40);
+    _delBtn.frame = CGRectMake(width - 10 - 40, (height - 40)*0.5f , 40, 40);
     
     [self addSubview:_editBtn];
     [self addSubview:_delBtn];

@@ -28,7 +28,7 @@
 
 @end
 
-#define _C_XAIDevHistoryVCCellHeight 60
+#define _C_XAIDevHistoryVCCellHeight 30
 #define _C_XAIDevHistoryVCCellID @"XAIDevHistoryVCCellID"
 @interface XAIDevHistoryVCCell : UITableViewCell
 

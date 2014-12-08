@@ -267,15 +267,24 @@
     __block  CGRect bufangBtnRect = self.bufangBtn.frame;
     NSLog(@"kkkkkk====%p,%p",image , &centerRect);
     
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         UIImage* cenImg = [self procMaoBoLi:image inFrame:centerRect];
+        dispatch_semaphore_signal(semaphore);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self addMaoBoLiCenter:cenImg];
         });
     });
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         UIImage* bufangImg = [self procMaoBoLi:image inFrame:bufangBtnRect];
+        dispatch_semaphore_signal(semaphore);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self addMaoBoLiBufang:bufangImg];
         });
