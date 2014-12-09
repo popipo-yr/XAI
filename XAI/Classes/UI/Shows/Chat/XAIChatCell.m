@@ -50,42 +50,30 @@
     if (isFromMe) {
         
         float width = [UIScreen mainScreen].bounds.size.width; //320
-        _photo.frame = CGRectMake(width-60, 10, 50, 50);
+        _photo.frame = CGRectMake(width-(10+35), 3, 35, 35);
         
     }else{
     
-        _photo.frame = CGRectMake(10, 10, 50, 50);
+        _photo.frame = CGRectMake(10, 3, 35, 35);
     }
     
     if (aMsg.type == XAIMegType_Ctrl) {
       
-      [self bubbleCtrlView:aMsg withPosition:65 withView:_bubbleView];
+      [self bubbleCtrlView:aMsg withPosition:45 withView:_bubbleView];
         
     }else{
     
-        [self bubbleView:aMsg.context from:isFromMe withPosition:65 withView:_bubbleView];
+        [self bubbleView:aMsg.context from:isFromMe withPosition:45 withView:_bubbleView];
     }
     
     
 
 }
 
--(void)setContent:(NSMutableDictionary*)dict
-{
-    if ([[dict objectForKey:@"name"]isEqualToString:@"rhl"]) {
-        
-    }else{
-        _photo.frame = CGRectMake(10, 10, 50, 50);
-        _photo.image = [UIImage imageNamed:@"photoXAI"];
-        
-        if ([[dict objectForKey:@"content"] isEqualToString:@"0"]) {
-            [self yuyinView:1 from:NO withPosition:65 withView:_bubbleView];
-        }else{
-            [self bubbleView:[dict objectForKey:@"content"] from:NO withPosition:65 withView:_bubbleView];
-        }
-    }
-
-}
+#define _C_ImageViewYInv   5.0f
+#define  _C_TextYInv  5.0f
+#define _C_ImagePer  12.0f
+#define  _C_TextXInv  15.0f
 
 //泡泡文本
 - (void)bubbleView:(NSString *)text from:(BOOL)fromSelf withPosition:(int)position withView:(UIView*)bulleView{
@@ -125,9 +113,13 @@
    
 	//NSLog(@"%f,%f",size.width,size.height);
 	
+    //文本和底图在同一层
+     float perNor = _C_ImagePer; //前方不平整的
     
     //添加文本信息
-	UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(fromSelf?15.0f:22.0f, 20.0f, size.width+10, size.height+10)];
+    float textInv = _C_TextXInv; //text相距底图的x距离
+    float textX =  textInv + (fromSelf ? 0 : perNor);
+	UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(textX, 0.0f, size.width, size.height+_C_TextYInv*2)];
 	bubbleText.backgroundColor = [UIColor clearColor];
 	bubbleText.font = font;
 	bubbleText.numberOfLines = 0;
@@ -143,17 +135,33 @@
         //bubbleText.textColor = [UIColor whiteColor];
     }
 	
+    //bubbleText.backgroundColor = [UIColor grayColor];
 
-	bubbleImageView.frame = CGRectMake(0.0f, 14.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+20.0f);
+    CGSize bubbleTextSize = bubbleText.frame.size;
+    float imageViewY  = _C_ImageViewYInv;
+	bubbleImageView.frame = CGRectMake(0.0f,
+                                       imageViewY,
+                                       bubbleTextSize.width+textInv*2+perNor,
+                                       bubbleTextSize.height);
     
-	if(fromSelf)
-		returnView.frame = CGRectMake(320-position-(bubbleText.frame.size.width+30.0f), 0.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
-	else
-		returnView.frame = CGRectMake(position, 0.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
+    CGSize imageViewSize = bubbleImageView.frame.size;
+    float returnViewY =  position ;
+    float winWidth = [UIScreen mainScreen].bounds.size.width;
+    if (fromSelf) returnViewY =  winWidth-position-(imageViewSize.width);
+    returnView.frame = CGRectMake(returnViewY,
+                                  0.0f,
+                                  imageViewSize.width,
+                                  imageViewSize.height+imageViewY*2.0f);
 	
 	[returnView addSubview:bubbleImageView];
-	[returnView addSubview:bubbleText];
+	[bubbleImageView addSubview:bubbleText];
     
+    
+    //returnView.backgroundColor = [UIColor redColor];
+    //bubbleImageView.backgroundColor = [UIColor blueColor];
+    
+    
+    //self.backgroundColor = [UIColor greenColor];
 }
 
 
@@ -184,10 +192,12 @@
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:image];
     
     
-    float perNor = 12.0f; //前方不平整的
-    
+    float perNor = _C_ImagePer; //前方不平整的
     //添加文本信息
-    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(perNor+10, 20.0f, size.width+10, size.height+10)];
+    float textInv = _C_TextXInv; //text相距底图的x距离
+    float textX =  textInv + perNor;
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(textX, 0.0f, size.width, size.height+_C_TextYInv*2)];
+    
     bubbleText.backgroundColor = [UIColor clearColor];
     bubbleText.font = font;
     bubbleText.numberOfLines = 0;
@@ -205,7 +215,7 @@
     
     int btnCount = [aMsg.ctrlInfo count];
     
-    float totalWidth = bubbleText.frame.size.width+perNor;
+    float totalWidth = bubbleText.frame.size.width+textInv*2+perNor;
     float needWidth = btnWidth*btnCount + btnInvert*(btnCount - 1) + perNor + 20;
     
     if (totalWidth < needWidth) {
@@ -220,12 +230,12 @@
     float totalHeight = btnStartY + btnHeight + 5;
     
     
-    bubbleImageView.frame = CGRectMake(0.0f, 14.0f, totalWidth , totalHeight);
+    bubbleImageView.frame = CGRectMake(0.0f, _C_ImageViewYInv, totalWidth , totalHeight);
     
-    returnView.frame = CGRectMake(position, 0.0f, totalWidth+10.0f, totalHeight+10.0f);
+    returnView.frame = CGRectMake(position, 0.0f, totalWidth, totalHeight+_C_ImageViewYInv*2);
     
     [returnView addSubview:bubbleImageView];
-    [returnView addSubview:bubbleText];
+    [bubbleImageView addSubview:bubbleText];
     
     
     for (int i = 0; i < btnCount; i++) {
@@ -338,12 +348,13 @@
         NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:20]};
         CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
         
+        
         if (amsg.type == XAIMegType_Ctrl) {
-            return size.height + 44 + 40;
+            return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2   + 40;
         }
         
         
-        return size.height+44;
+        return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2;
     }
     
     return 0;
@@ -359,13 +370,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(60, 0, 190, 20)];
         [view setBackgroundColor:[UIColor clearColor]];
         view.alpha = 0.2;
         
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 190, 20)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 190, 20)];
         _label.textAlignment = NSTextAlignmentCenter;
         _label.alpha = 0.5;
+        _label.font = [UIFont systemFontOfSize:12];
         
         [self.contentView addSubview:view];
         [self.contentView addSubview:_label];
@@ -390,7 +402,7 @@
 
 + (float) allHeight{
 
-    return 30;
+    return 20;
 }
 
 @end

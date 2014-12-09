@@ -299,7 +299,6 @@
 		9631E1611A00BE8D0040FC82 /* XAIDevBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9631E1601A00BE8D0040FC82 /* XAIDevBtn.m */; };
 		96334D9A192303B700676F10 /* PacketStatusTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D99192303B700676F10 /* PacketStatusTest.m */; };
 		96334D9C192308EC00676F10 /* PacketACKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96334D9B192308EC00676F10 /* PacketACKTest.m */; };
-		9636A53B1A25793F00F0BDFD /* SenderAppNodeBkg_HL@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9636A53A1A25793F00F0BDFD /* SenderAppNodeBkg_HL@3x.png */; };
 		9636A53D1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9636A53C1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png */; };
 		96376ECF1A147F3C007F1264 /* switch-no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E951A147F3C007F1264 /* switch-no@2x.png */; };
 		96376ED01A147F3C007F1264 /* switch_2_con@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96376E961A147F3C007F1264 /* switch_2_con@2x.png */; };
@@ -391,7 +390,6 @@
 		9668284C1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9668283F1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png */; };
 		9668284D1998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828401998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png */; };
 		9668284E1998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828411998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png */; };
-		966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */; };
 		966828511998C2C600F25AB9 /* SenderVoiceNodeDownloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */; };
 		966828521998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */; };
 		966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */; };
@@ -747,6 +745,8 @@
 		96F4AAE51A319B580058DF5C /* photoUsr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F4AADB1A319B580058DF5C /* photoUsr@3x.png */; };
 		96F4AAE61A319B580058DF5C /* photoXAI@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F4AADC1A319B580058DF5C /* photoXAI@3x.png */; };
 		96F4AAEB1A31A20E0058DF5C /* XAIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F4AAEA1A31A20E0058DF5C /* XAIApplication.m */; };
+		96F4AAEE1A35A6310058DF5C /* SenderAppNodeBkg_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F4AAEC1A35A6310058DF5C /* SenderAppNodeBkg_HL@2x.png */; };
+		96F4AAEF1A35A6310058DF5C /* SenderAppNodeBkg_HL@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F4AAED1A35A6310058DF5C /* SenderAppNodeBkg_HL@3x.png */; };
 		96F93A0519A4384D0057C0FC /* photoUsr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F93A0119A4384D0057C0FC /* photoUsr@2x.png */; };
 		96F93A0619A4384D0057C0FC /* photoXAI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F93A0219A4384D0057C0FC /* photoXAI@2x.png */; };
 		96F93A0719A4384D0057C0FC /* photoUsr.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F93A0319A4384D0057C0FC /* photoUsr.png */; };
@@ -1143,7 +1143,6 @@
 		9631E1601A00BE8D0040FC82 /* XAIDevBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDevBtn.m; sourceTree = "<group>"; };
 		96334D99192303B700676F10 /* PacketStatusTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketStatusTest.m; sourceTree = "<group>"; };
 		96334D9B192308EC00676F10 /* PacketACKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketACKTest.m; sourceTree = "<group>"; };
-		9636A53A1A25793F00F0BDFD /* SenderAppNodeBkg_HL@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderAppNodeBkg_HL@3x.png"; sourceTree = "<group>"; };
 		9636A53C1A25794600F0BDFD /* ReceiverTextNodeBkg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@3x.png"; sourceTree = "<group>"; };
 		96376E951A147F3C007F1264 /* switch-no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-no@2x.png"; sourceTree = "<group>"; };
 		96376E961A147F3C007F1264 /* switch_2_con@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch_2_con@2x.png"; sourceTree = "<group>"; };
@@ -1250,7 +1249,6 @@
 		9668283F1998C2C600F25AB9 /* ReceiverVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
 		966828401998C2C600F25AB9 /* ReceiverVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReceiverVoiceNodePlaying.png; sourceTree = "<group>"; };
 		966828411998C2C600F25AB9 /* ReceiverVoiceNodePlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverVoiceNodePlaying@2x.png"; sourceTree = "<group>"; };
-		966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderAppNodeBkg_HL@2x.png"; sourceTree = "<group>"; };
 		966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodeDownloading.png; sourceTree = "<group>"; };
 		966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
 		966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying.png; sourceTree = "<group>"; };
@@ -1719,6 +1717,8 @@
 		96F4AADC1A319B580058DF5C /* photoXAI@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoXAI@3x.png"; sourceTree = "<group>"; };
 		96F4AAE91A31A20E0058DF5C /* XAIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIApplication.h; sourceTree = "<group>"; };
 		96F4AAEA1A31A20E0058DF5C /* XAIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIApplication.m; sourceTree = "<group>"; };
+		96F4AAEC1A35A6310058DF5C /* SenderAppNodeBkg_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderAppNodeBkg_HL@2x.png"; sourceTree = "<group>"; };
+		96F4AAED1A35A6310058DF5C /* SenderAppNodeBkg_HL@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderAppNodeBkg_HL@3x.png"; sourceTree = "<group>"; };
 		96F93A0119A4384D0057C0FC /* photoUsr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoUsr@2x.png"; sourceTree = "<group>"; };
 		96F93A0219A4384D0057C0FC /* photoXAI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoXAI@2x.png"; sourceTree = "<group>"; };
 		96F93A0319A4384D0057C0FC /* photoUsr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoUsr.png; sourceTree = "<group>"; };
@@ -2584,9 +2584,9 @@
 		966828421998C2C600F25AB9 /* sender */ = {
 			isa = PBXGroup;
 			children = (
-				9636A53A1A25793F00F0BDFD /* SenderAppNodeBkg_HL@3x.png */,
+				96F4AAEC1A35A6310058DF5C /* SenderAppNodeBkg_HL@2x.png */,
+				96F4AAED1A35A6310058DF5C /* SenderAppNodeBkg_HL@3x.png */,
 				96F93A2019A469FC0057C0FC /* SenderAppNodeBkg_HL.png */,
-				966828441998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png */,
 				966828451998C2C600F25AB9 /* SenderVoiceNodeDownloading.png */,
 				966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */,
 				966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */,
@@ -3932,7 +3932,6 @@
 				96D5838B1A257A420056CF07 /* add_nor@2x.png in Resources */,
 				961F93B61A24563400EA2AFD /* cg_safe_nor@2x.png in Resources */,
 				96D583A41A257A420056CF07 /* back_sel@3x.png in Resources */,
-				9636A53B1A25793F00F0BDFD /* SenderAppNodeBkg_HL@3x.png in Resources */,
 				96F4AAC91A3184420058DF5C /* set_tbg_titile@3x.png in Resources */,
 				96B7B60B1A145DC600BCAC74 /* link_s_btn_off@2x.png in Resources */,
 				96F93A0519A4384D0057C0FC /* photoUsr@2x.png in Resources */,
@@ -3948,6 +3947,7 @@
 				961F93D71A24563400EA2AFD /* cg_safe_nor@3x.png in Resources */,
 				961F93F61A24563400EA2AFD /* cg_inf_nor.png in Resources */,
 				962272321A09F94000FCE9EE /* link_edit_save_nor.png in Resources */,
+				96F4AAEF1A35A6310058DF5C /* SenderAppNodeBkg_HL@3x.png in Resources */,
 				961F93F31A24563400EA2AFD /* cg_dw_sel.png in Resources */,
 				9612B09219A1E6F1004CA9F5 /* linkage_tip_close_n@2x.png in Resources */,
 				96B7B61F1A145DC600BCAC74 /* link_s.png in Resources */,
@@ -4058,7 +4058,6 @@
 				96F4AA871A3183BF0058DF5C /* jiaohu_head@3x.png in Resources */,
 				96CAE7151A075FE80030075C /* devHis_sc.png in Resources */,
 				96F4AAD01A3184420058DF5C /* set_tbg_titile.png in Resources */,
-				966828501998C2C600F25AB9 /* SenderAppNodeBkg_HL@2x.png in Resources */,
 				9622727A1A0B169900FCE9EE /* link_sw_bg_sel@2x.png in Resources */,
 				962272771A0B169900FCE9EE /* link_inf_bg_nor@2x.png in Resources */,
 				96F4AAE11A319B580058DF5C /* chat_input_text@3x.png in Resources */,
@@ -4336,6 +4335,7 @@
 				96B75ACA1974F77300253906 /* obj_IR_working@2x.png in Resources */,
 				96CAE7101A075FE80030075C /* devHis_sc@3x.png in Resources */,
 				9622729D1A0B210100FCE9EE /* Link_Choose.xib in Resources */,
+				96F4AAEE1A35A6310058DF5C /* SenderAppNodeBkg_HL@2x.png in Resources */,
 				96D583B61A257A420056CF07 /* back_nor.png in Resources */,
 				96E49DC919F8ECAC003920EE /* useradd_tbg@3x.png in Resources */,
 				9696856219D9085C009B1DFD /* launch-log@2x.png in Resources */,

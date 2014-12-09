@@ -153,7 +153,7 @@ static XAIMobileControl* __S_MSGSAVE = nil;
         if (data->data_type == XAI_DATA_TYPE_ASCII_TEXT) {
             
             newMsg.context = [[NSString alloc] initWithBytes:data->data length:data->data_len encoding:NSUTF8StringEncoding];
-            
+            newMsg.date = [NSDate dateWithTimeIntervalSince1970:IM->time];
         }
     }
     

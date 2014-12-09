@@ -60,6 +60,7 @@
 
 -(void) startFadeAnimation
 {
+    return;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationDelegate:self];
@@ -69,7 +70,7 @@
 }
 
 -(void)endFadeAnimation{
-    
+    return;
     if (_bFade) {
         
         if (_fade < 0) {
@@ -172,7 +173,8 @@
 - (void) showUnkonw{
     
     _bgImgView.image = [UIImage imageWithFile:@"switch_nor.png"];
-    _statusTextImgView.image = [UIImage imageWithFile:@"switch_off_text.png"];
+    _statusTextImgView.image = nil;
+    _statusTipImgView.image = nil;
     _statusTextImgView.hidden = true;
     _unkownImgView.hidden = false;
     
