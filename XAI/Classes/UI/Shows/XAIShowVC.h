@@ -48,6 +48,7 @@
 @property (nonatomic,strong) IBOutlet UIView* centerView;
 
 @property (nonatomic,strong) IBOutlet UIButton* bufangBtn;
+@property (nonatomic,strong) IBOutlet UIView* jiaohuView;
 
 
 -(IBAction)userBtnClick:(id)sender;

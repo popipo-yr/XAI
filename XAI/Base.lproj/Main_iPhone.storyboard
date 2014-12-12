@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -75,7 +75,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="KxZ-Fw-fg1">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" id="KxZ-Fw-fg1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -90,7 +90,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="yQD-3j-PXw" userLabel="xai">
-                                <rect key="frame" x="87" y="48" width="147" height="147"/>
+                                <rect key="frame" x="87" y="73" width="147" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lJA-Ss-RGZ">
@@ -113,7 +113,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" id="bsM-FV-FV6" userLabel="ip">
-                                <rect key="frame" x="60" y="210" width="200" height="37"/>
+                                <rect key="frame" x="60" y="230" width="200" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ip.png" id="deV-dM-1Wi">
@@ -131,28 +131,28 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="4hN-cg-CQg">
-                                <rect key="frame" x="45" y="264" width="230" height="155"/>
+                                <rect key="frame" x="49" y="321" width="222" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_bg.png" id="9U8-6W-gZM">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="155"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="222" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" minimumFontSize="17" id="hpN-4L-ywU">
-                                        <rect key="frame" x="40" y="10" width="160" height="35"/>
+                                        <rect key="frame" x="46" y="4" width="163" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" id="1HH-oP-bAX">
-                                        <rect key="frame" x="40" y="50" width="160" height="35"/>
+                                        <rect key="frame" x="46" y="51" width="163" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rin-An-rYW" userLabel="login">
-                                        <rect key="frame" x="15" y="113" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="94" width="222" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="login_btn_nor.png"/>
@@ -184,14 +184,14 @@
     </scenes>
     <resources>
         <image name="bg.png" width="356" height="633"/>
-        <image name="login_btn_nor.png" width="221" height="36"/>
-        <image name="login_btn_sel.png" width="221" height="36"/>
+        <image name="login_btn_nor.png" width="222" height="30"/>
+        <image name="login_btn_sel.png" width="222" height="30"/>
         <image name="login_ip.png" width="258" height="36"/>
-        <image name="login_other_bg.png" width="257" height="171"/>
+        <image name="login_other_bg.png" width="222" height="124"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>
-        <image name="xai_icon_nor.png" width="167" height="167"/>
-        <image name="xai_icon_sel.png" width="167" height="167"/>
+        <image name="xai_icon_nor.png" width="163" height="162"/>
+        <image name="xai_icon_sel.png" width="163" height="162"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

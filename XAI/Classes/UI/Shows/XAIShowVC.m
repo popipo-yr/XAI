@@ -330,7 +330,7 @@
     }
     
 
-    float totalH = self.bufangBtn.frame.origin.y - 64;
+    float totalH = self.jiaohuView.frame.origin.y - 64;
     float inverlTop = (totalH - self.centerView.frame.size.height) *0.5f;
     
     CGRect frame = self.centerView.frame;

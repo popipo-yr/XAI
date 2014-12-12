@@ -13,9 +13,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="show_bg.png" id="6R9-rX-pgN">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="show_bg.png" id="6R9-rX-pgN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch_tbg.png" id="RRR-Bt-2ZE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatTip.png" id="mBj-Zi-Isb">
                                 <rect key="frame" x="0.0" y="484" width="320" height="84"/>
@@ -54,7 +58,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="95G-kI-ptj">
-                                <rect key="frame" x="11" y="425" width="298" height="40"/>
+                                <rect key="frame" x="11" y="479" width="298" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="cg_bufang_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,15 +70,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="Bda-5W-IYg" userLabel="user-view">
-                                <rect key="frame" x="103" y="467" width="114" height="104"/>
+                                <rect key="frame" x="11" y="425" width="298" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
-                                        <rect key="frame" x="85" y="0.0" width="27" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rFx-bj-MCd">
-                                        <rect key="frame" x="5" y="0.0" width="104" height="104"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="298" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="cg_usr_nor.png">
@@ -86,8 +86,12 @@
                                             <action selector="userBtnClick:" destination="Vti-oI-JhL" eventType="touchUpInside" id="ulT-B2-Gn2"/>
                                         </connections>
                                     </button>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgNum1.png" id="k50-KG-IHs">
+                                        <rect key="frame" x="229" y="9" width="27" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Env-aE-P8r">
-                                        <rect key="frame" x="85" y="-1" width="27" height="22"/>
+                                        <rect key="frame" x="229" y="7" width="27" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,6 +109,7 @@
                         <outlet property="centerBgImgV" destination="7Dg-oF-mYl" id="VS5-T7-sMw"/>
                         <outlet property="centerView" destination="NdQ-3x-r9a" id="N3j-vf-NMM"/>
                         <outlet property="chatTipV" destination="mBj-Zi-Isb" id="bsu-YZ-RNy"/>
+                        <outlet property="jiaohuView" destination="Bda-5W-IYg" id="imz-1n-K5O"/>
                         <outlet property="label" destination="Env-aE-P8r" id="RAK-12-NFu"/>
                         <outlet property="labelIV" destination="k50-KG-IHs" id="gCb-yb-XU1"/>
                         <outlet property="scrollView" destination="2ny-Sg-Lm1" id="Hqr-h7-EUf"/>
@@ -487,10 +492,10 @@
         <image name="Head-xai.png" width="46" height="46"/>
         <image name="add_nor.png" width="21" height="21"/>
         <image name="add_sel.png" width="21" height="21"/>
-        <image name="cg_bufang_nor.png" width="298" height="40"/>
-        <image name="cg_bufang_sel.png" width="298" height="40"/>
-        <image name="cg_usr_nor.png" width="79" height="79"/>
-        <image name="cg_usr_sel.png" width="79" height="79"/>
+        <image name="cg_bufang_nor.png" width="297" height="40"/>
+        <image name="cg_bufang_sel.png" width="297" height="40"/>
+        <image name="cg_usr_nor.png" width="297" height="40"/>
+        <image name="cg_usr_sel.png" width="297" height="40"/>
         <image name="chatTip.png" width="356" height="84"/>
         <image name="dc_tip_img.png" width="63" height="63"/>
         <image name="dc_title.png" width="127" height="20"/>
