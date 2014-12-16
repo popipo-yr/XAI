@@ -40,7 +40,7 @@
                                 <rect key="frame" x="111" y="25" width="98" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="NdQ-3x-r9a">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="NdQ-3x-r9a">
                                 <rect key="frame" x="10" y="76" width="300" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>

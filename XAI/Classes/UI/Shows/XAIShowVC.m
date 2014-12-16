@@ -65,7 +65,93 @@
     [self addDevCategory];
     [self changeBufangStatus];
     
+    
+    float cvAddHeight = 100;
+    float cvOldHeight = self.centerView.frame.size.height;
+
+
+    
+    
+    //_centerView.backgroundColor = [UIColor redColor];
+
+    CALayer *layer = [_centerView layer];
+    CGPoint oldAnchorPoint = layer.anchorPoint;
+    [layer setAnchorPoint:CGPointMake(0.5, 0)];
+    [layer setPosition:CGPointMake(layer.position.x + layer.bounds.size.width * (layer.anchorPoint.x - oldAnchorPoint.x), layer.position.y + layer.bounds.size.height * (layer.anchorPoint.y - oldAnchorPoint.y))];
+    
+    self.centerView.transform =  CGAffineTransformMakeScale(1, (cvAddHeight + cvOldHeight) / cvOldHeight);
+    
+    CGAffineTransform t = CGAffineTransformMakeScale(1,1);
+
+
+    [UIView animateWithDuration:1.5f
+                     animations:^{
+                         self.centerView.transform = t;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+    
+    
+    CGRect jiaoHuFrame = _jiaohuView.frame;
+    float  jiaoHuMove = 200;
+    
+    CGRect jiaohuMoveFrame = jiaoHuFrame;
+    jiaohuMoveFrame.origin.y +=  jiaoHuMove;
+    _jiaohuView.frame = jiaohuMoveFrame;
+    
+    CGRect bufangFrame = _bufangBtn.frame;
+    float  bufangMove = 200;
+    
+    CGRect bufangMoveFrame = bufangFrame;
+    bufangMoveFrame.origin.y +=  bufangMove;
+    _bufangBtn.frame = bufangMoveFrame;
+    
+    
+    [UIView animateWithDuration:2
+                     animations:^{
+                         
+                         _jiaohuView.frame = jiaoHuFrame;
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         [UIView animateWithDuration:1 animations:^{
+                             _bufangBtn.frame = bufangFrame;
+                         }];
+                         
+                         [XAIShowVC rarEffect:_bufangBtn];
+                         
+                     }];
+    
+     [XAIShowVC rarEffect:_jiaohuView];
+    
 }
+
+#define DegreesToRadians(x) (M_PI * x / 180.0)
+
++(void)rarEffect:(UIView *)target
+{
+    
+    CALayer *layer = [target layer];
+    CATransform3D transform = layer.transform;
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.values = [NSArray arrayWithObjects:
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 100, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(70), 100, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 100, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(-70), 100, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(40), 1, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
+                        nil];
+    animation.duration = 3;
+    [layer addAnimation:animation forKey:animation.keyPath];
+}
+
+
+
 
 
 - (void)viewDidAppear:(BOOL)animated{
