@@ -114,11 +114,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="1ls-BX-HMF">
-                                <rect key="frame" x="36" y="155" width="246" height="186"/>
+                                <rect key="frame" x="37" y="155" width="246" height="186"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chPawd_title.png" id="x3j-bd-x0D">
-                                        <rect key="frame" x="54" y="2" width="125" height="20"/>
+                                        <rect key="frame" x="61" y="2" width="125" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chPawd_bbg.png" id="TW4-h0-guD">

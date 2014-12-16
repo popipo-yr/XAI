@@ -244,6 +244,8 @@
 }
 
 -(void) addMaoBoLi{
+    
+    return;
 
     self.centerView.hidden = true;
     
@@ -561,13 +563,13 @@
     }
     
     [_label setText:[NSString stringWithFormat:@"%d",notReadImCount]];
-    [_labelIV setHidden:notReadImCount <=0 ? true : false];
+    //[_labelIV setHidden:notReadImCount <=0 ? true : false];
     [_label setHidden:notReadImCount <=0 ? true : false];
    
     BOOL hasRedTip = [MQTT shareMQTT].isBufang && (openLightCount > 0 || openDWCount > 0 || openInfCount > 0);
     BOOL hasNorTip = notReadImCount > 0;
     
-    [_chatTipV setHidden:!hasRedTip && !hasNorTip];
+    //[_chatTipV setHidden:!hasRedTip && !hasNorTip];
     
     if (hasRedTip) {
         
@@ -599,6 +601,7 @@
 }
 
 - (void) alphaChange{
+    return;
 
     _tipAlpha += _tipAlphaAdd;
     

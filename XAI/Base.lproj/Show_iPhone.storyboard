@@ -58,7 +58,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="95G-kI-ptj">
-                                <rect key="frame" x="11" y="479" width="298" height="40"/>
+                                <rect key="frame" x="11" y="494" width="298" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="cg_bufang_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="Bda-5W-IYg" userLabel="user-view">
-                                <rect key="frame" x="11" y="425" width="298" height="40"/>
+                                <rect key="frame" x="11" y="436" width="298" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rFx-bj-MCd">
@@ -94,7 +94,7 @@
                                         <rect key="frame" x="229" y="7" width="27" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.98594826459884644" green="0.0" blue="0.026950567960739136" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -510,7 +510,7 @@
         <image name="jiaohu_tbg.png" width="356" height="170"/>
         <image name="msgNum1.png" width="29" height="24"/>
         <image name="show_bg.png" width="356" height="633"/>
-        <image name="show_bg_cent.png" width="299" height="347"/>
+        <image name="show_bg_cent.png" width="298" height="348"/>
         <image name="show_title.png" width="98" height="23"/>
         <image name="switch-no.png" width="133" height="113"/>
         <image name="switch_head.png" width="63" height="63"/>
