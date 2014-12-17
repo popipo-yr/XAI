@@ -34,6 +34,8 @@
         _curDevStatus = XAIObjStatusUnkown;
         _curOprStatus = XAIObjectOprStatus_none;
         
+        _power = -1;
+        
         //_flag = XAIObjectFlagNormal;
     }
     

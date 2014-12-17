@@ -80,7 +80,7 @@ typedef enum XAIObjectType{
 
 @property (nonatomic, assign) int  curDevStatus;
 
-
+@property (nonatomic, assign) float power;
 @property (nonatomic, strong) NSString* vender; /*生产商*/
 @property (nonatomic, strong) NSString* model; /*型号*/
 

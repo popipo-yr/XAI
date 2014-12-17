@@ -14,6 +14,9 @@
 
     float _angle;
     BOOL  _bRoll;
+    
+    
+    BOOL _bPower;
 
 }
 
@@ -21,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIView *waitView;
 @property (strong, nonatomic) IBOutlet UIImageView *waitRollImageView;
 
+@property (strong, nonatomic) IBOutlet UIView* powerView;
 
 @property (nonatomic,weak) XAIObject* weakObj;
 

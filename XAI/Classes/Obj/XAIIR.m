@@ -164,6 +164,8 @@
         
         [_delegate ir:self curPower:power getIsSuccess:err == XAI_ERROR_NONE];
     }
+    
+    self.power = power;
 }
 
 

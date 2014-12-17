@@ -84,7 +84,7 @@
     CGAffineTransform t = CGAffineTransformMakeScale(1,1);
 
 
-    [UIView animateWithDuration:1.5f
+    [UIView animateWithDuration:0.1f
                      animations:^{
                          self.centerView.transform = t;
                      }
@@ -108,23 +108,46 @@
     _bufangBtn.frame = bufangMoveFrame;
     
     
-    [UIView animateWithDuration:2
+    [UIView animateWithDuration:0.2
                      animations:^{
                          
                          _jiaohuView.frame = jiaoHuFrame;
+                        
                          
                      }
                      completion:^(BOOL finished) {
                          
-                         [UIView animateWithDuration:1 animations:^{
-                             _bufangBtn.frame = bufangFrame;
-                         }];
                          
-                         [XAIShowVC rarEffect:_bufangBtn];
+                         [UIView beginAnimations:@"ccc" context:nil];
+                         [UIView setAnimationDelay:0.3f];
+                         [UIView setAnimationDelegate:self];
+                         [UIView setAnimationDidStopSelector:@selector(delayAnimal)];
+                         //[UIView animateWithDuration:0.2 animations:^{
+                             _bufangBtn.frame = bufangFrame;
+                         //}];
+                         
+                         
+                         
+                         
+                         [UIView commitAnimations];
+                         
+                         
+                         
+//                         [UIView animateWithDuration:0.2 animations:^{
+//                             _bufangBtn.frame = bufangFrame;
+//                         }];
+                         
+                         
                          
                      }];
     
      [XAIShowVC rarEffect:_jiaohuView];
+    
+}
+
+-(void)delayAnimal{
+
+    [XAIShowVC rarEffect:_bufangBtn];
     
 }
 
@@ -138,15 +161,16 @@
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     animation.values = [NSArray arrayWithObjects:
-                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 100, 0, 0)],
-                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(70), 100, 0, 0)],
-                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 100, 0, 0)],
-                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(-70), 100, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(-70), 1, 0, 0)],
                         [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
-                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(40), 1, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(70), 1, 0, 0)],
                         [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(-50), 1, 0, 0)],
+                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
+//                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(40), 1, 0, 0)],
+//                        [NSValue valueWithCATransform3D:CATransform3DRotate(transform, DegreesToRadians(0), 1, 0, 0)],
                         nil];
-    animation.duration = 3;
+    animation.duration = 0.7f;
     [layer addAnimation:animation forKey:animation.keyPath];
 }
 

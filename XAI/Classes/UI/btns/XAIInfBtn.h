@@ -23,6 +23,8 @@
     BOOL _showWarnIsDel;
     
     UIImageView* _fuckImgView;
+    
+    BOOL _bPower;
 
 }
 
@@ -33,6 +35,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView* nor1ImgView;
 @property (strong, nonatomic) IBOutlet UIImageView* nor2ImgView;
 @property (strong, nonatomic) IBOutlet UIImageView* nor3ImgView;
+
+@property (strong, nonatomic) IBOutlet UIView* powerView;
 
 
 

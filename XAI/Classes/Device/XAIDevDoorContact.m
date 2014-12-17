@@ -190,6 +190,13 @@
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     
     
+    topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_BatteryPowerId];
+    
+    [[MQTT shareMQTT].client subscribe:topicStr];
+    
+    [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
+    
+    
 }
 - (void) endFocusStatus{
     
@@ -197,6 +204,9 @@
     
     [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
     
+    topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_BatteryPowerId];
+    
+    [[MQTT shareMQTT].packetManager removePacketManager:self withKey:topicStr];
 }
 
 

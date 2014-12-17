@@ -27,10 +27,10 @@ typedef enum XAIDeviceStatus{
 
 typedef NS_ENUM(NSUInteger, XAIDevPowerStatus){
     
-    XAIDevPowerStatus_Normal,
-    XAIDevPowerStatus_Low,
-    XAIDevPowerStatus_Less,
-    XAIDevPowerStatus_Unkown
+    XAIDevPowerStatus_Normal = 1,
+    XAIDevPowerStatus_Low = 0,
+    XAIDevPowerStatus_Less = 2,
+    XAIDevPowerStatus_Unkown = 99
 };
 
 @protocol XAIDeviceStatusDelegate;

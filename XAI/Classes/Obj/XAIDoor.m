@@ -142,6 +142,8 @@
         
         [_delegate  door:self curPower:power getIsSuccess:err == XAI_ERROR_NONE];
     }
+    
+    self.power = power;
 }
 
 

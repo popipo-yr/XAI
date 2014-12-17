@@ -181,7 +181,25 @@
 }
 
 -(void)window:(XAIWindow *)window curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
--(void)door:(XAIDoor *)door curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
+-(void)door:(XAIDoor *)door curPower:(float)power getIsSuccess:(BOOL)isSuccess{
+    
+    [self powerChange:power];
+
+}
+
+-(void) powerChange:(float)power{
+
+    if (power == XAIDevPowerStatus_Low ||
+        power == XAIDevPowerStatus_Less) {
+        
+        _powerView.hidden = false;
+        _bPower = true;
+    }else{
+        
+        _bPower = false;
+        _powerView.hidden = true;
+    }
+}
 
 - (void) setInfo:(XAIObject*)aObj{
     
@@ -244,7 +262,7 @@
     
     [self _changeWeakObj:aObj];
     
-    
+    [self powerChange:aObj.power];
     
 }
 
@@ -289,6 +307,19 @@
     }
     
 }
+
+-(void)startEdit{
+    
+    [super startEdit];
+    
+    [self powerChange:-1];
+}
+
+-(void)endEdit{
+    [super endEdit];
+    [self powerChange:_weakObj.power];
+}
+
 
 
 

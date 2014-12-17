@@ -320,7 +320,30 @@ bool _is = false;
     }
 }
 
--(void)ir:(XAIIR *)ir curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
+-(void)ir:(XAIIR *)ir curPower:(float)power getIsSuccess:(BOOL)isSuccess{
+
+    if (!isSuccess) return;
+    [self powerChange:power];
+}
+
+
+-(void) powerChange:(float)power{
+    
+    if (power == XAIDevPowerStatus_Low ||
+        power == XAIDevPowerStatus_Less) {
+        
+        if (_bPower == false) {
+         
+            _powerView.hidden = false;
+            _bPower = true;
+        }
+
+    }else{
+        
+        _bPower = false;
+        _powerView.hidden = true;
+    }
+}
 
 - (void) setInfo:(XAIObject*)aObj{
     
@@ -381,6 +404,7 @@ bool _is = false;
     
     //[self showWorning:XAIIRStatus_warning == aObj.curDevStatus];
     
+    [self powerChange:aObj.power];
     
 }
 
@@ -416,6 +440,23 @@ bool _is = false;
     
 }
 
+
+-(void)startEdit{
+
+    [super startEdit];
+    
+    if (_bPower) {
+        _powerView.hidden = true;
+    }
+
+}
+
+-(void)endEdit{
+    [super endEdit];
+    if (_bPower) {
+        _powerView.hidden = false;
+    }
+}
 
 
 #pragma mark create
