@@ -223,29 +223,29 @@
                                                     <rect key="frame" x="13" y="102" width="69" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.53041934970000004" green="0.5304034352" blue="0.53041249509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_s.png" id="Ebu-Vk-das">
-                                                    <rect key="frame" x="110" y="10" width="100" height="100"/>
+                                                    <rect key="frame" x="120" y="20" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_s_roll.png" id="Lqp-TR-hZL">
-                                                    <rect key="frame" x="110" y="10" width="100" height="100"/>
+                                                    <rect key="frame" x="120" y="20" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_opr_roll.png" id="a2I-5Z-Lp2">
-                                                    <rect key="frame" x="110" y="10" width="100" height="100"/>
+                                                    <rect key="frame" x="120" y="20" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6yq-bk-ebh">
-                                                    <rect key="frame" x="97" y="109" width="127" height="24"/>
+                                                    <rect key="frame" x="97" y="106" width="127" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.53041934970000004" green="0.5304034352" blue="0.53041249509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I8V-4s-L2L">
@@ -321,8 +321,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="edit_nor.png" width="25" height="25"/>
-        <image name="edit_sel.png" width="25" height="25"/>
+        <image name="edit_nor.png" width="17" height="17"/>
+        <image name="edit_sel.png" width="17" height="17"/>
         <image name="link-no.png" width="200" height="155"/>
         <image name="link_del_nor.png" width="32" height="31"/>
         <image name="link_edit_head.png" width="91" height="91"/>

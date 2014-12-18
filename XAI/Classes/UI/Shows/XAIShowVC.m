@@ -695,13 +695,13 @@
     if ([MQTT shareMQTT].isBufang) {
 
         
-        if (hasRedTip) {
-            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateHighlighted];
-            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateSelected];
-        }else{
+//        if (hasRedTip) {
+//            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateHighlighted];
+//            [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufangCancel_sel.png"] forState:UIControlStateSelected];
+//        }else{
             [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufang_sel.png"] forState:UIControlStateHighlighted];
             [_bufangBtn setImage:[UIImage imageWithFile:@"cg_bufang_sel.png"] forState:UIControlStateSelected];
-        }
+//        }
         
     }
     
