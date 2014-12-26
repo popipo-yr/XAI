@@ -88,6 +88,11 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" id="kcI-gV-Keg">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="GgY-G1-zEP">
                                                 <rect key="frame" x="16" y="10" width="205" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -155,36 +160,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="Xdt-SM-B4J">
-                                <rect key="frame" x="0.0" y="145" width="320" height="236"/>
+                                <rect key="frame" x="0.0" y="135" width="320" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_tbg_t.png" id="Cem-la-7QL">
-                                        <rect key="frame" x="88" y="5" width="144" height="23"/>
+                                        <rect key="frame" x="115" y="14" width="90" height="19"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_cbg.png" id="pfo-qd-GuJ">
-                                        <rect key="frame" x="0.0" y="61" width="320" height="174"/>
+                                        <rect key="frame" x="37" y="61" width="246" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="o9j-Be-wGf">
-                                        <rect key="frame" x="128" y="52" width="164" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" id="o9j-Be-wGf">
+                                        <rect key="frame" x="138" y="57" width="138" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Rgc-RX-GUP">
-                                        <rect key="frame" x="128" y="101" width="164" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户密码" minimumFontSize="17" id="Rgc-RX-GUP">
+                                        <rect key="frame" x="138" y="107" width="138" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fSE-Lm-dah">
-                                        <rect key="frame" x="128" y="151" width="164" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入重复密码" minimumFontSize="17" id="fSE-Lm-dah">
+                                        <rect key="frame" x="138" y="155" width="138" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uQm-3T-PTr">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uQm-3T-PTr">
                                         <rect key="frame" x="128" y="199" width="90" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="sex_man.png">
@@ -195,7 +200,7 @@
                                             <action selector="sexClick:" destination="FfJ-G2-Idm" eventType="touchUpInside" id="ZQk-V6-V4x"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WNG-Iv-OV8">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WNG-Iv-OV8">
                                         <rect key="frame" x="247" y="198" width="45" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="headImg.png">
@@ -209,19 +214,19 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="twD-v3-I9r">
-                                <rect key="frame" x="0.0" y="-64" width="320" height="201"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="useradd_tbg.png" id="o7b-3I-NNa">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiaohu_tbg.png" id="o7b-3I-NNa">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-admin.png" id="kZG-Mc-uQL">
-                                        <rect key="frame" x="125" y="98" width="70" height="70"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiaohu_head.png" id="kZG-Mc-uQL">
+                                        <rect key="frame" x="129" y="31" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5bn-84-niL">
-                                        <rect key="frame" x="0.0" y="168" width="320" height="33"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="admin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5bn-84-niL">
+                                        <rect key="frame" x="0.0" y="97" width="320" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -231,7 +236,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qWX-Qh-6WD">
-                                <rect key="frame" x="57" y="433" width="206" height="38"/>
+                                <rect key="frame" x="57" y="400" width="206" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="useradd_ok_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -388,7 +393,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Head-admin.png" width="104" height="105"/>
         <image name="chat_input_bg.png" width="356" height="48"/>
         <image name="chat_send_nor.png" width="97" height="27"/>
         <image name="chat_send_sel.png" width="97" height="27"/>
@@ -400,15 +404,16 @@
         <image name="edit_close_nor.png" width="17" height="17"/>
         <image name="edit_close_sel.png" width="17" height="17"/>
         <image name="headImg.png" width="28" height="28"/>
+        <image name="jiaohu_head.png" width="63" height="63"/>
+        <image name="jiaohu_tbg.png" width="356" height="170"/>
         <image name="qrcode_scan_cancel.png" width="195" height="42"/>
         <image name="qrcode_scan_rec.png" width="195" height="195"/>
         <image name="sex_man.png" width="78" height="28"/>
         <image name="sex_woman.png" width="78" height="28"/>
-        <image name="useradd_cbg.png" width="356" height="174"/>
-        <image name="useradd_ok_nor.png" width="206" height="38"/>
-        <image name="useradd_ok_sel.png" width="206" height="38"/>
-        <image name="useradd_tbg.png" width="356" height="206"/>
-        <image name="useradd_tbg_t.png" width="144" height="23"/>
+        <image name="useradd_cbg.png" width="246" height="115"/>
+        <image name="useradd_ok_nor.png" width="222" height="30"/>
+        <image name="useradd_ok_sel.png" width="222" height="30"/>
+        <image name="useradd_tbg_t.png" width="103" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

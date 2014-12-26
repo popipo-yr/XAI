@@ -176,7 +176,7 @@
     
     if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
         
-        apsnstr = @"210e2b26";
+        apsnstr = @"010e2b26";
         //apsnstr = @"210e9b6e";
         //apsnstr = @"210e2757";
         
@@ -770,6 +770,7 @@
     if (rc == _err_none) {
         
         _scanIP = ip;
+        //_scanIP = @"171.213.60.250";
         _qrcodeView.hidden = true;
         [_qrcodeLabel setText:ip];
         [_qrcodeLabel setEnabled:false];

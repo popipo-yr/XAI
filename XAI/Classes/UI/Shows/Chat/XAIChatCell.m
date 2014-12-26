@@ -55,6 +55,10 @@
     }else{
     
         _photo.frame = CGRectMake(10, 3, 35, 35);
+        
+        if (aMsg.fromLuid == 0x03) {
+            _photo.frame = CGRectMake(5, 3, 35, 35);
+        }
     }
     
     if (aMsg.type == XAIMegType_Ctrl) {
@@ -83,7 +87,7 @@
     
     
     //计算大小
-    UIFont *font = [UIFont systemFontOfSize:20];
+    UIFont *font = [UIFont systemFontOfSize:18];
 //	CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
     
     NSDictionary *attribute = @{NSFontAttributeName: font};
@@ -345,16 +349,16 @@
 
     if ([amsg isKindOfClass:[XAIMeg class]]) {
         
-        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:20]};
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:18]};
         CGSize size = [amsg.context boundingRectWithSize:CGSizeMake(180, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
         
         
         if (amsg.type == XAIMegType_Ctrl) {
-            return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2   + 40;
+            return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2   + 40 + 5;
         }
         
         
-        return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2;
+        return size.height + _C_TextYInv*2 + _C_ImageViewYInv*2 + 5;
     }
     
     return 0;

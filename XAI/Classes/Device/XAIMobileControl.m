@@ -66,7 +66,11 @@ static XAIMobileControl* __S_MSGSAVE = nil;
     
     _xai_packet_param_data* context_data = generatePacketParamData();
     
-    NSData* data = [context dataUsingEncoding:NSUTF8StringEncoding];
+    //NSData* data = [context dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableData* data = [[NSMutableData alloc] initWithData:
+                           [context dataUsingEncoding:NSUTF8StringEncoding]];
+    char s = '\0';
+    [data appendBytes:&s length:1];
     xai_param_data_set(context_data, XAI_DATA_TYPE_ASCII_TEXT,
                        [data length], (void*)[context UTF8String],nil);
     

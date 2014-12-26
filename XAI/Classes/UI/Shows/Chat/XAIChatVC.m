@@ -124,6 +124,7 @@
     _oldTableFrame = self.tableView.frame;
 }
 
+
 -(void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
@@ -399,9 +400,16 @@
 
 #pragma UITableView
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+- (UIView *)tableView:(UITableView *)tableView
+viewForHeaderInSection:(NSInteger)section{
+
+    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
