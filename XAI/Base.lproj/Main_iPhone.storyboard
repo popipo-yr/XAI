@@ -85,6 +85,67 @@
                                     <action selector="closeKeyboard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6wU-Wy-3Ih"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="XUJ-Gp-PbK">
+                                <rect key="frame" x="0.0" y="230" width="320" height="338"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="4hN-cg-CQg">
+                                        <rect key="frame" x="49" y="80" width="222" height="177"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view hidden="YES" contentMode="scaleToFill" id="bsM-FV-FV6" userLabel="ip">
+                                                <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ip.png" id="deV-dM-1Wi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 二维码" textAlignment="center" minimumFontSize="17" id="rzg-GT-8IT">
+                                                        <rect key="frame" x="10" y="0.0" width="200" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_bg.png" id="9U8-6W-gZM">
+                                                <rect key="frame" x="0.0" y="48" width="222" height="124"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" minimumFontSize="17" id="hpN-4L-ywU">
+                                                <rect key="frame" x="56" y="51" width="140" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" id="1HH-oP-bAX">
+                                                <rect key="frame" x="56" y="99" width="140" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rin-An-rYW" userLabel="login">
+                                                <rect key="frame" x="0.0" y="139" width="222" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" image="login_btn_nor.png"/>
+                                                <state key="disabled" image="login_btn_nor.png"/>
+                                                <state key="selected" image="login_btn_sel.png"/>
+                                                <state key="highlighted" image="login_btn_sel.png"/>
+                                                <connections>
+                                                    <action selector="loginBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tIV-Zo-3Pp"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="yQD-3j-PXw" userLabel="xai">
                                 <rect key="frame" x="87" y="73" width="147" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -103,60 +164,6 @@
                                         </state>
                                         <connections>
                                             <action selector="qrcodeBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3GJ-sz-cyQ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="4hN-cg-CQg">
-                                <rect key="frame" x="49" y="296" width="222" height="177"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" id="bsM-FV-FV6" userLabel="ip">
-                                        <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ip.png" id="deV-dM-1Wi">
-                                                <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 二维码" textAlignment="center" minimumFontSize="17" id="rzg-GT-8IT">
-                                                <rect key="frame" x="10" y="0.0" width="200" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_other_bg.png" id="9U8-6W-gZM">
-                                        <rect key="frame" x="0.0" y="48" width="222" height="124"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" minimumFontSize="17" id="hpN-4L-ywU">
-                                        <rect key="frame" x="56" y="51" width="140" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" id="1HH-oP-bAX">
-                                        <rect key="frame" x="56" y="99" width="140" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rin-An-rYW" userLabel="login">
-                                        <rect key="frame" x="0.0" y="139" width="222" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="login_btn_nor.png"/>
-                                        <state key="disabled" image="login_btn_nor.png"/>
-                                        <state key="selected" image="login_btn_sel.png"/>
-                                        <state key="highlighted" image="login_btn_sel.png"/>
-                                        <connections>
-                                            <action selector="loginBtnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tIV-Zo-3Pp"/>
                                         </connections>
                                     </button>
                                 </subviews>

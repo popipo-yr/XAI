@@ -104,7 +104,7 @@ center.y -= len; \
     \
     float textY = Point.y; \
     float bottomHeight = self.view.frame.size.height-textY; \
-    float keyboardHeight = 270; \
+    float keyboardHeight = 275; \
     if((bottomHeight) >=keyboardHeight)  /*判断当前的高度是否已经有216，
                                             如果超过了就不需要再移动主界面的View高度*/ \
     {  \

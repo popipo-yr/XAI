@@ -22,7 +22,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_title.png" id="ctV-G3-04r">
-                                        <rect key="frame" x="109" y="28" width="102" height="25"/>
+                                        <rect key="frame" x="121" y="32" width="79" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pWZ-6V-i4O">
@@ -37,7 +37,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_head.png" id="ctS-XZ-IIB">
-                                        <rect key="frame" x="121" y="79" width="78" height="78"/>
+                                        <rect key="frame" x="129" y="84" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -170,7 +170,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_title_top.png" id="uM0-uL-A1g">
-                                        <rect key="frame" x="109" y="30" width="102" height="25"/>
+                                        <rect key="frame" x="121" y="32" width="79" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n5j-Be-Ggm">
@@ -185,7 +185,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_head_top.png" id="PEa-2I-cjl">
-                                        <rect key="frame" x="121" y="78" width="78" height="78"/>
+                                        <rect key="frame" x="129" y="84" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>

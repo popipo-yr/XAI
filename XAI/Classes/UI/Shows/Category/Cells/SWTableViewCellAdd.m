@@ -24,7 +24,7 @@
                                            normalIcon:[UIImage imageWithFile:@"del_nor.png"]
                                          selectedIcon:[UIImage imageWithFile:@"del_sel.png"]];
     
-    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:70];
+    [self setRightUtilityButtons:rightUtilityButtons WithButtonWidth:46];
 }
 
 - (void) removeDelBtn{

@@ -29,7 +29,7 @@
     
     [_centerBtn setImage:[UIImage imageWithFile:@"link_edit_name_bg.png"]
                 forState:UIControlStateNormal];
-    
+    _numberLab.hidden = true;
 }
 
 -(void)labelEditFinish{

@@ -13,6 +13,9 @@
 #import "XAIDoorWinListVC.h"
 #import "XAIInfListVC.h"
 #import "XAIUserServerListVC.h"
+#import "XAISafeListVC.h"
+#import "XAIDWCtrlListVC.h"
+#import "XAISwitchOneListVC.h"
 
 
 
@@ -124,7 +127,18 @@
             nextVC = [XAIUserServerListVC create];
             break;
         }
-            
+        case XAICategoryType_dwCtr:{
+            nextVC = [XAIDWCtrlListVC create];
+            break;
+        }
+        case XAICategoryType_swOne:{
+            nextVC = [XAISwitchOneListVC create];
+            break;
+        }
+        case XAICategoryType_safe:{
+            nextVC = [XAISafeListVC create];
+            break;
+        }
         default:
             break;
     }
