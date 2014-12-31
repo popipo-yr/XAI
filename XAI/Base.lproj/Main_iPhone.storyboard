@@ -11,55 +11,47 @@
                 <viewController storyboardIdentifier="XAIScanVCID" id="hsi-Ff-krP" customClass="XAIScanVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lL8-gN-QHX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="A2y-Ub-aL3">
+                            <view userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" id="A2y-Ub-aL3" customClass="MaskView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="aP8-w0-lBf">
-                                        <rect key="frame" x="0.0" y="59" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="TYF-hb-zBa">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M3T-fo-MEU">
-                                                <rect key="frame" x="0.0" y="20" width="320" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zsj-mM-FV3">
-                                        <rect key="frame" x="104" y="379" width="112" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="取消" backgroundImage="qrcode_scan_cancel.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancelBtnClick:" destination="hsi-Ff-krP" eventType="touchUpInside" id="zEq-KV-Bq5"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_scan_rec.png" id="5Md-Xj-HSO">
-                                        <rect key="frame" x="40" y="132" width="240" height="199"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_scan_rec.png" id="5Md-Xj-HSO">
+                                <rect key="frame" x="38" y="82" width="243" height="288"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_scan_line.png" id="EZL-3d-E0T">
+                                <rect key="frame" x="43" y="80" width="234" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sxl-5Y-0iP">
+                                <rect key="frame" x="88" y="39" width="142" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.58823529411764708" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zsj-mM-FV3">
+                                <rect key="frame" x="42" y="485" width="236" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" backgroundImage="qrcode_scan_cancel.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBtnClick:" destination="hsi-Ff-krP" eventType="touchUpInside" id="zEq-KV-Bq5"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="backView" destination="A2y-Ub-aL3" id="no9-m9-8ae"/>
+                        <outlet property="backView" destination="A2y-Ub-aL3" id="1bb-jj-ZgN"/>
+                        <outlet property="cancelBtn" destination="zsj-mM-FV3" id="Mke-Xk-8vU"/>
+                        <outlet property="scanLine" destination="EZL-3d-E0T" id="ece-R8-7sg"/>
                         <outlet property="scanView" destination="5Md-Xj-HSO" id="FE6-h7-c9m"/>
                     </connections>
                 </viewController>
@@ -190,8 +182,9 @@
         <image name="login_btn_sel.png" width="222" height="30"/>
         <image name="login_ip.png" width="222" height="30"/>
         <image name="login_other_bg.png" width="222" height="124"/>
-        <image name="qrcode_scan_cancel.png" width="195" height="42"/>
-        <image name="qrcode_scan_rec.png" width="195" height="195"/>
+        <image name="qrcode_scan_cancel.png" width="236" height="31"/>
+        <image name="qrcode_scan_line.png" width="234" height="17"/>
+        <image name="qrcode_scan_rec.png" width="243" height="288"/>
         <image name="xai_icon_nor.png" width="163" height="162"/>
         <image name="xai_icon_sel.png" width="163" height="162"/>
     </resources>

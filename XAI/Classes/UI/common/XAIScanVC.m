@@ -17,7 +17,7 @@
 + (XAIScanVC*)create{
     
     
-    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Show_iPhone_Other" bundle:nil];
+    UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     XAIScanVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
 
     return vc;
@@ -50,9 +50,15 @@
                               _scanView.frame.origin.y+starty,
                               _scanView.frame.size.width-startx*2,
                               _scanView.frame.size.height-starty*2);
+
+    CGRect  newframe = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,
+                       [UIScreen mainScreen].bounds.size.height);
     
     _readerView.frame = CGRectMake(startx,starty, frame.size.width, frame.size.height);
     //[_readerView setBackgroundColor:[UIColor clearColor]];
+    
+    _readerView.frame = newframe;
+    
     _readerView.readerDelegate = self;
     
     //关闭闪光灯
@@ -69,9 +75,9 @@
     }
     
     //扫描区域
-    //CGRect scanMaskRect = frame;
+    CGRect scanMaskRect = frame;
     //扫描区域计算
-    // _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
+    _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
     
     [_readerView.scanner setSymbology: ZBAR_I25
                                config: ZBAR_CFG_ENABLE
@@ -81,10 +87,29 @@
 
     //dispatch_async(dispatch_get_main_queue(), ^{[_readerView start];});
     
+    
+    _readerView.tracksSymbols = false;
+    [self.view insertSubview:_readerView atIndex:0];
+    //[_scanView addSubview:_readerView];
+    
+    
+   
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [_readerView performSelectorInBackground:@selector(start) withObject:nil];
     
     
-    [_scanView addSubview:_readerView];
+     [self lineMove];
+    
+    CGRect frame = _scanView.frame;
+    frame.origin.x += 5;
+    frame.origin.y += 5;
+    frame.size.width -= 10;
+    frame.size.height -= 10;
+    _backView.holeRect = frame;
+    [_backView setNeedsDisplay];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -98,10 +123,10 @@
         view.backgroundColor=[UIColor whiteColor];
         [self.view addSubview:view];
         
-        CGPoint  oldCenter =  _backView.center;
-        oldCenter.y += 20;
-        
-        [_backView setCenter:oldCenter];
+//        CGPoint  oldCenter =  _backView.center;
+//        oldCenter.y += 20;
+//        
+//        [_backView setCenter:oldCenter];
         
         _ios7_view = view;
         
@@ -120,6 +145,7 @@
         
     }
     
+    _scanEnd =  true;
 
     [super viewWillDisappear:animated];
     
@@ -131,14 +157,73 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)prefersStatusBarHidden{
+    
+    return false;
+}
+
+
+
+-(void)lineMove{
+
+    
+    CGRect frame = self.scanLine.frame;
+    frame.origin.y = _scanView.frame.origin.y;
+    self.scanLine.frame = frame;
+
+
+    [UIView animateWithDuration:1.5f
+                     animations:^{
+                         
+                         CGRect frame = self.scanLine.frame;
+                         frame.origin.y = _scanView.frame.origin.y+_scanView.frame.size.height - self.scanLine.frame.size.height;
+                         self.scanLine.frame = frame;
+                     }
+                     completion:^(BOOL s){
+                         
+                         if (!_scanEnd) [self lineUp];
+                     }];
+    
+
+}
+
+
+-(void)lineUp{
+
+    [UIView animateWithDuration:1.5f
+                     animations:^{
+                         
+                         CGRect frame = self.scanLine.frame;
+                         frame.origin.y = _scanView.frame.origin.y;
+                         self.scanLine.frame = frame;
+                     }
+                     completion:^(BOOL s){
+                         
+                         if (!_scanEnd) [self lineMove];
+                     }];
+
+}
+
+
+-(void)dealloc{
+
+}
 
 -(void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
 {
+    _cancelBtn.enabled = false;
     
-    if (nil != _delegate && [_delegate respondsToSelector:@selector(scanVC:didReadSymbols:)]) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*1),dispatch_get_main_queue(), ^{
         
-        [_delegate scanVC:self didReadSymbols:symbols];
-    }
+        if (nil != _delegate && [_delegate respondsToSelector:@selector(scanVC:didReadSymbols:)]) {
+            
+            [_delegate scanVC:self didReadSymbols:symbols];
+        }
+        
+        _cancelBtn.enabled = true;
+        
+    });
+    
     
     //[self cancelBtnClick:nil];
     
@@ -158,6 +243,7 @@
 
 
 - (IBAction)cancelBtnClick:(id)sender{
+    
 
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self removeFromParentViewController];
@@ -168,5 +254,24 @@
     }
 
 }
+
+@end
+
+@implementation MaskView
+
+- (void)drawRect:(CGRect)rect {
+    // Start by filling the area with the blue color
+    [[UIColor colorWithRed:35/255.0f green:39/255.0f blue:60/255.0f alpha:0.4] setFill];
+    UIRectFill( rect );
+    
+    // Assume that there's an ivar somewhere called holeRect of type CGRect
+    // We could just fill holeRect, but it's more efficient to only fill the
+    // area we're being asked to draw.
+    CGRect holeRectIntersection = CGRectIntersection(_holeRect, rect );
+    
+    [[UIColor clearColor] setFill];
+    UIRectFill( holeRectIntersection );
+}
+
 
 @end
