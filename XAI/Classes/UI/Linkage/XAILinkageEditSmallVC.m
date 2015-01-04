@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 alibaba. All rights reserved.
 //
 
-#import "XAILinkageEditVC.h"
+#import "XAILinkageEditSmallVC.h"
 #import "XAILinkage.h"
 #import "XAILinkageEditCell.h"
 #import "XAILinkageChooseVCTool.h"
@@ -16,15 +16,15 @@
 #import "XAIData.h"
 #import "XAIObjectGenerate.h"
 
-#define _ST_XAILinkageEditVCID @"XAILinkageEditVCID"
-@implementation XAILinkageEditVC
+#define _ST_XAILinkageEditSmallVCID @"XAILinkageEditSmallVCID"
+@implementation XAILinkageEditSmallVC
 
-+ (XAILinkageEditVC*)create{
++ (XAILinkageEditSmallVC*)create{
     
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
+    XAILinkageEditSmallVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditSmallVCID];
     
-    if (![vc isKindOfClass:[XAILinkageEditVC class]]) return nil;
+    if (![vc isKindOfClass:[XAILinkageEditSmallVC class]]) return nil;
     
      [vc changeIphoneStatus];
     
@@ -32,14 +32,14 @@
     
 }
 
-+ (XAILinkageEditVC*)create:(XAILinkage *)linkage{
++ (XAILinkageEditSmallVC*)create:(XAILinkage *)linkage{
 
     UIStoryboard* show_Storyboard = [UIStoryboard storyboardWithName:@"Linkage_iPhone" bundle:nil];
-    XAILinkageEditVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditVCID];
+    XAILinkageEditSmallVC* vc = [show_Storyboard instantiateViewControllerWithIdentifier:_ST_XAILinkageEditSmallVCID];
     
     [vc changeIphoneStatus];
     
-    if (![vc isKindOfClass:[XAILinkageEditVC class]]) return nil;
+    if (![vc isKindOfClass:[XAILinkageEditSmallVC class]]) return nil;
     
     [vc setLinkage:linkage];
     
@@ -106,31 +106,7 @@
         _linkage = [[XAILinkage alloc] init];
     }
     
-    
-    //-----
-    [self.nameTF addTarget:self
-                   action:@selector(labelEditFinish)
-         forControlEvents:UIControlEventEditingDidEndOnExit];
-    [self.nameTF addTarget:self action:@selector(labelEditBegin)
-          forControlEvents:UIControlEventEditingDidBegin];
 }
-
--(void)labelEditBegin{
-    
-    if (_nameTF.attributedText != nil && _nameTF.attributedText.length > 5) {
-        
-        NSString* realName = [_nameTF.attributedText.string substringFromIndex:5];
-        _nameTF.text = realName;
-    }
-    
-}
-
--(void)labelEditFinish{
-    
-    [self setNameText:_nameTF.text];
-
-}
-
 
 
 
@@ -213,13 +189,6 @@
 
 }
 
--(void)condClick:(id)sender{
-    
-    _selIndex = [NSIndexPath indexPathForRow:-1
-                                   inSection:0];
-    [self gotoLinkageAddInfoVC:true];
-}
-
 -(void)addLinkage{
 
     
@@ -253,15 +222,13 @@
 
     NSIndexPath* next = nil;
     
-    if ([_selIndex row] == -1){
+    if ([_selIndex row] == 1){
     
         _linkage.effeInfo = useInfo;
-        [self setCondText:[useInfo toStrIsCond:true]];
-        return;
 
     }else{
         
-        NSUInteger resIndex = [_selIndex row];
+        NSUInteger resIndex = [_selIndex row] - 2;
     
         if (resIndex < [_linkage.condInfos count]) {
             
@@ -299,14 +266,14 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     if ([_linkage.condInfos count] == 16) { //16个不能进行添加
-        return 16;
+        return 16+2;
     }
-    return [_linkage.condInfos count] + 1;
+    return [_linkage.condInfos count]+ 3; //最后的2是2个提示
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 45.0;
+    return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -322,26 +289,49 @@
                 reuseIdentifier:cellID];
     }
     
-    NSUInteger condIndex = [indexPath row];
-    
-    if (condIndex < [_linkage.condInfos count]) {
+    if ([indexPath row] == 0) { //名字
         
-        XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex];
+        [cell setName:_linkage.name];
         
+        [cell isEidt:false];
+        cell.canDelete = false;
+
         
-        [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex];
+    }else if ([indexPath row ] == 1) { //条件
         
-        [cell isEidt:_gEditing];
-        cell.canDelete = true;
-        
-    }else{
+        XAILinkageUseInfo * aUseInfo = _linkage.effeInfo;
         
         
-        [cell setInfo:nil index:condIndex];
+        [cell setCondInfo:[aUseInfo toStrIsCond:true]];
         
         [cell isEidt:false];
         cell.canDelete = false;
         
+    }else{ //结果
+    
+        NSUInteger condIndex = [indexPath row] - 2;
+        
+        if (condIndex < [_linkage.condInfos count]) {
+            
+            XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex];
+            
+            
+            [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex];
+            
+            [cell isEidt:_gEditing];
+            cell.canDelete = true;
+            
+        }else{
+            
+            
+            [cell setInfo:nil index:condIndex];
+            
+            [cell isEidt:false];
+            cell.canDelete = false;
+            
+        }
+
+    
     }
     
     
@@ -380,15 +370,50 @@
 #pragma mark - delgate
 -(void)linkageInfoCellDelClick:(XAILinkageEditCell *)cell{
 
-    NSIndexPath* indexPatn = [self.cTableView indexPathForCell:cell];
+    NSIndexPath* indexPath = [self.cTableView indexPathForCell:cell];
     
     
-    NSUInteger condIndex = [indexPatn row];
+    NSUInteger condIndex = [indexPath row] - 2;
     if (condIndex < [_linkage.condInfos count]) {
         
         [_linkage.condInfos removeObjectAtIndex:condIndex];
-        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPatn]
+        
+        
+        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                 withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+//        NSArray* visCells = [self.cTableView visibleCells];
+//        
+//        NSMutableArray* indexs = [[NSMutableArray alloc] init];
+//        for (XAILinkageEditCell* cell in visCells) {
+//           NSIndexPath* aIndexPath =  [_cTableView indexPathForCell:cell];
+//            if ([aIndexPath row] > [indexPath row]) {
+//                
+//                NSUInteger condIndex = [aIndexPath row] - 2 - 2;
+//                
+//                if (condIndex < [_linkage.condInfos count]) {
+//                    
+//                    XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex-1];
+//                    
+//                    [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex-1];
+//                    
+//
+//                }
+//
+//                //[indexs addObject:indexPath];
+//            }
+//            
+////            if (cell == visCells.lastObject) {
+////                [cell reloadInputViews];
+////            }
+//        }
+        
+    
+        
+        
+//        [self.cTableView reloadRowsAtIndexPaths:indexs withRowAnimation:UITableViewRowAnimationNone];
+
+        
         [_cTableView reloadData];
     }
     
@@ -407,7 +432,16 @@
     _selIndex = indexPath;
     
     
-    [self gotoLinkageAddInfoVC:false];
+    if ([indexPath row] == 0) { //名字
+        
+        return;
+        
+    }else if ([indexPath row ] == 1) { //条件
+        
+        [self gotoLinkageAddInfoVC:true];
+    }else{
+        [self gotoLinkageAddInfoVC:false];
+    }
 
 }
 
@@ -467,50 +501,10 @@
         
         _linkage = linkage;
         
-        [self setNameText:_linkage.name];
-        [self setCondText:[_linkage.effeInfo toStrIsCond:true]];
-
         [self.cTableView reloadData];
     }
 
 }
 
-
--(void) setNameText:(NSString*)str{
-
-    self.nameTF.text = str;
-}
-
--(void) setCondText:(NSString*)str{
-    
-    if (str != nil) {
-        
-        
-        
-        NSString* allStr = [NSString stringWithFormat:@"%@",str];
-        
-        NSMutableAttributedString* str = [[NSMutableAttributedString alloc] initWithString:allStr];
-        
-        [str addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
-                    range:NSMakeRange(0,1)];
-        [str addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
-                    range:NSMakeRange(str.length-1, 1)];
-        
-        self.condTF.attributedText = str;
-        
-    }else{
-    
-        self.condTF.text = nil;
-    }
-}
-
-@end
-
-@implementation XAILinkageEditSupVC
-
-- (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo{}
--(XAILinkage *)getLinkage{return nil;}
 
 @end

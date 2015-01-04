@@ -20,7 +20,8 @@
 @property (nonatomic,strong) IBOutlet UITextField* tipTF;
 @property (nonatomic,strong) IBOutlet UIButton*  delBtn;
 @property (nonatomic,strong) IBOutlet UIButton*  centerBtn;
-@property (nonatomic,strong) IBOutlet UILabel* numberLab;
+@property (nonatomic,strong) IBOutlet UILabel* preLab;
+@property (nonatomic,assign) BOOL canDelete;
 
 - (IBAction)resultClick:(id)sender;
 - (IBAction)delClick:(id)sender;

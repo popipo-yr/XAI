@@ -214,7 +214,7 @@
         
         
         self.statusRollImgV.transform = CGAffineTransformMakeRotation(_angle * (M_PI / 180.0f));
-        _angle += 10;
+        _angle += 5;
     
     }
 }

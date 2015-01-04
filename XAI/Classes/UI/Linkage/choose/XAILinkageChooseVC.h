@@ -28,7 +28,7 @@
 }
 
 
-@property (nonatomic,retain) XAILinkageEditVC* infoVC;
+@property (nonatomic,retain) XAILinkageEditSupVC* infoVC;
 
 @property (nonatomic,retain) IBOutlet UITableView* leftTableView;
 @property (nonatomic,retain) IBOutlet UITableView* rightTableView;

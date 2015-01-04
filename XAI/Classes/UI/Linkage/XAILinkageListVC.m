@@ -9,6 +9,7 @@
 #import "XAILinkageListVC.h"
 #import "XAILinkageListCell.h"
 #import "XAILinkageEditVC.h"
+#import "XAILinkageEditSmallVC.h"
 
 #import "XAIShowVC.h"
 
@@ -192,7 +193,13 @@
 
 -(void)addOneLink:(id)sender{
 
-    [self.navigationController pushViewController:[XAILinkageEditVC create] animated:YES];
+    UIViewController* vc = nil;
+    if ([UIScreen is_35_Size]) {
+        vc = [XAILinkageEditSmallVC create];
+    }else{
+        vc = [XAILinkageEditVC create];
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -352,7 +359,13 @@
     
     XAILinkage* linkage = [_Datas objectAtIndex:[indexPath row]];
     
-    UIViewController* vc = [XAILinkageEditVC create:linkage];
+    UIViewController* vc = nil;
+    if ([UIScreen is_35_Size]) {
+        vc = [XAILinkageEditSmallVC create:linkage];
+    }else{
+        vc = [XAILinkageEditVC create:linkage];
+    }
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

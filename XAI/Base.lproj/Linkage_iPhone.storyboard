@@ -14,19 +14,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="Hep-E2-clu">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_tbg.png" id="Rrg-tR-UKk">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_title.png" id="ctV-G3-04r">
-                                        <rect key="frame" x="121" y="32" width="79" height="20"/>
+                                        <rect key="frame" x="121" y="34" width="79" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pWZ-6V-i4O">
-                                        <rect key="frame" x="283" y="138" width="25" height="29"/>
+                                        <rect key="frame" x="283" y="110" width="25" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <state key="normal" image="edit_nor.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,18 +37,86 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_head.png" id="ctS-XZ-IIB">
-                                        <rect key="frame" x="129" y="84" width="63" height="63"/>
+                                        <rect key="frame" x="129" y="71" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="fhl-Yb-9gq">
+                                <rect key="frame" x="0.0" y="158" width="320" height="169"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="b08-Oa-kNV">
+                                        <rect key="frame" x="0.0" y="3" width="320" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名  称:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lNV-hv-vWU">
+                                                <rect key="frame" x="56" y="8" width="52" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rum-Iu-I6B">
+                                                <rect key="frame" x="48" y="3" width="222" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="link_edit_cell_bg.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入联动名称" minimumFontSize="17" id="7FU-4f-D6C">
+                                                <rect key="frame" x="109" y="4" width="153" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="hUL-R2-caW">
+                                        <rect key="frame" x="0.0" y="47" width="320" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="条  件:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qcB-Zx-bRd">
+                                                <rect key="frame" x="55" y="7" width="52" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VCv-BN-bqH">
+                                                <rect key="frame" x="48" y="3" width="222" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="link_edit_cell_bg.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="condClick:" destination="a60-cG-E4a" eventType="touchUpInside" id="d3x-df-hYz"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加联动条件" minimumFontSize="17" id="gul-LT-nH3">
+                                                <rect key="frame" x="109" y="3" width="143" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="POv-IX-R1o">
-                                <rect key="frame" x="0.0" y="176" width="320" height="339"/>
+                                <rect key="frame" x="0.0" y="252" width="320" height="268"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILinkageEditCellID" rowHeight="50" id="hze-dG-tJ6" userLabel="light Cell" customClass="XAILinkageEditCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILinkageEditCellID" rowHeight="45" id="hze-dG-tJ6" userLabel="Cell" customClass="XAILinkageEditCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hze-dG-tJ6" id="95Y-mW-Akc">
@@ -60,9 +128,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lVO-Rq-F73">
-                                                            <rect key="frame" x="50" y="0.0" width="221" height="36"/>
+                                                            <rect key="frame" x="48" y="3" width="222" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" image="link_edit_save_bg.png">
+                                                            <state key="normal" image="link_edit_cell_bg.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -70,9 +138,9 @@
                                                             </connections>
                                                         </button>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uD5-zO-Jdb">
-                                                            <rect key="frame" x="284" y="2" width="32" height="31"/>
+                                                            <rect key="frame" x="284" y="5" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" image="link_del_nor.png">
+                                                            <state key="normal" image="link_edit_del.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
@@ -80,18 +148,18 @@
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加触发动作" minimumFontSize="17" id="w56-6S-ceN">
-                                                            <rect key="frame" x="92" y="3" width="137" height="30"/>
+                                                            <rect key="frame" x="109" y="3" width="143" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EjH-dh-wC9">
-                                                            <rect key="frame" x="61" y="8" width="20" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="触 发:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EjH-dh-wC9">
+                                                            <rect key="frame" x="55" y="7" width="52" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -104,7 +172,7 @@
                                         <connections>
                                             <outlet property="centerBtn" destination="lVO-Rq-F73" id="4TD-v1-3xe"/>
                                             <outlet property="delBtn" destination="uD5-zO-Jdb" id="NBP-xA-9c1"/>
-                                            <outlet property="numberLab" destination="EjH-dh-wC9" id="CSg-Fa-6nT"/>
+                                            <outlet property="preLab" destination="EjH-dh-wC9" id="3Sg-Cg-cav"/>
                                             <outlet property="tipTF" destination="w56-6S-ceN" id="wHv-ZB-vfY"/>
                                         </connections>
                                     </tableViewCell>
@@ -115,7 +183,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KgP-gO-Wrr">
-                                <rect key="frame" x="22" y="523" width="277" height="39"/>
+                                <rect key="frame" x="0.0" y="521" width="320" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="link_edit_save_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,12 +199,146 @@
                     <navigationItem key="navigationItem" id="ao8-Bk-dhg"/>
                     <connections>
                         <outlet property="cTableView" destination="POv-IX-R1o" id="EIE-e0-Q2g"/>
+                        <outlet property="condTF" destination="gul-LT-nH3" id="yPT-Fi-dY9"/>
                         <outlet property="gEditBtn" destination="pWZ-6V-i4O" id="8ba-1m-kbb"/>
+                        <outlet property="nameTF" destination="7FU-4f-D6C" id="hEP-64-nYo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gX-0W-34T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1606" y="-377"/>
+        </scene>
+        <!--Linkage Edit SmallVC-->
+        <scene sceneID="D7I-bx-bNi">
+            <objects>
+                <viewController storyboardIdentifier="XAILinkageEditSmallVCID" id="qm3-ag-a1x" customClass="XAILinkageEditSmallVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="egg-5l-GaF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="RO0-OI-j07">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_tbg.png" id="6Qc-ZA-q2N">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_title.png" id="kZm-RK-khf">
+                                        <rect key="frame" x="121" y="34" width="79" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TZM-V7-KHr">
+                                        <rect key="frame" x="283" y="110" width="25" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" image="edit_nor.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="edit_sel.png"/>
+                                        <connections>
+                                            <action selector="globalEditClick:" destination="qm3-ag-a1x" eventType="touchUpInside" id="qu3-AK-k9u"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_edit_head.png" id="Xla-LA-ZNr">
+                                        <rect key="frame" x="129" y="71" width="63" height="63"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="D3m-dI-hZS">
+                                <rect key="frame" x="0.0" y="151" width="320" height="364"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="XAILinkageEditCellID" rowHeight="45" id="787-sM-6sQ" userLabel="cell" customClass="XAILinkageEditCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="787-sM-6sQ" id="jsB-GQ-Tut">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="e9O-cS-TuC">
+                                                    <rect key="frame" x="0.0" y="7" width="320" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ssl-QF-13K">
+                                                            <rect key="frame" x="48" y="3" width="222" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="link_edit_cell_bg.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="resultClick:" destination="787-sM-6sQ" eventType="touchUpInside" id="xpH-Fl-OH1"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L3Y-Gq-jKl">
+                                                            <rect key="frame" x="283" y="5" width="25" height="25"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="link_edit_del.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="delClick:" destination="787-sM-6sQ" eventType="touchUpInside" id="eKR-nX-uaU"/>
+                                                            </connections>
+                                                        </button>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请添加触发动作" minimumFontSize="17" id="Owv-zb-srC">
+                                                            <rect key="frame" x="117" y="3" width="143" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="textColor" red="0.0" green="0.58823529411764708" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="条件一:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IEH-YN-5vW">
+                                                            <rect key="frame" x="57" y="8" width="52" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="centerBtn" destination="Ssl-QF-13K" id="hl8-kg-NEI"/>
+                                            <outlet property="delBtn" destination="L3Y-Gq-jKl" id="ree-XJ-DRZ"/>
+                                            <outlet property="preLab" destination="IEH-YN-5vW" id="TqZ-22-D8R"/>
+                                            <outlet property="tipTF" destination="Owv-zb-srC" id="pTa-PZ-rkc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qm3-ag-a1x" id="enK-BR-67Z"/>
+                                    <outlet property="delegate" destination="qm3-ag-a1x" id="9Og-Ld-ale"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Kmb-Z5-uFK">
+                                <rect key="frame" x="0.0" y="521" width="320" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="link_edit_save_nor.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="link_edit_save_sel.png"/>
+                                <connections>
+                                    <action selector="okClick:" destination="qm3-ag-a1x" eventType="touchUpInside" id="N36-4y-cnM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AeB-pf-tkd"/>
+                    <connections>
+                        <outlet property="cTableView" destination="D3m-dI-hZS" id="WmD-Gw-lC2"/>
+                        <outlet property="gEditBtn" destination="TZM-V7-KHr" id="PrR-W6-vwq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1al-0z-GGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1564" y="362"/>
         </scene>
         <!--Linkage ChooseVC-->
         <scene sceneID="j5k-Vp-XUG">
@@ -162,7 +364,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="kw7-xN-7Oy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_tbg.png" id="cT7-xk-YVG">
@@ -170,11 +372,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_title_top.png" id="uM0-uL-A1g">
-                                        <rect key="frame" x="121" y="32" width="79" height="20"/>
+                                        <rect key="frame" x="121" y="34" width="79" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n5j-Be-Ggm">
-                                        <rect key="frame" x="283" y="138" width="25" height="29"/>
+                                        <rect key="frame" x="283" y="113" width="25" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <state key="normal" image="edit_nor.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,7 +387,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_head_top.png" id="PEa-2I-cjl">
-                                        <rect key="frame" x="129" y="84" width="63" height="63"/>
+                                        <rect key="frame" x="129" y="71" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -197,18 +399,18 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="N85-Hr-gqU">
-                                <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="150" width="320" height="418"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link-no.png" id="dG6-XH-yZb">
-                                        <rect key="frame" x="72" y="93" width="176" height="207"/>
+                                        <rect key="frame" x="72" y="105" width="176" height="207"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iAp-Ki-5UZ">
-                                <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="150" width="320" height="418"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -301,6 +503,7 @@
                         <outlet property="tableView" destination="iAp-Ki-5UZ" id="qIS-Pn-UAw"/>
                         <outlet property="tipImgView" destination="dG6-XH-yZb" id="1iv-yL-NT8"/>
                         <segue destination="a60-cG-E4a" kind="push" identifier="nouse1" id="0xr-oa-DIi"/>
+                        <segue destination="qm3-ag-a1x" kind="push" identifier="nouse2" id="6Yi-RD-ZVg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fb3-Do-4a3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -332,10 +535,11 @@
         <image name="edit_sel.png" width="17" height="17"/>
         <image name="link-no.png" width="176" height="207"/>
         <image name="link_del_nor.png" width="32" height="31"/>
+        <image name="link_edit_cell_bg.png" width="222" height="30"/>
+        <image name="link_edit_del.png" width="25" height="25"/>
         <image name="link_edit_head.png" width="91" height="91"/>
-        <image name="link_edit_save_bg.png" width="221" height="36"/>
-        <image name="link_edit_save_nor.png" width="206" height="38"/>
-        <image name="link_edit_save_sel.png" width="206" height="38"/>
+        <image name="link_edit_save_nor.png" width="356" height="47"/>
+        <image name="link_edit_save_sel.png" width="356" height="47"/>
         <image name="link_edit_title.png" width="123" height="30"/>
         <image name="link_head_top.png" width="91" height="91"/>
         <image name="link_opr_roll.png" width="94" height="94"/>
@@ -343,7 +547,7 @@
         <image name="link_s_btn_on.png" width="78" height="28"/>
         <image name="link_s_roll.png" width="94" height="94"/>
         <image name="link_s_time_valid.png" width="78" height="28"/>
-        <image name="link_tbg.png" width="356" height="207"/>
+        <image name="link_tbg.png" width="356" height="191"/>
         <image name="link_title_top.png" width="122" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

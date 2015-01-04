@@ -7,19 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XAILinkageEditVC.h"
 #import "XAIObjectCell.h"
 #import "XAILinkageService.h"
 #import "XAILinkageEditCell.h"
 
-@interface XAILinkageEditSupVC : UIViewController
 
-- (void) setLinkageUseInfo:(XAILinkageUseInfo*)useInfo;
--(XAILinkage *)getLinkage;
-
-@end
-
-
-@interface XAILinkageEditVC : XAILinkageEditSupVC
+@interface XAILinkageEditSmallVC : XAILinkageEditSupVC
 <UITableViewDataSource,UITabBarDelegate,XAILinkageServiceDelegate,XAILinkageInfoCellDelegate>{
 
     XAILinkageService* _linkageService;
@@ -40,12 +34,6 @@
 @property (nonatomic,strong) IBOutlet UITableView* cTableView;
 @property (nonatomic,strong) IBOutlet UIButton* gEditBtn;
 
-
-@property (nonatomic,strong) IBOutlet UITextField* nameTF;
-@property (nonatomic,strong) IBOutlet UITextField* condTF;
-
--(IBAction)condClick:(id)sender;
-
 -(IBAction)globalEditClick:(id)sender;
 - (IBAction)okClick:(id)sender;
 
@@ -54,6 +42,7 @@
 
 
 - (void) setName:(NSString*)name;
+- (void) setLinkage:(XAILinkage*)linkage;
 - (XAILinkage*) getLinkage;
 
 
