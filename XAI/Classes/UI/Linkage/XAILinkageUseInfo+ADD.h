@@ -11,5 +11,6 @@
 @interface XAILinkageUseInfo (add)
 
 -(NSString*)toStrIsCond:(BOOL)isCond;
+-(NSString*)toStrIsCond:(BOOL)isCond  nameRange:(NSRange*)nameRange;
 
 @end

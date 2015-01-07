@@ -301,8 +301,8 @@
         
         XAILinkageUseInfo * aUseInfo = _linkage.effeInfo;
         
-        
-        [cell setCondInfo:[aUseInfo toStrIsCond:true]];
+        NSRange range;
+        [cell setCondInfo:[aUseInfo toStrIsCond:true nameRange:&range] nameRange:range];
         
         [cell isEidt:false];
         cell.canDelete = false;

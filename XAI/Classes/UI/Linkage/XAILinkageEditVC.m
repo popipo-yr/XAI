@@ -256,7 +256,8 @@
     if ([_selIndex row] == -1){
     
         _linkage.effeInfo = useInfo;
-        [self setCondText:[useInfo toStrIsCond:true]];
+        NSRange range;
+        [self setCondText:[useInfo toStrIsCond:true nameRange:&range] nameRange:range];
         return;
 
     }else{
@@ -468,7 +469,8 @@
         _linkage = linkage;
         
         [self setNameText:_linkage.name];
-        [self setCondText:[_linkage.effeInfo toStrIsCond:true]];
+        NSRange range;
+        [self setCondText:[_linkage.effeInfo toStrIsCond:true nameRange:&range] nameRange:range];
 
         [self.cTableView reloadData];
     }
@@ -481,11 +483,12 @@
     self.nameTF.text = str;
 }
 
--(void) setCondText:(NSString*)str{
+-(void) setCondText:(NSString*)str nameRange:(NSRange)range{
     
     if (str != nil) {
         
         
+        int endStart = str.length - range.location - range.length;
         
         NSString* allStr = [NSString stringWithFormat:@"%@",str];
         
@@ -496,7 +499,7 @@
                     range:NSMakeRange(0,1)];
         [str addAttribute:NSForegroundColorAttributeName
                     value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
-                    range:NSMakeRange(str.length-1, 1)];
+                    range:NSMakeRange(endStart, str.length-endStart)];
         
         self.condTF.attributedText = str;
         

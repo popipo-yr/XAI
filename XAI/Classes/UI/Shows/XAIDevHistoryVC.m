@@ -97,7 +97,18 @@
     
     if (aOpr != nil && [aOpr isKindOfClass:[XAIObjectOpr class]]) {
         
-        cell.contentLab.text = [aOpr allStr];
+        NSString* str = [aOpr allStr];
+        NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        if (astr.length > 14) {
+           
+            [astr addAttribute:NSForegroundColorAttributeName
+                         value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
+                         range:NSMakeRange(14,astr.length - 14)];
+        }
+
+
+        cell.contentLab.attributedText = astr;
     }
     
     return cell;

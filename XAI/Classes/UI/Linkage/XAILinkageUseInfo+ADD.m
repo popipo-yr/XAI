@@ -14,6 +14,11 @@
 
 -(NSString*)toStrIsCond:(BOOL)isCond{
 
+    return [self toStrIsCond:isCond nameRange:nil];
+}
+
+-(NSString*)toStrIsCond:(BOOL)isCond  nameRange:(NSRange*)nameRange{
+
     if (self.dev_apsn == 0x0 && self.dev_luid == 0x0) {
         //时间
         XAITYPETime time = 0;
@@ -84,8 +89,16 @@
                 // tiaojian
                 if (miaoshu == nil || ![obj  hasLinkageTiaojian]) {
                     tip = [NSString stringWithFormat:@"%@未知条件",name];
+                    if (nameRange != nil) {
+                        (*nameRange).location = 0;
+                        (*nameRange).length = name.length;
+                    }
                 }else{
                     tip = [NSString stringWithFormat:@"当%@%@时",name,miaoshu];
+                    if (nameRange != nil) {
+                        (*nameRange).location = 1;
+                        (*nameRange).length = name.length;
+                    }
                 }
                 
                 return tip;
@@ -95,8 +108,16 @@
                 //结果
                 if (miaoshu == nil || ![obj hasLinkageJieGuo]) {
                     tip = [NSString stringWithFormat:@"%@未知控制",name];
+                    if (nameRange != nil) {
+                        (*nameRange).location = 1;
+                        (*nameRange).length = name.length;
+                    }
                 }else{
                     tip = [NSString stringWithFormat:@"%@%@",miaoshu,name];
+                    if (nameRange != nil) {
+                        (*nameRange).location = 1;
+                        (*nameRange).length = name.length;
+                    }
                 }
                 
                 return tip;

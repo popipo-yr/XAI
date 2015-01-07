@@ -67,11 +67,12 @@
     
 }
 
-- (void)setCondInfo:(NSString*)str{
+- (void)setCondInfo:(NSString*)str nameRange:(NSRange)range{
     
     self.preLab.text = @"条  件:";
     
     if (str != nil) {
+        int endStart = str.length - range.location - range.length;
         
         NSString* allStr = [NSString stringWithFormat:@"%@",str];
         
@@ -82,10 +83,11 @@
                     range:NSMakeRange(0,1)];
         [str addAttribute:NSForegroundColorAttributeName
                     value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
-                    range:NSMakeRange(str.length-1, 1)];
+                    range:NSMakeRange(endStart, str.length-endStart)];
         
         
         self.tipTF.attributedText = str;
+        
     }else{
         
         self.tipTF.text = nil;
@@ -118,6 +120,9 @@
         
         NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
         
+        [astr addAttribute:NSForegroundColorAttributeName
+                    value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
+                    range:NSMakeRange(0,2)];
         self.tipTF.attributedText = astr;
 
         
