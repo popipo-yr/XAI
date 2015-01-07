@@ -83,7 +83,7 @@
     
     
     //开关
-    _luidDev = 0x00124B000413C85C;  //21
+    _luidDev = 0x0004000000000210;  //21
 //     _luidDev = 0x00124B000413C931;
 //_luidDev = 0x00124B000413CCC2;
     
@@ -704,7 +704,7 @@
     _err = errcode;
     
 }
-- (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode{
+- (void) devService:(XAIDeviceService*)devService delDevice:(BOOL)isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
     
     if (_delStatus != start) return;
     

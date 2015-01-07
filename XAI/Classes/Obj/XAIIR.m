@@ -58,6 +58,11 @@
     return [_infrared linkageInfoIsEqual:useInfo index:index];
 }
 
+-(BOOL)hasLinkageTiaojian{
+    
+    return true;
+}
+
 
 -(NSArray *)getLinkageTiaojian{
     

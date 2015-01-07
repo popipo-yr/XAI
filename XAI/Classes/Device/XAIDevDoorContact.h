@@ -38,7 +38,10 @@ typedef enum XAIDevDoorContactStatus{
 
 
 @protocol XAIDevDoorContactDelegate <NSObject>
-
+/*********************
+ 当调用getDoorContactStatus,如果失败直接通知代理curstatus,
+ 成功则通知代理status,这时server可能缓存了多个状态,则代理必须储存多个状态,通过id进行排序找出curstatus
+ */
 - (void) doorContact:(XAIDevDoorContact*)dc curStatus:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err;
 - (void) doorContact:(XAIDevDoorContact*)dc curPower:(float)power err:(XAI_ERROR)err;
 - (void) doorContact:(XAIDevDoorContact*)dc status:(XAIDevDoorContactStatus)status

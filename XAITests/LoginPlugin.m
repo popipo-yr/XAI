@@ -52,7 +52,7 @@
 }
 
 
-- (void)loginFinishWithStatus:(BOOL)status isTimeOut:(BOOL)bTimeOut{
+-(void)loginFinishWithStatus:(BOOL)status loginErr:(XAILoginErr)err{
 
     if (_loginStatus == _start) {
         
@@ -83,6 +83,8 @@
 }
 
 
+
+
 - (void)loginWithName:(NSString*)name PWD:(NSString*)pwd
 {
     uint8_t token[32] = {0xff};
@@ -104,10 +106,11 @@
     NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
                               ,name,[MQTTCover apsnToString:_K_APSN]];
     
-    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate changeMQTTClinetID:nameWithAPSN];
     
-    [login loginWithName:name Password:pwd Host:_K_HOST apsn:_K_APSN];
+    XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate changeMQTTClinetID:nameWithAPSN apsn:_K_APSN];
+    
+    [login loginWithName:name Password:pwd Host:_K_HOST apsn:_K_APSN needCheckCloud:false];
     
     _loginStatus_normal = _start;
     
@@ -143,11 +146,11 @@
                               ,@"admin",[MQTTCover apsnToString:_K_APSN]];
     
     XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate changeMQTTClinetID:nameWithAPSN];
+    [appDelegate changeMQTTClinetID:nameWithAPSN apsn:_K_APSN];
     
     XAILogin*  login = [[XAILogin alloc] init];
     login.delegate = self;
-    [login loginWithName:@"admin" Password:@"admin" Host:_K_HOST apsn:_K_APSN];
+    [login loginWithName:@"admin" Password:@"admin" Host:_K_HOST apsn:_K_APSN needCheckCloud:false];
     
     _loginStatus = _start;
 

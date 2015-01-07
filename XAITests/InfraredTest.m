@@ -190,5 +190,10 @@
     
 }
 
+-(void)infrared:(XAIDevInfrared *)inf status:(XAIDevInfraredStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    [self infrared:inf status:status err:err otherInfo:otherInfo];
+}
+
 
 @end

@@ -244,5 +244,10 @@
 
 }
 
+-(void)doorContact:(XAIDevDoorContact *)dc status:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    [self doorContact:dc status:status err:err otherInfo:otherInfo];
+}
+
 
 @end

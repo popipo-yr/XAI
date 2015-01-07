@@ -551,5 +551,16 @@
 }
 
 
+-(void)switch_:(XAIDevSwitch *)swi circuitOneStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
+
+    [self switch_:swi getCircuitOneStatus:status err:err];
+}
+
+-(void)switch_:(XAIDevSwitch *)swi circuitTwoStatus:(XAIDevCircuitStatus)status err:(XAI_ERROR)err therInfo:(XAIOtherInfo *)otherInfo{
+
+    [self switch_:swi getCircuitTwoStatus:status err:err];
+}
+
+
 
 @end
