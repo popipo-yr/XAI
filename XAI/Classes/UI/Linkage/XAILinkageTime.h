@@ -14,6 +14,19 @@
 @property (nonatomic,strong) IBOutlet UIButton* okBtn;
 @property (nonatomic,strong) IBOutlet UIDatePicker* dataPicker;
 
+@property (nonatomic,strong) IBOutlet UIView* yanshiView;
+@property (nonatomic,strong) IBOutlet UIView* dingshiView;
+
+@property (nonatomic,strong) IBOutlet UIButton* everyDayBtn;
+@property (nonatomic,strong) IBOutlet UIButton* oneDayBtn;
+@property (nonatomic,strong) IBOutlet UILabel*  yanshiTipLab;
+@property (nonatomic,strong) IBOutlet UILabel*  dingshiTipLab;
+
+
+
+-(IBAction)everyDayClick:(id)sender;
+-(IBAction)oneDayClick:(id)sender;
+-(IBAction)valueChange:(id)sender;
 
 - (void) setDingShi;
 - (void) setYanShi;

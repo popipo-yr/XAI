@@ -24,6 +24,11 @@
 
     self.titleImgV.image = [UIImage imageWithFile:@"link_result_title.png"];
     self.headImgV.image = [UIImage imageWithFile:@"link_result_head.png"];
+    
+    
+    CGFloat headerHeight = (self.view.frame.size.width -
+                            [self getLeftDatas].count*[self tableViewCellHight_l])*0.5f;
+    self.leftTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, headerHeight)];
 }
 
 -(NSArray*)getLeftDatas{
@@ -41,7 +46,7 @@
 
 -(float)tableViewCellHight_l{
     
-    return 200;
+    return 80;
 }
 
 - (UITableViewCell *)tableView_r:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -77,14 +82,30 @@
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
-    UIImageView* imageNor = [[UIImageView alloc] init];
-    imageNor.image = [self imgCond:type isSel:false];
-    cell.backgroundView = imageNor;
+    CGRect rect = CGRectMake(0, 0, 80, 60); //CGRectZero;
+    //rect.size = cell.frame.size;
+    
+    UIImage* norImg = [self imgCond:type isSel:false];
+    UIImage* selImg = [self imgCond:type isSel:true];
+    
+    CGRect imgRect  = CGRectMake((rect.size.width - norImg.size.width)*0.5f,
+                                 (rect.size.height - norImg.size.height)*0.5f,
+                                 norImg.size.width,
+                                 norImg.size.height);
+    
+    
+    UIImageView* imageNor = [[UIImageView alloc] initWithFrame:imgRect];
+    imageNor.image = norImg;
+    UIView*  bgView = [[UIView alloc] initWithFrame:rect];
+    [bgView addSubview:imageNor];
+    cell.backgroundView = bgView;
     cell.backgroundColor = [UIColor clearColor];
     
-    UIImageView* imageSel = [[UIImageView alloc] init];
-    imageSel.image = [self imgCond:type isSel:true];
-    cell.selectedBackgroundView = imageSel;
+    UIImageView* imageSel = [[UIImageView alloc] initWithFrame:imgRect];
+    imageSel.image = selImg;
+    UIView*  sbgView = [[UIView alloc] initWithFrame:rect];
+    [sbgView addSubview:imageSel];
+    cell.selectedBackgroundView = sbgView;
     
     
     return cell;
@@ -105,12 +126,14 @@
         [[XAILinkageTime share]  setYanShi];
         
         self.rightTableView.hidden = true;
+        self.rightHeadView.hidden = true;
         
     }else{
         
         [[XAILinkageTime share] removeFromSuperview];
         
         self.rightTableView.hidden = false;
+        self.rightHeadView.hidden = false;
     }
     
 
@@ -215,18 +238,15 @@
 #pragma  mark - helper
 -(void)attrShow:(_L_Type)type{
     
-    self.attr1Btn.hidden = false;
-    self.attr2Btn.hidden = false;
+    self.attrBtn.hidden = false;
     
     switch (type) {
         case _L_Switch:{
-            [self.attr1Btn setTitle:@"打开开关" forState:UIControlStateNormal];
-            [self.attr2Btn setTitle:@"关闭开关" forState:UIControlStateNormal];
+            self.tipLab.text = _isChooseAttr1 ? @"您已选择开关打开动作" :@"您已选择开关关闭动作";
             break;
         }
         default:{
-            self.attr1Btn.hidden = true;
-            self.attr2Btn.hidden = true;
+            self.attrBtn.hidden = true;
             break;
         }
     }

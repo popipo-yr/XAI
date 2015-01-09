@@ -51,7 +51,7 @@
 
 -(float)tableViewCellHight_l{
     
-    return 100;
+    return 80;
 }
 
 - (UITableViewCell *)tableView_r:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -85,16 +85,33 @@
         
     }
     
+    
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
-    UIImageView* imageNor = [[UIImageView alloc] init];
-    imageNor.image = [self imgCond:type isSel:false];
-    cell.backgroundView = imageNor;
+    CGRect rect = CGRectMake(0, 0, 80, 60); //CGRectZero;
+    //rect.size = cell.frame.size;
+    
+    UIImage* norImg = [self imgCond:type isSel:false];
+    UIImage* selImg = [self imgCond:type isSel:true];
+    
+    CGRect imgRect  = CGRectMake((rect.size.width - norImg.size.width)*0.5f,
+                         (rect.size.height - norImg.size.height)*0.5f,
+                         norImg.size.width,
+                         norImg.size.height);
+    
+    
+    UIImageView* imageNor = [[UIImageView alloc] initWithFrame:imgRect];
+    imageNor.image = norImg;
+    UIView*  bgView = [[UIView alloc] initWithFrame:rect];
+    [bgView addSubview:imageNor];
+    cell.backgroundView = bgView;
     cell.backgroundColor = [UIColor clearColor];
     
-    UIImageView* imageSel = [[UIImageView alloc] init];
-    imageSel.image = [self imgCond:type isSel:true];
-    cell.selectedBackgroundView = imageSel;
+    UIImageView* imageSel = [[UIImageView alloc] initWithFrame:imgRect];
+    imageSel.image = selImg;
+    UIView*  sbgView = [[UIView alloc] initWithFrame:rect];
+    [sbgView addSubview:imageSel];
+    cell.selectedBackgroundView = sbgView;
     
     return cell;
 }
@@ -116,12 +133,14 @@
         [[XAILinkageTime share]  setDingShi];
         
         self.rightTableView.hidden = true;
+        self.rightHeadView.hidden = true;
         
     }else{
         
         [[XAILinkageTime share] removeFromSuperview];
     
         self.rightTableView.hidden = false;
+        self.rightHeadView.hidden = false;
     }
     
     [self attrShow:type];
@@ -188,12 +207,17 @@
     
     NSDate* date= [[XAILinkageTime share].dataPicker date];
     
+    
+    NSDateFormatter* mouthFormat = [[NSDateFormatter alloc] init];
+    [mouthFormat setDateFormat:@"MM"];
+    
     NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
     [hourFormat setDateFormat:@"HH"];
     
     NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
     [minuFormat setDateFormat:@"mm"];
     
+    int mouth = [[mouthFormat stringFromDate:date] intValue];
     int hour =[[hourFormat stringFromDate:date] intValue];
     int min = [[minuFormat stringFromDate:date] intValue];
     
@@ -207,7 +231,7 @@
     
     
     XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
-    timeUseInfo.time = hour*60*60 + min*60;
+    timeUseInfo.time = hour*60*60 + min*60 ;
     [timeUseInfo change];
     
     [self.infoVC setLinkageUseInfo:timeUseInfo];
@@ -219,28 +243,24 @@
 #pragma  mark - helper
 -(void)attrShow:(_L_Type)type{
     
-    self.attr1Btn.hidden = false;
-    self.attr2Btn.hidden = false;
+    self.attrBtn.hidden = false;
     
     switch (type) {
         case _L_Switch:{
-            [self.attr1Btn setTitle:@"开关打开时" forState:UIControlStateNormal];
-            [self.attr2Btn setTitle:@"开关关闭时" forState:UIControlStateNormal];
+            self.tipLab.text  = _isChooseAttr1 ? @"您已选择开关打开触发" : @"您已选择开关关闭触发";
             break;
         }
         case _L_DC:{
-            [self.attr1Btn setTitle:@"门窗打开时" forState:UIControlStateNormal];
-            [self.attr2Btn setTitle:@"门窗关闭时" forState:UIControlStateNormal];
+            self.tipLab.text  = _isChooseAttr1 ?@"您已选择门窗打开触发" : @"您已选择门窗关闭触发";
             break;
         }
         case _L_INF:{
-            [self.attr1Btn setTitle:@"红外触发时" forState:UIControlStateNormal];
-            [self.attr2Btn setTitle:@"红外扫描时" forState:UIControlStateNormal];
+            self.tipLab.text  = @"当红外触发时";
+            self.attrBtn.hidden = true;
             break;
         }
         default:{
-            self.attr1Btn.hidden = true;
-            self.attr2Btn.hidden = true;
+            self.attrBtn.hidden = true;
             break;
         }
     }

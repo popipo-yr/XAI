@@ -39,11 +39,11 @@
     _ddc.dcDelegate = self;
     
     _ddc.apsn = [MQTT shareMQTT].apsn;
-    _ddc.luid = 0x124b000413c931;
+    _ddc.luid = 0x0004000000000001;
     
     [_ddc startFocusStatus];
     
-    _err_luid = 0x12989430909437;
+    _err_luid = 0x0004000000100001;
    // _ddc.luid = 0x00124B000413CCC2;
     
     //    _luidDev = 0x124b0003d430b7;
@@ -246,7 +246,7 @@
 
 -(void)doorContact:(XAIDevDoorContact *)dc status:(XAIDevDoorContactStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
 
-    [self doorContact:dc status:status err:err otherInfo:otherInfo];
+    [self doorContact:dc curStatus:status err:err];
 }
 
 

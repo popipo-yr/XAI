@@ -488,7 +488,7 @@
     if (str != nil) {
         
         
-        int endStart = str.length - range.location - range.length;
+        int endStart =  range.location + range.length;
         
         NSString* allStr = [NSString stringWithFormat:@"%@",str];
         

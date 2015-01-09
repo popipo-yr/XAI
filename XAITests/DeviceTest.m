@@ -32,7 +32,7 @@
     
     _device.apsn = [MQTT shareMQTT].apsn;
     //_device.luid = 0x124b0003d430b6;
-    _device.luid = 0x00124b00039afe69;
+    _device.luid = 0x0004000000000001;
     //00-12-4B-00-04-13-C8-D8
     
 

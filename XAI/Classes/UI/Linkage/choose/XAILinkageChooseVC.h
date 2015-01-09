@@ -33,17 +33,19 @@
 @property (nonatomic,retain) IBOutlet UITableView* leftTableView;
 @property (nonatomic,retain) IBOutlet UITableView* rightTableView;
 
-@property (nonatomic,retain) IBOutlet UIButton* attr1Btn;
-@property (nonatomic,retain) IBOutlet UIButton* attr2Btn;
+@property (nonatomic,retain) IBOutlet UIButton* attrBtn;
+@property (nonatomic,retain) IBOutlet UILabel*  tipLab;
 
 @property (nonatomic,retain) IBOutlet UIImageView* titleImgV;
 @property (nonatomic,retain) IBOutlet UIImageView* headImgV;
 
 @property (nonatomic,retain) IBOutlet UIView* rightView;
 
+@property(nonatomic,retain) IBOutlet UIView* rightHeadView;
 
--(IBAction)attr1BtnClick:(id)sender;
--(IBAction)attr2BtnClick:(id)sender;
+
+
+-(IBAction)attrBtnClick:(id)sender;
 - (void) reloadRight;
 
 +(XAILinkageChooseVC*)create;

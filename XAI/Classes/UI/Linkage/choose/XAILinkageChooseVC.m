@@ -110,7 +110,20 @@
         [self tableView_l:_leftTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
 
-    [self attr1BtnClick:nil];
+    [self attrBtnClick:nil];
+    
+    
+    CGRect oldRect = _leftTableView.frame;
+    oldRect.size.height = [UIScreen mainScreen].bounds.size.width;
+    oldRect.origin.y = [UIScreen mainScreen].bounds.size.height - oldRect.size.width;
+    _leftTableView.frame = oldRect;
+    
+    CALayer* layer = _leftTableView.layer;
+    CGPoint oldAnchorPoint = layer.anchorPoint;
+    [layer setAnchorPoint:CGPointMake(0.5, layer.bounds.size.width / layer.bounds.size.height * 0.5f)];
+    [layer setPosition:CGPointMake(layer.position.x + layer.bounds.size.width * (layer.anchorPoint.x - oldAnchorPoint.x), layer.position.y + layer.bounds.size.height * (layer.anchorPoint.y - oldAnchorPoint.y))];
+    _leftTableView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
+
     
 }
 
@@ -206,10 +219,12 @@
         
         cell = [self tableView_r:tableView cellForRowAtIndexPath:indexPath];
         
+        
     }else if(tableView == _leftTableView){
         
     
         cell = [self tableView_l:tableView cellForRowAtIndexPath:indexPath];
+        cell.transform = CGAffineTransformMakeRotation(M_PI / 2);
     }
     
     if (cell == nil) {
@@ -244,24 +259,14 @@
 }
 
 
--(void)attr1BtnClick:(id)sender{
+-(void)attrBtnClick:(id)sender{
 
-    _attr1Btn.selected = true;
-    _attr2Btn.selected = false;
-    _isChooseAttr1 = true;
+    _attrBtn.selected = !_attrBtn.selected;
+    _isChooseAttr1 = _attrBtn.selected;
     
     [self reloadRight];
 }
 
--(void)attr2BtnClick:(id)sender{
-
-    _attr1Btn.selected = false;
-    _attr2Btn.selected = true;
-    
-    _isChooseAttr1 = false;
-    
-    [self reloadRight];
-}
 
 
 @end

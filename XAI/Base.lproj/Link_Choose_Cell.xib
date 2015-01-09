@@ -26,14 +26,13 @@
                                     <action selector="bgBtnClick:" destination="pQM-gJ-AHb" eventType="touchUpInside" id="IU5-fy-v6L"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i02-5D-0Lp">
-                                <rect key="frame" x="7" y="8" width="112" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i02-5D-0Lp">
+                                <rect key="frame" x="7" y="8" width="141" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4bz-2W-Kau"/>
-                                    <constraint firstAttribute="width" constant="112" id="IIA-B1-b72"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -44,6 +43,7 @@
                             <constraint firstAttribute="bottom" secondItem="R2G-Pr-DDC" secondAttribute="bottom" id="J6y-yh-gLD"/>
                             <constraint firstItem="R2G-Pr-DDC" firstAttribute="top" secondItem="2iO-3n-gGQ" secondAttribute="top" id="Quo-be-WdF"/>
                             <constraint firstItem="R2G-Pr-DDC" firstAttribute="leading" secondItem="2iO-3n-gGQ" secondAttribute="leading" id="WCU-MM-Bhl"/>
+                            <constraint firstAttribute="trailing" secondItem="i02-5D-0Lp" secondAttribute="trailing" constant="7" id="WRt-iL-yXK"/>
                             <constraint firstAttribute="trailing" secondItem="R2G-Pr-DDC" secondAttribute="trailing" id="ZOU-gQ-33Y"/>
                             <constraint firstAttribute="centerY" secondItem="i02-5D-0Lp" secondAttribute="centerY" id="nkB-q3-y9t"/>
                             <constraint firstAttribute="height" constant="36" id="rEQ-yL-rae"/>
@@ -65,7 +65,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="link_sw_bg_nor.png" width="155" height="36"/>
-        <image name="link_sw_bg_sel.png" width="155" height="36"/>
+        <image name="link_sw_bg_nor.png" width="234" height="32"/>
+        <image name="link_sw_bg_sel.png" width="234" height="32"/>
     </resources>
 </document>
