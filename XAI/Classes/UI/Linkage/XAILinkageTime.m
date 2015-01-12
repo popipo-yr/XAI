@@ -18,44 +18,139 @@ XAILinkageTime* ___S_TimePicker = nil;
 - (void) setDingShi{
     
     [self.dataPicker setLocale:[NSLocale currentLocale]];
-    //[self.dataPicker setDatePickerMode:UIDatePickerModeTime];
     self.dataPicker.minuteInterval = 5;
-    //[self.dataPicker setTimeZone:[NSTimeZone localTimeZone]];
-    //[self.dataPicker setDate:[NSDate new]];
-    
-//    NSDate* now = [NSDate date];
-//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    NSDateComponents *comps = [[NSDateComponents alloc] init];
-////    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
-////    NSHourCalendarUnit;
-//    
-//    NSInteger unitFlags = NSYearCalendarUnit;
-//    comps = [calendar components:unitFlags fromDate:now];
-//    int hour = [comps hour];
-//    int year = [comps year];
-//    int month = [comps    month];
-//    int day = [comps day];
-//    
-//    self.dataPicker.calendar = calendar;
     
     
     self.dingshiView.hidden = false;
     self.yanshiView.hidden = true;
+    
+    _dataPicker.hidden = false;
+    _secPickView.hidden = true;
+    _secLab.hidden = true;
+    _minLab.hidden = true;
+    
     [self oneDayClick:nil];
 }
 - (void) setYanShi{
     
-    [self.dataPicker setLocale:[NSLocale currentLocale]];
-    [self.dataPicker setDatePickerMode:UIDatePickerModeCountDownTimer];
-    //[self.dataPicker setDate:[NSDate dateWithTimeIntervalSince1970:1]];
-    //[self.dataPicker setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 
     self.dingshiView.hidden = true;
     self.yanshiView.hidden = false;
     
     [self valueChange:nil];
     
+    
+    if (_secPickView == nil) {
+        
+        
+        _secPickView = [[UIPickerView alloc] init];
+        _secPickView.dataSource = self;
+        _secPickView.delegate = self;
+        
+        
+        [_dataPicker.superview  addSubview:_secPickView];
+        
+        [_dataPicker.superview addConstraint:[NSLayoutConstraint
+                                              constraintWithItem:_secPickView
+                                              attribute:NSLayoutAttributeTop
+                                              relatedBy:NSLayoutRelationEqual
+                                              toItem:_yanshiView
+                                              attribute:NSLayoutAttributeBottom
+                                              multiplier:1
+                                              constant:10]];
+        [_dataPicker.superview addConstraint:[NSLayoutConstraint
+                                              constraintWithItem:_secPickView
+                                              attribute:NSLayoutAttributeBottom
+                                              relatedBy:NSLayoutRelationEqual
+                                              toItem:_okBtn
+                                              attribute:NSLayoutAttributeTop
+                                              multiplier:1
+                                              constant:-10]];
+
+        
+        _secPickView.translatesAutoresizingMaskIntoConstraints = false;
+
+        
+
+        
+        [_secPickView selectRow:60 inComponent:1 animated:false];
+        [_secPickView selectRow:60 inComponent:0 animated:false];
+        
+        CGRect secRect = CGRectMake(0,0,20,30);
+        UILabel* secLab = [[UILabel alloc] initWithFrame:secRect];
+        secLab.text = @"秒";
+        secLab.font = [UIFont systemFontOfSize:16];
+        [_secPickView.superview addSubview:secLab];
+        
+        CGRect minRect = CGRectMake(0,0,20,30);
+        UILabel* minLab = [[UILabel alloc] initWithFrame:minRect];
+        minLab.text = @"分";
+        minLab.font = [UIFont systemFontOfSize:16];
+        [_secPickView.superview addSubview:minLab];
+        
+        
+        float move = 5;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0){
+            
+            move =  [UIScreen is_35_Size] ? 15 : 0;
+        }
+        
+
+        secLab.translatesAutoresizingMaskIntoConstraints = false;
+        [_secPickView.superview addConstraint:[NSLayoutConstraint
+                                              constraintWithItem:secLab
+                                              attribute:NSLayoutAttributeCenterY
+                                              relatedBy:NSLayoutRelationEqual
+                                              toItem:_secPickView
+                                              attribute:NSLayoutAttributeCenterY
+                                              multiplier:1
+                                              constant:move]];
+        [_secPickView.superview addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:secLab
+                                     attribute:NSLayoutAttributeCenterX
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:_secPickView
+                                     attribute:NSLayoutAttributeCenterX
+                                     multiplier:1
+                                     constant:50 + 30]];
+        
+        minLab.translatesAutoresizingMaskIntoConstraints = false;
+        [_secPickView.superview addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:minLab
+                                     attribute:NSLayoutAttributeCenterY
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:_secPickView
+                                     attribute:NSLayoutAttributeCenterY
+                                     multiplier:1
+                                     constant:move]];
+        [_secPickView.superview addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:minLab
+                                     attribute:NSLayoutAttributeCenterX
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:_secPickView
+                                     attribute:NSLayoutAttributeCenterX
+                                     multiplier:1
+                                     constant:-50 + 25]];
+        
+        
+  
+        
+        _secLab = secLab;
+        _minLab = minLab;
+        
+
+
+    }
+    
+    _dataPicker.hidden = true;
+    _secPickView.hidden = false;
+    _secLab.hidden = false;
+    _minLab.hidden = false;
+    
+    
 }
+
+
 
 
 
@@ -144,31 +239,49 @@ XAILinkageTime* ___S_TimePicker = nil;
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if(component == 0)
-        return 24;
+        return 60*3;
     
-    return 60;
+    return 60*3;
 }
+
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
+
+    return 100;
+}
+
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
     return 30;
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-{
-//    UILabel *columnView = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, self.view.frame.size.width/3 - 35, 30)];
-//    columnView.text = [NSString stringWithFormat:@"%lu", row];
-//    columnView.textAlignment = NSTextAlignmentLeft;
-//    
-//    return columnView;
-    return nil;
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    [self valueChange:nil];
+    [self pickerViewLoaded:component];
 }
+
+
+-(void)pickerViewLoaded: (NSInteger)component {
+    [_secPickView selectRow:[_secPickView selectedRowInComponent:component]%60+60 inComponent:component animated:false];
+}
+
+#pragma mark Picker Delegate Methods
+
+//返回当前行的内容,此处是将数组中数值添加到滚动的那个显示栏上
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+    return [NSString stringWithFormat:@"%@",@(row % 60)];
+}
+
 
 
 -(void)everyDayClick:(id)sender{
@@ -206,7 +319,7 @@ XAILinkageTime* ___S_TimePicker = nil;
                                            initWithString:[format stringFromDate:_dataPicker.date]];
         
         [astr addAttribute:NSForegroundColorAttributeName
-                     value:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:255/255.0 alpha:1]
+                     value:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:255/255.0 alpha:1]
                      range:NSMakeRange(4,astr.length-2-4)];
         
         
@@ -215,25 +328,32 @@ XAILinkageTime* ___S_TimePicker = nil;
 
     }else{
         
-        float couteDown = _dataPicker.countDownDuration;
-        int hour = couteDown / 60 / 60;
-        int min  = (couteDown - hour*60*60)/ 60;
+        int min = [_secPickView selectedRowInComponent:0]%60;
+        int sec  = [_secPickView selectedRowInComponent:1]%60;
         
-        NSString* str = [NSString stringWithFormat:@"您已添加执行延时%d时%d分的动作",hour,min];
-        if (hour == 0) {
-          str = [NSString stringWithFormat:@"您已添加执行延时%d分的动作",min];
+        NSString* str = [NSString stringWithFormat:@"您已添加执行延时%d分%d秒的动作",min,sec];
+        if (min == 0) {
+          str = [NSString stringWithFormat:@"您已添加执行延时%d秒的动作",sec];
         }
         
         
         NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
         
         [astr addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:255/255.0 alpha:1]
+                    value:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:255/255.0 alpha:1]
                     range:NSMakeRange(4,str.length-3-4)];
        
         
         self.yanshiTipLab.attributedText = astr;
     }
+}
+
+-(NSUInteger)secValue{
+
+    int min = [_secPickView selectedRowInComponent:0]%60;
+    int sec  = [_secPickView selectedRowInComponent:1]%60;
+    
+    return min*60 + sec;
 }
 
 @end

@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XAILinkageTime : UIView
+@interface XAILinkageTime : UIView <UIPickerViewDataSource,UIPickerViewDelegate>{
+
+    
+    UILabel* _secLab;
+    UILabel* _minLab;
+}
 
 
 @property (nonatomic,strong) IBOutlet UIButton* okBtn;
@@ -21,6 +26,8 @@
 @property (nonatomic,strong) IBOutlet UIButton* oneDayBtn;
 @property (nonatomic,strong) IBOutlet UILabel*  yanshiTipLab;
 @property (nonatomic,strong) IBOutlet UILabel*  dingshiTipLab;
+
+@property (nonatomic,strong) IBOutlet UIPickerView* secPickView;
 
 
 
@@ -39,5 +46,7 @@
 -(void) addToCenter:(UIView*)view;
 
 -(void)removeFromSuperview;
+
+-(NSUInteger)secValue;
 
 @end

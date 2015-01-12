@@ -14,10 +14,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iO-3n-gGQ">
-                        <rect key="frame" x="83" y="4" width="155" height="36"/>
+                        <rect key="frame" x="43" y="4" width="234" height="36"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2G-Pr-DDC">
-                                <rect key="frame" x="0.0" y="0.0" width="155" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="234" height="36"/>
                                 <state key="normal" image="link_sw_bg_nor.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,11 +27,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i02-5D-0Lp">
-                                <rect key="frame" x="7" y="8" width="141" height="21"/>
+                                <rect key="frame" x="7" y="8" width="220" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4bz-2W-Kau"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -39,7 +39,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i02-5D-0Lp" firstAttribute="leading" secondItem="2iO-3n-gGQ" secondAttribute="leading" constant="7" id="9sQ-aM-w1d"/>
-                            <constraint firstAttribute="width" constant="155" id="GMH-Ox-wTz"/>
+                            <constraint firstAttribute="width" constant="234" id="GMH-Ox-wTz"/>
                             <constraint firstAttribute="bottom" secondItem="R2G-Pr-DDC" secondAttribute="bottom" id="J6y-yh-gLD"/>
                             <constraint firstItem="R2G-Pr-DDC" firstAttribute="top" secondItem="2iO-3n-gGQ" secondAttribute="top" id="Quo-be-WdF"/>
                             <constraint firstItem="R2G-Pr-DDC" firstAttribute="leading" secondItem="2iO-3n-gGQ" secondAttribute="leading" id="WCU-MM-Bhl"/>

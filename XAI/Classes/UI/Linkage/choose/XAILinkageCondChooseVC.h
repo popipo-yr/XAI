@@ -11,6 +11,7 @@
 @interface XAILinkageCondChooseVC : XAILinkageChooseVC{
 
     int _selLeftType;
+    UITableViewCell* _curCell;
 }
 
 @end

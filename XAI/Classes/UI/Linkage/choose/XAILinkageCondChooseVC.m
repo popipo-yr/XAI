@@ -119,6 +119,12 @@
 
 - (void)tableView_l:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundView.hidden = true;
+    if (_curCell != nil) _curCell.backgroundView.hidden = false;
+    _curCell = cell;
+    
+
   
      _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     

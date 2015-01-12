@@ -46,7 +46,7 @@
 
 -(float)tableViewCellHight_l{
     
-    return 80;
+    return [UIScreen mainScreen].bounds.size.width * 0.5f;
 }
 
 - (UITableViewCell *)tableView_r:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -82,7 +82,7 @@
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
-    CGRect rect = CGRectMake(0, 0, 80, 60); //CGRectZero;
+    CGRect rect = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.5f, 60); //CGRectZero;
     //rect.size = cell.frame.size;
     
     UIImage* norImg = [self imgCond:type isSel:false];
@@ -113,6 +113,11 @@
 
 
 - (void)tableView_l:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundView.hidden = true;
+    if (_curCell != nil) _curCell.backgroundView.hidden = false;
+    _curCell = cell;
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
     
@@ -205,28 +210,9 @@
 
 - (void)dateChoose:(id)sender{
     
-    NSDate* date= [[XAILinkageTime share].dataPicker date];
-    
-    NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
-    [hourFormat setDateFormat:@"HH"];
-    
-    NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
-    [minuFormat setDateFormat:@"mm"];
-    
-    int hour =[[hourFormat stringFromDate:date] intValue];
-    int min = [[minuFormat stringFromDate:date] intValue];
-    
-    
-    if ([XAILinkageTime share].dataPicker.datePickerMode == UIDatePickerModeCountDownTimer) {
-        float couteDown = [XAILinkageTime share].dataPicker.countDownDuration;
-        hour = couteDown / 60 / 60;
-        min  = (couteDown - hour*60*60)/ 60;
-    }
-    
-    
     
     XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
-    timeUseInfo.time = hour*60*60 + min*60;
+    timeUseInfo.time = [[XAILinkageTime share] secValue];;
     [timeUseInfo change];
     
     [self.infoVC setLinkageUseInfo:timeUseInfo];

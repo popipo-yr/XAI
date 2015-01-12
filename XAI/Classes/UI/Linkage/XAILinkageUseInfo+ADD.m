@@ -33,16 +33,31 @@
         time = timeUseInfo.time;
         int hour = time/(60*60);
         int minu = (time - (hour*60*60))/60;
+        int sec =  time - (hour*60*60) - minu*60;
+        
+        NSString* str = nil;
         
         if (isCond) {//条件 定时
-            return [NSString stringWithFormat:@"当%d点%d分时",hour,minu];
+            
+            str = [NSString stringWithFormat:@"当%d点%d分时",hour,minu];
+            
+            if (nameRange != nil) {
+                (*nameRange).location = 1;
+                (*nameRange).length = str.length - 2;
+            }
+
             
         }else{
             
-            return [NSString stringWithFormat:@"延时%d小时%d分",hour,minu];
+            str = [NSString stringWithFormat:@"延时%d分%d秒",minu,sec];
             
+            if (nameRange != nil) {
+                (*nameRange).location = 2;
+                (*nameRange).length = str.length - 2;
+            }
         }
         
+        return str;
         
         
     }else{
