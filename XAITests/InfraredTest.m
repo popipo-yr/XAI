@@ -35,7 +35,7 @@
     _din.infDelegate = self;
     
     _din.apsn = [MQTT shareMQTT].apsn;
-    _din.luid = 0x124b0002292580;
+    _din.luid = 0x0005000000000001;
     
     [_din startFocusStatus];
 
@@ -192,7 +192,7 @@
 
 -(void)infrared:(XAIDevInfrared *)inf status:(XAIDevInfraredStatus)status err:(XAI_ERROR)err otherInfo:(XAIOtherInfo *)otherInfo{
 
-    [self infrared:inf status:status err:err otherInfo:otherInfo];
+    [self infrared:inf curStatus:status err:err];
 }
 
 

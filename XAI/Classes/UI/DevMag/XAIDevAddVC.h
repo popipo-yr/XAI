@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UINavigationItem* cNavigationItem;
+@property (strong, nonatomic) IBOutlet UINavigationBar*  cNavBar;
+@property (strong, nonatomic) IBOutlet UILabel* tipLabel;
 
 @property (nonatomic,strong) NSString* luidStr;
 

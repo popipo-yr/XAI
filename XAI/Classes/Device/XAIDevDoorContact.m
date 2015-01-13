@@ -10,7 +10,7 @@
 #import "XAIPacketStatus.h"
 
 #define Key_StatusID 1
-#define Key_BatteryPowerId 126
+#define Key_BatteryPowerId 0xFE
 
 @implementation XAIDevDoorContact
 
@@ -150,9 +150,9 @@
             byte_data_copy(&power, data->data, sizeof(int), data->data_len);
             
             if (power == 0) {
-                curPower = XAIDevPowerStatus_Normal;
-            }else if (power == 1){
                 curPower = XAIDevPowerStatus_Low;
+            }else if (power == 1){
+                curPower = XAIDevPowerStatus_Normal;
             }else if (power == 2){
                 curPower = XAIDevPowerStatus_Less;
             }
@@ -185,7 +185,7 @@
     
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_StatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     

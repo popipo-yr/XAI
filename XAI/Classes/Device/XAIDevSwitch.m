@@ -341,7 +341,7 @@
     
     NSString* topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitOneStatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
     
@@ -349,7 +349,7 @@
     
     topicStr = [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID];
     
-    [[MQTT shareMQTT].client subscribe:topicStr];
+    [[MQTT shareMQTT].client subscribe:topicStr withQos:2];
     
     [[MQTT shareMQTT].packetManager addPacketManager:self withKey:topicStr];
 

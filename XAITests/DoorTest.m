@@ -67,7 +67,7 @@
             
             if (_status > start) {
                 
-                //*done = YES;
+                *done = YES;
             }
         });
         

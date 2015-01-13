@@ -11,7 +11,7 @@
 #import "XAIDeviceType.h"
 #import "XAIObject.h"
 
-#define Key_DeviceStatusID  127
+#define Key_DeviceStatusID  0xFF
 
 typedef NSUInteger XAIDevOpr;
 

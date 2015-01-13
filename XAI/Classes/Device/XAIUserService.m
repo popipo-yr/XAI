@@ -312,7 +312,7 @@
 
 - (void) finderUserLuidHelper:(NSString*)username apsn:(XAITYPEAPSN) apsn luid:(XAITYPELUID)luid{
 
-    _usernameFind = [[NSString alloc] initWithString:username];
+    _usernameFind = [[NSString alloc] initWithFormat:@"%@",username];
     findingAUser = TRUE;
     
     [self finderAllUserApsn:apsn luid:luid];

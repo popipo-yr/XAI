@@ -32,9 +32,9 @@
     _light = [[XAILight alloc] init];
     _light.delegate = self;
     _light.apsn = [MQTT  shareMQTT].apsn;
-    _light.luid= 0x00124b0001859f37;//0x00124B000413C85C;
+    _light.luid= 0x0002000000000001;//0x00124B000413C85C;
     
-    _err_luid = 0x001489848478349d;
+    _err_luid = 0x0002000001000001;
     
     
     [_light startControl];

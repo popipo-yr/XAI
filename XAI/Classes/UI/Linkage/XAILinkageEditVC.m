@@ -178,6 +178,8 @@
 
 - (IBAction)okClick:(id)sender{
     
+    _linkage.name = self.nameTF.text;
+    
     NSString* tiperr = nil;
     
     if (_linkage.name == nil || [_linkage.name isEqualToString:@""]) {

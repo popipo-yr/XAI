@@ -319,6 +319,7 @@
         if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {
             
             [cell setInfo:aLinkage];
+            [cell isEidt:_gEditing];
         }
         
         

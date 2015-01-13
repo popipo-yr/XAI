@@ -18,6 +18,11 @@
 }
 
 -(NSString*)toStrIsCond:(BOOL)isCond  nameRange:(NSRange*)nameRange{
+    
+    if (nameRange != nil) {
+        (*nameRange).location = 0;
+        (*nameRange).length = 0;
+    }
 
     if (self.dev_apsn == 0x0 && self.dev_luid == 0x0) {
         //时间

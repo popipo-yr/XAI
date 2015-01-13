@@ -11,7 +11,7 @@
 #import "XAIPacketStatus.h"
 
 #define Key_DetectorStatusID 1
-#define Key_BatteryPowerId 126
+#define Key_BatteryPowerId 0xFE
 
 @implementation XAIDevInfrared
 
@@ -156,9 +156,9 @@
             byte_data_copy(&power, data->data, sizeof(int), data->data_len);
             
             if (power == 0) {
-                curPower = XAIDevPowerStatus_Normal;
-            }else if (power == 1){
                 curPower = XAIDevPowerStatus_Low;
+            }else if (power == 1){
+                curPower = XAIDevPowerStatus_Normal;
             }else if (power == 2){
                 curPower = XAIDevPowerStatus_Less;
             }

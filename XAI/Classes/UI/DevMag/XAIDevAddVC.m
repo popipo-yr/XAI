@@ -50,26 +50,59 @@
     
 }
 
+-(BOOL)prefersStatusBarHidden{
+    
+    return NO;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    
+    return UIStatusBarStyleLightContent;
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    if (isIOS7) {
+        
+        
+        [self.cNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [self.cNavBar setShadowImage:[UIImage new]];
+        
+    }else{
+        
+        [self.cNavBar setBackgroundImage:[UIImage imageWithColor:RGBA(255, 91, 0, 255)
+                                                            size:CGSizeMake(1, 44)]
+                           forBarMetrics:UIBarMetricsDefault];
+        
+    }
+    
 
     [_nameTextField addTarget:self action:@selector(nameTextReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
-    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"BarItemOK", nil)
-                                                               style:UIBarButtonItemStyleBordered
-                                                              target:self
-                                                              action:@selector(addOneDevice:)];
+    
+    UIImage* okImg = [UIImage imageWithFile:@"dev_add_btn_ok.png"] ;
+    
+    if ([okImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
+        
+        okImg = [okImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    UIBarButtonItem* okItem = [[UIBarButtonItem alloc] initWithImage:okImg
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(addOneDevice:)];
     
     [okItem ios6cleanBackgroud];
     
     [self.cNavigationItem setRightBarButtonItem:okItem];
     
     
-    UIImage* backImg = [UIImage imageWithFile:@"back_nor.png"] ;
+    UIImage* backImg = [UIImage imageWithFile:@"dev_add_btn_cancel.png"] ;
     
     if ([backImg respondsToSelector:@selector(imageWithRenderingMode:)]) {
         
@@ -98,8 +131,35 @@
 
     
     [self.view addSubview:_activityView];
+    
+    
+    
+    NSString* luidStr = _luidStr;
+    NSString* tipStr = nil;
+    if ([luidStr hasPrefix:@"0005"]) {
+        tipStr = @"门磁";
+    }else if ([luidStr hasPrefix:@"0002"]) {
+        tipStr = @"开关";
+    }else if ([luidStr hasPrefix:@"0003"]) {
+        tipStr = @"双控开关";
+    }else if ([luidStr hasPrefix:@"0004"]) {
+        tipStr = @"红外";
+    }else{
+        tipStr = @"未知";
+    }
 
+    tipStr = [NSString stringWithFormat:@"请为%@设备添加名称",tipStr];
+    
+    NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:tipStr];
 
+        
+    [astr addAttribute:NSForegroundColorAttributeName
+                 value:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:255/255.0 alpha:1]
+                 range:NSMakeRange(2,tipStr.length - 6)];
+    
+    _tipLabel.attributedText = astr;
+    
+    [_nameTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

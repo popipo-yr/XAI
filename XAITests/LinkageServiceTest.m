@@ -29,6 +29,9 @@
     int _getDetail;
     
     
+    int _curLinkageId;
+    
+    
     NSString* _name4Change;
     
     NSString* _name4Change_end;
@@ -61,8 +64,8 @@
     
     
     
-    _name4Change = [NSString stringWithFormat:@"NAME111"];
-    _name4Change_end = [NSString stringWithFormat:@"NAME112"];
+    _name4Change = [NSString stringWithFormat:@"onet"];
+    _name4Change_end = [NSString stringWithFormat:@"twot"];
     
     //    _luidDev = 0x124b0003d430b6 ;
     
@@ -251,7 +254,7 @@
     [self _addLinkageParams:[NSArray arrayWithObjects:us_add, nil]
                    ctrlInfo:open
                      status:XAILinkageStatus_Active
-                       name:@"ls_test2"];
+                       name:_name4Change];
     
     if (_loginStatus == Success) {
         
@@ -265,6 +268,9 @@
         
         XCTFail(@"login faild");
     }
+    
+    [self testFindAll];
+    [_service delLinkage:_curLinkageId];
     
 }
 
@@ -289,6 +295,9 @@
         
         XCTFail(@"login faild");
     }
+    
+    [self testFindAll];
+    [_service delLinkage:_curLinkageId];
     
 }
 
@@ -328,24 +337,30 @@
 
 - (void)testDel_TRUE
 {
-//    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageUseInfos] objectAtIndex:0], nil]
-//                   ctrlInfo:[[_light getLinkageUseInfos] objectAtIndex:0]
-//                     status:XAILinkageStatus_Active
-//                       name:_name4Change];
-//    
-//    if (_loginStatus != Success && _addStatus != Success) {
-//        
-//        XCTFail(@"Del_TRUE test faild : generate data faild");
-//        return;
-//    }
-//    
+
+    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageTiaojian] objectAtIndex:0], nil]
+                   ctrlInfo:[[_light getLinkageTiaojian] objectAtIndex:0]
+                     status:XAILinkageStatus_Active
+                       name:_name4Change];
+    
     [self login];
     
-    [self _delLinkage:0x1];
+    [self testFindAll];
+    [_service delLinkage:_curLinkageId];
     
     
     if (_loginStatus == Success) {
         
+        _delStatus = start;
+        
+        
+        runInMainLoop(^(BOOL * done) {
+            
+            if (_delStatus > 0) {
+                
+                *done = YES;
+            }
+        });
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Fail, @"no, del dev should be true");
@@ -363,16 +378,6 @@
 
 - (void)testGetDetail_TRUE
 {
-    [self _addLinkageParams:[NSArray arrayWithObjects:[[_door getLinkageTiaojian] objectAtIndex:0], nil]
-                   ctrlInfo:[[_light getLinkageTiaojian] objectAtIndex:0]
-                     status:XAILinkageStatus_Active
-                       name:_name4Change];
-    
-    if (_loginStatus != Success && _addStatus != Success) {
-        
-        XCTFail(@"Del_TRUE test faild : generate data faild");
-        return;
-    }
     
     
     XAILinkage* linkage = [[XAILinkage alloc] init];
@@ -417,7 +422,7 @@
     _err = errcode;
 }
 
-- (void)linkageService:(XAILinkageService *)service delStatusCode:(XAI_ERROR)errcode{
+- (void)linkageService:(XAILinkageService *)service delStatusCode:(XAI_ERROR)errcode otherID:(int)otherID{
 
     if (_delStatus != start) return;
     
@@ -445,6 +450,15 @@
     }else{
         
         _findStatus = Fail;
+    }
+    
+    
+    for (XAILinkage* aLink in linkageAry) {
+        if ([aLink.name  isEqualToString:_name4Change]) {
+            _curLinkageId  = aLink.num;
+            break;
+        }
+        
     }
     
     _err = errcode;
