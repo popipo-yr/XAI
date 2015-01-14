@@ -81,7 +81,8 @@
     [self showTipLable:true];
     
     _oprRollImgV.hidden = false;
-    _statusImgV.hidden = true;
+    _oprRollBgImgV.hidden = false;
+    //_statusImgV.hidden = true;
     
     [self endAnimation];
     
@@ -119,7 +120,8 @@
     _opr = XAIOCOT_None;
     
     _oprRollImgV.hidden = true;
-    _statusImgV.hidden = false;
+    _oprRollBgImgV.hidden = true;
+    //_statusImgV.hidden = false;
     
     if (_oprTimer != nil) {
         [_oprTimer invalidate];
@@ -237,6 +239,8 @@
                     forState:UIControlStateNormal];
     
     self.statusRollImgV.transform = CGAffineTransformMakeRotation(0);
+    self.statusImgV.hidden = false;
+    self.statusRollImgV.hidden = true;
     
     [self showTipLable:false];
 }
@@ -249,6 +253,8 @@
                     forState:UIControlStateNormal];
     
     self.statusRollImgV.transform = CGAffineTransformMakeRotation(0);
+    self.statusImgV.hidden = true;
+    self.statusRollImgV.hidden = false;
     
     [self showTipLable:false];
     

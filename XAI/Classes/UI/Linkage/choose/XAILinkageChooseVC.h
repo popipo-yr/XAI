@@ -24,6 +24,7 @@
     NSArray* _rTableViewDatas;
     
     BOOL _isChooseAttr1;
+    int _curType;
     
 }
 
@@ -47,6 +48,7 @@
 
 -(IBAction)attrBtnClick:(id)sender;
 - (void) reloadRight;
+-(void)attrShow:(int)type;
 
 +(XAILinkageChooseVC*)create;
 

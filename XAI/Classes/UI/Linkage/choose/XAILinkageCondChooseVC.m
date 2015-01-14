@@ -29,6 +29,12 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+
+    [super viewDidAppear:animated];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -127,6 +133,7 @@
 
   
      _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
+    _curType = type;
     
     
     if (type == _L_Timer) {
@@ -249,19 +256,44 @@
 #pragma  mark - helper
 -(void)attrShow:(_L_Type)type{
     
+    if (_oldFont == nil) {
+        _oldFont = self.tipLab.font;
+        _oldRect = self.tipLab.frame;
+    }
+    
     self.attrBtn.hidden = false;
+    self.tipLab.font = _oldFont;
+    self.tipLab.frame = _oldRect;
     
     switch (type) {
         case _L_Switch:{
-            self.tipLab.text  = _isChooseAttr1 ? @"您已选择开关打开触发" : @"您已选择开关关闭触发";
+            
+            NSString* str = _isChooseAttr1 ? @"您已选择开关打开触发" : @"您已选择开关关闭触发";
+            
+            NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
+            [astr addAttribute:NSForegroundColorAttributeName
+                         value:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]
+                         range:NSMakeRange(4,4)];
+            
+            self.tipLab.attributedText = astr;
             break;
         }
         case _L_DC:{
-            self.tipLab.text  = _isChooseAttr1 ?@"您已选择门窗打开触发" : @"您已选择门窗关闭触发";
+            NSString* str  = _isChooseAttr1 ?@"您已选择门窗打开触发" : @"您已选择门窗关闭触发";
+            NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
+            [astr addAttribute:NSForegroundColorAttributeName
+                         value:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]
+                         range:NSMakeRange(4,4)];
+            
+            self.tipLab.attributedText = astr;
             break;
         }
         case _L_INF:{
             self.tipLab.text  = @"当红外触发时";
+            self.tipLab.font = [UIFont systemFontOfSize:17];
+            CGRect newRect = _oldRect;
+            newRect.origin.y += 10;
+            self.tipLab.frame = newRect;
             self.attrBtn.hidden = true;
             break;
         }

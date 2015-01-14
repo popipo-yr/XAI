@@ -837,7 +837,7 @@ XAITYPELUID  ____luid;
     _err = errcode;
 
 }
-- (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode{
+- (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
     
     if (_delStatus != start) return;
     

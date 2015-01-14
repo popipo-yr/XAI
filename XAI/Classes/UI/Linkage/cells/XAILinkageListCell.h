@@ -11,7 +11,7 @@
 #import "XAIDevBtn.h"
 
 #define XAILinkageListCellID @"XAILinkageListCellID"
-#define _C_LinkageListCellHeight 140
+#define _C_LinkageListCellHeight 85
 
 @protocol XAILinkageListCellDelegate;
 
@@ -38,6 +38,7 @@
 
 @property (nonatomic,strong) IBOutlet UIImageView* statusRollImgV;
 @property (nonatomic,strong) IBOutlet UIImageView* oprRollImgV;
+@property (nonatomic,strong) IBOutlet UIImageView* oprRollBgImgV;
 
 @property (nonatomic,weak) id<XAILinkageListCellDelegate> delegate;
 

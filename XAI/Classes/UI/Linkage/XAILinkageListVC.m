@@ -409,7 +409,7 @@
         
     } while (0);
     
-    [_activityView startAnimating];
+    //[_activityView startAnimating];
     
 }
 
@@ -434,7 +434,7 @@
         
     } while (0);
     
-    [_activityView startAnimating];
+    //[_activityView startAnimating];
         
 }
 
@@ -444,7 +444,7 @@
 
     if (service != _linkageService) return;
     
-    [_activityView stopAnimating];
+    //[_activityView stopAnimating];
     
     XAILinkage * aLinkage = [_changeInfo objectForKey:[NSNumber numberWithInt:otherID]];
     if (aLinkage != nil && [aLinkage isKindOfClass:[XAILinkage class]]) {

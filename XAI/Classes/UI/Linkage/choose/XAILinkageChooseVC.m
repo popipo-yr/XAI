@@ -258,12 +258,16 @@
 
 }
 
+-(void)attrShow:(int)type{
+}
+
 
 -(void)attrBtnClick:(id)sender{
 
     _attrBtn.selected = !_attrBtn.selected;
     _isChooseAttr1 = _attrBtn.selected;
     
+    [self attrShow:_curType];
     [self reloadRight];
 }
 

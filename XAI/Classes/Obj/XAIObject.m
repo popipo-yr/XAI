@@ -294,6 +294,10 @@
 
 - (void) timeout{
     
+    if ([self isKindOfClass:[XAIDoor class]]) {
+        NSLog(@"ccc");
+    }
+    
     NSArray* newAry = [XAIObjectOpr sort:_tmpOprs];
     [_tmpOprs removeAllObjects];
     

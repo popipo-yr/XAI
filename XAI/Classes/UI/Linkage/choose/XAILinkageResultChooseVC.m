@@ -120,6 +120,7 @@
     _curCell = cell;
     
     _L_Type type = [[_lTableViewDatas objectAtIndex:[indexPath row]] intValue];
+    _curType = type;
     
     if (type == _L_Timer) {
         
@@ -228,7 +229,14 @@
     
     switch (type) {
         case _L_Switch:{
-            self.tipLab.text = _isChooseAttr1 ? @"您已选择开关打开动作" :@"您已选择开关关闭动作";
+            NSString* str = _isChooseAttr1 ? @"您已选择开关打开动作" :@"您已选择开关关闭动作";
+            
+            NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
+            [astr addAttribute:NSForegroundColorAttributeName
+                         value:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]
+                         range:NSMakeRange(4,4)];
+            
+            self.tipLab.attributedText = astr;
             break;
         }
         default:{

@@ -12,6 +12,9 @@
 
     int _selLeftType;
     UITableViewCell* _curCell;
+    
+    UIFont* _oldFont;
+    CGRect  _oldRect;
 }
 
 @end

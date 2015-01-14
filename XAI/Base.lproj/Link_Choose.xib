@@ -41,11 +41,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view alpha="0.80000000000000004" contentMode="scaleToFill" id="pXm-K0-GMb" userLabel="line">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_sep.png" id="PGR-KX-0io">
                     <rect key="frame" x="0.0" y="507" width="320" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.59999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
+                </imageView>
                 <view contentMode="scaleToFill" id="Nri-TT-69m">
                     <rect key="frame" x="0.0" y="150" width="320" height="353"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,11 +75,10 @@
                                         <action selector="attrBtnClick:" destination="-1" eventType="touchUpInside" id="gnq-QS-Xnb"/>
                                     </connections>
                                 </button>
-                                <view alpha="0.80000000000000004" contentMode="scaleToFill" id="Wx8-p0-EUL" userLabel="line">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_sep.png" id="T1L-NT-VCQ">
                                     <rect key="frame" x="0.0" y="60" width="320" height="1"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <color key="backgroundColor" white="0.59999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -114,6 +112,7 @@
     <resources>
         <image name="link_cond_head.png" width="91" height="91"/>
         <image name="link_cond_tiltle.png" width="124" height="30"/>
+        <image name="link_sep.png" width="356" height="1"/>
         <image name="link_swi_close.png" width="34" height="17"/>
         <image name="link_swi_open.png" width="34" height="17"/>
         <image name="link_tbg.png" width="356" height="191"/>

@@ -29,7 +29,7 @@ XAILinkageTime* ___S_TimePicker = nil;
     _secLab.hidden = true;
     _minLab.hidden = true;
     
-    [self oneDayClick:nil];
+    [self everyDayClick:nil];
 }
 - (void) setYanShi{
     
@@ -288,8 +288,12 @@ XAILinkageTime* ___S_TimePicker = nil;
 
     _everyDayBtn.selected = true;
     _oneDayBtn.selected = false;
+    [_everyDayBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [_oneDayBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+
     
     [self.dataPicker setDatePickerMode:UIDatePickerModeTime];
+    self.dataPicker.minimumDate = nil;
     [self valueChange:nil];
 }
 
@@ -297,8 +301,12 @@ XAILinkageTime* ___S_TimePicker = nil;
 
     _everyDayBtn.selected = false;
     _oneDayBtn.selected = true;
+    [_oneDayBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [_everyDayBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
     
     [self.dataPicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    self.dataPicker.minimumDate = [NSDate new];
     [self valueChange:nil];
 }
 
@@ -310,16 +318,16 @@ XAILinkageTime* ___S_TimePicker = nil;
         
         if (_oneDayBtn.selected) {
             
-            [format setDateFormat:@"您已选择MM月dd日HH时mm分触发"];
+            [format setDateFormat:@"您已选择yy/MM/dd HH:mm触发"];
         }else{
-            [format setDateFormat:@"您已选择每天HH时mm分触发"];
+            [format setDateFormat:@"您已选择每天HH:mm触发"];
         }
         
         NSMutableAttributedString* astr = [[NSMutableAttributedString alloc]
                                            initWithString:[format stringFromDate:_dataPicker.date]];
         
         [astr addAttribute:NSForegroundColorAttributeName
-                     value:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:255/255.0 alpha:1]
+                     value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
                      range:NSMakeRange(4,astr.length-2-4)];
         
         
@@ -331,16 +339,16 @@ XAILinkageTime* ___S_TimePicker = nil;
         int min = [_secPickView selectedRowInComponent:0]%60;
         int sec  = [_secPickView selectedRowInComponent:1]%60;
         
-        NSString* str = [NSString stringWithFormat:@"您已添加执行延时%d分%d秒的动作",min,sec];
+        NSString* str = [NSString stringWithFormat:@"您已添加延时%d分%d秒的动作",min,sec];
         if (min == 0) {
-          str = [NSString stringWithFormat:@"您已添加执行延时%d秒的动作",sec];
+          str = [NSString stringWithFormat:@"您已添加延时%d秒的动作",sec];
         }
         
         
         NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
         
         [astr addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:0/255.0 green:150/255.0 blue:255/255.0 alpha:1]
+                    value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]
                     range:NSMakeRange(4,str.length-3-4)];
        
         
