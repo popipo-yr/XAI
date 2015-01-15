@@ -59,6 +59,9 @@
     
     [self setSeparatorStyle];
     // Do any additional setup after loading the view.
+    
+    NSIndexPath* ip = [NSIndexPath indexPathForRow:([_datas count] - 1) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

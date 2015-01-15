@@ -43,19 +43,11 @@
     
     _readerView = [[ZBarReaderView alloc]init];
     
-    float startx =  2;
-    float starty = 2;
     
-    CGRect frame = CGRectMake(_scanView.frame.origin.x+startx,
-                              _scanView.frame.origin.y+starty,
-                              _scanView.frame.size.width-startx*2,
-                              _scanView.frame.size.height-starty*2);
 
     CGRect  newframe = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,
                        [UIScreen mainScreen].bounds.size.height);
     
-    _readerView.frame = CGRectMake(startx,starty, frame.size.width, frame.size.height);
-    //[_readerView setBackgroundColor:[UIColor clearColor]];
     
     _readerView.frame = newframe;
     
@@ -74,10 +66,6 @@
         cameraSimulator.readerView = _readerView;
     }
     
-    //扫描区域
-    CGRect scanMaskRect = frame;
-    //扫描区域计算
-    _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
     
     [_readerView.scanner setSymbology: ZBAR_I25
                                config: ZBAR_CFG_ENABLE
@@ -98,6 +86,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    //扫描区域
+    CGRect scanMaskRect = _scanView.frame;
+    //扫描区域计算
+    _readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:_readerView.bounds];
+    
     [_readerView performSelectorInBackground:@selector(start) withObject:nil];
     
     
@@ -231,6 +225,12 @@
 
 -(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
 {
+    
+    CGRect newRect = rect;
+    newRect.origin.x = (readerViewBounds.size.width - newRect.size.width)*0.5f;
+    newRect.origin.y = (readerViewBounds.size.height - newRect.size.height)*0.5f;
+    rect = newRect;
+    
     CGFloat x,y,width,height;
     
     x = rect.origin.x / readerViewBounds.size.width;
