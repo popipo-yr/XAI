@@ -106,7 +106,6 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     void* in_data =  malloc(ctrl_param_data->data_len);
     memset(in_data, 0, ctrl_param_data->data_len);
     memcpy(in_data, data+_XPP_CD_DATA_START, ctrl_param_data->data_len);
-    //packet_to_param_helper(in_data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
     
     
     
@@ -135,9 +134,8 @@ _xai_packet_param_data*    generateParamDataOneFromData(void*  data,int size){
     //unfixed
     ctrl_param_data->data = malloc(ctrl_param_data->data_len);
     memset(ctrl_param_data->data, 0, ctrl_param_data->data_len);
-    //packet_to_param_helper(ctrl_param_data->data, data, _XPP_CD_DATA_START, _XPP_CD_DATA_START+ctrl_param_data->data_len);
+    memcpy(ctrl_param_data->data, in_data, ctrl_param_data->data_len);
     
-    packet_to_param_helper(ctrl_param_data->data, in_data, 0, ctrl_param_data->data_len);
     free(in_data);
     
     return ctrl_param_data;

@@ -452,14 +452,10 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xm8-Sj-sPB">
-                                                    <rect key="frame" x="0.0" y="49" width="500" height="1"/>
+                                                <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_sep.png" id="lxo-ml-eYH">
+                                                    <rect key="frame" x="0.0" y="48" width="320" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-xai.png" id="oXD-hH-Dxb">
                                                     <rect key="frame" x="10" y="10" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -529,6 +525,7 @@
         <image name="inf_title.png" width="127" height="20"/>
         <image name="jiaohu_head.png" width="63" height="63"/>
         <image name="jiaohu_tbg.png" width="356" height="170"/>
+        <image name="link_sep.png" width="356" height="1"/>
         <image name="msgNum1.png" width="29" height="24"/>
         <image name="show_bg.png" width="356" height="633"/>
         <image name="show_bg_cent.png" width="298" height="348"/>

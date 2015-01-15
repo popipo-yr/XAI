@@ -65,7 +65,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="link_sw_bg_nor.png" width="234" height="32"/>
+        <image name="link_sw_bg_nor.png" width="356" height="633"/>
         <image name="link_sw_bg_sel.png" width="234" height="32"/>
     </resources>
 </document>
