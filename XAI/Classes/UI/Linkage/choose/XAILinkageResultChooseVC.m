@@ -319,21 +319,24 @@
         }
     }
     
-    //找出使用的结果,不能使用
+    //找出使用的条件,不能使用
     XAILinkage* linkage = [self.infoVC getLinkage];
-    XAILinkageUseInfo* useInfo = linkage.effeInfo;
+    NSMutableArray* useds = [[NSMutableArray alloc] init];
+    //[useds addObjectsFromArray:linkage.resultInfos];
+    [useds addObjectsFromArray:linkage.condInfos];
     
+    for (XAILinkageUseInfo* useInfo in useds) {
         
         //时间进行下一个
-    if (useInfo.dev_apsn != 0 && useInfo.dev_luid != 0){
-    
+        if (useInfo.dev_apsn == 0 && useInfo.dev_luid == 0) continue;
+        
         for (XAIObject* obj in jieGuoObjs) {
+            
             if ([obj linkageInfoIsEqual:useInfo index:index]) {
                 [jieGuoObjs removeObject:obj];
                 break;
             }
         }
-    
     }
 
     

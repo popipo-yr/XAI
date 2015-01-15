@@ -218,33 +218,16 @@
 
 - (void)dateChoose:(id)sender{
     
-    NSDate* date= [[XAILinkageTime share].dataPicker date];
     
+    Linkage_Time_Dimension dimension = [[XAILinkageTime share] isEveryDay]
+    ? Linkage_Time_Dimension_Day : Linkage_Time_Dimension_All;
     
-    NSDateFormatter* mouthFormat = [[NSDateFormatter alloc] init];
-    [mouthFormat setDateFormat:@"MM"];
-    
-    NSDateFormatter* hourFormat = [[NSDateFormatter alloc] init];
-    [hourFormat setDateFormat:@"HH"];
-    
-    NSDateFormatter* minuFormat = [[NSDateFormatter alloc] init];
-    [minuFormat setDateFormat:@"mm"];
-    
-    int mouth = [[mouthFormat stringFromDate:date] intValue];
-    int hour =[[hourFormat stringFromDate:date] intValue];
-    int min = [[minuFormat stringFromDate:date] intValue];
-    
-    
-    if ([XAILinkageTime share].dataPicker.datePickerMode == UIDatePickerModeCountDownTimer) {
-        float couteDown = [XAILinkageTime share].dataPicker.countDownDuration;
-        hour = couteDown / 60 / 60;
-        min  = (couteDown - hour*60*60)/ 60;
-    }
-    
+    XAILinkageTimeStruct* time = [[XAILinkageTimeStruct alloc] init];
+    [time setDate:[[XAILinkageTime share].dataPicker date] dimension:dimension];
     
     
     XAILinkageUseInfoTime* timeUseInfo = [[XAILinkageUseInfoTime alloc] init];
-    timeUseInfo.time = hour*60*60 + min*60 ;
+    timeUseInfo.timeStruct = time ;
     [timeUseInfo change];
     
     [self.infoVC setLinkageUseInfo:timeUseInfo];
@@ -394,9 +377,11 @@
     
     //找出使用的结果,不能使用
     XAILinkage* linkage = [self.infoVC getLinkage];
-    NSArray* results = linkage.condInfos;
+    NSMutableArray* useds = [[NSMutableArray alloc] init];
+    [useds addObjectsFromArray:linkage.resultInfos];
+    //[useds addObjectsFromArray:linkage.condInfos];
     
-    for (XAILinkageUseInfo* useInfo in results) {
+    for (XAILinkageUseInfo* useInfo in useds) {
         
         //时间进行下一个
         if (useInfo.dev_apsn == 0 && useInfo.dev_luid == 0) continue;

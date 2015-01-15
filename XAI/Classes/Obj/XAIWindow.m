@@ -198,5 +198,9 @@
     return @"";
 }
 
+-(BOOL)isWorn{
+    
+    return _opr == XAIWindowStatus_Open;
+}
 
 @end

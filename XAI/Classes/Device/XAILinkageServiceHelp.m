@@ -79,8 +79,8 @@
     
     if (errcode == XAI_ERROR_NONE) {
         
-        NSMutableArray* useInfos = [[NSMutableArray alloc] initWithArray:linkage.condInfos];
-        [useInfos addObject:linkage.effeInfo];
+        NSMutableArray* useInfos = [[NSMutableArray alloc] initWithArray:linkage.resultInfos];
+        [useInfos addObjectsFromArray:linkage.condInfos];
         
         for (XAILinkageUseInfo* info in useInfos) {
             if (info.dev_apsn == _curDev.apsn && info.dev_luid == _curDev.luid) {

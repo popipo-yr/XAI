@@ -184,9 +184,11 @@
     
     if (_linkage.name == nil || [_linkage.name isEqualToString:@""]) {
         tiperr = @"请添加联动名称";
-    }else if (_linkage.effeInfo == nil) {
+    }else if (strlen([_linkage.name UTF8String]) < 4) {
+        tiperr = @"联动名称长度过短";
+    }else if ([_linkage.condInfos count] == 0) {
         tiperr = @"请添加联动条件";
-    }else if([_linkage.condInfos count] == 0){
+    }else if([_linkage.resultInfos count] == 0){
         tiperr = @"请添加联动控制";
     }
     
@@ -225,8 +227,8 @@
 -(void)addLinkage{
 
     
-    [_linkageService addLinkageParams:_linkage.condInfos
-                             ctrlInfo:_linkage.effeInfo
+    [_linkageService addLinkageConds:_linkage.condInfos
+                             results:_linkage.resultInfos
                                status:XAILinkageStatus_Active
                                  name:_linkage.name];
 }
@@ -257,7 +259,7 @@
     
     if ([_selIndex row] == -1){
     
-        _linkage.effeInfo = useInfo;
+        _linkage.condInfos =  [NSMutableArray arrayWithObject:useInfo];
         NSRange range;
         [self setCondText:[useInfo toStrIsCond:true nameRange:&range] nameRange:range];
         return;
@@ -266,12 +268,12 @@
         
         NSUInteger resIndex = [_selIndex row];
     
-        if (resIndex < [_linkage.condInfos count]) {
+        if (resIndex < [_linkage.resultInfos count]) {
             
-            [_linkage.condInfos replaceObjectAtIndex:resIndex withObject:useInfo];
+            [_linkage.resultInfos replaceObjectAtIndex:resIndex withObject:useInfo];
             
-        }else if(resIndex == [_linkage.condInfos count]){
-            [_linkage.condInfos addObject:useInfo];
+        }else if(resIndex == [_linkage.resultInfos count]){
+            [_linkage.resultInfos addObject:useInfo];
            
             next = [NSIndexPath indexPathForRow:_selIndex.row+1
                                       inSection:_selIndex.section];
@@ -304,7 +306,7 @@
     if ([_linkage.condInfos count] == 16) { //16个不能进行添加
         return 16;
     }
-    return [_linkage.condInfos count] + 1;
+    return [_linkage.resultInfos count] + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -327,9 +329,9 @@
     
     NSUInteger condIndex = [indexPath row];
     
-    if (condIndex < [_linkage.condInfos count]) {
+    if (condIndex < [_linkage.resultInfos count]) {
         
-        XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex];
+        XAILinkageUseInfo * aUseInfo = [_linkage.resultInfos objectAtIndex:condIndex];
         
         
         [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex];
@@ -387,9 +389,9 @@
     
     
     NSUInteger condIndex = [indexPatn row];
-    if (condIndex < [_linkage.condInfos count]) {
+    if (condIndex < [_linkage.resultInfos count]) {
         
-        [_linkage.condInfos removeObjectAtIndex:condIndex];
+        [_linkage.resultInfos removeObjectAtIndex:condIndex];
         [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPatn]
                                 withRowAnimation:UITableViewRowAnimationAutomatic];
         [_cTableView reloadData];
@@ -472,7 +474,11 @@
         
         [self setNameText:_linkage.name];
         NSRange range;
-        [self setCondText:[_linkage.effeInfo toStrIsCond:true nameRange:&range] nameRange:range];
+        
+        if (_linkage.condInfos.count > 0) {
+            [self setCondText:[[_linkage.condInfos objectAtIndex:0] toStrIsCond:true nameRange:&range] nameRange:range];
+        }
+
 
         [self.cTableView reloadData];
     }

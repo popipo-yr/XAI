@@ -71,11 +71,49 @@ typedef enum : uint8_t{
 
 
 /*时间*/
+@class XAILinkageTimeStruct;
 @interface XAILinkageUseInfoTime : XAILinkageUseInfoStatus
 
 @property (nonatomic,assign) XAITYPETime time;
+@property (nonatomic,strong) XAILinkageTimeStruct* timeStruct;
+
 
 - (void)change;
 
 
 @end
+
+typedef NS_ENUM(NSUInteger, Linkage_Time_Dimension) {
+    Linkage_Time_Dimension_Day,
+    Linkage_Time_Dimension_Mouth,
+    Linkage_Time_Dimension_Year,
+    Linkage_Time_Dimension_All, /*表示整个时间长度*/
+};
+//gmt 时间
+@interface XAILinkageTimeStruct : NSObject{
+
+    
+    uint8_t _sec;
+    uint8_t _min;
+    uint8_t _hour;
+    uint8_t _mday;
+    uint8_t _mouth;
+    uint8_t _year;  /*从2000年开始计数*/
+    uint8_t _wday;
+    
+    
+    Linkage_Time_Dimension  _dimension;
+
+
+}
+
+
+-(void)setDate:(NSDate*)date dimension:(Linkage_Time_Dimension)dimension;
+-(NSData*)getBinary;
+-(void)setDateFromBData:(NSData*)bData;
+
+-(NSString*)toStr;
+
+@end
+
+

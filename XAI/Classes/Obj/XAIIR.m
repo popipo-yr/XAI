@@ -197,6 +197,9 @@
     return @"";
 }
 
-
+-(BOOL)isWorn{
+    
+    return _opr == XAIIRStatus_warning;
+}
 
 @end

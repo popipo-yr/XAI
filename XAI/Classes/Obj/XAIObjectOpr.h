@@ -47,5 +47,7 @@
 /*对操作数据进行排序*/
 + (NSArray*) sort:(NSArray*)oprs;
 
+-(BOOL) isWorn;
+
 @end
 

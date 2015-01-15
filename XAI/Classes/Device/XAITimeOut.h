@@ -25,13 +25,14 @@
 #define _DEF_XTO_TIME  (5.0f)
 #define _DEF_XTO_TIMEWait  (0.5f)
 
+//通知代理之前调用
 #define _DEF_XTO_TIME_End \
 if (_timeout != nil) { \
 [_timeout invalidate]; \
 _timeout = nil; \
 }
 
-
+//调用数据之后调用
 #define _DEF_XTO_TIME_Start \
 _DEF_XTO_TIME_End \
 _timeout = [NSTimer scheduledTimerWithTimeInterval:_DEF_XTO_TIME  \

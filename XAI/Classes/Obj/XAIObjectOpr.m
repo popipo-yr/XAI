@@ -126,6 +126,11 @@
     return [oprs sortedArrayUsingSelector:@selector(compare:)];
 }
 
+-(BOOL) isWorn{
+
+    return false;
+}
+
 
 @end
 

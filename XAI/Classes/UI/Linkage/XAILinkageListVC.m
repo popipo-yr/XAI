@@ -197,7 +197,7 @@
     if ([UIScreen is_35_Size]) {
         vc = [XAILinkageEditSmallVC create];
     }else{
-        vc = [XAILinkageEditVC create];
+        vc = [XAILinkageEditSmallVC create];
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -364,7 +364,7 @@
     if ([UIScreen is_35_Size]) {
         vc = [XAILinkageEditSmallVC create:linkage];
     }else{
-        vc = [XAILinkageEditVC create:linkage];
+        vc = [XAILinkageEditSmallVC create:linkage];
     }
     
     [self.navigationController pushViewController:vc animated:YES];

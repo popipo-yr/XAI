@@ -11,7 +11,7 @@
 #import "XAIDevBtn.h"
 
 #define XAILinkageListCellID @"XAILinkageListCellID"
-#define _C_LinkageListCellHeight 85
+#define _C_LinkageListCellHeight 95
 
 @protocol XAILinkageListCellDelegate;
 

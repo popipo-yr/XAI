@@ -17,6 +17,7 @@
 
     if (self = [super init]) {
         _condInfos = [[NSMutableArray alloc]init];
+        _resultInfos = [[NSMutableArray alloc]init];
     }
     
     return self;

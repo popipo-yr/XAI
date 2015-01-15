@@ -18,7 +18,7 @@ XAILinkageTime* ___S_TimePicker = nil;
 - (void) setDingShi{
     
     [self.dataPicker setLocale:[NSLocale currentLocale]];
-    self.dataPicker.minuteInterval = 5;
+    self.dataPicker.minuteInterval = 1;
     
     
     self.dingshiView.hidden = false;
@@ -362,6 +362,11 @@ XAILinkageTime* ___S_TimePicker = nil;
     int sec  = [_secPickView selectedRowInComponent:1]%60;
     
     return min*60 + sec;
+}
+
+-(BOOL)isEveryDay{
+
+    return _everyDayBtn.selected;
 }
 
 @end

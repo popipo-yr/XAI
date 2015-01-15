@@ -28,9 +28,6 @@ typedef enum : uint8_t{
     XAILinkageStatus _status;
     NSString* _name;
     
-    
-    XAILinkageUseInfo* _effeInfo;
-    NSMutableArray*  _condInfos;
 }
 
 
@@ -39,7 +36,7 @@ typedef enum : uint8_t{
 @property (nonatomic,strong) NSString* name;
 
 
-@property (nonatomic,strong) XAILinkageUseInfo* effeInfo;
+@property (nonatomic,strong) NSMutableArray* resultInfos;
 @property (nonatomic,strong) NSMutableArray* condInfos;
 
 

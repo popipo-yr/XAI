@@ -67,11 +67,15 @@
     
 }
 
-- (void)setCondInfo:(NSString*)str nameRange:(NSRange)range{
+- (void)setCondInfo:(NSString*)str nameRange:(NSRange)range index:(int)index{
     
-    self.preLab.text = @"条  件:";
+    self.tipTF.textAlignment = NSTextAlignmentLeft;
+    self.tipTF.enabled = false;
     
     if (str != nil) {
+        
+        self.preLab.text = [NSString stringWithFormat:@"条件%d:",index+1];
+        
         int endStart = range.location + range.length;
         
         NSString* allStr = [NSString stringWithFormat:@"%@",str];
@@ -88,21 +92,32 @@
         
         self.tipTF.attributedText = str;
         
+        
+        [_centerBtn setImage:[UIImage imageWithFile:@"link_edit_cell_bg.png"]
+                    forState:UIControlStateNormal];
+
+        
     }else{
         
+        self.preLab.text = nil;
+        self.tipTF.attributedText = nil;
+        [_centerBtn setImage:[UIImage imageWithFile:@"link_edit_add.png"]
+                    forState:UIControlStateNormal];
+        
+        if (index == 0) {
+            
+            [_centerBtn setImage:[UIImage imageWithFile:@"link_edit_cell_bg.png"]
+                        forState:UIControlStateNormal];
+            self.preLab.text = @"条  件:";
+            _tipTF.placeholder = @"请添加触发条件";
+            
+        }else{
+            _tipTF.placeholder = nil;
+        }
+
         self.tipTF.text = nil;
     }
-
-
-    self.tipTF.textAlignment = NSTextAlignmentLeft;
-    self.tipTF.placeholder = @"请添加触发条件";
-    self.tipTF.enabled = false;
     
-    
-    [_centerBtn setImage:[UIImage imageWithFile:@"link_edit_cell_bg.png"]
-                forState:UIControlStateNormal];
-    
-
 }
 
 - (void) setInfo:(NSString*)str index:(int)index{

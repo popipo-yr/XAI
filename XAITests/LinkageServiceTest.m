@@ -143,7 +143,7 @@
     if (_loginStatus == Success) {
         
         
-        [_service addLinkageParams:ary ctrlInfo:ctrlInfo status:status name:name];
+        [_service addLinkageConds:ary results:ctrlInfo status:status name:name];
         
         
         _addStatus = 0;

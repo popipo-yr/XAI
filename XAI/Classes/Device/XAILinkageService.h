@@ -27,7 +27,7 @@
 @property (weak,nonatomic) id<XAILinkageServiceDelegate> linkageServiceDelegate;
 
 
-- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfo*)ctrlInfo
+- (void)  addLinkageConds:(NSArray*)conds results:(NSArray*)results
                     status:(XAILinkageStatus)status name:(NSString*)name;
 
 - (int) delLinkage:(XAILinkageNum)linkNum;
@@ -63,5 +63,6 @@ typedef NS_ENUM(NSUInteger,_XAILinkageOpr){
     
     XAILinkageOpr_FindAll = __Dev_lastItem,
     XAILinkageOpr_GetDetail,
+    XAILinkageOpr_Add,
     ___Linkage_lastItem,
 };

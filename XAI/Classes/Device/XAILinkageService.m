@@ -25,35 +25,59 @@
 @implementation XAILinkageService
 
 
-- (void)  addLinkageParams:(NSArray*)params ctrlInfo:(XAILinkageUseInfo*)ctrlInfo
+- (void)  addLinkageConds:(NSArray*)conds results:(NSArray*)results
                     status:(XAILinkageStatus)status name:(NSString*)name{    
     
     
     MQTT* cur_MQTT = [MQTT shareMQTT];
     
-    _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
+     _xai_packet_param_ctrl*  param_ctrl = generatePacketParamCtrl();
     
     _xai_packet_param_data* status_data = generatePacketParamData();
     _xai_packet_param_data* name_data = generatePacketParamData();
-    _xai_packet_param_data* ctrlInfo_data = generatePacketParamData();
-    _xai_packet_param_data* paramInfo_data = NULL;
+    _xai_packet_param_data* resultsInfo_data = NULL;
+    _xai_packet_param_data* condsInfo_data = NULL;
     int param_count = 0;
     
-    xai_param_data_set(status_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageStatus), &status, name_data);
-    param_count += 1;
-    
-    
-    NSData* data = [name dataUsingEncoding:NSUTF8StringEncoding];
-    xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
-                       [data length], (void*)[name UTF8String],ctrlInfo_data);
-    param_count += 1;
     
     /*倒叙*/
     _xai_packet_param_data* next_data = NULL;
-    /*条件参数*/
-    for (int i = 0; i < [params count]; i++) {
+    /*结果参数*/
+    for (int i = 0; i < [results count]; i++) {
         
-        XAILinkageUseInfo* aUseInfo = [params objectAtIndex:[params count] - i - 1];
+        XAILinkageUseInfo* aUseInfo = [results objectAtIndex:[results count] - i - 1];
+        if (![aUseInfo isKindOfClass:[XAILinkageUseInfo class]]) {
+            
+            /*错误处理*/
+            break;
+        }
+        
+        _xai_packet_param_data* one_data = generatePacketParamData();
+        
+        _xai_packet_param_linkage* result_info = generatePacketParamLinkage();
+        xai_param_Linkage_set(result_info, aUseInfo.dev_apsn, aUseInfo.dev_luid, aUseInfo.some_id, (uint8_t)aUseInfo.cond,aUseInfo.datas);
+        _xai_packet* cond_info_p = generatePacketFromParamLinkage(result_info);
+        
+        xai_param_data_set(one_data, XAI_DATA_TYPE_LINKAGE_Result, cond_info_p->size, cond_info_p->all_load, next_data);
+        
+        purgePacket(cond_info_p);
+        purgePacketParamLinkage(result_info);
+        
+        
+        next_data = one_data;
+        resultsInfo_data = one_data;
+        
+        param_count += 1;
+        
+    }
+    
+    
+    /*倒叙*/
+    //next_data = NULL; /*不设置为null,因为在上面处理后它指向结果的头部,在下面直接使用*/
+    /*条件参数*/
+    for (int i = 0; i < [conds count]; i++) {
+        
+        XAILinkageUseInfo* aUseInfo = [conds objectAtIndex:[conds count] - i - 1];
         if (![aUseInfo isKindOfClass:[XAILinkageUseInfo class]]) {
             
             /*错误处理*/
@@ -66,31 +90,37 @@
         xai_param_Linkage_set(cond_info, aUseInfo.dev_apsn, aUseInfo.dev_luid, aUseInfo.some_id, (uint8_t)aUseInfo.cond,aUseInfo.datas);
         _xai_packet* cond_info_p = generatePacketFromParamLinkage(cond_info);
         
-        xai_param_data_set(one_data, XAI_DATA_TYPE_LINKAGE, cond_info_p->size, cond_info_p->all_load, next_data);
+        xai_param_data_set(one_data, XAI_DATA_TYPE_LINKAGE_Cond, cond_info_p->size, cond_info_p->all_load, next_data);
         
         purgePacket(cond_info_p);
         purgePacketParamLinkage(cond_info);
         
         
         next_data = one_data;
-        paramInfo_data = one_data;
+        condsInfo_data = one_data;
         
         param_count += 1;
         
     }
     
+    /*名称*/
     
-    /*结果参数*/
-    _xai_packet_param_linkage* ctrl_info = generatePacketParamLinkage();
-    xai_param_Linkage_set(ctrl_info, ctrlInfo.dev_apsn, ctrlInfo.dev_luid, ctrlInfo.some_id, (uint8_t)ctrlInfo.cond,ctrlInfo.datas);
-    _xai_packet* ctrl_info_p = generatePacketFromParamLinkage(ctrl_info);
-    
-    xai_param_data_set(ctrlInfo_data, XAI_DATA_TYPE_LINKAGE, ctrl_info_p->size, ctrl_info_p->all_load, paramInfo_data);
-    
-    purgePacket(ctrl_info_p);
-    purgePacketParamLinkage(ctrl_info);
+    NSData* data = [name dataUsingEncoding:NSUTF8StringEncoding];
+    xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
+                       [data length], (void*)[name UTF8String],condsInfo_data);
+//    NSMutableData* mudata = [[NSMutableData alloc] initWithData:data];
+//    uint8_t _end = 0;
+//    [mudata appendBytes:&_end length:1];
+//    xai_param_data_set(name_data, XAI_DATA_TYPE_ASCII_TEXT,
+//                       [mudata length], (void*)[mudata UTF8String],condsInfo_data);
+
     param_count += 1;
     
+    /*状态*/
+    xai_param_data_set(status_data, XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN, sizeof(XAILinkageStatus), &status, name_data);
+    param_count += 1;
+    
+
     
     xai_param_ctrl_set(param_ctrl, cur_MQTT.apsn, cur_MQTT.luid, _apsn , _luid, XAI_PKT_TYPE_CONTROL, 0, 0,
                        Key_LinkageAdd,[[NSDate new] timeIntervalSince1970], param_count, status_data);
@@ -110,6 +140,10 @@
     
     purgePacket(packet);
     purgePacketParamCtrlAndData(param_ctrl);
+    
+    
+    _devOpr = XAILinkageOpr_Add;
+    _DEF_XTO_TIME_Start;
 
 
 }
@@ -359,6 +393,8 @@
         
     }
     
+    _DEF_XTO_TIME_End;
+    
     if ((nil != _linkageServiceDelegate) &&
         [_linkageServiceDelegate respondsToSelector:@selector(linkageService:findedAllLinkage:errcode:)]) {
         
@@ -366,15 +402,13 @@
     }
     
     
-    _DEF_XTO_TIME_End;
-    
     return 0;
 }
 
 - (int) getLinkageDetailWithParamStatus:(_xai_packet_param_status*) param{
     
-    int fixparam = 3;
-    int cond_count = param->data_count - fixparam;
+    int fixparam = 2;
+    int less_count = param->data_count - fixparam;
     
     BOOL hasErr = true;
     
@@ -394,53 +428,51 @@
         NSString* name = [[NSString alloc] initWithBytes:name_data->data length:name_data->data_len encoding:NSUTF8StringEncoding];
 
         
-        _xai_packet_param_data* ctrlInfo_data = getParamDataFromParamStatus(param, 2);
-         if (ctrlInfo_data == NULL || (ctrlInfo_data->data_type != XAI_DATA_TYPE_LINKAGE) || ctrlInfo_data->data_len <= 0) break;
-        
-        _xai_packet_param_linkage* ctrl_info = generateParamLinkageFromData(ctrlInfo_data->data, ctrlInfo_data->data_len);
-
-
-        XAILinkageUseInfo* effeInfo = [[XAILinkageUseInfo alloc] init];
-        XAITYPEAPSN apsn = 0;
-        XAITYPELUID luid = 0;
-        GUIDToApsnAndLuid(&apsn, &luid, ctrl_info->guid, sizeof(ctrl_info->guid));
-        
-        [effeInfo setApsn:apsn Luid:luid ID:ctrl_info->some_id Datas:ctrl_info->data];
-        
         
         NSMutableArray* cond_infos = [[NSMutableArray alloc] init];
+        NSMutableArray* result_infos = [[NSMutableArray alloc] init];
         
-        BOOL  infos_b = true;
+        BOOL  infos_b = less_count > 0;
         
-        for (int i = 0;  i < cond_count; i++) {
+        for (int i = 0;  i < less_count; i++) {
+    
             
-            infos_b = false;
-            
-            _xai_packet_param_data* Info_data = getParamDataFromParamStatus(param, 3 + i);
-            if (Info_data == NULL || (Info_data->data_type != XAI_DATA_TYPE_LINKAGE) || Info_data->data_len <= 0) break;
-
+            _xai_packet_param_data* Info_data = getParamDataFromParamStatus(param, fixparam + i);
+            if (Info_data == NULL  || Info_data->data_len <= 0) break;
             
             _xai_packet_param_linkage* cond_info = generateParamLinkageFromData(Info_data->data, Info_data->data_len);
             
-            
-            XAILinkageUseInfo* useInfo = [[XAILinkageUseInfo alloc] init];
             XAITYPEAPSN apsn = 0;
             XAITYPELUID luid = 0;
             GUIDToApsnAndLuid(&apsn, &luid, cond_info->guid, sizeof(cond_info->guid));
             
+            XAILinkageUseInfo* useInfo = [[XAILinkageUseInfo alloc] init];
             [useInfo setApsn:apsn Luid:luid ID:cond_info->some_id Datas:cond_info->data];
+    
             
-            [cond_infos  addObject:useInfo];
-
-            infos_b = true;
+            if (Info_data->data_type == XAI_DATA_TYPE_LINKAGE_Cond) {
+                
+                [cond_infos  addObject:useInfo];
+               
+            }else if(Info_data->data_type == XAI_DATA_TYPE_LINKAGE_Result){
             
+                [result_infos  addObject:useInfo];
+            
+            }else{
+            
+                infos_b = false;
+            }
+            
+            purgePacketParamLinkage(cond_info);
+            
+            if (infos_b == false) break;
         }
         
         if (infos_b == false) break;
 
         _getLinkage.name = name;
         _getLinkage.status = status;
-        _getLinkage.effeInfo = effeInfo;
+        _getLinkage.resultInfos = result_infos;
         _getLinkage.condInfos = cond_infos;
         
         hasErr = false;
@@ -458,15 +490,20 @@
     }
     
     
+
+    
+    _DEF_XTO_TIME_End;
+    
     if ((nil != _linkageServiceDelegate) &&
         [_linkageServiceDelegate respondsToSelector:@selector(linkageService:getLinkageDetail:statusCode:)]) {
         
         [_linkageServiceDelegate linkageService:self getLinkageDetail:_getLinkage statusCode:err];
     }
     
+
     _getLinkage = nil;
     
-    _DEF_XTO_TIME_End;
+    
     return 0;
 }
 
@@ -492,34 +529,12 @@
             
             [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
             
+            _DEF_XTO_TIME_End;
+            
             
         }break;
             
         case Key_LinkageChange:{
-            
-//            if (ack->normal_param->magic_number == Key_LinkageDelMagNum) {
-//                
-//                
-//                if ((nil != _linkageServiceDelegate) &&
-//                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:delStatusCode:)]) {
-//                    
-//                    [_linkageServiceDelegate linkageService:self delStatusCode:ack->err_no];
-//                }
-//                
-//                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-//                
-//                
-//            }else if(ack->normal_param->magic_number == Key_LinkageChgMagNum){
-//                
-//                if ((nil != _linkageServiceDelegate) &&
-//                    [_linkageServiceDelegate respondsToSelector:@selector(linkageService:changeStatusStatusCode:)]) {
-//                    
-//                    [_linkageServiceDelegate linkageService:self changeStatusStatusCode:ack->err_no];
-//                }
-//                
-//                [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
-//                
-//            }
             
             NSNumber* curID = [NSNumber numberWithInt:ack->normal_param->magic_number];
             
@@ -670,6 +685,16 @@
        [_linkageServiceDelegate respondsToSelector:@selector(linkageService:getLinkageDetail:statusCode:)]){
         
         [_linkageServiceDelegate linkageService:self getLinkageDetail:_getLinkage statusCode:XAI_ERROR_TIMEOUT];
+        
+    }
+    
+    if(_devOpr == XAILinkageOpr_Add &&
+       (nil != _linkageServiceDelegate) &&
+       [_linkageServiceDelegate respondsToSelector:@selector(linkageService:addStatusCode:)]){
+        
+        [_linkageServiceDelegate linkageService:self addStatusCode:XAI_ERROR_TIMEOUT];
+        
+        [[MQTT shareMQTT].packetManager removePacketManagerACK:self];
         
     }
     

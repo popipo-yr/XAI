@@ -35,34 +35,50 @@
             [timeUseInfo setApsn:0 Luid:0 ID:0 Datas:self.datas];
         }
         
-        time = timeUseInfo.time;
-        int hour = time/(60*60);
-        int minu = (time - (hour*60*60))/60;
-        int sec =  time - (hour*60*60) - minu*60;
-        
-        NSString* str = nil;
-        
-        if (isCond) {//条件 定时
+        if (timeUseInfo.timeStruct != nil) {
             
-            str = [NSString stringWithFormat:@"当%d点%d分时",hour,minu];
+            
+            NSString* timeStr = [timeUseInfo.timeStruct toStr];
             
             if (nameRange != nil) {
                 (*nameRange).location = 1;
-                (*nameRange).length = str.length - 2;
+                (*nameRange).length = timeStr.length;
             }
-
+            
+            return [NSString stringWithFormat:@"当%@时",timeStr];
             
         }else{
-            
-            str = [NSString stringWithFormat:@"延时%d分%d秒",minu,sec];
-            
-            if (nameRange != nil) {
-                (*nameRange).location = 2;
-                (*nameRange).length = str.length - 2;
-            }
-        }
         
-        return str;
+            time = timeUseInfo.time;
+            int hour = time/(60*60);
+            int minu = (time - (hour*60*60))/60;
+            int sec =  time - (hour*60*60) - minu*60;
+            
+            NSString* str = nil;
+            
+            if (isCond) {//条件 定时
+                
+                str = [NSString stringWithFormat:@"当%d点%d分时",hour,minu];
+                
+                if (nameRange != nil) {
+                    (*nameRange).location = 1;
+                    (*nameRange).length = str.length - 2;
+                }
+                
+                
+            }else{
+                
+                str = [NSString stringWithFormat:@"延时%d分%d秒",minu,sec];
+                
+                if (nameRange != nil) {
+                    (*nameRange).location = 2;
+                    (*nameRange).length = str.length - 2;
+                }
+            }
+            
+            return str;
+        
+        }
         
         
     }else{

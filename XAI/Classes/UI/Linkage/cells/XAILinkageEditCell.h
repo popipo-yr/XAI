@@ -27,7 +27,7 @@
 - (IBAction)delClick:(id)sender;
 
 - (void) setName:(NSString*)name;
-- (void) setCondInfo:(NSString*)str nameRange:(NSRange)range;
+- (void) setCondInfo:(NSString*)str nameRange:(NSRange)range index:(int)index;
 - (void) setInfo:(NSString*)str index:(int)index;
 
 

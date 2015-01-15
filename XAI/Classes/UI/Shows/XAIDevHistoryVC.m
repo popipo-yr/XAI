@@ -100,7 +100,7 @@
         NSString* str = [aOpr allStr];
         NSMutableAttributedString* astr = [[NSMutableAttributedString alloc] initWithString:str];
         
-        if (astr.length > 14) {
+        if (astr.length > 14 && [aOpr isWorn]) {
            
             [astr addAttribute:NSForegroundColorAttributeName
                          value:[UIColor colorWithRed:255/255.0 green:0/255.0 blue:0/255.0 alpha:1]

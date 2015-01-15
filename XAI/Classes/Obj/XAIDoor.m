@@ -200,5 +200,9 @@
     return @"";
 }
 
+-(BOOL)isWorn{
+
+    return _opr == XAIDoorStatus_Open;
+}
 
 @end

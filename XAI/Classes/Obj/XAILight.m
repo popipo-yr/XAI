@@ -254,6 +254,11 @@
     return @"";
 }
 
+-(BOOL)isWorn{
+    
+    return _opr == XAILightStatus_Open;
+}
+
 @end
 
 

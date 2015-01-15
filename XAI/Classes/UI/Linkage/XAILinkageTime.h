@@ -49,4 +49,6 @@
 
 -(NSUInteger)secValue;
 
+-(BOOL) isEveryDay;
+
 @end

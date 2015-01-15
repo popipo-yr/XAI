@@ -60,10 +60,15 @@ typedef  enum XAI_DATA_TYPE{
     XAI_DATA_TYPE_BIN_DIGITAL_UNSIGN = 0Xd, //	无符号数字
     
     XAI_DATA_TYPE_LINKAGE = 0x10, //联动使用的类型
+    XAI_DATA_TYPE_LINKAGE_Cond = 20, //联动条件
+    XAI_DATA_TYPE_LINKAGE_Result = 21, //联动结果
     
     XAI_DATA_TYPE_DELAY = 0x11, //时间
     
     XAI_DATA_TYPE_BIN_BUTTON = 0x12, //im消息中 带控制
+    
+    XAI_DATA_TYPE_Time = 0x7, //时间结构体
+    
         
         
 }XAI_DATA_TYPE;

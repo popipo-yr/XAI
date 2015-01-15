@@ -552,6 +552,7 @@
     
     if (cellData.hasCon == false) {//没有关联的
        
+        btn = cell.oneBtn; //如果是单个 则返回的btn为nil,vc指示了显示第一个
         XAIObject* obj = btn.weakLight;
         [obj startOpr];
         obj.curOprtip = @"正在删除";

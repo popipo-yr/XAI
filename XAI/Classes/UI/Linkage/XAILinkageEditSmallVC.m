@@ -158,9 +158,11 @@
     
     if (_linkage.name == nil || [_linkage.name isEqualToString:@""]) {
         tiperr = @"请添加联动名称";
-    }else if (_linkage.effeInfo == nil) {
+    }else if (strlen([_linkage.name UTF8String]) < 4) {
+        tiperr = @"联动名称长度过短";
+    }else if ([_linkage.condInfos count] == 0) {
         tiperr = @"请添加联动条件";
-    }else if([_linkage.condInfos count] == 0){
+    }else if([_linkage.resultInfos count] == 0){
         tiperr = @"请添加联动控制";
     }
     
@@ -192,8 +194,8 @@
 -(void)addLinkage{
 
     
-    [_linkageService addLinkageParams:_linkage.condInfos
-                             ctrlInfo:_linkage.effeInfo
+    [_linkageService addLinkageConds:_linkage.condInfos
+                             results:_linkage.resultInfos
                                status:XAILinkageStatus_Active
                                  name:_linkage.name];
 }
@@ -222,20 +224,32 @@
 
     NSIndexPath* next = nil;
     
-    if ([_selIndex row] == 1){
-    
-        _linkage.effeInfo = useInfo;
-
-    }else{
+    if ([_selIndex row] > 0 && [_selIndex row] < _linkage.condInfos.count+2){
         
-        NSUInteger resIndex = [_selIndex row] - 2;
-    
+        
+        NSUInteger resIndex = [_selIndex row] - 1;
+        
         if (resIndex < [_linkage.condInfos count]) {
             
             [_linkage.condInfos replaceObjectAtIndex:resIndex withObject:useInfo];
             
         }else if(resIndex == [_linkage.condInfos count]){
             [_linkage.condInfos addObject:useInfo];
+            
+            next = [NSIndexPath indexPathForRow:_selIndex.row+1
+                                      inSection:_selIndex.section];
+        }
+
+    }else{
+        
+        NSUInteger resIndex = [_selIndex row] - 3 - _linkage.condInfos.count;
+    
+        if (resIndex < [_linkage.resultInfos count]) {
+            
+            [_linkage.resultInfos replaceObjectAtIndex:resIndex withObject:useInfo];
+            
+        }else if(resIndex == [_linkage.resultInfos count]){
+            [_linkage.resultInfos addObject:useInfo];
            
             next = [NSIndexPath indexPathForRow:_selIndex.row+1
                                       inSection:_selIndex.section];
@@ -265,19 +279,54 @@
 {
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    if ([_linkage.condInfos count] == 16) { //16个不能进行添加
-        return 16+2;
-    }
-    return [_linkage.condInfos count]+ 3; //最后的2是2个提示
+    BOOL hasCondAdd = _linkage.condInfos.count < 16;
+    BOOL hasResultAdd = _linkage.resultInfos.count < 16;
+    
+    int count  = 2; //name + 分割线;
+    
+    if (hasCondAdd) count += 1;
+    if (hasResultAdd) count += 1;
+    
+    count +=  _linkage.condInfos.count;
+    count +=  _linkage.resultInfos.count;
+    
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BOOL hasCondAdd = _linkage.condInfos.count < 16;
+    
+    int sepIndx = 1 + _linkage.condInfos.count + (hasCondAdd ? 1 : 0);
+    
+    if ([indexPath row] == sepIndx) {
+        return 25;
+    }
+    
     
     return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    BOOL hasCondAdd = _linkage.condInfos.count < 16;
+    int sepIndx = 1 + _linkage.condInfos.count + (hasCondAdd ? 1 : 0);
+    if ([indexPath row] == sepIndx) {
+        
+        NSString* sepId = @"sepId";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sepId];
+        
+        if (cell == nil || ![cell isKindOfClass:[UITableViewCell class]]) {
+            cell = [[UITableViewCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault
+                    reuseIdentifier:sepId];
+        }
+        
+        return cell;
+
+    }
     
     NSString* cellID = _C_XAILinkageEditCellID;
     
@@ -297,23 +346,36 @@
         cell.canDelete = false;
 
         
-    }else if ([indexPath row ] == 1) { //条件
-        
-        XAILinkageUseInfo * aUseInfo = _linkage.effeInfo;
+    }else if ([indexPath row] == _linkage.condInfos.count + 1) { //条件+
         
         NSRange range;
-        [cell setCondInfo:[aUseInfo toStrIsCond:true nameRange:&range] nameRange:range];
+        [cell setCondInfo:nil nameRange:range index:_linkage.condInfos.count];
         
         [cell isEidt:false];
         cell.canDelete = false;
         
+        
+    }else if ([indexPath row ] - 1 < _linkage.condInfos.count) { //条件
+        
+        NSRange range;
+        
+        XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:[indexPath row ] - 1];
+        [cell setCondInfo:[aUseInfo toStrIsCond:true nameRange:&range]
+                nameRange:range
+                    index:[indexPath row ] - 1];
+        
+        
+        [cell isEidt:_gEditing];
+        cell.canDelete = true;
+        
+        
     }else{ //结果
     
-        NSUInteger condIndex = [indexPath row] - 2;
+        NSUInteger condIndex = [indexPath row] - 3 - _linkage.condInfos.count;
         
-        if (condIndex < [_linkage.condInfos count]) {
+        if (condIndex < [_linkage.resultInfos count]) {
             
-            XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex];
+            XAILinkageUseInfo * aUseInfo = [_linkage.resultInfos objectAtIndex:condIndex];
             
             
             [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex];
@@ -372,50 +434,82 @@
 
     NSIndexPath* indexPath = [self.cTableView indexPathForCell:cell];
     
+
+    int  row = indexPath.row - 1; //name
     
-    NSUInteger condIndex = [indexPath row] - 2;
-    if (condIndex < [_linkage.condInfos count]) {
+    
+    if (row < _linkage.condInfos.count) {
         
-        [_linkage.condInfos removeObjectAtIndex:condIndex];
-        
+        [_linkage.condInfos removeObjectAtIndex:row];
         
         [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                 withRowAnimation:UITableViewRowAnimationAutomatic];
         
-//        NSArray* visCells = [self.cTableView visibleCells];
-//        
-//        NSMutableArray* indexs = [[NSMutableArray alloc] init];
-//        for (XAILinkageEditCell* cell in visCells) {
-//           NSIndexPath* aIndexPath =  [_cTableView indexPathForCell:cell];
-//            if ([aIndexPath row] > [indexPath row]) {
-//                
-//                NSUInteger condIndex = [aIndexPath row] - 2 - 2;
-//                
-//                if (condIndex < [_linkage.condInfos count]) {
-//                    
-//                    XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex-1];
-//                    
-//                    [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex-1];
-//                    
-//
-//                }
-//
-//                //[indexs addObject:indexPath];
-//            }
-//            
-////            if (cell == visCells.lastObject) {
-////                [cell reloadInputViews];
-////            }
-//        }
-        
-    
-        
-        
-//        [self.cTableView reloadRowsAtIndexPaths:indexs withRowAnimation:UITableViewRowAnimationNone];
-
-        
         [_cTableView reloadData];
+
+    }else{
+        
+        BOOL hasCondAdd = _linkage.condInfos.count < 16;
+        row  -= hasCondAdd ? 1 : 0;
+        row  -= 1;  // sep
+    
+        row -= _linkage.condInfos.count;
+        if (row < _linkage.resultInfos.count) {
+            
+            [_linkage.resultInfos removeObjectAtIndex:row];
+            
+            [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationAutomatic];
+
+            [_cTableView reloadData];
+        }
+    
     }
+    
+    
+//    NSUInteger condIndex = [indexPath row] - _linkage.condInfos.count - 1;
+//    if (condIndex < [_linkage.resultInfos count]) {
+//        
+//        [_linkage.resultInfos removeObjectAtIndex:condIndex];
+//        
+//        
+//        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                                withRowAnimation:UITableViewRowAnimationAutomatic];
+//        
+////        NSArray* visCells = [self.cTableView visibleCells];
+////        
+////        NSMutableArray* indexs = [[NSMutableArray alloc] init];
+////        for (XAILinkageEditCell* cell in visCells) {
+////           NSIndexPath* aIndexPath =  [_cTableView indexPathForCell:cell];
+////            if ([aIndexPath row] > [indexPath row]) {
+////                
+////                NSUInteger condIndex = [aIndexPath row] - 2 - 2;
+////                
+////                if (condIndex < [_linkage.condInfos count]) {
+////                    
+////                    XAILinkageUseInfo * aUseInfo = [_linkage.condInfos objectAtIndex:condIndex-1];
+////                    
+////                    [cell setInfo:[aUseInfo toStrIsCond:false] index:condIndex-1];
+////                    
+////
+////                }
+////
+////                //[indexs addObject:indexPath];
+////            }
+////            
+//////            if (cell == visCells.lastObject) {
+//////                [cell reloadInputViews];
+//////            }
+////        }
+//        
+//    
+//        
+//        
+////        [self.cTableView reloadRowsAtIndexPaths:indexs withRowAnimation:UITableViewRowAnimationNone];
+//
+//        
+//        [_cTableView reloadData];
+//    }
     
 
 
@@ -436,7 +530,7 @@
         
         return;
         
-    }else if ([indexPath row ] == 1) { //条件
+    }else if ([indexPath row ] - 1 <= _linkage.condInfos.count) { //条件
         
         [self gotoLinkageAddInfoVC:true];
     }else{
