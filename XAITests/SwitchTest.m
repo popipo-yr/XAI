@@ -49,9 +49,9 @@
     _devSwitch.swiDelegate = self;
     _devSwitch.apsn = [MQTT shareMQTT].apsn;
     
-    _devSwitch.luid= 0x00124b00039afe69;//0x00124B000413C85C;
+    _devSwitch.luid= 0x0002000000000001;//0x00124B000413C85C;
     
-    _err_luid = 0x0013434335998aad;
+    _err_luid = 0x0002001000000001;
                      
     
     [_devSwitch startFocusStatus];

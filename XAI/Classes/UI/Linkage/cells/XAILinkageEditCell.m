@@ -33,7 +33,7 @@
     self.tipTF.returnKeyType = UIReturnKeyDone;
     [self.tipTF addTarget:self
                    action:@selector(labelEditFinish)
-         forControlEvents:UIControlEventEditingDidEndOnExit];
+         forControlEvents:UIControlEventEditingDidEnd];
     [self.tipTF addTarget:self
                    action:@selector(labelEditStart)
          forControlEvents:UIControlEventEditingDidBegin];

@@ -46,4 +46,7 @@
 
 - (void) changeMQTTClinetID:(NSString*)clientID apsn:(XAITYPEAPSN)apsn;
 
+//use for XCTest 全局变量获取不到
+@property (readonly,nonatomic) MosquittoClient* mosquittoClient;
+
 @end

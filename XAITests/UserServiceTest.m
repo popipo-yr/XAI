@@ -8,10 +8,12 @@
 
 #import <XCTest/XCTest.h>
 #import "XAIUserService.h"
+#import "XAIAppDelegate.h"
 
 #import "XAIToken.h"
 
 #import "LoginPlugin.h"
+
 
 XAITYPELUID  ____luid;
 
@@ -43,7 +45,9 @@ XAITYPELUID  ____luid;
     
     XAITYPELUID  _luiduser;
     
-    XAI_ERROR _err;
+    XAI_ERROR _errNum;
+    
+    MQTT*  _curMqtt;
 
 }
 
@@ -60,11 +64,13 @@ XAITYPELUID  ____luid;
     _userService.luid = MQTTCover_LUID_Server_03;
     _userService.userServiceDelegate = self;
     
+    _curMqtt = [MQTT shareMQTT];
     
-    _name4Change = @"adminxx";
-    _pwd4Change = @"adminxx";
-    _pwd4Change_end = @"adminn";
-    _name4Change_end = @"adminn";
+    
+    _name4Change = @"abcdc";
+    _pwd4Change = @"abcdc";
+    _pwd4Change_end = @"dcbac";
+    _name4Change_end = @"dcbac";
     
     
     ____luid = 258;
@@ -212,6 +218,10 @@ XAITYPELUID  ____luid;
     if (_loginStatus_normal == Success) {
         
         
+        XAIAppDelegate* deleg = (XAIAppDelegate*)[UIApplication sharedApplication].delegate ;
+        [deleg.mosquittoClient subscribe:[MQTTCover mobileCtrTopicWithAPNS:_K_APSN
+                                                                      luid:luid]
+                                 withQos:2];
         
         [_userService changeUser:luid  oldPassword:newPut to:toPwd];
         
@@ -266,7 +276,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
         XCTAssertTrue (_addStatus != Fail, @"no, add user should be suc");
-        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"-err : %d",_errNum);
         
     }else{
     
@@ -298,7 +308,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
         XCTAssertTrue (_addStatus != Success, @"no, add user should be fail , name is rep");
-        XCTAssert(_err == XAI_ERROR_NAME_EXISTED, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NAME_EXISTED, @"-err : %d",_errNum);
         
     }else{
         
@@ -323,7 +333,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
         XCTAssertTrue (_addStatus != Success, @"NO, add user should be fail, name is null");
-        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NAME_INVALID, @"-err : %d",_errNum);
         
     }else{
         
@@ -346,7 +356,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_addStatus != start, @"delegate did not get called");
         XCTAssertTrue (_addStatus != Success, @"NO, add user should be fail, pawd is null");
-        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NAME_INVALID, @"-err : %d",_errNum);
         
     }else{
         
@@ -359,6 +369,7 @@ XAITYPELUID  ____luid;
 
 - (void)test_2_1_ChangeName_TRUE
 {
+    return;
     [self _addName:_name4Change pawd:_pwd4Change];
     
     if (_loginStatus != Success && _addStatus != Success) {
@@ -375,7 +386,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changeNameStatus != Fail, @"no, change name should be suc");
-        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"-err : %d",_errNum);
         
     }else{
         
@@ -390,7 +401,7 @@ XAITYPELUID  ____luid;
 
 - (void)test_2_2_ChangeName_NameNull
 {
-    
+    return;
     [self _addName:_name4Change pawd:_pwd4Change];
     
     if (_loginStatus != Success && _addStatus != Success) {
@@ -407,7 +418,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changeNameStatus != Success, @"no, change name should be fail, name is null");
-        XCTAssert(_err == XAI_ERROR_NAME_INVALID, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NAME_INVALID, @"-err : %d",_errNum);
         
     }else{
         
@@ -439,7 +450,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changeNameStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changeNameStatus != Success, @"no, change other name should be fail");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NO_PRIV, @"-err : %d",_errNum);
         
     }else{
         
@@ -470,12 +481,14 @@ XAITYPELUID  ____luid;
     
     [self _change:[self _findLuid:_name4Change] Name:_name4Change pawd:_pwd4Change toPWD:_pwd4Change_end];
     
+ //       [self _change:284 Name:_name4Change pawd:_pwd4Change toPWD:_pwd4Change_end];
+    
     if (_loginStatus_normal == Success) {
         
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Fail, @"no, change pwad should be suc");
-        XCTAssert(_err == XAI_ERROR_NONE, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"-err : %d",_errNum);
         
     }else{
         
@@ -509,7 +522,8 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Success, @"no, change other pwad should be fail");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
+        //XCTAssert(_errNum == XAI_ERROR_NO_PRIV, @"-err : %d",_errNum);
+        XCTAssert(_errNum != XAI_ERROR_NONE, @"-err : %d",_errNum);
         
     }else{
         
@@ -542,7 +556,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,old is null");
-        XCTAssert(_err == XAI_ERROR_PAWD_INVALID, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_PAWD_INVALID, @"-err : %d",_errNum);
         
     }else{
         
@@ -574,7 +588,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_changePWDStatus != start, @"delegate did not get called");
         XCTAssertTrue (_changePWDStatus != Success, @"no, change  pwad should be fail,NEW is null");
-        XCTAssert(_err == XAI_ERROR_PAWD_INVALID, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_PAWD_INVALID, @"-err : %d",_errNum);
         
     }else{
         
@@ -613,7 +627,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_pushStatus != start, @"delegate did not get called");
         XCTAssertTrue (_pushStatus != Fail, @"push faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"oh , push has err : %d", _err);
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"oh , push has err : %d", _errNum);
         
     }else{
         
@@ -653,7 +667,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_findStatus != start, @"delegate did not get called");
         XCTAssertTrue (_findStatus != Fail, @"Find faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"yes it can be find");
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"yes it can be find");
         
     }else{
         
@@ -691,7 +705,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_findAllStatus != start, @"delegate did not get called");
         XCTAssertTrue (_findAllStatus != Fail, @"Find faild");
-        XCTAssert(_err == XAI_ERROR_NONE, @"YES. it is always true");
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"YES. it is always true");
         
         
     }else{
@@ -713,7 +727,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Success, @"del user should faild,no privacy");
-        XCTAssert(_err == XAI_ERROR_NO_PRIV, @"-err : %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NO_PRIV, @"-err : %d",_errNum);
         
     }else{
         
@@ -745,7 +759,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Fail, @"del user should syc");
-        XCTAssert(_err == XAI_ERROR_NONE, @"-err %d",_err);
+        XCTAssert(_errNum == XAI_ERROR_NONE, @"-err %d",_errNum);
         
         
     }else{
@@ -778,7 +792,7 @@ XAITYPELUID  ____luid;
         
         XCTAssertTrue (_delStatus != start, @"delegate did not get called");
         XCTAssertTrue (_delStatus != Success, @"del user should faild, already be del");
-        XCTAssert(_err == XAI_ERROR_LUID_NONE_EXISTED, @"-err : %d", _err);
+        XCTAssert(_errNum == XAI_ERROR_LUID_NONE_EXISTED, @"-err : %d", _errNum);
         
         //_err == XAI_ERROR_LUID_NONE_EXISTED;
         
@@ -828,13 +842,13 @@ XAITYPELUID  ____luid;
 
     if (isSuccess == TRUE) {
         
-        _addStatus = 1;
+        _addStatus = Success;
     }else{
         
-        _addStatus = 2;
+        _addStatus = Fail;
     }
     
-    _err = errcode;
+    _errNum = errcode;
 
 }
 - (void) userService:(XAIUserService*)userService delUser:(BOOL) isSuccess errcode:(XAI_ERROR)errcode otherID:(int)otherID{
@@ -849,7 +863,7 @@ XAITYPELUID  ____luid;
         _delStatus = Fail;
     }
     
-    _err = errcode;
+    _errNum = errcode;
 
 
 }
@@ -865,7 +879,7 @@ XAITYPELUID  ____luid;
         _changeNameStatus = Fail;
     }
     
-    _err = errcode;
+    _errNum = errcode;
 
 
 }
@@ -882,7 +896,7 @@ XAITYPELUID  ____luid;
         _changePWDStatus = Fail;
     }
 
-      _err = errcode;
+      _errNum = errcode;
     
 }
 
@@ -898,7 +912,7 @@ XAITYPELUID  ____luid;
         _pushStatus = Fail;
     }
     
-    _err = errcode;
+    _errNum = errcode;
 
 }
 
@@ -919,7 +933,7 @@ XAITYPELUID  ____luid;
         _findAllStatus = Fail;
     }
 
-      _err = errcode;
+      _errNum = errcode;
 
 }
 
@@ -935,6 +949,8 @@ XAITYPELUID  ____luid;
         _luiduser = luid;
         ____luid = luid;
         
+        
+        
         //[[NSUserDefaults standardUserDefaults] setInteger:luid forKey:@"LUID"];
         
     }else{
@@ -942,7 +958,7 @@ XAITYPELUID  ____luid;
         _findStatus = Fail;
     }
     
-      _err = errcode;
+      _errNum = errcode;
 
 
 }
