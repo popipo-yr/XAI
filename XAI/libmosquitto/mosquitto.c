@@ -990,6 +990,11 @@ int mosquitto_loop_read(struct mosquitto *mosq, int max_packets)
 	for(i=0; i<max_packets; i++){
 		rc = _mosquitto_packet_read(mosq);
 		if(rc || errno == EAGAIN || errno == COMPAT_EWOULDBLOCK){
+            if (rc ==  MOSQ_ERR_NOT_FOUND) {
+                printf("/n!!!!!!!!!!!!!!!!!!!!!!!!!!!! \
+                       /nPlease check something this is not found !/n");
+                return rc;
+            }
 			return _mosquitto_loop_rc_handle(mosq, rc);
 		}
 	}

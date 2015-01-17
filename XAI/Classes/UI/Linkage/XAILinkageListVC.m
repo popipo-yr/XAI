@@ -527,9 +527,9 @@
                 
                 if (errcode != XAI_ERROR_NONE) {
                     
-                    //[cell showMsg:aLinkage.curOprtip];
+                    [cell showMsg];
                 }else{
-                    //[cell showOprEnd];
+                    //[cell showOprEnd]; //直接移除了
                     
                     [_Datas removeObject:aLinkage];
                     
