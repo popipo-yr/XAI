@@ -157,24 +157,16 @@
     NSMutableArray* newDatas =  [[NSMutableArray alloc] init];
     
     
-    for (int i = 0; i < (int)[_deviceDatasNoManage count] - 1; i = i+2) {
+    for (int i = 0; i < (int)[_deviceDatasNoManage count]; i++) {
         
         XAIObject* one = [_deviceDatasNoManage objectAtIndex:i];
-        XAIObject* two =     [_deviceDatasNoManage objectAtIndex:i+1];
         XAIDCCellData* cellData = [[XAIDCCellData alloc] init];
-        [cellData setOne:one two:two];
+        [cellData setOne:one two:nil];
         
         [newDatas addObject:cellData];
 
     }
     
-
-    if ([_deviceDatasNoManage count] % 2 == 1) {
-        XAIObject* one = [_deviceDatasNoManage objectAtIndex:[_deviceDatasNoManage count] - 1];
-        XAIDCCellData* cellData = [[XAIDCCellData alloc] init];
-        [cellData setOne:one two:nil];
-        [newDatas addObject:cellData];
-    }
     
     _deviceDatas = [[NSMutableArray alloc] initWithArray:newDatas];
     
@@ -308,7 +300,7 @@
         if ([_deviceDatas count] == 1) {
             [cell setOnlyNeedCenter:YES];
         }else{
-            [cell setOnlyNeedCenter:false];
+            [cell setOnlyNeedCenter:YES];
         }
     }
     
