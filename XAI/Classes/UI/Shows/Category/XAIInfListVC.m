@@ -57,10 +57,10 @@
 {
     [super viewDidLoad];
 
-    if (![[MQTT shareMQTT].curUser isAdmin]) {
-        _gEditBtn.hidden = true;
-        _gEditBtn.enabled = false;
-    }
+//    if (![[MQTT shareMQTT].curUser isAdmin]) {
+//        _gEditBtn.hidden = true;
+//        _gEditBtn.enabled = false;
+//    }
 
 }
 

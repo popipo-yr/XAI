@@ -34,15 +34,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="zzh-Mp-zok">
-                                <rect key="frame" x="0.0" y="0.0" width="319" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="set_tbg.png" id="1Hu-Zg-rf8">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="set_tbg_titile.png" id="SoC-WF-zb2">
-                                        <rect key="frame" x="97" y="31" width="127" height="20"/>
+                                        <rect key="frame" x="97" y="31" width="128" height="20"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="set_head.png" id="Yz3-tz-w4X">
@@ -195,8 +195,8 @@
         <image name="chPawd_bbg.png" width="246" height="115"/>
         <image name="chPawd_title.png" width="124" height="18"/>
         <image name="goin_nor.png" width="16" height="13"/>
-        <image name="ok_nor.png" width="206" height="38"/>
-        <image name="ok_sel.png" width="206" height="38"/>
+        <image name="ok_nor.png" width="222" height="30"/>
+        <image name="ok_sel.png" width="222" height="30"/>
         <image name="set_bbg.png" width="246" height="69"/>
         <image name="set_head.png" width="63" height="63"/>
         <image name="set_tbg.png" width="356" height="170"/>

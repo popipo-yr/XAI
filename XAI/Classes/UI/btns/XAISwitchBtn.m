@@ -382,6 +382,7 @@
 -(void) editNickStop{
     
     self.nameTF.hidden = true;
+    self.nameTF.text = nil;
 
     [self.bgView.layer removeAllAnimations];
 }

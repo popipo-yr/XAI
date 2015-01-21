@@ -439,6 +439,7 @@
 		967BD79B1908DA61007C3C8C /* XAIChangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD79A1908DA61007C3C8C /* XAIChangeCell.m */; };
 		967BD7A6190904FA007C3C8C /* XAIDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7A5190904FA007C3C8C /* XAIDebug.m */; };
 		967BD7B019090F3A007C3C8C /* XAISetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 967BD7AC19090F3A007C3C8C /* XAISetVC.m */; };
+		967DB3061A6A442700DB4532 /* XAINodeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 967DB3051A6A442700DB4532 /* XAINodeStatus.m */; };
 		968105E71917601A00171BF3 /* XAILight2_CirculeTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 968105E61917601A00171BF3 /* XAILight2_CirculeTwo.m */; };
 		968120B618FF6B920016DDB7 /* SwitchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B518FF6B920016DDB7 /* SwitchTest.m */; };
 		968120B918FF73660016DDB7 /* XAIDevDoorContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 968120B818FF73660016DDB7 /* XAIDevDoorContact.m */; };
@@ -1487,6 +1488,8 @@
 		967BD7A5190904FA007C3C8C /* XAIDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDebug.m; sourceTree = "<group>"; };
 		967BD7AB19090F3A007C3C8C /* XAISetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAISetVC.h; sourceTree = "<group>"; };
 		967BD7AC19090F3A007C3C8C /* XAISetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAISetVC.m; sourceTree = "<group>"; };
+		967DB3041A6A442700DB4532 /* XAINodeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINodeStatus.h; sourceTree = "<group>"; };
+		967DB3051A6A442700DB4532 /* XAINodeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINodeStatus.m; sourceTree = "<group>"; };
 		968105E51917601A00171BF3 /* XAILight2_CirculeTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILight2_CirculeTwo.h; sourceTree = "<group>"; };
 		968105E61917601A00171BF3 /* XAILight2_CirculeTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILight2_CirculeTwo.m; sourceTree = "<group>"; };
 		968120B518FF6B920016DDB7 /* SwitchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchTest.m; sourceTree = "<group>"; };
@@ -2114,6 +2117,8 @@
 				964525A319CABB520037129C /* XAICloudService.m */,
 				966D910819E4DB4D00571345 /* XAICloud.h */,
 				966D910919E4DB4D00571345 /* XAICloud.m */,
+				967DB3041A6A442700DB4532 /* XAINodeStatus.h */,
+				967DB3051A6A442700DB4532 /* XAINodeStatus.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -4980,6 +4985,7 @@
 				C341A66C18EBB2C400034649 /* mosquitto.c in Sources */,
 				96EB61791A0720730083455B /* XAIDCBtn.m in Sources */,
 				9608ADE21960FBFE00E1CE75 /* XAIMobileControl.m in Sources */,
+				967DB3061A6A442700DB4532 /* XAINodeStatus.m in Sources */,
 				C33E77F918F395DF00808391 /* XAIPacketDevTypeInfo.c in Sources */,
 				C33E780118F3B41A00808391 /* MQTT.m in Sources */,
 				96B53145193EBC9000E5D0C9 /* XAIPacketLinkage.c in Sources */,

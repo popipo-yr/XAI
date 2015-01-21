@@ -760,7 +760,18 @@
     
     
     /*获取ip地址*/
-    [_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];
+    //[_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];
+    
+    NSString*  apsnStr = [MQTTCover apsnToString:_scanApsn];
+    if (apsnStr.length == 10) {
+        
+        apsnStr = [apsnStr substringFromIndex:2];
+        [self xaiIPHelper:nil
+                    getIp:[NSString stringWithFormat:@"%@.xai.so",apsnStr]
+                  errcode:_err_none];
+    }
+    
+
 
 }
 

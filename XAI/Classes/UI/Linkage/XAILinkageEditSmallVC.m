@@ -243,6 +243,7 @@
     }else{
         
         NSUInteger resIndex = [_selIndex row] - 3 - _linkage.condInfos.count;
+        if (_linkage.condInfos.count == 16) resIndex += 1;
     
         if (resIndex < [_linkage.resultInfos count]) {
             
@@ -253,6 +254,7 @@
            
             next = [NSIndexPath indexPathForRow:_selIndex.row+1
                                       inSection:_selIndex.section];
+            if (_linkage.resultInfos.count == 16) next = nil;
         }
     
     }
@@ -346,7 +348,8 @@
         cell.canDelete = false;
 
         
-    }else if ([indexPath row] == _linkage.condInfos.count + 1) { //条件+
+    }else if (_linkage.condInfos.count < 16 &&
+              ([indexPath row] == _linkage.condInfos.count + 1)) { //条件+
         
         NSRange range;
         [cell setCondInfo:nil nameRange:range index:_linkage.condInfos.count];
@@ -372,6 +375,7 @@
     }else{ //结果
     
         NSUInteger condIndex = [indexPath row] - 3 - _linkage.condInfos.count;
+        if (_linkage.condInfos.count == 16) condIndex += 1;
         
         if (condIndex < [_linkage.resultInfos count]) {
             
@@ -442,8 +446,8 @@
         
         [_linkage.condInfos removeObjectAtIndex:row];
         
-        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                                withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                                withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [_cTableView reloadData];
 
@@ -458,8 +462,8 @@
             
             [_linkage.resultInfos removeObjectAtIndex:row];
             
-            [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [self.cTableView  deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                                    withRowAnimation:UITableViewRowAnimationAutomatic];
 
             [_cTableView reloadData];
         }

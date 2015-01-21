@@ -64,7 +64,15 @@
 
     _IPHelper.delegate = self;
 
-    [_IPHelper getApserverIpWithApsn:[MQTT shareMQTT].apsn fromRoute:_Macro_Host];
+    //[_IPHelper getApserverIpWithApsn:[MQTT shareMQTT].apsn fromRoute:_Macro_Host];
+    NSString*  apsnStr = [MQTTCover apsnToString:[MQTT shareMQTT].apsn];
+    if (apsnStr.length == 10) {
+        
+        apsnStr = [apsnStr substringFromIndex:2];
+        [self xaiIPHelper:nil
+                    getIp:[NSString stringWithFormat:@"%@.xai.so",apsnStr]
+                  errcode:_err_none];
+    }
 }
 
 
@@ -146,6 +154,15 @@
 
     _devService.delegate = nil;
     _findDev =  isSuccess ? findSuccess : findFail;
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        /*存储数据 其他页面使用*/
+//        if (isSuccess) [[XAIData shareData] setObjList:devAry];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self getDateFinsh];
+//        });
+//    });
     
     if (isSuccess) {
         /*存储数据 其他页面使用*/

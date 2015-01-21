@@ -126,6 +126,9 @@
     _twoBtn.userInteractionEnabled = (two != nil);
     
     _conImgView.hidden = !_hasCon;
+    
+    [self.oneBtn editNickStop];
+    [self.twoBtn editNickStop];
 
 }
 
@@ -146,6 +149,10 @@
     
     _editBtn.hidden = !isEdit;
     _delBtn.hidden = !isEdit;
+    if (![[MQTT shareMQTT].curUser isAdmin]) {
+        _delBtn.hidden = true;
+    }
+    
 }
 
 -(void) setOnlyNeedCenter:(BOOL)isNeed{

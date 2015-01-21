@@ -141,16 +141,21 @@
     _delBtn.hidden = true;
     _bgBtn.enabled = true;
     _bgView.userInteractionEnabled = true;
+    _nameTF.text = nil;
 
 }
 -(void) startEdit{
 
     _editBtn.enabled = true;
     _editBtn.hidden  = false;
-    _delBtn.enabled = true;
-    _delBtn.hidden = false;
+    if ([[MQTT shareMQTT].curUser isAdmin]) {
+        _delBtn.enabled = true;
+        _delBtn.hidden = false;
+    }
+
     _bgBtn.enabled = false;
     _bgView.userInteractionEnabled = false;
+    
 }
 
 -(void)dealloc{
