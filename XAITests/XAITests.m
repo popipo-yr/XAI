@@ -290,4 +290,15 @@ NSString*  abc = [[NSString alloc] initWithBytes:param->data->data length:param-
 
 }
 
+
+-(void)testCover{
+
+    XCTAssert([MQTTCover string36ToUInt64:@"A"] == 10);
+    XCTAssert([MQTTCover string36ToUInt64:@"A1"] == 361);
+    XCTAssert([MQTTCover string36ToUInt64:@"A1AAAAAAAAAAAAAAAAAAA"] == 0);
+    
+    XCTAssert([MQTTCover uint64ToApsn:0x1111111111111111] == 0);
+    XCTAssert([MQTTCover uint64ToApsn:0xabcdef] == 0xabcdef);
+}
+
 @end

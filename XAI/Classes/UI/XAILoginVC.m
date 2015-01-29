@@ -24,7 +24,9 @@
 #define findFail   2
 #define findStart  0
 
+#define _K_APSN_COL  @"APSNCOL"
 #define _K_APSN @"APSN"
+#define _K_APSN_36 @"APSN36"
 #define _K_Username @"username"
 
 @interface XAILoginVC ()
@@ -56,11 +58,12 @@
 
     if (self = [super initWithCoder:aDecoder]) {
         
-        _IPHelper = [[XAIIPHelper alloc] init];
-        _IPHelper.delegate = self;
         _isLoging = false;
         _pushScan = false;
         _beBackgroud = false;
+        
+        _apsnDatas = [[NSMutableArray alloc] init];
+        
     }
     
     return self;
@@ -74,8 +77,6 @@
     _userService = nil;
     _devService = nil;
 
-    _IPHelper.delegate = nil;
-    _IPHelper = nil;
 }
 
 - (void)viewDidLoad
@@ -91,25 +92,31 @@
     [nameLabel setText:nil];
     [nameLabel setPlaceholder:NSLocalizedString(@"用户名", nil)];
     
-    //TODO: THERE IS
-    //_scanApsn = 0x1;
-    //_scanIP = @"192.168.0.33";
-    _hasScan = false;
     
     _keyboardIsUp = false;
     
-    [_qrcodeLabel setText:nil];
-//    [_qrcodeLabel setEnabled:YES];
-    [_qrcodeLabel setPlaceholder:@"Server-IP"];
-    
-    _qrcodeView.hidden = true;
 
     
     
-    NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:_K_Username];
-    if (username != nil && [username isKindOfClass:[NSString class]] && ![username isEqualToString:@""]) {
-        [nameLabel setText:username];
+//    NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:_K_Username];
+//    if (username != nil && [username isKindOfClass:[NSString class]] && ![username isEqualToString:@""]) {
+//        [nameLabel setText:username];
+//    }
+    
+    
+    NSArray* saveApsns = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN_COL];
+    if (saveApsns != nil && [saveApsns isKindOfClass:[NSArray class]]) {
+        [_apsnDatas addObjectsFromArray:saveApsns];
     }
+    
+    
+    CGRect frame = _apsnPareView.frame;
+    frame.origin = CGPointZero;
+    XAIApsnView* apsnView = [[XAIApsnView alloc] initWithFrame:frame];
+    apsnView.delegate = self;
+    apsnView.dataSource = self;
+    [_apsnPareView addSubview:apsnView];
+    _apsnView = apsnView;
 
 }
 
@@ -166,27 +173,12 @@
     [self.nameLabel addTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel addTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
-    [self.qrcodeLabel addTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     if (_pushScan) {//扫描返回不需要get
         return;
     }
     
-    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    
-    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
-        
-        apsnstr = @"010e2b26";
-        //apsnstr = @"210e9b6e";
-        //apsnstr = @"210e2757";
-        
-        //apsnstr = @"2923AEEA";
-        
-    }
-    
-    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
-        [self hasGetApsn:apsnstr];
-    }
+
 }
 
 
@@ -214,11 +206,10 @@
     [self.nameLabel removeTarget:self action:@selector(nameLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.passwordLabel removeTarget:self action:@selector(passwordLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
-    [self.qrcodeLabel removeTarget:self action:@selector(qrcodeLabelReturn:) forControlEvents:UIControlEventEditingDidEndOnExit];
+
 
     [self.passwordLabel resignFirstResponder];
     [self.passwordLabel resignFirstResponder];
-    [self.qrcodeLabel resignFirstResponder];
     
     [super viewWillDisappear:animated];
 }
@@ -234,22 +225,6 @@
     if (_pushScan) {//扫描返回不需要get
         return;
     }
-    
-    NSString* apsnstr = [[NSUserDefaults standardUserDefaults] objectForKey:_K_APSN];
-    
-    if (apsnstr == nil || [apsnstr isEqualToString:@""]) {
-        
-        //apsnstr = @"210e2b26";
-        //apsnstr = @"210e9b6e";
-        apsnstr = @"210e2757";
-        
-        //apsnstr = @"2923AEEA";
-        
-    }
-    
-    if (apsnstr != nil && [apsnstr isKindOfClass:[NSString class]] && ![apsnstr isEqualToString:@""]) {
-        [self hasGetApsn:apsnstr];
-    }
 
 }
 
@@ -263,15 +238,6 @@
     [self.passwordLabel becomeFirstResponder];
     
 }
-
-- (void)qrcodeLabelReturn:(id)sender {
-    
-    [self.nameLabel becomeFirstResponder];
-    
-    _scanIP = _qrcodeLabel.text;
-    
-}
-
 
 
 - (void)passwordLabelReturn:(id)sender {
@@ -343,9 +309,6 @@
 
 - (IBAction)loginBtnClick:(id)sender{
     
-    //[_activityView startAnimating];
-    
-    //return;
     
     BOOL hasErr = true;
     
@@ -353,10 +316,22 @@
     
     do {
         
-        if (!_hasScan) {
+        if (_curApsn == 0) {
             
-            errTip = NSLocalizedString(@"PleaseScanQRCode", nil);
-            break;
+            //审核
+            NSString* dateStr = @"2015-02-20";
+            NSDateFormatter* formart = [[NSDateFormatter alloc] init];
+            [formart  setDateFormat:@"yyyy-MM-dd"];
+            NSDate* endDate = [formart dateFromString:dateStr];
+            NSTimeInterval inv = [endDate  timeIntervalSinceDate:[NSDate new]];
+            
+            if (inv > 0) {
+                _curApsn = 0x010e2b26;
+            }else{
+                errTip = NSLocalizedString(@"PleaseScanQRCode", nil);
+                break;
+            }
+
             
         }
         
@@ -379,11 +354,6 @@
             break;
         }
         
-        if (nil == _qrcodeLabel.text ||[_qrcodeLabel.text isEqualToString:@""]) {
-            
-            errTip = NSLocalizedString(@"ApServerIpNULL", nil);
-            break;
-        }
         
         
         if (![nameLabel.text onlyHasNumberAndChar]) {
@@ -456,28 +426,38 @@
     _login.delegate = self;
     
     //_scanApsn = 0x2923aeea;
-    //_qrcodeLabel.text = @"192.168.1.236";
     
     NSString* nameWithAPSN = [NSString stringWithFormat:@"%@@%@"
-                              ,self.nameLabel.text,[MQTTCover apsnToString:_scanApsn]];
+                              ,self.nameLabel.text,[MQTTCover apsnToString:_curApsn]];
+    
+    NSString*  apsnStr = [MQTTCover apsnToString:_curApsn];
+    apsnStr = [apsnStr substringFromIndex:2];
+    NSString* apsnDomain = [NSString stringWithFormat:@"%@.xai.so",apsnStr];
+    
     
     XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate changeMQTTClinetID:nameWithAPSN apsn:_scanApsn];
+    [appDelegate changeMQTTClinetID:nameWithAPSN apsn:_curApsn];
     
-    [[NSUserDefaults standardUserDefaults] setObject:nameLabel.text forKey:_K_Username];
+    //save  info
+    if (_apsnCurIndex < _apsnDatas.count) {
+        NSDictionary* dic = [_apsnDatas objectAtIndex:_apsnCurIndex];
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+           
+            NSMutableDictionary* mDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+            [mDic setObject:nameLabel.text forKey:_K_Username];
+            [_apsnDatas replaceObjectAtIndex:_apsnCurIndex withObject:mDic];
+            [[NSUserDefaults standardUserDefaults] setObject:_apsnDatas forKey:_K_APSN_COL];
+        }
+    }
+
 
     if (_isLoging) {
         return;
     }
     _isLoging = true;
     
-    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:_qrcodeLabel.text apsn:_scanApsn needCheckCloud:![MQTT shareMQTT].isFromRoute];
-    //[_login loginWithName:@"admin" Password:@"admin" Host:@"192.168.1.1" apsn:0x1];
+    [_login loginWithName:self.nameLabel.text Password:self.passwordLabel.text Host:apsnDomain apsn:_curApsn needCheckCloud:![MQTT shareMQTT].isFromRoute];
 
-
-//    _findDev = findSuccess;
-//    _findUser = findSuccess;
-//    [self getDataFinsh];
 }
 
 #pragma mark - Delegate
@@ -502,16 +482,6 @@
     
     _userService.userServiceDelegate = nil;
     _userService = nil;
-    
-    if ((YES == isSuccess) &&  (errcode == XAI_ERROR_NONE)) {
-        
-        
-        //[self getData];
-        
-    }else{
-        
-    
-    }
     
     [self getData];
     
@@ -678,23 +648,9 @@
         _devService = nil;
         _userService = nil;
         
-        //[[XAIAlert shareAlert] startFocus];
         MQTT* curMQTT = [MQTT shareMQTT];
         /*订阅主题*/
-//        [curMQTT.client subscribe:[MQTTCover serverStatusTopicWithAPNS:curMQTT.apsn
-//                                                                  luid:MQTTCover_LUID_Server_03]];
-        
-        
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid] withQos:2];
-
-//        uint8_t isOnline = 1;
-//        [curMQTT.client publish:&isOnline
-//                           size:1
-//                        toTopic:[MQTTCover mobileStatusTopicWithAPNS:curMQTT.apsn
-//                                                                luid:curMQTT.luid
-//                                 other:0x7f]
-//                        withQos:2
-//                         retain:true];
     
     }
 
@@ -703,15 +659,10 @@
 
 -(IBAction)qrcodeBtnClick:(id)sender{
     
-    if (_isLoging) {
-        return;
-    }
+    if (_isLoging) return;
 
-    
-    //XAIScanVC* scanvc = [self.storyboard instantiateViewControllerWithIdentifier:XAIScanVC_SB_ID];
     XAIScanVC* scanvc = [XAIScanVC create];
 
-    
     if ([scanvc isKindOfClass:[XAIScanVC class]]) {
         
         [self.nameLabel resignFirstResponder];
@@ -724,20 +675,29 @@
 
 }
 
--(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
+-(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(NSString *)symbols{
 
     
+    NSString *symbolStr = symbols;
+    
+    XAITYPEAPSN oneApsn;
+    if (![self hasGetApsn:symbolStr retApsn:&oneApsn]) return;
     
     [scanVC dismissViewControllerAnimated:YES completion:nil];
-    
-    const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
-    NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
-    
-    [self hasGetApsn:symbolStr];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:symbolStr forKey:_K_APSN];
-   
     _pushScan = false;
+    
+    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         symbolStr,_K_APSN,@"",_K_Username,nil];
+    
+    
+    NSUInteger addIndex = _apsnCurIndex+1;
+    if (addIndex > _apsnDatas.count) addIndex = _apsnDatas.count;
+    
+    [_apsnDatas insertObject:dic atIndex:addIndex];
+    [_apsnView addViewAtIndex:addIndex];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_apsnDatas forKey:_K_APSN_COL];
+    
 }
 
 -(void)scanVC:(XAIScanVC *)scanVC closeWithCacncel:(BOOL)cancel{
@@ -745,33 +705,28 @@
     _pushScan = false;
 }
 
-- (void) hasGetApsn:(NSString*)apsn{
-
-    //symbolStr = @"210e2813";
-    //_scanApsn = 0x210e2813;
-    //_scanIP = @"192.168.0.33";
+- (BOOL) hasGetApsn:(NSString*)apsn64Str retApsn:(XAITYPEAPSN*)apsnRef{
     
     
-    NSScanner* scanner = [NSScanner scannerWithString:apsn];
-    
-    if ([scanner scanHexInt:&_scanApsn]) {
-        _hasScan = true;
-    }
-    
-    
-    /*获取ip地址*/
-    //[_IPHelper getApserverIpWithApsn:_scanApsn fromRoute:_Macro_Host];
-    
-    NSString*  apsnStr = [MQTTCover apsnToString:_scanApsn];
-    if (apsnStr.length == 10) {
+    do {
         
-        apsnStr = [apsnStr substringFromIndex:2];
-        [self xaiIPHelper:nil
-                    getIp:[NSString stringWithFormat:@"%@.xai.so",apsnStr]
-                  errcode:_err_none];
-    }
+        if (apsn64Str.length < 2) break;
+        if (![apsn64Str hasPrefix:@"X"] && ![apsn64Str hasPrefix:@"x"]) break;
+        
+        NSString* bianHaoStr = [apsn64Str substringFromIndex:1];
+        
+        UInt64 bianHao = [MQTTCover string36ToUInt64:bianHaoStr];
+        if (bianHao == 0) break;
+        
+        XAITYPEAPSN apsn  = [MQTTCover uint64ToApsn:bianHao];
+        if (apsn == 0) break;
+        
+        *apsnRef = apsn;
+        
+        return true;
+    } while (0);
     
-
+    return false;
 
 }
 
@@ -780,11 +735,6 @@
 
     if (rc == _err_none) {
         
-        _scanIP = ip;
-        //_scanIP = @"171.213.60.250";
-        _qrcodeView.hidden = true;
-        [_qrcodeLabel setText:ip];
-        [_qrcodeLabel setEnabled:false];
         
         if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
             [MQTT shareMQTT].isFromRoute = true;
@@ -793,20 +743,97 @@
         }
         
         
-    }else{
-    
-        _qrcodeView.hidden = false;
-        [_qrcodeLabel setText:nil];
-        [_qrcodeLabel setEnabled:true];
     }
     
-    //_scanIP = @"192.168.0.33";
-    //[_qrcodeLabel setText:_scanIP];
 }
 
 -(void)closeKeyboard:(id)sender{
 
     [self.view endEditing:true];
+}
+
+#pragma MARK - APSNVIEW
+
+-(NSUInteger)apsnViewCount:(XAIApsnView *)apsnView{
+
+    return [_apsnDatas count] + 1;
+}
+
+-(NSString *)apsnViewIndexStr:(NSUInteger)index{
+    
+    
+    XAITYPEAPSN apsn = [self apsnAtIndex:index];
+    
+    if (apsn != 0) {
+        
+        return [MQTTCover apsnToString:apsn];
+    }
+
+    return @"请扫描二维码";
+}
+
+-(BOOL)apsnViewCanDelIndex:(NSUInteger)index{
+
+    return  index < _apsnDatas.count;
+}
+
+-(void)apsnView:(XAIApsnView *)apsnView curIndex:(NSUInteger)index{
+    
+    _apsnCurIndex = index;
+    
+    
+    nameLabel.text = nil;
+    passwordLabel.text = nil;
+    
+    _curApsn = [self apsnAtIndex:index];
+    
+    do {
+        
+        if(index >= _apsnDatas.count) break;
+         NSDictionary* dic = [_apsnDatas objectAtIndex:index];
+        if (![dic isKindOfClass:[NSDictionary class]]) break;
+        
+        nameLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:_K_Username]];
+        
+    } while (0);
+    
+}
+
+-(void)apsnView:(XAIApsnView *)apsnView delIndex:(NSUInteger)index{
+
+    if (_apsnDatas.count > index){
+        [_apsnDatas removeObjectAtIndex:index];
+        [[NSUserDefaults standardUserDefaults] setObject:_apsnDatas forKey:_K_APSN_COL];
+    }
+}
+-(void)apsnView:(XAIApsnView *)apsnView selIndex:(NSUInteger)index{
+
+    [self qrcodeBtnClick:nil];
+}
+
+-(XAITYPEAPSN)apsnAtIndex:(NSUInteger)index{
+
+    XAITYPEAPSN oneApsn = 0;
+    
+    do {
+        
+        if(index >= _apsnDatas.count) break;
+        NSDictionary* dic = [_apsnDatas objectAtIndex:index];
+        if (![dic isKindOfClass:[NSDictionary class]]) break;
+        
+        NSString* apsnstr = [dic objectForKey:_K_APSN];
+        
+        if (apsnstr == nil
+            || ![apsnstr isKindOfClass:[NSString class]]
+            || [apsnstr isEqualToString:@""]) break;
+        
+        
+        [self hasGetApsn:apsnstr retApsn:&oneApsn];
+        
+        
+    } while (0);
+
+    return oneApsn;
 }
 
 @end

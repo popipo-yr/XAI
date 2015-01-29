@@ -64,6 +64,11 @@
 + (BOOL)  qrStr:(NSString*)qrStr ToLuidStr:(NSString**)luidStr;
 
 
+
++ (uint64_t) string36ToUInt64:(NSString*)string36;
++ (uint32_t) uint64ToApsn:(uint64_t)num64;
+
+
 @end
 
 

@@ -42,6 +42,7 @@
         _deviceDatas = [[NSMutableArray alloc] init];
         _delInfo = [[NSMutableDictionary alloc] init];
         _delAnimalIDs = [[NSMutableArray alloc] init];
+        _cell2Infos = [[NSMutableDictionary alloc] init];
         _canDel = true;
         _gEditBtn = false;
         

@@ -15,6 +15,7 @@
 #import "XAILinkageTime.h"
 #import "XAILoginVC.h"
 
+#import "XAINodeStatus.h"
 
 #include "mosquitto.h"
 
@@ -149,6 +150,7 @@
     [KeyboardStateListener sharedInstance];
     
     [XAILinkageTime share];
+    [XAINodeStatus instance];
 
     return YES;
 }
@@ -161,6 +163,8 @@
     [[XAIData shareData] stopRefresh];
     [_mosquittoClient disconnect];
     [_mosquittoClient endwork];
+    
+    [[XAINodeStatus instance] enabel:false];
 
     _needKeepTip = false;
 }
@@ -192,6 +196,7 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     XSLog(@"xxxxxxxxxxxxxxxxxxxx");
+    [[XAINodeStatus instance] enabel:true];
     if ([MQTT shareMQTT].isLogin) {
         [_mosquittoClient startwork];
         [self performSelector:@selector(reloginWhenGoIn) withObject:nil afterDelay:0.5f];

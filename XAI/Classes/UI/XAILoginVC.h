@@ -12,14 +12,14 @@
 #import "XAIDeviceService.h"
 #import "XAIScanVC.h"
 #import "XAIIPHelper.h"
+#import "XAIApsnView.h"
 
 @interface XAILoginVC : UIViewController
 <XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate
-,XAIScanVCDelegate,XAIIPHelperDelegate>{
+,XAIScanVCDelegate,XAIIPHelperDelegate,XAIApsnViewDelegate,XAIApsnViewDataSource>{
 
 
     XAILogin*  _login;
-    XAIIPHelper* _IPHelper;
     
     UIActivityIndicatorView* _activityView;
     
@@ -30,21 +30,24 @@
     int _findDev;
     
     BOOL _keyboardIsUp;
-    BOOL _hasScan;
     BOOL _isLoging;
     
-    NSString* _scanIP;
-    XAITYPEAPSN _scanApsn;
+
+    XAITYPEAPSN _curApsn;
     
     BOOL _pushScan;
     BOOL _beBackgroud;
+    
+    NSMutableArray* _apsnDatas;
+    XAIApsnView* _apsnView;
+    NSUInteger  _apsnCurIndex;
 }
 
 
 @property  (nonatomic,strong) IBOutlet UITextField* nameLabel;
 @property  (nonatomic,strong) IBOutlet UITextField* passwordLabel;
-@property  (nonatomic,strong) IBOutlet UITextField* qrcodeLabel;
-@property  (nonatomic,strong) IBOutlet UIView* qrcodeView;
+
+@property  (nonatomic,strong) IBOutlet UIView* apsnPareView;
 
 -(IBAction)loginBtnClick:(id)sender;
 -(IBAction)qrcodeBtnClick:(id)sender;

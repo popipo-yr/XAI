@@ -107,11 +107,11 @@
     _userService.apsn = _apsn;
     _cloud.apsn = _apsn;
     
-    if (_needCheckCloud) {
-        [_cloud bridgeStatus];
-    }else{
+//    if (_needCheckCloud) {
+//        [_cloud bridgeStatus];
+//    }else{
         [_userService finderUserLuidHelper:_name];
-    }
+//    }
     
     _DEF_XTO_TIME_End;
     

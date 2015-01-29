@@ -535,11 +535,10 @@
 }
 
 
--(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(ZBarSymbolSet *)symbols{
+-(void)scanVC:(XAIScanVC *)scanVC didReadSymbols:(NSString *)symbols{
     
     
-    const zbar_symbol_t *symbol = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
-    NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol)];
+    NSString *symbolStr = symbols;
     NSString* luidstr = nil;
     
     if ([MQTTCover qrStr:symbolStr ToLuidStr:&luidstr]) {

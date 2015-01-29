@@ -18,7 +18,7 @@
 @end
 
 @protocol XAIScanVCDelegate ;
-@interface XAIScanVC : UIViewController <ZBarReaderViewDelegate>{
+@interface XAIScanVC : UIViewController <ZBarReaderViewDelegate,UITextFieldDelegate>{
 
     ZBarReaderView *_readerView ;
     
@@ -32,7 +32,10 @@
 @property (nonatomic,strong) IBOutlet UIImageView* scanView;
 @property (nonatomic,strong) IBOutlet UIButton* cancelBtn;
 @property (nonatomic,strong) IBOutlet UIImageView* scanLine;
+@property (nonatomic,strong) IBOutlet UITextField* qrTF;
 @property (nonatomic,weak)  id<XAIScanVCDelegate> delegate;
+
+@property (nonatomic,strong) IBOutlet UIView* move35View;
 
 + (XAIScanVC*)create;
 
@@ -45,7 +48,7 @@
 
 @protocol XAIScanVCDelegate <NSObject>
 
-- (void)scanVC:(XAIScanVC*)scanVC didReadSymbols:(ZBarSymbolSet *)symbols;
+- (void)scanVC:(XAIScanVC*)scanVC didReadSymbols:(NSString *)symbols;
 @optional
 - (void)scanVC:(XAIScanVC*)scanVC closeWithCacncel:(BOOL)cancel;
 

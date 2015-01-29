@@ -351,7 +351,7 @@
 
 
 
-/*扫描的字符串转化为APSN*/
+/*扫描的字符串转化为Luid*/
 + (BOOL)  qrStr:(NSString*)qrStr ToLuidStr:(NSString**)luidStr{
 
  
@@ -359,15 +359,29 @@
     
     do {
         
-        NSString*  qrRM = [qrStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        if ([qrRM length] + 7 != [qrStr length]) break;
+        if (qrStr.length < 2) break;
+    
+        
+        NSString* typpStr = [qrStr substringToIndex:1];
+        NSString* numStr = [qrStr substringFromIndex:1];
+        
+        UInt64 type = [MQTTCover string36ToUInt64:typpStr];
+        UInt64 num  = [MQTTCover string36ToUInt64:numStr];
+        
+        NSString* num16Str = [NSString stringWithFormat:@"%.12llx",num];
+        NSString* type16Str = [NSString stringWithFormat:@"%.4llx",type];
+        
+        if (num16Str.length > 12) break;
+        if (type16Str.length > 4) break;
+        
+        NSString* qrRM = [NSString stringWithFormat:@"%@%@",type16Str,num16Str];
         
         
         __autoreleasing NSString*  newQrStr = [[NSString alloc] initWithFormat:@"0x%@",qrRM];
         if ([newQrStr length] != (LUID_STR_TOTAL_LEN + OTHER_STR_TOTAL_LEN)) break;
         
         
-        *luidStr = newQrStr;
+        *luidStr = qrRM;
         
         isSuc = true;
         
@@ -375,6 +389,43 @@
     
     
     return isSuc;
+}
+
+
++ (uint64_t) string36ToUInt64:(NSString*)string36{
+    
+    NSString* upString = [string36 uppercaseString];
+    if (upString == nil) return 0;
+
+    uint64_t num = 0;
+    
+    for (int i = 0 ; i < upString.length; i++) {
+        unichar s = [upString characterAtIndex:i];
+        if (s >= 48  &&  s <= 57) {
+            s = s - 48;
+        }else if(s >= 65 && s <= 90){
+            s = s - 65 + 10;
+        }else{
+            //只能是数字和字母
+            return 0;
+        }
+        
+        double add = s * pow(36, upString.length - i - 1);
+        if (add + num > 0xFFFFFFFFFFFFFFFF) return 0;
+        
+        num +=  add ;
+    }
+    
+    return num;
+}
++ (uint32_t) uint64ToApsn:(uint64_t)num64{
+    
+    
+        
+    uint64_t numPurge = num64 & 0xFFFFFFFF00000000;
+    if (numPurge != 0) return 0;//有溢出
+
+    return (uint32_t)num64;
 }
 
 

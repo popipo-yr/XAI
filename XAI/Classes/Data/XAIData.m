@@ -14,6 +14,7 @@
 #import "XAIPacket.h"
 #import "XAIUserService.h"
 #import "XAIDeviceService.h"
+#import "XAINodeStatus.h"
 
 @implementation XAIData
 
@@ -35,21 +36,61 @@ static XAIData*  _s_XAIData_ = NULL;
 
 - (void) setObjList:(NSArray*)devs{
     
-    //------------del
-    for (XAIObject* obj in _objListenList) {
+
+    
+    //------找出需要老的需要删除的
+    NSMutableArray*  needRemoveObjs = [NSMutableArray arrayWithArray:_objListenList];
+    NSMutableArray*  needAddDevs = [NSMutableArray arrayWithArray:nil];
+    for (int i = 0; i < devs.count; i++) {
+    
+        /*服务器上的数据*/
+        BOOL find = false;
+        XAIDevice*  aDev = [devs objectAtIndex:i];
+        XAIObject*  aObj = nil;
+        for (int j = 0; j < needRemoveObjs.count; j++) {
+            
+            aObj = [needRemoveObjs objectAtIndex:j];
+            if (aDev.luid == aObj.luid && aDev.apsn == aObj.apsn ) {
+                find = true;
+                break;
+            }
+        }
+        
+        if (find) {
+         
+            [needRemoveObjs removeObject:aObj];
+        }else{
+        
+            [needAddDevs addObject:aDev];
+        }
+    }
+    
+    for (XAIObject* obj in needRemoveObjs) {
         [obj endControl];
         [obj willRemove];
     }
     
-    [_objListenList removeAllObjects];
+    [_objListenList removeObjectsInArray:needRemoveObjs];
+    
+    
+    
+//    //------------del
+//    for (XAIObject* obj in _objListenList) {
+//        [obj endControl];
+//        [obj willRemove];
+//    }
+//    
+//    //-----找出新的需要添加的
+//    
+//    [_objListenList removeAllObjects];
     //---------------
     
     NSMutableArray* objs = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < [devs count]; i++) {
+    for (int i = 0; i < [needAddDevs count]; i++) {
         
         /*服务器上的数据*/
-        XAIDevice*  aDev = [devs objectAtIndex:i];
+        XAIDevice*  aDev = [needAddDevs objectAtIndex:i];
         
         if (![aDev isKindOfClass:[XAIDevice class]]) continue;
         
@@ -87,10 +128,30 @@ static XAIData*  _s_XAIData_ = NULL;
         //--------------
     }
     
-    [_objList  setArray:objs];
+    [_objList  setArray:_objListenList];
     
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        [[XAINodeStatus instance] enabel:false];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            for (XAIObject* obj in _objListenList) {
+//                [obj readOprList];
+//                if ([obj getOprList].count > 0) {
+//                    obj.lastOpr = [obj getOprList].lastObject;
+//                }
+//                [obj startControl];
+//            }
+//        });
+//    });
+
     
-    for (XAIObject* obj in _objListenList) {
+    [[XAINodeStatus instance] enabel:false];
+    for (XAIObject* obj in objs) {
+        [obj readOprList];
+        if ([obj getOprList].count > 0) {
+            obj.lastOpr = [obj getOprList].lastObject;
+        }
+        
         [obj startControl];
     }
 

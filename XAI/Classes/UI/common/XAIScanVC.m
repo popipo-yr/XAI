@@ -81,8 +81,46 @@
     //[_scanView addSubview:_readerView];
     
     
-   
+    [_qrTF addTarget:self action:@selector(qrTFEditStart) forControlEvents:UIControlEventEditingDidBegin];
+    [_qrTF addTarget:self action:@selector(qrTFEditEnd) forControlEvents:UIControlEventEditingDidEnd];
+    
+   [_qrTF setValue:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.6]
+        forKeyPath:@"_placeholderLabel.textColor"];
+    _qrTF.returnKeyType = UIReturnKeyDone;
+    _qrTF.delegate = self;
+    
 }
+
+-(void)qrTFEditStart{
+    
+    float move = - 133;
+    if ([UIScreen is_35_Size]) {
+        move = - 133 - 15;
+    }
+
+    [self.view setFrame:CGRectMake(0, move,
+                                   self.view.bounds.size.width,
+                                   self.view.bounds.size.height)];
+}
+
+-(void)qrTFEditEnd{
+
+    [self.view setFrame:CGRectMake(0, 0,
+                                   self.view.bounds.size.width,
+                                   self.view.bounds.size.height)];
+    
+    if (_qrTF.text != nil && _delegate != nil
+        && [_delegate respondsToSelector:@selector(scanVC:didReadSymbols:)]) {
+        [_delegate scanVC:self didReadSymbols:_qrTF.text];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+
+    [_qrTF resignFirstResponder];
+    return true;
+}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -124,6 +162,13 @@
         
         _ios7_view = view;
         
+    }
+    
+    if ([UIScreen is_35_Size]) {
+        
+        CGRect frame = _move35View.frame;
+        frame.origin.y += 15;
+        _move35View.frame = frame;
     }
 
 }
@@ -211,7 +256,10 @@
         
         if (nil != _delegate && [_delegate respondsToSelector:@selector(scanVC:didReadSymbols:)]) {
             
-            [_delegate scanVC:self didReadSymbols:symbols];
+            const zbar_symbol_t *symbol_T = zbar_symbol_set_first_symbol(symbols.zbarSymbolSet);
+            NSString *symbolStr = [NSString stringWithUTF8String: zbar_symbol_get_data(symbol_T)];
+            
+            [_delegate scanVC:self didReadSymbols:symbolStr];
         }
         
         _cancelBtn.enabled = true;

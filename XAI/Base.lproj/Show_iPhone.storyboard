@@ -453,7 +453,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link_sep.png" id="lxo-ml-eYH">
-                                                    <rect key="frame" x="0.0" y="48" width="320" height="1"/>
+                                                    <rect key="frame" x="0.0" y="49" width="400" height="3"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Head-xai.png" id="oXD-hH-Dxb">

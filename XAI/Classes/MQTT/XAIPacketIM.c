@@ -125,7 +125,7 @@ _xai_packet_param_IM*   generateParamIMFromData(void*  packet_data,int size){
     
     
     //little endian
-    IM_param->time = CFSwapInt16(IM_param->time);
+    IM_param->time = CFSwapInt32(IM_param->time);
     
     //unfixed
     
