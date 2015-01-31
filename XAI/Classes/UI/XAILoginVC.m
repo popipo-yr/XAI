@@ -731,8 +731,13 @@
         
     }else{
         
+        NSString* apsnStr = [NSString stringWithString:apsn64Str];
+        if ([apsnStr hasPrefix:@"0x"] || [apsnStr hasPrefix:@"0X"]) {
+            apsnStr = [apsnStr substringFromIndex:2];
+        }
+        
         XAITYPEAPSN oneApsn;
-        NSScanner* scanner = [NSScanner scannerWithString:apsn64Str];
+        NSScanner* scanner = [NSScanner scannerWithString:apsnStr];
         if ([scanner scanHexInt:&oneApsn]) {
             *apsnRef = oneApsn;
             return true;
