@@ -707,26 +707,39 @@
 
 - (BOOL) hasGetApsn:(NSString*)apsn64Str retApsn:(XAITYPEAPSN*)apsnRef{
     
-    
-    do {
+    if ([apsn64Str hasPrefix:@"X"] || [apsn64Str hasPrefix:@"x"]) {
         
-        if (apsn64Str.length < 2) break;
-        if (![apsn64Str hasPrefix:@"X"] && ![apsn64Str hasPrefix:@"x"]) break;
+        do {
+            
+            if (apsn64Str.length < 2) break;
+            if (![apsn64Str hasPrefix:@"X"] && ![apsn64Str hasPrefix:@"x"]) break;
+            
+            NSString* bianHaoStr = [apsn64Str substringFromIndex:1];
+            
+            UInt64 bianHao = [MQTTCover string36ToUInt64:bianHaoStr];
+            if (bianHao == 0) break;
+            
+            XAITYPEAPSN apsn  = [MQTTCover uint64ToApsn:bianHao];
+            if (apsn == 0) break;
+            
+            *apsnRef = apsn;
+            
+            return true;
+        } while (0);
         
-        NSString* bianHaoStr = [apsn64Str substringFromIndex:1];
+        return false;
         
-        UInt64 bianHao = [MQTTCover string36ToUInt64:bianHaoStr];
-        if (bianHao == 0) break;
+    }else{
         
-        XAITYPEAPSN apsn  = [MQTTCover uint64ToApsn:bianHao];
-        if (apsn == 0) break;
+        XAITYPEAPSN oneApsn;
+        NSScanner* scanner = [NSScanner scannerWithString:apsn64Str];
+        if ([scanner scanHexInt:&oneApsn]) {
+            *apsnRef = oneApsn;
+            return true;
+        }
         
-        *apsnRef = apsn;
-        
-        return true;
-    } while (0);
-    
-    return false;
+        return false;
+    }
 
 }
 

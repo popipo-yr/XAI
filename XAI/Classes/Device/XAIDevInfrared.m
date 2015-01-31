@@ -36,11 +36,11 @@
     
     XAIDevInfraredStatus retStatus = XAIDevInfraredStatusUnkown;
     
-    if (typeBool == XAITYPEBOOL_TRUE) {
+    if (typeBool != XAITYPEBOOL_FALSE) {
         
         retStatus = XAIDevInfraredStatusDetectorThing;
         
-    }else if(typeBool == XAITYPEBOOL_FALSE){
+    }else{
         
         retStatus = XAIDevInfraredStatusDetectorNothing;
         

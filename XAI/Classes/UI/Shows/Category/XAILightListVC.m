@@ -426,6 +426,10 @@
         [cell setOnlyNeedCenter:cellData.twoLight == nil];
     }
     
+    /*节点可能更新,但是已经滚动,控制器接受不到消息,需要延迟主动拉取*/
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self performSelector:@selector(lightFireCount) withObject:nil afterDelay:5.0f];
+    
     return cell;
     
 }
@@ -686,6 +690,7 @@ float prewMoveY;
 
 -(void)lightCell:(XAILightListVCCellNew *)cell lightBtnStatusChange:(XAISwitchBtn *)btn{
 
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self lightFireCount];
 }
 
