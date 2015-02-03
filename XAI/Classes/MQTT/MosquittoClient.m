@@ -71,6 +71,7 @@ static void on_message(struct mosquitto *mosq, void *obj, const struct mosquitto
     //@autoreleasepool {
     XSLog(@"MQTT-MSG-IN");
     MosquittoMessage *mosq_msg = [[MosquittoMessage alloc] init];
+    mosq_msg.mid = message->mid;
     mosq_msg.topic = [NSString stringWithUTF8String: message->topic];
     mosq_msg.payload = [[NSString alloc] initWithBytes:message->payload
                                                  length:message->payloadlen

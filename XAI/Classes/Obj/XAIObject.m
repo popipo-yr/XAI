@@ -252,10 +252,14 @@
     
     /*与最后一次记录一样,不储存*/
     XAIObjectOpr* saveLast = [_objOprList lastObject];
-    if (saveLast != nil && saveLast.otherID == aOpr.otherID && saveLast.opr == aOpr.opr) {
+//    if (saveLast != nil && saveLast.otherID == aOpr.otherID && saveLast.opr == aOpr.opr) {
+//        return false;
+//    }
+
+    if ([aOpr.time timeIntervalSinceDate:saveLast.time] == 0 && saveLast.opr == aOpr.opr) {
         return false;
     }
-    
+
     if (saveLast != nil && [aOpr.time timeIntervalSinceDate:saveLast.time] < 0) {
         return false; //时间比最后的小
     }

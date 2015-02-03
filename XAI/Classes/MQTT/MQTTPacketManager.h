@@ -10,7 +10,6 @@
 #import "MosquittoClient.h"
 @protocol MQTTPacketManagerDelegate <NSObject>
 
-- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage*)mosq_msg;
 @optional
 
 - (void) didPublish: (NSUInteger)messageId;
@@ -18,6 +17,8 @@
 - (void) didUnsubscribe: (NSUInteger)messageId;
 
 - (void) sendPacketIsSuccess:(BOOL) bl;
+
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage*)mosq_msg;
 
 
 @end
