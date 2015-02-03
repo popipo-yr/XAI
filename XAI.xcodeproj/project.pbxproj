@@ -311,7 +311,6 @@
 		9639352E19E7AC9500D7EC44 /* xai_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9639352C19E7AC9500D7EC44 /* xai_icon_nor.png */; };
 		9639353019E7AD4A00D7EC44 /* xai_icon_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9639352F19E7AD4A00D7EC44 /* xai_icon_sel.png */; };
 		9639353219E7AD5200D7EC44 /* xai_icon_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9639353119E7AD5200D7EC44 /* xai_icon_sel@2x.png */; };
-		9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB2619459DBF001E6320 /* XAIIPHelper.m */; };
 		9639FB291945A883001E6320 /* IPGetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9639FB281945A883001E6320 /* IPGetTest.m */; };
 		963BDB93199B05D80025B304 /* XAICategoryBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB92199B05D80025B304 /* XAICategoryBtn.m */; };
 		963BDB96199B0CE40025B304 /* XAICategoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDB95199B0CE40025B304 /* XAICategoryTool.m */; };
@@ -324,7 +323,6 @@
 		963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBA8199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		963BDBB0199B426B0025B304 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */; };
 		963D9CB9193DAEC5006ACFF2 /* XAILinkageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */; };
-		964525A419CABB520037129C /* XAICloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 964525A319CABB520037129C /* XAICloudService.m */; };
 		9646646B1A776154002305C0 /* XAIApsnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9646646A1A776154002305C0 /* XAIApsnView.m */; };
 		9648E6E4190A137C00D630D8 /* XAIUserAddVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6E3190A137C00D630D8 /* XAIUserAddVC.m */; };
 		9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9648E6EC190A1FD200D630D8 /* XAITableViewController.m */; };
@@ -335,7 +333,6 @@
 		96569B4719403FD600A96F45 /* XAILinkage.m in Sources */ = {isa = PBXBuildFile; fileRef = 96569B4419403FD600A96F45 /* XAILinkage.m */; };
 		96569B4819403FD600A96F45 /* XAILinkageUseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96569B4619403FD600A96F45 /* XAILinkageUseInfo.m */; };
 		96619DB91915D58F009849B0 /* XAIDoor.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DB81915D58F009849B0 /* XAIDoor.m */; };
-		96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DBB1915D5A0009849B0 /* XAIWindow.m */; };
 		96619DBF1915DD9D009849B0 /* XAIObjectGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DBE1915DD9D009849B0 /* XAIObjectGenerate.m */; };
 		96619DC21915DE49009849B0 /* XAIObjectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 96619DC11915DE49009849B0 /* XAIObjectGroup.m */; };
 		96659E3E192C6B200045E66F /* XAILight2_CirculeOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 96659E3D192C6B200045E66F /* XAILight2_CirculeOne.m */; };
@@ -361,7 +358,6 @@
 		966828521998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */; };
 		966828531998C2C600F25AB9 /* SenderVoiceNodePlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */; };
 		966828541998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */; };
-		966D910A19E4DB4D00571345 /* XAICloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 966D910919E4DB4D00571345 /* XAICloud.m */; };
 		9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */; };
 		96729FD3192B1F00002A8C40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD2192B1F00002A8C40 /* AVFoundation.framework */; };
 		96729FD5192B1F0F002A8C40 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96729FD4192B1F0F002A8C40 /* CoreMedia.framework */; };
@@ -1201,8 +1197,6 @@
 		9639352C19E7AC9500D7EC44 /* xai_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xai_icon_nor.png; sourceTree = "<group>"; };
 		9639352F19E7AD4A00D7EC44 /* xai_icon_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xai_icon_sel.png; sourceTree = "<group>"; };
 		9639353119E7AD5200D7EC44 /* xai_icon_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xai_icon_sel@2x.png"; sourceTree = "<group>"; };
-		9639FB2519459DBF001E6320 /* XAIIPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIIPHelper.h; sourceTree = "<group>"; };
-		9639FB2619459DBF001E6320 /* XAIIPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIIPHelper.m; sourceTree = "<group>"; };
 		9639FB281945A883001E6320 /* IPGetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPGetTest.m; sourceTree = "<group>"; };
 		963BDB91199B05D70025B304 /* XAICategoryBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICategoryBtn.h; sourceTree = "<group>"; };
 		963BDB92199B05D80025B304 /* XAICategoryBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICategoryBtn.m; sourceTree = "<group>"; };
@@ -1226,8 +1220,6 @@
 		963BDBAA199B426B0025B304 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		963D9CB7193DAEC5006ACFF2 /* XAILinkageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAILinkageService.h; sourceTree = "<group>"; };
 		963D9CB8193DAEC5006ACFF2 /* XAILinkageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageService.m; sourceTree = "<group>"; };
-		964525A219CABB520037129C /* XAICloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICloudService.h; sourceTree = "<group>"; };
-		964525A319CABB520037129C /* XAICloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICloudService.m; sourceTree = "<group>"; };
 		964664691A776154002305C0 /* XAIApsnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIApsnView.h; sourceTree = "<group>"; };
 		9646646A1A776154002305C0 /* XAIApsnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIApsnView.m; sourceTree = "<group>"; };
 		9648E6E2190A137C00D630D8 /* XAIUserAddVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIUserAddVC.h; sourceTree = "<group>"; };
@@ -1248,8 +1240,6 @@
 		96569B4619403FD600A96F45 /* XAILinkageUseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAILinkageUseInfo.m; sourceTree = "<group>"; };
 		96619DB71915D58F009849B0 /* XAIDoor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIDoor.h; sourceTree = "<group>"; };
 		96619DB81915D58F009849B0 /* XAIDoor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIDoor.m; sourceTree = "<group>"; };
-		96619DBA1915D5A0009849B0 /* XAIWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIWindow.h; sourceTree = "<group>"; };
-		96619DBB1915D5A0009849B0 /* XAIWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIWindow.m; sourceTree = "<group>"; };
 		96619DBD1915DD9D009849B0 /* XAIObjectGenerate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectGenerate.h; sourceTree = "<group>"; };
 		96619DBE1915DD9D009849B0 /* XAIObjectGenerate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAIObjectGenerate.m; sourceTree = "<group>"; };
 		96619DC01915DE49009849B0 /* XAIObjectGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAIObjectGroup.h; sourceTree = "<group>"; };
@@ -1267,8 +1257,6 @@
 		966828461998C2C600F25AB9 /* SenderVoiceNodeDownloading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodeDownloading@2x.png"; sourceTree = "<group>"; };
 		966828471998C2C600F25AB9 /* SenderVoiceNodePlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SenderVoiceNodePlaying.png; sourceTree = "<group>"; };
 		966828481998C2C600F25AB9 /* SenderVoiceNodePlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderVoiceNodePlaying@2x.png"; sourceTree = "<group>"; };
-		966D910819E4DB4D00571345 /* XAICloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAICloud.h; sourceTree = "<group>"; };
-		966D910919E4DB4D00571345 /* XAICloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAICloud.m; sourceTree = "<group>"; };
 		967101891988979B0037C21E /* XAINoAcceptPacketHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAINoAcceptPacketHandle.h; sourceTree = "<group>"; };
 		9671018A1988979B0037C21E /* XAINoAcceptPacketHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAINoAcceptPacketHandle.m; sourceTree = "<group>"; };
 		96729FD0192B1E81002A8C40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1990,10 +1978,6 @@
 				96AF0A81195A695C00AF3C88 /* XAIToken.m */,
 				9608ADE01960FBFE00E1CE75 /* XAIMobileControl.h */,
 				9608ADE11960FBFE00E1CE75 /* XAIMobileControl.m */,
-				964525A219CABB520037129C /* XAICloudService.h */,
-				964525A319CABB520037129C /* XAICloudService.m */,
-				966D910819E4DB4D00571345 /* XAICloud.h */,
-				966D910919E4DB4D00571345 /* XAICloud.m */,
 				967DB3041A6A442700DB4532 /* XAINodeStatus.h */,
 				967DB3051A6A442700DB4532 /* XAINodeStatus.m */,
 			);
@@ -2456,8 +2440,6 @@
 			children = (
 				963BDB9E199B426B0025B304 /* SWCell */,
 				968D79AB1947FC4E004A9F20 /* route.h */,
-				9639FB2519459DBF001E6320 /* XAIIPHelper.h */,
-				9639FB2619459DBF001E6320 /* XAIIPHelper.m */,
 				9621FF4D19494A4F004356B1 /* XAIReLogin.h */,
 				9621FF4E19494A4F004356B1 /* XAIReLogin.m */,
 				9608ADDD1960FB5C00E1CE75 /* XAIAlert.h */,
@@ -2518,8 +2500,6 @@
 				964E6A3C1904F30B00F1F61C /* XAILight.m */,
 				96619DB71915D58F009849B0 /* XAIDoor.h */,
 				96619DB81915D58F009849B0 /* XAIDoor.m */,
-				96619DBA1915D5A0009849B0 /* XAIWindow.h */,
-				96619DBB1915D5A0009849B0 /* XAIWindow.m */,
 				96619DC01915DE49009849B0 /* XAIObjectGroup.h */,
 				96619DC11915DE49009849B0 /* XAIObjectGroup.m */,
 				967BD7A4190904FA007C3C8C /* XAIDebug.h */,
@@ -4651,7 +4631,6 @@
 				961071DE192B3EFA00D5F75A /* XAIDeviceType.m in Sources */,
 				961F95D318F79EF5002D4F74 /* XAIPacketACK.c in Sources */,
 				962272A41A0B298300FCE9EE /* XAILinkageCondChooseVC.m in Sources */,
-				964525A419CABB520037129C /* XAICloudService.m in Sources */,
 				962272A71A0B299900FCE9EE /* XAILinkageResultChooseVC.m in Sources */,
 				964E6A3D1904F30B00F1F61C /* XAILight.m in Sources */,
 				962A0071199DA7950039E4EE /* XAIObjectCell.m in Sources */,
@@ -4685,7 +4664,6 @@
 				9612B03C19A08934004CA9F5 /* XAIInfListCell.m in Sources */,
 				9612B04519A09254004CA9F5 /* XAIUserServerListCell.m in Sources */,
 				96F93A2419A488790057C0FC /* XAIPacketIM.c in Sources */,
-				966D910A19E4DB4D00571345 /* XAICloud.m in Sources */,
 				C38D91E418ED3490006F22D3 /* MosquittoClient.m in Sources */,
 				9671018B1988979B0037C21E /* XAINoAcceptPacketHandle.m in Sources */,
 				C387F35E18EA757A0069F98B /* main.m in Sources */,
@@ -4734,7 +4712,6 @@
 				96E44802191C6B22008A424B /* Reachability.m in Sources */,
 				9691443F1A5398EB00984C27 /* XAILinkageEditSmallVC.m in Sources */,
 				962272A11A0B273D00FCE9EE /* XAILinkageChooseVC.m in Sources */,
-				96619DBC1915D5A0009849B0 /* XAIWindow.m in Sources */,
 				9697918519F4ECC000153CF5 /* XAIPacketIMCtrl.c in Sources */,
 				9648E6EF190A1FD200D630D8 /* XAITableViewController.m in Sources */,
 				968105E71917601A00171BF3 /* XAILight2_CirculeTwo.m in Sources */,
@@ -4751,7 +4728,6 @@
 				9648E6F0190A1FD200D630D8 /* XAITableViewWithOprController.m in Sources */,
 				963BDBAF199B426B0025B304 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				C341A67518EBB2C400034649 /* will_mosq.c in Sources */,
-				9639FB2719459DBF001E6320 /* XAIIPHelper.m in Sources */,
 				9612B05219A191C2004CA9F5 /* XAILinkageListVC.m in Sources */,
 				C341A67318EBB2C400034649 /* thread_mosq.c in Sources */,
 				961B620219A3487500085411 /* XAILinkageChooseCell.m in Sources */,
@@ -5084,6 +5060,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
+				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = "armv7 armv7s  arm64";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -5099,8 +5076,8 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: liping tang (4KSVTJUMRP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: liping tang (4KSVTJUMRP)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",

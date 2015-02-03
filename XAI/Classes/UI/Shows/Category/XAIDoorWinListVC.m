@@ -42,7 +42,7 @@
         _deviceService.luid = MQTTCover_LUID_Server_03;
         _deviceService.deviceServiceDelegate = self;
         
-        _types = @[@(XAIObjectType_door),@(XAIObjectType_window)];
+        _types = @[@(XAIObjectType_door)];
         _deviceDatas = [[NSMutableArray alloc] init];
         _delInfo = [[NSMutableDictionary alloc] init];
         _delAnimalIDs = [[NSMutableArray alloc] init];
@@ -99,9 +99,6 @@
     //_activityView = nil;
     
     for (XAIObject * obj in _deviceDatas) {
-        if ([obj isKindOfClass:[XAIWindow class]]){
-            ((XAIWindow*)obj).delegate = nil;
-        }
         if ([obj isKindOfClass:[XAIDoor class]]){
             ((XAIDoor*)obj).delegate = nil;
         }
@@ -367,11 +364,7 @@
             if ([obj isKindOfClass:[XAIDoor class]]) {
                 
                 btn =  (XAIDCBtn*)((XAIDoor*)obj).delegate;
-            }else if([obj isKindOfClass:[XAIWindow class]]) {
-                
-                btn = (XAIDCBtn*)((XAIWindow*)obj).delegate;
             }
-            
             
             if ((btn != nil)
                 && [btn isKindOfClass:[XAIDCBtn class]]) {
@@ -430,11 +423,7 @@
             if ([obj isKindOfClass:[XAIDoor class]]) {
                 
                 btn =  (XAIDCBtn*)((XAIDoor*)obj).delegate;
-            }else if([obj isKindOfClass:[XAIWindow class]]) {
-                
-                btn = (XAIDCBtn*)((XAIWindow*)obj).delegate;
             }
-            
             
             if ((btn != nil)
                 && [btn isKindOfClass:[XAIDCBtn class]]) {
@@ -598,9 +587,6 @@ float prewMoveY;
             if ([obj isKindOfClass:[XAIDoor class]]) {
                 
                 btn =  (XAIDCBtn*)((XAIDoor*)obj).delegate;
-            }else if([obj isKindOfClass:[XAIWindow class]]) {
-                
-                btn = (XAIDCBtn*)((XAIWindow*)obj).delegate;
             }
             
             
@@ -644,11 +630,7 @@ float prewMoveY;
                 if ([oneObj isKindOfClass:[XAIDoor class]]) {
                     
                     btn =  (XAIDCBtn*)((XAIDoor*)oneObj).delegate;
-                }else if([oneObj isKindOfClass:[XAIWindow class]]) {
-                    
-                    btn = (XAIDCBtn*)((XAIWindow*)oneObj).delegate;
                 }
-                
                
                 
                 if ((btn != nil)

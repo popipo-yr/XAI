@@ -608,16 +608,6 @@
                 break;
             }
             
-            case XAIObjectType_window:{
-            
-                if (aObj.isOnline && aObj.curDevStatus == XAIWindowStatus_Open) {
-                    
-                    openDWCount += 1;
-                }
-                
-                break;
-            }
-            
             case XAIObjectType_IR:{
             
                 if (aObj.isOnline && aObj.curDevStatus == XAIIRStatus_warning) {

@@ -9,7 +9,6 @@
 #import "XAITimeOut.h"
 #import "MQTT.h"
 #import "XAIUserService.h"
-#import "XAICloud.h"
 
 
 typedef NS_ENUM(NSUInteger, XAILoginErr){
@@ -28,7 +27,7 @@ typedef NS_ENUM(NSUInteger, XAILoginErr){
 
 @end
 
-@interface XAILogin : XAITimeOut <MQTTConnectDelegate,XAIUserServiceDelegate,XAICloudDelegate>{
+@interface XAILogin : XAITimeOut <MQTTConnectDelegate,XAIUserServiceDelegate>{
 
 
     NSString*  _name;
@@ -39,9 +38,6 @@ typedef NS_ENUM(NSUInteger, XAILoginErr){
     XAITYPEAPSN _apsn;
     
     BOOL _isLogin ;
-
-    XAICloud* _cloud;
-    BOOL  _needCheckCloud;
 
 }
 

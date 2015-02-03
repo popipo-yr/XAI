@@ -11,12 +11,11 @@
 #import "XAIUserService.h"
 #import "XAIDeviceService.h"
 #import "XAIScanVC.h"
-#import "XAIIPHelper.h"
 #import "XAIApsnView.h"
 
 @interface XAILoginVC : UIViewController
 <XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate
-,XAIScanVCDelegate,XAIIPHelperDelegate,XAIApsnViewDelegate,XAIApsnViewDataSource>{
+,XAIScanVCDelegate,XAIApsnViewDelegate,XAIApsnViewDataSource>{
 
 
     XAILogin*  _login;

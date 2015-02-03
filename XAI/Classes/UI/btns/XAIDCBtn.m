@@ -123,33 +123,7 @@
 }
 
 
-- (void) window:(XAIWindow*)window curStatus:(XAIWindowStatus) status getIsSuccess:(BOOL)isSuccess{
-    
-    if (self.weakObj == nil || ![self.weakObj isKindOfClass:[XAIWindow class]]) return;
-    
-    if (window.isOnline == false) {
-        
-        [self setStatus:XAIOCST_Unkown];
-        return;
-    }
-    
-    if (status == XAIWindowStatus_Open) {
-        [self setStatus:XAIOCST_Open];
-        [self.oprTipLab setText:[window.lastOpr allStr]];
-    }else if(status == XAIWindowStatus_Close){
-        [self.oprTipLab setText:[window.lastOpr allStr]];
-        [self setStatus:XAIOCST_Close];
-    }else{
-        
-        [self setStatus:XAIOCST_Unkown];
-    }
-    
-    
-    if (nil != self.delegate && [self.delegate respondsToSelector:@selector(btnStatusChange:)] ) {
-        [self.delegate btnStatusChange:self];
-    }
-    
-}
+
 
 -(void)door:(XAIDoor *)door curStatus:(XAIDoorStatus)status getIsSuccess:(BOOL)isSuccess{
     
@@ -180,7 +154,6 @@
     }
 }
 
--(void)window:(XAIWindow *)window curPower:(float)power getIsSuccess:(BOOL)isSuccess{}
 -(void)door:(XAIDoor *)door curPower:(float)power getIsSuccess:(BOOL)isSuccess{
     
     [self powerChange:power];
@@ -206,7 +179,7 @@
     [self _removeWeakObj];
     
     if (aObj == nil) return;
-    if (![aObj isKindOfClass:[XAIDoor class]] && ![aObj isKindOfClass:[XAIWindow class]]){
+    if (![aObj isKindOfClass:[XAIDoor class]]){
         
         [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
         [self.statusTipImgView setBackgroundColor:[UIColor clearColor]];
@@ -238,13 +211,11 @@
     
     if (aObj.isOnline){
         
-        if (aObj.curDevStatus == XAIDoorStatus_Open ||
-            aObj.curDevStatus == XAIWindowStatus_Open) {
+        if (aObj.curDevStatus == XAIDoorStatus_Open) {
             
             status = XAIOCST_Open;
             
-        }else if(aObj.curDevStatus == XAIDoorStatus_Close ||
-                 aObj.curDevStatus == XAIWindowStatus_Close){
+        }else if(aObj.curDevStatus == XAIDoorStatus_Close){
             status = XAIOCST_Close;
         }
         
@@ -270,12 +241,8 @@
     
     if (self.weakObj != nil && [self.weakObj isKindOfClass:[XAIDoor class]]) {
         ((XAIDoor*)self.weakObj).delegate = nil;
-        self.weakObj = nil;
-        
-    }else if (self.weakObj != nil && [self.weakObj isKindOfClass:[XAIWindow class]]) {
-        ((XAIWindow*)self.weakObj).delegate = nil;
-        self.weakObj = nil;
     }
+    self.weakObj = nil;
 }
 
 - (void) _changeWeakObj:(XAIObject*)aObj{
@@ -288,13 +255,7 @@
         self.weakObj = aObj;
         ((XAIDoor*)self.weakObj).delegate = self;
         
-    }else if([aObj isKindOfClass:[XAIWindow class]]) {
-        
-        self.weakObj = aObj;
-        ((XAIWindow*)self.weakObj).delegate = self;
-        
     }
-    
 }
 
 

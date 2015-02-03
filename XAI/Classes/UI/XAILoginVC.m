@@ -749,22 +749,6 @@
 }
 
 
--(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
-
-    if (rc == _err_none) {
-        
-        
-        if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
-            [MQTT shareMQTT].isFromRoute = true;
-        }else{
-            [MQTT shareMQTT].isFromRoute = false;
-        }
-        
-        
-    }
-    
-}
-
 -(void)closeKeyboard:(id)sender{
 
     [self.view endEditing:true];

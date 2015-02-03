@@ -22,7 +22,6 @@
 typedef enum XAIDeviceType{
     
     XAIDeviceType_door = DB_DEVICE_MODEL_MAGNET,
-    XAIDeviceType_window = DB_DEVICE_MODEL_MAGNET + 100, /*加100只是为了和门不一样*/
     XAIDeviceType_light = DB_DEVICE_MODEL_SWITCH_1,
     XAIDeviceType_light_2 = DB_DEVICE_MODEL_SWITCH_2,
     XAIDeviceType_Inf = DB_DEVICE_MODEL_IRS,

@@ -470,12 +470,6 @@
             
         }
             break;
-        case XAIDeviceType_window:{
-            
-            device.corObjType = XAIObjectType_window;
-            
-        }
-            break;
         case XAIDeviceType_door:{
             
             device.corObjType = XAIObjectType_door;
@@ -512,7 +506,7 @@
             
         }else if([device.model isEqualToString:@"MAGNET"]){
             
-            device.corObjType = XAIObjectType_window;
+            device.corObjType = XAIObjectType_door;
             
         }else if ([device.model isEqualToString:@"SWITCH-2"]) {//双控灯
             

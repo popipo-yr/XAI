@@ -29,8 +29,6 @@
 
     if (self = [super init]) {
         
-        _IPHelper = [[XAIIPHelper alloc] init];
-        
         _login = [[XAILogin alloc] init];
         _bRetry = false;
     }
@@ -41,7 +39,6 @@
 
 -(void)dealloc{
 
-    _IPHelper.delegate = nil;
     _login.delegate = nil;
 }
 
@@ -51,7 +48,6 @@
     _userService = nil;
     _devService.deviceServiceDelegate = nil;
     _devService = nil;
-    _IPHelper.delegate = nil;
     _login.delegate = nil;
     
 }
@@ -62,31 +58,14 @@
 
 - (void) relogin{
 
-    _IPHelper.delegate = self;
 
     //[_IPHelper getApserverIpWithApsn:[MQTT shareMQTT].apsn fromRoute:_Macro_Host];
     NSString*  apsnStr = [MQTTCover apsnToString:[MQTT shareMQTT].apsn];
     if (apsnStr.length == 10) {
         
         apsnStr = [apsnStr substringFromIndex:2];
-        [self xaiIPHelper:nil
-                    getIp:[NSString stringWithFormat:@"%@.xai.so",apsnStr]
-                  errcode:_err_none];
-    }
-}
-
-
--(void)xaiIPHelper:(XAIIPHelper *)helper getIp:(NSString *)ip errcode:(_err)rc{
-   
-    _IPHelper.delegate = nil;
-    
-    if (rc == _err_none) {
-
-        if (helper.getStep == _XAIIPHelper_GetStep_FromRoute) {
-            [MQTT shareMQTT].isFromRoute = true;
-        }else{
-            [MQTT shareMQTT].isFromRoute = false;
-        }
+        NSString* host = [NSString stringWithFormat:@"%@.xai.so",apsnStr];
+        
         
         XSLog(@"name =%@ , pwd = %@",[MQTT shareMQTT].curUser.name , [MQTT shareMQTT].curUser.pawd);
         _login.delegate = self;
@@ -99,16 +78,14 @@
         [appDelegate changeMQTTClinetID:nameWithAPSN apsn:[MQTT shareMQTT].apsn];
         
         
-        [_login relogin:ip
-         needCheckCloud:![MQTT shareMQTT].isFromRoute];
-        
+        [_login relogin:host needCheckCloud:false];
+
     }else{
-        /*提示获取失败 返回登录页面*/
-        
+    
         [self overWithCide:XAIReLoginErr_GetRouteIP_Fail];
-        
     }
 }
+
 
 - (void) pushToken{
     

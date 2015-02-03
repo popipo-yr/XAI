@@ -12,7 +12,6 @@
 #import "XAIUserService.h"
 #import "XAIDeviceService.h"
 #import "XAIScanVC.h"
-#import "XAIIPHelper.h"
 
 typedef enum XAIReLoginErr{
     
@@ -26,11 +25,10 @@ typedef enum XAIReLoginErr{
 
 @protocol XAIReLoginDelegate ;
 @interface XAIReLogin : NSObject
-<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate,XAIIPHelperDelegate>{
+<XAILoginDelegate,XAIDeviceServiceDelegate,XAIUserServiceDelegate>{
     
     
     XAILogin*  _login;
-    XAIIPHelper* _IPHelper;
     
     XAIUserService* _userService;
     XAIDeviceService* _devService;

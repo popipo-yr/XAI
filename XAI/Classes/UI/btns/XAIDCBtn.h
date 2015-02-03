@@ -7,10 +7,9 @@
 //
 
 #import "XAIDevBtn.h"
-#import "XAIWindow.h"
 #import "XAIDoor.h"
 
-@interface XAIDCBtn : XAIDevBtn<XAIDoorDelegate,XAIWindownDelegate>{
+@interface XAIDCBtn : XAIDevBtn<XAIDoorDelegate>{
 
     float _angle;
     BOOL  _bRoll;

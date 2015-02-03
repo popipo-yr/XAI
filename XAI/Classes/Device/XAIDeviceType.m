@@ -11,18 +11,17 @@
 @implementation XAIDeviceTypeUtil
 
 #define __door  @"门"
-#define __window @"窗"
 #define __switch @"开关"
 #define __switch2 @"双控开关"
 #define __inf   @"红外"
 
 + (NSArray*) typeAry{
 
-    return @[@(XAIDeviceType_door),@(XAIDeviceType_window),@(XAIDeviceType_light),@(XAIDeviceType_light_2),@(XAIDeviceType_Inf)];
+    return @[@(XAIDeviceType_door),@(XAIDeviceType_light),@(XAIDeviceType_light_2),@(XAIDeviceType_Inf)];
 }
 + (NSArray*) typeNameAry{
     
-    return @[__door,__window,__switch,__switch2,__inf];
+    return @[__door,__switch,__switch2,__inf];
 }
 + (NSString*) typeToName:(XAIDeviceType)type{
     
@@ -30,11 +29,6 @@
         case XAIDeviceType_door:
         {
             return __door;
-        }
-            break;
-        case XAIDeviceType_window:
-        {
-            return __window;
         }
             break;
         case XAIDeviceType_light:
@@ -65,10 +59,6 @@
         
         return XAIDeviceType_door;
         
-    }else if([name isEqual:__window]){
-        
-        return XAIDeviceType_window;
-    
     }else if ([name isEqual:__switch]){
     
         return XAIDeviceType_light;
