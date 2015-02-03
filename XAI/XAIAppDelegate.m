@@ -74,26 +74,7 @@
     
     
     _mqttPacketManager = [[MQTTPacketManager alloc] init];
-    //_noAcceptHandle = [[XAINoAcceptPacketHandle alloc] init];
-    //[_mqttPacketManager addPacketManagerNoAccept:_noAcceptHandle];
-    
-    //uuid_t uid;
-    //[[[UIDevice currentDevice] identifierForVendor] getUUIDBytes:uid];
-    
-    //NSString* uidStr = nil;
-    //uidStr = [[NSString alloc] initWithCharacters:(const unichar *)uid length:sizeof(uuid_t)];
-    //uidStr = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    //uidStr = [self getMacAddress];
-    
-    //NSString *clientId = [NSString stringWithFormat:@"ios%@", uidStr];
-    
-    
-    //_mosquittoClient = [[MosquittoClient alloc] initWithClientId:@"ios"];
-    
-    //[_mosquittoClient setDelegate:_mqttPacketManager];
-    
-    
-    //[[MQTT shareMQTT] setClient:_mosquittoClient];
+   
     [[MQTT shareMQTT] setPacketManager:_mqttPacketManager];
     
     

@@ -325,9 +325,9 @@
         if (delgInfo != NULL
             && delgInfo.refObj != NULL
             && [delgInfo isKindOfClass:[MQTTPacketManagerDelgInfo class]]
-            && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:)]) {
+            && [delgInfo.refObj respondsToSelector:@selector(recivePacket:size:topic:mosqMsg:)]) {
             
-            [(id <MQTTPacketManagerDelegate>)delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+            [(id <MQTTPacketManagerDelegate>)delgInfo.refObj recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic mosqMsg:mosq_msg];
             
             //[delgInfo.refObj recivePacket:datas size:size topic:topic];
         }
@@ -345,9 +345,9 @@
             id<MQTTPacketManagerDelegate> apro = [_allDelegate objectAtIndex:i];
             if (apro != NULL
                 && [apro conformsToProtocol:@protocol(MQTTPacketManagerDelegate)]
-                && [apro respondsToSelector:@selector(recivePacket:size:topic:)]) {
+                && [apro respondsToSelector:@selector(recivePacket:size:topic:mosqMsg:)]) {
                 
-                [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic];
+                [apro recivePacket:[mosq_msg getPayloadbyte] size:mosq_msg.payloadlen topic:mosq_msg.topic mosqMsg:mosq_msg];
             }
             
         }

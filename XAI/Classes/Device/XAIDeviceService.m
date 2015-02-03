@@ -671,9 +671,9 @@
 
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
-    [super recivePacket:datas size:size topic:topic];
+    [super recivePacket:datas size:size topic:topic mosqMsg:mosq_msg];
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     

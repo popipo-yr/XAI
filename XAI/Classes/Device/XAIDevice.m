@@ -218,7 +218,7 @@
 
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
     //return;
     

@@ -31,7 +31,7 @@
     return _s_status;
 }
 
-- (void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic{
+- (void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
     if (![MQTTCover isNodeStatusTopic:topic]) return;
     
@@ -82,7 +82,7 @@
            
             XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
             otherInfo.time = param->time;
-            otherInfo.msgid = param->normal_param->magic_number;
+            otherInfo.msgid = mosq_msg.mid;
             otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
             
             [door doorContact:nil status:curStatus err:XAI_ERROR_NONE otherInfo:otherInfo];
@@ -131,7 +131,7 @@
             
             XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
             otherInfo.time = param->time;
-            otherInfo.msgid = param->normal_param->magic_number;
+            otherInfo.msgid = mosq_msg.mid;
             otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
             
             [ir infrared:nil status:curStatus err:XAI_ERROR_NONE otherInfo:otherInfo];

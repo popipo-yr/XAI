@@ -379,7 +379,7 @@ static XAIData*  _s_XAIData_ = NULL;
 }
 
 
--(void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic{
+-(void)recivePacket:(void *)datas size:(int)size topic:(NSString *)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
     
     MQTT* curMQTT = [MQTT shareMQTT];
@@ -394,12 +394,12 @@ static XAIData*  _s_XAIData_ = NULL;
     
     if (topic != nil && [topic isEqualToString:uTopic]) {
         
-        [_userService recivePacket:datas size:size topic:topic];
+        [_userService recivePacket:datas size:size topic:topic mosqMsg:mosq_msg];
         
     }else if(topic != nil && [topic isEqualToString:dTopic]){
     
         //[_devService _setFindOnline];
-        [_devService recivePacket:datas size:size topic:topic];
+        [_devService recivePacket:datas size:size topic:topic mosqMsg:mosq_msg];
     
     }
 

@@ -214,9 +214,9 @@
 }
 
 
-- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic{
+- (void) reciveStatusPacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
-    [super recivePacket:datas size:size topic:topic];
+    [super recivePacket:datas size:size topic:topic mosqMsg:mosq_msg];
     
     if (![topic isEqualToString:
           [MQTTCover nodeStatusTopicWithAPNS:_apsn luid:_luid other:Key_CircuitTwoStatusID]]
@@ -267,7 +267,7 @@
                 
                 XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
                 otherInfo.time = param->time;
-                otherInfo.msgid = param->normal_param->magic_number;
+                otherInfo.msgid = mosq_msg.mid;
                 otherInfo.error = err;
                 otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
 
@@ -286,7 +286,7 @@
                 
                 XAIOtherInfo* otherInfo = [[XAIOtherInfo alloc] init];
                 otherInfo.time = param->time;
-                otherInfo.msgid = param->normal_param->magic_number;
+                otherInfo.msgid = mosq_msg.mid;
                 otherInfo.error = err;
                 otherInfo.fromluid =  luidFromGUID(param->normal_param->from_guid);
                 
@@ -305,7 +305,7 @@
 }
 
 
-- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic{
+- (void) recivePacket:(void*)datas size:(int)size topic:(NSString*)topic mosqMsg:(MosquittoMessage *)mosq_msg{
     
     _xai_packet_param_normal* param = generateParamNormalFromData(datas, size);
     
@@ -325,7 +325,7 @@
             
         case XAI_PKT_TYPE_STATUS:
         {
-            [self reciveStatusPacket:datas size:size topic:topic];
+            [self reciveStatusPacket:datas size:size topic:topic mosqMsg:mosq_msg];
             
         }break;
             
