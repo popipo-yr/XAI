@@ -152,6 +152,17 @@
     
     _gEditBtn.hidden = true;
     
+    
+    UISwipeGestureRecognizer * panTap = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handlePanGesture:)];
+    panTap.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:panTap];
+    
+}
+
+- (void) handlePanGesture:(UIPanGestureRecognizer*) recognizer
+{
+    [self returnClick:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

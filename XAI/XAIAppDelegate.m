@@ -27,6 +27,8 @@
 
 #import "ssl/openssl/crypto.h"
 
+#import "mqtt3_protocol.h"
+
 
 
 
@@ -39,12 +41,20 @@
 
 - (void) changeMQTTClinetID:(NSString*)clientID apsn:(XAITYPEAPSN)apsn{
     
+    [[MQTT shareMQTT].client willRemove];
+    if (clientID == nil) {
+        [_mosquittoClient setDelegate:nil];
+        [_mosquittoClient setKeepAliveDelegate:nil];
+        _mosquittoClient = nil;
+        [MQTT shareMQTT].client = nil;
+        return;
+    }
+    
     
     _mosquittoClient = [[MosquittoClient alloc] initWithClientId:clientID];
     
     [_mosquittoClient setDelegate:_mqttPacketManager];
     [_mosquittoClient setKeepAliveDelegate:self];
-    [[MQTT shareMQTT].client willRemove];
     [[MQTT shareMQTT] setClient:_mosquittoClient];
     [MQTT shareMQTT].tmpApsn = apsn;
     
@@ -340,6 +350,9 @@
         return;
     }
     
+    _isReConnect = true;
+    
+    
     XSLog(@"-------------");
     XSLog(@"islong = %@, hasalert = %@, is noreachable= %@",
           [MQTT shareMQTT].isLogin ? @"true" : @"false",
@@ -347,12 +360,11 @@
           NotReachable != [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] ? @"true" : @"false");
     
     if ([MQTT shareMQTT].isLogin &&
-        false == _isReConnect &&
         NotReachable != [[Reachability reachabilityForInternetConnection] currentReachabilityStatus]) {
         /*重新获取数据,数据可能更新*/
         
         _isRelogin = islogin;
-        _isReConnect = true;
+
         
         NSString* msg =[NSString stringWithString:NSLocalizedString(@"ReLoginStartUpdate", nil)];
         
@@ -404,8 +416,7 @@
     }else{
         
         if (_hasAlert) return;
-    
-        _isReConnect = true;
+
         [self XAIRelogin:nil loginErrCode:XAIReLoginErr_LoginFail];
     }
     
@@ -419,11 +430,12 @@
         return;
     }
     
+    
     /*成功,取消提示*/
     if (_reLoginStartAlert != nil && [_reLoginStartAlert isVisible]) {
-        [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:YES];
+        [_reLoginStartAlert  dismissWithClickedButtonIndex:0 animated:NO];
     }
-    _isReConnect = false;
+    
     
     XSLog(@"END .............");
     
@@ -478,6 +490,8 @@
     
     [_reLogin stop];
     _reLogin.delegate = nil;
+    
+    _isReConnect = false;
 }
 
 
@@ -501,22 +515,35 @@
 #pragma mark -- KeepAlive
 -(void)didDisconnect{
 
-    if (_isReConnect == false && [MQTT shareMQTT].isLogin == true && _needKeepTip == true) {
+    if (_isReConnect == false && [MQTT shareMQTT].isLogin == true && _needKeepTip) {
         
-        [MQTT shareMQTT].isLogin = false;
+        [self didConnect:CONNACK_DISCONNECT_OTHER_LOGIN];
         
-        
-        NSString* msg = NSLocalizedString(@"other space login", nil);
-        
-        _otherLoginTipAlert = [[UIAlertView alloc] initWithTitle:nil
-                                                       message:msg
-                                                      delegate:self
-                                             cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
-        [_otherLoginTipAlert show];
+        //[self reloginIsLogin:false];
 
     }
 
     
+}
+
+-(void)didConnect:(int)rc{
+    
+    if (rc == CONNACK_DISCONNECT_OTHER_LOGIN) {
+        
+        [MQTT shareMQTT].isLogin = false;
+        
+        NSString* msg = NSLocalizedString(@"other space login", nil);
+        
+        _otherLoginTipAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:msg
+                                                        delegate:self
+                                               cancelButtonTitle:NSLocalizedString(@"AlertOK", nil) otherButtonTitles:nil];
+        [_otherLoginTipAlert show];
+        
+        [self changeMQTTClinetID:nil apsn:0];
+
+    }
+
 }
 
 //

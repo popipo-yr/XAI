@@ -543,6 +543,9 @@
         [_activityView stopAnimating];
         
         _isLoging = false;
+        
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+        [appDelegate changeMQTTClinetID:nil apsn:0];
     
     }
 
@@ -624,6 +627,9 @@
         
         [MQTT shareMQTT].isLogin = false;
         
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+        [appDelegate changeMQTTClinetID:nil apsn:0];
+        
     }else{
         
         [[XAIData shareData] save];
@@ -652,6 +658,7 @@
         /*订阅主题*/
         [curMQTT.client subscribe:[MQTTCover mobileCtrTopicWithAPNS:curMQTT.apsn luid:curMQTT.luid] withQos:2];
     
+        [MQTT shareMQTT].isLogin = true;
     }
 
     _isLoging =false;

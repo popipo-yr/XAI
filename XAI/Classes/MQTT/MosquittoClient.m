@@ -30,6 +30,11 @@ static void on_connect(struct mosquitto *mosq, void *obj, int rc)
     if (client != nil && client.delegate != nil &&  [client.delegate respondsToSelector:@selector(change)]) {
         [[client delegate] change];
     }
+    
+    if (client != nil && client.keepAliveDelegate != nil && [client.keepAliveDelegate respondsToSelector:@selector(didConnect:)]) {
+        [client.keepAliveDelegate didConnect:rc];
+    }
+
 }
 
 static void on_disconnect(struct mosquitto *mosq, void *obj, int rc)

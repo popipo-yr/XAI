@@ -192,7 +192,6 @@
     if (_findDev == findFail || _findUser == findFail) {
         
         err = XAIReLoginErr_GetDataFail;
-        [MQTT shareMQTT].isLogin = false;
         
     }
     
@@ -214,28 +213,12 @@
         [_delegate XAIRelogin:self loginErrCode:err];
     }
     
-    if (err == XAIReLoginErr_NONE) {
-//        uint8_t isOnline = 1;
-//        XAIUser* curUser = [MQTT shareMQTT].curUser;
-//        [[MQTT shareMQTT].client publish:&isOnline
-//                                    size:1
-//                                 toTopic:[MQTTCover mobileStatusTopicWithAPNS:curUser.apsn
-//                                                                         luid:curUser.luid
-//                                                                        other:0x7f]
-//                                 withQos:2
-//                                  retain:true];
+    if (err != XAIReLoginErr_NONE) {
+
+        XAIAppDelegate *appDelegate = (XAIAppDelegate*)[UIApplication sharedApplication].delegate;
+        [appDelegate changeMQTTClinetID:nil apsn:0];
         
-        
-//        XAIUser* curUser = [MQTT shareMQTT].curUser;
-//
-//        
-//        [[MQTT shareMQTT].client publish:NULL
-//                                    size:0
-//                                 toTopic:[MQTTCover mobileCtrTopicWithAPNS:curUser.apsn
-//                                                                         luid:curUser.luid
-//                                                                    ]
-//                                 withQos:0
-//                                  retain:true];
+        [MQTT shareMQTT].isLogin = false;
     }
     
     _bRetry = false;

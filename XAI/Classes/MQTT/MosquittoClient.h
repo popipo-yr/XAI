@@ -26,6 +26,7 @@
 
 @optional
 - (void) didDisconnect;
+- (void) didConnect:(int)rc;
 
 @end
 

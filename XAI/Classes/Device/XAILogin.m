@@ -10,6 +10,7 @@
 #import "XAIToken.h"
 #import "XAIAlert.h"
 #import "XAIPacketStatus.h"
+#include "mqtt3_protocol.h"
 
 //#include "openssl/ssl.h"
 
@@ -46,24 +47,6 @@
     
 }
 
-//- (void) relogin{
-//    
-//    _isLogin = true;
-//    
-//    MosquittoClient*  mosq = [MQTT shareMQTT].client;
-//    
-//    _name = [MQTT shareMQTT].curUser.name;
-//    _apsn = [MQTT shareMQTT].apsn;
-//    _pawd = [MQTT shareMQTT].curUser.pawd;
-//    
-//    
-//    
-//    [[MQTT shareMQTT].packetManager setConnectDelegate:self];
-//    
-//    [mosq reconnect];
-//    _DEF_XTO_TIME_Start;
-//    
-//}
 
 - (void) relogin:(NSString *)host needCheckCloud:(BOOL)bNeed{
 
@@ -99,11 +82,20 @@
 	
     if (!_isLogin) return;
     
-    [[XAIAlert shareAlert] startFocus];
-    
-    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
-    _userService.apsn = _apsn;
-    [_userService finderUserLuidHelper:_name];
+    if (code == CONNACK_ACCEPTED) {
+        
+        [[XAIAlert shareAlert] startFocus];
+        [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
+        
+        _userService.apsn = _apsn;
+        [_userService finderUserLuidHelper:_name];
+        
+    }else{
+        
+        
+        [self loginOver:code == CONNACK_REFUSED_BAD_USERNAME_PASSWORD
+                        ? XAILoginErr_UPErr : XAILoginErr_UnKnow];
+    }
     
     _DEF_XTO_TIME_End;
     
@@ -115,19 +107,14 @@
     
     [[XAIAlert shareAlert] stop];
     
-    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
     
     XAILoginErr loginErr = XAILoginErr_UnKnow;
     if (code ==  7 /*SSL_ERROR_WANT_CONNECT*/) {
         loginErr = XAILoginErr_UPErr;
     }
-	
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
-        
-        [_delegate loginFinishWithStatus:false loginErr:loginErr];
-    }
-    
-    _isLogin = false;
+
+    [self loginOver:loginErr];
+
     
     _DEF_XTO_TIME_End;
 
@@ -138,18 +125,21 @@
     [_timeout invalidate];
     _timeout = nil;
 
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
-        
-        [_delegate loginFinishWithStatus:false loginErr:XAILoginErr_TimeOut];
-    }
-    
-    //[[MQTT shareMQTT].client disconnect];
-    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
-    
-    _isLogin = false;
-
+    [self loginOver:XAILoginErr_TimeOut];
 }
 
+
+-(void)loginOver:(XAILoginErr)err{
+    
+    _isLogin = false;
+    [[MQTT shareMQTT].packetManager setConnectDelegate:nil];
+
+    if (nil != _delegate && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]){
+        
+        [_delegate loginFinishWithStatus:err == XAILoginErr_None
+                                loginErr:err];
+    }
+}
 
 
 
@@ -177,8 +167,6 @@
         
         curMQTT.curUser = user;
         
-        curMQTT.isLogin = true;
-        
         loginErr = XAILoginErr_None;
         
     }else if(errcode == XAI_ERROR_TIMEOUT){
@@ -191,17 +179,8 @@
     }
     
     
+    [self loginOver:loginErr];
     
-    
-    if ( (nil != _delegate) && [_delegate respondsToSelector:@selector(loginFinishWithStatus:loginErr:)]) {
-        
-        [_delegate loginFinishWithStatus:isSuccess loginErr:loginErr];
-    }
-    
-    _isLogin = false;
-    
-    
-
 }
 
 
