@@ -132,7 +132,7 @@ static void on_unsubscribe(struct mosquitto *mosq, void *obj, int message_id)
 
 static void on_log(struct mosquitto *mosq, void *userdata, int level, const char *str){
     
-    printf("mqtt-log:%s\n\n",str);
+    //printf("mqtt-log:%s\n\n",str);
 }
 
 

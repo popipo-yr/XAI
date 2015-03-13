@@ -257,6 +257,7 @@
 //    }
 
     if ([aOpr.time timeIntervalSinceDate:saveLast.time] == 0 && saveLast.opr == aOpr.opr) {
+        _lastOpr = aOpr;
         return false;
     }
 
