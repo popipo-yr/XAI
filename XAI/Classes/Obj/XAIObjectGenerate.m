@@ -36,6 +36,13 @@
             className = @"XAIIROpr";
         }break;
             
+        case XAIObjectType_DWC_C:
+        case XAIObjectType_DWC_D:
+        case XAIObjectType_DWC_W:
+        {
+            
+            className = @"XADWCOpr";
+        }break;
             
         default:{
         
@@ -79,6 +86,18 @@
         case XAIObjectType_IR:{
             
             className = @"XAIIR";
+        } break;
+        case XAIObjectType_DWC_C:{
+            
+            className = @"XAIDWCtrl";
+        } break;
+        case XAIObjectType_DWC_D:{
+            
+            className = @"XAIDWCtrl";
+        } break;
+        case XAIObjectType_DWC_W:{
+            
+            className = @"XAIDWCtrl";
         } break;
             
         default:

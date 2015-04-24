@@ -51,7 +51,7 @@
 }
 
 
-- (void) setStatus:(XAIOCST)type{
+- (void) setStatus:(XAICBTYPE)type{
     
     _status = type;
     
@@ -59,23 +59,17 @@
         return;
     }
     
-    switch (type) {
-        case XAIOCST_Open:
-            [self showOpen];
-            break;
-        case XAIOCST_Close:
-            [self showClose];
-            break;
-        case XAIOCST_Unkown:
-            [self showUnkonw];
-            break;
-        default:
-            break;
-    }
+    [self showTipLable:false];
+    [self setStatusCB:type];
+    
     
 }
 
-- (void) firstStatus:(XAIOCST)staus opr:(XAIOCOT)opr tip:(NSString *)tip{
+-(void)setStatusCB:(XAICBTYPE)type{
+
+}
+
+- (void) firstStatus:(XAICBTYPE)staus opr:(XAIOCOT)opr tip:(NSString *)tip{
     
     _opr = opr;
     _status = staus;
@@ -97,23 +91,6 @@
     }
     
 }
-
-
-- (void) showClose{
-    
-    [self showTipLable:false];
-}
-- (void) showOpen{
-    
-    [self showTipLable:false];
-}
-
-- (void) showUnkonw{
-    
-    [self showTipLable:false];
-}
-
-
 
 
 

@@ -17,6 +17,7 @@
 #import "XAIDebug.h"
 #import "XAITimeOut.h"
 
+
 typedef enum XAIObjectType{
     
     XAIObjectType_door = 0,
@@ -24,11 +25,14 @@ typedef enum XAIObjectType{
     XAIObjectType_light2_1 = 3,
     XAIObjectType_light2_2 = 4,
     XAIObjectType_IR = 5,
+    XAIObjectType_DWC_C = 7, //推拉窗帘
+    XAIObjectType_DWC_D = 8,  //推拉门
+    XAIObjectType_DWC_W = 9,  //推拉窗
     XAIObjectType_UnKown = -1,
     
 }XAIObjectType;
 
-#define XAIObjectTypeCount 6
+#define XAIObjectTypeCount 9
 
 #define XAIObjectFlagNormal 0
 

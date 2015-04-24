@@ -10,13 +10,7 @@
 #import "XAIObject.h"
 
 
-typedef enum{
-    
-    XAIOCST_Open,
-    XAIOCST_Close,
-    XAIOCST_Unkown,
-    
-}XAIOCST;
+typedef int XAICBTYPE;
 
 
 /*操作状态*/
@@ -31,7 +25,7 @@ typedef enum{
 @protocol XAIDevBtnDelegate;
 @interface  XAIDevBtn : UIView{
     
-    XAIOCST  _status;
+    XAICBTYPE  _status;
     XAIOCOT  _opr;
     
 }
@@ -54,12 +48,14 @@ typedef enum{
 - (void) showMsg;
 - (void) showOprEnd;
 
-- (void) setStatus:(XAIOCST)type;
-- (void) firstStatus:(XAIOCST)staus opr:(XAIOCOT)opr tip:(NSString*)tip;
+- (void) setStatus:(XAICBTYPE)type;
+- (void) firstStatus:(XAICBTYPE)staus opr:(XAIOCOT)opr tip:(NSString*)tip;
 
 - (XAIOCOT) coverForm:(XAIObjectOprStatus)objOprStatus;
 
 - (void) _init;
+
+-(void) setStatusCB:(XAICBTYPE)type;
 
 @end
 

@@ -7,10 +7,37 @@
 //
 
 #import "XAIHasTableViewVC.h"
+#import "XAIDeviceService.h"
+#import "XAIReLoginRefresh.h"
+#import "XAIDWCListCell.h"
+
+#import "XAILinkageServiceHelp.h"
+
+#include "XAIData.h"
 
 
-@interface XAIDWCtrlListVC : XAIHasTableViewVC{
+@interface XAIDWCtrlListVC : XAIHasTableViewVC<XAIDeviceServiceDelegate,XAIDataRefreshDelegate,XAIReLoginRefresh
+,XAIDWCListVCCellNewDelegate,XAILinkageServiceHelpDelegate,UIAlertViewDelegate>{
     
+
+    XAIDeviceService* _deviceService;
+    
+    NSArray* _types;
+    
+    NSMutableArray*  _deviceDatas; /*XAIObject数组*/
+    NSMutableArray* _deviceDatasNoManage; /*没有分类的数据*/
+    
+    
+    
+    NSMutableDictionary* _delInfo;
+    NSMutableArray* _delAnimalIDs;
+    NSMutableDictionary* _cell2Infos;
+    BOOL _canDel;
+    
+    XAIDWCBtn* _curEditBtn;
+    
+    NSMutableDictionary* _cell2Purge;
+    NSMutableArray* _linkageHelps;
 
 
     BOOL _gEditing;
@@ -29,4 +56,20 @@
     
     
 @end
+
+
+@interface XAIDWCListCellData : NSObject
+@property (readonly,strong) XAIObject* oneObj;
+
+-(void)setOne:(XAIObject *)one;
+
+@end
+
+
+@interface XAIDWCListDelInfo : NSObject
+@property (nonatomic,strong) NSArray* corObjs;
+@property (nonatomic,strong) XAIDWCListCellData* cellData;
+
+@end
+
 

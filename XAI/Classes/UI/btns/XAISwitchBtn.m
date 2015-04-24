@@ -131,7 +131,22 @@
     _statusTipImgView.hidden = false;
 }
 
-
+-(void)setStatusCB:(XAICBTYPE)type{
+    
+    XAILightStatus status = (XAILightStatus)type;
+    switch (status) {
+        case XAILightStatus_Open:
+            [self showOpen];
+            break;
+        case XAILightStatus_Close:
+            [self showClose];
+            break;
+        default:
+            [self showUnkonw];
+            break;
+    }
+    
+}
 
 
 - (void) showClose{
@@ -195,7 +210,7 @@
     if (aObj == nil) return;
     if (![aObj isKindOfClass:[XAILight class]] ){
         
-        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
+        [self  firstStatus:XAILightStatus_Unkown opr:XAIOCOT_None tip:nil];
         return;
     }
     
@@ -216,16 +231,16 @@
     
     
     
-    XAIOCST status = XAIOCST_Unkown;
+    XAICBTYPE status = XAILightStatus_Unkown;
     
     if (aObj.isOnline) {
         
         if (aObj.curDevStatus == XAILightStatus_Open) {
             
-            status = XAIOCST_Open;
+            status = XAILightStatus_Open;
             
         }else if(aObj.curDevStatus == XAILightStatus_Close){
-            status = XAIOCST_Close;
+            status = XAILightStatus_Close;
         }
     }
     
@@ -301,7 +316,7 @@
     if (isSuccess) {
         
         [self showOprEnd];
-        [self setStatus:XAIOCST_Open];
+        [self setStatus:XAILightStatus_Open];
         
     }else{
         
@@ -316,7 +331,7 @@
     if (isSuccess) {
         
         [self showOprEnd];
-        [self setStatus:XAIOCST_Close];
+        [self setStatus:XAILightStatus_Close];
         
     }else{
         
@@ -328,19 +343,19 @@
     
     if (light.isOnline == false) {
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAILightStatus_Unkown];
         return;
     }
     
     if (status == XAILightStatus_Open) {
-        [self setStatus:XAIOCST_Open];
+        [self setStatus:XAILightStatus_Open];
         [self.oprTipLab  setText:[light.lastOpr allStr]];
     }else if (status == XAILightStatus_Close) {
-        [self setStatus:XAIOCST_Close];
+        [self setStatus:XAILightStatus_Close];
         [self.oprTipLab setText:[light.lastOpr allStr]];
     }else{
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAILightStatus_Unkown];
     }
     
     

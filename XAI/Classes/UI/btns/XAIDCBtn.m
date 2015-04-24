@@ -86,6 +86,22 @@
 }
 
 
+-(void)setStatusCB:(XAICBTYPE)type{
+    
+    XAIDoorStatus status = (XAIDoorStatus)type;
+    switch (status) {
+        case XAIDoorStatus_Open:
+            [self showOpen];
+            break;
+        case XAIDoorStatus_Close:
+            [self showClose];
+            break;
+        default:
+            [self showUnkonw];
+            break;
+    }
+    
+}
 
 
 - (void) showClose{
@@ -131,21 +147,21 @@
     
     if (door.isOnline == false) {
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAIDoorStatus_Unkown];
        
         return;
     }
     
     if (status == XAIDoorStatus_Open) {
-        [self setStatus:XAIOCST_Open];
+        [self setStatus:XAIDoorStatus_Open];
         [self.oprTipLab setText:[door.lastOpr allStr]];
     }else if(status == XAIDoorStatus_Close){
         
-        [self setStatus:XAIOCST_Close];
+        [self setStatus:XAIDoorStatus_Close];
         [self.oprTipLab setText:[door.lastOpr allStr]];
     }else{
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAIDoorStatus_Unkown];
     }
     
     
@@ -181,7 +197,7 @@
     if (aObj == nil) return;
     if (![aObj isKindOfClass:[XAIDoor class]]){
         
-        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
+        [self  firstStatus:XAIDoorStatus_Unkown opr:XAIOCOT_None tip:nil];
         [self.statusTipImgView setBackgroundColor:[UIColor clearColor]];
         [self.statusTipImgView setImage:nil];
         [self.nameTipLab setText:nil];
@@ -207,16 +223,16 @@
     
     
     
-    XAIOCST status = XAIOCST_Unkown;
+    XAICBTYPE status = XAIDoorStatus_Unkown;
     
     if (aObj.isOnline){
         
         if (aObj.curDevStatus == XAIDoorStatus_Open) {
             
-            status = XAIOCST_Open;
+            status = XAIDoorStatus_Open;
             
         }else if(aObj.curDevStatus == XAIDoorStatus_Close){
-            status = XAIOCST_Close;
+            status = XAIDoorStatus_Open;
         }
         
         

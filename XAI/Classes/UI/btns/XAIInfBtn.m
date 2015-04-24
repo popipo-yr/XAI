@@ -85,6 +85,22 @@
     [self setStatus:_status];
 }
 
+-(void)setStatusCB:(XAICBTYPE)type{
+
+    XAIIRStatus status = (XAIIRStatus)type;
+    switch (status) {
+        case XAIIRStatus_warning:
+            [self showOpen];
+            break;
+        case XAIIRStatus_working:
+            [self showClose];
+            break;
+        default:
+            [self showUnkonw];
+            break;
+    }
+    
+}
 
 - (void) showClose{
     
@@ -296,21 +312,21 @@ bool _is = false;
     
     if (ir.isOnline == false) {
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAIIRStatus_Unkown];
 
         return;
     }
     
     if (status == XAIIRStatus_warning) {
-        [self setStatus:XAIOCST_Open];
+        [self setStatus:XAIIRStatus_warning];
         
         
     }else if(status == XAIIRStatus_working){
         
-        [self setStatus:XAIOCST_Close];
+        [self setStatus:XAIIRStatus_working];
     }else{
         
-        [self setStatus:XAIOCST_Unkown];
+        [self setStatus:XAIIRStatus_Unkown];
     }
     
     //[self showWorning:XAIIRStatus_warning == status];
@@ -352,7 +368,7 @@ bool _is = false;
     if (aObj == nil) return;
     if (![aObj isKindOfClass:[XAIIR class]]){
         
-        [self  firstStatus:XAIOCST_Unkown opr:XAIOCOT_None tip:nil];
+        [self  firstStatus:XAIIRStatus_Unkown opr:XAIOCOT_None tip:nil];
         [self.statusTipImgView setBackgroundColor:[UIColor clearColor]];
         [self.statusTipImgView setImage:nil];
         [self.nameTipLab setText:nil];
@@ -380,16 +396,16 @@ bool _is = false;
     
     
     
-    XAIOCST status = XAIOCST_Unkown;
+    XAICBTYPE status = XAIIRStatus_Unkown;
     
     if (aObj.isOnline){
         
         if (aObj.curDevStatus == XAIIRStatus_warning) {
             
-            status = XAIOCST_Open;
+            status = XAIIRStatus_warning;
             
         }else if(aObj.curDevStatus == XAIIRStatus_working){
-            status = XAIOCST_Close;
+            status = XAIIRStatus_working;
         }
         
     }

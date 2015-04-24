@@ -104,7 +104,8 @@
 
 - (BOOL) isNameOrPawdLength{
 
-    return [self length] > 3 && [self length] < 13;
+    return [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > 3
+    && [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding] < 25;
 
 }
 @end

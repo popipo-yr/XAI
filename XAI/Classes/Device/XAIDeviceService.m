@@ -386,6 +386,7 @@
             
             
             NSString* luidStr = [MQTTCover luidToString:aDevice.luid];
+            luidStr = [luidStr lowercaseString];
             if ([luidStr hasPrefix:@"0x0005"]) {
                 aDevice.devType = XAIDeviceType_door;
             }else if ([luidStr hasPrefix:@"0x0002"]) {
@@ -394,6 +395,12 @@
                 aDevice.devType = XAIDeviceType_light_2;
             }else if ([luidStr hasPrefix:@"0x0004"]) {
                 aDevice.devType = XAIDeviceType_Inf;
+            }else if ([luidStr hasPrefix:@"0x000b"]) {
+                aDevice.devType = XAIDeviceType_dwc_c;
+            }else if ([luidStr hasPrefix:@"0x000d"]) {
+                aDevice.devType = XAIDeviceType_dwc_d;
+            }else if ([luidStr hasPrefix:@"0x000a"]) {
+                aDevice.devType = XAIDeviceType_dwc_w;
             }else{
                 aDevice.devType = XAIDeviceType_UnKown;
             }
@@ -478,6 +485,18 @@
             
         case XAIDeviceType_Inf:{
             device.corObjType = XAIObjectType_IR;
+        }
+            break;
+        case XAIDeviceType_dwc_c:{
+            device.corObjType = XAIObjectType_DWC_C;
+        }
+            break;
+        case XAIDeviceType_dwc_d:{
+            device.corObjType = XAIObjectType_DWC_D;
+        }
+            break;
+        case XAIDeviceType_dwc_w:{
+            device.corObjType = XAIObjectType_DWC_W;
         }
             break;
             

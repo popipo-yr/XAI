@@ -18,6 +18,10 @@
 #define DB_DEVICE_MODEL_USER        0x05      //手机用户和路由器(归类到主界面的用户区域)
 #define DB_DEVICE_MODEL_VIRTUAL        0x06     // 虚拟设备(暂时保留未用)
 
+#define DB_DEVICE_MODEL_DWC_C    0x07
+#define DB_DEVICE_MODEL_DWC_D    0x08
+#define DB_DEVICE_MODEL_DWC_W    0x09
+
 
 typedef enum XAIDeviceType{
     
@@ -26,6 +30,10 @@ typedef enum XAIDeviceType{
     XAIDeviceType_light_2 = DB_DEVICE_MODEL_SWITCH_2,
     XAIDeviceType_Inf = DB_DEVICE_MODEL_IRS,
     XAIDeviceType_UnKown = DB_DEVICE_MODEL_UNKNOWN,
+    
+    XAIDeviceType_dwc_c = DB_DEVICE_MODEL_DWC_C,
+    XAIDeviceType_dwc_d = DB_DEVICE_MODEL_DWC_D,
+    XAIDeviceType_dwc_w = DB_DEVICE_MODEL_DWC_W,
     
 }XAIDeviceType;
 

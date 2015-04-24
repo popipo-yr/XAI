@@ -134,7 +134,7 @@
     
     
     
-    NSString* luidStr = _luidStr;
+    NSString* luidStr = [_luidStr lowercaseString];
     NSString* tipStr = nil;
     if ([luidStr hasPrefix:@"0005"]) {
         tipStr = @"门磁";
@@ -144,6 +144,12 @@
         tipStr = @"双控开关";
     }else if ([luidStr hasPrefix:@"0004"]) {
         tipStr = @"红外";
+    }else if ([luidStr hasPrefix:@"000b"]) {
+        tipStr = @"自动窗帘";
+    }else if ([luidStr hasPrefix:@"000d"]) {
+        tipStr = @"推拉门";
+    }else if ([luidStr hasPrefix:@"000a"]) {
+        tipStr = @"推拉窗";
     }else{
         tipStr = @"未知";
     }
@@ -240,6 +246,12 @@
         if ( nil == _nameTextField.text || [_nameTextField.text isEqualToString:@""]) {
             
             errTip = NSLocalizedString(@"请输入设备名称", nil);
+            break;
+        }
+        
+        if ([_nameTextField.text isNameOrPawdLength]) {
+            
+            errTip = NSLocalizedString(@"设备名称长度不正确", nil);
             break;
         }
         

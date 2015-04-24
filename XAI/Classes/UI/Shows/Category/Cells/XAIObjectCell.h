@@ -11,13 +11,13 @@
 #import "XAIObject.h"
 #import "XAIDevBtn.h"
 
-//typedef enum{
-//    
-//    XAIOCST_Open,
-//    XAIOCST_Close,
-//    XAIOCST_Unkown,
-//    
-//}XAIOCST;
+typedef enum{
+    
+    XAIOCST_Open,
+    XAIOCST_Close,
+    XAIOCST_Unkown,
+    
+}XAIOCST;
 //
 //
 //typedef enum{

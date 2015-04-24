@@ -517,9 +517,9 @@
 
     if (_isReConnect == false && [MQTT shareMQTT].isLogin == true && _needKeepTip) {
         
-        [self didConnect:CONNACK_DISCONNECT_OTHER_LOGIN];
+        //[self didConnect:CONNACK_DISCONNECT_OTHER_LOGIN];
         
-        //[self reloginIsLogin:false];
+        [self reloginIsLogin:false];
 
     }
 
